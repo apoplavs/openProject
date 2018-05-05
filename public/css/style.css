@@ -1,3 +1,159 @@
+body {
+    background-color: #e9ebee;
+}
 .navbar-light {
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.2), 0 4px 15px 0 rgba(0, 0, 0, 0.19);
+}
+#input-form {
+	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+}
+.help-block {
+	color: red;
+}
+#top-navbar li {
+	padding: 0 10px;
+}
+#welcome-page {
+	background-image: linear-gradient(116deg, #5e72c4, #5b76c3 6%, #5b76c3 6%, #4c88bd 37%, #2facb0);
+	height: 100vh;
+}
+
+#title-label {
+	/*font-size: 7em;*/
+	font-family: BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+	color: white;
+
+}
+#title-label h1{
+	font-size: 7em;
+	animation-name: title1;
+	animation-duration: 1s;
+}
+
+#title-label div{
+	font-size: 2.8em;
+	text-decoration: overline;
+	margin-top: -22px;
+	animation-name: title2;
+	animation-duration: 1s;
+}
+ /* Анімація для welcome.blade.php титульного надпису */
+@keyframes title1 {
+	0%   {color: rgba(255, 255, 255, 0.1); font-size: 4.5em;}
+	10%   {color: rgba(255, 255, 255, 0.2); font-size: 5em;}
+	20%  {color: rgba(255, 255, 255, 0.3); font-size: 5.4em;}
+	30%   {color: rgba(255, 255, 255, 0.4); font-size: 5.7em;}
+	40%   {color: rgba(255, 255, 255, 0.5); font-size: 6em;}
+	50%  {color: rgba(255, 255, 255, 0.6); font-size: 6.3em;}
+	60%   {color: rgba(255, 255, 255, 0.7); font-size: 6.5em;}
+	70% {color: rgba(255, 255, 255, 0.7); font-size: 6.7em;}
+	80%   {color: rgba(255, 255, 255, 0.8); font-size: 6.8em;}
+	90%   {color: rgba(255, 255, 255, 0.9); font-size: 6.9em;}
+}
+@keyframes title2 {
+    0%   {color: rgba(255, 255, 255, 0.1); font-size: 1em; text-decoration: none;}
+    10%   {color: rgba(255, 255, 255, 0.2); font-size: 1.3em;}
+    20%  {color: rgba(255, 255, 255, 0.3); font-size: 1.5em;}
+    30%   {color: rgba(255, 255, 255, 0.4); font-size: 1.7em;}
+    40%   {color: rgba(255, 255, 255, 0.5); font-size: 1.9em;}
+    50%  {color: rgba(255, 255, 255, 0.6); font-size: 2.1em;}
+    60%   {color: rgba(255, 255, 255, 0.7); font-size: 2.3em;}
+    70% {color: rgba(255, 255, 255, 0.7); font-size: 2.5em;}
+    80%   {color: rgba(255, 255, 255, 0.8); font-size: 2.6em;}
+    90%   {color: rgba(255, 255, 255, 0.9); font-size: 2.7em; text-decoration: none;}
+}
+
+ /* Стилі для фільтрів */
+#filters {
+    font-size: 0.9em;
+    vertical-align: center;
+}
+#filters h6 {
+    color: #4c88bd;
+}
+/* Customize the label (the container) */
+#filters ul label {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+/* Hide the browser's default checkbox */
+#filters ul input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+/* Create a custom checkbox */
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 21px;
+    width: 21px;
+    background-color: #eee;
+}
+/* When the checkbox is checked, add a blue background */
+#filters ul label input:checked ~ .checkmark {
+    background-color: #2b989b;
+}
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+/* Show the checkmark when checked */
+#filters ul label input:checked ~ .checkmark:after {
+    display: block;
+}
+/* Style the checkmark/indicator */
+#filters ul label .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+/* styles for fontawesome */
+.fa-filter {
+    font-size: 21px;
+    color: #6291ba;
+}
+.fa-sort-alpha-asc {
+    font-size: 18px;
+    color: #3d7ee5;
+}
+.fa-bookmark-o, .fa-bookmark {
+    font-size: 18px;
+    color: #3d7ee5;
+}
+
+.fa-briefcase {
+    color: #538754;
+    font-size: 15px;
+}
+.fa-line-chart {
+    color: #6291ba;
+}
+.fa-medkit {
+    font-size: 17px;
+    color: #e27a6c;
+}
+.fa-calendar-plus-o {
+    font-size: 17px;
+    color: #84813c;
+}
+div.card-body.p-2 h5 a{
+    color: #3d7ee5;
 }

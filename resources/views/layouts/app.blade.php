@@ -13,6 +13,7 @@
 	<!-- Styles -->
 	{{--<link href="{{ asset('css/app.css') }}" rel="stylesheet">--}}
 	<link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+	<link href="{{ asset('css/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
 	<link href="{{ asset('css/style.css') }}" rel="stylesheet">
 </head>
 <body>
@@ -30,7 +31,7 @@
 					<input class="form-control" type="text" placeholder="Пошук">
 					<button class="btn btn-outline-success m-2 my-sm-0">Пошук</button>
 				</form> -->
-				<ul class="navbar-nav">
+				<ul class="navbar-nav" id="top-navbar">
 					<li class="nav-item active">
 						<a class="nav-link" href="{{ url('/') }}">На головну<span class="sr-only">(поточна)</span></a>
 					</li>
@@ -39,7 +40,7 @@
 						Рейтинг
 						</a>
 						<div class="dropdown-menu" aria-labelledby="dropdown06">
-						  <a class="dropdown-item" href="#">Судді</a>
+						  <a class="dropdown-item" href="{{ url('/judges') }}">Судді</a>
 						  <a class="dropdown-item" href="#">Суди</a>
 						  <a class="dropdown-item" href="#">Something else here</a>
 						</div>
@@ -52,7 +53,7 @@
 					</li>
 				  	
 					<!-- Authentication Links -->
-					<div class="mx-4"></div>
+					<div class="mx-5"></div>
 					@guest
 					<li class="nav-item">
 						<a class="nav-link" href="{{ route('login') }}">Вхід</a>
@@ -61,7 +62,7 @@
 						<a class="nav-link" href="{{ route('register') }}">Рєстрація</a>
 					</li>
 					@else
-					<li class="nav-item dropdown">
+					<li class="nav-item dropdown pr-4 mr-5">
 						<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" id="dropdown-menu" role="button" aria-expanded="false" aria-haspopup="true" v-pre>
 						{{ Auth::user()->name }} <span class="caret"></span>
 						</a>
@@ -72,6 +73,9 @@
 						</div> -->
 						<ul class="dropdown-menu">
 							<li>
+								<a href="{{ route('settings') }}">
+									Налаштування
+								</a>
 								<a href="{{ route('logout') }}"
 									onclick="event.preventDefault();
 											 document.getElementById('logout-form').submit();">
