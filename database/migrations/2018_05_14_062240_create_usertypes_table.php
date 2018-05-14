@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateJudgeStatusesTable extends Migration
+class CreateUsertypesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateJudgeStatusesTable extends Migration
      */
     public function up()
     {
-        Schema::create('judge_statuses', function (Blueprint $table) {
+        Schema::create('usertypes', function (Blueprint $table) {
             $table->tinyInteger('id');
 			$table->string('title');
-
-            $table->primary('id');
+	
+			$table->primary('id');
         });
     }
 
@@ -28,6 +28,6 @@ class CreateJudgeStatusesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('judge_statuses');
+        Schema::dropIfExists('usertypes');
     }
 }

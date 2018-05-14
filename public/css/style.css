@@ -13,13 +13,29 @@ body {
 #top-navbar li {
 	padding: 0 10px;
 }
+#top-navbar>li:hover>a{
+    color: #2b989b!important;
+}
+
+ /* styles for dropdown menu */
+ul.dropdown-menu.dropdown-menu-right a{
+    text-decoration: none;
+    color: black;
+}
+ul.dropdown-menu.dropdown-menu-right a:hover, ul.dropdown-menu.dropdown-menu-right a:hover i{
+    color: #2b989b!important;
+}
+ul.dropdown-menu.dropdown-menu-right a i{
+    font-size: 1.1em;
+}
+
+ /* styles for welcome page */
 #welcome-page {
 	background-image: linear-gradient(116deg, #5e72c4, #5b76c3 6%, #5b76c3 6%, #4c88bd 37%, #2facb0);
 	height: 100vh;
 }
 
 #title-label {
-	/*font-size: 7em;*/
 	font-family: BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 	color: white;
 
@@ -125,7 +141,16 @@ body {
     transform: rotate(45deg);
 }
 
-/* styles for fontawesome */
+#court-name {
+    max-width: 51%;
+    min-width: 50%;
+}
+#judge-photo {
+    width: 90px;
+    height: 90px;
+}
+
+/* styles for font awesome */
 .fa-filter {
     font-size: 21px;
     color: #6291ba;
@@ -136,11 +161,11 @@ body {
 }
 .fa-bookmark-o, .fa-bookmark {
     font-size: 18px;
-    color: #3d7ee5;
+    color: #2b989b;
 }
 
 .fa-briefcase {
-    color: #538754;
+    color: green;
     font-size: 15px;
 }
 .fa-line-chart {
@@ -148,12 +173,23 @@ body {
 }
 .fa-medkit {
     font-size: 17px;
-    color: #e27a6c;
+    color: red;
 }
-.fa-calendar-plus-o {
+.fa-calendar-check-o {
     font-size: 17px;
-    color: #84813c;
+    color: #2b989b;
 }
 div.card-body.p-2 h5 a{
+    color: #3d7ee5;
+}
+
+
+ /* styles for homepage */
+#follow-judges div.col-2{
+    background-color: white;
+    min-width: 230px;
+}
+#follow-judges div div.container a{
+    text-decoration: none;
     color: #3d7ee5;
 }

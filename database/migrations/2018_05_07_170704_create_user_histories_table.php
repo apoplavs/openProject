@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUserBookmarkJudgesTable extends Migration
+class CreateUserHistoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateUserBookmarkJudgesTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_bookmark_judges', function (Blueprint $table) {
+        Schema::create('user_histories', function (Blueprint $table) {
 			$table->increments('id');
 			$table->unsignedInteger('user');
 			$table->integer('judge');
@@ -31,6 +31,6 @@ class CreateUserBookmarkJudgesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_bookmark_judges');
+        Schema::dropIfExists('user_histories');
     }
 }

@@ -35,14 +35,13 @@
 					<li class="nav-item active">
 						<a class="nav-link" href="{{ url('/') }}">На головну<span class="sr-only">(поточна)</span></a>
 					</li>
-					<li class="nav-item dropdown">
+					<li class="nav-item dropdown active">
 						<a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown06" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 						Рейтинг
 						</a>
 						<div class="dropdown-menu" aria-labelledby="dropdown06">
 						  <a class="dropdown-item" href="{{ url('/judges') }}">Судді</a>
-						  <a class="dropdown-item" href="#">Суди</a>
-						  <a class="dropdown-item" href="#">Something else here</a>
+						  <a class="dropdown-item disabled" href="#">Суди <small>( <i class="fa fa-code" aria-hidden="true"></i> в розробці)</small></a>
 						</div>
 					</li>
 					<li class="nav-item">
@@ -55,14 +54,14 @@
 					<!-- Authentication Links -->
 					<div class="mx-5"></div>
 					@guest
-					<li class="nav-item">
+					<li class="nav-item active">
 						<a class="nav-link" href="{{ route('login') }}">Вхід</a>
 					</li>
-					<li class="nav-item">
+					<li class="nav-item active">
 						<a class="nav-link" href="{{ route('register') }}">Рєстрація</a>
 					</li>
 					@else
-					<li class="nav-item dropdown pr-4 mr-5">
+					<li class="nav-item dropdown pr-4 mr-5 active">
 						<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" id="dropdown-menu" role="button" aria-expanded="false" aria-haspopup="true" v-pre>
 						{{ Auth::user()->name }} <span class="caret"></span>
 						</a>
@@ -71,17 +70,38 @@
 						  <a class="dropdown-item" href="#">Another action</a>
 						  <a class="dropdown-item" href="#">Something else here</a>
 						</div> -->
-						<ul class="dropdown-menu">
+						<ul class="dropdown-menu dropdown-menu-right px-1">
 							<li>
-								<a href="{{ route('settings') }}">
-									Налаштування
-								</a>
+								<span class="text-muted">
+									{{ Auth::user()->email }}
+								</span>
+							</li>
+							
+							<hr class="my-2">
+							
+							<a href="{{ url('/') }}">
+								<li>
+									Головна <i class="fa fa-home text-muted float-right" aria-hidden="true"></i>
+								</li>
+							</a>
+							
+							<hr class="my-2">
+							
+							<a href="{{ route('settings') }}">
+								<li>
+									Налаштування <i class="fa fa-cog text-muted float-right" aria-hidden="true"></i>
+								</li>
+							</a>
+							
+							<hr class="my-2">
+							
+							<li>
 								<a href="{{ route('logout') }}"
-									onclick="event.preventDefault();
+								   onclick="event.preventDefault();
 											 document.getElementById('logout-form').submit();">
-									Вийти
+									Вийти <i class="fa fa-sign-out text-muted float-right" aria-hidden="true"></i>
 								</a>
-									<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+								<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
 									{{ csrf_field() }}
 								</form>
 							</li>
@@ -100,6 +120,6 @@
 	<script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
 	<script src="{{ asset('js/bootstrap.min.js') }}"></script>
 	<script src="{{ asset('js/script.js') }}"></script>
-	<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
+	{{--<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>--}}
 </body>
 </html>

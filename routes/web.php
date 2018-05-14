@@ -11,15 +11,24 @@
 |
 */
 
+// головна сторінка сайту
 Route::get('/', function () {
     return view('welcome');
 });
-
+// rotes авторизації користувача
 Auth::routes();
 
+// домашня сторінка користувача
 Route::get('/home', 'HomeController@index')->name('home');
 /*Route::get('/home', function () {
 	return view('welcome');
 });*/
+
+// налаштування (Username->налаштування)
 Route::get('/settings', 'HomeController@index')->name('settings');
-Route::get('/judges', 'HomeController@index')->name('home');
+
+// список суддів (Рейтинг->судді)
+Route::get('/judges', 'Judges\JudgesListController@index')->name('judges');
+/*Route::get('/judges', 'HomeController@index' function () {
+	return view('judges.judges-list');
+});*/
