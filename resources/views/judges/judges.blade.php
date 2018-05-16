@@ -103,7 +103,7 @@
 									<button type="reset" class="btn btn-outline-info">Скинути</button>
 								</div>
 								<div class="col-lg-6">
-									<button type="button" onclick="applyFilters()" class="btn btn-primary">Показати</button>
+									<button type="button" onclick="getJudgesList()" class="btn btn-primary">Показати</button>
 								</div>
 							</div>
 						</form>
@@ -116,10 +116,15 @@
 			<div class="col-lg-9">
 				<div class="card card-outline-secondary my-4">
 					<div class="card-header">
-						Список суддів <span class="ml-5"> сортувати: <label id="sorting-type"><input type="checkbox" onchange="applyFilters()" form="form-filters" name="sorting"><i class="fa fa-sort-alpha-asc" aria-hidden="true"></i> <span><i class="fa fa-sort-alpha-desc" aria-hidden="true"></i></span></label></span>
+						Список суддів <span class="ml-5"> сортувати: <label id="sorting-type">
+								<input type="checkbox" onchange="changeSorting(this.checked)" form="form-filters" name="sorting">
+								<i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
+								
+							</label></span>
 					</div>
-					
-					@include('judges.judges-list')
+					<div  id="judges-list">
+						{{--@include('judges.judges-list')--}}
+					</div>
 					
 				</div><!-- /.card -->
 			</div> <!-- col-lg-9 -->

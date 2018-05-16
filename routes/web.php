@@ -25,10 +25,16 @@ Route::get('/home', 'HomeController@index')->name('home');
 });*/
 
 // налаштування (Username->налаштування)
-Route::get('/settings', 'HomeController@index')->name('settings');
+//Route::get('/settings', 'HomeController@index')->name('settings');
 
-// список суддів (Рейтинг->судді)
-Route::get('/judges', 'Judges\JudgesListController@index')->name('judges');
-/*Route::get('/judges', 'HomeController@index' function () {
-	return view('judges.judges-list');
-});*/
+// список суддів (Рейтинг->судді) використовується для ajax
+Route::get('/judges-list', 'Judges\JudgesController@index')->name('judges-list');
+
+// оболонка сторінки (Рейтинг->судді)
+Route::get('/judges', function () {
+	return view('judges.judges');
+})->name('judges');
+
+
+// для отримання сторінки конкретного судді
+//Route::get('/judges{}', 'Judges\JudgesController@show')->name('judges');

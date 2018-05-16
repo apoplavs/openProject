@@ -19,15 +19,22 @@ class Judge extends Model
 	/**
 	 * @return mixed
 	 */
-	public static function getAllJudges($sorting) {
-		$sort = $sorting ? 'DESC' : 'ASC';
+	public static function getJudgesList($regions, $instances, $sort_order) {
+		// отримання id користувача
 		$user_id = Auth::check() ? Auth::user()->id : 0;
 		return (static::select('judges.id', 'courts.name AS court_name', 'judges.surname', 'judges.name',
 			'judges.patronymic', 'judges.photo', 'judges.status', DB::raw('DATE_FORMAT(judges.updated_status, "%d/%c/%Y") AS updated_status'),	'judges.rating',
 			DB::raw('(CASE WHEN user_bookmark_judges.id = '.$user_id.' THEN 1 ELSE 0 END) AS is_bookmark'))
 			->join('courts', 'judges.court', '=', 'courts.court_code')
 			->leftJoin('user_bookmark_judges', 'judges.id', '=', 'user_bookmark_judges.judge')
-			->orderBy('judges.surname', $sort)
-			->paginate(15));
+			->when(!empty($regions), function ($query) use ($regions) {
+				return $query->whereIn('courts.region_code', $regions);
+			})
+			->when(!empty($instances), function ($query) use ($instances) {
+				return $query->whereIn('courts.instance_code', $instances);
+			})
+			->orderBy('judges.surname', $sort_order)
+			->paginate(10));
 	}
+	
 }
