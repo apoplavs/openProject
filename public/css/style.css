@@ -146,14 +146,14 @@ ul.dropdown-menu.dropdown-menu-right a i{
     min-width: 50%;
 }
 #judge-photo {
-    width: 90px;
-    height: 90px;
+    width: 100px;
+    height: 100px;
 }
-#sorting-type {
+#sorting-type, .bookmark, .fa-pencil {
     cursor: pointer;
 }
 #sorting-type input {
-    display: none;
+    /*display: none;*/
 }
 
 /* styles for font awesome */
@@ -185,6 +185,17 @@ ul.dropdown-menu.dropdown-menu-right a i{
     font-size: 17px;
     color: #2b989b;
 }
+.fa-pencil {
+    color: #6c757d;
+    -webkit-transition-duration: 0.3s;
+    -o-transition-duration: 0.3s;
+    -moz-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+}
+.fa-pencil:hover {
+    color: #6291ba;
+    box-shadow: 0 0 3px rgba(0,0,0,0.5),  inset 0 0 1px rgba(0,0,0,0.7);
+}
 div.card-body.p-2 h5 a{
     color: #3d7ee5;
 }
@@ -198,4 +209,41 @@ div.card-body.p-2 h5 a{
 #follow-judges div div.container a{
     text-decoration: none;
     color: #3d7ee5;
+}
+
+
+
+ /* styles for autocomplete field  */
+.autocomplete {
+    /*the container must be positioned relative:*/
+    position: relative;
+    display: inline-block;
+}
+.autocomplete-items {
+    position: absolute;
+    font-size: 0.9em;
+    border: 1px solid #d4d4d4;
+    border-bottom: none;
+    border-top: none;
+    z-index: 99;
+    /*position the autocomplete items to be the same width as the container:*/
+    top: 100%;
+    left: 0;
+    right: 0;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.5);
+}
+.autocomplete-items div {
+    padding: 10px;
+    cursor: pointer;
+    background-color: #fff;
+    border-bottom: 1px solid #d4d4d4;
+}
+.autocomplete-items div:hover {
+    /*when hovering an item:*/
+    background-color: #e9e9e9;
+}
+.autocomplete-active {
+    /*when navigating through the items using the arrow keys:*/
+    background-color: DodgerBlue !important;
+    color: #ffffff;
 }

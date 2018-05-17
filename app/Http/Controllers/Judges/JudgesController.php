@@ -37,7 +37,8 @@ class JudgesController extends Controller
 //    	print_r($regions);
 //		print_r($instances);
 //    	dd($regions, $instance);
-    	$judges_list = Judge::getJudgesList($filters['regions'], $filters['instances'], $filters['sort_order']);
+    	$judges_list = Judge::getJudgesList($filters['regions'], $filters['instances'],
+			$filters['sort_order'], $filters['search']);
 //		$judges_list = DB::table('judges')->paginate(15);
 //		$judges_list = Paginator::make($judges_list);
 //		$data = $request->session()->all();
@@ -45,6 +46,7 @@ class JudgesController extends Controller
 //		dd($data);
 //		echo $judges_list->links();
 //		dd($judges_list[0]);
+		
 		return view('judges.judges-list', compact('judges_list'));
     }
 
@@ -115,9 +117,23 @@ class JudgesController extends Controller
     }
 	
 	
+	/**
+	 * автодоповнення в полі пошуку
+	 * отримує з GET початок слова
+	 * і шукає в БД подібні
+	 * повертає результати в json
+	 */
+	public function autocompleteSearch() {
+		$search = Input::has('search') ? Input::get('search') : '';
+		// приведення першої букви в верхній регістр
+		$search = mb_convert_case($search, MB_CASE_TITLE, "UTF-8");
+		$autocomplete = Judge::getAutocomplete($search);
+		return (json_encode($autocomplete));
+	}
+	
+	
 	
 	// PRIVATE METHODS
-	
 	
 	/**
 	 * виконується, якщо застосовувалась фільтрація до списку суддів
@@ -130,7 +146,8 @@ class JudgesController extends Controller
 		$regions = Input::has('regions') ? Input::get('regions') : [];
 		$instances = Input::has('instances') ? Input::get('instances') : [];
 		$rsort = Input::has('rsort') ? intval(Input::get('rsort')) : 0;
-		
+		$search = Input::has('search') ? Input::get('search') : '';
+
 		// визначення порядку сортування
 		$sort_order = $rsort ? 'DESC' : 'ASC';
 		
@@ -142,9 +159,8 @@ class JudgesController extends Controller
 		foreach($instances as $instance) {
 			$int_instances[] = intval($instance);
 		}
-//		$judges_list = Judge::getFilteredJudges($int_regions, $int_instances, $rsort == 'true' ? 'DESC' : 'ASC');
-		
-		return (['regions'=>$int_regions, 'instances'=>$int_instances, 'sort_order'=>$sort_order]);
+
+		return (['regions'=>$int_regions, 'instances'=>$int_instances, 'sort_order'=>$sort_order, 'search'=>$search]);
  
 	}
 }

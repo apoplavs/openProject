@@ -24,17 +24,28 @@ Route::get('/home', 'HomeController@index')->name('home');
 	return view('welcome');
 });*/
 
-// налаштування (Username->налаштування)
-//Route::get('/settings', 'HomeController@index')->name('settings');
+// налаштування (Username->налаштування) ЩЕ НЕ ЗРОБЛЕНО
+Route::get('/settings', 'HomeController@index')->name('settings');
 
+
+/**
+ * Розділ "Судді"
+ */
 // список суддів (Рейтинг->судді) використовується для ajax
 Route::get('/judges-list', 'Judges\JudgesController@index')->name('judges-list');
+
+// отримання результатів для автодоповнення в формі пошуку використовується для ajax
+Route::get('/judges-autocomplete', 'Judges\JudgesController@autocompleteSearch')->name('judges-autocomplete');
 
 // оболонка сторінки (Рейтинг->судді)
 Route::get('/judges', function () {
 	return view('judges.judges');
 })->name('judges');
 
+// додати суддю в закладки
+Route::post('/bookmark', 'Judges\BookmarkController@store')->name('bookmark');
 
+// видалити суддю з закладок
+Route::delete('/bookmark', 'Judges\BookmarkController@destroy')->name('bookmark');
 // для отримання сторінки конкретного судді
 //Route::get('/judges{}', 'Judges\JudgesController@show')->name('judges');

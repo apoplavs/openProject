@@ -26,13 +26,13 @@
 	<div class="container mt-5">
 		<div class="row">
 			<div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
-				<form method="post">
+				<form method="get" autocomplete="off">
 					<div class="form-row">
-						<div class="col-12 col-md-9 mb-2 mb-md-0">
-							<input type="text" class="form-control form-control" placeholder="Пошук...">
+						<div class="col-12 col-md-9 mb-2 mb-md-0 autocomplete">
+							<input type="search" class="form-control" id="search-input" placeholder="Пошук...">
 						</div>
 						<div class="col-12 col-md-3">
-							<button type="submit" class="btn btn-block btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i> знайти</button>
+							<button type="button" class="btn btn-block btn btn-primary" onclick="findJudge()"><i class="fa fa-search" aria-hidden="true"></i> знайти</button>
 						</div>
 					</div>
 				</form>
