@@ -116,10 +116,11 @@
 
 	<!-- Scripts -->
 {{--    <script src="{{ asset('js/app.js') }}"></script>--}}
+	
 	<script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
 	<script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
 	<script src="{{ asset('js/bootstrap.min.js') }}"></script>
-	<script src="{{ asset('js/script.js') }}"></script>
+	<script src="{{ asset('js/main.js') }}"></script>
 	{{--<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>--}}
 </body>
 </html>

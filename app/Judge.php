@@ -24,8 +24,10 @@ class Judge extends Model
 		// отримання id користувача
 		$user_id = Auth::check() ? Auth::user()->id : 0;
 		return (static::select('judges.id', 'courts.name AS court_name', 'judges.surname', 'judges.name',
-			'judges.patronymic', 'judges.photo', 'judges.status', DB::raw('DATE_FORMAT(judges.updated_status, "%d/%c/%Y") AS updated_status'),	'judges.rating',
-			DB::raw('(CASE WHEN user_bookmark_judges.id = '.$user_id.' THEN 1 ELSE 0 END) AS is_bookmark'))
+			'judges.patronymic', 'judges.photo', 'judges.status',
+			DB::raw('DATE_FORMAT(judges.updated_status, "%d/%c/%Y") AS updated_status'),
+			DB::raw('DATE_FORMAT(judges.due_date_status, "%d/%c/%Y") AS due_date_status'),
+			'judges.rating', DB::raw('(CASE WHEN user_bookmark_judges.user = '.$user_id.' THEN 1 ELSE 0 END) AS is_bookmark'))
 			->join('courts', 'judges.court', '=', 'courts.court_code')
 			->leftJoin('user_bookmark_judges', 'judges.id', '=', 'user_bookmark_judges.judge')
 			->when(!empty($regions), function ($query) use ($regions) {
@@ -43,6 +45,8 @@ class Judge extends Model
 	
 	
 	/**
+	 * отримує результати автодоповнення
+	 * для поля пошуку судді
 	 * @param string $search
 	 * @return mixed
 	 */
@@ -57,4 +61,22 @@ class Judge extends Model
 	
 	}
 	
+	
+	/**
+	 * встановлює новий статус судді
+	 * і повертає його
+	 * @param $judge_id
+	 * @param $status
+	 * @param $due_date
+	 */
+	public static function setNewStatus($judge_id, $status, $due_date) {
+		static::where('judges.id', '=', $judge_id)
+			->update(['judges.status' => $status,
+				'judges.due_date_status' => $due_date]);
+		return (static::select('judges.status',
+			DB::raw('DATE_FORMAT(judges.updated_status, "%d/%c/%Y") AS updated_status'),
+			DB::raw('DATE_FORMAT(judges.due_date_status, "%d/%c/%Y") AS due_date_status'))
+			->where('judges.id', '=', $judge_id)
+			->first());
+	}
 }

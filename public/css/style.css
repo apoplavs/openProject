@@ -181,7 +181,7 @@ ul.dropdown-menu.dropdown-menu-right a i{
     font-size: 17px;
     color: red;
 }
-.fa-calendar-check-o {
+.fa-calendar-check-o, .fa-calendar-minus-o, .fa-calendar-times-o {
     font-size: 17px;
     color: #2b989b;
 }
@@ -247,3 +247,25 @@ div.card-body.p-2 h5 a{
     background-color: DodgerBlue !important;
     color: #ffffff;
 }
+
+/* styles for pop-up form changing status */
+select#chooser-judge-status {
+    font-family: 'FontAwesome', Helvetica, serif;
+}
+select#chooser-judge-status option:first-child {
+    color: green;
+}
+select#chooser-judge-status option:nth-child(2) {
+    color: red;
+}
+select#chooser-judge-status option:nth-child(3) {
+    color: #2b989b;
+}
+select#chooser-judge-status option:nth-child(4) {
+    color: #2b989b;
+}
+select#chooser-judge-status option:last-child {
+    color: #6291ba;
+}
+
+

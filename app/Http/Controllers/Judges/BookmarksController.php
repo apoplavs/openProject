@@ -3,7 +3,9 @@
 namespace Toecyd\Http\Controllers\Judges;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Toecyd\Http\Controllers\Controller;
+use Toecyd\UserBookmarkJudge;
 
 /**
  * Управління закладками корисувача
@@ -40,8 +42,7 @@ class BookmarksController extends Controller
      */
     public function store(Request $request)
     {
-        // закінчив тут
-		// @todo зробити можливість додавання в закладки, видалення з закладок
+        //
     }
 
     /**
@@ -75,7 +76,7 @@ class BookmarksController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+    	UserBookmarkJudge::createBookmark(Auth::user()->id, $id);
     }
 
     /**
@@ -86,6 +87,6 @@ class BookmarksController extends Controller
      */
     public function destroy($id)
     {
-        //
+		UserBookmarkJudge::deleteBookmark(Auth::user()->id, $id);
     }
 }

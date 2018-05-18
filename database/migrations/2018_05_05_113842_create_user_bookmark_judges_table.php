@@ -17,7 +17,6 @@ class CreateUserBookmarkJudgesTable extends Migration
 			$table->increments('id');
 			$table->unsignedInteger('user');
 			$table->integer('judge');
-			$table->timestamps();
 	
 			$table->foreign('user')->references('id')->on('users');
 			$table->foreign('judge')->references('id')->on('judges');

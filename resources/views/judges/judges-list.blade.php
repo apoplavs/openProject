@@ -15,43 +15,28 @@
 								@endif" alt="фото" class="float-left mr-3">
 								<h5>
 									<a href="#">{{ $judge->surname }} {{ $judge->name }}. {{ $judge->patronymic }}.</a>
-									<small class="text-muted ml-5">
-										<i class="fa fa-line-chart" aria-hidden="true"> NaN </i>
-										<small class="text-muted float-right mr-5 bookmark" onclick="addBookmark(this)">
-											@if(Auth::check())
-												<input type="hidden" value="{{ $judge->id }}">
-												@if($judge->is_bookmark == 1)
-													<span>відстежується</span> <i class="fa fa-bookmark" aria-hidden="true"></i>
-												@else
-													<span>відстежувати</span> <i class="fa fa-bookmark-o" aria-hidden="true"></i>
-												@endif
+									<small class="text-muted">
+										<i class="fa fa-line-chart mx-3" aria-hidden="true"> NaN </i>
+										@if(Auth::check())
+										<small class="text-muted float-right mr-3 bookmark" onclick="addBookmark(this, {{ $judge->id }})">
+											{{--<input type="hidden" value="{{ $judge->id }}">--}}
+											@if($judge->is_bookmark == 1)
+												<span>відстежується</span> <i class="fa fa-bookmark" aria-hidden="true"></i>
+											@else
+												<span>відстежувати</span> <i class="fa fa-bookmark-o" aria-hidden="true"></i>
 											@endif
 										</small>
+										@endif
 									</small>
 								</h5>
 								<div id="court-name" class="float-left">{{ $judge->court_name }}</div>
-								<small class="text-muted ml-1">
-									@switch($judge->status)
-										@case(1)
-										<i class="fa fa-briefcase" aria-hidden="true"></i> на роботі {{ $judge->updated_status }}
-											@break
-										@case(2)
-										<i class="fa fa-medkit" aria-hidden="true"></i> на лікарняному з {{ $judge->updated_status }}
-											@break
-										@case(3)
-										<i class="fa fa-calendar-check-o" aria-hidden="true"></i> у відпустці з {{ $judge->updated_status }}
-											@break
-										@case(4)
-										<i class="fa fa-calendar-check-o" aria-hidden="true"></i> відсутній на робочому місці з {{ $judge->updated_status }}
-											@break
-										@case(5)
-										<i class="fa fa-calendar-check-o" aria-hidden="true"></i> припиено повноваження з {{ $judge->updated_status }}
-											@break
-									@endswitch
+								<small class="text-muted ml-1 judge-status">
+									@include('judges.judge-statuses')
 								</small>
 								{{--if юзер ввійшов - є можливість змінювати статус--}}
 								@if(Auth::check())
-								<span><i class="fa fa-pencil p-1" aria-hidden="true"></i></span>
+								<span><i class="fa fa-pencil p-1" aria-hidden="true"  data-toggle="modal" data-target="#changeJudgeStatus"
+										 onclick="setJudgeToChangeStatus({{ $judge->id }})"></i></span>
 								@endif
 							</p>
 							<br>

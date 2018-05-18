@@ -3,13 +3,15 @@
 namespace Toecyd\Http\Controllers\Judges;
 
 use Illuminate\Http\Request;
-use Illuminate\Pagination\Paginator;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Validator;
 use Toecyd\Http\Controllers\Controller;
 use Toecyd\Judge;
 
+/**
+ * Class JudgesController
+ * @package Toecyd\Http\Controllers\Judges
+ */
 class JudgesController extends Controller
 {
     /**
@@ -104,6 +106,29 @@ class JudgesController extends Controller
     {
         //
     }
+	
+	/**
+	 * Оновлює статус судді
+	 *
+	 * @param  \Illuminate\Http\Request  $request
+	 * @param  int  $id
+	 * @return string || \Illuminate\Http\Response
+	 */
+    public function updateJudgeStatus(Request $request, $id) {
+    	$set_status = intval($request->setstatus);
+    	$due_date = $request->date;
+		$validator = Validator::make(['setstatus'=>$set_status, 'date'=>$due_date], [
+    		'setstatus' => 'required|integer|between:1,5',
+			'date' => 'date|date_format:Y-m-d|after:yesterday|nullable'
+		]);
+		if ($validator->fails()) {
+			return('we check it');
+		}
+		// отримання статусу судді
+		$judge = Judge::setNewStatus($id, $set_status, $due_date);
+	
+		return view('judges.judge-statuses', compact('judge'));
+	}
 
     /**
      * Remove the specified resource from storage.

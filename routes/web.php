@@ -37,15 +37,18 @@ Route::get('/judges-list', 'Judges\JudgesController@index')->name('judges-list')
 // отримання результатів для автодоповнення в формі пошуку використовується для ajax
 Route::get('/judges-autocomplete', 'Judges\JudgesController@autocompleteSearch')->name('judges-autocomplete');
 
+// оновити статус судді
+Route::put('/judge-status/{id}', 'Judges\JudgesController@updateJudgeStatus')->name('judge-status');
+
 // оболонка сторінки (Рейтинг->судді)
 Route::get('/judges', function () {
 	return view('judges.judges');
 })->name('judges');
 
 // додати суддю в закладки
-Route::post('/bookmark', 'Judges\BookmarkController@store')->name('bookmark');
+Route::put('/bookmark/{id}', 'Judges\BookmarksController@update')->name('bookmark');
 
 // видалити суддю з закладок
-Route::delete('/bookmark', 'Judges\BookmarkController@destroy')->name('bookmark');
+Route::delete('/bookmark/{id}', 'Judges\BookmarksController@destroy')->name('bookmark');
 // для отримання сторінки конкретного судді
 //Route::get('/judges{}', 'Judges\JudgesController@show')->name('judges');
