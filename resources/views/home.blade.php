@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+	<link href="{{ asset('css/home.css') }}" rel="stylesheet">
 	<div class="container mr-5 mt-4" id="follow-judges">
 		<div class="row">
 			<div class="col-11">

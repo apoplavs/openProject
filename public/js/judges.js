@@ -204,7 +204,11 @@ function findJudge() {
 }
 
 
-
+/**
+ * додати або видалити суддю з закладок
+ * @param el
+ * @param judge
+ */
 function addBookmark(el, judge) {
 	let iTag = el.getElementsByTagName('i')[0];
 	let spanTag = el.getElementsByTagName('span')[0];
@@ -236,7 +240,10 @@ function addBookmark(el, judge) {
 	}
 }
 
-
+/**
+ *
+ * @returns {boolean}
+ */
 function updateJudgeStatus() {
 	let judge = document.getElementById('judge-for-new-status').value;
 	if (judge == 0) {
@@ -253,7 +260,7 @@ function updateJudgeStatus() {
 			setstatus: newStatus,
 			date: dueDate},
 		success: function (data) {
-			$('small.judge-status').html(data);
+			$('#judge'+judge).html(data);
 		}
 	});
 }

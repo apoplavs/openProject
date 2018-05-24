@@ -34,6 +34,9 @@ Route::get('/settings', 'HomeController@index')->name('settings');
 // список суддів (Рейтинг->судді) використовується для ajax
 Route::get('/judges-list', 'Judges\JudgesController@index')->name('judges-list');
 
+// сторінка судді з інформацією про нього
+Route::get('/judges/{id}', 'Judges\JudgesController@show')->name('judges');
+
 // отримання результатів для автодоповнення в формі пошуку використовується для ajax
 Route::get('/judges-autocomplete', 'Judges\JudgesController@autocompleteSearch')->name('judges-autocomplete');
 

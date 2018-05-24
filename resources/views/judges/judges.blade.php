@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+	<link href="{{ asset('css/judges.css') }}" rel="stylesheet">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-8 col-md-offset-2">
@@ -125,10 +126,6 @@
 					<div  id="judges-list">
 						{{--@include('judges.judges-list')--}}
 					</div>
-					<!-- Button trigger modal -->
-					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#changeJudgeStatus">
-						Launch demo modal
-					</button>
 				</div><!-- /.card -->
 			</div> <!-- col-lg-9 -->
 		
@@ -157,7 +154,7 @@
 									<input type="hidden" id="judge-for-new-status" value="0">
 								</div>
 								<div class="form-group row mt-1">
-									<label for="status-end-date" class="col-6 col-form-label">Дата завершення дії <small class="text-muted">(якщо відома)</small></label>
+									<label for="status-end-date" class="col-6 col-form-label">Дата завершення дії статусу <br><sup class="text-muted">(якщо відома)</sup></label>
 									<div class="col-5">
 										<input class="form-control" type="date" min="{{ date('Y-m-d') }}" id="status-end-date">
 									</div>

@@ -1,0 +1,73 @@
+
+div.card-body h5 a {
+    max-width: 51%;
+    min-width: 50%;
+}
+#judge-photo {
+    width: 200px;
+    height: 200px;
+}
+#sorting-type, .bookmark, .fa-pencil {
+    cursor: pointer;
+}
+#sorting-type input {
+    /*display: none;*/
+}
+
+/* styles for font awesome */
+.fa-filter {
+    font-size: 21px;
+    color: #6291ba;
+}
+.fa-sort-alpha-asc, .fa-sort-alpha-desc {
+    font-size: 18px;
+    color: #3d7ee5;
+}
+.fa-bookmark-o, .fa-bookmark {
+    font-size: 18px;
+    color: #2b989b;
+}
+
+.fa-briefcase {
+    color: green;
+    font-size: 15px;
+}
+.fa-line-chart {
+    color: #6291ba;
+}
+.fa-medkit {
+    font-size: 17px;
+    color: red;
+}
+.fa-calendar-check-o, .fa-calendar-minus-o, .fa-calendar-times-o {
+    font-size: 17px;
+    color: #2b989b;
+}
+.fa-pencil {
+    color: #6c757d;
+    -webkit-transition-duration: 0.3s;
+    -o-transition-duration: 0.3s;
+    -moz-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+}
+.fa-pencil:hover {
+    color: #6291ba;
+    box-shadow: 0 0 3px rgba(0,0,0,0.5),  inset 0 0 1px rgba(0,0,0,0.7);
+}
+div.card-body.p-2 h5 a{
+    color: #3d7ee5;
+}
+
+
+ /* styles for homepage */
+#follow-judges div.col-2{
+    background-color: white;
+    min-width: 230px;
+}
+#follow-judges div div.container a{
+    text-decoration: none;
+    color: #3d7ee5;
+}
+
+
+

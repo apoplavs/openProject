@@ -1,0 +1,117 @@
+
+div.col-12 img {
+    width: 250px;
+    height: 250px;
+}
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 992px) {
+    div.col-12 img {
+        width: 350px;
+        height: 350px;
+    }
+}
+.header-information {
+    background-color: white;
+}
+.likes, .unlikes{
+    font-size: 1.3em;
+    cursor: pointer;
+}
+.likes span {
+    color: green;
+}
+.unlikes span {
+    color: red;
+}
+div.text-muted>a {
+    text-decoration: none;
+}
+div.card-header h5{
+    margin-bottom: 0;
+    color: #365899;
+    font-weight: bold;
+}
+div.in-develop>i {
+    color: #c8cbce;
+    font-size: 8.5em;
+}
+
+
+
+
+
+#court-name {
+    max-width: 51%;
+    min-width: 50%;
+}
+#judge-photo {
+    width: 100px;
+    height: 100px;
+}
+#sorting-type, .bookmark, .fa-pencil {
+    cursor: pointer;
+}
+#sorting-type input {
+    /*display: none;*/
+}
+
+/* styles for font awesome */
+
+.fa-university {
+    /*font-size: 21px;*/
+    color: #6291ba;
+}
+.fa-bookmark-o, .fa-bookmark {
+    font-size: 18px;
+    color: #2b989b;
+}
+
+.fa-briefcase {
+    color: green;
+    font-size: 15px;
+}
+.fa-line-chart {
+    color: #365899;
+}
+.fa-medkit {
+    font-size: 17px;
+    color: red;
+}
+.fa-calendar-check-o, .fa-calendar-minus-o, .fa-calendar-times-o {
+    font-size: 17px;
+    color: #2b989b;
+}
+.fa-pencil {
+    color: #6c757d;
+    -webkit-transition-duration: 0.3s;
+    -o-transition-duration: 0.3s;
+    -moz-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+}
+.fa-pencil:hover {
+    color: #6291ba;
+    box-shadow: 0 0 3px rgba(0,0,0,0.5),  inset 0 0 1px rgba(0,0,0,0.7);
+}
+
+
+
+
+/* styles for pop-up form changing status */
+select#chooser-judge-status {
+    font-family: 'FontAwesome', Helvetica, serif;
+}
+select#chooser-judge-status option:first-child {
+    color: green;
+}
+select#chooser-judge-status option:nth-child(2) {
+    color: red;
+}
+select#chooser-judge-status option:nth-child(3) {
+    color: #2b989b;
+}
+select#chooser-judge-status option:nth-child(4) {
+    color: #2b989b;
+}
+select#chooser-judge-status option:last-child {
+    color: #6291ba;
+}

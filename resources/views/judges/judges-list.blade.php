@@ -5,16 +5,16 @@
 							<div>За заданими параметрами нічого не знайдено</div>
 						@endif
 						@foreach($judges_list as $judge)
-							{{--judge photo зробити значення по дефолту в БД і прибрати цей if звідси--}}
 							<p>
-								<img id="judge-photo" src="
-								@if($judge->photo)
-									{{ $judge->photo }}
-								@else
-									http://placehold.it/100x100
-								@endif" alt="фото" class="float-left mr-3">
+								<img src="{{ $judge->photo }}" alt="фото" class="float-left mr-3">
 								<h5>
-									<a href="#">{{ $judge->surname }} {{ $judge->name }}. {{ $judge->patronymic }}.</a>
+									<a href="{{ url('/judges/'. $judge->id) }}">{{ $judge->surname }}
+										@if (strlen($judge->name) > 2)
+											{{ $judge->name }} {{ $judge->patronymic }}
+											@else
+											{{ $judge->name }}. {{ $judge->patronymic }}.
+										@endif
+									</a>
 									<small class="text-muted">
 										<i class="fa fa-line-chart mx-3" aria-hidden="true"> NaN </i>
 										@if(Auth::check())
@@ -29,8 +29,8 @@
 										@endif
 									</small>
 								</h5>
-								<div id="court-name" class="float-left">{{ $judge->court_name }}</div>
-								<small class="text-muted ml-1 judge-status">
+								<div class="float-left">{{ $judge->court_name }}</div>
+								<small class="text-muted ml-1" id="judge{{ $judge->id }}">
 									@include('judges.judge-statuses')
 								</small>
 								{{--if юзер ввійшов - є можливість змінювати статус--}}

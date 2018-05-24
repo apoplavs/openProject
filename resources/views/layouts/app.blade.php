@@ -15,6 +15,7 @@
 	<link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
 	<link href="{{ asset('css/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
 	<link href="{{ asset('css/style.css') }}" rel="stylesheet">
+	<script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
 </head>
 <body>
 	<!-- <div id="app"> -->
@@ -36,7 +37,7 @@
 						<a class="nav-link" href="{{ url('/') }}">На головну<span class="sr-only">(поточна)</span></a>
 					</li>
 					<li class="nav-item dropdown active">
-						<a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown06" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<a class="nav-link dropdown-toggle" href="#" id="dropdown06" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 						Рейтинг
 						</a>
 						<div class="dropdown-menu" aria-labelledby="dropdown06">
@@ -117,7 +118,6 @@
 	<!-- Scripts -->
 {{--    <script src="{{ asset('js/app.js') }}"></script>--}}
 	
-	<script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
 	<script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
 	<script src="{{ asset('js/bootstrap.min.js') }}"></script>
 	<script src="{{ asset('js/main.js') }}"></script>

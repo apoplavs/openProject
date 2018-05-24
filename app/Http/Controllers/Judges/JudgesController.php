@@ -81,7 +81,8 @@ class JudgesController extends Controller
      */
     public function show($id)
     {
-        //
+    	$judge = Judge::getJudgeData($id);
+        return (view('judges.judge', compact('judge')));
     }
 
     /**
