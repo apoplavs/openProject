@@ -35,7 +35,9 @@ div.in-develop>i {
     color: #c8cbce;
     font-size: 8.5em;
 }
-
+div.card>div.card-body {
+    min-height: 270px;
+}
 
 
 

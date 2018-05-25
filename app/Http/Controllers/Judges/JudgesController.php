@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
 use Toecyd\Http\Controllers\Controller;
 use Toecyd\Judge;
+use Toecyd\JudgesStatistic;
 
 /**
  * Class JudgesController
@@ -82,7 +83,8 @@ class JudgesController extends Controller
     public function show($id)
     {
     	$judge = Judge::getJudgeData($id);
-        return (view('judges.judge', compact('judge')));
+    	$statistic = JudgesStatistic::getStatistic($id);
+        return (view('judges.judge', compact('judge', 'statistic')));
     }
 
     /**
@@ -157,6 +159,19 @@ class JudgesController extends Controller
 		return (json_encode($autocomplete));
 	}
 	
+	
+	/**
+	 * Put like for judge.
+	 *
+	 * @param  int  $id
+	 * @return \Illuminate\Http\Response
+	 */
+	public function putLike($id)
+	{
+		$judge = Judge::getJudgeData($id);
+		$statistic = JudgesStatistic::getStatistic($id);
+		return (view('judges.judge', compact('judge', 'statistic')));
+	}
 	
 	
 	// PRIVATE METHODS

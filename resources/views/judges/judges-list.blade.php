@@ -16,7 +16,7 @@
 										@endif
 									</a>
 									<small class="text-muted">
-										<i class="fa fa-line-chart mx-3" aria-hidden="true"> NaN </i>
+										<i class="fa fa-line-chart mx-3" aria-hidden="true" title="рейтинг"> NaN </i>
 										@if(Auth::check())
 										<small class="text-muted float-right mr-3 bookmark" onclick="addBookmark(this, {{ $judge->id }})">
 											{{--<input type="hidden" value="{{ $judge->id }}">--}}

@@ -1,9 +1,4 @@
 
-// якщо документ був повністю завантажений
-$(document).ready(function () {
-	// commonStatistic();
-});
-
 /**
  * додати або видалити суддю з закладок
  * @param el
@@ -65,6 +60,41 @@ function updateJudgeStatus(judge) {
 }
 
 
+/**
+ * встановлює новий статус для судді
+ * @returns {boolean}
+ */
+function putLike(judge) {
+
+	$.ajax({
+		url: '/judge-like/' + judge,
+		type: 'post',
+		data: {_method: 'PUT',
+			_token : $('meta[name="csrf-token"]').attr('content')},
+		success: function (data) {
+			$('#judge'+judge).html(data);
+		}
+	});
+}
+
+/**
+ * встановлює новий статус для судді
+ * @returns {boolean}
+ */
+function putUnlike(judge) {
+
+	$.ajax({
+		url: '/judge-unlike/' + judge,
+		type: 'post',
+		data: {_method: 'PUT',
+			_token : $('meta[name="csrf-token"]').attr('content')},
+		success: function (data) {
+			$('#judge'+judge).html(data);
+		}
+	});
+}
+
+
 
 // ФУНКЦІЇ ДЛЯ МАЛЮВАННЯ ГРАФІКІВ
 
@@ -72,26 +102,37 @@ function updateJudgeStatus(judge) {
  * малювання графіка
  * загальної статистики по карегоріях розглянутих справ
  */
-function commonStatistic () {
+function showCommonStatistic () {
 	google.charts.load('current', {'packages':['corechart']});
 	google.charts.setOnLoadCallback(drawCommonStatistic);
 
 	function drawCommonStatistic() {
+		console.log(statisticData);
 		var data = google.visualization.arrayToDataTable([
 			['категорія', 'кількість справ'],
-			['цивільні',     519],
-			['кримінальні',      342],
-			['справи про адміністративні правопорушення',  156]
+			['цивільні',     statisticData.civil_amount],
+			['кримінальні',      statisticData.criminal_amount],
+			['справи про адміністративні правопорушення',  statisticData.adminoffence_amount],
+			['адміністративні справи',  statisticData.admin_amount],
+			['господарські справи',  statisticData.commercial_amount]
+
 		]);
 		var options = {
 			title: 'Категорії розглянутих справ',
 			is3D: true,
 			legend:{position:'left'},
-			chartArea:{left:5,top:0,width:'80%',height:'100%'}
+			chartArea:{left:0,top:0,width:'90%',height:'100%'}
 		};
 		var chart = new google.visualization.PieChart(document.getElementById('common-statistic'));
 		chart.draw(data, options);
 	}
-	google.load("visualization", "1", {packages:["corechart"]});
-	google.setOnLoadCallback(drawCommonStatistic);
 }
+
+
+
+
+
+// якщо документ був повністю завантажений
+$(document).ready(function () {
+	showCommonStatistic();
+});

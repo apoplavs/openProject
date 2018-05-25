@@ -49,7 +49,7 @@
 							@endif
 							<div class="mt-4 text-center">
 								<label class="float-left ml-2 likes"><span>{{ $judge->likes }}</span> <i class="fa fa-thumbs-o-up" aria-hidden="true"></i> </label>
-								<i class="fa fa-line-chart mx-5" aria-hidden="true"> NaN </i>
+								<i class="fa fa-line-chart mx-5" aria-hidden="true" title="рейтинг"> NaN </i>
 								<label class="float-right mr-2 unlikes"> <i class="fa fa-thumbs-o-down" aria-hidden="true"></i> <span>{{ $judge->unlikes }}</span></label>
 							</div>
 						</div>
@@ -113,65 +113,6 @@
 		</div>
 	</div>
 	
-	
-	
-	
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<div class="container mr-5">
-		<div class="row">
-			<div class="col-11">
-				<div class="card card-outline-secondary my-4">
-					<div class="card-header">
-						<i class="fa fa-history" aria-hidden="true"></i> Історія переглядів
-					</div>
-					<div class="card-body p-2">
-						<hr class="mt-0">
-						<p><img src="http://placehold.it/90x90" alt="фото" class="float-left mr-3"><h5><a href="#">Мірошниченко В. М.</a> <small class="text-muted ml-5"><i class="fa fa-line-chart" aria-hidden="true"> NaN </i></i><small class="text-muted float-right mr-5">відстежувати <i class="fa fa-bookmark-o" aria-hidden="true"></i></small></small></h5>
-						Славутицький міський суд Київської області <small class="text-muted ml-5"><i class="fa fa-calendar-check-o" aria-hidden="true"></i> у відпустці з 01/04/18</small></p><br>
-						<hr>
-						<p><img src="http://placehold.it/90x90" alt="фото" class="float-left mr-3"><h5><a href="#">Бандура Олена Петрівна</a> <small class="text-muted ml-5"><i class="fa fa-line-chart" aria-hidden="true"> NaN </i></i><small class="text-muted float-right mr-5">відстежувати <i class="fa fa-bookmark-o" aria-hidden="true"></i></small></small></h5>
-						Млинівський районний суд Рівненської області <small class="text-muted ml-5"><i class="fa fa-briefcase" aria-hidden="true"></i> на роботі 03/04/18</small></p><br>
-						<hr>
-						<p><img src="http://placehold.it/90x90" alt="фото" class="float-left mr-3"><h5><a href="#">Кислашко В. Д.</a> <small class="text-muted ml-5"><i class="fa fa-line-chart" aria-hidden="true"> NaN </i></i><small class="text-muted float-right mr-5">відстежувати <i class="fa fa-bookmark-o" aria-hidden="true"></i></small></small></h5>
-						Млинівський районний суд Рівненської області <small class="text-muted ml-5"><i class="fa fa-briefcase" aria-hidden="true"></i> на роботі 03/04/18</small></p><br>
-						<hr>
-						<p><img src="http://placehold.it/90x90" alt="фото" class="float-left mr-3"><h5><a href="#">Бандура Алла Петрівна</a> <small class="text-muted ml-5"><i class="fa fa-line-chart" aria-hidden="true"> NaN </i></i><small class="text-muted float-right mr-5">відстежувати <i class="fa fa-bookmark-o" aria-hidden="true"></i></small></small></h5>
-						Млинівський районний суд Рівненської області <small class="text-muted ml-5"><i class="fa fa-briefcase" aria-hidden="true"></i> на роботі 03/04/18</small></p><br>
-						<hr>
-						<p><img src="http://placehold.it/90x90" alt="фото" class="float-left mr-3"><h5><a href="#">Степанюк О. Г.</a> <small class="text-muted ml-5"><i class="fa fa-line-chart" aria-hidden="true"> NaN </i></i><small class="text-muted float-right mr-5">відстежується <i class="fa fa-bookmark" aria-hidden="true"></i></small></small></h5>
-						Іванківський районний суд Київської області <small class="text-muted ml-5"><i class="fa fa-medkit" aria-hidden="true"></i> на лікарняному з 19/03/18</small></p><br>
-						<hr>
-					</div>
-				</div>
-				<!-- /.card -->
-			
-			</div> <!-- col-9 -->
-		</div>
-	</div>
-	
 	@if(Auth::check())
 		<!-- Modal -->
 		<div class="modal fade" id="changeJudgeStatus" tabindex="-1" role="dialog" aria-labelledby="changeJudgeStatusLabel" aria-hidden="true">
@@ -210,6 +151,9 @@
 				</div>
 			</div>
 		</div>
+		<script>
+			var statisticData = @json($statistic);
+		</script>
 	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 	<script src="{{ asset('js/judge.js') }}"></script>
