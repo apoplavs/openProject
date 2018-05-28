@@ -43,15 +43,20 @@ Route::get('/judges-autocomplete', 'Judges\JudgesController@autocompleteSearch')
 // оновити статус судді
 Route::put('/judge-status/{id}', 'Judges\JudgesController@updateJudgeStatus')->name('judge-status');
 
-// оболонка сторінки (Рейтинг->судді)
+// оболонка сторінки яка влючає фільтри, і пошук (Рейтинг->судді)
 Route::get('/judges', function () {
 	return view('judges.judges');
 })->name('judges');
 
-// додати суддю в закладки
-Route::put('/bookmark/{id}', 'Judges\BookmarksController@update')->name('bookmark');
 
+// РОЗГЛЯНУТИ ВАРІАНТ, ЯКЩО МОЖЛИВО ЗРОБИТИ route "/judges/{id}/bookmark", РОЗІБРАТИ ЩО ТАКЕ ->name('...') в routes
+// додати суддю в закладки
+Route::put('/judges/{id}/bookmark', 'User\BookmarksController@addJudgeBookmark');
 // видалити суддю з закладок
-Route::delete('/bookmark/{id}', 'Judges\BookmarksController@destroy')->name('bookmark');
-// для отримання сторінки конкретного судді
-//Route::get('/judges{}', 'Judges\JudgesController@show')->name('judges');
+Route::delete('/judges/{id}/bookmark', 'User\BookmarksController@delJudgeBookmark');
+
+
+// поставити лайк судді
+Route::put('/judge-like/{id}', 'Judges\JudgesController@putLike')->name('judge-like');
+// поставити дизлайк судді
+Route::put('/judge-unlike/{id}', 'Judges\JudgesController@putUnlike')->name('judge-unlike');

@@ -218,7 +218,7 @@ function addBookmark(el, judge) {
 		iTag.classList.remove('fa-bookmark');
 		spanTag.innerHTML = 'відстежувати';
 		$.ajax({
-			url: '/bookmark/' + judge,
+			url: '/judges/' + judge + '/bookmark',
 			type: 'post',
 			data: {_method: 'DELETE',
 				_token : $('meta[name="csrf-token"]').attr('content'), },
@@ -230,7 +230,7 @@ function addBookmark(el, judge) {
 		iTag.classList.remove('fa-bookmark-o');
 		spanTag.innerHTML = 'відстежується';
 		$.ajax({
-			url: '/bookmark/' + judge,
+			url: '/judges/' + judge + '/bookmark',
 			type: 'post',
 			data: {_method: 'PUT',
 				_token : $('meta[name="csrf-token"]').attr('content'), },

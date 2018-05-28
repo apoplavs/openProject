@@ -17,6 +17,7 @@ class JudgesStatistic extends Model
 	/**
 	 * отримує з БД і повертає статистику по судді
 	 * id якого передано в параметрах
+	 * використовується на сторінці судді
 	 * @param $judge
 	 */
 	public static function getStatistic($judge) {

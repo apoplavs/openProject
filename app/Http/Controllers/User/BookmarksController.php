@@ -1,6 +1,6 @@
 <?php
 
-namespace Toecyd\Http\Controllers\Judges;
+namespace Toecyd\Http\Controllers\User;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -9,8 +9,8 @@ use Toecyd\UserBookmarkJudge;
 
 /**
  * Управління закладками корисувача
- * Class BookmarkJudgeController
- * @package Toecyd\Http\Controllers\Judges
+ * Class BookmarksController
+ * @package Toecyd\Http\Controllers\User
  */
 class BookmarksController extends Controller
 {
@@ -69,24 +69,22 @@ class BookmarksController extends Controller
 
     /**
      * Update the specified resource in storage.
-     *
+     * Додати суддю в закладки
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
+    public function addJudgeBookmark(Request $request, $id) {
     	UserBookmarkJudge::createBookmark(Auth::user()->id, $id);
     }
 
     /**
      * Remove the specified resource from storage.
-     *
+     * Видалити суддю з закладок
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
+    public function delJudgeBookmark($id) {
 		UserBookmarkJudge::deleteBookmark(Auth::user()->id, $id);
     }
 }

@@ -174,13 +174,26 @@ class JudgesController extends Controller
 	}
 	
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	// PRIVATE METHODS
+	
 	
 	/**
 	 * виконується, якщо застосовувалась фільтрація до списку суддів
-	 * @param array $regions
-	 * @param array $instances
-	 * @param       $rsort
+	 * @return array
 	 */
 	private function getFilters() {
 		// отримання параметрів, якщо вони були передані
@@ -202,6 +215,5 @@ class JudgesController extends Controller
 		}
 
 		return (['regions'=>$int_regions, 'instances'=>$int_instances, 'sort_order'=>$sort_order, 'search'=>$search]);
- 
 	}
 }

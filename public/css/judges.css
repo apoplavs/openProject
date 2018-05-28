@@ -60,10 +60,10 @@
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
 }
-
-div.card-body h5 a {
-    max-width: 51%;
-    min-width: 50%;
+ /*потрібно зробити row-col d bootstrap щоб нормально відображалось на мобільних пристроях*/
+div.card-body .court-name {
+    max-width: 80%;
+    min-width: 79%;
 }
 p>img {
     width: 100px;
