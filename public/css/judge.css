@@ -3,7 +3,7 @@ div.col-12 img {
     width: 250px;
     height: 250px;
 }
-/* Medium devices (tablets, 768px and up) */
+/* large devices (992px and up) */
 @media (min-width: 992px) {
     div.col-12 img {
         width: 350px;

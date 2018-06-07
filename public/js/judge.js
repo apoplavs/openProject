@@ -61,35 +61,35 @@ function updateJudgeStatus(judge) {
 
 
 /**
- * встановлює новий статус для судді
+ * поставити/прибрати лайк судді
  * @returns {boolean}
  */
 function putLike(judge) {
 
 	$.ajax({
-		url: '/judge-like/' + judge,
+		url: '/judges/' + judge + '/like',
 		type: 'post',
 		data: {_method: 'PUT',
 			_token : $('meta[name="csrf-token"]').attr('content')},
 		success: function (data) {
-			$('#judge'+judge).html(data);
+			$('span.likes-unlikes').html(data);
 		}
 	});
 }
 
 /**
- * встановлює новий статус для судді
+ * поставити/прибрати дизлайк судді
  * @returns {boolean}
  */
 function putUnlike(judge) {
 
 	$.ajax({
-		url: '/judge-unlike/' + judge,
+		url: '/judges/' + judge + '/unlike',
 		type: 'post',
 		data: {_method: 'PUT',
 			_token : $('meta[name="csrf-token"]').attr('content')},
 		success: function (data) {
-			$('#judge'+judge).html(data);
+			$('span.likes-unlikes').html(data);
 		}
 	});
 }

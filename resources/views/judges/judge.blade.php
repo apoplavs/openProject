@@ -48,9 +48,10 @@
 								</small>
 							@endif
 							<div class="mt-4 text-center">
-								<label class="float-left ml-2 likes"><span>{{ $judge->likes }}</span> <i class="fa fa-thumbs-o-up" aria-hidden="true"></i> </label>
+								<span class="likes-unlikes">
+									@include('judges.judge-likes-unlikes')
+								</span>
 								<i class="fa fa-line-chart mx-5" aria-hidden="true" title="рейтинг"> NaN </i>
-								<label class="float-right mr-2 unlikes"> <i class="fa fa-thumbs-o-down" aria-hidden="true"></i> <span>{{ $judge->unlikes }}</span></label>
 							</div>
 						</div>
 					</div>
@@ -112,6 +113,7 @@
 			
 		</div>
 	</div>
+	
 	
 	@if(Auth::check())
 		<!-- Modal -->

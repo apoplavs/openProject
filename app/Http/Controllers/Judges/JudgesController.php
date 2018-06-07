@@ -166,8 +166,7 @@ class JudgesController extends Controller
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
 	 */
-	public function putLike($id)
-	{
+	public function putLike($id) {
 		$judge = Judge::getJudgeData($id);
 		$statistic = JudgesStatistic::getStatistic($id);
 		return (view('judges.judge', compact('judge', 'statistic')));

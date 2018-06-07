@@ -41,7 +41,7 @@ Route::get('/judges/{id}', 'Judges\JudgesController@show')->name('judges');
 Route::get('/judges-autocomplete', 'Judges\JudgesController@autocompleteSearch')->name('judges-autocomplete');
 
 // оновити статус судді
-Route::put('/judge-status/{id}', 'Judges\JudgesController@updateJudgeStatus')->name('judge-status');
+Route::put('/judge-status/{id}', 'Judges\JudgesController@updateJudgeStatus');
 
 // оболонка сторінки яка влючає фільтри, і пошук (Рейтинг->судді)
 Route::get('/judges', function () {
@@ -49,14 +49,13 @@ Route::get('/judges', function () {
 })->name('judges');
 
 
-// РОЗГЛЯНУТИ ВАРІАНТ, ЯКЩО МОЖЛИВО ЗРОБИТИ route "/judges/{id}/bookmark", РОЗІБРАТИ ЩО ТАКЕ ->name('...') в routes
 // додати суддю в закладки
-Route::put('/judges/{id}/bookmark', 'User\BookmarksController@addJudgeBookmark');
+Route::put('/judges/{id}/bookmark', 'User\BookmarksController@addJudgeBookmark')->middleware('auth');
 // видалити суддю з закладок
-Route::delete('/judges/{id}/bookmark', 'User\BookmarksController@delJudgeBookmark');
+Route::delete('/judges/{id}/bookmark', 'User\BookmarksController@delJudgeBookmark')->middleware('auth');
 
 
 // поставити лайк судді
-Route::put('/judge-like/{id}', 'Judges\JudgesController@putLike')->name('judge-like');
+Route::put('/judges/{id}/like', 'Judges\JudgesController@putLike')->middleware('auth');
 // поставити дизлайк судді
-Route::put('/judge-unlike/{id}', 'Judges\JudgesController@putUnlike')->name('judge-unlike');
+Route::put('/judges/{id}/unlike', 'Judges\JudgesController@putUnlike')->middleware('auth');

@@ -60,21 +60,30 @@
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
 }
- /*потрібно зробити row-col d bootstrap щоб нормально відображалось на мобільних пристроях*/
-div.card-body .court-name {
-    max-width: 80%;
-    min-width: 79%;
-}
-p>img {
-    width: 100px;
-    height: 100px;
+
+
+ /* styles for page elements */
+div.col-12.col-lg-2>img {
+    width: 120px;
+    height: 120px;
 }
 #sorting-type, .bookmark, .fa-pencil {
     cursor: pointer;
 }
 #sorting-type input {
-    /*display: none;*/
+    display: none;
 }
+ div.card-body.p-2 h5 a{
+     color: #3d7ee5;
+ }
+/* if display is small then hide part of pagination */
+ @media (max-width:992px){
+     .pagination li:nth-child(even) {
+         display: none;
+     }
+ }
+
+
 
 /* styles for font awesome */
 .fa-filter {
@@ -116,9 +125,8 @@ p>img {
     color: #6291ba;
     box-shadow: 0 0 3px rgba(0,0,0,0.5),  inset 0 0 1px rgba(0,0,0,0.7);
 }
-div.card-body.p-2 h5 a{
-    color: #3d7ee5;
-}
+
+
 
  /* styles for autocomplete field  */
 .autocomplete {

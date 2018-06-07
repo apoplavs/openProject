@@ -32,7 +32,7 @@
 						<div class="col-12 col-md-9 mb-2 mb-md-0 autocomplete">
 							<input type="search" class="form-control" id="search-input" placeholder="Пошук...">
 						</div>
-						<div class="col-12 col-md-3">
+						<div class=" col-8  col-lg-3">
 							<button type="button" class="btn btn-block btn btn-primary" onclick="findJudge()"><i class="fa fa-search" aria-hidden="true"></i> знайти</button>
 						</div>
 					</div>
@@ -43,9 +43,9 @@
 	
 	<!-- Filters -->
 	
-	<div class="container ml-1" id="filters">
+	<div class="container ml-1">
 		<div class="row">
-			<div class="col-lg-3">
+			<div class="col-lg-3"  id="filters">
 				<div class="card my-4">
 					<h4 class="card-header"><i class="fa fa-filter" aria-hidden="true"></i> Фільтри</h4>
 					<div class="card-body">
@@ -110,67 +110,65 @@
 						</form>
 					</div>
 				</div> <!-- Card -->
-			</div> <!-- Filters -->
+			</div> <!--  col-3 Filters  -->
 			
 			
-			<!-- Main list -->
-			<div class="col-lg-9">
-				<div class="card card-outline-secondary my-4">
-					<div class="card-header">
-						Список суддів <span class="ml-5"> сортувати: <label id="sorting-type">
-								<input type="checkbox" onchange="changeSorting(this.checked)" form="form-filters" name="sorting">
-								<i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
-								
-							</label></span>
-					</div>
-					<div  id="judges-list">
-						{{--@include('judges.judges-list')--}}
-					</div>
-				</div><!-- /.card -->
-			</div> <!-- col-lg-9 -->
+		<!-- Main list -->
+		<div class="col-lg-9">
+			<div class="card card-outline-secondary my-4">
+				<div class="card-header">
+					Список суддів <span class="ml-5"> сортувати: <label id="sorting-type">
+							<input type="checkbox" onchange="changeSorting(this.checked)" form="form-filters" name="sorting">
+							<i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
+							
+						</label></span>
+				</div>
+				<div  id="judges-list">
+					{{--@include('judges.judges-list')--}}
+				</div>
+			</div><!-- /.card -->
+		</div> <!-- col-lg-9 -->
 		
-		@if(Auth::check())
-			<!-- Modal -->
-			<div class="modal fade" id="changeJudgeStatus" tabindex="-1" role="dialog" aria-labelledby="changeJudgeStatusLabel" aria-hidden="true">
-				<div class="modal-dialog" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title" id="changeJudgeStatusLabel">Оновити статус судді</h5>
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-						</div>
-						<div class="modal-body">
-							<form>
-								<div class="form-group row mt-1">
-									<label for="chooser-judge-status" class="col-2 col-form-label">Статус</label>
-									<select class="form-control col-8 ml-4" id="chooser-judge-status">
-										<option value="1">&#xf0b1; &nbsp; на роботі</option>
-										<option value="2">&#xf0fa; &nbsp; на лікарняному</option>
-										<option value="3">&#xf274; &nbsp; у відпустці</option>
-										<option value="4">&#xf272; &nbsp; відсутній на робочому місці</option>
-										<option value="5">&#xf273; &nbsp; припиено повноваження</option>
-									</select>
-									<input type="hidden" id="judge-for-new-status" value="0">
+	@if(Auth::check())
+		<!-- Modal -->
+		<div class="modal fade" id="changeJudgeStatus" tabindex="-1" role="dialog" aria-labelledby="changeJudgeStatusLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="changeJudgeStatusLabel">Оновити статус судді</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<form>
+							<div class="form-group row mt-1">
+								<label for="chooser-judge-status" class="col-2 col-form-label">Статус</label>
+								<select class="form-control col-8 ml-4" id="chooser-judge-status">
+									<option value="1">&#xf0b1; &nbsp; на роботі</option>
+									<option value="2">&#xf0fa; &nbsp; на лікарняному</option>
+									<option value="3">&#xf274; &nbsp; у відпустці</option>
+									<option value="4">&#xf272; &nbsp; відсутній на робочому місці</option>
+									<option value="5">&#xf273; &nbsp; припиено повноваження</option>
+								</select>
+								<input type="hidden" id="judge-for-new-status" value="0">
+							</div>
+							<div class="form-group row mt-1">
+								<label for="status-end-date" class="col-6 col-form-label">Дата завершення дії статусу <br><sup class="text-muted">(якщо відома)</sup></label>
+								<div class="col-5">
+									<input class="form-control" type="date" min="{{ date('Y-m-d') }}" id="status-end-date">
 								</div>
-								<div class="form-group row mt-1">
-									<label for="status-end-date" class="col-6 col-form-label">Дата завершення дії статусу <br><sup class="text-muted">(якщо відома)</sup></label>
-									<div class="col-5">
-										<input class="form-control" type="date" min="{{ date('Y-m-d') }}" id="status-end-date">
-									</div>
-								</div>
-							</form>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary" data-dismiss="modal">Закрити</button>
-							<button type="button" class="btn btn-primary" data-dismiss="modal" onclick="updateJudgeStatus()">Змінити статус</button>
-						</div>
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Закрити</button>
+						<button type="button" class="btn btn-primary" data-dismiss="modal" onclick="updateJudgeStatus()">Змінити статус</button>
 					</div>
 				</div>
 			</div>
-		@endif
-			
-		</div> <!-- row -->
-	</div> <!-- container -->
-
+		</div>
+	@endif
+	</div> <!-- row -->
+</div> <!-- container -->
 @endsection
