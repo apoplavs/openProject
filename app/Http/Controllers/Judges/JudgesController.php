@@ -3,11 +3,14 @@
 namespace Toecyd\Http\Controllers\Judges;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
 use Toecyd\Http\Controllers\Controller;
 use Toecyd\Judge;
 use Toecyd\JudgesStatistic;
+use Toecyd\UserHistory;
+use Toecyd\UserLikedJudge;
 
 /**
  * Class JudgesController
@@ -84,7 +87,14 @@ class JudgesController extends Controller
     {
     	$judge = Judge::getJudgeData($id);
     	$statistic = JudgesStatistic::getStatistic($id);
-        return (view('judges.judge', compact('judge', 'statistic')));
+    	$liked = UserLikedJudge::isLikedJudge($id);
+		$unliked = UserLikedJudge::isUnlikedJudge($id);
+		
+		// вносим в історію переглядів
+		if (Auth::check()) {
+		UserHistory::addToHistory($id);
+		}
+        return (view('judges.judge', compact('judge', 'statistic', 'liked', 'unliked')));
     }
 
     /**
@@ -167,9 +177,47 @@ class JudgesController extends Controller
 	 * @return \Illuminate\Http\Response
 	 */
 	public function putLike($id) {
-		$judge = Judge::getJudgeData($id);
-		$statistic = JudgesStatistic::getStatistic($id);
-		return (view('judges.judge', compact('judge', 'statistic')));
+		$is_liked = UserLikedJudge::isLikedJudge($id);
+		if ($is_liked) {
+			$judge_data = UserLikedJudge::deleteLike($id);
+			return (view('judges.judge-likes-unlikes')
+				->with(['judge' => $judge_data,
+					'liked' => false,
+					'unliked' => false
+				]));
+		} else {
+			$judge_data = UserLikedJudge::putLike($id);
+			return (view('judges.judge-likes-unlikes')
+				->with(['judge' => $judge_data,
+					'liked' => true,
+					'unliked' => false
+				]));
+		}
+	}
+	
+	/**
+	 * Put unlike for judge.
+	 *
+	 * @param  int  $id
+	 * @return \Illuminate\Http\Response
+	 */
+	public function putUnlike($id) {
+		$is_unliked = UserLikedJudge::isUnlikedJudge($id);
+		if ($is_unliked) {
+			$judge_data = UserLikedJudge::deleteUnlike($id);
+			return (view('judges.judge-likes-unlikes')
+				->with(['judge' => $judge_data,
+					'liked' => false,
+					'unliked' => false
+				]));
+		} else {
+			$judge_data = UserLikedJudge::putUnlike($id);
+			return (view('judges.judge-likes-unlikes')
+				->with(['judge' => $judge_data,
+					'liked' => false,
+					'unliked' => true
+				]));
+		}
 	}
 	
 	

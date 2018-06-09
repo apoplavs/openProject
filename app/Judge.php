@@ -100,4 +100,5 @@ class Judge extends Model
 			->where('judges.id', '=', $judge_id)
 			->first());
 	}
+	
 }

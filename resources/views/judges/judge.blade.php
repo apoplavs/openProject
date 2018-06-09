@@ -7,10 +7,10 @@
 			<div class="col-12">
 				<div class="container py-1 header-information">
 					<div class="row">
-						<div class="col-12 col-md-5 text-center">
+						<div class="col-12 col-md-5 col-lg-4 text-center">
 							<img src="{{ $judge->photo }}" alt="фото" class="mr-3">
 						</div>
-						<div class="col-12 col-md-7 mt-3  text-center text-md-left">
+						<div class="col-12 col-md-7 col-lg-8 mt-3  text-center text-md-left">
 							<h2 class="font-weight-bold">
 								{{ $judge->surname }}
 								@if (strlen($judge->name) > 2)

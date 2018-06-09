@@ -32,7 +32,7 @@
 						<div class="col-12 col-md-9 mb-2 mb-md-0 autocomplete">
 							<input type="search" class="form-control" id="search-input" placeholder="Пошук...">
 						</div>
-						<div class=" col-8  col-lg-3">
+						<div class="col-6 col-md-3">
 							<button type="button" class="btn btn-block btn btn-primary" onclick="findJudge()"><i class="fa fa-search" aria-hidden="true"></i> знайти</button>
 						</div>
 					</div>
@@ -97,16 +97,18 @@
 								</div>
 							</div>
 							
-							<hr>
+							<hr id="apply-filters-mark">
 							
-							<div class="row">
-								<div class="col-6">
-									<button type="reset" class="btn btn-outline-info">Скинути</button>
+							<div id="apply-filters">
+								<div class="row">
+									<div class="col-6 pl-1">
+										<button type="reset" class="btn btn-outline-info">Скинути</button>
+									</div>
+									<div class="col-6">
+										<button type="button" onclick="getJudgesList()" class="btn btn-primary">Показати</button>
+									</div>
 								</div>
-								<div class="col-6">
-									<button type="button" onclick="getJudgesList()" class="btn btn-primary">Показати</button>
-								</div>
-							</div>
+							</div> <!-- apply-filters -->
 						</form>
 					</div>
 				</div> <!-- Card -->

@@ -2,7 +2,6 @@
  /* Стилі для фільтрів */
 #filters {
     font-size: 0.9em;
-    vertical-align: center;
 }
 #filters h6 {
     color: #4c88bd;
@@ -60,6 +59,24 @@
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
 }
+#apply-filters {
+    width: 150px;
+    background-color: white;
+    position: fixed;
+    left: 40px;
+    bottom: 3px;
+}
+
+ /* if display is bigger then 1200px, correct position */
+ @media (min-width: 1200px) {
+     #apply-filters {
+         min-width: 180px;
+         padding-left: 20px;
+         left: 35px;
+     }
+ }
+
+
 
 
  /* styles for page elements */
@@ -76,7 +93,7 @@ div.col-12.col-lg-2>img {
  div.card-body.p-2 h5 a{
      color: #3d7ee5;
  }
-/* if display is small then hide part of pagination */
+/* if display is small then 992 hide part of pagination */
  @media (max-width:992px){
      .pagination li:nth-child(even) {
          display: none;

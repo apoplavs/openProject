@@ -3,6 +3,8 @@
 namespace Toecyd\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Toecyd\UserBookmarkJudge;
+use Toecyd\UserHistory;
 
 class HomeController extends Controller
 {
@@ -23,6 +25,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+		$judges_list = UserBookmarkJudge::getBookmarkJudges();
+		$judges_history = UserHistory::getHistoryJudges();
+        return view('home', compact('judges_list', 'judges_history'));
     }
 }

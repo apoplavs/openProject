@@ -56,6 +56,6 @@ Route::delete('/judges/{id}/bookmark', 'User\BookmarksController@delJudgeBookmar
 
 
 // поставити лайк судді
-Route::put('/judges/{id}/like', 'Judges\JudgesController@putLike')->middleware('auth');
+Route::put('/judges/{id}/like', 'Judges\JudgesController@putLike');
 // поставити дизлайк судді
 Route::put('/judges/{id}/unlike', 'Judges\JudgesController@putUnlike')->middleware('auth');

@@ -13,7 +13,7 @@
 					<div class="col-12 col-lg-10 p-0">
 						<div class="container">
 							<div class="row">
-								<div class="col-12 col-lg-6 text-center text-lg-left">
+								<div class="col-12 col-lg-6 text-center text-lg-left" title="ПІБ судді">
 									<h5>
 										<a href="{{ url('/judges/'. $judge->id) }}">{{ $judge->surname }}
 											@if (strlen($judge->name) > 2)
@@ -24,8 +24,8 @@
 										</a>
 									</h5>
 								</div>
-								<div class="col-4 col-lg-2">
-									<i class="fa fa-line-chart mx-3" aria-hidden="true" title="рейтинг"> NaN </i>
+								<div class="col-4 col-lg-2" title="рейтинг">
+									<i class="fa fa-line-chart" aria-hidden="true"> NaN </i>
 								</div>
 								<div class="col-8 col-lg-4">
 									<span class="text-muted">
@@ -43,16 +43,16 @@
 								</div>
 							</div>
 							<div class="row">
-								<div class="col-12 col-lg-7">
+								<div class="col-12 col-lg-7" title="найменування суду">
 									<div class="float-left court-name">{{ $judge->court_name }}</div>
 								</div>
 								<div class="col-12 col-lg-5">
-									<small class="text-muted ml-1" id="judge{{ $judge->id }}">
+									<small class="text-muted ml-1" id="judge{{ $judge->id }}" title="статус судді, дата оновлення статусу">
 										@include('judges.judge-statuses')
 									</small>
 									{{--if юзер ввійшов - є можливість змінювати статус--}}
 									@if(Auth::check())
-										<span><i class="fa fa-pencil p-1" aria-hidden="true"  data-toggle="modal" data-target="#changeJudgeStatus"
+										<span title="змінити статус судді"><i class="fa fa-pencil p-1" aria-hidden="true"  data-toggle="modal" data-target="#changeJudgeStatus"
 												 onclick="setJudgeToChangeStatus({{ $judge->id }})"></i></span>
 									@endif
 								</div>

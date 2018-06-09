@@ -3,6 +3,8 @@
 namespace Toecyd;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class UserBookmarkJudge extends Model
 {
@@ -39,5 +41,37 @@ class UserBookmarkJudge extends Model
 		static::where('user', '=', $user_id)
 			->where('judge', '=', $judge_id)
 			->delete();
+	}
+	
+	
+	/**
+	 * Отримати всіх суддів, що перебувають
+	 * в закладках користувача
+	 * @return null
+	 */
+	public static function getBookmarkJudges() {
+		// отримуємо всі закладки користувача
+		$bookmark_judges = static::select('judge')
+		->where('user', '=', Auth::user()->id)
+		->get();
+		// якщо закладок немає - виходимо
+		if ($bookmark_judges->isEmpty()) {
+			return (NULL);
+		}
+		
+		// формуємо масив з id суддів, які в закладках
+		$judges_id = [];
+		foreach($bookmark_judges as $judge_id) {
+			$judges_id[] = $judge_id->judge;
+		}
+		
+		return (DB::table('judges')->select('judges.id', 'courts.name AS court_name', 'judges.surname', 'judges.name',
+			'judges.patronymic', 'judges.photo', 'judges.status',
+			DB::raw('DATE_FORMAT(judges.updated_status, "%d.%c.%Y") AS updated_status'),
+			DB::raw('DATE_FORMAT(judges.due_date_status, "%d.%c.%Y") AS due_date_status'),
+			'judges.rating')
+			->join('courts', 'judges.court', '=', 'courts.court_code')
+			->whereIn('judges.id', $judges_id)
+			->get());
 	}
 }

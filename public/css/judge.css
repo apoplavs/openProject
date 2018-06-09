@@ -6,8 +6,8 @@ div.col-12 img {
 /* large devices (992px and up) */
 @media (min-width: 992px) {
     div.col-12 img {
-        width: 350px;
-        height: 350px;
+        width: 300px;
+        height: 300px;
     }
 }
 .header-information {
@@ -15,7 +15,6 @@ div.col-12 img {
 }
 .likes, .unlikes{
     font-size: 1.3em;
-    cursor: pointer;
 }
 .likes span {
     color: green;
@@ -23,6 +22,11 @@ div.col-12 img {
 .unlikes span {
     color: red;
 }
+.likes i, .unlikes i{
+    cursor: pointer;
+}
+
+
 div.text-muted>a {
     text-decoration: none;
 }
@@ -42,20 +46,8 @@ div.card>div.card-body {
 
 
 
-#court-name {
-    max-width: 51%;
-    min-width: 50%;
-}
-#judge-photo {
-    width: 100px;
-    height: 100px;
-}
-#sorting-type, .bookmark, .fa-pencil {
-    cursor: pointer;
-}
-#sorting-type input {
-    /*display: none;*/
-}
+
+
 
 /* styles for font awesome */
 
@@ -67,7 +59,15 @@ div.card>div.card-body {
     font-size: 18px;
     color: #2b989b;
 }
-
+.fa-thumbs-up {
+    color: green;
+}
+.fa-thumbs-down {
+    color: red;
+}
+.fa-thumbs-o-up.text-muted, .fa-thumbs-o-down.text-muted {
+    cursor: auto;
+}
 .fa-briefcase {
     color: green;
     font-size: 15px;
@@ -93,6 +93,9 @@ div.card>div.card-body {
 .fa-pencil:hover {
     color: #6291ba;
     box-shadow: 0 0 3px rgba(0,0,0,0.5),  inset 0 0 1px rgba(0,0,0,0.7);
+}
+.bookmark, .fa-pencil {
+    cursor: pointer;
 }
 
 

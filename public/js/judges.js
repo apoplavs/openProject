@@ -78,6 +78,29 @@ $(document).ready(function () {
 	autocomplete(document.getElementById('search-input'));
 });
 
+// якщо прокрутка сторінки вниз фільтрів - закріпити кнопки
+window.onscroll = function () {
+	let applyFilters = $('#apply-filters');
+	let isView = checkIfInView($('#apply-filters-mark'));
+	if (isView) {
+		applyFilters.css('position', 'static');
+	} else {
+		applyFilters.css('position', 'fixed');
+	}
+};
+
+/**
+ * перевірка чи знаходиться елемент в видимій області екрану
+ * @param element
+ * @returns {boolean}
+ */
+function checkIfInView(element){
+	let offset = (element.offset().top + 60) - $(window).scrollTop();
+	return offset <= window.innerHeight;
+}
+
+
+
 
 /**
  * весь функціонал автодоповнення в полі пошуку
@@ -127,6 +150,7 @@ function autocomplete(inp) {
 						/*close the list of autocompleted values,
 						(or any other open lists of autocompleted values:*/
 						closeAllLists();
+						findJudge();
 					});
 					a.appendChild(b);
 				}

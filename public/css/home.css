@@ -1,18 +1,36 @@
 
-div.card-body h5 a {
-    max-width: 51%;
-    min-width: 50%;
+/* styles for bookmarks */
+#follow-judges div.col-12>div.container{
+    background-color: white;
+    min-width: 260px;
+    max-width: 300px;
 }
-#judge-photo {
-    width: 200px;
-    height: 200px;
+#follow-judges div div.container a{
+    text-decoration: none;
+    color: #3d7ee5;
 }
-#sorting-type, .bookmark, .fa-pencil {
-    cursor: pointer;
+.court-name {
+    min-height: 70px;
 }
-#sorting-type input {
-    /*display: none;*/
+
+div.row>div.col-12>img {
+    width: 230px;
+    height: 230px;
 }
+div.card-body.p-2 h5 a{
+    color: #3d7ee5;
+}
+
+/* styles for history */
+#user-history div.col-12.col-lg-2>img {
+    width: 120px;
+    height: 120px;
+}
+
+
+
+
+
 
 /* styles for font awesome */
 .fa-filter {
@@ -54,19 +72,8 @@ div.card-body h5 a {
     color: #6291ba;
     box-shadow: 0 0 3px rgba(0,0,0,0.5),  inset 0 0 1px rgba(0,0,0,0.7);
 }
-div.card-body.p-2 h5 a{
-    color: #3d7ee5;
-}
-
-
- /* styles for homepage */
-#follow-judges div.col-2{
-    background-color: white;
-    min-width: 230px;
-}
-#follow-judges div div.container a{
-    text-decoration: none;
-    color: #3d7ee5;
+.bookmark, .fa-pencil {
+    cursor: pointer;
 }
 
 

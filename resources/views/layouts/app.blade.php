@@ -19,7 +19,7 @@
 </head>
 <body>
 	<!-- <div id="app"> -->
-		<nav class="navbar navbar-expand-xl navbar-light bg-light z-depth-3">
+		<nav class="navbar navbar-expand-lg navbar-light bg-light z-depth-3">
 			<a href="{{ url('/') }}" class="navbar-brand p-0 m-0">
 				<img src="{{ asset('img/logo.png') }}" width="40" alt="logo">
 				{{ config('app.name', 'ТОЕсуд') }}
@@ -80,9 +80,9 @@
 							
 							<hr class="my-2">
 							
-							<a href="{{ url('/') }}">
+							<a href="{{ url('/home') }}">
 								<li>
-									Головна <i class="fa fa-home text-muted float-right" aria-hidden="true"></i>
+									Домашня <i class="fa fa-home text-muted float-right" aria-hidden="true"></i>
 								</li>
 							</a>
 							

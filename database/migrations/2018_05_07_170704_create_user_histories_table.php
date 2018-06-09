@@ -17,7 +17,7 @@ class CreateUserHistoriesTable extends Migration
 			$table->increments('id');
 			$table->unsignedInteger('user');
 			$table->integer('judge');
-			$table->timestamps();
+			$table->timestamp('created_at')->useCurrent();
 	
 			$table->foreign('user')->references('id')->on('users');
 			$table->foreign('judge')->references('id')->on('judges');

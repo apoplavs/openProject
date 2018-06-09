@@ -5,6 +5,9 @@ switch (window.location.pathname) {
 	case '/judges':
 		$.getScript("js/judges.js");
 		break;
+	case '/home':
+		$.getScript("js/home.js");
+		break;
 	/*case '/':
 		break;
 	case '/':
@@ -12,3 +15,14 @@ switch (window.location.pathname) {
 	case '/':
 		break;*/
 }
+
+/**
+ * функція яка виконується кожен раз
+ * як тільки ajax завершить завантаження
+ */
+$(document).ajaxComplete(function() {
+	setTimeout(function () {
+		$('#floatingCirclesG').hide();
+
+	}, 100);
+});
