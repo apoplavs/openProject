@@ -43,7 +43,7 @@ class JudgesController extends Controller
 //    	print_r($regions);
 //		print_r($instances);
 //    	dd($regions, $instance);
-    	$judges_list = Judge::getJudgesList($filters['regions'], $filters['instances'],
+    	$judges_list = Judge::getJudgesList($filters['regions'], $filters['instances'], $filters['jurisdictions'],
 			$filters['sort_order'], $filters['search']);
 //		$judges_list = DB::table('judges')->paginate(15);
 //		$judges_list = Paginator::make($judges_list);
@@ -246,6 +246,7 @@ class JudgesController extends Controller
 		// отримання параметрів, якщо вони були передані
 		$regions = Input::has('regions') ? Input::get('regions') : [];
 		$instances = Input::has('instances') ? Input::get('instances') : [];
+		$jurisdictions = Input::has('jurisdictions') ? Input::get('jurisdictions') : [];
 		$rsort = Input::has('rsort') ? intval(Input::get('rsort')) : 0;
 		$search = Input::has('search') ? Input::get('search') : '';
 
@@ -254,13 +255,21 @@ class JudgesController extends Controller
 		
 		$int_regions = [];
 		$int_instances = [];
+		$int_jurisdictions = [];
 		foreach($regions as $region) {
 			$int_regions[] = intval($region);
 		}
 		foreach($instances as $instance) {
 			$int_instances[] = intval($instance);
 		}
+		foreach($jurisdictions as $jurisdiction) {
+			$int_jurisdictions[] = intval($jurisdiction);
+		}
 
-		return (['regions'=>$int_regions, 'instances'=>$int_instances, 'sort_order'=>$sort_order, 'search'=>$search]);
+		return (['regions'=>$int_regions,
+			'instances'=>$int_instances,
+			'jurisdictions'=>$int_jurisdictions,
+			'sort_order'=>$sort_order,
+			'search'=>$search]);
 	}
 }

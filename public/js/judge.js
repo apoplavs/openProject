@@ -134,5 +134,6 @@ function showCommonStatistic () {
 
 // якщо документ був повністю завантажений
 $(document).ready(function () {
+	// отримуємо статистику по даному судді
 	showCommonStatistic();
 });

@@ -12,6 +12,19 @@ function getInstances() {
 	return (instances);
 }
 
+function getJurisdiction() {
+	let jurisdictionEl = document.getElementsByName('jurisdiction');
+	let jurisdictions = [];
+
+	// перевіка відмічених юрисдикцій
+	for (key in jurisdictionEl) {
+		if (jurisdictionEl[key].checked) {
+			jurisdictions.push(jurisdictionEl[key].value);
+		}
+	}
+	return (jurisdictions);
+}
+
 function getRegions() {
 	let regionsEl = document.getElementsByName('region');
 	let regions = [];
@@ -40,14 +53,16 @@ function getJudgesList(getParams) {
 	getURL = '/judges-list';
 	getURL += getParams || '';
 
-	let regions = getRegions();
 	let instances = getInstances();
+	let jurisdictions = getJurisdiction();
+	let regions = getRegions();
+
 	let search = getSearch();
 	let reverseSort = document.getElementsByName('sorting')[0].checked ? 1 : 0;
 
 	// ajax запит для отримання інфи
 	$.get(getURL,
-		{regions: regions, instances: instances, rsort: reverseSort, search: search},
+		{regions: regions, instances: instances, jurisdictions: jurisdictions, rsort: reverseSort, search: search},
 		function (data, textStatus) {
 			$('#judges-list').html(data);
 
@@ -72,11 +87,6 @@ function changeSorting(checked) {
 	}
 	getJudgesList();
 }
-// якщо документ був повністю завантажений
-$(document).ready(function () {
-	getJudgesList();
-	autocomplete(document.getElementById('search-input'));
-});
 
 // якщо прокрутка сторінки вниз фільтрів - закріпити кнопки
 window.onscroll = function () {
@@ -114,16 +124,24 @@ function autocomplete(inp) {
 	inp.addEventListener("input", function(e) {
 		var val = this.value;
 
-		/*close any already open lists of autocompleted values*/
-		closeAllLists();
-		if (!val) { return false;}
-		currentFocus = -1;
-
 		/* getting values from DB via AJAX */
-		$.get('/judges-autocomplete',
-			{search: val},
-			function (data, textStatus) {
+		$.ajax({
+			url: '/judges-autocomplete',
+			type: 'get',
+			beforeSend: function(){
+				$('#loader').hide();
+				$('#content').removeClass('blurry')
+			},
+			data: {search: val},
+			dataType: "json",
+			success: function (data, textStatus) {
 				let a, b, i;
+
+				/*close any already open lists of autocompleted values*/
+				closeAllLists();
+				if (!val) { return false;}
+				currentFocus = -1;
+
 				/*create a DIV element that will contain the items (values):*/
 				a = document.createElement("DIV");
 				a.setAttribute("id", inp.id + "autocomplete-list");
@@ -154,8 +172,8 @@ function autocomplete(inp) {
 					});
 					a.appendChild(b);
 				}
-			}, "json"
-		);/* $.get */
+			}
+		});/* $.ajax (get) */
 	});
 
 	/*execute a function presses a key on the keyboard:*/
@@ -293,3 +311,6 @@ function setJudgeToChangeStatus(judge) {
 	document.getElementById('judge-for-new-status').value = judge;
 }
 
+// завантаження списку суддів і активація поля автодоповнення
+getJudgesList();
+autocomplete(document.getElementById('search-input'));

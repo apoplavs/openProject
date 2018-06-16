@@ -66,32 +66,45 @@
 							
 							<div class="row">
 								<div class="col-lg-12">
+									<h6>Юрисдикція</h6>
+									<ul class="list-unstyled mb-0">
+										<li><label><input type="checkbox" value="3" name="jurisdiction"><span class="checkmark"></span> Господарська</label></li>
+										<li><label><input type="checkbox" value="2" name="jurisdiction"><span class="checkmark"></span> Адміністративна</label></li>
+										<li><label><input type="checkbox" value="1" name="jurisdiction"><span class="checkmark"></span> Загальна</label></li>
+									</ul>
+								</div>
+							</div>
+							
+							<hr>
+							
+							<div class="row">
+								<div class="col-lg-12">
 									<h6>Регіон суду</h6>
 									<ul class="list-unstyled mb-0">
-										<li><label><input type="checkbox" value="2" name="region"><span class="checkmark"></span> Вінницька область</label></li>
-										<li><label><input type="checkbox" value="3" name="region"><span class="checkmark"></span> Волинська область</label></li>
-										<li><label><input type="checkbox" value="4" name="region"><span class="checkmark"></span> Дніпропетровська область</label></li>
-										<li><label><input type="checkbox" value="5" name="region"><span class="checkmark"></span> Донецька область</label></li>
-										<li><label><input type="checkbox" value="6" name="region"><span class="checkmark"></span> Житомирська область</label></li>
-										<li><label><input type="checkbox" value="7" name="region"><span class="checkmark"></span> Закарпатська область</label></li>
-										<li><label><input type="checkbox" value="8" name="region"><span class="checkmark"></span> Запорізька область</label></li>
-										<li><label><input type="checkbox" value="9" name="region"><span class="checkmark"></span> Івано-Франківська область</label></li>
-										<li><label><input type="checkbox" value="10" name="region"><span class="checkmark"></span> Київська область</label></li>
-										<li><label><input type="checkbox" value="11" name="region"><span class="checkmark"></span> Кіровоградська область</label></li>
-										<li><label><input type="checkbox" value="12" name="region"><span class="checkmark"></span> Луганська область</label></li>
-										<li><label><input type="checkbox" value="13" name="region"><span class="checkmark"></span> Львівська область</label></li>
-										<li><label><input type="checkbox" value="14" name="region"><span class="checkmark"></span> Миколаївська область</label></li>
-										<li><label><input type="checkbox" value="15" name="region"><span class="checkmark"></span> Одеська область</label></li>
-										<li><label><input type="checkbox" value="16" name="region"><span class="checkmark"></span> Полтавська область</label></li>
-										<li><label><input type="checkbox" value="17" name="region"><span class="checkmark"></span> Рівненська область</label></li>
-										<li><label><input type="checkbox" value="18" name="region"><span class="checkmark"></span> Сумська область</label></li>
-										<li><label><input type="checkbox" value="19" name="region"><span class="checkmark"></span> Тернопільська область</label></li>
-										<li><label><input type="checkbox" value="20" name="region"><span class="checkmark"></span> Харківська область</label></li>
-										<li><label><input type="checkbox" value="21" name="region"><span class="checkmark"></span> Херсонська область</label></li>
-										<li><label><input type="checkbox" value="22" name="region"><span class="checkmark"></span> Хмельницька область</label></li>
-										<li><label><input type="checkbox" value="23" name="region"><span class="checkmark"></span> Черкаська область</label></li>
-										<li><label><input type="checkbox" value="24" name="region"><span class="checkmark"></span> Чернівецька область</label></li>
-										<li><label><input type="checkbox" value="25" name="region"><span class="checkmark"></span> Чернігівська область</label></li>
+										<li><label><input type="checkbox" value="2" name="region"><span class="checkmark"></span> Вінницька</label></li>
+										<li><label><input type="checkbox" value="3" name="region"><span class="checkmark"></span> Волинська</label></li>
+										<li><label><input type="checkbox" value="4" name="region"><span class="checkmark"></span> Дніпропетровська</label></li>
+										<li><label><input type="checkbox" value="5" name="region"><span class="checkmark"></span> Донецька</label></li>
+										<li><label><input type="checkbox" value="6" name="region"><span class="checkmark"></span> Житомирська</label></li>
+										<li><label><input type="checkbox" value="7" name="region"><span class="checkmark"></span> Закарпатська</label></li>
+										<li><label><input type="checkbox" value="8" name="region"><span class="checkmark"></span> Запорізька</label></li>
+										<li><label><input type="checkbox" value="9" name="region"><span class="checkmark"></span> Івано-Франківська</label></li>
+										<li><label><input type="checkbox" value="10" name="region"><span class="checkmark"></span> Київська</label></li>
+										<li><label><input type="checkbox" value="11" name="region"><span class="checkmark"></span> Кіровоградська</label></li>
+										<li><label><input type="checkbox" value="12" name="region"><span class="checkmark"></span> Луганська</label></li>
+										<li><label><input type="checkbox" value="13" name="region"><span class="checkmark"></span> Львівська</label></li>
+										<li><label><input type="checkbox" value="14" name="region"><span class="checkmark"></span> Миколаївська</label></li>
+										<li><label><input type="checkbox" value="15" name="region"><span class="checkmark"></span> Одеська</label></li>
+										<li><label><input type="checkbox" value="16" name="region"><span class="checkmark"></span> Полтавська</label></li>
+										<li><label><input type="checkbox" value="17" name="region"><span class="checkmark"></span> Рівненська</label></li>
+										<li><label><input type="checkbox" value="18" name="region"><span class="checkmark"></span> Сумська</label></li>
+										<li><label><input type="checkbox" value="19" name="region"><span class="checkmark"></span> Тернопільська</label></li>
+										<li><label><input type="checkbox" value="20" name="region"><span class="checkmark"></span> Харківська</label></li>
+										<li><label><input type="checkbox" value="21" name="region"><span class="checkmark"></span> Херсонська</label></li>
+										<li><label><input type="checkbox" value="22" name="region"><span class="checkmark"></span> Хмельницька</label></li>
+										<li><label><input type="checkbox" value="23" name="region"><span class="checkmark"></span> Черкаська</label></li>
+										<li><label><input type="checkbox" value="24" name="region"><span class="checkmark"></span> Чернівецька</label></li>
+										<li><label><input type="checkbox" value="25" name="region"><span class="checkmark"></span> Чернігівська</label></li>
 										<li><label><input type="checkbox" value="26" name="region"><span class="checkmark"></span> м. Київ</label></li>
 									</ul>
 								</div>

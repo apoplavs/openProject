@@ -19,7 +19,7 @@ class Judge extends Model
 	/**
 	 * @return mixed
 	 */
-	public static function getJudgesList($regions, $instances, $sort_order, $search) {
+	public static function getJudgesList($regions, $instances, $jurisdictions, $sort_order, $search) {
 		
 		// отримання id користувача
 		$user_id = Auth::check() ? Auth::user()->id : 0;
@@ -35,6 +35,9 @@ class Judge extends Model
 			})
 			->when(!empty($instances), function ($query) use ($instances) {
 				return $query->whereIn('courts.instance_code', $instances);
+			})
+			->when(!empty($jurisdictions), function ($query) use ($jurisdictions) {
+				return $query->whereIn('courts.jurisdiction', $jurisdictions);
 			})
 			->when(!empty($search), function ($query) use ($search) {
 				return $query->where('judges.surname', 'LIKE', $search.'%');

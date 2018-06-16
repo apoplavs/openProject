@@ -1,12 +1,4 @@
 
-// якщо документ був повністю завантажений
-$(document).ready(function () {
-	//getJudgesList();
-	//autocomplete(document.getElementById('search-input'));
-});
-
-
-
 /**
  * додати або видалити суддю з закладок
  * @param el
