@@ -16,10 +16,10 @@
 
 	<!-- Styles -->
 	{{--<link href="{{ asset('css/app.css') }}" rel="stylesheet">--}}
-	<link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
-	<link href="{{ asset('css/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
+	<link href="{{ asset('css/plugins/bootstrap.min.css') }}" rel="stylesheet">
+	<link href="{{ asset('css/plugins/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
 	<link href="{{ asset('css/style.css') }}" rel="stylesheet">
-	<script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
+	<script src="{{ asset('js/plugins/jquery-3.3.1.min.js') }}"></script>
 </head>
 <noscript>
 	<style type="text/css">
@@ -170,7 +170,7 @@
 {{--    <script src="{{ asset('js/app.js') }}"></script>--}}
 	
 {{--	<script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>--}}
-	<script src="{{ asset('js/bootstrap.min.js') }}"></script>
+	<script src="{{ asset('js/plugins/bootstrap.min.js') }}"></script>
 	<script src="{{ asset('js/main.js') }}"></script>
 	{{--<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>--}}
 </body>

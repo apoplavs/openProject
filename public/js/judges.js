@@ -50,9 +50,15 @@ function getSearch() {
 }
 // отримує відмічені фільтри і робить ajax запит
 function getJudgesList(getParams) {
+	// запускаємо прелоадер
+	ajaxActive = true;
+	$('#loader').show();
+	$('#content').addClass('blurry');
+
 	getURL = '/judges-list';
 	getURL += getParams || '';
 
+	// отримуємо відмічені фільтри
 	let instances = getInstances();
 	let jurisdictions = getJurisdiction();
 	let regions = getRegions();
@@ -128,10 +134,6 @@ function autocomplete(inp) {
 		$.ajax({
 			url: '/judges-autocomplete',
 			type: 'get',
-			beforeSend: function(){
-				$('#loader').hide();
-				$('#content').removeClass('blurry')
-			},
 			data: {search: val},
 			dataType: "json",
 			success: function (data, textStatus) {

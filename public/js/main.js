@@ -5,9 +5,7 @@ let ajaxActive = false;
  * як тільки ajax починає будь-яке завантаження
  */
 $(document).ajaxStart(function() {
-	ajaxActive = true;
-	$('#loader').show();
-	$('#content').addClass('blurry');
+	//
 });
 
 

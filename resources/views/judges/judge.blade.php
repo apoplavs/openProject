@@ -2,13 +2,21 @@
 
 @section('content')
 	<link href="{{ asset('css/judge.css') }}" rel="stylesheet">
+{{--	<link href="{{ asset('css/plugins/imgareaselect/imgareaselect-default.css') }}" rel="stylesheet">--}}
 	<div class="container mt-2">
 		<div class="row">
 			<div class="col-12">
 				<div class="container py-1 header-information">
 					<div class="row">
-						<div class="col-12 col-md-5 col-lg-4 text-center">
-							<img src="{{ $judge->photo }}" alt="фото" class="mr-3">
+						<div class="col-12 col-md-5 col-lg-4">
+							<div class="judge-photo-container text-center">
+								<img src="{{ $judge->photo }}" alt="фото" class="mr-3" id="judge-photo">
+								@if(Auth::check() && $judge->photo == '/img/judges/no_photo.jpg')
+									<div id="addJudgePhoto" aria-hidden="true"  data-toggle="modal" data-target="#formAddJudgePhoto">
+										<i class="fa fa-camera" aria-hidden="true"></i> додати фото
+									</div>
+								@endif
+							</div>
 						</div>
 						<div class="col-12 col-md-7 col-lg-8 mt-3  text-center text-md-left">
 							<h2 class="font-weight-bold">
@@ -116,7 +124,7 @@
 	
 	
 	@if(Auth::check())
-		<!-- Modal -->
+		<!-- Modal for change Judge Status -->
 		<div class="modal fade" id="changeJudgeStatus" tabindex="-1" role="dialog" aria-labelledby="changeJudgeStatusLabel" aria-hidden="true">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
@@ -152,12 +160,50 @@
 					</div>
 				</div>
 			</div>
-		</div>
+		</div> <!-- Modal -->
+		
+		@if(Auth::check() && $judge->photo == '/img/judges/no_photo.jpg')
+			<!-- Modal for add Judge Photo -->
+			<div class="modal fade" id="formAddJudgePhoto" tabindex="-1" role="dialog" aria-labelledby="formAddJudgePhotoLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="formAddJudgePhotoLabel">Додати фото судді</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<div class="form-group row mt-1">
+								<div class="col-12">
+									<div id="uploaded-holder">
+										<img src="">
+									</div>
+								</div>
+							</div>
+							<div class="form-group row my-5 text-center" id="uploadPhotoForm">
+								<div class="col-12">
+									<form enctype="multipart/form-data" method="post" onchange="checkFile(this)">
+										<input type="file" id="newJudgePhoto" name="photo" accept="image/png,image/jpeg,image/jpg" required>
+									</form>
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<small class="errorLabel mr-1"></small>
+							<button type="button" class="btn btn-primary" data-dismiss="modal" onclick="addPhoto({{ $judge->id }})">Додати фото</button>
+						</div>
+					</div>
+				</div>
+			</div> <!-- Modal -->
+		@endif
+		
 		<script>
 			var statisticData = @json($statistic);
 		</script>
 	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+	{{--<script type="text/javascript" src="{{ asset('js/plugins/jquery.imgareaselect.pack.js') }}"></script>--}}
 	<script src="{{ asset('js/judge.js') }}"></script>
 	@endif
 

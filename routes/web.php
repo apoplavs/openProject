@@ -59,3 +59,6 @@ Route::delete('/judges/{id}/bookmark', 'User\BookmarksController@delJudgeBookmar
 Route::put('/judges/{id}/like', 'Judges\JudgesController@putLike');
 // поставити дизлайк судді
 Route::put('/judges/{id}/unlike', 'Judges\JudgesController@putUnlike')->middleware('auth');
+
+// додати фото судді
+Route::post('/judges/add-photo', 'Judges\JudgesController@addPhoto');

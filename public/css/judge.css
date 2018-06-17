@@ -1,15 +1,30 @@
 
-div.col-12 img {
+#judge-photo, .judge-photo-container {
     width: 250px;
     height: 250px;
+    margin: auto;
 }
 /* large devices (992px and up) */
 @media (min-width: 992px) {
-    div.col-12 img {
+    #judge-photo, .judge-photo-container {
         width: 300px;
         height: 300px;
     }
 }
+#addJudgePhoto {
+    position: relative;
+    bottom: 25px;
+    margin: auto;
+    height: 25px;
+    background-color: black;
+    color: white;
+    opacity: 0.2;
+    cursor: pointer;
+}
+.judge-photo-container:hover #addJudgePhoto {
+    opacity: 0.6;
+}
+
 .header-information {
     background-color: white;
 }
@@ -119,4 +134,13 @@ select#chooser-judge-status option:nth-child(4) {
 }
 select#chooser-judge-status option:last-child {
     color: #6291ba;
+}
+
+/* styles for pop-up form add photo */
+#uploaded-holder img{
+    min-width: 300px;
+    max-width: 460px;
+}
+.errorLabel {
+    color: red;
 }

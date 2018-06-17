@@ -221,6 +221,12 @@ class JudgesController extends Controller
 	}
 	
 	
+	public function addPhoto(Request $request) {
+//		dd($request);
+		return json_encode(Input::all());
+	}
+	
+	
 	
 	
 	
