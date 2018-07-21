@@ -11740,7 +11740,7 @@ DELIMITER $$
 --
 -- Події
 --
-DROP EVENT `clearingUserHistory`$$
+DROP EVENT IF EXISTS `clearingUserHistory`$$
 CREATE DEFINER=`root`@`localhost` EVENT `clearingUserHistory` ON SCHEDULE EVERY '0 4:10' DAY_MINUTE STARTS '2018-07-20 21:40:58' ON COMPLETION NOT PRESERVE ENABLE COMMENT 'очищувати історії переглядів користувачів (крім останніх 5 запис' DO DELETE uh
 FROM user_histories uh
 WHERE
@@ -11754,7 +11754,7 @@ WHERE
             AND uh1.created_at > uh.created_at
         HAVING COUNT(*) >= 5)$$
 
-DROP EVENT `clearingLogs`$$
+DROP EVENT IF EXISTS `clearingLogs`$$
 CREATE DEFINER=`root`@`localhost` EVENT `clearingLogs` ON SCHEDULE EVERY '0 4:5' DAY_MINUTE STARTS '2018-07-20 21:41:09' ON COMPLETION NOT PRESERVE ENABLE COMMENT 'очищувати логи старші 14 днів кожен день в 04:05' DO DELETE FROM log_change_rows WHERE created_at < DATE_SUB(NOW(), INTERVAL 14 DAY)$$
 
 DELIMITER ;

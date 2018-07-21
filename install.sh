@@ -28,7 +28,7 @@ fi
 DATABASE="open_project"
 # DIRECTORY_PROJECT=$(pwd)
 
-echo "Enter username to MySQL"
+echo "\n\n\n Enter username to MySQL"
 read USERNAME
 echo "Enter password to MySQL"
 read PASS
@@ -36,20 +36,21 @@ echo "Enter host MySQL  ('127.0.0.1' if default)"
 read HOST
 
 echo "installation Database ...\n"
+echo "it will take a few minutes\n"
 
-SETDATABASE=$(mysql -u $USERNAME -p$PASS -h $HOST -e "SOURCE db_import/open_project.sql;")
-if $( echo $SETDATABASE | grep 'ERROR')
+mysql -u $USERNAME -p$PASS -h $HOST -e "SOURCE db_import/open_project.sql;"
+SETDATABASE=$(mysql -u $USERNAME -p$PASS -N -h $HOST -D $DATABASE -e "SHOW TABLES;")
+if $( echo $SETDATABASE | grep -q 'migrations')
 then
-	echo "it will take a few minutes\n"
+	echo "Database installed successfully\n\n"
+	exit;
 else
 	echo "Database installation error";
 	exit;
 fi
 
-echo "Database installed successfully\n\n"
-
 echo "Setup settings ..."
-echo "APP_NAME=OpenProject
+echo "APP_NAME=ТОЕсуд
 APP_ENV=local
 APP_KEY=
 APP_DEBUG=true
@@ -82,7 +83,7 @@ MAIL_ENCRYPTION=null
 PUSHER_APP_ID=
 PUSHER_APP_KEY=
 PUSHER_APP_SECRET=" >> .env
-echo "Settings installed successfully"
+echo "Settings installed successfully\n"
 
 php artisan key:generate
 php artisan optimize
