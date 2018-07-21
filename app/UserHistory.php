@@ -24,6 +24,7 @@ class UserHistory extends Model
 	 * якщо судді немає в історії переглядів і закладках користувача
 	 * додати нового суддю
 	 * в історію переглядів користувача
+	 * Застарілу історію видаляти не потрібно - оскільки це робить "event"
 	 * @param $judge
 	 */
 	public static function addToHistory($judge) {
@@ -51,26 +52,10 @@ class UserHistory extends Model
 	/**
 	 * Отримати останніх 5 суддів, що перебувають
 	 * в історії переглядів користувача
+	 * Застарілу історію видаляти не потрібно - оскільки це робить "event"
 	 */
 	public static function getHistoryJudges() {
-		$overflow_history = static::select('id')
-			->where('user', '=', Auth::user()->id)
-			->orderBy('user_histories.created_at', 'DESC')
-			->offset(5)
-			->limit(20)
-			->get();
-		
-		// якщо є застаріла історія - видаляємо
-		if ($overflow_history->isNotEmpty()) {
-			// формуємо масив з id суддів, які в застарілій історії
-			$judges_id = [];
-			foreach($overflow_history as $judge_id) {
-				$judges_id[] = $judge_id->id;
-			}
-			static::whereIn('id', $judges_id)
-				->delete();
-		}
-		
+
 		// отримуємо і повертаємо 5 останніх позицій з історії переглядів користувача
 		return (DB::table('judges')->select('judges.id', 'courts.name AS court_name', 'judges.surname', 'judges.name',
 			'judges.patronymic', 'judges.photo', 'judges.status',

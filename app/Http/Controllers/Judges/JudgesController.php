@@ -11,6 +11,8 @@ use Toecyd\Judge;
 use Toecyd\JudgesStatistic;
 use Toecyd\UserHistory;
 use Toecyd\UserLikedJudge;
+use Toecyd\UsersLikesJudge;
+use Toecyd\UsersUnlikesJudge;
 
 /**
  * Class JudgesController
@@ -32,17 +34,11 @@ class JudgesController extends Controller
 //		if (Input::has('regions') || Input::has('instances') || Input::has('rsort')) {
 //			return ($this->filteredJudges(Input::get('regions'), Input::get('instances'), Input::get('rsort')));
 //		}
-//    	if (array_key_exists('rsort', $all_input) && $all_input['rsort'] == 'false') {
-//    	return ($all_input);
-//		}
 //		return ([$regions, empty($instances), $rsort]);
   
 //    	dd($logged);
 //    	$regions = Input::get('regions');
 //    	$instances = Input::get('instances');
-//    	print_r($regions);
-//		print_r($instances);
-//    	dd($regions, $instance);
     	$judges_list = Judge::getJudgesList($filters['regions'], $filters['instances'], $filters['jurisdictions'],
 			$filters['sort_order'], $filters['search']);
 //		$judges_list = DB::table('judges')->paginate(15);
@@ -51,7 +47,6 @@ class JudgesController extends Controller
 //		$data = Auth::user()->id;
 //		dd($data);
 //		echo $judges_list->links();
-//		dd($judges_list[0]);
 		
 		return view('judges.judges-list', compact('judges_list'));
     }
@@ -87,8 +82,8 @@ class JudgesController extends Controller
     {
     	$judge = Judge::getJudgeData($id);
     	$statistic = JudgesStatistic::getStatistic($id);
-    	$liked = UserLikedJudge::isLikedJudge($id);
-		$unliked = UserLikedJudge::isUnlikedJudge($id);
+    	$liked = UsersLikesJudge::isLikedJudge($id);
+		$unliked = UsersUnlikesJudge::isUnlikedJudge($id);
 		
 		// вносим в історію переглядів
 		if (Auth::check()) {
@@ -130,6 +125,8 @@ class JudgesController extends Controller
     public function updateJudgeStatus(Request $request, $id) {
     	$set_status = intval($request->setstatus);
     	$due_date = $request->date;
+    	
+    	// вілідація форми для зміни статусу
 		$validator = Validator::make(['setstatus'=>$set_status, 'date'=>$due_date], [
     		'setstatus' => 'required|integer|between:1,5',
 			'date' => 'date|date_format:Y-m-d|after:yesterday|nullable'
@@ -171,22 +168,25 @@ class JudgesController extends Controller
 	
 	
 	/**
-	 * Put like for judge.
+	 * Поставити лайк судді
 	 *
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
 	 */
 	public function putLike($id) {
-		$is_liked = UserLikedJudge::isLikedJudge($id);
+		// перевіряємо чи користувач вже ставив лайк
+		$is_liked = UsersLikesJudge::isLikedJudge($id);
+		
+		// якщо ставив - то прибираємо, в іншому випадку ставимо
 		if ($is_liked) {
-			$judge_data = UserLikedJudge::deleteLike($id);
+			$judge_data = UsersLikesJudge::deleteLike($id);
 			return (view('judges.judge-likes-unlikes')
 				->with(['judge' => $judge_data,
 					'liked' => false,
 					'unliked' => false
 				]));
 		} else {
-			$judge_data = UserLikedJudge::putLike($id);
+			$judge_data = UsersLikesJudge::putLike($id);
 			return (view('judges.judge-likes-unlikes')
 				->with(['judge' => $judge_data,
 					'liked' => true,
@@ -196,22 +196,25 @@ class JudgesController extends Controller
 	}
 	
 	/**
-	 * Put unlike for judge.
+	 * Поставити дизлайк судді
 	 *
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
 	 */
 	public function putUnlike($id) {
-		$is_unliked = UserLikedJudge::isUnlikedJudge($id);
+		// перевіряємо чи користувач вже ставив дизлайк
+		$is_unliked = UsersUnlikesJudge::isUnlikedJudge($id);
+		
+		// якщо ставив - то прибираємо, в іншому випадку ставимо
 		if ($is_unliked) {
-			$judge_data = UserLikedJudge::deleteUnlike($id);
+			$judge_data = UsersUnlikesJudge::deleteUnlike($id);
 			return (view('judges.judge-likes-unlikes')
 				->with(['judge' => $judge_data,
 					'liked' => false,
 					'unliked' => false
 				]));
 		} else {
-			$judge_data = UserLikedJudge::putUnlike($id);
+			$judge_data = UsersUnlikesJudge::putUnlike($id);
 			return (view('judges.judge-likes-unlikes')
 				->with(['judge' => $judge_data,
 					'liked' => false,
@@ -221,8 +224,13 @@ class JudgesController extends Controller
 	}
 	
 	
+	/**
+	 * функція для додавання фото судді
+	 * ПОКИ ЩО НЕ ВИКОРИСТОВУЄЬСЯ
+	 * @param Request $request
+	 * @return string
+	 */
 	public function addPhoto(Request $request) {
-//		dd($request);
 		return json_encode(Input::all());
 	}
 	

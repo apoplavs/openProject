@@ -11,11 +11,11 @@
 						<div class="col-12 col-md-5 col-lg-4">
 							<div class="judge-photo-container text-center">
 								<img src="{{ $judge->photo }}" alt="фото" class="mr-3" id="judge-photo">
-								@if(Auth::check() && $judge->photo == '/img/judges/no_photo.jpg')
-									<div id="addJudgePhoto" aria-hidden="true"  data-toggle="modal" data-target="#formAddJudgePhoto">
-										<i class="fa fa-camera" aria-hidden="true"></i> додати фото
-									</div>
-								@endif
+								{{--@if(Auth::check() && $judge->photo == '/img/judges/no_photo.jpg')--}}
+									{{--<div id="addJudgePhoto" aria-hidden="true"  data-toggle="modal" data-target="#formAddJudgePhoto">--}}
+										{{--<i class="fa fa-camera" aria-hidden="true"></i> додати фото--}}
+									{{--</div>--}}
+								{{--@endif--}}
 							</div>
 						</div>
 						<div class="col-12 col-md-7 col-lg-8 mt-3  text-center text-md-left">
@@ -199,6 +199,7 @@
 		@endif
 		
 		<script>
+			// дані в JSON для статистики
 			var statisticData = @json($statistic);
 		</script>
 	<script type="text/javascript" src="https://www.google.com/jsapi"></script>

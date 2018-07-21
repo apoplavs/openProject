@@ -17,6 +17,7 @@ class Judge extends Model
 	
 	
 	/**
+	 * отримати список суддів, враховуючи фільтри, які були задані
 	 * @return mixed
 	 */
 	public static function getJudgesList($regions, $instances, $jurisdictions, $sort_order, $search) {
@@ -86,6 +87,7 @@ class Judge extends Model
 	
 	
 	/**
+	 * отримати дані по одному судді
 	 * @param $judge_id
 	 */
 	public static function getJudgeData($judge_id) {
@@ -94,7 +96,9 @@ class Judge extends Model
 		return (static::select('judges.id', 'judges.surname', 'judges.name',
 			'courts.name AS court_name', 'courts.address AS court_address',
 			'courts.phone AS court_phone', 'courts.email AS court_email', 'courts.site AS court_site',
-			'judges.patronymic', 'judges.photo', 'judges.status', 'judges.likes', 'judges.unlikes',
+			'judges.patronymic', 'judges.photo', 'judges.status',
+			DB::raw('(SELECT COUNT(*) FROM users_likes_judges WHERE users_likes_judges.judge=judges.id) AS likes'),
+			DB::raw('(SELECT COUNT(*) FROM users_unlikes_judges WHERE users_unlikes_judges.judge=judges.id) AS unlikes'),
 			DB::raw('DATE_FORMAT(judges.updated_status, "%d.%c.%Y") AS updated_status'),
 			DB::raw('DATE_FORMAT(judges.due_date_status, "%d.%c.%Y") AS due_date_status'),
 			'judges.rating', DB::raw('(CASE WHEN user_bookmark_judges.user = '.$user_id.' THEN 1 ELSE 0 END) AS is_bookmark'))

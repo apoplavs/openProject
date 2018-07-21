@@ -20,14 +20,10 @@ class CreateJudgesTable extends Migration
 			$table->string('name');
 			$table->string('patronymic');
 			$table->string('photo')->nullable();
-			$table->string('facebook')->nullable();
-			$table->string('chesnosud')->nullable();
 			$table->tinyInteger('status')->default(1);
             $table->timestamp('updated_status');
 			$table->string('phone')->nullable();
 			$table->smallInteger('rating')->default(0);
-			$table->smallInteger('likes')->default(0);
-			$table->smallInteger('unlikes')->default(0);
             
             $table->primary('id');
 			$table->foreign('status')->references('id')->on('judge_statuses');

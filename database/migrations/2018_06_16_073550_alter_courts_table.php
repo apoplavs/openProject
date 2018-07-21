@@ -16,11 +16,12 @@ class AlterCourtsTable extends Migration
      */
     public function up()
     {
-		if (Schema::hasTable('courts') && !Schema::hasColumn('courts', 'jurisdiction')) {
+        // якщо існує таблиця courts, і не існує поле head_judge
+		if (Schema::hasTable('courts') && !Schema::hasColumn('courts', 'head_judge')) {
 			Schema::table('courts', function (Blueprint $table) {
-				$table->tinyInteger('jurisdiction')->default(1)->after('region_code');
+				$table->integer('head_judge')->nullable()->after('jurisdiction')->comment('суддя який є головою суду');
 				
-				$table->foreign('jurisdiction')->references('id')->on('jurisdictions');
+				$table->foreign('head_judge')->references('id')->on('judges');
 			});
 		}
     }
@@ -33,7 +34,7 @@ class AlterCourtsTable extends Migration
     public function down()
     {
 		Schema::table('courts', function (Blueprint $table) {
-			$table->dropColumn('jurisdiction');
+			$table->dropColumn('head_judge');
 		});
     }
 }

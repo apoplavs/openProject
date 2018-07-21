@@ -70,9 +70,10 @@
 					</div>
 					<div class="card-body p-2" id="user-history">
 						<hr class="mt-0 mb-1">
-						@if(!$judges_history[0])
-							<div>За заданими параметрами нічого не знайдено</div>
-						@endif
+						{{--якщо історії переглядів немає--}}
+						@if(empty($judges_history) || empty($judges_history[0]))
+							<div>пусто</div>
+						@else
 						<div class="container">
 							@foreach($judges_history as $judge)
 								<div class="row">
@@ -132,6 +133,7 @@
 								<hr class="my-3 my-lg-2">
 							@endforeach
 						</div> <!-- container -->
+						@endif
 					</div> <!-- card-body -->
 				</div> <!-- card-outline-secondary -->
 			</div> <!-- col-12 -->
