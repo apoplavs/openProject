@@ -26,7 +26,6 @@ fi
 
 # Setup variables
 DATABASE="open_project"
-# DIRECTORY_PROJECT=$(pwd)
 
 echo "\n\n\n Enter username to MySQL"
 read USERNAME
@@ -43,7 +42,6 @@ SETDATABASE=$(mysql -u $USERNAME -p$PASS -N -h $HOST -D $DATABASE -e "SHOW TABLE
 if $( echo $SETDATABASE | grep -q 'migrations')
 then
 	echo "Database installed successfully\n\n"
-	exit;
 else
 	echo "Database installation error";
 	exit;
@@ -87,10 +85,6 @@ echo "Settings installed successfully\n"
 
 php artisan key:generate
 php artisan optimize
-
-#echo "Setting permissions.."
-# chgrp -R www-data $DIRECTORY_PROJECT
-#chmod -R 775 $DIRECTORY_PROJECT/storage
 
 echo "Done. Restart apache, and try use it"
 #echo "if something does not work    https://www.howtoforge.com/tutorial/install-laravel-on-ubuntu-for-apache"
