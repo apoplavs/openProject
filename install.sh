@@ -11,6 +11,9 @@ else
     exit;
 fi
 
+# update composer
+composer update --no-scripts
+
 # check if installed laravel
 LARAVEL=$(php artisan --version)
 if $( echo $LARAVEL | grep --quiet 'Laravel')
@@ -32,10 +35,18 @@ read PASS
 echo "Enter host MySQL  ('127.0.0.1' if default)"
 read HOST
 
-echo "installation Database ..."
-echo "it will take a few minutes"
-mysql -u $USERNAME -p$PASS -h $HOST -e "SOURCE install/open_project.sql;"
-echo "Database installed successfully"
+echo "installation Database ...\n"
+
+SETDATABASE=$(mysql -u $USERNAME -p$PASS -h $HOST -e "SOURCE db_import/open_project.sql;")
+if $( echo $SETDATABASE | grep 'ERROR')
+then
+	echo "it will take a few minutes\n"
+else
+	echo "Database installation error";
+	exit;
+fi
+
+echo "Database installed successfully\n\n"
 
 echo "Setup settings ..."
 echo "APP_NAME=OpenProject
@@ -76,9 +87,9 @@ echo "Settings installed successfully"
 php artisan key:generate
 php artisan optimize
 
-echo "Setting permissions.."
+#echo "Setting permissions.."
 # chgrp -R www-data $DIRECTORY_PROJECT
-chmod -R 775 $DIRECTORY_PROJECT/storage
+#chmod -R 775 $DIRECTORY_PROJECT/storage
 
 echo "Done. Restart apache, and try use it"
 #echo "if something does not work    https://www.howtoforge.com/tutorial/install-laravel-on-ubuntu-for-apache"
