@@ -48,10 +48,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 // Дані маршрути призначені для API V1 доступ здійснюється по "host/api/v1/"
-Route::group(['prefix' => 'v1/'], function () {
+Route::group(['prefix' => 'v1/', 'namespace' => 'Api\V1',], function () {
 	
-	Route::post('register', 'Api\V1\Auth\RegisterController@register');
-	Route::get('register', 'Api\V1\Auth\RegisterController@show');
+	//Route::post('register', 'Auth\RegisterController@register');
+	//Route::get('register', 'Auth\RegisterController@show');
+//	Route::resource();
 	
 	
 });
