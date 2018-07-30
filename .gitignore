@@ -8,5 +8,8 @@
 Homestead.json
 Homestead.yaml
 npm-debug.log
+package.json
+composer.json
+composer.lock
 yarn-error.log
 .env

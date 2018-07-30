@@ -1,0 +1,12 @@
+{
+	"db":{
+			"type":"mysql",	
+			"host":"develop-toecyd.ckbu3cst0zhm.eu-central-1.rds.amazonaws.com",
+			"dbname":"develop_toecyd",
+			"charset":"utf8",
+			"user":"develop",
+			"pass":"openproject",
+			"port":"3306"
+	}
+
+}
