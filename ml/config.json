@@ -1,5 +1,15 @@
 {
-	"db":{
+	"db_edrsr":{
+			"type":"mysql",	
+			"host":"develop-toecyd.ckbu3cst0zhm.eu-central-1.rds.amazonaws.com",
+			"dbname":"ml_toecyd",
+			"charset":"utf8",
+			"user":"develop",
+			"pass":"openproject",
+			"port":"3306"
+	},
+
+	"db_toecyd":{
 			"type":"mysql",	
 			"host":"develop-toecyd.ckbu3cst0zhm.eu-central-1.rds.amazonaws.com",
 			"dbname":"develop_toecyd",
