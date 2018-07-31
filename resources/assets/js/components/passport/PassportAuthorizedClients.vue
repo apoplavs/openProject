@@ -1,31 +1,22 @@
-<style scoped>
-    .action-link {
-        cursor: pointer;
-    }
+<transition>
+    <template>
+        <div>
+            <div v-if="tokens.length > 0">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Authorized Applications</div>
 
-    .m-b-none {
-        margin-bottom: 0;
-    }
-</style>
-
-<template>
-    <div>
-        <div v-if="tokens.length > 0">
-            <div class="panel panel-default">
-                <div class="panel-heading">Authorized Applications</div>
-
-                <div class="panel-body">
-                    <!-- Authorized Tokens -->
-                    <table class="table table-borderless m-b-none">
-                        <thead>
+                    <div class="panel-body">
+                        <!-- Authorized Tokens -->
+                        <table class="table table-borderless m-b-none">
+                            <thead>
                             <tr>
                                 <th>Name</th>
                                 <th>Scopes</th>
                                 <th></th>
                             </tr>
-                        </thead>
+                            </thead>
 
-                        <tbody>
+                            <tbody>
                             <tr v-for="token in tokens">
                                 <!-- Client Name -->
                                 <td style="vertical-align: middle;">
@@ -46,19 +37,18 @@
                                     </a>
                                 </td>
                             </tr>
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</template>
+    </template>
+</transition>
 
 <script>
     export default {
-        /*
-         * The component's data.
-         */
+
         data() {
             return {
                 tokens: []
@@ -109,3 +99,14 @@
         }
     }
 </script>
+
+
+<style scoped>
+    .action-link {
+        cursor: pointer;
+    }
+
+    .m-b-none {
+        margin-bottom: 0;
+    }
+</style>
