@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ app()->getLocale() }}">
+<html lang="ua">
 <head>
 	<meta charset="utf-8">
 	<meta name="description" content="ТОЕсуд - рейтинг суддів України що формується за допомогою алгоритмів ML на основі показників копетентності та своєчасності">
@@ -15,7 +15,7 @@
 	<title>{{ config('app.name', 'ТОЕсуд') }}</title>
 
 	<!-- Styles -->
-	{{--<link href="{{ asset('css/app.css') }}" rel="stylesheet">--}}
+	{{-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> --}}
 	<link href="{{ asset('css/plugins/bootstrap.min.css') }}" rel="stylesheet">
 	<link href="{{ asset('css/plugins/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
 	<link href="{{ asset('css/style.css') }}" rel="stylesheet">
@@ -32,7 +32,12 @@
 		<a target="_blank" class="outer" href="https://support.google.com/adsense/answer/12654?hl=uk">ок Google як увімкнути JavaScript?</a></div>
 </noscript>
 <body>
-	<!-- <div id="app"> -->
+	<div id="app">
+
+
+
+
+		
 		<nav class="navbar navbar-expand-lg navbar-light bg-light z-depth-3">
 			<a href="{{ url('/') }}" class="navbar-brand p-0 m-0">
 				<img src="{{ asset('img/logo.png') }}" width="40" alt="logo">
@@ -160,14 +165,16 @@
 		}
 	</style>
 		<div id="loader"></div>
+
+
+		<router-view></router-view>
+	</div>	
 	
-<div id="content" class="blurry">
-	@yield('content')
-</div>
+
 	
 
 	<!-- Scripts -->
-{{--    <script src="{{ asset('js/app.js') }}"></script>--}}
+    <script src="{{ asset('js/app.js') }}"></script>
 	
 {{--	<script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>--}}
 	<script src="{{ asset('js/plugins/bootstrap.min.js') }}"></script>
