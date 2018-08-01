@@ -1,7 +1,6 @@
 
 <template>
     <div>
-        <header-component></header-component>
         <div class="container">
             <div class="row">
                 <div class="col-md-8 col-md-offset-2">
@@ -21,12 +20,9 @@
 
 <script>
 
-    // var headerComponent = require('./HeaderComponent.vue');
     export default {
-        name: 'home-component',
-        components: {
-            // HeaderComponent
-        },
+        name: 'HomeComponent',
+
         mounted() {
             console.log('Component mounted.')
         }

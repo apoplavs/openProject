@@ -4,5 +4,33 @@
 // Variables
 @import "variables";
 
-// Bootstrap
-@import "~bootstrap/scss/bootstrap";
+
+body {
+  background-color: #e9ebee;
+}
+.navbar-light {
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.2), 0 4px 15px 0 rgba(0, 0, 0, 0.19);
+}
+#input-form {
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+}
+.help-block {
+  color: red;
+}
+//#top-navbar li {
+//  padding: 0 10px;
+//}
+//#top-navbar>li:hover>a{
+//  color: #2b989b!important;
+//}
+
+//ul li a {
+//  text-decoration: none;
+//  color: black !important;
+//}
+ul li a:hover{
+  color: #2b989b!important;
+}
+ul li a i{
+  font-size: 1.1em;
+}
