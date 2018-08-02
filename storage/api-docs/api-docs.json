@@ -24,11 +24,11 @@
         "/signup": {
             "post": {
                 "tags": [
-                    "\u0410\u0443\u0442\u0435\u043d\u0442\u0438\u0444\u0456\u043a\u0430\u0446\u0456\u044f \u043a\u043e\u0440\u0438\u0441\u0442\u0443\u0432\u0430\u0447\u0430"
+                    "\u0420\u0435\u0454\u0441\u0442\u0440\u0430\u0446\u0456\u044f \u043a\u043e\u0440\u0438\u0441\u0442\u0443\u0432\u0430\u0447\u0430"
                 ],
-                "summary": "\u0420\u0435\u0454\u0441\u0442\u0440\u0430\u0446\u0456\u044f",
+                "summary": "",
                 "description": "\u0417\u0430\u0440\u0435\u0454\u0441\u0442\u0440\u0443\u0432\u0430\u0442\u0438 \u043d\u043e\u0432\u043e\u0433\u043e \u043a\u043e\u0440\u0438\u0441\u0442\u0443\u0432\u0430\u0447\u0430",
-                "operationId": "api.dashboard.index",
+                "operationId": "signup",
                 "produces": [
                     "application/json"
                 ],
@@ -77,6 +77,65 @@
                                 "errors": {
                                     "email": "\u0414\u0430\u043d\u0438\u0439 email \u0432\u0436\u0435 \u0432\u0438\u043a\u043e\u0440\u0438\u0441\u0442\u043e\u0432\u0443\u0454\u0442\u044c\u0441\u044f."
                                 }
+                            }
+                        }
+                    },
+                    "405": {
+                        "description": "\u041c\u0435\u0442\u043e\u0434, \u0437 \u044f\u043a\u0438\u043c \u0432\u0438\u043a\u043e\u043d\u0443\u0432\u0430\u0432\u0441\u044f \u0437\u0430\u043f\u0438\u0442, \u043d\u0435 \u0434\u043e\u0437\u0432\u043e\u043b\u0435\u043d\u043e \u0432\u0438\u043a\u043e\u0440\u0438\u0441\u0442\u043e\u0432\u0443\u0432\u0430\u0442\u0438 \u0434\u043b\u044f \u0437\u0430\u0434\u0430\u043d\u043e\u0433\u043e \u0440\u0435\u0441\u0443\u0440\u0441\u0443; \u043d\u0430\u043f\u0440\u0438\u043a\u043b\u0430\u0434, \u0437\u0430\u043f\u0438\u0442 \u0431\u0443\u0432 \u0437\u0434\u0456\u0439\u0441\u043d\u0435\u043d\u0438\u0439 \u0437\u0430 \u043c\u0435\u0442\u043e\u0434\u043e\u043c GET, \u0445\u043e\u0447\u0430 \u043e\u0447\u0456\u043a\u0443\u0454\u0442\u044c\u0441\u044f \u0449\u043e \u0434\u0430\u043d\u0456 \u0431\u0443\u0434\u0443\u0442\u044c \u043d\u0430\u0434\u0456\u0441\u043b\u0430\u043d\u0456 \u043c\u0435\u0442\u043e\u0434\u043e\u043c POST."
+                    }
+                }
+            }
+        },
+        "/login": {
+            "post": {
+                "tags": [
+                    "\u0412\u0445\u0456\u0434 \u0432 \u0441\u0438\u0441\u0442\u0435\u043c\u0443"
+                ],
+                "summary": "",
+                "description": "\u0412\u0445\u0456\u0434 \u043a\u043e\u0440\u0438\u0441\u0442\u0443\u0432\u0430\u0447\u0430 \u0432 \u0441\u0438\u0441\u0442\u0435\u043c\u0443 \u043c\u043e\u0436\u043b\u0438\u0432\u0438\u0439 \u043f\u0456\u0441\u043b\u044f \u043f\u0456\u0434\u0442\u0432\u0435\u0440\u0434\u0436\u0435\u043d\u043d\u044f email;\n\t \u041f\u0456\u0441\u043b\u044f \u043d\u0430\u0434\u0441\u0438\u043b\u0430\u043d\u043d\u044f \u0432\u0430\u043b\u0456\u0434\u043d\u043e\u0433\u043e \u0437\u0430\u043f\u0438\u0442\u0443, \u0432 \u0441\u0438\u0441\u0442\u0435\u043c\u0456 \u0433\u0435\u043d\u0435\u0440\u0443\u0454\u0442\u044c\u0441\u044f \u0443\u043d\u0456\u043a\u0430\u043b\u044c\u043d\u0438\u0439 \u0442\u043e\u043a\u0435\u043d \u0434\u043b\u044f \u043a\u043e\u0436\u043d\u043e\u0433\u043e \u043a\u043e\u0440\u0438\u0441\u0442\u0443\u0432\u0430\u0447\u0430;\n\t \u0422\u043e\u043a\u0435\u043d, \u043f\u043e\u0442\u0440\u0456\u0431\u0435\u043d \u0434\u043b\u044f \u043f\u0456\u0434\u0442\u0432\u0435\u0440\u0434\u0436\u0435\u043d\u043d\u044f \u0430\u0432\u0442\u0435\u043d\u0442\u0438\u0444\u0456\u043a\u0430\u0446\u0456\u0457 \u043a\u043e\u0440\u0438\u0441\u0442\u0443\u0432\u0430\u0447\u0430 \u0432 \u0441\u0438\u0441\u0442\u0435\u043c\u0456;\n\t \u041f\u0456\u0441\u043b\u044f \u043e\u0442\u0440\u0438\u043c\u0430\u043d\u043d\u044f \u0442\u043e\u043a\u0435\u043d\u0430 \u043a\u043e\u0440\u0438\u0441\u0442\u0443\u0432\u0430\u0447 \u043c\u043e\u0436\u0435 \u0437\u0434\u0456\u0439\u0441\u043d\u044e\u0432\u0430\u0442\u0438 \u0437\u0430\u043f\u0438\u0442\u0438 \u043d\u0430 \u043c\u0430\u0440\u0448\u0440\u0443\u0442\u0438 \u0448\u043e \u0432\u0438\u043c\u0430\u0433\u0430\u044e\u0442\u044c \u0430\u0432\u0442\u043e\u0440\u0438\u0437\u0430\u0446\u0456\u0457;\n\t \u041f\u0440\u0438 \u0437\u0434\u0456\u0439\u0441\u043d\u0435\u043d\u043d\u0456 \u043b\u044e\u0431\u0438\u0445 \u0437\u0430\u043f\u0438\u0442\u0456\u0432 \u043d\u0430 \u043c\u0430\u0440\u0448\u0440\u0443\u0442\u0438 \u0449\u043e \u0432\u0438\u043c\u0430\u0433\u0430\u044e\u0442\u044c \u0430\u0432\u0442\u043e\u0440\u0438\u0437\u0430\u0446\u0456\u0457, \u0442\u043e\u043a\u0435\u043d \u043f\u043e\u0432\u0438\u043d\u0435\u043d \u043d\u0430\u0434\u0441\u0438\u043b\u0430\u0442\u0438\u0441\u044f \u0432 Headers.",
+                "operationId": "login",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "\u0414\u0430\u043d\u0456 \u043a\u043e\u0440\u0438\u0441\u0442\u0443\u0432\u0430\u0447\u0430",
+                        "in": "body",
+                        "description": "\u0429\u043e\u0431 \u043e\u0442\u0440\u0438\u043c\u0430\u0442\u0438 \u0443\u043d\u0456\u043a\u0430\u043b\u044c\u043d\u0438\u0439 \u0442\u043e\u043a\u0435\u043d, \u043f\u043e\u0442\u0440\u0456\u0431\u043d\u043e \u043f\u0435\u0440\u0435\u0434\u0430\u0442\u0438 email \u0456 \u043f\u0430\u0440\u043e\u043b\u044c \u043a\u043e\u0440\u0438\u0441\u0442\u0443\u0432\u0430\u0447\u0430.",
+                        "required": true,
+                        "schema": {
+                            "properties": {
+                                "email": {
+                                    "description": "email \u041a\u043e\u0440\u0438\u0441\u0442\u0443\u0432\u0430\u0447\u0430",
+                                    "type": "string",
+                                    "example": "example@gmail.com"
+                                },
+                                "password": {
+                                    "description": "\u041f\u0430\u0440\u043e\u043b\u044c \u041a\u043e\u0440\u0438\u0441\u0442\u0443\u0432\u0430\u0447\u0430",
+                                    "type": "string",
+                                    "example": "123456"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "\u0422\u043e\u043a\u0435\u043d \u0423\u0441\u043f\u0456\u0448\u043d\u043e \u0437\u0433\u0435\u043d\u0435\u0440\u043e\u0432\u0430\u043d\u0438\u0439",
+                        "examples": {
+                            "application/json": {
+                                "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjYwODMxYTExMzQwODJmMmJlN2YyYjRhYzc4NjZkN2EzZDI5YjQ5YmQ0MWI1ZjVmNjhlMDAxZDc1NGQ5ZjlhZjFlMGFhNzcxMzM1Yjk2YzU5In0.eyJhdWQiOiIxIiwianRpIjoiNjA4MzFhMTEzNDA4MmYyYmU3ZjJiNGFjNzg2NmQ3YTNkMjliNDliZDQxYjVmNWY2OGUwMDFkNzU0ZDlmOWFmMWUwYWE3NzEzMzViOTZjNTkiLCJpYXQiOjE1MzMyMjExMTksIm5iZiI6MTUzMzIyMTExOSwiZXhwIjoxNTY0NzU3MTE5LCJzdWIiOiI0Iiwic2NvcGVzIjpbXX0.lGr3pzgbh7GZVmfyFcuHEo_gDeHbRmRoh8_UzmmL6PH_X0HgufZSg5jQH9LmBpC5p_FSGJ2bzRAWHg65CbIW0GBbh0bGHwZbBfJ2UF2n8adUfgaJbbxmKqCQmZzFkHaMs_bWG2bDP0RGYvuuqx7UgLVT_lMOjzs5bcNfK8BBY3h_1lQ0EroQJp6cRm67f6UN9GclALMQJvK5Az-jlqjWqpv61bayKoOTdITSvI4Wa6h3VKWACkVRn81oLdnDyAQ6gygM9bEJlYRKBEhPfOL23T_Jvc0tjyfe13VTpGy9FlEb5MnBUH8NfZSEZJfCBgwKrmDFnr6TFGKWaTCZRdgBEhOvv5wrh0hqW45ZiRGKqEvzQ25tgq5UYUaAwKA4vMAZg1QjdSaMkA5G7cveCXQV0o_vfF77T2sxKjA0UFNnjwCCIipuz7xMKtf0aKK53B_vccAuCPgIIR4ACzPo6YEyCpKNYfGVvSTlWN9YkMrgAaX6DBKF91r2zUisA5-xCPKHXnlkUwZX-QqlYPPkeIFDXa-9AqdqT243oLvqIq4ieOrlr4II8w96XJPHZk1PKTaXJQlVT3t3lJOY2qmrMZOL80I9RijoCHIaAWDD7jeaTaN8fcgR8sI1LIVd5N5bl4UM03nm4CbKon8P16vs22swG4zfWSHWenOLiJbqGVxsEQs",
+                                "token_type": "Bearer",
+                                "expires_at": "2019-08-02 14:45:19"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "\u041f\u0435\u0440\u0435\u0434\u0430\u043d\u0456 \u043d\u0430 \u0432\u0430\u043b\u0456\u0434\u043d\u0456 \u0434\u0430\u043d\u0456, \u043d\u0435\u043f\u0440\u0430\u0432\u0438\u043b\u044c\u043d\u0438\u0439 email \u0430\u0431\u043e \u043f\u0430\u0440\u043e\u043b\u044c",
+                        "examples": {
+                            "application/json": {
+                                "message": "Unauthorized"
                             }
                         }
                     },

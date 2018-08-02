@@ -26,6 +26,7 @@ Route::group(['prefix' => 'v1/', 'namespace' => 'Api\V1',], function () {
 	Route::post('login', 'Auth\AuthController@login');
 	Route::post('signup', 'Auth\AuthController@signup');
 	
+	// Маршрути які вимагають реєстрації користувача
 	Route::group([
 		'middleware' => 'auth:api'
 	], function() {

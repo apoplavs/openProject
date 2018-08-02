@@ -30,8 +30,8 @@ class AuthController extends Controller
 	 *     description="Зареєструвати нового користувача",
 	 *     operationId="signup",
 	 *     produces={"application/json"},
-	 *     tags={"Аутентифікація користувача"},
-	 *     summary="Реєстрація",
+	 *     tags={"Реєстрація користувача"},
+	 *     summary="",
 	 *
 	 *     @SWG\Parameter(
 	 *     name="Дані користувача",
@@ -84,7 +84,6 @@ class AuthController extends Controller
 	 */
 	public function signup(Request $request)
 	{
-		//return (response()->json($request->all()));
 		$request->validate([
 			'name' => 'required|string|max:255|min:3',
 			'email' => 'required|string|email|unique:users|max:255',
@@ -101,21 +100,48 @@ class AuthController extends Controller
 		], 201);
 	}
 	
+	
+	public function test(Request $request)
+	{
+		return (response()->json($request->all()));
+		$request->validate([
+			'name' => 'required|string|max:255|min:3',
+			'email' => 'required|string|email|unique:users|max:255',
+			'password' => 'required|string|min:6|max:32'
+		]);
+		$user = new User([
+			'name' => $request->name,
+			'email' => $request->email,
+			'password' => bcrypt($request->password)
+		]);
+		$user->save();
+		return response()->json([
+			'message' => 'Successfully created user!'
+		], 201);
+	}
+	
+	
+	
+	
 	/**
 	 * Login user and create token
 	 *
 	 * @SWG\Post(
 	 *     path="/login",
-	 *     description="Вхід користувача в систему і генерація токена",
+	 *     description="Вхід користувача в систему можливий після підтвердження email;
+	 Після надсилання валідного запиту, в системі генерується унікальний токен для кожного користувача;
+	 Токен, потрібен для підтвердження автентифікації користувача в системі;
+	 Після отримання токена користувач може здійснювати запити на маршрути шо вимагають авторизації;
+	 При здійсненні любих запитів на маршрути що вимагають авторизації, токен повинен надсилатися в Headers.",
 	 *     operationId="login",
 	 *     produces={"application/json"},
-	 *     tags={"Аутентифікація користувача"},
-	 *     summary="Вхід",
+	 *     tags={"Вхід в систему"},
+	 *     summary="",
 	 *
 	 *     @SWG\Parameter(
 	 *     name="Дані користувача",
 	 *     in="body",
-	 *     description="Щоб увійти в систему і отримати унікальний токен, потрібно email і пароль користувача.",
+	 *     description="Щоб отримати унікальний токен, потрібно передати email і пароль користувача.",
 	 *     required=true,
 	 *     @SWG\Schema(
 	 *          type="object",
@@ -126,7 +152,7 @@ class AuthController extends Controller
 	 *
 	 *     @SWG\Response(
 	 *         response=200,
-	 *         description="Користувач увійшов в систему",
+	 *         description="Токен Успішно згенерований",
 	 *     	   examples={"application/json":
 	 *              {
 	 *     				"access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjYwODMxYTExMzQwODJmMmJlN2YyYjRhYzc4NjZkN2EzZDI5YjQ5YmQ0MWI1ZjVmNjhlMDAxZDc1NGQ5ZjlhZjFlMGFhNzcxMzM1Yjk2YzU5In0.eyJhdWQiOiIxIiwianRpIjoiNjA4MzFhMTEzNDA4MmYyYmU3ZjJiNGFjNzg2NmQ3YTNkMjliNDliZDQxYjVmNWY2OGUwMDFkNzU0ZDlmOWFmMWUwYWE3NzEzMzViOTZjNTkiLCJpYXQiOjE1MzMyMjExMTksIm5iZiI6MTUzMzIyMTExOSwiZXhwIjoxNTY0NzU3MTE5LCJzdWIiOiI0Iiwic2NvcGVzIjpbXX0.lGr3pzgbh7GZVmfyFcuHEo_gDeHbRmRoh8_UzmmL6PH_X0HgufZSg5jQH9LmBpC5p_FSGJ2bzRAWHg65CbIW0GBbh0bGHwZbBfJ2UF2n8adUfgaJbbxmKqCQmZzFkHaMs_bWG2bDP0RGYvuuqx7UgLVT_lMOjzs5bcNfK8BBY3h_1lQ0EroQJp6cRm67f6UN9GclALMQJvK5Az-jlqjWqpv61bayKoOTdITSvI4Wa6h3VKWACkVRn81oLdnDyAQ6gygM9bEJlYRKBEhPfOL23T_Jvc0tjyfe13VTpGy9FlEb5MnBUH8NfZSEZJfCBgwKrmDFnr6TFGKWaTCZRdgBEhOvv5wrh0hqW45ZiRGKqEvzQ25tgq5UYUaAwKA4vMAZg1QjdSaMkA5G7cveCXQV0o_vfF77T2sxKjA0UFNnjwCCIipuz7xMKtf0aKK53B_vccAuCPgIIR4ACzPo6YEyCpKNYfGVvSTlWN9YkMrgAaX6DBKF91r2zUisA5-xCPKHXnlkUwZX-QqlYPPkeIFDXa-9AqdqT243oLvqIq4ieOrlr4II8w96XJPHZk1PKTaXJQlVT3t3lJOY2qmrMZOL80I9RijoCHIaAWDD7jeaTaN8fcgR8sI1LIVd5N5bl4UM03nm4CbKon8P16vs22swG4zfWSHWenOLiJbqGVxsEQs",
@@ -136,8 +162,8 @@ class AuthController extends Controller
 	 *     		}
 	 *     ),
 	 *     @SWG\Response(
-	 *         response=422,
-	 *         description="Передані на валідні дані, або їх не достатньо, у відповіді буде зазначено у чому причина",
+	 *         response=401,
+	 *         description="Передані на валідні дані, неправильний email або пароль",
 	 *     	   examples={"application/json":
 	 *              {
 	 *     				"message": "Unauthorized",
@@ -161,8 +187,7 @@ class AuthController extends Controller
 	{
 		$request->validate([
 			'email' => 'required|string|email',
-			'password' => 'required|string',
-			'remember_me' => 'boolean'
+			'password' => 'required|string'
 		]);
 		$credentials = request(['email', 'password']);
 		if(!Auth::attempt($credentials))
