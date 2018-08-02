@@ -28,7 +28,7 @@ class AuthController extends Controller
 	 * @SWG\Post(
 	 *     path="/signup",
 	 *     description="Зареєструвати нового користувача",
-	 *     operationId="api.dashboard.index",
+	 *     operationId="signup",
 	 *     produces={"application/json"},
 	 *     tags={"Аутентифікація користувача"},
 	 *     summary="Реєстрація",
@@ -104,7 +104,51 @@ class AuthController extends Controller
 	/**
 	 * Login user and create token
 	 *
-	 * 
+	 * @SWG\Post(
+	 *     path="/login",
+	 *     description="Вхід користувача в систему і генерація токена",
+	 *     operationId="login",
+	 *     produces={"application/json"},
+	 *     tags={"Аутентифікація користувача"},
+	 *     summary="Вхід",
+	 *
+	 *     @SWG\Parameter(
+	 *     name="Дані користувача",
+	 *     in="body",
+	 *     description="Щоб увійти в систему і отримати унікальний токен, потрібно email і пароль користувача.",
+	 *     required=true,
+	 *     @SWG\Schema(
+	 *          type="object",
+	 *          @SWG\Property(property="email", type="string", example="example@gmail.com", description="email Користувача"),
+	 *          @SWG\Property(property="password", type="string", example="123456", description="Пароль Користувача")
+	 *       )
+	 *     ),
+	 *
+	 *     @SWG\Response(
+	 *         response=200,
+	 *         description="Користувач увійшов в систему",
+	 *     	   examples={"application/json":
+	 *              {
+	 *     				"access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjYwODMxYTExMzQwODJmMmJlN2YyYjRhYzc4NjZkN2EzZDI5YjQ5YmQ0MWI1ZjVmNjhlMDAxZDc1NGQ5ZjlhZjFlMGFhNzcxMzM1Yjk2YzU5In0.eyJhdWQiOiIxIiwianRpIjoiNjA4MzFhMTEzNDA4MmYyYmU3ZjJiNGFjNzg2NmQ3YTNkMjliNDliZDQxYjVmNWY2OGUwMDFkNzU0ZDlmOWFmMWUwYWE3NzEzMzViOTZjNTkiLCJpYXQiOjE1MzMyMjExMTksIm5iZiI6MTUzMzIyMTExOSwiZXhwIjoxNTY0NzU3MTE5LCJzdWIiOiI0Iiwic2NvcGVzIjpbXX0.lGr3pzgbh7GZVmfyFcuHEo_gDeHbRmRoh8_UzmmL6PH_X0HgufZSg5jQH9LmBpC5p_FSGJ2bzRAWHg65CbIW0GBbh0bGHwZbBfJ2UF2n8adUfgaJbbxmKqCQmZzFkHaMs_bWG2bDP0RGYvuuqx7UgLVT_lMOjzs5bcNfK8BBY3h_1lQ0EroQJp6cRm67f6UN9GclALMQJvK5Az-jlqjWqpv61bayKoOTdITSvI4Wa6h3VKWACkVRn81oLdnDyAQ6gygM9bEJlYRKBEhPfOL23T_Jvc0tjyfe13VTpGy9FlEb5MnBUH8NfZSEZJfCBgwKrmDFnr6TFGKWaTCZRdgBEhOvv5wrh0hqW45ZiRGKqEvzQ25tgq5UYUaAwKA4vMAZg1QjdSaMkA5G7cveCXQV0o_vfF77T2sxKjA0UFNnjwCCIipuz7xMKtf0aKK53B_vccAuCPgIIR4ACzPo6YEyCpKNYfGVvSTlWN9YkMrgAaX6DBKF91r2zUisA5-xCPKHXnlkUwZX-QqlYPPkeIFDXa-9AqdqT243oLvqIq4ieOrlr4II8w96XJPHZk1PKTaXJQlVT3t3lJOY2qmrMZOL80I9RijoCHIaAWDD7jeaTaN8fcgR8sI1LIVd5N5bl4UM03nm4CbKon8P16vs22swG4zfWSHWenOLiJbqGVxsEQs",
+	 *     				"token_type": "Bearer",
+	 *     				"expires_at": "2019-08-02 14:45:19"
+	 * 				}
+	 *     		}
+	 *     ),
+	 *     @SWG\Response(
+	 *         response=422,
+	 *         description="Передані на валідні дані, або їх не достатньо, у відповіді буде зазначено у чому причина",
+	 *     	   examples={"application/json":
+	 *              {
+	 *     				"message": "Unauthorized",
+	 *              }
+	 *     		}
+	 *     ),
+	 *     @SWG\Response(
+	 *         response=405,
+	 *         description="Метод, з яким виконувався запит, не дозволено використовувати для заданого ресурсу; наприклад, запит був здійснений за методом GET, хоча очікується що дані будуть надіслані методом POST.",
+	 *     )
+	 * )
 	 *
 	 * @param  [string] email
 	 * @param  [string] password
