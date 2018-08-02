@@ -61,21 +61,6 @@ class RegisterController extends Controller
 	 * @param  array  $data
 	 * @return \Toecyd\User
 	 *
-	 * @SWG\Post(
-	 *     path="/api/dashboard",
-	 *     description="Зареєструвати нового користувача.",
-	 *     operationId="api.dashboard.index",
-	 *     produces={"application/json"},
-	 *     tags={"Реєстрація"},
-	 *     @SWG\Response(
-	 *         response=200,
-	 *         description="Dashboard overview."
-	 *     ),
-	 *     @SWG\Response(
-	 *         response=401,
-	 *         description="Unauthorized action.",
-	 *     )
-	 * )
 	 */
 	protected function create(array $data)
 	{
@@ -107,21 +92,7 @@ class RegisterController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      *
-     * @SWG\Get(
-     *     path="/api/dashboard",
-     *     description="Зареєструвати нового користувача.",
-     *     operationId="api.dashboard.index",
-     *     produces={"application/json"},
-     *     tags={"Реєстрація"},
-     *     @SWG\Response(
-     *         response=200,
-     *         description="Dashboard overview."
-     *     ),
-     *     @SWG\Response(
-     *         response=401,
-     *         description="Unauthorized action.",
-     *     )
-     * )
+     *
      */
     public function index()
     {
