@@ -61226,9 +61226,7 @@ module.exports = function listToStyles (parentId, list) {
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__HeaderComponent_vue__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__HeaderComponent_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__HeaderComponent_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__HomeComponent_vue__ = __webpack_require__(72);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__HomeComponent_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__HomeComponent_vue__);
-//
+throw new Error("Cannot find module \"./FooterComponent.vue\"");
 //
 //
 //
@@ -61245,7 +61243,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "AppComponent",
 
-    components: [__WEBPACK_IMPORTED_MODULE_0__HeaderComponent_vue___default.a, __WEBPACK_IMPORTED_MODULE_1__HomeComponent_vue___default.a]
+    components: [__WEBPACK_IMPORTED_MODULE_0__HeaderComponent_vue___default.a, __WEBPACK_IMPORTED_MODULE_1__FooterComponent_vue___default.a]
 });
 
 /***/ }),
@@ -62444,7 +62442,17 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_c("header-component")], 1)
+  return _c(
+    "div",
+    [
+      _c("header-component"),
+      _vm._v(" "),
+      _c("router-view"),
+      _vm._v(" "),
+      _c("footer-component")
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true

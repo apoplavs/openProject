@@ -1,16 +1,16 @@
 <template>
-<div>
-    <header-component></header-component>
-
-
-
-</div>
+  <div>
+    <header-component/>
+    <router-view></router-view>
+    <footer-component></footer-component>
+  </div>
 
 </template>
 
 <script>
     import HeaderComponent from './HeaderComponent.vue';
-    import HomeComponent from './HomeComponent.vue';
+    import FooterComponent from './FooterComponent.vue';
+
 
 
     export default {
@@ -18,7 +18,7 @@
 
         components: [
             HeaderComponent,
-            HomeComponent
+            FooterComponent,
         ]
     }
 </script>

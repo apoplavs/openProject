@@ -26,8 +26,6 @@ Vue.component('header-component', require('./components/HeaderComponent.vue'));
 Vue.component('home-component', require('./components/HomeComponent.vue'));
 
 
-
-
 const router = new VueRouter({
     mode: 'history',
     // base: __dirname,
