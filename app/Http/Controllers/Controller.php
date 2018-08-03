@@ -12,8 +12,8 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
  * опис для Swagger
  *
  * @SWG\Swagger(
- *     schemes={"http"},
- *     host="toecyd.local",
+ *     schemes={"http", "https"},
+ *     host="127.0.0.1:8000",
  *     basePath="/api/v1",
  *     produces={"application/json"},
  * 	   consumes={"application/json"},
