@@ -3,12 +3,20 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 // import Datepicker from 'vuejs-datepicker';
 import axios from 'axios';
+import VeeValidate, { Validator } from 'vee-validate';
+import uk from 'vee-validate/dist/locale/uk';
+
+
+Vue.use(VeeValidate);
+Vue.use(VueRouter);
+
+Validator.localize('uk', uk);
 
 
 window.axios = axios;
 require('./bootstrap');
 
-Vue.use(VueRouter);
+
 
 import AppComponent from './components/AppComponent.vue';
 
@@ -96,6 +104,13 @@ const router = new VueRouter({
 //         date: new Date()
 //     }
 // });
+//
+// const validate = new VeeValidate({
+//     // import VeeValidate from 'vee-validate';
+//     // this.$validator.localize('fr', french)
+//
+//
+// })
 
 const app = new Vue({
     el: '#app',

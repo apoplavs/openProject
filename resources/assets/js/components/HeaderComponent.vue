@@ -185,7 +185,17 @@
     }
 
 </script>
-<style>
+<style lang="scss" scoped>
+    .navbar-light {
+        box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.2), 0 4px 15px 0 rgba(0, 0, 0, 0.19);
+    }
+    ul li a:hover{
+        color: #304040!important;
+    }
+    ul li a i{
+        font-size: 1.1em;
+    }
+
 
 </style>
 

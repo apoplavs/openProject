@@ -7,36 +7,46 @@
                         Вхід
                     </div>
                     <div class="card-body">
-                        <form >
+                        <form @submit.prevent="validateBeforeSubmit">
                             <div class="form-group">
                                 <label for="email" class="form-control-label">
                                     E-Mail
                                 </label>
-                                <input
-                                        id="email"
-                                        type="email"
-                                        class="form-control"
-                                        name="email"
-                                        value=""
-                                        v-model="email"
-                                        required
-                                        autofocus
-                                >
-                                <small  class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                <p class="control has-icon has-icon-right">
+                                    <input
+                                            id="email"
+                                            type="email"
+                                            class="form-control"
+                                            name="email"
+                                            v-model="email"
+                                            v-validate="'required|email'"
+                                            :class="{'input': true, 'is-danger': errors.has('email') }"
+
+                                    >
+                                    <small>
+                                        <i v-show="errors.has('email')" class="fa fa-warning"></i>
+                                        <span v-show="errors.has('email')" class="help is-danger">{{ errors.first('email') }}</span>
+                                    </small>
+                                </p>
                             </div>
                             <div class="form-group">
                                 <label for="password" class="form-control-label">
                                     Пароль
                                 </label>
-                                <input
-                                        id="password"
-                                        type="password"
-                                        class="form-control"
-                                        name="password"
-                                        v-model="password"
-                                        required
-                                >
-                                <small class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                <p class="control has-icon has-icon-right">
+                                    <input
+                                            id="password"
+                                            type="password"
+                                            class="form-control"
+                                            name="password"
+                                            v-model="password"
+                                            v-validate="'required|min:6|max:25'"
+                                    >
+                                    <small>
+                                        <i v-show="errors.has('password')" class="fa fa-warning"></i>
+                                        <span v-show="errors.has('password')" class="help is-danger">{{ errors.first('password') }}</span>
+                                    </small>
+                                </p>
                             </div>
                             <div class="form-check">
                                 <label class="form-check-label">
@@ -82,7 +92,20 @@
             }
         },
         methods: {
-            login() {
+            validateBeforeSubmit() {
+                this.$validator.validateAll()
+                    .then((result) => {
+                        if (result) {
+                            // eslint-disable-next-line
+                            alert('Form Submitted!');
+                            console.log(this.email, this.password, this.remember);
+                            return;
+                        }
+                        alert('Correct them errors!');
+                    });
+            },
+            login: () => {
+               // callback();
                 console.log(this.email, this.password, this.remember);
 
             }
@@ -91,5 +114,14 @@
 </script>
 
 <style scoped>
+    input[aria-invalid="true"] {
+        border-color: red;
+    }
+    i.fa-warning, span.is-danger {
+        color: red;
+
+    }
+
+
 
 </style>
