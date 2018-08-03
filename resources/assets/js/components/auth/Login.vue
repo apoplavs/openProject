@@ -7,6 +7,7 @@
                         Вхід
                     </div>
                     <div class="card-body">
+                        <div id="back-error" class="is-danger w-100 text-center"><small>Не вірний логін або пароль</small></div>
                         <form @submit.prevent="validateBeforeSubmit">
                             <div class="form-group">
                                 <label for="email" class="form-control-label">
@@ -54,16 +55,13 @@
                                             type="checkbox"
                                             class="form-check-input"
                                             name="remember"
-                                            v-model="remember"
-                                            @click="remember = !remember"
-                                            checked
                                     >
                                     Запамятати мене
                                 </label>
                             </div>
-                            <div class="form-group">
-                                <div class="d-flex justify-between">
-                                    <button type="submit" class="btn btn-primary" @click.prevent="login()">
+                            <div class="form-group mt-3">
+                                <div class="d-flex justify-content-between">
+                                    <button type="submit" class="btn btn-primary" id="submit-btn">
                                         Увійти
                                     </button>
                                     <div>
@@ -87,28 +85,28 @@
         data() {
             return {
                 email: '',
-                password: '',
-                remember: false
+                password: ''
             }
         },
         methods: {
             validateBeforeSubmit() {
+
                 this.$validator.validateAll()
                     .then((result) => {
                         if (result) {
-                            // eslint-disable-next-line
-                            alert('Form Submitted!');
-                            console.log(this.email, this.password, this.remember);
+
+                            // $('#submit-btn').removeAttr('di')
+                            alert('OK');
+                            // this.login();
+                           // console.log($('#submit-btn').disabled)
+                            // console.log(this)
+                            console.log(this.email, this.password);
                             return;
                         }
                         alert('Correct them errors!');
                     });
             },
-            login: () => {
-               // callback();
-                console.log(this.email, this.password, this.remember);
 
-            }
         }
     }
 </script>
@@ -117,9 +115,26 @@
     input[aria-invalid="true"] {
         border-color: red;
     }
-    i.fa-warning, span.is-danger {
+    i.fa-warning, span.is-danger,
+    #back-error{
         color: red;
-
+    }
+    #back-error{
+        display: none;
+    }
+    .card-header {
+        font-size: 1.5em;
+        color: #408080 !important;
+        font-weight: 700;
+    }
+    .btn-primary {
+        background-color: #408080;
+        border-color: #408080;
+        border-bottom: 3px solid #2d5656;
+    }
+    button:hover(:not:disabled),
+    button:active(:not:disabled){
+        opacity: .8;
     }
 
 
