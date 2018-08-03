@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -13,35 +14,6 @@ use Illuminate\Http\Request;
 |
 */
 
-/**
- * опис для Swagger
- *
- * @SWG\Swagger(
- *     basePath="",
- *     host="openproject.local",
- *     produces={"application/json"},
- * 	   consumes={"application/json"},
- *     @SWG\Info(
- *         version="1.0",
- *         title="Open Project API",
- *     	   description="Опис REST API",
- *         @SWG\Contact(name="Developers", url="https://www.google.com"),
- *     ),
- *     @SWG\Definition(
- *         definition="Error",
- *         required={"code", "message"},
- *         @SWG\Property(
- *             property="code",
- *             type="integer",
- *             format="int32"
- *         ),
- *         @SWG\Property(
- *             property="message",
- *             type="string"
- *         )
- *     )
- * )
- */
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
@@ -49,6 +21,18 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 // Дані маршрути призначені для API V1 доступ здійснюється по "host/api/v1/"
 Route::group(['prefix' => 'v1/', 'namespace' => 'Api\V1',], function () {
+	
+	// Аутенфікація користувача
+	Route::post('login', 'Auth\AuthController@login');
+	Route::post('signup', 'Auth\AuthController@signup');
+	
+	// Маршрути які вимагають реєстрації користувача
+	Route::group([
+		'middleware' => 'auth:api'
+	], function() {
+		Route::get('logout', 'Auth\AuthController@logout');
+		Route::get('user', 'Auth\AuthController@user');
+	});
 	
 	//Route::post('register', 'Auth\RegisterController@register');
 	//Route::get('register', 'Auth\RegisterController@show');
