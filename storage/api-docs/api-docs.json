@@ -7,7 +7,7 @@
             "name": "Developers",
             "url": "https://www.google.com"
         },
-        "version": "3.0"
+        "version": "1.0"
     },
     "host": "toecyd.local",
     "basePath": "/api/v1",
@@ -124,6 +124,9 @@
                 "responses": {
                     "200": {
                         "description": "\u0422\u043e\u043a\u0435\u043d \u0423\u0441\u043f\u0456\u0448\u043d\u043e \u0437\u0433\u0435\u043d\u0435\u0440\u043e\u0432\u0430\u043d\u0438\u0439",
+                        "schema": {
+                            "$ref": "#/definitions/Token"
+                        },
                         "examples": {
                             "application/json": {
                                 "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjYwODMxYTExMzQwODJmMmJlN2YyYjRhYzc4NjZkN2EzZDI5YjQ5YmQ0MWI1ZjVmNjhlMDAxZDc1NGQ5ZjlhZjFlMGFhNzcxMzM1Yjk2YzU5In0.eyJhdWQiOiIxIiwianRpIjoiNjA4MzFhMTEzNDA4MmYyYmU3ZjJiNGFjNzg2NmQ3YTNkMjliNDliZDQxYjVmNWY2OGUwMDFkNzU0ZDlmOWFmMWUwYWE3NzEzMzViOTZjNTkiLCJpYXQiOjE1MzMyMjExMTksIm5iZiI6MTUzMzIyMTExOSwiZXhwIjoxNTY0NzU3MTE5LCJzdWIiOiI0Iiwic2NvcGVzIjpbXX0.lGr3pzgbh7GZVmfyFcuHEo_gDeHbRmRoh8_UzmmL6PH_X0HgufZSg5jQH9LmBpC5p_FSGJ2bzRAWHg65CbIW0GBbh0bGHwZbBfJ2UF2n8adUfgaJbbxmKqCQmZzFkHaMs_bWG2bDP0RGYvuuqx7UgLVT_lMOjzs5bcNfK8BBY3h_1lQ0EroQJp6cRm67f6UN9GclALMQJvK5Az-jlqjWqpv61bayKoOTdITSvI4Wa6h3VKWACkVRn81oLdnDyAQ6gygM9bEJlYRKBEhPfOL23T_Jvc0tjyfe13VTpGy9FlEb5MnBUH8NfZSEZJfCBgwKrmDFnr6TFGKWaTCZRdgBEhOvv5wrh0hqW45ZiRGKqEvzQ25tgq5UYUaAwKA4vMAZg1QjdSaMkA5G7cveCXQV0o_vfF77T2sxKjA0UFNnjwCCIipuz7xMKtf0aKK53B_vccAuCPgIIR4ACzPo6YEyCpKNYfGVvSTlWN9YkMrgAaX6DBKF91r2zUisA5-xCPKHXnlkUwZX-QqlYPPkeIFDXa-9AqdqT243oLvqIq4ieOrlr4II8w96XJPHZk1PKTaXJQlVT3t3lJOY2qmrMZOL80I9RijoCHIaAWDD7jeaTaN8fcgR8sI1LIVd5N5bl4UM03nm4CbKon8P16vs22swG4zfWSHWenOLiJbqGVxsEQs",
@@ -147,5 +150,43 @@
             }
         }
     },
-    "definitions": {}
+    "definitions": {
+        "Token": {
+            "description": "\u041a\u043e\u0436\u0435\u043d \u0437\u0430\u043f\u0438\u0442 \u043d\u0430 \u043b\u044e\u0431\u0438\u0439 \u043c\u0430\u0440\u0448\u0440\u0443\u0442 \u043a\u0440\u0456\u043c /signup i /login \u043f\u043e\u0432\u0438\u043d\u0435\u043d \u043c\u0456\u0441\u0442\u0438\u0442\u0438 \u0442\u043e\u043a\u0435\u043d \u0430\u0432\u0442\u043e\u0440\u0438\u0437\u0430\u0446\u0456\u0457, \u044f\u043a\u0438\u0439 \u043e\u0434\u043d\u043e\u0447\u0430\u0441\u043d\u043e \u0454 \u0456\u0434\u0435\u043d\u0442\u0438\u0444\u0456\u043a\u0430\u0442\u043e\u0440\u043e\u043c \u043a\u043e\u0440\u0438\u0441\u0442\u0443\u0432\u0430\u0447\u0430. \u0419\u043e\u0433\u043e \u043f\u043e\u0442\u0440\u0456\u0431\u043d\u043e \u0431\u0443\u0434\u0435 \u043f\u0435\u0440\u0435\u0434\u0430\u0432\u0430\u0442\u0438 \u0432 Headers \u043f\u0440\u0438 \u0437\u0434\u0456\u0439\u0441\u043d\u0435\u043d\u0456 \u0437\u0430\u043f\u0438\u0442\u0443\n * Authorization:  'Bearer j7zRhODMx...6IjYw'",
+            "required": [
+                "access_token",
+                "token_type"
+            ],
+            "properties": {
+                "access_token": {
+                    "description": "\u0421\u0430\u043c \u0442\u043e\u043a\u0435\u043d, (\u043c\u0430\u0440\u043a\u0435\u0440 \u0434\u043e\u0441\u0442\u0443\u043f\u0443)",
+                    "type": "string",
+                    "example": "p0aSI6IjYwODMxY...jRhYz"
+                },
+                "token_type": {
+                    "description": "\u0426\u0435 \u0437\u0430\u0437\u0432\u0438\u0447\u0430\u0439 \u0431\u0443\u0434\u0435 \u0441\u043b\u043e\u0432\u043e Bearer (\u0434\u043b\u044f \u043f\u043e\u0437\u043d\u0430\u0447\u0435\u043d\u043d\u044f \u043d\u043e\u0441\u0456\u044f)",
+                    "type": "string",
+                    "example": "Bearer"
+                },
+                "expires_at": {
+                    "description": "\u0414\u0430\u0442\u0430 \u0442\u0430 \u0447\u0430\u0441, \u0449\u043e \u043f\u0440\u0435\u0434\u0441\u0442\u0430\u0432\u043b\u044f\u0454 TTL \u0434\u043b\u044f \u0442\u043e\u043a\u0435\u043d\u0430 (\u0434\u0430\u0442\u0430 \u0456 \u0447\u0430\u0441, \u043a\u043e\u043b\u0438 \u0442\u0435\u0440\u043c\u0456\u043d \u0434\u0456\u0457 \u0442\u043e\u043a\u0435\u043d\u0430 \u0437\u0430\u043a\u0456\u043d\u0447\u0438\u0442\u044c\u0441\u044f)",
+                    "type": "string",
+                    "example": "2019-09-02 18:21:42"
+                },
+                "refresh_token": {
+                    "description": "\u0422\u043e\u043a\u0435\u043d \u043e\u043d\u043e\u0432\u043b\u0435\u043d\u043d\u044f, \u044f\u043a\u0438\u0439 \u043c\u043e\u0436\u0435 \u0431\u0443\u0442\u0438 \u0432\u0438\u043a\u043e\u0440\u0438\u0441\u0442\u0430\u043d\u0438\u0439 \u0434\u043b\u044f \u043f\u0440\u0438\u0434\u0431\u0430\u043d\u043d\u044f \u043d\u043e\u0432\u043e\u0433\u043e \u0442\u043e\u043a\u0435\u043d\u0443 \u0434\u043e\u0441\u0442\u0443\u043f\u0443, \u043a\u043e\u043b\u0438 \u0442\u0435\u0440\u043c\u0456\u043d \u0434\u0456\u0457 \u043e\u0440\u0438\u0433\u0456\u043d\u0430\u043b\u0443 \u0437\u0430\u043a\u0456\u043d\u0447\u0438\u0442\u044c\u0441\u044f",
+                    "type": "string"
+                }
+            },
+            "example": "Bearer"
+        }
+    },
+    "securityDefinitions": {
+        "default": {
+            "type": "apiKey",
+            "description": "\u0422\u043e\u043a\u0435\u043d \u0430\u0432\u0442\u043e\u0440\u0438\u0437\u0430\u0446\u0456\u0457, \u043f\u0440\u0435\u0434\u0441\u0442\u0430\u0432\u043b\u0435\u043d\u0438\u0439 \u044f\u043a: 'Bearer \\<Token\\>'",
+            "name": "Authorization",
+            "in": "header"
+        }
+    }
 }
