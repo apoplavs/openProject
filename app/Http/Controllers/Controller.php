@@ -13,8 +13,8 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
  *
  * @SWG\Swagger(
  *     schemes={"http", "https"},
- *     host="127.0.0.1:8000",
- *     basePath="/api/v1",
+ *     host=L5_SWAGGER_CONST_HOST,
+ *     basePath=L5_SWAGGER_BASE_PATH,
  *     produces={"application/json"},
  * 	   consumes={"application/json"},
  *     @SWG\Info(
@@ -23,7 +23,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
  *           description="REST API проекту являє собою набір методів, за допомогою яких здійснюються запити і повертаються відповіді для кожної операції. Всі відповіді приходять у вигляді JSON структур. При передачі будь-яких даних в цьому API вам слід встановити два заголовки, наведені нижче:
  *	 Content-Type: application/json
  *	 X-Requested-With: XMLHttpRequest",
- *         @SWG\Contact(name="Developers", url="https://www.google.com"),
+ *         @SWG\Contact(name="Developers", url="https://www.google.com", email="p.andriy.v@gmail.com"),
  *     )
  * )
  * @package App\Http\Controllers
