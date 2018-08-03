@@ -7,54 +7,52 @@
                         Вхід
                     </div>
                     <div class="card-body">
-                        <form class="form-group">
-                            <div class="row">
-                                <label for="email" class="col-12 form-control-label">
+                        <form >
+                            <div class="form-group">
+                                <label for="email" class="form-control-label">
                                     E-Mail
                                 </label>
-                                <div class="col-12">
-                                    <input
-                                            id="email"
-                                            type="email"
-                                            class="form-control"
-                                            name="email"
-                                            value=""
-                                            v-model="email"
-                                            required
-                                            autofocus
-
-                                    >
-                                </div>
+                                <input
+                                        id="email"
+                                        type="email"
+                                        class="form-control"
+                                        name="email"
+                                        value=""
+                                        v-model="email"
+                                        required
+                                        autofocus
+                                >
+                                <small  class="form-text text-muted">We'll never share your email with anyone else.</small>
                             </div>
-                            <div class="row">
-                                <label for="password" class="col-12 form-control-label">
+                            <div class="form-group">
+                                <label for="password" class="form-control-label">
                                     Пароль
                                 </label>
-                                <div class="col-12">
-                                    <input
-                                            id="password"
-                                            type="password"
-                                            class="form-control"
-                                            name="password"
-                                            v-model="password"
-                                            required
-                                    >
-                                </div>
+                                <input
+                                        id="password"
+                                        type="password"
+                                        class="form-control"
+                                        name="password"
+                                        v-model="password"
+                                        required
+                                >
+                                <small class="form-text text-muted">We'll never share your email with anyone else.</small>
                             </div>
-                            <div class="row">
-                                <div class="col-12">
+                            <div class="form-check">
+                                <label class="form-check-label">
                                     <input
                                             type="checkbox"
+                                            class="form-check-input"
                                             name="remember"
                                             v-model="remember"
                                             @click="remember = !remember"
                                             checked
                                     >
                                     Запамятати мене
-                                </div>
+                                </label>
                             </div>
-                            <div class="row">
-                                <div class="col-12 d-flex justify-between">
+                            <div class="form-group">
+                                <div class="d-flex justify-between">
                                     <button type="submit" class="btn btn-primary" @click.prevent="login()">
                                         Увійти
                                     </button>

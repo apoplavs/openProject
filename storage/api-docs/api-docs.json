@@ -9,10 +9,11 @@
         },
         "version": "1.0"
     },
-    "host": "toecyd.local",
+    "host": "127.0.0.1:8000",
     "basePath": "/api/v1",
     "schemes": [
-        "http"
+        "http",
+        "https"
     ],
     "consumes": [
         "application/json"
