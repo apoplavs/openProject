@@ -1,6 +1,6 @@
 <?php
 
-namespace Toecyd\Http\Controllers\Judges;
+namespace Toecyd\Http\Controllers\Api\V1;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -10,7 +10,6 @@ use Toecyd\Http\Controllers\Controller;
 use Toecyd\Judge;
 use Toecyd\JudgesStatistic;
 use Toecyd\UserHistory;
-use Toecyd\UserLikedJudge;
 use Toecyd\UsersLikesJudge;
 use Toecyd\UsersUnlikesJudge;
 
@@ -27,20 +26,23 @@ class JudgesController extends Controller
      */
     public function index(Request $request)
     {
-//    	$logged = Auth::check();
-    	
+    	// валідація фільтрів
+		$request->validate([
+			'regions' => 'array',
+			'regions.*' => 'numeric|min:2|max:26',
+			'instances' => 'array',
+			'instances.*' => 'numeric|min:1|max:3',
+			'jurisdictions' => 'array',
+			'jurisdictions.*' => 'numeric|min:1|max:3',
+			'search' => 'string|alpha',
+			'sort' => 'numeric|min:1|max:4',
+			'expired' => 'numeric'
+		]);
+		// приведення фільтрів до коректного вигляду
     	$filters = $this->getFilters();
-
-//		if (Input::has('regions') || Input::has('instances') || Input::has('rsort')) {
-//			return ($this->filteredJudges(Input::get('regions'), Input::get('instances'), Input::get('rsort')));
-//		}
-//		return ([$regions, empty($instances), $rsort]);
-  
-//    	dd($logged);
-//    	$regions = Input::get('regions');
-//    	$instances = Input::get('instances');
+    	// отримання результатів
     	$judges_list = Judge::getJudgesList($filters['regions'], $filters['instances'], $filters['jurisdictions'],
-			$filters['sort_order'], $filters['search']);
+			$filters['sort_order'], $filters['search'], $filters['powers_expired']);
 //		$judges_list = DB::table('judges')->paginate(15);
 //		$judges_list = Paginator::make($judges_list);
 //		$data = $request->session()->all();
@@ -48,7 +50,7 @@ class JudgesController extends Controller
 //		dd($data);
 //		echo $judges_list->links();
 		
-		return view('judges.judges-list', compact('judges_list'));
+		return response()->json($judges_list);
     }
 
     /**
@@ -261,12 +263,11 @@ class JudgesController extends Controller
 		$regions = Input::has('regions') ? Input::get('regions') : [];
 		$instances = Input::has('instances') ? Input::get('instances') : [];
 		$jurisdictions = Input::has('jurisdictions') ? Input::get('jurisdictions') : [];
-		$rsort = Input::has('rsort') ? intval(Input::get('rsort')) : 0;
+		$sort_order = Input::has('sort') ? intval(Input::get('sort')) : 1;
 		$search = Input::has('search') ? Input::get('search') : '';
-
-		// визначення порядку сортування
-		$sort_order = $rsort ? 'DESC' : 'ASC';
+		$powers_expired = Input::has('expired') ? true : false;
 		
+		// приведення всіх фільтрів до Integer
 		$int_regions = [];
 		$int_instances = [];
 		$int_jurisdictions = [];
@@ -284,6 +285,7 @@ class JudgesController extends Controller
 			'instances'=>$int_instances,
 			'jurisdictions'=>$int_jurisdictions,
 			'sort_order'=>$sort_order,
-			'search'=>$search]);
+			'search'=>$search,
+			'powers_expired'=>$powers_expired]);
 	}
 }

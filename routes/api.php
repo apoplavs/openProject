@@ -31,6 +31,10 @@ Route::group(['prefix' => 'v1/', 'namespace' => 'Api\V1',], function () {
 	Route::group(['middleware' => 'auth:api'], function() {
 		Route::get('logout', 'AuthController@logout');
 		Route::get('user', 'AuthController@user');
+		
+		// список суддів з застосованими фільтрами (Рейтинг->судді)
+		Route::get('judges-list', 'JudgesController@index');
+		
 	});
 	
 });
