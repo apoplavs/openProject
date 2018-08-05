@@ -33,7 +33,7 @@ Route::group(['prefix' => 'v1/', 'namespace' => 'Api\V1',], function () {
 		Route::get('user', 'AuthController@user');
 		
 		// список суддів з застосованими фільтрами (Рейтинг->судді)
-		Route::get('judges-list', 'JudgesController@index');
+		Route::get('judges/list', 'JudgesController@index');
 		
 	});
 	

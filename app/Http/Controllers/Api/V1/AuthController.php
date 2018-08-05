@@ -27,11 +27,17 @@ class AuthController extends Controller
 	 * Реєстрація
 	 * @SWG\Post(
 	 *     path="/signup",
+	 *     summary="Реєстрація",
 	 *     description="Зареєструвати нового користувача",
 	 *     operationId="signup",
 	 *     produces={"application/json"},
 	 *     tags={"Автентифікація користувача"},
-	 *     summary="Реєстрація",
+	 *     @SWG\Parameter(
+	 *     	ref="#/parameters/Content-Type",
+	 *     ),
+	 *     @SWG\Parameter(
+	 *     	ref="#/parameters/X-Requested-With",
+	 *     ),
 	 *
 	 *     @SWG\Parameter(
 	 *     name="Дані користувача",
@@ -124,6 +130,7 @@ class AuthController extends Controller
 	 *
 	 * @SWG\Post(
 	 *     path="/login",
+	 *     summary="Вхід в систему",
 	 *     description="Вхід користувача в систему можливий після підтвердження email;
 	 Після надсилання валідного запиту, в системі генерується унікальний токен для кожного користувача;
 	 Токен, потрібен для підтвердження автентифікації користувача в системі;
@@ -131,7 +138,12 @@ class AuthController extends Controller
 	 *     operationId="login",
 	 *     produces={"application/json"},
 	 *     tags={"Автентифікація користувача"},
-	 *     summary="Вхід в систему",
+	 *     @SWG\Parameter(
+	 *     	ref="#/parameters/Content-Type",
+	 *     ),
+	 *     @SWG\Parameter(
+	 *     	ref="#/parameters/X-Requested-With",
+	 *     ),
 	 *
 	 *     @SWG\Parameter(
 	 *     name="Дані користувача",
@@ -242,6 +254,7 @@ class AuthController extends Controller
 	 *
 	 * @SWG\Get(
 	 *     path="/logout",
+	 *     summary="Вихід з системи",
 	 *     description="Вийти з системи і анулювати поточний токен",
 	 *     operationId="logout",
 	 *     produces={"application/json"},
@@ -249,7 +262,12 @@ class AuthController extends Controller
 	 *     security={
 	 *     {"passport": {}},
 	 *   	},
-	 *     summary="Вихід з системи",
+	 *     @SWG\Parameter(
+	 *     	ref="#/parameters/Content-Type",
+	 *     ),
+	 *     @SWG\Parameter(
+	 *     	ref="#/parameters/X-Requested-With",
+	 *     ),
 	 *
 	 *     @SWG\Response(
 	 *         response=200,
@@ -291,6 +309,7 @@ class AuthController extends Controller
 	 *
 	 * @SWG\Get(
 	 *     path="/user",
+	 *     summary="Отримати дані користувача",
 	 *     description="Отримати дані про поточного користувача",
 	 *     operationId="user",
 	 *     produces={"application/json"},
@@ -298,7 +317,12 @@ class AuthController extends Controller
 	 *     security={
 	 *     {"passport": {}},
 	 *   	},
-	 *     summary="Отримати дані користувача",
+	 *     @SWG\Parameter(
+	 *     	ref="#/parameters/Content-Type",
+	 *     ),
+	 *     @SWG\Parameter(
+	 *     	ref="#/parameters/X-Requested-With",
+	 *     ),
 	 *
 	 *     @SWG\Response(
 	 *         response=200,

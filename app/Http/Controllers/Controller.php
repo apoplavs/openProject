@@ -67,6 +67,21 @@ ____________________________________________________________
  *     		@SWG\Property(property="created_at", type="string", example="2018-08-17 15:26:05", description="дата і час реєстрації"),
  *     		@SWG\Property(property="updated_at", type="string", example="2018-10-21 19:42:03", description="дата і час останнього редагування даних"),
  * 		),
+ *
+ * 			@SWG\Parameter(
+ *     			name="Content-Type",
+ *     			type="string",
+ *     			in="header",
+ *     			required=true,
+ *     			default="application/json"
+ *     		),
+ *     		@SWG\Parameter(
+ *     			name="X-Requested-With",
+ *     			type="string",
+ *     			in="header",
+ *     			required=true,
+ *     			default="XMLHttpRequest"
+ *     		)
  * )
  * @package App\Http\Controllers
  */
