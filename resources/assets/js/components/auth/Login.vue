@@ -1,7 +1,5 @@
 <template>
-    <div class="container mt-5">
-        <div class="row">
-            <div class="col-lg-6 offset-md-3">
+    <div class="container mt-5 d-flex justify-content-center">
                 <div class="card" id="input-form">
                     <div class="card-header text-center">
                         Вхід
@@ -19,7 +17,7 @@
                                             type="email"
                                             class="form-control"
                                             name="email"
-                                            v-model="email"
+                                            v-model="user.email"
                                             v-validate="'required|email'"
                                             :class="{'input': true, 'is-danger': errors.has('email') }"
 
@@ -40,7 +38,7 @@
                                             type="password"
                                             class="form-control"
                                             name="password"
-                                            v-model="password"
+                                            v-model="user.password"
                                             v-validate="'required|min:6|max:25'"
                                     >
                                     <small>
@@ -61,12 +59,12 @@
                             </div>
                             <div class="form-group mt-3">
                                 <div class="d-flex justify-content-between">
-                                    <button type="submit" class="btn btn-primary" id="submit-btn">
+                                    <button type="submit" class="btn btn-my-primary" id="submit-btn">
                                         Увійти
                                     </button>
-                                    <div>
+                                    <div class="footer-link d-flex align-items-center">
                                         <router-link to="/registration">
-                                            <a class="footer-link">Забув пароль?</a>
+                                            <a>Забув пароль?</a>
                                         </router-link>
                                     </div>
                                 </div>
@@ -74,69 +72,84 @@
                         </form>
                     </div>
                 </div>
-            </div>
-        </div>
+
     </div>
 </template>
 
 <script>
     export default {
         name: "login",
-        data() {
+        data: () => {
             return {
-                email: '',
-                password: ''
+                user: {
+                    email: '',
+                    password: ''
+                }
             }
         },
         methods: {
             validateBeforeSubmit() {
-
                 this.$validator.validateAll()
-                    .then((result) => {
+                    .then( result => {
                         if (result) {
-
-                            // $('#submit-btn').removeAttr('di')
-                            alert('OK');
-                            // this.login();
-                           // console.log($('#submit-btn').disabled)
                             // console.log(this)
-                            console.log(this.email, this.password);
-                            return;
+                            console.log(this.user);
+                            return new Promise((resolve, reject) => {
+                                axios.post('/post', this.user)
+                                    .then(response => {
+                                        resolve(response);
+                                        // let token = res.data.token;
+                                        // console.log(token);
+                                        // localStorage.setItem('token', token);
+                                        // this.$router.push('/home');
+                                    })
+                                    .catch(error => {
+                                        reject(error);
+                                    });
+                                });
+                        // alert('Correct them errors!');
                         }
-                        alert('Correct them errors!');
                     });
-            },
 
+            }
         }
-    }
 </script>
 
-<style scoped>
-    input[aria-invalid="true"] {
-        border-color: red;
-    }
-    i.fa-warning, span.is-danger,
-    #back-error{
-        color: red;
-    }
-    #back-error{
-        display: none;
-    }
-    .card-header {
-        font-size: 1.5em;
-        color: #408080 !important;
-        font-weight: 700;
-    }
-    .btn-primary {
-        background-color: #408080;
-        border-color: #408080;
-        border-bottom: 3px solid #2d5656;
-    }
-    button:hover(:not:disabled),
-    button:active(:not:disabled){
-        opacity: .8;
-    }
+<style lang="scss" scoped>
+    .card {
+        width: 100%;
+        max-width: 450px;
 
+        input[aria-invalid="true"] {
+            border-color: red;
+        }
+        i.fa-warning, span.is-danger,
+        #back-error{
+            color: red;
+        }
+        #back-error{
+            display: none;
+        }
+        .card-header {
+            font-size: 1.5em;
+            color: #408080 !important;
+            font-weight: 700;
+        }
+        .btn-my-primary {
+            background-color: #408080;
+            border-color: #408080;
+            border-bottom: 3px solid #2d5656;
+            color: #ffffff;
+        }
+        button:hover,
+        button:active{
+            opacity: .8;
+        }
+        .footer-link{
+            font-weight: 300;
+        }
+
+    }
 
 
 </style>
