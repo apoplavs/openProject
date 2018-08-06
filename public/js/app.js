@@ -1543,7 +1543,7 @@ module.exports = Component.exports
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(91)
+  __webpack_require__(69)
 }
 var normalizeComponent = __webpack_require__(3)
 /* script */
@@ -69947,12 +69947,168 @@ if (false) {
 }
 
 /***/ }),
-/* 69 */,
-/* 70 */,
-/* 71 */
-/***/ (function(module, exports) {
+/* 69 */
+/***/ (function(module, exports, __webpack_require__) {
 
-throw new Error("Module build failed: SyntaxError: Unexpected token, expected , (116:0)\n\n\u001b[0m \u001b[90m 114 | \u001b[39m        }\n \u001b[90m 115 | \u001b[39m    }\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 116 | \u001b[39m\n \u001b[90m     | \u001b[39m\u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n");
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(70);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(2)("8a549c10", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-dca5370e\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Login.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-dca5370e\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Login.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 70 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.card[data-v-dca5370e] {\n  width: 100%;\n  max-width: 450px;\n}\n.card input[aria-invalid=\"true\"][data-v-dca5370e] {\n    border-color: red;\n}\n.card i.fa-warning[data-v-dca5370e], .card span.is-danger[data-v-dca5370e],\n  .card #back-error[data-v-dca5370e] {\n    color: red;\n}\n.card #back-error[data-v-dca5370e] {\n    display: none;\n}\n.card .card-header[data-v-dca5370e] {\n    font-size: 1.5em;\n    color: #408080 !important;\n    font-weight: 700;\n}\n.card .btn-my-primary[data-v-dca5370e] {\n    background-color: #408080;\n    border-color: #408080;\n    border-bottom: 3px solid #2d5656;\n    color: #ffffff;\n}\n.card button[data-v-dca5370e]:hover,\n  .card button[data-v-dca5370e]:active {\n    opacity: .8;\n}\n.card .footer-link[data-v-dca5370e] {\n    font-weight: 300;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 71 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    name: "login",
+    data: function data() {
+        return {
+            user: {
+                email: '',
+                password: ''
+            }
+        };
+    },
+    methods: {
+        validateBeforeSubmit: function validateBeforeSubmit() {
+            var _this = this;
+
+            this.$validator.validateAll().then(function (result) {
+                if (result) {
+                    // console.log(this)
+                    console.log(result);
+                    return new Promise(function (resolve, reject) {
+                        axios.post('/post', _this.user, { headers: {
+                                'Content-Type': 'application/json'
+                            }
+                        }).then(function (response) {
+                            resolve(response);
+                            // let token = res.data.token;
+                            // console.log(token);
+                            // localStorage.setItem('token', token);
+                            // this.$router.push('/home');
+                        }).catch(function (error) {
+                            reject(error);
+                        });
+                    });
+                    // alert('Correct them errors!');
+                }
+            });
+        }
+    }
+});
 
 /***/ }),
 /* 72 */
@@ -72060,49 +72216,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 88 */,
-/* 89 */,
-/* 90 */,
-/* 91 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(92);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(2)("8a549c10", content, false, {});
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-dca5370e\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Login.vue", function() {
-     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-dca5370e\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Login.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 92 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(1)(false);
-// imports
-
-
-// module
-exports.push([module.i, "\n.card[data-v-dca5370e] {\n  width: 100%;\n  max-width: 450px;\n}\n.card input[aria-invalid=\"true\"][data-v-dca5370e] {\n    border-color: red;\n}\n.card i.fa-warning[data-v-dca5370e], .card span.is-danger[data-v-dca5370e],\n  .card #back-error[data-v-dca5370e] {\n    color: red;\n}\n.card #back-error[data-v-dca5370e] {\n    display: none;\n}\n.card .card-header[data-v-dca5370e] {\n    font-size: 1.5em;\n    color: #408080 !important;\n    font-weight: 700;\n}\n.card .btn-my-primary[data-v-dca5370e] {\n    background-color: #408080;\n    border-color: #408080;\n    border-bottom: 3px solid #2d5656;\n    color: #ffffff;\n}\n.card button[data-v-dca5370e]:hover,\n  .card button[data-v-dca5370e]:active {\n    opacity: .8;\n}\n.card .footer-link[data-v-dca5370e] {\n    font-weight: 300;\n}\n", ""]);
-
-// exports
-
 
 /***/ })
 /******/ ]);

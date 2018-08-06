@@ -93,9 +93,12 @@
                     .then( result => {
                         if (result) {
                             // console.log(this)
-                            console.log(this.user);
+                            console.log(result);
                             return new Promise((resolve, reject) => {
-                                axios.post('/post', this.user)
+                                axios.post('/post', this.user, { headers: {
+                                        'Content-Type': 'application/json',
+                                        }
+                                    })
                                     .then(response => {
                                         resolve(response);
                                         // let token = res.data.token;
@@ -113,6 +116,7 @@
 
             }
         }
+    }
 </script>
 
 <style lang="scss" scoped>
@@ -150,6 +154,4 @@
         }
 
     }
-
-
 </style>
