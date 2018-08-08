@@ -8,6 +8,11 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 use Swagger\Annotations as SWG;
 
+/**
+ * Class User
+ * Модель для звязку з таблицею users
+ * @package Toecyd
+ */
 class User extends Authenticatable
 {
     use HasApiTokens, Notifiable;
@@ -18,7 +23,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'surname', 'phone', 'town', 'region', 'email', 'password', 'photo', 'usertype'
+        'name', 'surname', 'phone', 'facebook_id', 'google_id', 'email', 'password', 'photo', 'usertype'
     ];
 
     /**
@@ -27,6 +32,6 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token', 'usertype'
     ];
 }
