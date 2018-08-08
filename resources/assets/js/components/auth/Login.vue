@@ -95,7 +95,7 @@
                             // console.log(this)
                             console.log(result);
                             return new Promise((resolve, reject) => {
-                                axios.post('/post', this.user, { headers: {
+                                axios.post('/api/v1/login', this.user, { headers: {
                                         'Content-Type': 'application/json',
                                         }
                                     })

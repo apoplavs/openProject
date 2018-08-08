@@ -70090,7 +70090,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     // console.log(this)
                     console.log(result);
                     return new Promise(function (resolve, reject) {
-                        axios.post('/post', _this.user, { headers: {
+                        axios.post('/api/v1/login', _this.user, { headers: {
                                 'Content-Type': 'application/json'
                             }
                         }).then(function (response) {
