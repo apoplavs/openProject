@@ -5,90 +5,100 @@ import pymysql.cursors
 import pprint
 import pickle
 import nltk
-nltk.download('punkt')
-nltk.download('averaged_perceptron_tagger')
-#nltk.download('averaged_perceptron_tagger_ru')
+import sys
+
 from nltk.tokenize import word_tokenize
 
-
-config = json.loads(open('../config.json', 'r').read())
-
-connection = pymysql.connect(host=config['db']['host'],
-							 user=config['db']['user'],
-							 password=config['db']['pass'],
-							 db=config['db']['dbname'],
-							 charset=config['db']['charset'],
-							 cursorclass=pymysql.cursors.DictCursor)
-with connection.cursor() as cursor:
-	sql = "SELECT `category`, `doc_text` FROM `ml_datasets`"
-	cursor.execute(sql)
-	data = cursor.fetchall()
-	# for res in result:
-	#     print(res['doc_text'])
-	#     print('\n');
-
-# list of your documents (each document is a string)
-#data = ''
-
-all_words = []
+config = json.loads(open('config.json', 'r').read())
 
 
-# J - adjective, R - adverb, V - verb
-# you can experement with that
-allowed_word_types = ["J", "R", "V"]
+def get_connection():
+    connection = pymysql.connect(host=config['db_edrsr']['host'],
+                                 user=config['db_edrsr']['user'],
+                                 password=config['db_edrsr']['pass'],
+                                 db=config['db_edrsr']['dbname'],
+                                 charset=config['db_edrsr']['charset'],
+                                 cursorclass=pymysql.cursors.DictCursor)
 
-print('all words')
-for title in data:
-	# create an array of all words
-	#print(title['doc_text'])
-	words = word_tokenize(title['doc_text'])
-
-	# add part of speech to each word
-	pos = nltk.pos_tag(words)
-	for w in pos:
-		# w = ( "Word", 'RR')
-		if w[1][0] in allowed_word_types:
-			# all training words
-			all_words.append(w[0].lower())
+    return connection
 
 
-#save all descriptions with genre names
-all_words = nltk.FreqDist(all_words)
-#print(all_words)
-word_features = [w for (w, c) in all_words.most_common(500)]
-print('\n\n')
-print(word_features)
-print('\n\n')
+def get_data(categories):
+    connection = get_connection()
+
+    with connection.cursor() as cursor:
+        sql = "SELECT `category`, `doc_text` FROM `ml_datasets` WHERE category IN {}".format(
+            str(tuple(categories))
+        )
+        cursor.execute(sql)
+        data = cursor.fetchall()
+
+    # list of your documents (each document is a string)
+    return data
 
 
-def find_features(document):
-	words = word_tokenize(document)
-	features = {}
-	for w in word_features:
-		features[w] = (w in words)
-	return features
+def train(clean_data):
+    all_words = []
+    # J - adjective, R - adverb, V - verb
+    # you can experement with that
+    allowed_word_types = ["J", "R", "V"]
 
-#data = [('text':'text', 'group':'1'), ]
+    print('all words')
+    for title in clean_data:
+        # create an array of all words
+        # print(title['doc_text'])
+        words = word_tokenize(title['doc_text'])
+
+        # add part of speech to each word
+        pos = nltk.pos_tag(words)
+        for w in pos:
+            # w = ( "Word", 'RR')
+            if w[1][0] in allowed_word_types:
+                # all training words
+                all_words.append(w[0].lower())
+
+    # save all descriptions with genre names
+    all_words = nltk.FreqDist(all_words)
+    # print(all_words)
+    word_features = [w for (w, c) in all_words.most_common(500)]
+
+    def find_features(document):
+        words = word_tokenize(document)
+        features = {}
+        for w in word_features:
+            features[w] = (w in words)
+        return features
+
+    # data = [('text':'text', 'group':'1'), ]
+
+    # preperaing featuresets for testing (it was specially for my case)
+    featuresets = [(find_features(title['doc_text']), title['category']) for
+                   title in clean_data]
+
+    classifier = nltk.NaiveBayesClassifier.train(featuresets)
+
+    return classifier
 
 
-#preperaing featuresets for testing (it was specially for my case)
-featuresets = [(find_features(title['doc_text']), title['category']) for title in data]
-# print(featuresets)
-#split into two parts for training and testing
-training_set = featuresets[:len(featuresets) / 2]
-testing_set = featuresets[len(featuresets) / 2:]
+def dump_classifier(classifier, categories):
+    file_path = "pickles/{}.pickle".format('_'.join(categories))
+
+    save_classifier = open(file_path, "wb")
+    pickle.dump(classifier, save_classifier)
+    save_classifier.close()
 
 
-#print('start train')
-classifier = nltk.NaiveBayesClassifier.train(training_set)
+if __name__ == '__main__':
+    input_categories = sys.argv[1:]
 
-# check the accuracy
-print("Original Naive Bayes Algo accuracy percent:", (nltk.classify.accuracy(classifier, testing_set)) * 100)
+    if any(not c.isdigit() for c in input_categories):
+        print('All arguments should be digits')
+        sys.exit()
+    elif len(input_categories) > 4 or len(input_categories) < 2:
+        print('Wrong number of categories')
+        sys.exit()
 
-
-#in the end we need to save our classifier to use it later
-save_classifier = open("pickles/originalnaivebayes.pickle", "wb")
-pickle.dump(classifier, save_classifier)
-save_classifier.close()
-
-#classifier.classify()
+    train_data = get_data(input_categories)
+    new_classifier = train(train_data)
+    # classifier.classify()
+    dump_classifier(new_classifier, input_categories)
