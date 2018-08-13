@@ -35,6 +35,9 @@ Route::group(['prefix' => 'v1/', 'namespace' => 'Api\V1',], function () {
 		// список суддів з застосованими фільтрами (Рейтинг->судді)
 		Route::get('judges/list', 'JudgesController@index');
 		
+		// швидкий пошук за прізвищем судді
+		Route::get('judges/autocomplete', 'JudgesController@autocomplete');
+		
 	});
 	
 });

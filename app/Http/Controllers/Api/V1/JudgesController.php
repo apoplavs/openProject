@@ -393,19 +393,186 @@ class JudgesController extends Controller
         //
     }
 	
-	
+	// todo дописати документацію
 	/**
-	 * автодоповнення в полі пошуку
-	 * отримує з GET початок слова
-	 * і шукає в БД подібні
-	 * повертає результати в json
+	 * Display a listing of the resource.
+	 *
+	 * @SWG\Get(
+	 *     path="/judges/autocomplete",
+	 *     summary="Перелік суддів для поля автодоповнення",
+	 *     description="Отримати швидкий перелік суддів можна передавши параметри (фільтри) пошуку описані нижче. Всі параметри можна використовувати як окремо, так і суміщати декілька параметрів одночасно. Всі результати пошуку відображаються по 10 шт. на одній сторінці",
+	 *     operationId="judges",
+	 *     produces={"application/json"},
+	 *     tags={"Судді"},
+	 *     security={
+	 *     {"passport": {}},
+	 *   	},
+	 *     @SWG\Parameter(
+	 *     	ref="#/parameters/Content-Type",
+	 *     ),
+	 *     @SWG\Parameter(
+	 *     	ref="#/parameters/X-Requested-With",
+	 *     ),
+	 *
+	 * 	  @SWG\Parameter(
+	 *     name="search",
+	 *     in="query",
+	 *     description="Пошук за прізвищем судді. Повинен містити від 1 до 20 символів. Будуть повернуті всі судді початок прізвища яких співпадає з заданим параметром.
+	НАПРИКЛАД: 'host/api/v1/judges/list?search=Кова' - означає, що потрібно отримати всіх суддів прізвище яких починається на 'Кова%'",
+	 *     type="string",
+	 *     collectionFormat="multi",
+	 *     uniqueItems=true,
+	 *     minLength=1,
+	 *     maxLength=20,
+	 *     allowEmptyValue=false
+	 *     ),
+	 *
+	 * 	  @SWG\Parameter(
+	 *     name="sort",
+	 *     in="query",
+	 *     description="Тип сортування при поверненні результатів. Коди типів:
+	 *   1 - Сортувати за прізвищем 'А->Я'
+	 *	 2 - Сортувати за прізвищем 'Я->А'
+	 *	 3 - Сортувати за рейтингом 'низький->високий'
+	 *	 4 - Сортувати за рейтингом 'високий->низький'",
+	 *     type="integer",
+	 *     collectionFormat="multi",
+	 *     uniqueItems=true,
+	 *     minimum=1,
+	 *     maximum=4,
+	 *     allowEmptyValue=false
+	 *     ),
+	 *
+	 * 	  @SWG\Parameter(
+	 *     name="expired",
+	 *     in="query",
+	 *     description="Якщо переданий цей параметр, то в результати пошуку будуть включені судді зі статусом 'закінчились повноваження'",
+	 *     type="integer",
+	 *     collectionFormat="multi",
+	 *     uniqueItems=true,
+	 *     default=1,
+	 *     allowEmptyValue=false
+	 *     ),
+	 *
+	 * 	   @SWG\Parameter(
+	 *     name="page",
+	 *     in="query",
+	 *     description="Оскільки результати відображаються по 10 шт. на сторінці, даний параметр вказує номер сторінки яку потрібно отримати",
+	 *     type="integer",
+	 *     collectionFormat="multi",
+	 *     uniqueItems=true,
+	 *     minimum=1,
+	 *     allowEmptyValue=false
+	 *     ),
+	 *
+	 *     @SWG\Response(
+	 *         response=200,
+	 *         description="ОК",
+	 *     	   @SWG\Schema(
+	 *		   @SWG\Property(property="current_page", type="integer", description="Поточна сторінка пошуку"),
+	 *		   @SWG\Property(property="data", type="json", description="Список суддів"),
+	 *     	   @SWG\Property(property="id", type="string", description="id судді"),
+	 *     	   @SWG\Property(property="court_name", type="string", description="Назва суду, в якому даний суддя працює"),
+	 *     	   @SWG\Property(property="surname", type="string", description="Прізвище судді"),
+	 *     	   @SWG\Property(property="name", type="string", description="Ім'я судді"),
+	 *     	   @SWG\Property(property="patronymic", type="string", description="По батькові судді"),
+	 *     	   @SWG\Property(property="photo", type="string", description="URL фото судді"),
+	 *     	   @SWG\Property(property="status", type="integer", description="Id поточного статусу судді
+	 * 	 1 - суддя на роботі
+	 *	 2 - На лікарняному
+	 *	 3 - У відпустці
+	 *	 4 - Відсуній на робочому місці з інших причин
+	 *	 5 - Припинено повноваження"),
+	 *     	   @SWG\Property(property="updated_status", type="string", description="Дата останнього оновлення статусу"),
+	 *     	   @SWG\Property(property="due_date_status", type="string", description="Дата дії статусу (до якого часу даний статус буде діяти)"),
+	 *     	   @SWG\Property(property="rating", type="integer", description="Місце в рейтингу серед усіх суддів"),
+	 *     	   @SWG\Property(property="is_bookmark", type="integer", description="Чи знаходиться в закладках в поточного користувача 1 - так,  0 - ні"),
+	 *     	   @SWG\Property(property="from", type="integer", description="Загальний номер результату в пошуку, який є першим на даній сторінці"),
+	 *     	   @SWG\Property(property="last_page", type="integer", description="Остання сторінка в пошуку"),
+	 *     	   @SWG\Property(property="path", type="string", description="URL поточного ресурсу"),
+	 *     	   @SWG\Property(property="per_page", type="integer", description="Кількість результатів на поточній сторінці"),
+	 *     	   @SWG\Property(property="total", type="integer", description="Загальна кількість результатів"),
+	 *     	   @SWG\Property(property="to", type="integer", description="Загальний номер результату в пошуку, який є останнім на даній сторінці"),
+	 *     	   ),
+	 *     	   examples={"application/json":
+	 *              {
+	 *					"current_page": 1,
+	 *					"data": {
+	 *					{
+	 *					"id": 9087,
+	 *					"court_name": "Господарський суд Київської області",
+	 *					"surname": "Євграфова",
+	 *					"name": "Є",
+	 *					"patronymic": "П",
+	 *					"photo": "/img/judges/no_photo.jpg",
+	 *					"status": 1,
+	 *					"updated_status": "08.06.2018",
+	 *					"due_date_status": null,
+	 *					"rating": 0,
+	 *					"is_bookmark": 0
+	 *					},
+	 *					{
+	 *					"id": 1518,
+	 *					"court_name": "Шосткинський міськрайонний суд Сумської області",
+	 *					"surname": "Євдокімова",
+	 *					"name": "Олена",
+	 *					"patronymic": "Павлівна",
+	 *					"photo": "/img/judges/no_photo.jpg",
+	 *					"status": 3,
+	 *					"updated_status": "21.07.2018",
+	 *					"due_date_status": "13.06.2018",
+	 *					"rating": 0,
+	 *					"is_bookmark": 0
+	 *					},
+	 *					{
+	 *					"id": 5793,
+	 *					"court_name": "Соснівський районний суд м. Черкаси",
+	 *					"surname": "Євтушенко",
+	 *					"name": "П",
+	 *					"patronymic": "М",
+	 *					"photo": "/img/judges/no_photo.jpg",
+	 *					"status": 1,
+	 *					"updated_status": "23.05.2018",
+	 *					"due_date_status": null,
+	 *					"rating": 0,
+	 *					"is_bookmark": 0
+	 *					}
+	 *					},
+	 *					"first_page_url": "http://toecyd.top/api/v1/judges/list?page=1",
+	 *					"from": 1,
+	 *					"last_page": 745,
+	 *					"last_page_url": "http://toecyd.top/api/v1/judges/list?page=745",
+	 *					"next_page_url": "http://toecyd.top/api/v1/judges/list?page=2",
+	 *					"path": "http://toecyd.local/api/v1/judges/list",
+	 *					"per_page": 10,
+	 *					"prev_page_url": null,
+	 *					"to": 10,
+	 *					"total": 7445
+	 *				}
+	 *     		}
+	 *     ),
+	 *
+	 *     @SWG\Response(
+	 *         response=401,
+	 *         description="Необхідна аутентифікація користувача, можливо токен не існує, або анульований",
+	 *     	   examples={"application/json":
+	 *              {
+	 *     				"message": "Unauthenticated",
+	 *              }
+	 *     		}
+	 *     ),
+	 *     @SWG\Response(
+	 *         response=405,
+	 *         description="Метод, з яким виконувався запит, не дозволено використовувати для заданого ресурсу; наприклад, запит був здійснений за методом POST, хоча очікується GET.",
+	 *     )
+	 * )
 	 */
-	public function autocompleteSearch() {
+	public function autocomplete() {
 		$search = Input::has('search') ? Input::get('search') : '';
-		// приведення першої букви в верхній регістр
+		// приведення першої букви в верхній регістр для валідного пошуку
 		$search = mb_convert_case($search, MB_CASE_TITLE, "UTF-8");
 		$autocomplete = Judge::getAutocomplete($search);
-		return (json_encode($autocomplete));
+		return response()->json($autocomplete);
 	}
 	
 	
