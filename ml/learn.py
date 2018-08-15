@@ -2,12 +2,14 @@
 # -*- coding: utf-8 -*-
 import json
 import pymysql.cursors
-import pprint
+import os
 import pickle
 import nltk
 import sys
 
 from nltk.tokenize import word_tokenize
+nltk.download('punkt')
+nltk.download('averaged_perceptron_tagger')
 
 config = json.loads(open('config.json', 'r').read())
 
@@ -43,7 +45,6 @@ def train(clean_data):
     # you can experement with that
     allowed_word_types = ["J", "R", "V"]
 
-    print('all words')
     for title in clean_data:
         # create an array of all words
         # print(title['doc_text'])
@@ -63,15 +64,12 @@ def train(clean_data):
     word_features = [w for (w, c) in all_words.most_common(500)]
 
     def find_features(document):
-        words = word_tokenize(document)
+        tokenized_words = word_tokenize(document)
         features = {}
         for w in word_features:
-            features[w] = (w in words)
+            features[w] = (w in tokenized_words)
         return features
 
-    # data = [('text':'text', 'group':'1'), ]
-
-    # preperaing featuresets for testing (it was specially for my case)
     featuresets = [(find_features(title['doc_text']), title['category']) for
                    title in clean_data]
 
@@ -83,12 +81,23 @@ def train(clean_data):
 def dump_classifier(classifier, categories):
     file_path = "pickles/{}.pickle".format('_'.join(categories))
 
+    if not os.path.exists('pickles'):
+        os.makedirs('pickles')
     save_classifier = open(file_path, "wb")
-    pickle.dump(classifier, save_classifier)
+    try:
+        pickle.dump(classifier, save_classifier)
+        print('Pickle with classifier was successfully dumped')
+    except Exception:
+        print('Something went wrong')
     save_classifier.close()
 
 
 if __name__ == '__main__':
+    """
+    To run script you need to type 'python learn.py [category] [category]' 
+    in your terminal
+    """
+
     input_categories = sys.argv[1:]
 
     if any(not c.isdigit() for c in input_categories):
@@ -100,5 +109,4 @@ if __name__ == '__main__':
 
     train_data = get_data(input_categories)
     new_classifier = train(train_data)
-    # classifier.classify()
     dump_classifier(new_classifier, input_categories)

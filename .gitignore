@@ -13,3 +13,5 @@ composer.json
 composer.lock
 yarn-error.log
 .env
+/ml/nltk_packages
+/ml/pickles
