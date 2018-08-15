@@ -1,6 +1,6 @@
 <template>
     <div class="container mt-5 d-flex justify-content-center">
-                <div class="card" id="input-form">
+                <div class="card">
                     <div class="card-header text-center">
                         Вхід
                     </div>
@@ -152,6 +152,5 @@
         .footer-link{
             font-weight: 300;
         }
-
     }
 </style>

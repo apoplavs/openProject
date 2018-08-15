@@ -1,62 +1,102 @@
 <template>
-    <div class="container mt-5">
-        <div class="row">
-            <div class="col-lg-6 offset-md-3">
-                <div class="card" id="input-form">
-                    <div class="card-header">
-                        Реєстрація
+    <div class="container mt-5 d-flex justify-content-center">
+        <div class="card">
+            <div class="card-header text-center">
+                Реєстрація
+            </div>
+            <div class="card-body">
+                <form @submit.prevent="validateBeforeSubmit">
+                    <div class="form-group">
+                        <label for="name" class="form-control-label">
+                            Ім'я
+                        </label>
+                        <p class="control has-icon has-icon-right">
+                            <input
+                                id="name"
+                                type="text"
+                                class="form-control"
+                                name="name"
+                                v-model="user.name"
+                                v-validate="'required|alpha'"
+                                :class="{'input': true, 'is-danger': errors.has('name') }"
+                                >
+                            <small>
+                                <i v-show="errors.has('name')" class="fa fa-warning"></i>
+                                <span v-show="errors.has('name')" class="help is-danger">{{ errors.first('name') }}</span>
+                            </small>
+                        </p>
                     </div>
-                    <div class="card-body">
-                        <form class="form-group">
 
-                            <div class="form-group}">
-                                <label for="name" class="col-lg-4 form-control-label">
-                                    Ім'я
-                                </label>
-                                <div class="col-lg-12">
-                                    <input id="name" type="text" class="form-control" name="name" value="" required autofocus>
-
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="email" class="col-lg-4 form-control-label">
-                                    E-Mail
-                                </label>
-                                <div class="col-lg-12">
-                                    <input id="email" type="email" class="form-control" name="email" value="" required>
-
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="password" class="col-lg-4 form-control-label">
-                                    Пароль
-                                </label>
-                                <div class="col-lg-12">
-                                    <input id="password" type="password" class="form-control" name="password" required>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="password-confirm" class="col-lg-6 form-control-label">
-                                    Підтвердити пароль
-                                </label>
-                                <div class="col-lg-12">
-                                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="col-12 text-center">
-                                    <button type="submit" class="btn btn-primary">
-                                        Зареєструватись
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
+                    <div class="form-group">
+                        <label for="email" class="form-control-label">
+                            E-Mail
+                        </label>
+                        <p class="control has-icon has-icon-right">
+                            <input
+                                id="email"
+                                type="email"
+                                class="form-control"
+                                name="email"
+                                v-model="user.email"
+                                v-validate="'required|email'"
+                                :class="{'input': true, 'is-danger': errors.has('email') }"
+                            >
+                            <small>
+                                <i v-show="errors.has('email')" class="fa fa-warning"></i>
+                                <span v-show="errors.has('email')" class="help is-danger">{{ errors.first('email') }}</span>
+                            </small>
+                        </p>
                     </div>
-                </div>
+                    <div class="form-group">
+                        <label for="password" class="form-control-label">
+                            Пароль
+                        </label>
+                        <p class="control has-icon has-icon-right">
+                            <input
+                                    id="password"
+                                    type="password"
+                                    class="form-control"
+                                    name="password"
+                                    v-model="user.password"
+                                    v-validate="'required|min:6|max:25'"
+                                    :class="{'input': true, 'is-danger': errors.has('password') }"
+                            >
+                            <small>
+                                <i v-show="errors.has('password')" class="fa fa-warning"></i>
+                                <span v-show="errors.has('password')" class="help is-danger">{{ errors.first('password') }}</span>
+                            </small>
+                        </p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="repassword" class="form-control-label">
+                            Підтвердити пароль
+                        </label>
+                        <p class="control has-icon has-icon-right">
+                            <input
+                                id="repassword"
+                                type="password"
+                                class="form-control"
+                                name="repassword"
+                                v-model="user.repassword"
+                                v-validate="'required|confirmed:password'"
+                                data-vv-as="password confirmation"
+                            >
+                            <small>
+                                <i v-show="errors.has('repassword')" class="fa fa-warning"></i>
+                                <span v-show="errors.has('repassword')" class="help is-danger">{{ errors.first('repassword') }}</span>
+                            </small>
+                        </p>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-my-primary" id="register-btn">
+                                Зареєструватись
+                            </button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -64,10 +104,67 @@
 
 <script>
     export default {
-        name: "registration"
+        name: "registration",
+        data: () => {
+            return {
+                user: {
+                    name: '',
+                    email: '',
+                    password: '',
+                    repassword: ''
+                }
+            }
+        },
+        methods: {
+            methods: {
+                validateBeforeSubmit() {
+                    this.$validator.validateAll().then((result) => {
+                        if (result) {
+                            alert('Form Submitted!');
+                            return;
+                        }
+
+                        alert('Correct them errors!');
+                    });
+                }
+            }
+        }
     }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+    .card {
+        width: 100%;
+        max-width: 450px;
+
+        input[aria-invalid="true"] {
+            border-color: red;
+        }
+        i.fa-warning, span.is-danger,
+        #back-error {
+            color: red;
+        }
+        #back-error {
+            display: none;
+        }
+        .card-header {
+            font-size: 1.5em;
+            color: #408080 !important;
+            font-weight: 700;
+        }
+        .btn-my-primary {
+            background-color: #408080;
+            border-color: #408080;
+            border-bottom: 3px solid #2d5656;
+            color: #ffffff;
+        }
+        button:hover,
+        button:active {
+            opacity: .8;
+        }
+        .footer-link {
+            font-weight: 300;
+        }
+    }
 
 </style>
