@@ -77,6 +77,62 @@ class Judge extends Model
 			->paginate(10));
 	}
 	
+	/**
+	 * Для не зареєстрованого користувача
+	 * отримати список суддів, враховуючи фільтри, які були задані
+	 * @param $regions  array
+	 * @param $instances  array
+	 * @param $jurisdictions  array
+	 * @param $sort_order  integer
+	 * @param $search  string
+	 * @param $powers_expired  boolean
+	 * @return mixed
+	 */
+	public static function getJudgesListGuest($regions, $instances, $jurisdictions, $sort_order, $search, $powers_expired) {
+		
+		// отримання id користувача
+		return (static::select('courts.name AS court_name', 'judges.surname', 'judges.name',
+			'judges.patronymic', 'judges.photo', 'judges.status',
+			DB::raw('DATE_FORMAT(judges.updated_status, "%d.%m.%Y") AS updated_status'),
+			DB::raw('DATE_FORMAT(judges.due_date_status, "%d.%m.%Y") AS due_date_status'),
+			'judges.rating')
+			->join('courts', 'judges.court', '=', 'courts.court_code')
+			// фільтрція за регіоном
+			->when(!empty($regions), function ($query) use ($regions) {
+				return $query->whereIn('courts.region_code', $regions);
+			})
+			// фільтрція за інстанцією
+			->when(!empty($instances), function ($query) use ($instances) {
+				return $query->whereIn('courts.instance_code', $instances);
+			})
+			// фільтрція за юрисдикцією
+			->when(!empty($jurisdictions), function ($query) use ($jurisdictions) {
+				return $query->whereIn('courts.jurisdiction', $jurisdictions);
+			})
+			// якщо не переданий аргумент щоб показувати суддів в яких закінчились повноваження - значить упускємо їх при вибірці
+			->when($powers_expired == false, function ($query) {
+				return $query->where('judges.status', '!=', 5);
+			})
+			// якщо застосовано пошук
+			->when(!empty($search), function ($query) use ($search) {
+				return $query->where('judges.surname', 'LIKE', $search.'%');
+			})
+			// визначення порядку сортування
+			->when($sort_order == 1, function ($query) {
+				return $query->orderBy('judges.surname', 'ASC');
+			})
+			->when($sort_order == 2, function ($query) {
+				return $query->orderBy('judges.surname', 'DESC');
+			})
+			->when($sort_order == 3, function ($query) {
+				return $query->orderBy('judges.rating', 'ASC');
+			})
+			->when($sort_order == 4, function ($query) {
+				return $query->orderBy('judges.rating', 'DESC');
+			})
+			->paginate(10));
+	}
+	
 	
 	/**
 	 * отримує результати автодоповнення
@@ -86,9 +142,10 @@ class Judge extends Model
 	 */
 	public static function getAutocomplete(string $search) {
 		
-		$results = static::select('judges.surname', 'judges.name', 'judges.patronymic', 'courts.name AS court_name')
-		->join('courts', 'judges.court', '=', 'courts.court_code')
+		$results = static::select('judges.surname', 'judges.name', 'judges.patronymic')
 		->where('judges.surname', 'LIKE', $search.'%')
+		->orWhere('judges.name', 'LIKE', $search.'%')
+		->orWhere('judges.patronymic', 'LIKE', $search.'%')
 		->limit(5)
 		->get();
 		return ($results);
@@ -136,6 +193,22 @@ class Judge extends Model
 			->leftJoin('user_bookmark_judges', 'judges.id', '=', 'user_bookmark_judges.judge')
 			->where('judges.id', '=', $judge_id)
 			->first());
+	}
+	
+	
+	/**
+	 * перевірити чи існує суддя з даним id
+	 * @param $id
+	 * @return boolean
+	 */
+	public static function checkJudgeById($id) {
+		$judge = static::select('judges.id')
+			->where('judges.id', '=', $id)
+			->first();
+		if (empty($judge)) {
+			return (false);
+		}
+		return (true);
 	}
 	
 }

@@ -20,7 +20,7 @@ class UserBookmarkJudge extends Model
 	
 	
 	/**
-	 * створює нову закладку за суддю
+	 * створює нову закладку на суддю
 	 * @param $user_id
 	 * @param $judge_id
 	 */
@@ -33,7 +33,7 @@ class UserBookmarkJudge extends Model
 	
 	
 	/**
-	 * видаляє закладку поточного користувача за суддю
+	 * видаляє закладку поточного користувача на суддю
 	 * @param $user_id
 	 * @param $judge_id
 	 */
@@ -47,7 +47,7 @@ class UserBookmarkJudge extends Model
 	/**
 	 * Отримати всіх суддів, що перебувають
 	 * в закладках користувача
-	 * @return null
+	 * @return mixed
 	 */
 	public static function getBookmarkJudges() {
 		// отримуємо всі закладки користувача
@@ -73,5 +73,23 @@ class UserBookmarkJudge extends Model
 			->join('courts', 'judges.court', '=', 'courts.court_code')
 			->whereIn('judges.id', $judges_id)
 			->get());
+	}
+	
+	
+	/**
+	 * перевірити чи є суддя в закладках користувача
+	 * @param $user_id
+	 * @param $judge_id
+	 * @return boolean
+	 */
+	public static function checkBookmark($user_id, $judge_id) {
+		$bookmark = static::select('id')
+			->where('judge', '=', $judge_id)
+			->where('user', '=', $user_id)
+			->first();
+		if (empty($bookmark)) {
+			return (false);
+		}
+		return (true);
 	}
 }
