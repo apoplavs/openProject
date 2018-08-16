@@ -877,9 +877,9 @@ class JudgesController extends Controller
 	/**
 	 * @SWG\Delete(
 	 *     path="/judges/{id}/bookmark",
-	 *     summary="Додати суддю в закладки",
-	 *     description="Додати суддю, в закладки поточного користувача",
-	 *     operationId="judges-addBookmark",
+	 *     summary="Видалити суддю з закладок",
+	 *     description="Видалити суддю, з закладок поточного користувача",
+	 *     operationId="judges-delBookmark",
 	 *     produces={"application/json"},
 	 *     tags={"Судді"},
 	 *     security={
@@ -896,7 +896,7 @@ class JudgesController extends Controller
 	 *     name="id",
 	 *     in="path",
 	 *     required=true,
-	 *     description="Id судді, якого потрібно додати в закладки поточного користувача",
+	 *     description="Id судді, якого потрібно видалити з закладок поточного користувача",
 	 *     type="integer",
 	 *     collectionFormat="multi",
 	 *     uniqueItems=true,
@@ -907,12 +907,7 @@ class JudgesController extends Controller
 	 *
 	 *     @SWG\Response(
 	 *         response=204,
-	 *         description="Закладка упішно видалена",
-	 *     	   examples={"application/json":
-	 *              {
-	 *     				"message": "Bookmark successfully deleted!"
-	 *              }
-	 *     		}
+	 *         description="Закладка упішно видалена"
 	 *     ),
 	 *
 	 *     @SWG\Response(
@@ -932,7 +927,7 @@ class JudgesController extends Controller
 	 *
 	 *     @SWG\Response(
 	 *         response=422,
-	 *         description="Передані не валідні дані, неіснуючий id, або дана закладки не існує",
+	 *         description="Передані не валідні дані, неіснуючий id, або даної закладки не існує",
 	 *     	   examples={"application/json":
 	 *              {
 	 *     				"message": "Закладки не існує",
@@ -954,9 +949,7 @@ class JudgesController extends Controller
 			], 422);
 		}
 		UserBookmarkJudge::deleteBookmark(Auth::user()->id, $id);
-		return response()->json([
-			'message' => 'Bookmark successfully deleted'
-		], 204);
+		return response()->json([], 204);
 	}
 	
 	
