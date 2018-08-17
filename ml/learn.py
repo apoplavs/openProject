@@ -41,9 +41,6 @@ def get_data(categories):
 
 def train(clean_data):
     all_words = []
-    # J - adjective, R - adverb, V - verb
-    # you can experement with that
-    allowed_word_types = ["J", "R", "V"]
 
     for title in clean_data:
         # create an array of all words
@@ -54,9 +51,8 @@ def train(clean_data):
         pos = nltk.pos_tag(words)
         for w in pos:
             # w = ( "Word", 'RR')
-            if w[1][0] in allowed_word_types:
-                # all training words
-                all_words.append(w[0].lower())
+            # all training words
+            all_words.append(w[0].lower())
 
     # save all descriptions with genre names
     all_words = nltk.FreqDist(all_words)
