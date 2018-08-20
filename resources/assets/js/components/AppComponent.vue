@@ -25,5 +25,6 @@
 
 <style lang="scss">
     @import "../../sass/app.scss";
+    @import "../../sass/_variables.scss";
 
 </style>

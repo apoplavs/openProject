@@ -14,7 +14,7 @@
 <script>
 
     export default {
-        name: 'HomeComponent',
+        name: 'home-component',
 
         mounted() {
             console.log('Component mounted.')

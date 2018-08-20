@@ -5,17 +5,18 @@ import VueRouter from 'vue-router';
 import axios from 'axios';
 import VeeValidate, { Validator } from 'vee-validate';
 import uk from 'vee-validate/dist/locale/uk';
+import Toasted from 'vue-toasted';
 
 
 Vue.use(VeeValidate);
 Vue.use(VueRouter);
+Vue.use(Toasted);
 
 Validator.localize('uk', uk);
 
 
 window.axios = axios;
 require('./bootstrap');
-
 
 
 import AppComponent from './components/AppComponent.vue';
@@ -25,6 +26,7 @@ import HomeComponent from './components/HomeComponent.vue';
 import Login from './components/auth/Login.vue';
 import Registration from './components/auth/Registration.vue';
 import JudgesList from './components/main/JudgesList.vue';
+
 
 import PassportClients from './components/passport/PassportClients.vue';
 import PassportAuthorizedClients from './components/passport/PassportAuthorizedClients.vue';
@@ -40,12 +42,8 @@ Vue.component('registration', require('./components/auth/Registration.vue'));
 // main
 Vue.component('judges-list', require('./components/main/JudgesList.vue'));
 
-
-
-
 Vue.component('passport-clients', require('./components/passport/PassportClients.vue'));
 Vue.component('passport-authorized-clients', require('./components/passport/PassportAuthorizedClients.vue'));
-
 
 
 
@@ -75,11 +73,6 @@ const router = new VueRouter({
             component: JudgesList,
             name: 'judges-list'
         },
-        // {
-        //     path: '/home',
-        //     component: HomeComponent,
-        //     name: 'home-component'
-        // },
 
         {
             path: '/passport-clients',
@@ -92,7 +85,7 @@ const router = new VueRouter({
             name: 'passport-authorized-clients'
         }
     ]
-})
+});
 
 
 // const date_picker = new Vue({

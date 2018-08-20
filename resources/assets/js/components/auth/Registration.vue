@@ -15,14 +15,14 @@
                                 id="name"
                                 type="text"
                                 class="form-control"
-                                name="name"
+                                name="ім'я"
                                 v-model="user.name"
-                                v-validate="'required|alpha'"
-                                :class="{'input': true, 'is-danger': errors.has('name') }"
+                                v-validate="'required|alpha|min:1||max:30'"
+                                :class="{'input': true, 'is-danger': errors.has('ім\'я') }"
                                 >
                             <small>
-                                <i v-show="errors.has('name')" class="fa fa-warning"></i>
-                                <span v-show="errors.has('name')" class="help is-danger">{{ errors.first('name') }}</span>
+                                <i v-show="errors.has('ім\'я')" class="fa fa-warning"></i>
+                                <span v-show="errors.has('ім\'я')" class="help is-danger">{{ errors.first('ім\'я') }}</span>
                             </small>
                         </p>
                     </div>
@@ -56,14 +56,14 @@
                                     id="password"
                                     type="password"
                                     class="form-control"
-                                    name="password"
+                                    name="пароль"
                                     v-model="user.password"
                                     v-validate="'required|min:6|max:25'"
-                                    :class="{'input': true, 'is-danger': errors.has('password') }"
+                                    :class="{'input': true, 'is-danger': errors.has('пароль') }"
                             >
                             <small>
-                                <i v-show="errors.has('password')" class="fa fa-warning"></i>
-                                <span v-show="errors.has('password')" class="help is-danger">{{ errors.first('password') }}</span>
+                                <i v-show="errors.has('пароль')" class="fa fa-warning"></i>
+                                <span v-show="errors.has('пароль')" class="help is-danger">{{ errors.first('пароль') }}</span>
                             </small>
                         </p>
                     </div>
@@ -77,14 +77,14 @@
                                 id="repassword"
                                 type="password"
                                 class="form-control"
-                                name="repassword"
+                                name="підтвердити пароль"
                                 v-model="user.repassword"
                                 v-validate="'required|confirmed:password'"
-                                data-vv-as="password confirmation"
+                                <!--data-vv-as="password confirmation"-->
                             >
                             <small>
-                                <i v-show="errors.has('repassword')" class="fa fa-warning"></i>
-                                <span v-show="errors.has('repassword')" class="help is-danger">{{ errors.first('repassword') }}</span>
+                                <!--<i v-show="errors.has('підтвердити пароль')" class="fa fa-warning"></i>-->
+                                <span v-show="errors.has('підтвердити пароль')" class="help is-danger">{{ errors.message }}</span>
                             </small>
                         </p>
                     </div>
@@ -105,6 +105,8 @@
 <script>
     export default {
         name: "registration",
+
+
         data: () => {
             return {
                 user: {
@@ -113,20 +115,20 @@
                     password: '',
                     repassword: ''
                 }
+
             }
+
         },
         methods: {
-            methods: {
-                validateBeforeSubmit() {
-                    this.$validator.validateAll().then((result) => {
-                        if (result) {
-                            alert('Form Submitted!');
-                            return;
-                        }
+            validateBeforeSubmit() {
+                this.$validator.validateAll().then((result) => {
+                    if (result) {
+                        alert('Form Submitted!');
+                        return;
+                    }
 
-                        alert('Correct them errors!');
-                    });
-                }
+                    alert('Correct them errors!');
+                });
             }
         }
     }
