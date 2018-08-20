@@ -68,8 +68,10 @@ class AuthController extends Controller
 	 *              {
 	 *     				"message": "The given data was invalid.",
 	 *                  "errors": {
-	 *                  	"email": "Даний email вже використовується."
-	 *     					}
+	 *                  	"email": {
+	 *     							"Даний email вже використовується."
+	 * 						}
+	 *     				}
 	 *              }
 	 *     		}
 	 *     ),
