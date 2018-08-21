@@ -72,19 +72,20 @@
                         <label for="repassword" class="form-control-label">
                             Підтвердити пароль
                         </label>
-                        <p class="control has-icon has-icon-right">
+                        <p class="control" :class="{error: !(user.repassword === user.password)}">
                             <input
                                 id="repassword"
                                 type="password"
                                 class="form-control"
-                                name="підтвердити пароль"
+                                name="repassword"
                                 v-model="user.repassword"
-                                v-validate="'required|confirmed:password'"
-                                <!--data-vv-as="password confirmation"-->
+                                v-validate="'required|min:6|max:25'"
+                                :class="{'is-danger': !(user.repassword === user.password)}"
+
                             >
-                            <small>
-                                <!--<i v-show="errors.has('підтвердити пароль')" class="fa fa-warning"></i>-->
-                                <span v-show="errors.has('підтвердити пароль')" class="help is-danger">{{ errors.message }}</span>
+                            <small v-show="!(user.repassword === user.password)">
+                                <i class="fa fa-warning"></i>
+                                <span class="help is-danger">Паролі не співпадають</span>
                             </small>
                         </p>
                     </div>
@@ -122,12 +123,50 @@
         methods: {
             validateBeforeSubmit() {
                 this.$validator.validateAll().then((result) => {
-                    if (result) {
+                    if (result && this.user.password === this.user.repassword) {
                         alert('Form Submitted!');
-                        return;
+                        console.log(this.user);
+                        let newUser = {};
+                        newUser.name = this.user.name;
+                        newUser.email = this.user.email;
+                        newUser.password = this.user.password;
+                        console.log(newUser);
+                        axios.post('/api/v1/signup', newUser, {
+                            headers: {
+                                'Content-Type': 'application/json',
+                            }
+                        }).then(response => {
+                            if (response) {
+                                this.$toasted.success('Вітаємо! Вам на пошту відпрвавлений лист з підтвердженням реєстрації!', {
+                                    theme: "primary",
+                                    position: "top-right",
+                                    duration: 5000
+                                })
+                            }
+                            // let token = res.data.token;
+                            // console.log(token);
+                            // localStorage.setItem('token', token);
+                            // this.$router.push('/home');
+                        }).catch(error => {
+                            alert('Something wrong:(')
+                            // if (error.response && error.response.status === 401) {
+                                // if (error.response.data && error.response.data.message) {
+                                //     console.error(error.response.data.message);
+                                //     this.$toasted.error('Користувач не зареєстований!', {
+                                //         theme: "primary",
+                                //         position: "top-right",
+                                //         duration: 5000
+                                //     })
+                                // }
+                            // }
+                        });
+                    } else {
+                        this.$toasted.error('Заповніть коректно всі поля!', {
+                            theme: "primary",
+                            position: "top-right",
+                            duration : 500
+                        })
                     }
-
-                    alert('Correct them errors!');
                 });
             }
         }
@@ -166,6 +205,9 @@
         }
         .footer-link {
             font-weight: 300;
+        }
+        .error > input {
+            border-color: red;
         }
     }
 
