@@ -108,19 +108,21 @@
                                         this.$router.push('/home');
                                     }
                                 }).catch(error => {
-                                if(error.response && error.response.status === 401) {
-                                    if (error.response.data && error.response.data.message) {
-                                        // console.error(error.response.data.message);
-                                        this.$toasted.error('Користувач не зареєстований!', {
-                                            theme: "primary",
-                                            position: "top-right",
-                                            duration : 5000
-                                        })
+                                    if(error.response && error.response.status === 401) {
+                                        if (error.response.data && error.response.data.message) {
+                                            // console.error(error.response.data.message);
+                                            this.$toasted.error('Користувач не зареєстований!', {
+                                                theme: "primary",
+                                                position: "top-right",
+                                                duration : 5000
+                                            })
+                                        }
+                                    } else {
+                                        alert('Something wrong:( Try again!')
                                     }
-                                }
-                            });
-                        }
-                    });
+                                });
+                            }
+                        });
 
             }
         }

@@ -70115,6 +70115,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                                     duration: 5000
                                 });
                             }
+                        } else {
+                            alert('Something wrong:( Try again!');
                         }
                     });
                 }
@@ -70545,7 +70547,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "registration",
-
     data: function data() {
         return {
             user: {
@@ -70554,7 +70555,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 password: '',
                 repassword: ''
             }
-
         };
     },
     methods: {
@@ -70563,13 +70563,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             this.$validator.validateAll().then(function (result) {
                 if (result && _this.user.password === _this.user.repassword) {
-                    alert('Form Submitted!');
-                    console.log(_this.user);
                     var newUser = {};
                     newUser.name = _this.user.name;
                     newUser.email = _this.user.email;
                     newUser.password = _this.user.password;
-                    console.log(newUser);
                     axios.post('/api/v1/signup', newUser, {
                         headers: {
                             'Content-Type': 'application/json'
@@ -70578,32 +70575,29 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                         if (response) {
                             _this.$toasted.success('Вітаємо! Вам на пошту відпрвавлений лист з підтвердженням реєстрації!', {
                                 theme: "primary",
-                                position: "top-right",
+                                position: "top-center",
                                 duration: 5000
                             });
                         }
-                        // let token = res.data.token;
-                        // console.log(token);
-                        // localStorage.setItem('token', token);
-                        // this.$router.push('/home');
                     }).catch(function (error) {
-                        alert('Something wrong:(');
-                        // if (error.response && error.response.status === 401) {
-                        // if (error.response.data && error.response.data.message) {
-                        //     console.error(error.response.data.message);
-                        //     this.$toasted.error('Користувач не зареєстований!', {
-                        //         theme: "primary",
-                        //         position: "top-right",
-                        //         duration: 5000
-                        //     })
-                        // }
-                        // }
+                        if (error.response && error.response.status === 422) {
+                            if (error.response.data && error.response.data.message) {
+                                console.error(error.response.data.message);
+                                _this.$toasted.error('Даний email вже зареєстований!', {
+                                    theme: "primary",
+                                    position: "top-right",
+                                    duration: 5000
+                                });
+                            }
+                        } else {
+                            alert('Something wrong:( Try again!');
+                        }
                     });
                 } else {
                     _this.$toasted.error('Заповніть коректно всі поля!', {
                         theme: "primary",
                         position: "top-right",
-                        duration: 500
+                        duration: 5000
                     });
                 }
             });

@@ -106,8 +106,6 @@
 <script>
     export default {
         name: "registration",
-
-
         data: () => {
             return {
                 user: {
@@ -116,21 +114,16 @@
                     password: '',
                     repassword: ''
                 }
-
             }
-
         },
         methods: {
             validateBeforeSubmit() {
                 this.$validator.validateAll().then((result) => {
                     if (result && this.user.password === this.user.repassword) {
-                        alert('Form Submitted!');
-                        console.log(this.user);
                         let newUser = {};
                         newUser.name = this.user.name;
                         newUser.email = this.user.email;
                         newUser.password = this.user.password;
-                        console.log(newUser);
                         axios.post('/api/v1/signup', newUser, {
                             headers: {
                                 'Content-Type': 'application/json',
@@ -139,32 +132,29 @@
                             if (response) {
                                 this.$toasted.success('Вітаємо! Вам на пошту відпрвавлений лист з підтвердженням реєстрації!', {
                                     theme: "primary",
-                                    position: "top-right",
+                                    position: "top-center",
                                     duration: 5000
                                 })
                             }
-                            // let token = res.data.token;
-                            // console.log(token);
-                            // localStorage.setItem('token', token);
-                            // this.$router.push('/home');
                         }).catch(error => {
-                            alert('Something wrong:(')
-                            // if (error.response && error.response.status === 401) {
-                                // if (error.response.data && error.response.data.message) {
-                                //     console.error(error.response.data.message);
-                                //     this.$toasted.error('Користувач не зареєстований!', {
-                                //         theme: "primary",
-                                //         position: "top-right",
-                                //         duration: 5000
-                                //     })
-                                // }
-                            // }
+                            if (error.response && error.response.status === 422) {
+                                if (error.response.data && error.response.data.message) {
+                                    console.error(error.response.data.message);
+                                    this.$toasted.error('Даний email вже зареєстований!', {
+                                        theme: "primary",
+                                        position: "top-right",
+                                        duration: 5000
+                                    })
+                                }
+                            } else {
+                                alert('Something wrong:( Try again!')
+                            }
                         });
                     } else {
                         this.$toasted.error('Заповніть коректно всі поля!', {
                             theme: "primary",
                             position: "top-right",
-                            duration : 500
+                            duration : 5000
                         })
                     }
                 });
