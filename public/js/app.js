@@ -70137,8 +70137,6 @@ var render = function() {
     "div",
     { staticClass: "container mt-5 d-flex justify-content-center" },
     [
-      _c("vue-toastr", { ref: "toastr" }),
-      _vm._v(" "),
       _c("div", { staticClass: "card" }, [
         _c("div", { staticClass: "card-header text-center" }, [
           _vm._v("\n            Вхід\n        ")
@@ -70263,8 +70261,8 @@ var render = function() {
                       {
                         name: "validate",
                         rawName: "v-validate",
-                        value: "required|min:6|max:25",
-                        expression: "'required|min:6|max:25'"
+                        value: "required|min:6|max:32",
+                        expression: "'required|min:6|max:32'"
                       }
                     ],
                     staticClass: "form-control",
@@ -70349,8 +70347,7 @@ var render = function() {
           )
         ])
       ])
-    ],
-    1
+    ]
   )
 }
 var staticRenderFns = [
@@ -70657,8 +70654,8 @@ var render = function() {
                       {
                         name: "validate",
                         rawName: "v-validate",
-                        value: "required|alpha|min:1||max:30",
-                        expression: "'required|alpha|min:1||max:30'"
+                        value: "required|alpha|min:3||max:250",
+                        expression: "'required|alpha|min:3||max:250'"
                       }
                     ],
                     staticClass: "form-control",
@@ -70812,8 +70809,8 @@ var render = function() {
                       {
                         name: "validate",
                         rawName: "v-validate",
-                        value: "required|min:6|max:25",
-                        expression: "'required|min:6|max:25'"
+                        value: "required|min:6|max:32",
+                        expression: "'required|min:6|max:32'"
                       }
                     ],
                     staticClass: "form-control",
@@ -70899,8 +70896,8 @@ var render = function() {
                         {
                           name: "validate",
                           rawName: "v-validate",
-                          value: "required|min:6|max:25",
-                          expression: "'required|min:6|max:25'"
+                          value: "required|min:6|max:32",
+                          expression: "'required|min:6|max:32'"
                         }
                       ],
                       staticClass: "form-control",

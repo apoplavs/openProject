@@ -17,7 +17,7 @@
                                 class="form-control"
                                 name="ім'я"
                                 v-model="user.name"
-                                v-validate="'required|alpha|min:1||max:30'"
+                                v-validate="'required|alpha|min:3||max:250'"
                                 :class="{'input': true, 'is-danger': errors.has('ім\'я') }"
                                 >
                             <small>
@@ -58,7 +58,7 @@
                                     class="form-control"
                                     name="пароль"
                                     v-model="user.password"
-                                    v-validate="'required|min:6|max:25'"
+                                    v-validate="'required|min:6|max:32'"
                                     :class="{'input': true, 'is-danger': errors.has('пароль') }"
                             >
                             <small>
@@ -79,7 +79,7 @@
                                 class="form-control"
                                 name="repassword"
                                 v-model="user.repassword"
-                                v-validate="'required|min:6|max:25'"
+                                v-validate="'required|min:6|max:32'"
                                 :class="{'is-danger': !(user.repassword === user.password)}"
 
                             >

@@ -1,6 +1,6 @@
 <template>
     <div class="container mt-5 d-flex justify-content-center">
-        <vue-toastr ref="toastr"></vue-toastr>
+        <!--<vue-toasted ref="toasted"></vue-toasted>-->
         <div class="card">
             <div class="card-header text-center">
                 Вхід
@@ -43,7 +43,7 @@
                                     class="form-control"
                                     name="password"
                                     v-model="user.password"
-                                    v-validate="'required|min:6|max:25'"
+                                    v-validate="'required|min:6|max:32'"
                             >
                             <small>
                                 <i v-show="errors.has('password')" class="fa fa-warning"></i>
