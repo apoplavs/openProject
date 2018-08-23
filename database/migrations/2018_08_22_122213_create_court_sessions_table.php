@@ -23,7 +23,7 @@ class CreateCourtSessionsTable extends Migration
             $table->tinyInteger('forma')->comment('форма судочинства');
             $table->string('number')->nullable()->comment('номер справи');
             $table->text('involved')->nullable()->comment('сторони по справі');
-            $table->text('description')->nullable()->comment('суть позову');
+            $table->unsignedSmallInteger('description')->nullable()->comment('суть справи');
             $table->text('add_address')->nullable()->comment('адреса суду');
 
             $table->foreign('court')->references('court_code')->on('courts');
@@ -31,6 +31,7 @@ class CreateCourtSessionsTable extends Migration
             $table->foreign('judge2')->references('id')->on('judges');
             $table->foreign('judge3')->references('id')->on('judges');
             $table->foreign('forma')->references('justice_kind')->on('justice_kinds');
+            $table->foreign('description')->references('id')->on('essences_cases');
 
         });
     }
