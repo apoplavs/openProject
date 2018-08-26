@@ -14,7 +14,7 @@ class CreateJudgesTable extends Migration
     public function up()
     {
         Schema::create('judges', function (Blueprint $table) {
-            $table->integer('id');
+            $table->increments('id');
 			$table->smallInteger('court');
 			$table->string('surname');
 			$table->string('name');
