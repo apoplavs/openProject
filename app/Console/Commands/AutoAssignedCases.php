@@ -5,6 +5,10 @@ namespace Toecyd\Console\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Exception;
+use Toecyd\Court;
+use Toecyd\EssencesCases;
+use Toecyd\Judge;
+use Toecyd\AutoAssignedCasesModel;
 
 class AutoAssignedCases extends Command
 {
@@ -45,29 +49,14 @@ class AutoAssignedCases extends Command
         $this->dateFrom = $this->argument('date');
         $this->dateTo = date('d.m.Y', strtotime('+1 month', strtotime($this->dateFrom)));
 
-        foreach ($this->getCourtIds() as $courtId) {
-            $this->saveCurlResponseToDb($courtId, $this->getCurlResponse($courtId));
+        foreach (Court::getCourtCodes() as $courtCode) {
+            $this->saveCurlResponseToDb($courtCode, $this->getCurlResponse($courtCode));
         }
     }
 
-    private function getCourtIds()
+    private function getCurlResponse(int $courtCode)
     {
-        $rows = DB::table('courts')
-            ->select('court_code')
-            ->whereNotIn('region_code', [1, 5, 12]) //відкидаємо АР Крим, Донецьку, Луганську області
-            ->where('court_code', '<', 2800) // відкидаємо спеціалізовані суди
-            ->get();
-
-        $result = [];
-        foreach ($rows as $row) {
-            $result[] = $row->court_code;
-        }
-        return $result;
-    }
-
-    private function getCurlResponse(int $courtId)
-    {
-        $curlPostFields = "sEcho=1&iColumns=6&sColumns=&iDisplayStart=0&iDisplayLength=-1&mDataProp_0=0&mDataProp_1=1&mDataProp_2=2&mDataProp_3=3&mDataProp_4=4&mDataProp_5=5&sSearch=&bRegex=false&sSearch_0=&bRegex_0=false&bSearchable_0=false&sSearch_1=&bRegex_1=false&bSearchable_1=false&sSearch_2=&bRegex_2=false&bSearchable_2=true&sSearch_3=&bRegex_3=false&bSearchable_3=true&sSearch_4=&bRegex_4=false&bSearchable_4=false&sSearch_5=&bRegex_5=false&bSearchable_5=false&q_ver=arbitr&date={$this->dateFrom}~{$this->dateTo}&sid={$courtId}&cspec=0&sSearch=";
+        $curlPostFields = "sEcho=1&iColumns=6&sColumns=&iDisplayStart=0&iDisplayLength=-1&mDataProp_0=0&mDataProp_1=1&mDataProp_2=2&mDataProp_3=3&mDataProp_4=4&mDataProp_5=5&sSearch=&bRegex=false&sSearch_0=&bRegex_0=false&bSearchable_0=false&sSearch_1=&bRegex_1=false&bSearchable_1=false&sSearch_2=&bRegex_2=false&bSearchable_2=true&sSearch_3=&bRegex_3=false&bSearchable_3=true&sSearch_4=&bRegex_4=false&bSearchable_4=false&sSearch_5=&bRegex_5=false&bSearchable_5=false&q_ver=arbitr&date={$this->dateFrom}~{$this->dateTo}&sid={$courtCode}&cspec=0&sSearch=";
 
         $ch = curl_init();
 
@@ -104,205 +93,68 @@ class AutoAssignedCases extends Command
         return $result;
     }
 
-    private function saveCurlResponseToDb($courtId, $response)
+    private function saveCurlResponseToDb($courtCode, $response)
     {
         if (empty($response) || empty($response->iTotalDisplayRecords) || empty($response->aaData)) {
             return;//Дані порожні, нема чого зберігати
         }
 
         foreach ($response->aaData as $item) {
-            $this->saveItemToDb($courtId, $item);
+            $this->saveItemToDb($courtCode, $item);
         }
 
-        echo "court {$courtId} complete\n";
+        echo "court {$courtCode} complete\n";
     }
 
-    private function saveItemToDb($courtId, $item)
+    private function saveItemToDb($courtCode, $item)
     {
-        $itemObj = new AutoAssignedCase($courtId, $item);
-        Db::table('auto_assigned_cases')->insert([
-            'court' => $itemObj->courtId,
-            'number' => $itemObj->number,
-            'date_registration' => $itemObj->dateRegistration,
-            'judge' => $itemObj->judgeId,
-            'description' => $itemObj->descriptionId,
-            'date_composition' => $itemObj->dateComposition,
-        ]);
+        $itemObj = new AutoAssignedCase($courtCode, $item);
+        if (empty($itemObj->caseId)) {
+            Db::table('auto_assigned_cases')->insert([
+                'court'             => $itemObj->courtCode,
+                'number'            => $itemObj->number,
+                'date_registration' => $itemObj->dateRegistration,
+                'judge'             => $itemObj->judgeId,
+                'description'       => $itemObj->titleId,
+                'date_composition'  => $itemObj->dateComposition,
+            ]);
+        }
     }
 }
 
 class AutoAssignedCase
 {
     public $caseId;
-    public $courtId;
+    public $courtCode;
     public $number;//номер справи
     public $dateRegistration;
-    public $judgeNameRaw;
 
-    /* @var JudgeNameParsed */
-    public $judgeNameParsed;
     public $judgeId;
-
-    public $descriptionRaw;
-    public $descriptionParsed;
-    public $descriptionId;
+    public $titleId;
 
     public $dateComposition;
 
-    public function __construct(int $courtId, array $item)
+    public function __construct(int $courtCode, array $item)
     {
-        $this->courtId = $courtId;
+        $this->courtCode = $courtCode;
 
         $this->number = $item[0];
         $this->dateRegistration = date('Y-m-d', strtotime($item[1]));
-        $this->judgeNameRaw = $item[2];
-        $this->descriptionRaw = $item[4];
+        $judgeNameRaw = $item[2];
+        $titleRaw = $item[4];
 
-        $this->fillCaseId();
-        if (!empty($this->caseId->items)) {
+        if (!empty($this->caseId = AutoAssignedCasesModel::getCaseId($this->courtCode, $this->dateRegistration, $this->number))) {
             return;
         }
 
-        $this->parseJudgeName();
-        $this->fillJudgeId();
+        $judgeNameParsed = Judge::parseJudgeName($judgeNameRaw);
+        $this->judgeId = Judge::getJudgeIdByParsedName($this->courtCode, $judgeNameParsed);
 
-        $this->parseDescription();
-        $this->fillDescriptionId();
+        $titleParsed = EssencesCases::parseTitle($titleRaw);
+        $this->titleId = EssencesCases::fillIdByParsedTitle($titleParsed);
 
         $this->dateComposition = date('Y-m-d', strtotime($item[5]));
     }
-
-    private function fillCaseId()
-    {
-        $rows = DB::table('auto_assigned_cases')
-            ->select('id')
-            ->where('court', '=', $this->courtId)
-            ->where('date_registration', '=', $this->dateRegistration)
-            ->where('number', '=', $this->number)
-            ->get();
-
-        foreach ($rows as $row) {
-            // записали в caseId значення id з першого рядка
-            $this->caseId = $row->id;
-            break;
-        }
-    }
-
-    private function parseJudgeName()
-    {
-        $judgeNameRaw = $this->judgeNameRaw;
-
-        $matches = [];
-        if (preg_match("/головуючий суддя:\s{0,1}(.+);\s{0,1}суддя-доповідач/iu", $judgeNameRaw, $matches))
-        {
-            $judgeNameRaw = $matches[1];
-        }
-
-        $matches = [];
-        if (preg_match("/^(\w*) (\w{1})\.\s{0,1}(\w{1})\.$/Uui", $judgeNameRaw, $matches)) {
-            // Варіант "Шевченко А.Б."
-            $this->judgeNameParsed = new JudgeNameParsed($matches[1], $matches[2], $matches[3]);
-        } elseif (preg_match("/^(\w*) (\w*) (\w*)$/Uui", $judgeNameRaw, $matches)) {
-            // Варіант "Шевченко Анатолій Борисович"
-            $this->judgeNameParsed = new JudgeNameParsed($matches[1], mb_substr($matches[2], 0, 1), mb_substr($matches[3], 0, 1));
-        } else {
-            throw new Exception("Не вдалось розпарсити ім'я судді: '{$judgeNameRaw}'");
-        }
-    }
-
-    private function fillJudgeId()
-    {
-        $rows = Db::table('judges')
-            ->select('id')
-            ->where('court', '=', $this->courtId)
-            ->where('surname', 'LIKE', $this->judgeNameParsed->surname)
-            ->where('name', 'LIKE', $this->judgeNameParsed->name . '%')
-            ->where('patronymic', 'LIKE', $this->judgeNameParsed->patronymic . '%')
-            ->get();
-
-        foreach ($rows as $row) {
-            // записали в judgeId значення id з першого рядка
-            $this->judgeId = $row->id;
-            break;
-        }
-
-        if (empty($this->judgeId)) {
-            $this->judgeId = Db::table('judges')->insertGetId([
-                'court' => $this->courtId,
-                'surname' => $this->judgeNameParsed->surname,
-                'name' => $this->judgeNameParsed->name,
-                'patronymic' => $this->judgeNameParsed->patronymic,
-            ]);
-        }
-    }
-
-    private function parseDescription()
-    {
-        $description = $this->descriptionRaw;
-        if (mb_strlen($description) < 5) {
-            return;
-        }
-
-        $description = mb_strtolower($description);
-
-        $matches = [];
-        if (preg_match("/.+ (про .+)/ui", $description, $matches)) {
-            $description = $matches[1];
-        }
-
-        if (mb_strlen($description) >= 255) {
-            return;
-        }
-
-        if (preg_match("/ \w. \?\w./u", $description) || preg_match("/\d\d+/u", $description)) {
-            return;
-        }
-
-        // Видаляємо небуквенні символи з кінця рядка, потрібно щоб рядок закінчувався на "\w$"
-        $description = preg_replace("/\W{0,}$/u", '', $description);
-
-        $this->descriptionParsed = $description;
-    }
-
-    private function fillDescriptionId()
-    {
-        $rows = Db::table('essences_cases')
-            ->select('id')
-            ->where('title', '=', $this->descriptionParsed)
-            ->get();
-
-        foreach ($rows as $row) {
-            // записали в descriptionId значення id з першого рядка
-            $this->descriptionId = $row->id;
-            break;
-        }
-
-        if (empty($this->descriptionId)) {
-            $this->descriptionId = Db::table('essences_cases')->insertGetId([
-                'title' => $this->descriptionParsed,
-            ]);
-        }
-    }
 }
 
-class JudgeNameParsed
-{
-    public $surname;
-    public $name;
-    public $patronymic;
 
-    public function __construct($surname, $name, $patronymic)
-    {
-        $this->surname = $surname;
-
-        if (mb_strlen($name) != 1) {
-            throw new Exception("Ініціал має складатися з однієї букви, проте маємо " . var_export($name, 1));
-        }
-        $this->name = $name;
-
-        if (mb_strlen($patronymic) != 1) {
-            throw new Exception("Ініціал має складатися з однієї букви, проте маємо " . var_export($patronymic, 1));
-        }
-        $this->patronymic = $patronymic;
-    }
-}
