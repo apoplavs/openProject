@@ -15,14 +15,14 @@ class CreateJudgesAdminoffenceStatisticTable extends Migration
     {
         Schema::create('judges_adminoffence_statistic', function (Blueprint $table) {
             $table->integer('judge')->unique();
-            $table->smallInteger('amount')->nullable()->comment('кількість розглянутих справ в порядку КУпАП');
-            $table->smallInteger('cases_on_time')->nullable()->comment('кількість справ розглянутих в визначені законом строки');
-            $table->smallInteger('average_duration')->nullable()->comment('середня тривалість розгляду справи');
-            $table->smallInteger('positive_judgment')->nullable()->comment('кількість постанов в яких особу звільнено від відповідальності');
-            $table->smallInteger('negative_judgment')->nullable()->comment('кількість постанов в яких особу притягнено до відповідальності');
-            $table->smallInteger('was_appeal')->nullable()->comment('кількість постанов на які подавалась апеляція');
-            $table->smallInteger('approved_by_appeal')->nullable()->comment('кількість постанов які встояли в апеляції');
-            $table->smallInteger('not_approved_by_appeal')->nullable()->comment('кількість постанов які не встояли в апеляції');
+            $table->smallInteger('amount')->default(0)->comment('кількість розглянутих справ в порядку КУпАП');
+            $table->smallInteger('cases_on_time')->default(0)->comment('кількість справ розглянутих в визначені законом строки');
+            $table->smallInteger('average_duration')->default(0)->comment('середня тривалість розгляду справи');
+            $table->smallInteger('positive_judgment')->default(0)->comment('кількість постанов в яких особу звільнено від відповідальності');
+            $table->smallInteger('negative_judgment')->default(0)->comment('кількість постанов в яких особу притягнено до відповідальності');
+            $table->smallInteger('was_appeal')->default(0)->comment('кількість постанов на які подавалась апеляція');
+            $table->smallInteger('approved_by_appeal')->default(0)->comment('кількість постанов які встояли в апеляції');
+            $table->smallInteger('not_approved_by_appeal')->default(0)->comment('кількість постанов які не встояли в апеляції');
 
             $table->foreign('judge')->references('id')->on('judges');
         });
