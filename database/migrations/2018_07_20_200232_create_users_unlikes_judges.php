@@ -16,7 +16,7 @@ class CreateUsersUnlikesJudges extends Migration
 		Schema::create('users_unlikes_judges', function (Blueprint $table) {
 			$table->increments('id');
 			$table->unsignedInteger('user');
-			$table->integer('judge');
+			$table->unsignedSmallInteger('judge');
 		
 			$table->foreign('user')->references('id')->on('users');
 			$table->foreign('judge')->references('id')->on('judges');

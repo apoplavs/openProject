@@ -18,14 +18,12 @@ class CreateAutoAssignedCasesTable extends Migration
             $table->smallInteger('court')->comment('id суду, в який надійшла справа');
             $table->string('number')->nullable()->comment('номер справи');
             $table->date('date_registration')->nullable()->comment('дата реєстрації');
-            $table->integer('judge')->comment('id головуючого судді');
-            $table->unsignedSmallInteger('description')->nullable()->comment('суть справи');
+            $table->unsignedSmallInteger('judge')->comment('id головуючого судді');
             $table->date('date_composition')->nullable()->comment('дата визначення складу суду');
             
 
             $table->foreign('court')->references('court_code')->on('courts');
             $table->foreign('judge')->references('id')->on('judges');
-            $table->foreign('description')->references('id')->on('essences_cases');
         });
     }
 
