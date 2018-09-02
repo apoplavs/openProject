@@ -106,9 +106,8 @@
                     </div>
                 </div> <!-- Card -->
             </div> <!--  col-3 Filters  -->
-            <div>Вирани едем   {{ regions }}</div>
-            <input v-model="message" placeholder="отредактируй меня">
-            <p>Введённое сообщение: {{ message }}</p>
+            <!-- <div>Вирани едем   {{ regions }}</div> -->
+           
 
 
             <!-- Main list -->
@@ -122,10 +121,7 @@
 						</label></span>
                     </div>
                     <div  id="judges-list">
-
                         <!--judges-judges-list-->
-
-
                     </div>
                 </div><!-- /.card -->
             </div> <!-- col-lg-9 -->
@@ -171,6 +167,8 @@
             </div>
 
         </div> <!-- row -->
+         <input v-model="message" placeholder="отредактируй меня">
+            <p>Введённое сообщение: {{ message }}</p>
     </div> <!-- container -->
     </div>
     
@@ -181,7 +179,8 @@
         name: "judges-list",
         data: { 
             page: 1,        
-            regions: []
+            regions: [],
+            message: '',
         },
         beforeMount(){
            // if (localStorage.getItem('token') === undefined)

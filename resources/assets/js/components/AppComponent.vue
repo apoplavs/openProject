@@ -11,8 +11,6 @@
     import HeaderComponent from './HeaderComponent.vue';
     // import FooterComponent from './FooterComponent.vue';
 
-
-
     export default {
         name: "app-component",
 

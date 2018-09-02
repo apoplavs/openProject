@@ -8,5 +8,3 @@
 		<div>робимо суд прозорішим</div>
 	</div>
 </div>
-
-@endsection
