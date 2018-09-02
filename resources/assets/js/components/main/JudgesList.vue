@@ -60,32 +60,33 @@
                                 <div class="col-lg-12">
                                     <h6>Регіон суду</h6>
                                     <ul class="list-unstyled mb-0">
-                                        <li><label><input type="checkbox" value="2" name="region"><span class="checkmark"></span> Вінницька</label></li>
-                                        <li><label><input type="checkbox" value="3" name="region"><span class="checkmark"></span> Волинська</label></li>
-                                        <li><label><input type="checkbox" value="4" name="region"><span class="checkmark"></span> Дніпропетровська</label></li>
-                                        <li><label><input type="checkbox" value="5" name="region"><span class="checkmark"></span> Донецька</label></li>
-                                        <li><label><input type="checkbox" value="6" name="region"><span class="checkmark"></span> Житомирська</label></li>
-                                        <li><label><input type="checkbox" value="7" name="region"><span class="checkmark"></span> Закарпатська</label></li>
-                                        <li><label><input type="checkbox" value="8" name="region"><span class="checkmark"></span> Запорізька</label></li>
-                                        <li><label><input type="checkbox" value="9" name="region"><span class="checkmark"></span> Івано-Франківська</label></li>
-                                        <li><label><input type="checkbox" value="10" name="region"><span class="checkmark"></span> Київська</label></li>
-                                        <li><label><input type="checkbox" value="11" name="region"><span class="checkmark"></span> Кіровоградська</label></li>
-                                        <li><label><input type="checkbox" value="12" name="region"><span class="checkmark"></span> Луганська</label></li>
-                                        <li><label><input type="checkbox" value="13" name="region"><span class="checkmark"></span> Львівська</label></li>
-                                        <li><label><input type="checkbox" value="14" name="region"><span class="checkmark"></span> Миколаївська</label></li>
-                                        <li><label><input type="checkbox" value="15" name="region"><span class="checkmark"></span> Одеська</label></li>
-                                        <li><label><input type="checkbox" value="16" name="region"><span class="checkmark"></span> Полтавська</label></li>
-                                        <li><label><input type="checkbox" value="17" name="region"><span class="checkmark"></span> Рівненська</label></li>
-                                        <li><label><input type="checkbox" value="18" name="region"><span class="checkmark"></span> Сумська</label></li>
-                                        <li><label><input type="checkbox" value="19" name="region"><span class="checkmark"></span> Тернопільська</label></li>
-                                        <li><label><input type="checkbox" value="20" name="region"><span class="checkmark"></span> Харківська</label></li>
-                                        <li><label><input type="checkbox" value="21" name="region"><span class="checkmark"></span> Херсонська</label></li>
-                                        <li><label><input type="checkbox" value="22" name="region"><span class="checkmark"></span> Хмельницька</label></li>
-                                        <li><label><input type="checkbox" value="23" name="region"><span class="checkmark"></span> Черкаська</label></li>
-                                        <li><label><input type="checkbox" value="24" name="region"><span class="checkmark"></span> Чернівецька</label></li>
-                                        <li><label><input type="checkbox" value="25" name="region"><span class="checkmark"></span> Чернігівська</label></li>
-                                        <li><label><input type="checkbox" value="26" name="region"><span class="checkmark"></span> м. Київ</label></li>
+                                        <li><label><input type="checkbox" value="2" name="region" v-model="regions"><span class="checkmark"></span> Вінницька</label></li>
+                                        <li><label><input type="checkbox" value="3" name="region" v-model="regions"><span class="checkmark"></span> Волинська</label></li>
+                                        <li><label><input type="checkbox" value="4" name="region" v-model="regions"><span class="checkmark"></span> Дніпропетровська</label></li>
+                                        <li><label><input type="checkbox" value="5" name="region" v-model="regions"><span class="checkmark"></span> Донецька</label></li>
+                                        <li><label><input type="checkbox" value="6" name="region" v-model="regions"><span class="checkmark"></span> Житомирська</label></li>
+                                        <li><label><input type="checkbox" value="7" name="region" v-model="regions"><span class="checkmark"></span> Закарпатська</label></li>
+                                        <li><label><input type="checkbox" value="8" name="region" v-model="regions"><span class="checkmark"></span> Запорізька</label></li>
+                                        <li><label><input type="checkbox" value="9" name="region" v-model="regions"><span class="checkmark"></span> Івано-Франківська</label></li>
+                                        <li><label><input type="checkbox" value="10" name="region" v-model="regions"><span class="checkmark"></span> Київська</label></li>
+                                        <li><label><input type="checkbox" value="11" name="region" v-model="regions"><span class="checkmark"></span> Кіровоградська</label></li>
+                                        <li><label><input type="checkbox" value="12" name="region" v-model="regions"><span class="checkmark"></span> Луганська</label></li>
+                                        <li><label><input type="checkbox" value="13" name="region" v-model="regions"><span class="checkmark"></span> Львівська</label></li>
+                                        <li><label><input type="checkbox" value="14" name="region" v-model="regions"><span class="checkmark"></span> Миколаївська</label></li>
+                                        <li><label><input type="checkbox" value="15" name="region" v-model="regions"><span class="checkmark"></span> Одеська</label></li>
+                                        <li><label><input type="checkbox" value="16" name="region" v-model="regions"><span class="checkmark"></span> Полтавська</label></li>
+                                        <li><label><input type="checkbox" value="17" name="region" v-model="regions"><span class="checkmark"></span> Рівненська</label></li>
+                                        <li><label><input type="checkbox" value="18" name="region" v-model="regions"><span class="checkmark"></span> Сумська</label></li>
+                                        <li><label><input type="checkbox" value="19" name="region" v-model="regions"><span class="checkmark"></span> Тернопільська</label></li>
+                                        <li><label><input type="checkbox" value="20" name="region" v-model="regions"><span class="checkmark"></span> Харківська</label></li>
+                                        <li><label><input type="checkbox" value="21" name="region" v-model="regions"><span class="checkmark"></span> Херсонська</label></li>
+                                        <li><label><input type="checkbox" value="22" name="region" v-model="regions"><span class="checkmark"></span> Хмельницька</label></li>
+                                        <li><label><input type="checkbox" value="23" name="region" v-model="regions"><span class="checkmark"></span> Черкаська</label></li>
+                                        <li><label><input type="checkbox" value="24" name="region" v-model="regions"><span class="checkmark"></span> Чернівецька</label></li>
+                                        <li><label><input type="checkbox" value="25" name="region" v-model="regions"><span class="checkmark"></span> Чернігівська</label></li>
+                                        <li><label><input type="checkbox" value="26" name="region" v-model="regions"><span class="checkmark"></span> м. Київ</label></li>
                                     </ul>
+                                    
                                 </div>
                             </div>
 
@@ -97,7 +98,7 @@
                                         <button type="reset" class="btn btn-outline-info">Скинути</button>
                                     </div>
                                     <div class="col-6">
-                                        <button type="button" onclick="getJudgesList()" class="btn btn-primary">Показати</button>
+                                        <button type="button" @click="getJudgesList()" class="btn btn-primary">Показати</button>
                                     </div>
                                 </div>
                             </div> <!-- apply-filters -->
@@ -105,6 +106,9 @@
                     </div>
                 </div> <!-- Card -->
             </div> <!--  col-3 Filters  -->
+            <div>Вирани едем   {{ regions }}</div>
+            <input v-model="message" placeholder="отредактируй меня">
+            <p>Введённое сообщение: {{ message }}</p>
 
 
             <!-- Main list -->
@@ -174,7 +178,37 @@
 
 <script>
     export default {
-        name: "judges-list"
+        name: "judges-list",
+        data: { 
+            page: 1,        
+            regions: []
+        },
+        beforeMount(){
+           // if (localStorage.getItem('token') === undefined)
+            axios.get('/api/v1/guest/judges/list', this.page, {
+                headers: {
+                        'Content-Type': 'application/json',
+                        'X-Requested-With': 'XMLHttpRequest'
+                    }
+                }).then(response => {
+                       console.log(response);
+                       
+                    }).catch(error => {
+                        console.log(error)
+
+                })
+        },
+        methods: {
+            // getJudgesList() {
+            // console.log(this.data.regions);
+
+            // }
+        }
+       
+        // beforeMounted() {
+
+        // }
+
     }
 </script>
 

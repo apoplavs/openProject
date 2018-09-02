@@ -127,6 +127,7 @@
                         axios.post('/api/v1/signup', newUser, {
                             headers: {
                                 'Content-Type': 'application/json',
+                                'X-Requested-With': 'XMLHttpRequest'
                             }
                         }).then(response => {
                             if (response) {
@@ -147,7 +148,14 @@
                                     })
                                 }
                             } else {
-                                alert('Something wrong:( Try again!')
+                                if (error.response.data && error.response.data.message) {
+                                    console.error(error.response.data.message);
+                                    this.$toasted.error('Щось пішло не так:( Спробуйте ще раз!', {
+                                        theme: "primary",
+                                        position: "top-right",
+                                        duration: 5000
+                                    })
+                                }
                             }
                         });
                     } else {
