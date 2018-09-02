@@ -299,18 +299,12 @@ class JudgesController extends Controller
 			'search' => 'string|alpha|min:1|max:20',
 			'sort' => 'numeric|min:1|max:4'
 		]);
-		return response()->json(Auth::check());
+
 		// приведення фільтрів до коректного вигляду
     	$filters = $this->getFilters();
     	// отримання результатів
     	$judges_list = Judge::getJudgesList($filters['regions'], $filters['instances'], $filters['jurisdictions'],
 			$filters['sort_order'], $filters['search'], $filters['powers_expired']);
-//		$judges_list = DB::table('judges')->paginate(15);
-//		$judges_list = Paginator::make($judges_list);
-//		$data = $request->session()->all();
-//		$data = Auth::user()->id;
-//		dd($data);
-//		echo $judges_list->links();
 		
 		return response()->json($judges_list);
     }
@@ -703,11 +697,12 @@ class JudgesController extends Controller
 	 * 	  @SWG\Parameter(
 	 *     name="search",
 	 *     in="query",
-	 *     description="Пошук за прізвищем судді. Повинен містити від 1 до 20 символів. Будуть повернуті всі судді, початок прізвища або імені або по батькові яких співпадає з заданим параметром.
-	НАПРИКЛАД: 'host/api/v1/judges/autocomplete?search=Петр' - означає, що потрібно отримати суддів прізвище або ім'я або по батькові яких починається на 'Петр%'",
+	 *     description="Пошук за прізвищем судді. Повинен містити від 1 до 20 символів. Будуть повернуті всі судді, початок прізвища яких співпадає з заданим параметром.
+	НАПРИКЛАД: 'host/api/v1/judges/autocomplete?search=Мельн' - означає, що потрібно отримати суддів прізвище яких починається на 'Мельн%'",
 	 *     type="string",
 	 *     collectionFormat="multi",
 	 *     uniqueItems=true,
+	 *	   required=true,
 	 *     minLength=1,
 	 *     maxLength=20,
 	 *     allowEmptyValue=false
@@ -717,9 +712,9 @@ class JudgesController extends Controller
 	 *         response=200,
 	 *         description="ОК",
 	 *     	   @SWG\Schema(
-	 *     	   @SWG\Property(property="surname", type="string", description="Прізвище судді"),
-	 *     	   @SWG\Property(property="name", type="string", description="Ім'я судді"),
-	 *     	   @SWG\Property(property="patronymic", type="string", description="По батькові судді"),
+	 *     	   @SWG\Property(property="surname", type="string", required=true, description="Прізвище судді"),
+	 *     	   @SWG\Property(property="name", type="string", required=true, description="Ім'я судді"),
+	 *     	   @SWG\Property(property="patronymic", type="string", required=true, description="По батькові судді"),
 	 *     	   ),
 	 *     	   examples={"application/json":
 	 *              {

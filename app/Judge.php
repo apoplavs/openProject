@@ -144,8 +144,6 @@ class Judge extends Model
 		
 		$results = static::select('judges.surname', 'judges.name', 'judges.patronymic')
 		->where('judges.surname', 'LIKE', $search.'%')
-		->orWhere('judges.name', 'LIKE', $search.'%')
-		->orWhere('judges.patronymic', 'LIKE', $search.'%')
 		->limit(5)
 		->get();
 		return ($results);
