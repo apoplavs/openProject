@@ -8,6 +8,8 @@ use Exception;
 use Toecyd\Court;
 use Toecyd\Judge;
 use Toecyd\AutoAssignedCase;
+use DateTime;
+use DateInterval;
 
 class AutoAssignedCases extends Command
 {
@@ -25,8 +27,14 @@ class AutoAssignedCases extends Command
      */
     protected $description = 'Отримати список автопризначених справ, що надійшли до суду, від вказаної дати + 1 міс';
 
+    /* @var DateTime */
     private $dateFrom;
+
+    /* @var DateTime */
     private $dateTo;
+
+    /* @var string */
+    private $dateFormat = 'd.m.Y';
 
     /**
      * Create a new command instance.
@@ -45,17 +53,34 @@ class AutoAssignedCases extends Command
      */
     public function handle()
     {
-        $this->dateFrom = $this->argument('date');
-        $this->dateTo = date('d.m.Y', strtotime('+1 month', strtotime($this->dateFrom)));
+        $this->initDateParams();
 
         foreach (Court::getCourtCodes() as $courtCode) {
             $this->saveCurlResponseToDb($courtCode, $this->getCurlResponse($courtCode));
         }
     }
 
+    private function initDateParams()
+    {
+        $this->dateFrom = DateTime::createFromFormat($this->dateFormat, $this->argument('date'));
+        if (empty($this->dateFrom)) {
+            throw new Exception("Параметр date='{$this->argument('date')}' не відповідає формату '{$this->dateFormat}'");
+        }
+
+        $dateMin = DateTime::createFromFormat('Y-m-d', '2014-07-21');
+        $dateMax = (new DateTime())->modify('-1 month');
+
+        if ($this->dateFrom < $dateMin || $this->dateFrom > $dateMax) {
+            throw new Exception("Параметр date='{$this->argument('date')}' вийшов за межі діапазона '{$dateMin->format($this->dateFormat)} - {$dateMax->format($this->dateFormat)}'");
+        }
+
+        $this->dateTo = clone $this->dateFrom;
+        $this->dateTo->modify('+1 month');
+    }
+
     private function getCurlResponse(int $courtCode)
     {
-        $curlPostFields = "sEcho=1&iColumns=6&sColumns=&iDisplayStart=0&iDisplayLength=-1&mDataProp_0=0&mDataProp_1=1&mDataProp_2=2&mDataProp_3=3&mDataProp_4=4&mDataProp_5=5&sSearch=&bRegex=false&sSearch_0=&bRegex_0=false&bSearchable_0=false&sSearch_1=&bRegex_1=false&bSearchable_1=false&sSearch_2=&bRegex_2=false&bSearchable_2=true&sSearch_3=&bRegex_3=false&bSearchable_3=true&sSearch_4=&bRegex_4=false&bSearchable_4=false&sSearch_5=&bRegex_5=false&bSearchable_5=false&q_ver=arbitr&date={$this->dateFrom}~{$this->dateTo}&sid={$courtCode}&cspec=0&sSearch=";
+        $curlPostFields = "sEcho=1&iColumns=6&sColumns=&iDisplayStart=0&iDisplayLength=-1&mDataProp_0=0&mDataProp_1=1&mDataProp_2=2&mDataProp_3=3&mDataProp_4=4&mDataProp_5=5&sSearch=&bRegex=false&sSearch_0=&bRegex_0=false&bSearchable_0=false&sSearch_1=&bRegex_1=false&bSearchable_1=false&sSearch_2=&bRegex_2=false&bSearchable_2=true&sSearch_3=&bRegex_3=false&bSearchable_3=true&sSearch_4=&bRegex_4=false&bSearchable_4=false&sSearch_5=&bRegex_5=false&bSearchable_5=false&q_ver=arbitr&date={$this->dateFrom->format($this->dateFormat)}~{$this->dateTo->format($this->dateFormat)}&sid={$courtCode}&cspec=0&sSearch=";
 
         $ch = curl_init();
 
