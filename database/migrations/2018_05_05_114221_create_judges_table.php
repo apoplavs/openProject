@@ -14,7 +14,7 @@ class CreateJudgesTable extends Migration
     public function up()
     {
         Schema::create('judges', function (Blueprint $table) {
-            $table->integer('id');
+            $table->smallIncrements('id');
 			$table->smallInteger('court');
 			$table->string('surname');
 			$table->string('name');
@@ -25,7 +25,6 @@ class CreateJudgesTable extends Migration
 			$table->string('phone')->nullable();
 			$table->smallInteger('rating')->default(0);
             
-            $table->primary('id');
 			$table->foreign('status')->references('id')->on('judge_statuses');
 			$table->foreign('court')->references('court_code')->on('courts');
         });
