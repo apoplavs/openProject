@@ -212,7 +212,7 @@ class Judge extends Model
     public static function parseJudgeName(string $judgeNameRaw)
     {
         $matches = [];
-        if (preg_match("/головуючий суддя:\s{0,}(.+);\s{0,}суддя-доповідач/iu", $judgeNameRaw, $matches))
+        if (preg_match("/головуючий суддя:\s{0,}(.+);/iu", $judgeNameRaw, $matches))
         {
             $judgeNameRaw = $matches[1];
         }
