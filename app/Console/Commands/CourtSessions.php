@@ -6,10 +6,9 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Exception;
 use Toecyd\Court;
-use Toecyd\CourtSessionModel;
-use Toecyd\EssencesCases;
+use Toecyd\CourtSession;
+use Toecyd\EssencesCase;
 use Toecyd\Judge;
-use Toecyd\AutoAssignedCasesModel;
 
 class CourtSessions extends Command
 {
@@ -100,7 +99,7 @@ class CourtSessions extends Command
 
     private function saveItemToDb($courtCode, $item)
     {
-        $itemObj = new CourtSession($courtCode, $item);
+        $itemObj = new CourtSessionHelper($courtCode, $item);
 
         if (empty($itemObj->caseId)) {
             Db::table('auto_assigned_cases')->insert([
@@ -115,7 +114,7 @@ class CourtSessions extends Command
     }
 }
 
-class CourtSession
+class CourtSessionHelper
 {
     public $courtSessionId;
     public $courtCode;
@@ -138,15 +137,15 @@ class CourtSession
         $judgeNameRaw = $item->judge;
         $titleRaw = $item->description;
 
-        if (!empty($this->caseId = CourtSessionModel::getCourtSessionId($this->courtCode, $this->date, $this->number))) {
+        if (!empty($this->caseId = CourtSession::getCourtSessionId($this->courtCode, $this->date, $this->number))) {
             return;
         }
 
         $judgeNameParsed = Judge::parseJudgeName($judgeNameRaw);
         $this->judgeId = Judge::getJudgeIdByParsedName($this->courtCode, $judgeNameParsed);
 
-        $titleParsed = EssencesCases::parseTitle($titleRaw);
-        $this->titleId = EssencesCases::fillIdByParsedTitle($titleParsed);
+        $titleParsed = EssencesCase::parseTitle($titleRaw);
+        $this->titleId = EssencesCase::fillIdByParsedTitle($titleParsed);
 
     }
 }

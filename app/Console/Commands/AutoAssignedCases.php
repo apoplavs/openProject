@@ -6,9 +6,8 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Exception;
 use Toecyd\Court;
-use Toecyd\EssencesCases;
 use Toecyd\Judge;
-use Toecyd\AutoAssignedCasesModel;
+use Toecyd\AutoAssignedCase;
 
 class AutoAssignedCases extends Command
 {
@@ -95,34 +94,33 @@ class AutoAssignedCases extends Command
 
     private function saveCurlResponseToDb($courtCode, $response)
     {
-        if (empty($response) || empty($response->iTotalDisplayRecords) || empty($response->aaData)) {
-            return;//Дані порожні, нема чого зберігати
+        $countTotal = 0;
+        $countAlreadyExists = 0;
+
+        if (!empty($response) && !empty($response->iTotalDisplayRecords) && !empty($response->aaData)) {
+            foreach ($response->aaData as $item) {
+                $countTotal++;
+
+                $itemObj = new AutoAssignedCaseHelper($courtCode, $item);
+                if (empty($itemObj->caseId)) {
+                    Db::table('auto_assigned_cases')->insert([
+                        'court'             => $itemObj->courtCode,
+                        'number'            => $itemObj->number,
+                        'date_registration' => $itemObj->dateRegistration,
+                        'judge'             => $itemObj->judgeId,
+                        'date_composition'  => $itemObj->dateComposition,
+                    ]);
+                } else {
+                    $countAlreadyExists++;
+                }
+            }
         }
 
-        foreach ($response->aaData as $item) {
-            $this->saveItemToDb($courtCode, $item);
-        }
-
-        echo "court {$courtCode} complete\n";
-    }
-
-    private function saveItemToDb($courtCode, $item)
-    {
-        $itemObj = new AutoAssignedCase($courtCode, $item);
-        if (empty($itemObj->caseId)) {
-            Db::table('auto_assigned_cases')->insert([
-                'court'             => $itemObj->courtCode,
-                'number'            => $itemObj->number,
-                'date_registration' => $itemObj->dateRegistration,
-                'judge'             => $itemObj->judgeId,
-                'description'       => $itemObj->titleId,
-                'date_composition'  => $itemObj->dateComposition,
-            ]);
-        }
+        echo "Court {$courtCode} complete. Total cases: {$countTotal}. Already existed cases: {$countAlreadyExists}\n";
     }
 }
 
-class AutoAssignedCase
+class AutoAssignedCaseHelper
 {
     public $caseId;
     public $courtCode;
@@ -130,7 +128,6 @@ class AutoAssignedCase
     public $dateRegistration;
 
     public $judgeId;
-    public $titleId;
 
     public $dateComposition;
 
@@ -141,17 +138,13 @@ class AutoAssignedCase
         $this->number = $item[0];
         $this->dateRegistration = date('Y-m-d', strtotime($item[1]));
         $judgeNameRaw = $item[2];
-        $titleRaw = $item[4];
 
-        if (!empty($this->caseId = AutoAssignedCasesModel::getCaseId($this->courtCode, $this->dateRegistration, $this->number))) {
+        if (!empty($this->caseId = AutoAssignedCase::getCaseId($this->courtCode, $this->dateRegistration, $this->number))) {
             return;
         }
 
         $judgeNameParsed = Judge::parseJudgeName($judgeNameRaw);
         $this->judgeId = Judge::getJudgeIdByParsedName($this->courtCode, $judgeNameParsed);
-
-        $titleParsed = EssencesCases::parseTitle($titleRaw);
-        $this->titleId = EssencesCases::fillIdByParsedTitle($titleParsed);
 
         $this->dateComposition = date('Y-m-d', strtotime($item[5]));
     }

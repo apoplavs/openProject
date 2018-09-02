@@ -4,7 +4,7 @@ namespace Toecyd;
 
 use Illuminate\Database\Eloquent\Model;
 
-class CourtSessionModel extends Model
+class CourtSession extends Model
 {
     public static function getCourtSessionId($courtCode, $date, $number)
     {

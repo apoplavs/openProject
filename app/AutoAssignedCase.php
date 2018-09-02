@@ -5,7 +5,7 @@ namespace Toecyd;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 
-class AutoAssignedCasesModel extends Model
+class AutoAssignedCase extends Model
 {
     public static function getCaseId($courtCode, $dateRegistration, $number)
     {
