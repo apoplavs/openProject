@@ -712,9 +712,9 @@ class JudgesController extends Controller
 	 *         response=200,
 	 *         description="ОК",
 	 *     	   @SWG\Schema(
-	 *     	   @SWG\Property(property="surname", type="string", required=true, description="Прізвище судді"),
-	 *     	   @SWG\Property(property="name", type="string", required=true, description="Ім'я судді"),
-	 *     	   @SWG\Property(property="patronymic", type="string", required=true, description="По батькові судді"),
+	 *     	   @SWG\Property(property="surname", type="string", description="Прізвище судді"),
+	 *     	   @SWG\Property(property="name", type="string", description="Ім'я судді"),
+	 *     	   @SWG\Property(property="patronymic", type="string", description="По батькові судді"),
 	 *     	   ),
 	 *     	   examples={"application/json":
 	 *              {
