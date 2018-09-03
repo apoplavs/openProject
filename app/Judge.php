@@ -210,16 +210,19 @@ class Judge extends Model
     public static function parseJudgeName(string $judgeNameRaw)
     {
         $matches = [];
-        if (preg_match("/головуючий суддя:\s{0,}(.+);/iu", $judgeNameRaw, $matches))
+        if (preg_match("/головуючий суддя:\s{0,}([^,;]+)/iu", $judgeNameRaw, $matches))
         {
             $judgeNameRaw = $matches[1];
         }
 
         $matches = [];
-        if (preg_match("/^(\w*)\s{0,}(\w{1})\.\s{0,}(\w{1})\.\s{0,}$/Uui", $judgeNameRaw, $matches)) {
+        $regExpName = "(\w*)\s*";
+        $regExpSurname = "(\w*\-*\w*)\s*";
+        $regExpInitial = "(\w{1})\.*\s*";
+        if (preg_match("/^{$regExpSurname}{$regExpInitial}{$regExpInitial}$/Uui", $judgeNameRaw, $matches)) {
             // Варіант "Шевченко А.Б."
             return new JudgeNameParsed($matches[1], $matches[2], $matches[3]);
-        } elseif (preg_match("/^(\w*)\s{0,}(\w*)\s{0,}(\w*)\s{0,}$/Uui", $judgeNameRaw, $matches)) {
+        } elseif (preg_match("/^{$regExpSurname}{$regExpName}{$regExpName}$/Uui", $judgeNameRaw, $matches)) {
             // Варіант "Шевченко Анатолій Борисович"
             return new JudgeNameParsed($matches[1], mb_substr($matches[2], 0, 1), mb_substr($matches[3], 0, 1));
         } else {
