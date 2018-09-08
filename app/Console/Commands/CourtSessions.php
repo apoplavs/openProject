@@ -134,15 +134,19 @@ class CourtSessionHelper
         $this->forma = $item->forma;
         $this->involved = $item->involved;
 
-        $judgeNameRaw = $item->judge;
         $titleRaw = $item->description;
 
         if (!empty($this->caseId = CourtSession::getCourtSessionId($this->courtCode, $this->date, $this->number))) {
             return;
         }
 
-        $judgeNameParsed = Judge::parseJudgeName($judgeNameRaw);
-        $this->judgeId = Judge::getJudgeIdByParsedName($this->courtCode, $judgeNameParsed);
+        $judgeNamesParsedArr = [];
+        $judgeNamesRawArr = explode(',', $item->judge);
+        foreach ($judgeNamesRawArr as $judgeNameRaw) {
+            $judgeNamesParsedArr[] = Judge::parseJudgeName($judgeNameRaw);
+        }
+
+        var_dump($judgeNamesParsedArr);die;
 
         $titleParsed = EssencesCase::parseTitle($titleRaw);
         $this->titleId = EssencesCase::fillIdByParsedTitle($titleParsed);

@@ -28,6 +28,7 @@ class JudgeTest extends TestCase
             ['Українка  Лариса Петрівна', $ukrainkaJudgeName],
             ['Українка Л. П.', $ukrainkaJudgeName],
             ['Українка Л.П.', $ukrainkaJudgeName],
+            [' Українка Л.П.', $ukrainkaJudgeName],
             ['Українка Л П', $ukrainkaJudgeName],
             ['Косач-Драгоманова Лариса Петрівна', new JudgeNameParsed('Косач-Драгоманова', 'Л', 'П')],
             ['головуючий суддя: Українка Лариса Петрівна', $ukrainkaJudgeName],

@@ -217,7 +217,7 @@ class Judge extends Model
 
         $matches = [];
         $regExpName = "(\w*)\s*";
-        $regExpSurname = "(\w*\-*\w*)\s*";
+        $regExpSurname = "\s*(\w*\-*\w*)\s*";
         $regExpInitial = "(\w{1})\.*\s*";
         if (preg_match("/^{$regExpSurname}{$regExpInitial}{$regExpInitial}$/Uui", $judgeNameRaw, $matches)) {
             // Варіант "Шевченко А.Б."
