@@ -11,5 +11,5 @@
 |
 */
 Route::get('/{any}', function () {
-    return view('welcome');
+    return view('layouts.app');
 })->where('any','.*');

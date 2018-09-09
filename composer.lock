@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "darkaonline/l5-swagger",
-            "version": "5.5.8",
+            "version": "5.5.8.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/DarkaOnLine/L5-Swagger.git",
-                "reference": "9703f14c3bfab00a164830fe466b8210abd0dd08"
+                "reference": "ac8b7d197415344a75749016c84522fe56c24874"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/DarkaOnLine/L5-Swagger/zipball/9703f14c3bfab00a164830fe466b8210abd0dd08",
-                "reference": "9703f14c3bfab00a164830fe466b8210abd0dd08",
+                "url": "https://api.github.com/repos/DarkaOnLine/L5-Swagger/zipball/ac8b7d197415344a75749016c84522fe56c24874",
+                "reference": "ac8b7d197415344a75749016c84522fe56c24874",
                 "shasum": ""
             },
             "require": {
@@ -64,7 +64,7 @@
                 "laravel",
                 "swagger"
             ],
-            "time": "2018-03-02T11:30:24+00:00"
+            "time": "2018-09-07T16:06:47+00:00"
         },
         {
             "name": "defuse/php-encryption",

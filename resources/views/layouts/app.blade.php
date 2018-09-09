@@ -9,13 +9,9 @@
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<!-- CSRF Token -->
-	<meta name="csrf-token" content="{{ csrf_token() }}">
-
 	<title>{{ config('app.name', 'ТОЕсуд') }}</title>
 
 	<!-- Styles -->
-	{{-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> --}}
 	<link href="{{ asset('css/plugins/bootstrap.min.css') }}" rel="stylesheet">
 	<link href="{{ asset('css/plugins/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
 	<link href="{{ asset('css/style.css') }}" rel="stylesheet">
@@ -34,51 +30,17 @@
 		<a target="_blank" class="outer" href="https://support.google.com/adsense/answer/12654?hl=uk">ок Google як увімкнути JavaScript?</a></div>
 </noscript>
 
-<style type="text/css">
-	#loader {
-		border: 8px solid #f3f3f3;
-		border-radius: 50%;
-		border-top: 8px solid #2b989b;
-		width: 80px;
-		height: 80px;
-		-webkit-animation: spin 1.5s linear infinite; /* Safari */
-		animation: spin 1.5s linear infinite;
-		z-index: 100;
-		position:absolute;
-		top: 50%;
-		left: 45%;
-	}
-	.blurry {
-		-webkit-filter: blur(5px);
-		-moz-filter: blur(5px);
-		-o-filter: blur(5px);
-		-ms-filter: blur(5px);
-		filter: blur(5px);
-	}
-	/* Safari */
-	@-webkit-keyframes spin {
-		0% { -webkit-transform: rotate(0deg); }
-		100% { -webkit-transform: rotate(360deg); }
-	}
-	@keyframes spin {
-		0% { transform: rotate(0deg); }
-		100% { transform: rotate(360deg); }
-	}
-</style>
 
 <body>
 
-	<div id="fb-root"></div>
 	<div id="app">
 		<router-view></router-view>
 	</div>
 	<!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
 	
-	{{--<script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>--}}
 	<script src="{{ asset('js/plugins/bootstrap.min.js') }}"></script>
 	<script src="{{ asset('js/main.js') }}"></script>
-	{{--<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>--}}
 
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
