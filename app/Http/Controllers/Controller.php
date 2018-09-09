@@ -64,6 +64,7 @@ ____________________________________________________________
  *     		@SWG\Property(property="google_id", type="string", example="101103303581561273014", description="id профілю google (якщо користувач зреєстрований через google)"),
  *     		@SWG\Property(property="email", type="string", example="example@gmail.com", description="email користувача"),
  *     		@SWG\Property(property="photo", type="string", example="https://host/img/users/1542.jpg", description="посилання на фото профілю"),
+ *     		@SWG\Property(property="usertype", type="integer", example="1", description="тип користувача: 1. Зареєстрований користувач, з НЕ підтвердженим email; 2. Користувач з підтвердженим email; 3. PRO аккаунт"),
  *     		@SWG\Property(property="created_at", type="string", example="2018-08-17 15:26:05", description="дата і час реєстрації"),
  *     		@SWG\Property(property="updated_at", type="string", example="2018-10-21 19:42:03", description="дата і час останнього редагування даних"),
  * 		),

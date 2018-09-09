@@ -217,7 +217,6 @@ class AuthController extends Controller
 	 */
 	public function login(Request $request)
 	{
-		//return response()->json(Carbon::now('Europe/Kiev')->addYears(3));
 		$request->validate([
 			'email' => 'required|string|email',
 			'password' => 'required|string',
@@ -340,6 +339,7 @@ class AuthController extends Controller
 	 *					"region": null,
 	 *					"email": "example@mail.com",
 	 *					"photo": null,
+	 *     				"usertype": 2,
 	 *					"created_at": "2018-08-01 15:26:05",
 	 *					"updated_at": "2018-08-01 15:26:05"
 	 *				}
