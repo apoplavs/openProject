@@ -11,7 +11,9 @@ namespace Toecyd\Http\Controllers\Api\V1;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Lang;
 use Toecyd\Http\Controllers\Controller;
 use Carbon\Carbon;
 use Toecyd\User;
@@ -57,7 +59,7 @@ class AuthController extends Controller
 	 *         description="Користувач успішно зареєстрований",
 	 *     	   examples={"application/json":
 	 *              {
-	 *     				"message": "Successfully created user!"
+	 *     				"message": "Користувач успішно створений"
 	 *              }
 	 *     		}
 	 *     ),
@@ -100,29 +102,11 @@ class AuthController extends Controller
 		]);
 		$user->save();
 		return response()->json([
-			'message' => 'Successfully created user!'
+			'message' => Lang::get('auth.successfully_created')
 		], 201);
 	}
 	
 	
-	public function test(Request $request)
-	{
-		return (response()->json($request->all()));
-		$request->validate([
-			'name' => 'required|string|max:255|min:3',
-			'email' => 'required|string|email|unique:users|max:255',
-			'password' => 'required|string|min:6|max:32'
-		]);
-		$user = new User([
-			'name' => $request->name,
-			'email' => $request->email,
-			'password' => bcrypt($request->password)
-		]);
-		$user->save();
-		return response()->json([
-			'message' => 'Successfully created user!'
-		], 201);
-	}
 	
 	
 	
@@ -159,8 +143,8 @@ class AuthController extends Controller
 	 *     		@SWG\Property(property="remember_me", type="integer", example="1", enum={"1", "2", "3"}, description="За замовчуванням токен видається на 24 години, якщо неохідно отримати токен на довший час, то потрібно передати цей параметр як додатковий, з вкзазанням ідентифікатора на скільки часу потрібен токен, може приймати значення від 1 до 3, що відповідає:
 	 * 	1 - два тижні;
 	 *	2 - шість місяців;
-	 *	3 - три роки.
- Одночасно для одного користувача може бути видано до 10 токенів, при видачі кожного насупного - попередній 10-й анулююється")
+	 *	3 - п'ять років.
+ Одночасно для одного користувача може бути видано до 5 токенів, при видачі кожного насупного - попередній 5-й анулююється, з них: 1 токен на п'ять років")
 	 *       )
 	 *     ),
 	 *
@@ -181,7 +165,7 @@ class AuthController extends Controller
 	 *         description="Передані не валідні дані (неправильний email або пароль)",
 	 *     	   examples={"application/json":
 	 *              {
-	 *     				"message": "Unauthorized",
+	 *     				"message": "Неправильний логін або пароль",
 	 *              }
 	 *     		}
 	 *     ),
@@ -222,14 +206,38 @@ class AuthController extends Controller
 			'password' => 'required|string',
 			'remember_me' => 'int|min:1|max:3',
 		]);
+		
 		$credentials = request(['email', 'password']);
-		if(!Auth::attempt($credentials))
+		$user_check = User::checkUser($request->email);
+		// якщо в користувача неправильний пароль, або є інші причини чому він не може ввійти
+		if(!Auth::attempt($credentials)	|| $user_check !== true) {
 			return response()->json([
-				'message' => 'Unauthorized'
+				'message' => ($user_check === true ? Lang::get('auth.failed') : $user_check)
 			], 401);
-		$user = $request->user();
-		$tokenResult = $user->createToken('Personal Access Token');
-		$token = $tokenResult->token;
+		}
+		// генерація токена користувача
+		$token_result = $this->getToken($request);
+
+		return response()->json([
+			'access_token' => $token_result->accessToken,
+			'token_type' => 'Bearer',
+			'expires_at' => Carbon::parse(
+				$token_result->token->expires_at
+			)->toDateTimeString()
+		]);
+	}
+	
+	
+	/**
+	 * @param Request $request
+	 * @return mixed
+	 */
+	private function getToken(Request $request) {
+		// генеруємо токен
+		$token_result = $request->user()->createToken('Personal Access Token');
+		$token = $token_result->token;
+		
+		// визначаємо тривалість дії токена на основі запиту користувача
 		if (!$request->remember_me) {
 			$token->expires_at = Carbon::now('Europe/Kiev')->addDay();
 		} else if ($request->remember_me == 1){
@@ -237,18 +245,25 @@ class AuthController extends Controller
 		} else if ($request->remember_me == 2){
 			$token->expires_at = Carbon::now('Europe/Kiev')->addMonths(6);
 		} else if ($request->remember_me == 3){
-			$token->expires_at = Carbon::now('Europe/Kiev')->addYears(3);
+			// генерація long time expires токена
+			$token_result = $request->user()->createToken('LTE Token');
+			$token = $token_result->token;
+			$token->expires_at = Carbon::now('Europe/Kiev')->addYears(5);
+			// анулюємо інші довготривалі токени
+			DB::table('oauth_access_tokens')
+				->where('user_id', '=', $request->user()->id)
+				->where('name', '=', 'LTE Token')
+				->update(['revoked' => 1]);
+		} else {
+			$token->expires_at = Carbon::now('Europe/Kiev')->addDay();
 		}
-		
+		// зберігаємо токен в БД
 		$token->save();
-		return response()->json([
-			'access_token' => $tokenResult->accessToken,
-			'token_type' => 'Bearer',
-			'expires_at' => Carbon::parse(
-				$tokenResult->token->expires_at
-			)->toDateTimeString()
-		]);
+		return ($token_result);
 	}
+	
+	
+	
 	
 	/**
 	 * Logout user (Revoke the token)
@@ -301,7 +316,7 @@ class AuthController extends Controller
 	{
 		$request->user()->token()->revoke();
 		return response()->json([
-			'message' => 'Successfully logged out'
+			'message' => Lang::get('auth.successfully_logout')
 		]);
 	}
 	
