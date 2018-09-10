@@ -5,7 +5,7 @@
   
     <div class="container mt-5">
       <div class="row">
-        <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
+        <div class="offset-lg-3 col-lg-9">
           <form method="get" autocomplete="off">
             <div class="form-row">
               <div class="col-12 col-md-9 mb-2 mb-md-0 autocomplete">
@@ -107,9 +107,10 @@
             </div>
           </div>
           <!-- Card -->
+          <div>Регіон-------------  {{ this.regions }}</div>
         </div>
         <!--  col-3 Filters  -->
-         <div>Регіон-------------  {{ this.regions }}</div>
+
   
   
   
@@ -134,16 +135,11 @@
           <!-- /.card -->
         </div>
         <!-- col-lg-9 -->
-  
-  
-  
-  
-  
-  
       </div>
       <!-- row -->
     </div>
     <!-- container -->
+
   </div>
 </template>
 
@@ -273,22 +269,16 @@
   }
   
   #apply-filters {
-    width: 150px;
     background-color: white;
-    position: fixed;
-    left: 40px;
-    bottom: 3px;
+    position: sticky;
+    bottom: 0;
   }
   
   
   /* if display is bigger then 1200px, correct position */
   
   @media (min-width: 1200px) {
-    #apply-filters {
-      min-width: 180px;
-      padding-left: 20px;
-      left: 35px;
-    }
+
   }
   
   

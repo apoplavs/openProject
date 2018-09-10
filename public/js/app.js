@@ -71121,7 +71121,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* Стилі для фільтрів */\n#filters[data-v-e9915f2e] {\n  font-size: 0.9em;\n}\n#filters h6[data-v-e9915f2e] {\n  color: #4c88bd;\n}\n\n\n/* Customize the label (the container) */\n#filters ul label[data-v-e9915f2e] {\n  display: block;\n  position: relative;\n  padding-left: 35px;\n  margin-bottom: 10px;\n  cursor: pointer;\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  user-select: none;\n}\n\n\n/* Hide the browser's default checkbox */\n#filters ul input[data-v-e9915f2e] {\n  position: absolute;\n  opacity: 0;\n  cursor: pointer;\n}\n\n\n/* Create a custom checkbox */\n.checkmark[data-v-e9915f2e] {\n  position: absolute;\n  top: 0;\n  left: 0;\n  height: 21px;\n  width: 21px;\n  background-color: #eee;\n}\n\n\n/* When the checkbox is checked, add a blue background */\n#filters ul label input:checked~.checkmark[data-v-e9915f2e] {\n  background-color: #2b989b;\n}\n\n\n/* Create the checkmark/indicator (hidden when not checked) */\n.checkmark[data-v-e9915f2e]:after {\n  content: \"\";\n  position: absolute;\n  display: none;\n}\n\n\n/* Show the checkmark when checked */\n#filters ul label input:checked~.checkmark[data-v-e9915f2e]:after {\n  display: block;\n}\n\n\n/* Style the checkmark/indicator */\n#filters ul label .checkmark[data-v-e9915f2e]:after {\n  left: 9px;\n  top: 5px;\n  width: 5px;\n  height: 10px;\n  border: solid white;\n  border-width: 0 3px 3px 0;\n  -webkit-transform: rotate(45deg);\n  transform: rotate(45deg);\n}\n#apply-filters[data-v-e9915f2e] {\n  width: 150px;\n  background-color: white;\n  position: fixed;\n  left: 40px;\n  bottom: 3px;\n}\n\n\n/* if display is bigger then 1200px, correct position */\n@media (min-width: 1200px) {\n#apply-filters[data-v-e9915f2e] {\n    min-width: 180px;\n    padding-left: 20px;\n    left: 35px;\n}\n}\n\n\n/* styles for page elements */\ndiv.col-12.col-lg-2>img[data-v-e9915f2e] {\n  width: 120px;\n  height: 120px;\n}\n#sorting-type[data-v-e9915f2e],\n.bookmark[data-v-e9915f2e],\n.fa-pencil[data-v-e9915f2e] {\n  cursor: pointer;\n}\n#sorting-type input[data-v-e9915f2e] {\n  display: none;\n}\ndiv.card-body.p-2 h5 a[data-v-e9915f2e] {\n  color: #3d7ee5;\n}\n\n\n/* if display is small then 992 hide part of pagination */\n@media (max-width: 992px) {\n.pagination li[data-v-e9915f2e]:nth-child(even) {\n    display: none;\n}\n}\n\n\n/* styles for font awesome */\n.fa-filter[data-v-e9915f2e] {\n  font-size: 21px;\n  color: #6291ba;\n}\n.fa-sort-alpha-asc[data-v-e9915f2e],\n.fa-sort-alpha-desc[data-v-e9915f2e] {\n  font-size: 18px;\n  color: #3d7ee5;\n}\n.fa-bookmark-o[data-v-e9915f2e],\n.fa-bookmark[data-v-e9915f2e] {\n  font-size: 18px;\n  color: #2b989b;\n}\n.fa-briefcase[data-v-e9915f2e] {\n  color: green;\n  font-size: 15px;\n}\n.fa-line-chart[data-v-e9915f2e] {\n  color: #6291ba;\n}\n.fa-medkit[data-v-e9915f2e] {\n  font-size: 17px;\n  color: red;\n}\n.fa-calendar-check-o[data-v-e9915f2e],\n.fa-calendar-minus-o[data-v-e9915f2e],\n.fa-calendar-times-o[data-v-e9915f2e] {\n  font-size: 17px;\n  color: #2b989b;\n}\n.fa-pencil[data-v-e9915f2e] {\n  color: #6c757d;\n  -webkit-transition-duration: 0.3s;\n  transition-duration: 0.3s;\n}\n.fa-pencil[data-v-e9915f2e]:hover {\n  color: #6291ba;\n  -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 0.5), inset 0 0 1px rgba(0, 0, 0, 0.7);\n          box-shadow: 0 0 3px rgba(0, 0, 0, 0.5), inset 0 0 1px rgba(0, 0, 0, 0.7);\n}\n\n\n/* styles for autocomplete field  */\n.autocomplete[data-v-e9915f2e] {\n  /*the container must be positioned relative:*/\n  position: relative;\n  display: inline-block;\n}\n.autocomplete-items[data-v-e9915f2e] {\n  position: absolute;\n  font-size: 0.9em;\n  border: 1px solid #d4d4d4;\n  border-bottom: none;\n  border-top: none;\n  z-index: 99;\n  /*position the autocomplete items to be the same width as the container:*/\n  top: 100%;\n  left: 0;\n  right: 0;\n  -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);\n          box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);\n}\n.autocomplete-items div[data-v-e9915f2e] {\n  padding: 10px;\n  cursor: pointer;\n  background-color: #fff;\n  border-bottom: 1px solid #d4d4d4;\n}\n.autocomplete-items div[data-v-e9915f2e]:hover {\n  /*when hovering an item:*/\n  background-color: #e9e9e9;\n}\n.autocomplete-active[data-v-e9915f2e] {\n  /*when navigating through the items using the arrow keys:*/\n  background-color: DodgerBlue !important;\n  color: #ffffff;\n}\n\n\n/* styles for pop-up form changing status */\nselect#chooser-judge-status[data-v-e9915f2e] {\n  font-family: \"FontAwesome\", Helvetica, serif;\n}\nselect#chooser-judge-status option[data-v-e9915f2e]:first-child {\n  color: green;\n}\nselect#chooser-judge-status option[data-v-e9915f2e]:nth-child(2) {\n  color: red;\n}\nselect#chooser-judge-status option[data-v-e9915f2e]:nth-child(3) {\n  color: #2b989b;\n}\nselect#chooser-judge-status option[data-v-e9915f2e]:nth-child(4) {\n  color: #2b989b;\n}\nselect#chooser-judge-status option[data-v-e9915f2e]:last-child {\n  color: #6291ba;\n}\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* Стилі для фільтрів */\n#filters[data-v-e9915f2e] {\n  font-size: 0.9em;\n}\n#filters h6[data-v-e9915f2e] {\n  color: #4c88bd;\n}\n\n\n/* Customize the label (the container) */\n#filters ul label[data-v-e9915f2e] {\n  display: block;\n  position: relative;\n  padding-left: 35px;\n  margin-bottom: 10px;\n  cursor: pointer;\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  user-select: none;\n}\n\n\n/* Hide the browser's default checkbox */\n#filters ul input[data-v-e9915f2e] {\n  position: absolute;\n  opacity: 0;\n  cursor: pointer;\n}\n\n\n/* Create a custom checkbox */\n.checkmark[data-v-e9915f2e] {\n  position: absolute;\n  top: 0;\n  left: 0;\n  height: 21px;\n  width: 21px;\n  background-color: #eee;\n}\n\n\n/* When the checkbox is checked, add a blue background */\n#filters ul label input:checked~.checkmark[data-v-e9915f2e] {\n  background-color: #2b989b;\n}\n\n\n/* Create the checkmark/indicator (hidden when not checked) */\n.checkmark[data-v-e9915f2e]:after {\n  content: \"\";\n  position: absolute;\n  display: none;\n}\n\n\n/* Show the checkmark when checked */\n#filters ul label input:checked~.checkmark[data-v-e9915f2e]:after {\n  display: block;\n}\n\n\n/* Style the checkmark/indicator */\n#filters ul label .checkmark[data-v-e9915f2e]:after {\n  left: 9px;\n  top: 5px;\n  width: 5px;\n  height: 10px;\n  border: solid white;\n  border-width: 0 3px 3px 0;\n  -webkit-transform: rotate(45deg);\n  transform: rotate(45deg);\n}\n#apply-filters[data-v-e9915f2e] {\n  background-color: white;\n  position: -webkit-sticky;\n  position: sticky;\n  bottom: 0;\n}\n\n\n/* if display is bigger then 1200px, correct position */\n@media (min-width: 1200px) {\n}\n\n\n/* styles for page elements */\ndiv.col-12.col-lg-2>img[data-v-e9915f2e] {\n  width: 120px;\n  height: 120px;\n}\n#sorting-type[data-v-e9915f2e],\n.bookmark[data-v-e9915f2e],\n.fa-pencil[data-v-e9915f2e] {\n  cursor: pointer;\n}\n#sorting-type input[data-v-e9915f2e] {\n  display: none;\n}\ndiv.card-body.p-2 h5 a[data-v-e9915f2e] {\n  color: #3d7ee5;\n}\n\n\n/* if display is small then 992 hide part of pagination */\n@media (max-width: 992px) {\n.pagination li[data-v-e9915f2e]:nth-child(even) {\n    display: none;\n}\n}\n\n\n/* styles for font awesome */\n.fa-filter[data-v-e9915f2e] {\n  font-size: 21px;\n  color: #6291ba;\n}\n.fa-sort-alpha-asc[data-v-e9915f2e],\n.fa-sort-alpha-desc[data-v-e9915f2e] {\n  font-size: 18px;\n  color: #3d7ee5;\n}\n.fa-bookmark-o[data-v-e9915f2e],\n.fa-bookmark[data-v-e9915f2e] {\n  font-size: 18px;\n  color: #2b989b;\n}\n.fa-briefcase[data-v-e9915f2e] {\n  color: green;\n  font-size: 15px;\n}\n.fa-line-chart[data-v-e9915f2e] {\n  color: #6291ba;\n}\n.fa-medkit[data-v-e9915f2e] {\n  font-size: 17px;\n  color: red;\n}\n.fa-calendar-check-o[data-v-e9915f2e],\n.fa-calendar-minus-o[data-v-e9915f2e],\n.fa-calendar-times-o[data-v-e9915f2e] {\n  font-size: 17px;\n  color: #2b989b;\n}\n.fa-pencil[data-v-e9915f2e] {\n  color: #6c757d;\n  -webkit-transition-duration: 0.3s;\n  transition-duration: 0.3s;\n}\n.fa-pencil[data-v-e9915f2e]:hover {\n  color: #6291ba;\n  -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 0.5), inset 0 0 1px rgba(0, 0, 0, 0.7);\n          box-shadow: 0 0 3px rgba(0, 0, 0, 0.5), inset 0 0 1px rgba(0, 0, 0, 0.7);\n}\n\n\n/* styles for autocomplete field  */\n.autocomplete[data-v-e9915f2e] {\n  /*the container must be positioned relative:*/\n  position: relative;\n  display: inline-block;\n}\n.autocomplete-items[data-v-e9915f2e] {\n  position: absolute;\n  font-size: 0.9em;\n  border: 1px solid #d4d4d4;\n  border-bottom: none;\n  border-top: none;\n  z-index: 99;\n  /*position the autocomplete items to be the same width as the container:*/\n  top: 100%;\n  left: 0;\n  right: 0;\n  -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);\n          box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);\n}\n.autocomplete-items div[data-v-e9915f2e] {\n  padding: 10px;\n  cursor: pointer;\n  background-color: #fff;\n  border-bottom: 1px solid #d4d4d4;\n}\n.autocomplete-items div[data-v-e9915f2e]:hover {\n  /*when hovering an item:*/\n  background-color: #e9e9e9;\n}\n.autocomplete-active[data-v-e9915f2e] {\n  /*when navigating through the items using the arrow keys:*/\n  background-color: DodgerBlue !important;\n  color: #ffffff;\n}\n\n\n/* styles for pop-up form changing status */\nselect#chooser-judge-status[data-v-e9915f2e] {\n  font-family: \"FontAwesome\", Helvetica, serif;\n}\nselect#chooser-judge-status option[data-v-e9915f2e]:first-child {\n  color: green;\n}\nselect#chooser-judge-status option[data-v-e9915f2e]:nth-child(2) {\n  color: red;\n}\nselect#chooser-judge-status option[data-v-e9915f2e]:nth-child(3) {\n  color: #2b989b;\n}\nselect#chooser-judge-status option[data-v-e9915f2e]:nth-child(4) {\n  color: #2b989b;\n}\nselect#chooser-judge-status option[data-v-e9915f2e]:last-child {\n  color: #6291ba;\n}\n", ""]);
 
 // exports
 
@@ -71134,10 +71134,6 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__JudgeComponent_vue__ = __webpack_require__(81);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__JudgeComponent_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__JudgeComponent_vue__);
-//
-//
-//
-//
 //
 //
 //
@@ -71406,7 +71402,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, "\n.judge-component[data-v-562dd8d6]:not(:last-child) {\n  border-bottom: 1px solid lightgray;\n}\n.avatar[data-v-562dd8d6] {\n  width: 130px;\n  height: 130px;\n}\n", ""]);
 
 // exports
 
@@ -71417,20 +71413,6 @@ exports.push([module.i, "", ""]);
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -71497,7 +71479,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("div", { staticClass: "card-body p-2" }, [
+    _c("div", { staticClass: "card-body px-4 py-2" }, [
       !this.list
         ? _c("div", [_vm._v("За заданими параметрами нічого не знайдено")])
         : _vm._e(),
@@ -71506,75 +71488,69 @@ var render = function() {
         ? _c(
             "div",
             { staticClass: "container" },
-            [
-              _vm._l(_vm.list.data.data, function(data, index) {
-                return _c("div", { key: index, staticClass: "row" }, [
-                  _c(
-                    "div",
-                    { staticClass: "col-12 col-lg-2 p-0 text-center" },
-                    [
+            _vm._l(_vm.list.data.data, function(data, index) {
+              return _c(
+                "div",
+                { key: index, staticClass: "judge-component row py-3 " },
+                [
+                  _c("div", { staticClass: "col-9 d-flex pl-0" }, [
+                    _c("div", { staticClass: "mr-3" }, [
                       _c("img", {
-                        staticStyle: { width: "50px", height: "80px" },
+                        staticClass: "avatar",
                         attrs: { src: data.photo, alt: "фото" }
                       })
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-12 col-lg-10 p-0" }, [
-                    _c("div", { staticClass: "container" }, [
-                      _c("div", { staticClass: "row" }, [
-                        _c(
-                          "div",
-                          {
-                            staticClass:
-                              "col-12 col-lg-6 text-center text-lg-left",
-                            attrs: { title: "ПІБ судді" }
-                          },
-                          [
-                            _c(
-                              "h5",
-                              [
-                                _c("router-link", { attrs: { to: "/" } }, [
-                                  _vm._v(
-                                    " " +
-                                      _vm._s(data.surname) +
-                                      " " +
-                                      _vm._s(
-                                        data.name.length > 1
-                                          ? data.name
-                                          : data.name + "."
-                                      ) +
-                                      " " +
-                                      _vm._s(
-                                        data.patronymic.length > 1
-                                          ? data.patronymic
-                                          : data.patronymic + "."
-                                      ) +
-                                      " "
-                                  )
-                                ])
-                              ],
-                              1
+                    ]),
+                    _vm._v(" "),
+                    _c("div", [
+                      _c(
+                        "h4",
+                        [
+                          _c("router-link", { attrs: { to: "/" } }, [
+                            _vm._v(
+                              " " +
+                                _vm._s(data.surname) +
+                                " " +
+                                _vm._s(
+                                  data.name.length > 1
+                                    ? data.name
+                                    : data.name + "."
+                                ) +
+                                " " +
+                                _vm._s(
+                                  data.patronymic.length > 1
+                                    ? data.patronymic
+                                    : data.patronymic + "."
+                                ) +
+                                " "
                             )
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _vm._m(0, true),
-                        _vm._v(" "),
-                        _vm._m(1, true)
-                      ]),
+                          ])
+                        ],
+                        1
+                      ),
                       _vm._v(" "),
-                      _vm._m(2, true)
+                      _c("h5", [_vm._v(_vm._s(data.court_name))])
                     ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-3" }, [
+                    _c("div", [
+                      _c(
+                        "i",
+                        {
+                          staticClass: "fa fa-line-chart",
+                          attrs: { "aria-hidden": "true" }
+                        },
+                        [_vm._v(" " + _vm._s(data.rating) + " ")]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(0, true),
+                    _vm._v(" "),
+                    _vm._m(1, true)
                   ])
-                ])
-              }),
-              _vm._v(" "),
-              _c("hr", { staticClass: "my-3 my-lg-2" }),
-              _vm._v(" "),
-              _vm._m(3)
-            ],
-            2
+                ]
+              )
+            })
           )
         : _vm._e()
     ])
@@ -71585,94 +71561,29 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "col-4 col-lg-2", attrs: { title: "рейтинг" } },
-      [
-        _c(
-          "i",
-          { staticClass: "fa fa-line-chart", attrs: { "aria-hidden": "true" } },
-          [_vm._v(" NaN ")]
-        )
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-8 col-lg-4" }, [
-      _c("span", { staticClass: "text-muted" }, [
-        _c("small", { staticClass: "text-muted float-right mr-3 bookmark" }, [
-          _c("span", [_vm._v("відстежувати")]),
-          _vm._v(" "),
-          _c("i", {
-            staticClass: "fa fa-bookmark-o",
-            attrs: { "aria-hidden": "true" }
-          })
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c(
-        "div",
-        {
-          staticClass: "col-12 col-lg-7",
-          attrs: { title: "найменування суду" }
-        },
-        [
-          _c("div", { staticClass: "float-left court-name" }, [
-            _vm._v("$judge->court_name")
-          ])
-        ]
-      ),
+    return _c("div", [
+      _c("span", [_vm._v("відстежувати")]),
       _vm._v(" "),
-      _c("div", { staticClass: "col-12 col-lg-5" }, [
-        _c(
-          "small",
-          {
-            staticClass: "text-muted ml-1",
-            attrs: {
-              id: "judge->id",
-              title: "статус судді, дата оновлення статусу"
-            }
-          },
-          [
-            _vm._v(
-              "\n\t\t\t\t\t\t\t\t\t\t'judges.judge-statuses\n\t\t\t\t\t\t\t\t\t"
-            )
-          ]
-        ),
-        _vm._v(
-          " if юзер ввійшов - є можливість змінювати статус\n                                "
-        ),
-        _c("span", { attrs: { title: "змінити статус судді" } }, [
-          _c("i", {
-            staticClass: "fa fa-pencil p-1",
-            attrs: {
-              "aria-hidden": "true",
-              "data-toggle": "modal",
-              "data-target": "#changeJudgeStatus"
-            }
-          })
-        ])
-      ])
+      _c("i", {
+        staticClass: "fa fa-bookmark-o",
+        attrs: { "aria-hidden": "true" }
+      })
     ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-12" }, [
-        _vm._v(
-          "\n                    // udges_list->links() //\n                "
-        )
+    return _c("div", [
+      _c("span", { attrs: { title: "змінити статус судді" } }, [
+        _c("i", {
+          staticClass: "fa fa-pencil p-1",
+          attrs: {
+            "aria-hidden": "true",
+            "data-toggle": "modal",
+            "data-target": "#changeJudgeStatus"
+          }
+        })
       ])
     ])
   }
@@ -72977,10 +72888,10 @@ var render = function() {
                 ]
               )
             ])
-          ])
+          ]),
+          _vm._v(" "),
+          _c("div", [_vm._v("Регіон-------------  " + _vm._s(this.regions))])
         ]),
-        _vm._v(" "),
-        _c("div", [_vm._v("Регіон-------------  " + _vm._s(this.regions))]),
         _vm._v(" "),
         _c("div", { staticClass: "col-lg-9" }, [
           _c("div", { staticClass: "card card-outline-secondary my-4" }, [
@@ -73005,7 +72916,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "container mt-5" }, [
       _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-md-10 col-lg-8 col-xl-7 mx-auto" }, [
+        _c("div", { staticClass: "offset-lg-3 col-lg-9" }, [
           _c("form", { attrs: { method: "get", autocomplete: "off" } }, [
             _c("div", { staticClass: "form-row" }, [
               _c(
