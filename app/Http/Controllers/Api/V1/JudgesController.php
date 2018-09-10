@@ -314,7 +314,7 @@ class JudgesController extends Controller
 	 * @SWG\Get(
 	 *     path="/guest/judges/list",
 	 *     summary="Отримати список суддів для незареєстрованого користувача",
-	 *     description="Даний маршрут працює так же як /judges/list, за винятком того, що не вимагає авторизації користувача і не повертає даних що стосуються користувача (напр. is_bookmark) і id суддів",
+	 *     description="Даний маршрут працює так же як /judges/list, за винятком того, що не вимагає авторизації користувача і не повертає даних що стосуються користувача (напр. is_bookmark)",
 	 *     operationId="guest-judges-list",
 	 *     produces={"application/json"},
 	 *     tags={"Судді"},
@@ -479,6 +479,7 @@ class JudgesController extends Controller
 	 *					"current_page": 1,
 	 *					"data": {
 	 *					{
+	 *            		"id": 4012,
 	 *					"court_name": "Господарський суд Київської області",
 	 *					"surname": "Євграфова",
 	 *					"name": "Є",
@@ -490,6 +491,7 @@ class JudgesController extends Controller
 	 *					"rating": 0
 	 *					},
 	 *					{
+	 *          		"id": 114,
 	 *					"court_name": "Шосткинський міськрайонний суд Сумської області",
 	 *					"surname": "Євдокімова",
 	 *					"name": "Олена",
@@ -501,6 +503,7 @@ class JudgesController extends Controller
 	 *					"rating": 0
 	 *					},
 	 *					{
+	 *     				"id": 1518,
 	 *					"court_name": "Соснівський районний суд м. Черкаси",
 	 *					"surname": "Євтушенко",
 	 *					"name": "П",
@@ -862,7 +865,7 @@ class JudgesController extends Controller
 		}
 		UserBookmarkJudge::createBookmark(Auth::user()->id, $id);
 		return response()->json([
-			'message' => 'Bookmark successfully created'
+			'message' => 'Закладка успішно створена'
 		], 201);
 	}
 	
