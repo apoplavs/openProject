@@ -644,118 +644,6 @@ class JudgesController extends Controller
         //
     }
 	
-	/**
-	 * @SWG\Put(
-	 *     path="/judges/{id}/update-status",
-	 *     summary="Оновити статус судді",
-	 *     description="Встановии новий статус для судді, наприклад: суддя був на роботі, і пішов у відпустку",
-	 *     operationId="judges-updateStatus",
-	 *     produces={"application/json"},
-	 *     tags={"Судді"},
-	 *     security={
-	 *     {"passport": {}},
-	 *   	},
-	 *     @SWG\Parameter(
-	 *     	ref="#/parameters/Content-Type",
-	 *     ),
-	 *     @SWG\Parameter(
-	 *     	ref="#/parameters/X-Requested-With",
-	 *     ),
-	 *
-	 * 	  @SWG\Parameter(
-	 *     name="id",
-	 *     in="path",
-	 *     required=true,
-	 *     description="Id судді, для якого потрібно встановити новий статус",
-	 *     type="integer",
-	 *     collectionFormat="multi",
-	 *     uniqueItems=true,
-	 *     minimum=1,
-	 *     maximum=5,
-	 *     allowEmptyValue=false
-	 *     ),
-	 *
-	 *     @SWG\Parameter(
-	 *     name="Дані нового статусу",
-	 *     in="body",
-	 *     required=true,
-	 *     description="Існує 5 статусів, які свідчать про перебування судді на робочому місці:
-	 	1 - На роботі
-	 	2 - На лікарняному
-	 	3 - У відпустці
-	 	4 - Відсутній на робочому місці з інших причин
-	 	5 - Припинено повноваження
-	 *  Щоб встановити новий статус, потрібно передати id нового статусу, і якщо відома, то дату дії статусу, тобто до якого часу даний статус буде діяти
-	 *	Дата дії статусу актуальна, може бути передана для статусів 2-4.  Для статусів 1,5 дата дії не враховується",
-	 *     @SWG\Schema(
-	 *          type="object",
-	 *     		required={"set_status"},
-	 *          @SWG\Property(property="set_status",  type="integer", example="3", description="id статусу"),
-	 *          @SWG\Property(property="due_date", type="date", example="2018-10-21", description="Дата дії статусу, у форматі Y-m-d, мінімальне значення, поточний день")
-	 *       )
-	 *     ),
-	 *
-	 *     @SWG\Response(
-	 *         response=200,
-	 *         description="Статус судді був успішно оновлений",
-	 *     	   examples={"application/json":
-	 *              {
-	 *     				"message": "Статус успішно оновлено"
-	 *              }
-	 *     		}
-	 *     ),
-	 *
-	 *     @SWG\Response(
-	 *         response=401,
-	 *         description="Необхідна аутентифікація користувача",
-	 *     	   examples={"application/json":
-	 *              {
-	 *     				"message": "Unauthenticated",
-	 *              }
-	 *     		}
-	 *     ),
-	 *
-	 *     @SWG\Response(
-	 *         response=405,
-	 *         description="Метод, з яким виконувався запит, не дозволено використовувати для заданого ресурсу; наприклад, запит був здійснений за методом POST, хоча очікується PUT.",
-	 *     ),
-	 *
-	 *     @SWG\Response(
-	 *         response=422,
-	 *         description="Передані не валідні дані, неіснуючий id",
-	 *     	   examples={"application/json":
-	 *              {
-	 *     				"message": "Неіснуючий id",
-	 *              }
-	 *     		}
-	 *     ),
-	 * )
-	 */
-    public function updateJudgeStatus(Request $request, $id) {
-		// валідація вхідних даних
-		$request->validate([
-			'set_status' => 'required|integer|between:1,5',
-			'due_date' => 'date|date_format:Y-m-d|after:yesterday|nullable'
-		]);
-		// перевірка чи існує такий id
-		if (!Judge::checkJudgeById($id)) {
-			return response()->json([
-				'message' => 'Неіснуючий id'
-			], 422);
-		}
-		$new_status = intval($request->set_status);
-		// якщо due_date не передана, або передано статуси 1,5 due_date=null
-		$due_date = $request->due_date ?? NULL;
-		if ($new_status == 1 || $new_status == 5) {
-			$due_date = NULL;
-		}
-		// оновлення статусу судді
-		Judge::setNewStatus($id, $new_status, $due_date);
-	
-		return response()->json([
-			'message' => 'Статус успішно оновлено'
-		], 200);
-	}
 	
 
     /**
@@ -1036,6 +924,130 @@ class JudgesController extends Controller
 		}
 		UserBookmarkJudge::deleteBookmark(Auth::user()->id, $id);
 		return response()->json([], 204);
+	}
+	
+	
+	
+	/**
+	 * @SWG\Put(
+	 *     path="/judges/{id}/update-status",
+	 *     summary="Оновити статус судді",
+	 *     description="Встановии новий статус для судді, наприклад: суддя був на роботі, і пішов у відпустку",
+	 *     operationId="judges-updateStatus",
+	 *     produces={"application/json"},
+	 *     tags={"Судді"},
+	 *     security={
+	 *     {"passport": {}},
+	 *   	},
+	 *     @SWG\Parameter(
+	 *     	ref="#/parameters/Content-Type",
+	 *     ),
+	 *     @SWG\Parameter(
+	 *     	ref="#/parameters/X-Requested-With",
+	 *     ),
+	 *
+	 * 	  @SWG\Parameter(
+	 *     name="id",
+	 *     in="path",
+	 *     required=true,
+	 *     description="Id судді, для якого потрібно встановити новий статус",
+	 *     type="integer",
+	 *     collectionFormat="multi",
+	 *     uniqueItems=true,
+	 *     minimum=1,
+	 *     maximum=15000,
+	 *     allowEmptyValue=false
+	 *     ),
+	 *
+	 *     @SWG\Parameter(
+	 *     name="Дані нового статусу",
+	 *     in="body",
+	 *     required=true,
+	 *     description="Існує 5 статусів, які свідчать про перебування судді на робочому місці:
+	1 - На роботі
+	2 - На лікарняному
+	3 - У відпустці
+	4 - Відсутній на робочому місці з інших причин
+	5 - Припинено повноваження
+	 *  Щоб встановити новий статус, потрібно передати id нового статусу, і якщо відома, то дату дії статусу, тобто до якого часу даний статус буде діяти
+	 *	Дата дії може бути передана для статусів 2-4.  Для статусів 1,5 дата дії не враховується",
+	 *     @SWG\Schema(
+	 *          type="object",
+	 *     		required={"set_status"},
+	 *          @SWG\Property(property="set_status",  type="integer", example="3", description="id статусу"),
+	 *          @SWG\Property(property="due_date", type="date", example="2018-09-21", description="Дата дії статусу, у форматі Y-m-d,
+	 * мінімальне значення >= поточний день
+	 * максимальне значення <= поточний день + 1 місяць")
+	 *       )
+	 *     ),
+	 *
+	 *     @SWG\Response(
+	 *         response=200,
+	 *         description="Статус судді був успішно оновлений",
+	 *     	   examples={"application/json":
+	 *              {
+	 *     				"message": "Статус успішно оновлено"
+	 *              }
+	 *     		}
+	 *     ),
+	 *
+	 *     @SWG\Response(
+	 *         response=401,
+	 *         description="Необхідна аутентифікація користувача",
+	 *     	   examples={"application/json":
+	 *              {
+	 *     				"message": "Unauthenticated",
+	 *              }
+	 *     		}
+	 *     ),
+	 *
+	 *     @SWG\Response(
+	 *         response=405,
+	 *         description="Метод, з яким виконувався запит, не дозволено використовувати для заданого ресурсу; наприклад, запит був здійснений за методом POST, хоча очікується PUT.",
+	 *     ),
+	 *
+	 *     @SWG\Response(
+	 *         response=422,
+	 *         description="Передані не валідні дані, неіснуючий id, некоректний формат даних",
+	 *     	   examples={"application/json":
+	 *              {
+	 *     				"message": "The given data was invalid.",
+	 *     				"errors": {
+	 *						"due_date": {
+	 *						"due date не валідна дата.",
+	 *						"due date не відповідає формату Y-m-d.",
+	 *						"due date повинна бути дата, що пізніша або рівна today."
+	 *						}
+	 *					}
+	 *              }
+	 *     		}
+	 *     ),
+	 * )
+	 */
+	public function updateJudgeStatus(Request $request, $id) {
+		// валідація вхідних даних
+		$request->validate([
+			'set_status' => 'required|integer|between:1,5',
+			'due_date' => 'date|date_format:Y-m-d|after_or_equal:today|before_or_equal:+1 month|nullable'
+		]);
+		// перевірка чи існує такий id
+		if (!Judge::checkJudgeById($id)) {
+			return response()->json([
+				'message' => 'Неіснуючий id'
+			], 422);
+		}
+		$new_status = intval($request->set_status);
+		// якщо due_date не передана, або передано статуси 1,5 due_date=null
+		$due_date = $request->due_date ?? NULL;
+		if ($new_status == 1 || $new_status == 5) {
+			$due_date = NULL;
+		}
+		// оновлення статусу судді
+		Judge::setNewStatus($id, $new_status, $due_date);
+		
+		return response()->json([
+			'message' => 'Статус успішно оновлено'
+		], 200);
 	}
 	
 	
