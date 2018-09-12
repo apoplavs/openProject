@@ -56,6 +56,9 @@ Route::group(['prefix' => 'v1/', 'namespace' => 'Api\V1',], function () {
 		// видалити суддю з закладок
 		Route::delete('/judges/{id}/bookmark', 'JudgesController@delJudgeBookmark');
 		
+		// оновити статус судді
+		Route::put('judges/{id}/update-status', 'Judges\JudgesController@updateJudgeStatus');
+		
 	});
 	
 });

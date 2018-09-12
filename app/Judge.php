@@ -153,7 +153,6 @@ class Judge extends Model
 	
 	/**
 	 * встановлює новий статус судді
-	 * і повертає його
 	 * @param $judge_id
 	 * @param $status
 	 * @param $due_date
@@ -162,11 +161,6 @@ class Judge extends Model
 		static::where('judges.id', '=', $judge_id)
 			->update(['judges.status' => $status,
 				'judges.due_date_status' => $due_date]);
-		return (static::select('judges.status',
-			DB::raw('DATE_FORMAT(judges.updated_status, "%d.%m.%Y") AS updated_status'),
-			DB::raw('DATE_FORMAT(judges.due_date_status, "%d.%m.%Y") AS due_date_status'))
-			->where('judges.id', '=', $judge_id)
-			->first());
 	}
 	
 	
