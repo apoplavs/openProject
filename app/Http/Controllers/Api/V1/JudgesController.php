@@ -830,11 +830,7 @@ class JudgesController extends Controller
 	 */
 	public function addJudgeBookmark($id) {
 		$id = intval($id);
-		if (!Judge::checkJudgeById($id)) {
-			return response()->json([
-				'message' => 'Неіснуючий id'
-			], 422);
-		}
+
 		if (UserBookmarkJudge::checkBookmark(Auth::user()->id, $id)) {
 			return response()->json([
 				'message' => 'Закладка вже існує'
@@ -912,11 +908,7 @@ class JudgesController extends Controller
 	 */
 	public function delJudgeBookmark($id) {
 		$id = intval($id);
-		if (!Judge::checkJudgeById($id)) {
-			return response()->json([
-				'message' => 'Неіснуючий id'
-			], 422);
-		}
+
 		if (!UserBookmarkJudge::checkBookmark(Auth::user()->id, $id)) {
 			return response()->json([
 				'message' => 'Закладки не існує'
@@ -1030,12 +1022,7 @@ class JudgesController extends Controller
 			'set_status' => 'required|integer|between:1,5',
 			'due_date' => 'date|date_format:Y-m-d|after_or_equal:today|before_or_equal:+1 month|nullable'
 		]);
-		// перевірка чи існує такий id
-		if (!Judge::checkJudgeById($id)) {
-			return response()->json([
-				'message' => 'Неіснуючий id'
-			], 422);
-		}
+
 		$new_status = intval($request->set_status);
 		// якщо due_date не передана, або передано статуси 1,5 due_date=null
 		$due_date = $request->due_date ?? NULL;
@@ -1053,7 +1040,7 @@ class JudgesController extends Controller
 	
 	
 	
-	
+	// todo написати документацію, і прописати маршрути для delete, протестити
 	/**
 	 * Поставити лайк судді
 	 *
@@ -1064,23 +1051,38 @@ class JudgesController extends Controller
 		// перевіряємо чи користувач вже ставив лайк
 		$is_liked = UsersLikesJudge::isLikedJudge($id);
 		
-		// якщо ставив - то прибираємо, в іншому випадку ставимо
+		// якщо ставив - то 422, в іншому випадку ставимо
 		if ($is_liked) {
-			$judge_data = UsersLikesJudge::deleteLike($id);
-			return (view('judges.judge-likes-unlikes')
-				->with(['judge' => $judge_data,
-					'liked' => false,
-					'unliked' => false
-				]));
-		} else {
-			$judge_data = UsersLikesJudge::putLike($id);
-			return (view('judges.judge-likes-unlikes')
-				->with(['judge' => $judge_data,
-					'liked' => true,
-					'unliked' => false
-				]));
+			return response()->json([
+				'message' => 'Даний користувач вже ставив лайк для цього судді'
+			], 422);
 		}
+		UsersLikesJudge::putLike($id);
+		return response()->json([
+			'message' => 'ОК'
+		], 201);
 	}
+	
+	/**
+	 * Поставити лайк судді
+	 *
+	 * @param  int  $id
+	 * @return \Illuminate\Http\Response
+	 */
+	public function deleteLike($id) {
+		// перевіряємо чи користувач ставив лайк
+		$is_liked = UsersLikesJudge::isLikedJudge($id);
+		
+		// якщо користувач не ставив лайк - 422
+		if (!$is_liked) {
+			return response()->json([
+				'message' => 'Даний користувач не ставив лайк для цього судді'
+			], 422);
+		}
+		UsersLikesJudge::deleteLike($id);
+		return response()->json([], 204);
+	}
+	
 	
 	/**
 	 * Поставити дизлайк судді
@@ -1092,8 +1094,32 @@ class JudgesController extends Controller
 		// перевіряємо чи користувач вже ставив дизлайк
 		$is_unliked = UsersUnlikesJudge::isUnlikedJudge($id);
 		
-		// якщо ставив - то прибираємо, в іншому випадку ставимо
+		// якщо ставив - то 422, в іншому випадку ставимо
 		if ($is_unliked) {
+			return response()->json([
+				'message' => 'Даний користувач вже ставив дизлайк для цього судді'
+			], 422);
+		}
+		UsersUnlikesJudge::putUnlike($id);
+		return response()->json([
+			'message' => 'ОК'
+		], 201);
+	}
+	
+	
+	// todo привести до коректного вигляду
+	/**
+	 * Поставити дизлайк судді
+	 *
+	 * @param  int  $id
+	 * @return \Illuminate\Http\Response
+	 */
+	public function deleteUnlike($id) {
+		// перевіряємо чи користувач вже ставив дизлайк
+		$is_unliked = UsersUnlikesJudge::isUnlikedJudge($id);
+		
+		// якщо ставив - то прибираємо, в іншому випадку ставимо
+		if (!$is_unliked) {
 			$judge_data = UsersUnlikesJudge::deleteUnlike($id);
 			return (view('judges.judge-likes-unlikes')
 				->with(['judge' => $judge_data,
@@ -1109,6 +1135,9 @@ class JudgesController extends Controller
 				]));
 		}
 	}
+	
+	
+	
 	
 	
 	/**

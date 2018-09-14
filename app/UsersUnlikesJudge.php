@@ -30,14 +30,11 @@ class UsersUnlikesJudge extends Model
 	 * @return bool
 	 */
 	public static function isUnlikedJudge($judge) {
-		if (!Auth::check()) {
-			return (false);
-		}
 		$data_status = static::select('id')
 			->where('user', '=', Auth::user()->id)
 			->where('judge', '=', $judge)
 			->first();
-		return (($data_status && $data_status->id )  ? (true) : (false));
+		return (($data_status && $data_status->id )  ? true : false);
 	}
 	
 	

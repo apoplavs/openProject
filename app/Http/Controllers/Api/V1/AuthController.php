@@ -290,7 +290,7 @@ class AuthController extends Controller
 	 *         description="Токен успішно анульовано",
 	 *     	   examples={"application/json":
 	 *              {
-	 *     				"message": "Successfully logged out!"
+	 *     				"message": "Успішно вийшов із системи"
 	 *              }
 	 *     		}
 	 *     ),

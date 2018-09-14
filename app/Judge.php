@@ -226,7 +226,7 @@ class Judge extends Model
 
     public static function getJudgeIdByParsedName(int $courtCode, JudgeNameParsed $judgeNameParsed)
     {
-        $judgeId = Db::table('judges')
+        $judgeId = DB::table('judges')
             ->select('id')
             ->where('court', '=', $courtCode)
             ->where('surname', 'LIKE', $judgeNameParsed->surname)
@@ -235,7 +235,7 @@ class Judge extends Model
             ->value('id');
 
         if (empty($judgeId)) {
-            $judgeId = Db::table('judges')->insertGetId([
+            $judgeId = DB::table('judges')->insertGetId([
                 'court'         => $courtCode,
                 'surname'       => $judgeNameParsed->surname,
                 'name'          => $judgeNameParsed->name,
