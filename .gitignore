@@ -13,4 +13,5 @@ yarn-error.log
 .env
 composer.lock
 composer.json
-/ml/*
+/ml/pickles/*
+/venv/*
