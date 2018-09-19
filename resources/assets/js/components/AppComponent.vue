@@ -13,6 +13,7 @@
 
     export default {
         name: "app-component",
+        
 
         components: [
             HeaderComponent,

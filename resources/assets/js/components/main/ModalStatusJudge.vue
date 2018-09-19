@@ -39,7 +39,14 @@
             </div>
 </template>
 <script>
+
+export default {
+        name: 'modal-satus-judge',
+        // data: () => {
+            //return {}
+        // }
+}
 </script>
 
-<style>
+<style scoped lang="scss">
 </style>

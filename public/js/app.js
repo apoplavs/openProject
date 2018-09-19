@@ -69359,10 +69359,10 @@ if(false) {
 
 exports = module.exports = __webpack_require__(1)(false);
 // imports
-exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);", ""]);
+exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&subset=cyrillic);", ""]);
 
 // module
-exports.push([module.i, "\nbody {\n  background-color: #eceaea;\n  height: 100vh;\n}\n", ""]);
+exports.push([module.i, "\nbody {\n  background-color: #eceaea;\n  height: 100vh;\n  font-family: 'Roboto', sans-serif;\n  font-weight: 400;\n  font-style: normal;\n  color: #304040;\n}\n", ""]);
 
 // exports
 
@@ -69473,7 +69473,6 @@ exports.push([module.i, "\n.navbar-light[data-v-2810fc09] {\n    -webkit-box-sha
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
 //
 //
 //
@@ -70066,138 +70065,63 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "login",
-  data: function data() {
-    return {
-      user: {
-        email: "",
-        password: ""
-      }
-    };
-  },
-  beforeMount: function beforeMount() {
-    // -------------------------------
-    (function (d, s, id) {
-      var js,
-          fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s);js.id = id;
-      js.src = 'https://connect.facebook.net/ru_RU/sdk.js#xfbml=1&version=v3.1&appId=297048331072736&autoLogAppEvents=1';
-      fjs.parentNode.insertBefore(js, fjs);
-    })(document, 'script', 'facebook-jssdk');
-
-    window.fbAsyncInit = function () {
-      // Check whether the user already logged in
-
-
-      function checkLoginState() {
-        console.log("i'm here");
-        FB.getLoginStatus(function (response) {
-          console.log(response);
-          statusChangeCallback(response);
-        });
-      }
-    };
-    // Facebook login with JavaScript SDK
-    function fbLogin() {
-      FB.login(function (response) {
-        console.log(response);
-        if (response.authResponse) {
-          // Get and display the user profile data
-          console.log(getFbUserData());
-        } else {
-          document.getElementById("status").innerHTML = "User cancelled login or did not fully authorize.";
-        }
-      }, { scope: "email" });
-    }
-    function fbLogout() {
-      FB.logout(function () {
-        document.getElementById("fbLink").setAttribute("onclick", "fbLogin()");
-        document.getElementById("fbLink").innerHTML = '<img src="fblogin.png"/>';
-        document.getElementById("userData").innerHTML = "";
-        document.getElementById("status").innerHTML = "You have successfully logout from Facebook.";
-      });
-    }
-
-    // ---------------------------------
-  },
-
-  methods: {
-    onSignInSuccess: function onSignInSuccess(response) {
-      FB.api('/me', function (dude) {
-        console.log("Good to see you, " + dude.name + ".");
-      });
+    name: "login",
+    data: function data() {
+        return {
+            user: {
+                email: "",
+                password: ""
+            }
+        };
     },
-    onSignInError: function onSignInError(error) {
-      console.log('OH NOES', error);
-    },
-    validateBeforeSubmit: function validateBeforeSubmit() {
-      var _this = this;
+    methods: {
+        validateBeforeSubmit: function validateBeforeSubmit() {
+            var _this = this;
 
-      this.$validator.validateAll().then(function (result) {
-        if (result) {
-          axios.post("/api/v1/login", _this.user, {
-            headers: {
-              "Content-Type": "application/json",
-              "X-Requested-With": "XMLHttpRequest"
-            }
-          }).then(function (response) {
-            if (response) {
-              var token = response.data.token_type + " " + response.data.access_token;
-              localStorage.setItem("token", token);
-              _this.$router.push("/home");
-            }
-          }).catch(function (error) {
-            if (error.response && error.response) {
-              if (error.response.data && error.response.data.message) {
-                // console.error(error.response.data.message);
-                _this.$toasted.error(error.response.data.message, {
-                  theme: "primary",
-                  position: "top-right",
-                  duration: 5000
-                });
-              }
-            } else {
-              _this.$toasted.error("Щось пішло не так :( Cпробу", {
-                theme: "primary",
-                position: "top-right",
-                duration: 5000
-              });
-              alert("Something wrong:( Try again!");
-            }
-          });
+            this.$validator.validateAll().then(function (result) {
+                if (result) {
+                    axios.post('/api/v1/login', _this.user, {
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-Requested-With': 'XMLHttpRequest'
+                        }
+                    }).then(function (response) {
+                        if (response) {
+                            var token = response.data.token_type + " " + response.data.access_token;
+                            localStorage.setItem("token", token);
+                            _this.$router.push("/");
+                        }
+                    }).catch(function (error) {
+                        if (error.response && error.response) {
+                            if (error.response.data && error.response.data.message) {
+                                _this.$toasted.error(error.response.data.message, {
+                                    theme: "primary",
+                                    position: "top-right",
+                                    duration: 5000
+                                });
+                            }
+                        } else {
+                            _this.$toasted.error("Щось пішло не так :( Cпробу", {
+                                theme: "primary",
+                                position: "top-right",
+                                duration: 5000
+                            });
+                            alert("Something wrong:( Try again!");
+                        }
+                    });
+                } else {
+                    _this.$toasted.error('Заповніть коректно всі поля!', {
+                        theme: "primary",
+                        position: "top-right",
+                        duration: 5000
+                    });
+                }
+            });
         }
-      });
     }
-  }
-
 });
 
 /***/ }),
@@ -70240,7 +70164,7 @@ var render = function() {
                   },
                   [
                     _vm._v(
-                      "\n                        E-Mail\n                    "
+                      "\n                                        E-Mail\n                                    "
                     )
                   ]
                 ),
@@ -70319,7 +70243,7 @@ var render = function() {
                   },
                   [
                     _vm._v(
-                      "\n                        Пароль\n                    "
+                      "\n                                        Пароль\n                                    "
                     )
                   ]
                 ),
@@ -70401,7 +70325,7 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\n                            Увійти\n                        "
+                        "\n                                            Увійти\n                                        "
                       )
                     ]
                   ),
@@ -70467,7 +70391,7 @@ var staticRenderFns = [
           attrs: { type: "checkbox", name: "remember" }
         }),
         _vm._v(
-          "\n                        Запамятати мене\n                    "
+          "\n                                        Запамятати мене\n                                    "
         )
       ])
     ])
@@ -70670,10 +70594,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                             });
                         }
                     }).catch(function (error) {
-                        if (error.response && error.response.status === 422) {
+                        if (error.response && error.response.status) {
                             if (error.response.data && error.response.data.message) {
                                 console.error(error.response.data.message);
-                                _this.$toasted.error('Даний email вже зареєстований!', {
+                                _this.$toasted.error(error.response.data.message, {
                                     theme: "primary",
                                     position: "top-right",
                                     duration: 5000
@@ -70685,7 +70609,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                                 _this.$toasted.error('Щось пішло не так:( Спробуйте ще раз!', {
                                     theme: "primary",
                                     position: "top-right",
-                                    duration: 5000
+                                    duration: 10000
                                 });
                             }
                         }
@@ -70694,7 +70618,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     _this.$toasted.error('Заповніть коректно всі поля!', {
                         theme: "primary",
                         position: "top-right",
-                        duration: 5000
+                        duration: 10000
                     });
                 }
             });
@@ -71121,7 +71045,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* Стилі для фільтрів */\n#filters[data-v-e9915f2e] {\n  font-size: 0.9em;\n}\n#filters h6[data-v-e9915f2e] {\n  color: #4c88bd;\n}\n\n\n/* Customize the label (the container) */\n#filters ul label[data-v-e9915f2e] {\n  display: block;\n  position: relative;\n  padding-left: 35px;\n  margin-bottom: 10px;\n  cursor: pointer;\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  user-select: none;\n}\n\n\n/* Hide the browser's default checkbox */\n#filters ul input[data-v-e9915f2e] {\n  position: absolute;\n  opacity: 0;\n  cursor: pointer;\n}\n\n\n/* Create a custom checkbox */\n.checkmark[data-v-e9915f2e] {\n  position: absolute;\n  top: 0;\n  left: 0;\n  height: 21px;\n  width: 21px;\n  background-color: #eee;\n}\n\n\n/* When the checkbox is checked, add a blue background */\n#filters ul label input:checked~.checkmark[data-v-e9915f2e] {\n  background-color: #2b989b;\n}\n\n\n/* Create the checkmark/indicator (hidden when not checked) */\n.checkmark[data-v-e9915f2e]:after {\n  content: \"\";\n  position: absolute;\n  display: none;\n}\n\n\n/* Show the checkmark when checked */\n#filters ul label input:checked~.checkmark[data-v-e9915f2e]:after {\n  display: block;\n}\n\n\n/* Style the checkmark/indicator */\n#filters ul label .checkmark[data-v-e9915f2e]:after {\n  left: 9px;\n  top: 5px;\n  width: 5px;\n  height: 10px;\n  border: solid white;\n  border-width: 0 3px 3px 0;\n  -webkit-transform: rotate(45deg);\n  transform: rotate(45deg);\n}\n#apply-filters[data-v-e9915f2e] {\n  background-color: white;\n  position: -webkit-sticky;\n  position: sticky;\n  bottom: 0;\n}\n\n\n/* if display is bigger then 1200px, correct position */\n@media (min-width: 1200px) {\n}\n\n\n/* styles for page elements */\ndiv.col-12.col-lg-2>img[data-v-e9915f2e] {\n  width: 120px;\n  height: 120px;\n}\n#sorting-type[data-v-e9915f2e],\n.bookmark[data-v-e9915f2e],\n.fa-pencil[data-v-e9915f2e] {\n  cursor: pointer;\n}\n#sorting-type input[data-v-e9915f2e] {\n  display: none;\n}\ndiv.card-body.p-2 h5 a[data-v-e9915f2e] {\n  color: #3d7ee5;\n}\n\n\n/* if display is small then 992 hide part of pagination */\n@media (max-width: 992px) {\n.pagination li[data-v-e9915f2e]:nth-child(even) {\n    display: none;\n}\n}\n\n\n/* styles for font awesome */\n.fa-filter[data-v-e9915f2e] {\n  font-size: 21px;\n  color: #6291ba;\n}\n.fa-sort-alpha-asc[data-v-e9915f2e],\n.fa-sort-alpha-desc[data-v-e9915f2e] {\n  font-size: 18px;\n  color: #3d7ee5;\n}\n.fa-bookmark-o[data-v-e9915f2e],\n.fa-bookmark[data-v-e9915f2e] {\n  font-size: 18px;\n  color: #2b989b;\n}\n.fa-briefcase[data-v-e9915f2e] {\n  color: green;\n  font-size: 15px;\n}\n.fa-line-chart[data-v-e9915f2e] {\n  color: #6291ba;\n}\n.fa-medkit[data-v-e9915f2e] {\n  font-size: 17px;\n  color: red;\n}\n.fa-calendar-check-o[data-v-e9915f2e],\n.fa-calendar-minus-o[data-v-e9915f2e],\n.fa-calendar-times-o[data-v-e9915f2e] {\n  font-size: 17px;\n  color: #2b989b;\n}\n.fa-pencil[data-v-e9915f2e] {\n  color: #6c757d;\n  -webkit-transition-duration: 0.3s;\n  transition-duration: 0.3s;\n}\n.fa-pencil[data-v-e9915f2e]:hover {\n  color: #6291ba;\n  -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 0.5), inset 0 0 1px rgba(0, 0, 0, 0.7);\n          box-shadow: 0 0 3px rgba(0, 0, 0, 0.5), inset 0 0 1px rgba(0, 0, 0, 0.7);\n}\n\n\n/* styles for autocomplete field  */\n.autocomplete[data-v-e9915f2e] {\n  /*the container must be positioned relative:*/\n  position: relative;\n  display: inline-block;\n}\n.autocomplete-items[data-v-e9915f2e] {\n  position: absolute;\n  font-size: 0.9em;\n  border: 1px solid #d4d4d4;\n  border-bottom: none;\n  border-top: none;\n  z-index: 99;\n  /*position the autocomplete items to be the same width as the container:*/\n  top: 100%;\n  left: 0;\n  right: 0;\n  -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);\n          box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);\n}\n.autocomplete-items div[data-v-e9915f2e] {\n  padding: 10px;\n  cursor: pointer;\n  background-color: #fff;\n  border-bottom: 1px solid #d4d4d4;\n}\n.autocomplete-items div[data-v-e9915f2e]:hover {\n  /*when hovering an item:*/\n  background-color: #e9e9e9;\n}\n.autocomplete-active[data-v-e9915f2e] {\n  /*when navigating through the items using the arrow keys:*/\n  background-color: DodgerBlue !important;\n  color: #ffffff;\n}\n\n\n/* styles for pop-up form changing status */\nselect#chooser-judge-status[data-v-e9915f2e] {\n  font-family: \"FontAwesome\", Helvetica, serif;\n}\nselect#chooser-judge-status option[data-v-e9915f2e]:first-child {\n  color: green;\n}\nselect#chooser-judge-status option[data-v-e9915f2e]:nth-child(2) {\n  color: red;\n}\nselect#chooser-judge-status option[data-v-e9915f2e]:nth-child(3) {\n  color: #2b989b;\n}\nselect#chooser-judge-status option[data-v-e9915f2e]:nth-child(4) {\n  color: #2b989b;\n}\nselect#chooser-judge-status option[data-v-e9915f2e]:last-child {\n  color: #6291ba;\n}\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* Стилі для фільтрів */\n#filters[data-v-e9915f2e] {\n  font-size: 0.9em;\n}\n#filters h6[data-v-e9915f2e] {\n  color: #4c88bd;\n}\n\n\n/* Customize the label (the container) */\n#filters ul label[data-v-e9915f2e] {\n  display: block;\n  position: relative;\n  padding-left: 35px;\n  margin-bottom: 10px;\n  cursor: pointer;\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  user-select: none;\n}\n\n\n/* Hide the browser's default checkbox */\n#filters ul input[data-v-e9915f2e] {\n  position: absolute;\n  opacity: 0;\n  cursor: pointer;\n}\n\n\n/* Create a custom checkbox */\n.checkmark[data-v-e9915f2e] {\n  position: absolute;\n  top: 0;\n  left: 0;\n  height: 21px;\n  width: 21px;\n  background-color: #eee;\n}\n\n\n/* When the checkbox is checked, add a blue background */\n#filters ul label input:checked~.checkmark[data-v-e9915f2e] {\n  background-color: #2b989b;\n}\n\n\n/* Create the checkmark/indicator (hidden when not checked) */\n.checkmark[data-v-e9915f2e]:after {\n  content: \"\";\n  position: absolute;\n  display: none;\n}\n\n\n/* Show the checkmark when checked */\n#filters ul label input:checked~.checkmark[data-v-e9915f2e]:after {\n  display: block;\n}\n\n\n/* Style the checkmark/indicator */\n#filters ul label .checkmark[data-v-e9915f2e]:after {\n  left: 9px;\n  top: 5px;\n  width: 5px;\n  height: 10px;\n  border: solid white;\n  border-width: 0 3px 3px 0;\n  -webkit-transform: rotate(45deg);\n  transform: rotate(45deg);\n}\n#apply-filters[data-v-e9915f2e] {\n  background-color: white;\n  position: -webkit-sticky;\n  position: sticky;\n  bottom: 0;\n}\n\n\n/* if display is bigger then 1200px, correct position */\n@media (min-width: 1200px) {\n}\n\n\n/* styles for page elements */\ndiv.col-12.col-lg-2>img[data-v-e9915f2e] {\n  width: 120px;\n  height: 120px;\n}\n#sorting-type[data-v-e9915f2e],\n.bookmark[data-v-e9915f2e],\n.fa-pencil[data-v-e9915f2e] {\n  cursor: pointer;\n}\n#sorting-type input[data-v-e9915f2e] {\n  display: none;\n}\ndiv.card-body.p-2 h5 a[data-v-e9915f2e] {\n  color: #3d7ee5;\n}\n\n\n/* if display is small then 992 hide part of pagination */\n@media (max-width: 992px) {\n.pagination li[data-v-e9915f2e]:nth-child(even) {\n    display: none;\n}\n}\n\n\n/* styles for font awesome */\n.fa-filter[data-v-e9915f2e] {\n  font-size: 21px;\n  color: #6291ba;\n}\n.fa-sort-alpha-asc[data-v-e9915f2e],\n.fa-sort-alpha-desc[data-v-e9915f2e] {\n  font-size: 18px;\n  color: #3d7ee5;\n}\n.fa-bookmark-o[data-v-e9915f2e],\n.fa-bookmark[data-v-e9915f2e] {\n  font-size: 18px;\n  color: #2b989b;\n}\n.fa-briefcase[data-v-e9915f2e] {\n  color: green;\n  font-size: 15px;\n}\n.fa-line-chart[data-v-e9915f2e] {\n  color: #6291ba;\n}\n.fa-medkit[data-v-e9915f2e] {\n  font-size: 17px;\n  color: red;\n}\n.fa-calendar-check-o[data-v-e9915f2e],\n.fa-calendar-minus-o[data-v-e9915f2e],\n.fa-calendar-times-o[data-v-e9915f2e] {\n  font-size: 17px;\n  color: #2b989b;\n}\n.fa-pencil[data-v-e9915f2e] {\n  color: #6c757d;\n  -webkit-transition-duration: 0.3s;\n  transition-duration: 0.3s;\n}\n.fa-pencil[data-v-e9915f2e]:hover {\n  color: #6291ba;\n  -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 0.5), inset 0 0 1px rgba(0, 0, 0, 0.7);\n          box-shadow: 0 0 3px rgba(0, 0, 0, 0.5), inset 0 0 1px rgba(0, 0, 0, 0.7);\n}\n\n\n/* styles for autocomplete field  */\n.autocomplete[data-v-e9915f2e] {\n  /*the container must be positioned relative:*/\n  position: relative;\n  display: inline-block;\n}\n.autocomplete-items[data-v-e9915f2e] {\n  position: absolute;\n  font-size: 0.9em;\n  border: 1px solid #d4d4d4;\n  border-bottom: none;\n  border-top: none;\n  z-index: 99;\n  /*position the autocomplete items to be the same width as the container:*/\n  top: 100%;\n  left: 0;\n  right: 0;\n  -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);\n          box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);\n}\n.autocomplete-items div[data-v-e9915f2e] {\n  padding: 10px;\n  cursor: pointer;\n  background-color: #fff;\n  border-bottom: 1px solid #d4d4d4;\n}\n.autocomplete-items div[data-v-e9915f2e]:hover {\n  /*when hovering an item:*/\n  background-color: #e9e9e9;\n}\n.autocomplete-active[data-v-e9915f2e] {\n  /*when navigating through the items using the arrow keys:*/\n  background-color: DodgerBlue !important;\n  color: #ffffff;\n}\n\n\n/* styles for pop-up form changing status */\nselect#chooser-judge-status[data-v-e9915f2e] {\n  font-family: \"FontAwesome\", Helvetica, serif;\n}\nselect#chooser-judge-status option[data-v-e9915f2e]:first-child {\n  color: green;\n}\nselect#chooser-judge-status option[data-v-e9915f2e]:nth-child(2) {\n  color: red;\n}\nselect#chooser-judge-status option[data-v-e9915f2e]:nth-child(3) {\n  color: #2b989b;\n}\nselect#chooser-judge-status option[data-v-e9915f2e]:nth-child(4) {\n  color: #2b989b;\n}\nselect#chooser-judge-status option[data-v-e9915f2e]:last-child {\n  color: #6291ba;\n}\n", ""]);
 
 // exports
 
@@ -71279,6 +71203,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -71286,30 +71218,62 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   name: "judges-list",
   data: function data() {
     return {
-      page: 1,
-      regions: [],
+      params: {
+        page: 1,
+        regions: [],
+        jurisdiction: [],
+        instance: [],
+        search: "",
+        sort: 1,
+        expired: 0
+      },
       message: "",
-      judgesList: {}
-    };
-  },
-  beforeMount: function beforeMount() {
-    var _this = this;
-
-    // if (localStorage.getItem('token') === undefined)
-    axios.get("/api/v1/guest/judges/list", this.page, {
+      judgesList: {},
       headers: {
         "Content-Type": "application/json",
         "X-Requested-With": "XMLHttpRequest"
       }
-    }).then(function (response) {
-      _this.judgesList = response;
-      console.log(response);
-    }).catch(function (error) {
-      console.log(error);
-    });
+    };
+  },
+  beforeMount: function beforeMount() {
+    this.getJudgesList();
   },
 
-  methods: {},
+  methods: {
+    getJudgesList: function getJudgesList() {
+      var _this = this;
+
+      if (localStorage.getItem('token')) {
+        console.log('have token');
+        debugger;
+        // this.headers["Authorization"] = localStorage.getItem('token');
+        console.log('token------', localStorage.getItem('token'));
+        axios.get("/api/v1/judges/list", this.params.regions, this.params.instance, this.params.jurisdiction, this.params.search, this.params.sort, this.params.expired, this.params.page, {
+          "Content-Type": "application/json",
+          "X-Requested-With": "XMLHttpRequest",
+          "Authorization": localStorage.getItem('token')
+        }).then(function (response) {
+          _this.judgesList = response;
+          console.log(response);
+        }).catch(function (error) {
+          console.log('Каже що не авторизований пффф та Канеха');
+        });
+      } else {
+        console.log('no token');
+        axios.get("/api/v1/guest/judges/list", this.params.regions, this.params.instance, this.params.jurisdiction, this.params.search, this.params.sort, this.params.expired, this.params.page, this.headers).then(function (response) {
+          _this.judgesList = response;
+          console.log(response);
+        }).catch(function (error) {
+          console.log(error);
+          console.log('Ну нє не логінився я ще');
+        });
+      }
+    },
+    resetFilters: function resetFilters() {
+      this.params.regions = [];
+      this.params.instance = [], this.params.jurisdiction = [], this.params.expired = 0;
+    }
+  },
   components: {
     JudgeComponent: __WEBPACK_IMPORTED_MODULE_0__JudgeComponent_vue___default.a
   }
@@ -71453,10 +71417,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "judge-component",
+    data: function data() {
+        return {
+            isAuth: localStorage.getItem('token'),
+            headers: {
+                "Content-Type": "application/json",
+                "X-Requested-With": "XMLHttpRequest"
+            }
+        };
+    },
     props: ['list'],
     // data() {
     //     return {
@@ -71464,6 +71436,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     //     }
     // },
+    methods: {
+        changeBookmarkStatus: function changeBookmarkStatus(judge) {
+            console.log(judge);
+            // if (judge.is_bookmark === true) {
+            //     axios
+            //         .delete(`/api/v1//judges/${id}/bookmark`, this.headers)
+            //         .then(response => {
+
+            //             // console.log(response);
+            //         })
+            //         .catch(error => {
+            //             console.log(error);
+            //         });
+            // } else {
+
+            // }
+        }
+    },
     mounted: function mounted() {
         //  console.log('props ----- ', this.data);
 
@@ -71488,7 +71478,7 @@ var render = function() {
         ? _c(
             "div",
             { staticClass: "container" },
-            _vm._l(_vm.list.data.data, function(data, index) {
+            _vm._l(this.list.data.data, function(judge, index) {
               return _c(
                 "div",
                 { key: index, staticClass: "judge-component row py-3 " },
@@ -71497,7 +71487,7 @@ var render = function() {
                     _c("div", { staticClass: "mr-3" }, [
                       _c("img", {
                         staticClass: "avatar",
-                        attrs: { src: data.photo, alt: "фото" }
+                        attrs: { src: judge.photo, alt: "фото" }
                       })
                     ]),
                     _vm._v(" "),
@@ -71508,18 +71498,18 @@ var render = function() {
                           _c("router-link", { attrs: { to: "/" } }, [
                             _vm._v(
                               " " +
-                                _vm._s(data.surname) +
+                                _vm._s(judge.surname) +
                                 " " +
                                 _vm._s(
-                                  data.name.length > 1
-                                    ? data.name
-                                    : data.name + "."
+                                  judge.name.length > 1
+                                    ? judge.name
+                                    : judge.name + "."
                                 ) +
                                 " " +
                                 _vm._s(
-                                  data.patronymic.length > 1
-                                    ? data.patronymic
-                                    : data.patronymic + "."
+                                  judge.patronymic.length > 1
+                                    ? judge.patronymic
+                                    : judge.patronymic + "."
                                 ) +
                                 " "
                             )
@@ -71528,7 +71518,7 @@ var render = function() {
                         1
                       ),
                       _vm._v(" "),
-                      _c("h5", [_vm._v(_vm._s(data.court_name))])
+                      _c("h5", [_vm._v(_vm._s(judge.court_name))])
                     ])
                   ]),
                   _vm._v(" "),
@@ -71540,13 +71530,53 @@ var render = function() {
                           staticClass: "fa fa-line-chart",
                           attrs: { "aria-hidden": "true" }
                         },
-                        [_vm._v(" " + _vm._s(data.rating) + " ")]
+                        [_vm._v(" " + _vm._s(judge.rating) + " ")]
                       )
                     ]),
                     _vm._v(" "),
-                    _vm._m(0, true),
+                    _vm.isAuth
+                      ? _c("div", [
+                          judge.is_bookmark
+                            ? _c(
+                                "span",
+                                {
+                                  on: {
+                                    click: function($event) {
+                                      _vm.changeBookmarkStatus(judge)
+                                    }
+                                  }
+                                },
+                                [_vm._v("відстежується")]
+                              )
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _c("i", {
+                            staticClass: "fa fa-bookmark",
+                            attrs: { "aria-hidden": "true" }
+                          }),
+                          _vm._v(" "),
+                          !judge.is_bookmark
+                            ? _c(
+                                "span",
+                                {
+                                  on: {
+                                    click: function($event) {
+                                      _vm.changeBookmarkStatus(judge)
+                                    }
+                                  }
+                                },
+                                [_vm._v("відстежувати")]
+                              )
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _c("i", {
+                            staticClass: "fa fa-bookmark-o",
+                            attrs: { "aria-hidden": "true" }
+                          })
+                        ])
+                      : _vm._e(),
                     _vm._v(" "),
-                    _vm._m(1, true)
+                    _vm.isAuth ? _c("div", [_vm._m(0, true)]) : _vm._e()
                   ])
                 ]
               )
@@ -71561,30 +71591,16 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("span", [_vm._v("відстежувати")]),
-      _vm._v(" "),
+    return _c("span", { attrs: { title: "змінити статус судді" } }, [
+      _vm._v("Змінити статус судді"),
       _c("i", {
-        staticClass: "fa fa-bookmark-o",
-        attrs: { "aria-hidden": "true" }
+        staticClass: "fa fa-pencil p-1",
+        attrs: {
+          "aria-hidden": "true",
+          "data-toggle": "modal",
+          "data-target": "#changeJudgeStatus"
+        }
       })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("span", { attrs: { title: "змінити статус судді" } }, [
-        _c("i", {
-          staticClass: "fa fa-pencil p-1",
-          attrs: {
-            "aria-hidden": "true",
-            "data-toggle": "modal",
-            "data-target": "#changeJudgeStatus"
-          }
-        })
-      ])
     ])
   }
 ]
@@ -71606,7 +71622,49 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
-    _vm._m(0),
+    _c("div", { staticClass: "container mt-5" }, [
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "offset-lg-3 col-lg-9" }, [
+          _c("form", { attrs: { method: "get", autocomplete: "off" } }, [
+            _c("div", { staticClass: "form-row" }, [
+              _c(
+                "div",
+                { staticClass: "col-12 col-md-9 mb-2 mb-md-0 autocomplete" },
+                [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.params.search,
+                        expression: "params.search"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: {
+                      type: "search",
+                      id: "search-input",
+                      placeholder: "Пошук..."
+                    },
+                    domProps: { value: _vm.params.search },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.params, "search", $event.target.value)
+                      }
+                    }
+                  })
+                ]
+              ),
+              _vm._v(" "),
+              _vm._m(0)
+            ])
+          ])
+        ])
+      ])
+    ]),
     _vm._v(" "),
     _c("div", { staticClass: "container" }, [
       _c("div", { staticClass: "row" }, [
@@ -71621,11 +71679,365 @@ var render = function() {
                   attrs: { method: "get", id: "form-filters", name: "filters" }
                 },
                 [
-                  _vm._m(2),
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "col-lg-12" }, [
+                      _c("h6", [_vm._v("Інстанція")]),
+                      _vm._v(" "),
+                      _c("ul", { staticClass: "list-unstyled mb-0" }, [
+                        _c("li", [
+                          _c("label", [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.params.instance,
+                                  expression: "params.instance"
+                                }
+                              ],
+                              attrs: {
+                                type: "checkbox",
+                                value: "3",
+                                name: "instance"
+                              },
+                              domProps: {
+                                checked: Array.isArray(_vm.params.instance)
+                                  ? _vm._i(_vm.params.instance, "3") > -1
+                                  : _vm.params.instance
+                              },
+                              on: {
+                                change: function($event) {
+                                  var $$a = _vm.params.instance,
+                                    $$el = $event.target,
+                                    $$c = $$el.checked ? true : false
+                                  if (Array.isArray($$a)) {
+                                    var $$v = "3",
+                                      $$i = _vm._i($$a, $$v)
+                                    if ($$el.checked) {
+                                      $$i < 0 &&
+                                        _vm.$set(
+                                          _vm.params,
+                                          "instance",
+                                          $$a.concat([$$v])
+                                        )
+                                    } else {
+                                      $$i > -1 &&
+                                        _vm.$set(
+                                          _vm.params,
+                                          "instance",
+                                          $$a
+                                            .slice(0, $$i)
+                                            .concat($$a.slice($$i + 1))
+                                        )
+                                    }
+                                  } else {
+                                    _vm.$set(_vm.params, "instance", $$c)
+                                  }
+                                }
+                              }
+                            }),
+                            _c("span", { staticClass: "checkmark" }),
+                            _vm._v(" Перша")
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("li", [
+                          _c("label", [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.params.instance,
+                                  expression: "params.instance"
+                                }
+                              ],
+                              attrs: {
+                                type: "checkbox",
+                                value: "2",
+                                name: "instance"
+                              },
+                              domProps: {
+                                checked: Array.isArray(_vm.params.instance)
+                                  ? _vm._i(_vm.params.instance, "2") > -1
+                                  : _vm.params.instance
+                              },
+                              on: {
+                                change: function($event) {
+                                  var $$a = _vm.params.instance,
+                                    $$el = $event.target,
+                                    $$c = $$el.checked ? true : false
+                                  if (Array.isArray($$a)) {
+                                    var $$v = "2",
+                                      $$i = _vm._i($$a, $$v)
+                                    if ($$el.checked) {
+                                      $$i < 0 &&
+                                        _vm.$set(
+                                          _vm.params,
+                                          "instance",
+                                          $$a.concat([$$v])
+                                        )
+                                    } else {
+                                      $$i > -1 &&
+                                        _vm.$set(
+                                          _vm.params,
+                                          "instance",
+                                          $$a
+                                            .slice(0, $$i)
+                                            .concat($$a.slice($$i + 1))
+                                        )
+                                    }
+                                  } else {
+                                    _vm.$set(_vm.params, "instance", $$c)
+                                  }
+                                }
+                              }
+                            }),
+                            _c("span", { staticClass: "checkmark" }),
+                            _vm._v(" Апеляційна")
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("li", [
+                          _c("label", [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.params.instance,
+                                  expression: "params.instance"
+                                }
+                              ],
+                              attrs: {
+                                type: "checkbox",
+                                value: "1",
+                                name: "instance"
+                              },
+                              domProps: {
+                                checked: Array.isArray(_vm.params.instance)
+                                  ? _vm._i(_vm.params.instance, "1") > -1
+                                  : _vm.params.instance
+                              },
+                              on: {
+                                change: function($event) {
+                                  var $$a = _vm.params.instance,
+                                    $$el = $event.target,
+                                    $$c = $$el.checked ? true : false
+                                  if (Array.isArray($$a)) {
+                                    var $$v = "1",
+                                      $$i = _vm._i($$a, $$v)
+                                    if ($$el.checked) {
+                                      $$i < 0 &&
+                                        _vm.$set(
+                                          _vm.params,
+                                          "instance",
+                                          $$a.concat([$$v])
+                                        )
+                                    } else {
+                                      $$i > -1 &&
+                                        _vm.$set(
+                                          _vm.params,
+                                          "instance",
+                                          $$a
+                                            .slice(0, $$i)
+                                            .concat($$a.slice($$i + 1))
+                                        )
+                                    }
+                                  } else {
+                                    _vm.$set(_vm.params, "instance", $$c)
+                                  }
+                                }
+                              }
+                            }),
+                            _c("span", { staticClass: "checkmark" }),
+                            _vm._v(" Касаційна")
+                          ])
+                        ])
+                      ])
+                    ])
+                  ]),
                   _vm._v(" "),
                   _c("hr"),
                   _vm._v(" "),
-                  _vm._m(3),
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "col-lg-12" }, [
+                      _c("h6", [_vm._v("Юрисдикція")]),
+                      _vm._v(" "),
+                      _c("ul", { staticClass: "list-unstyled mb-0" }, [
+                        _c("li", [
+                          _c("label", [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.params.jurisdiction,
+                                  expression: "params.jurisdiction"
+                                }
+                              ],
+                              attrs: {
+                                type: "checkbox",
+                                value: "3",
+                                name: "jurisdiction"
+                              },
+                              domProps: {
+                                checked: Array.isArray(_vm.params.jurisdiction)
+                                  ? _vm._i(_vm.params.jurisdiction, "3") > -1
+                                  : _vm.params.jurisdiction
+                              },
+                              on: {
+                                change: function($event) {
+                                  var $$a = _vm.params.jurisdiction,
+                                    $$el = $event.target,
+                                    $$c = $$el.checked ? true : false
+                                  if (Array.isArray($$a)) {
+                                    var $$v = "3",
+                                      $$i = _vm._i($$a, $$v)
+                                    if ($$el.checked) {
+                                      $$i < 0 &&
+                                        _vm.$set(
+                                          _vm.params,
+                                          "jurisdiction",
+                                          $$a.concat([$$v])
+                                        )
+                                    } else {
+                                      $$i > -1 &&
+                                        _vm.$set(
+                                          _vm.params,
+                                          "jurisdiction",
+                                          $$a
+                                            .slice(0, $$i)
+                                            .concat($$a.slice($$i + 1))
+                                        )
+                                    }
+                                  } else {
+                                    _vm.$set(_vm.params, "jurisdiction", $$c)
+                                  }
+                                }
+                              }
+                            }),
+                            _c("span", { staticClass: "checkmark" }),
+                            _vm._v(" Господарська")
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("li", [
+                          _c("label", [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.params.jurisdiction,
+                                  expression: "params.jurisdiction"
+                                }
+                              ],
+                              attrs: {
+                                type: "checkbox",
+                                value: "2",
+                                name: "jurisdiction"
+                              },
+                              domProps: {
+                                checked: Array.isArray(_vm.params.jurisdiction)
+                                  ? _vm._i(_vm.params.jurisdiction, "2") > -1
+                                  : _vm.params.jurisdiction
+                              },
+                              on: {
+                                change: function($event) {
+                                  var $$a = _vm.params.jurisdiction,
+                                    $$el = $event.target,
+                                    $$c = $$el.checked ? true : false
+                                  if (Array.isArray($$a)) {
+                                    var $$v = "2",
+                                      $$i = _vm._i($$a, $$v)
+                                    if ($$el.checked) {
+                                      $$i < 0 &&
+                                        _vm.$set(
+                                          _vm.params,
+                                          "jurisdiction",
+                                          $$a.concat([$$v])
+                                        )
+                                    } else {
+                                      $$i > -1 &&
+                                        _vm.$set(
+                                          _vm.params,
+                                          "jurisdiction",
+                                          $$a
+                                            .slice(0, $$i)
+                                            .concat($$a.slice($$i + 1))
+                                        )
+                                    }
+                                  } else {
+                                    _vm.$set(_vm.params, "jurisdiction", $$c)
+                                  }
+                                }
+                              }
+                            }),
+                            _c("span", { staticClass: "checkmark" }),
+                            _vm._v(" Адміністративна")
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("li", [
+                          _c("label", [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.params.jurisdiction,
+                                  expression: "params.jurisdiction"
+                                }
+                              ],
+                              attrs: {
+                                type: "checkbox",
+                                value: "1",
+                                name: "jurisdiction"
+                              },
+                              domProps: {
+                                checked: Array.isArray(_vm.params.jurisdiction)
+                                  ? _vm._i(_vm.params.jurisdiction, "1") > -1
+                                  : _vm.params.jurisdiction
+                              },
+                              on: {
+                                change: function($event) {
+                                  var $$a = _vm.params.jurisdiction,
+                                    $$el = $event.target,
+                                    $$c = $$el.checked ? true : false
+                                  if (Array.isArray($$a)) {
+                                    var $$v = "1",
+                                      $$i = _vm._i($$a, $$v)
+                                    if ($$el.checked) {
+                                      $$i < 0 &&
+                                        _vm.$set(
+                                          _vm.params,
+                                          "jurisdiction",
+                                          $$a.concat([$$v])
+                                        )
+                                    } else {
+                                      $$i > -1 &&
+                                        _vm.$set(
+                                          _vm.params,
+                                          "jurisdiction",
+                                          $$a
+                                            .slice(0, $$i)
+                                            .concat($$a.slice($$i + 1))
+                                        )
+                                    }
+                                  } else {
+                                    _vm.$set(_vm.params, "jurisdiction", $$c)
+                                  }
+                                }
+                              }
+                            }),
+                            _c("span", { staticClass: "checkmark" }),
+                            _vm._v(" Загальна")
+                          ])
+                        ])
+                      ])
+                    ])
+                  ]),
                   _vm._v(" "),
                   _c("hr"),
                   _vm._v(" "),
@@ -71641,8 +72053,8 @@ var render = function() {
                                 {
                                   name: "model",
                                   rawName: "v-model",
-                                  value: _vm.regions,
-                                  expression: "regions"
+                                  value: _vm.params.regions,
+                                  expression: "params.regions"
                                 }
                               ],
                               attrs: {
@@ -71651,13 +72063,13 @@ var render = function() {
                                 name: "region"
                               },
                               domProps: {
-                                checked: Array.isArray(_vm.regions)
-                                  ? _vm._i(_vm.regions, "2") > -1
-                                  : _vm.regions
+                                checked: Array.isArray(_vm.params.regions)
+                                  ? _vm._i(_vm.params.regions, "2") > -1
+                                  : _vm.params.regions
                               },
                               on: {
                                 change: function($event) {
-                                  var $$a = _vm.regions,
+                                  var $$a = _vm.params.regions,
                                     $$el = $event.target,
                                     $$c = $$el.checked ? true : false
                                   if (Array.isArray($$a)) {
@@ -71665,15 +72077,23 @@ var render = function() {
                                       $$i = _vm._i($$a, $$v)
                                     if ($$el.checked) {
                                       $$i < 0 &&
-                                        (_vm.regions = $$a.concat([$$v]))
+                                        _vm.$set(
+                                          _vm.params,
+                                          "regions",
+                                          $$a.concat([$$v])
+                                        )
                                     } else {
                                       $$i > -1 &&
-                                        (_vm.regions = $$a
-                                          .slice(0, $$i)
-                                          .concat($$a.slice($$i + 1)))
+                                        _vm.$set(
+                                          _vm.params,
+                                          "regions",
+                                          $$a
+                                            .slice(0, $$i)
+                                            .concat($$a.slice($$i + 1))
+                                        )
                                     }
                                   } else {
-                                    _vm.regions = $$c
+                                    _vm.$set(_vm.params, "regions", $$c)
                                   }
                                 }
                               }
@@ -71690,8 +72110,8 @@ var render = function() {
                                 {
                                   name: "model",
                                   rawName: "v-model",
-                                  value: _vm.regions,
-                                  expression: "regions"
+                                  value: _vm.params.regions,
+                                  expression: "params.regions"
                                 }
                               ],
                               attrs: {
@@ -71700,13 +72120,13 @@ var render = function() {
                                 name: "region"
                               },
                               domProps: {
-                                checked: Array.isArray(_vm.regions)
-                                  ? _vm._i(_vm.regions, "3") > -1
-                                  : _vm.regions
+                                checked: Array.isArray(_vm.params.regions)
+                                  ? _vm._i(_vm.params.regions, "3") > -1
+                                  : _vm.params.regions
                               },
                               on: {
                                 change: function($event) {
-                                  var $$a = _vm.regions,
+                                  var $$a = _vm.params.regions,
                                     $$el = $event.target,
                                     $$c = $$el.checked ? true : false
                                   if (Array.isArray($$a)) {
@@ -71714,15 +72134,23 @@ var render = function() {
                                       $$i = _vm._i($$a, $$v)
                                     if ($$el.checked) {
                                       $$i < 0 &&
-                                        (_vm.regions = $$a.concat([$$v]))
+                                        _vm.$set(
+                                          _vm.params,
+                                          "regions",
+                                          $$a.concat([$$v])
+                                        )
                                     } else {
                                       $$i > -1 &&
-                                        (_vm.regions = $$a
-                                          .slice(0, $$i)
-                                          .concat($$a.slice($$i + 1)))
+                                        _vm.$set(
+                                          _vm.params,
+                                          "regions",
+                                          $$a
+                                            .slice(0, $$i)
+                                            .concat($$a.slice($$i + 1))
+                                        )
                                     }
                                   } else {
-                                    _vm.regions = $$c
+                                    _vm.$set(_vm.params, "regions", $$c)
                                   }
                                 }
                               }
@@ -71739,8 +72167,8 @@ var render = function() {
                                 {
                                   name: "model",
                                   rawName: "v-model",
-                                  value: _vm.regions,
-                                  expression: "regions"
+                                  value: _vm.params.regions,
+                                  expression: "params.regions"
                                 }
                               ],
                               attrs: {
@@ -71749,13 +72177,13 @@ var render = function() {
                                 name: "region"
                               },
                               domProps: {
-                                checked: Array.isArray(_vm.regions)
-                                  ? _vm._i(_vm.regions, "4") > -1
-                                  : _vm.regions
+                                checked: Array.isArray(_vm.params.regions)
+                                  ? _vm._i(_vm.params.regions, "4") > -1
+                                  : _vm.params.regions
                               },
                               on: {
                                 change: function($event) {
-                                  var $$a = _vm.regions,
+                                  var $$a = _vm.params.regions,
                                     $$el = $event.target,
                                     $$c = $$el.checked ? true : false
                                   if (Array.isArray($$a)) {
@@ -71763,15 +72191,23 @@ var render = function() {
                                       $$i = _vm._i($$a, $$v)
                                     if ($$el.checked) {
                                       $$i < 0 &&
-                                        (_vm.regions = $$a.concat([$$v]))
+                                        _vm.$set(
+                                          _vm.params,
+                                          "regions",
+                                          $$a.concat([$$v])
+                                        )
                                     } else {
                                       $$i > -1 &&
-                                        (_vm.regions = $$a
-                                          .slice(0, $$i)
-                                          .concat($$a.slice($$i + 1)))
+                                        _vm.$set(
+                                          _vm.params,
+                                          "regions",
+                                          $$a
+                                            .slice(0, $$i)
+                                            .concat($$a.slice($$i + 1))
+                                        )
                                     }
                                   } else {
-                                    _vm.regions = $$c
+                                    _vm.$set(_vm.params, "regions", $$c)
                                   }
                                 }
                               }
@@ -71788,8 +72224,8 @@ var render = function() {
                                 {
                                   name: "model",
                                   rawName: "v-model",
-                                  value: _vm.regions,
-                                  expression: "regions"
+                                  value: _vm.params.regions,
+                                  expression: "params.regions"
                                 }
                               ],
                               attrs: {
@@ -71798,13 +72234,13 @@ var render = function() {
                                 name: "region"
                               },
                               domProps: {
-                                checked: Array.isArray(_vm.regions)
-                                  ? _vm._i(_vm.regions, "5") > -1
-                                  : _vm.regions
+                                checked: Array.isArray(_vm.params.regions)
+                                  ? _vm._i(_vm.params.regions, "5") > -1
+                                  : _vm.params.regions
                               },
                               on: {
                                 change: function($event) {
-                                  var $$a = _vm.regions,
+                                  var $$a = _vm.params.regions,
                                     $$el = $event.target,
                                     $$c = $$el.checked ? true : false
                                   if (Array.isArray($$a)) {
@@ -71812,15 +72248,23 @@ var render = function() {
                                       $$i = _vm._i($$a, $$v)
                                     if ($$el.checked) {
                                       $$i < 0 &&
-                                        (_vm.regions = $$a.concat([$$v]))
+                                        _vm.$set(
+                                          _vm.params,
+                                          "regions",
+                                          $$a.concat([$$v])
+                                        )
                                     } else {
                                       $$i > -1 &&
-                                        (_vm.regions = $$a
-                                          .slice(0, $$i)
-                                          .concat($$a.slice($$i + 1)))
+                                        _vm.$set(
+                                          _vm.params,
+                                          "regions",
+                                          $$a
+                                            .slice(0, $$i)
+                                            .concat($$a.slice($$i + 1))
+                                        )
                                     }
                                   } else {
-                                    _vm.regions = $$c
+                                    _vm.$set(_vm.params, "regions", $$c)
                                   }
                                 }
                               }
@@ -71837,8 +72281,8 @@ var render = function() {
                                 {
                                   name: "model",
                                   rawName: "v-model",
-                                  value: _vm.regions,
-                                  expression: "regions"
+                                  value: _vm.params.regions,
+                                  expression: "params.regions"
                                 }
                               ],
                               attrs: {
@@ -71847,13 +72291,13 @@ var render = function() {
                                 name: "region"
                               },
                               domProps: {
-                                checked: Array.isArray(_vm.regions)
-                                  ? _vm._i(_vm.regions, "6") > -1
-                                  : _vm.regions
+                                checked: Array.isArray(_vm.params.regions)
+                                  ? _vm._i(_vm.params.regions, "6") > -1
+                                  : _vm.params.regions
                               },
                               on: {
                                 change: function($event) {
-                                  var $$a = _vm.regions,
+                                  var $$a = _vm.params.regions,
                                     $$el = $event.target,
                                     $$c = $$el.checked ? true : false
                                   if (Array.isArray($$a)) {
@@ -71861,15 +72305,23 @@ var render = function() {
                                       $$i = _vm._i($$a, $$v)
                                     if ($$el.checked) {
                                       $$i < 0 &&
-                                        (_vm.regions = $$a.concat([$$v]))
+                                        _vm.$set(
+                                          _vm.params,
+                                          "regions",
+                                          $$a.concat([$$v])
+                                        )
                                     } else {
                                       $$i > -1 &&
-                                        (_vm.regions = $$a
-                                          .slice(0, $$i)
-                                          .concat($$a.slice($$i + 1)))
+                                        _vm.$set(
+                                          _vm.params,
+                                          "regions",
+                                          $$a
+                                            .slice(0, $$i)
+                                            .concat($$a.slice($$i + 1))
+                                        )
                                     }
                                   } else {
-                                    _vm.regions = $$c
+                                    _vm.$set(_vm.params, "regions", $$c)
                                   }
                                 }
                               }
@@ -71886,8 +72338,8 @@ var render = function() {
                                 {
                                   name: "model",
                                   rawName: "v-model",
-                                  value: _vm.regions,
-                                  expression: "regions"
+                                  value: _vm.params.regions,
+                                  expression: "params.regions"
                                 }
                               ],
                               attrs: {
@@ -71896,13 +72348,13 @@ var render = function() {
                                 name: "region"
                               },
                               domProps: {
-                                checked: Array.isArray(_vm.regions)
-                                  ? _vm._i(_vm.regions, "7") > -1
-                                  : _vm.regions
+                                checked: Array.isArray(_vm.params.regions)
+                                  ? _vm._i(_vm.params.regions, "7") > -1
+                                  : _vm.params.regions
                               },
                               on: {
                                 change: function($event) {
-                                  var $$a = _vm.regions,
+                                  var $$a = _vm.params.regions,
                                     $$el = $event.target,
                                     $$c = $$el.checked ? true : false
                                   if (Array.isArray($$a)) {
@@ -71910,15 +72362,23 @@ var render = function() {
                                       $$i = _vm._i($$a, $$v)
                                     if ($$el.checked) {
                                       $$i < 0 &&
-                                        (_vm.regions = $$a.concat([$$v]))
+                                        _vm.$set(
+                                          _vm.params,
+                                          "regions",
+                                          $$a.concat([$$v])
+                                        )
                                     } else {
                                       $$i > -1 &&
-                                        (_vm.regions = $$a
-                                          .slice(0, $$i)
-                                          .concat($$a.slice($$i + 1)))
+                                        _vm.$set(
+                                          _vm.params,
+                                          "regions",
+                                          $$a
+                                            .slice(0, $$i)
+                                            .concat($$a.slice($$i + 1))
+                                        )
                                     }
                                   } else {
-                                    _vm.regions = $$c
+                                    _vm.$set(_vm.params, "regions", $$c)
                                   }
                                 }
                               }
@@ -71935,8 +72395,8 @@ var render = function() {
                                 {
                                   name: "model",
                                   rawName: "v-model",
-                                  value: _vm.regions,
-                                  expression: "regions"
+                                  value: _vm.params.regions,
+                                  expression: "params.regions"
                                 }
                               ],
                               attrs: {
@@ -71945,13 +72405,13 @@ var render = function() {
                                 name: "region"
                               },
                               domProps: {
-                                checked: Array.isArray(_vm.regions)
-                                  ? _vm._i(_vm.regions, "8") > -1
-                                  : _vm.regions
+                                checked: Array.isArray(_vm.params.regions)
+                                  ? _vm._i(_vm.params.regions, "8") > -1
+                                  : _vm.params.regions
                               },
                               on: {
                                 change: function($event) {
-                                  var $$a = _vm.regions,
+                                  var $$a = _vm.params.regions,
                                     $$el = $event.target,
                                     $$c = $$el.checked ? true : false
                                   if (Array.isArray($$a)) {
@@ -71959,15 +72419,23 @@ var render = function() {
                                       $$i = _vm._i($$a, $$v)
                                     if ($$el.checked) {
                                       $$i < 0 &&
-                                        (_vm.regions = $$a.concat([$$v]))
+                                        _vm.$set(
+                                          _vm.params,
+                                          "regions",
+                                          $$a.concat([$$v])
+                                        )
                                     } else {
                                       $$i > -1 &&
-                                        (_vm.regions = $$a
-                                          .slice(0, $$i)
-                                          .concat($$a.slice($$i + 1)))
+                                        _vm.$set(
+                                          _vm.params,
+                                          "regions",
+                                          $$a
+                                            .slice(0, $$i)
+                                            .concat($$a.slice($$i + 1))
+                                        )
                                     }
                                   } else {
-                                    _vm.regions = $$c
+                                    _vm.$set(_vm.params, "regions", $$c)
                                   }
                                 }
                               }
@@ -71984,8 +72452,8 @@ var render = function() {
                                 {
                                   name: "model",
                                   rawName: "v-model",
-                                  value: _vm.regions,
-                                  expression: "regions"
+                                  value: _vm.params.regions,
+                                  expression: "params.regions"
                                 }
                               ],
                               attrs: {
@@ -71994,13 +72462,13 @@ var render = function() {
                                 name: "region"
                               },
                               domProps: {
-                                checked: Array.isArray(_vm.regions)
-                                  ? _vm._i(_vm.regions, "9") > -1
-                                  : _vm.regions
+                                checked: Array.isArray(_vm.params.regions)
+                                  ? _vm._i(_vm.params.regions, "9") > -1
+                                  : _vm.params.regions
                               },
                               on: {
                                 change: function($event) {
-                                  var $$a = _vm.regions,
+                                  var $$a = _vm.params.regions,
                                     $$el = $event.target,
                                     $$c = $$el.checked ? true : false
                                   if (Array.isArray($$a)) {
@@ -72008,15 +72476,23 @@ var render = function() {
                                       $$i = _vm._i($$a, $$v)
                                     if ($$el.checked) {
                                       $$i < 0 &&
-                                        (_vm.regions = $$a.concat([$$v]))
+                                        _vm.$set(
+                                          _vm.params,
+                                          "regions",
+                                          $$a.concat([$$v])
+                                        )
                                     } else {
                                       $$i > -1 &&
-                                        (_vm.regions = $$a
-                                          .slice(0, $$i)
-                                          .concat($$a.slice($$i + 1)))
+                                        _vm.$set(
+                                          _vm.params,
+                                          "regions",
+                                          $$a
+                                            .slice(0, $$i)
+                                            .concat($$a.slice($$i + 1))
+                                        )
                                     }
                                   } else {
-                                    _vm.regions = $$c
+                                    _vm.$set(_vm.params, "regions", $$c)
                                   }
                                 }
                               }
@@ -72033,8 +72509,8 @@ var render = function() {
                                 {
                                   name: "model",
                                   rawName: "v-model",
-                                  value: _vm.regions,
-                                  expression: "regions"
+                                  value: _vm.params.regions,
+                                  expression: "params.regions"
                                 }
                               ],
                               attrs: {
@@ -72043,13 +72519,13 @@ var render = function() {
                                 name: "region"
                               },
                               domProps: {
-                                checked: Array.isArray(_vm.regions)
-                                  ? _vm._i(_vm.regions, "10") > -1
-                                  : _vm.regions
+                                checked: Array.isArray(_vm.params.regions)
+                                  ? _vm._i(_vm.params.regions, "10") > -1
+                                  : _vm.params.regions
                               },
                               on: {
                                 change: function($event) {
-                                  var $$a = _vm.regions,
+                                  var $$a = _vm.params.regions,
                                     $$el = $event.target,
                                     $$c = $$el.checked ? true : false
                                   if (Array.isArray($$a)) {
@@ -72057,15 +72533,23 @@ var render = function() {
                                       $$i = _vm._i($$a, $$v)
                                     if ($$el.checked) {
                                       $$i < 0 &&
-                                        (_vm.regions = $$a.concat([$$v]))
+                                        _vm.$set(
+                                          _vm.params,
+                                          "regions",
+                                          $$a.concat([$$v])
+                                        )
                                     } else {
                                       $$i > -1 &&
-                                        (_vm.regions = $$a
-                                          .slice(0, $$i)
-                                          .concat($$a.slice($$i + 1)))
+                                        _vm.$set(
+                                          _vm.params,
+                                          "regions",
+                                          $$a
+                                            .slice(0, $$i)
+                                            .concat($$a.slice($$i + 1))
+                                        )
                                     }
                                   } else {
-                                    _vm.regions = $$c
+                                    _vm.$set(_vm.params, "regions", $$c)
                                   }
                                 }
                               }
@@ -72082,8 +72566,8 @@ var render = function() {
                                 {
                                   name: "model",
                                   rawName: "v-model",
-                                  value: _vm.regions,
-                                  expression: "regions"
+                                  value: _vm.params.regions,
+                                  expression: "params.regions"
                                 }
                               ],
                               attrs: {
@@ -72092,13 +72576,13 @@ var render = function() {
                                 name: "region"
                               },
                               domProps: {
-                                checked: Array.isArray(_vm.regions)
-                                  ? _vm._i(_vm.regions, "11") > -1
-                                  : _vm.regions
+                                checked: Array.isArray(_vm.params.regions)
+                                  ? _vm._i(_vm.params.regions, "11") > -1
+                                  : _vm.params.regions
                               },
                               on: {
                                 change: function($event) {
-                                  var $$a = _vm.regions,
+                                  var $$a = _vm.params.regions,
                                     $$el = $event.target,
                                     $$c = $$el.checked ? true : false
                                   if (Array.isArray($$a)) {
@@ -72106,15 +72590,23 @@ var render = function() {
                                       $$i = _vm._i($$a, $$v)
                                     if ($$el.checked) {
                                       $$i < 0 &&
-                                        (_vm.regions = $$a.concat([$$v]))
+                                        _vm.$set(
+                                          _vm.params,
+                                          "regions",
+                                          $$a.concat([$$v])
+                                        )
                                     } else {
                                       $$i > -1 &&
-                                        (_vm.regions = $$a
-                                          .slice(0, $$i)
-                                          .concat($$a.slice($$i + 1)))
+                                        _vm.$set(
+                                          _vm.params,
+                                          "regions",
+                                          $$a
+                                            .slice(0, $$i)
+                                            .concat($$a.slice($$i + 1))
+                                        )
                                     }
                                   } else {
-                                    _vm.regions = $$c
+                                    _vm.$set(_vm.params, "regions", $$c)
                                   }
                                 }
                               }
@@ -72131,8 +72623,8 @@ var render = function() {
                                 {
                                   name: "model",
                                   rawName: "v-model",
-                                  value: _vm.regions,
-                                  expression: "regions"
+                                  value: _vm.params.regions,
+                                  expression: "params.regions"
                                 }
                               ],
                               attrs: {
@@ -72141,13 +72633,13 @@ var render = function() {
                                 name: "region"
                               },
                               domProps: {
-                                checked: Array.isArray(_vm.regions)
-                                  ? _vm._i(_vm.regions, "12") > -1
-                                  : _vm.regions
+                                checked: Array.isArray(_vm.params.regions)
+                                  ? _vm._i(_vm.params.regions, "12") > -1
+                                  : _vm.params.regions
                               },
                               on: {
                                 change: function($event) {
-                                  var $$a = _vm.regions,
+                                  var $$a = _vm.params.regions,
                                     $$el = $event.target,
                                     $$c = $$el.checked ? true : false
                                   if (Array.isArray($$a)) {
@@ -72155,15 +72647,23 @@ var render = function() {
                                       $$i = _vm._i($$a, $$v)
                                     if ($$el.checked) {
                                       $$i < 0 &&
-                                        (_vm.regions = $$a.concat([$$v]))
+                                        _vm.$set(
+                                          _vm.params,
+                                          "regions",
+                                          $$a.concat([$$v])
+                                        )
                                     } else {
                                       $$i > -1 &&
-                                        (_vm.regions = $$a
-                                          .slice(0, $$i)
-                                          .concat($$a.slice($$i + 1)))
+                                        _vm.$set(
+                                          _vm.params,
+                                          "regions",
+                                          $$a
+                                            .slice(0, $$i)
+                                            .concat($$a.slice($$i + 1))
+                                        )
                                     }
                                   } else {
-                                    _vm.regions = $$c
+                                    _vm.$set(_vm.params, "regions", $$c)
                                   }
                                 }
                               }
@@ -72180,8 +72680,8 @@ var render = function() {
                                 {
                                   name: "model",
                                   rawName: "v-model",
-                                  value: _vm.regions,
-                                  expression: "regions"
+                                  value: _vm.params.regions,
+                                  expression: "params.regions"
                                 }
                               ],
                               attrs: {
@@ -72190,13 +72690,13 @@ var render = function() {
                                 name: "region"
                               },
                               domProps: {
-                                checked: Array.isArray(_vm.regions)
-                                  ? _vm._i(_vm.regions, "13") > -1
-                                  : _vm.regions
+                                checked: Array.isArray(_vm.params.regions)
+                                  ? _vm._i(_vm.params.regions, "13") > -1
+                                  : _vm.params.regions
                               },
                               on: {
                                 change: function($event) {
-                                  var $$a = _vm.regions,
+                                  var $$a = _vm.params.regions,
                                     $$el = $event.target,
                                     $$c = $$el.checked ? true : false
                                   if (Array.isArray($$a)) {
@@ -72204,15 +72704,23 @@ var render = function() {
                                       $$i = _vm._i($$a, $$v)
                                     if ($$el.checked) {
                                       $$i < 0 &&
-                                        (_vm.regions = $$a.concat([$$v]))
+                                        _vm.$set(
+                                          _vm.params,
+                                          "regions",
+                                          $$a.concat([$$v])
+                                        )
                                     } else {
                                       $$i > -1 &&
-                                        (_vm.regions = $$a
-                                          .slice(0, $$i)
-                                          .concat($$a.slice($$i + 1)))
+                                        _vm.$set(
+                                          _vm.params,
+                                          "regions",
+                                          $$a
+                                            .slice(0, $$i)
+                                            .concat($$a.slice($$i + 1))
+                                        )
                                     }
                                   } else {
-                                    _vm.regions = $$c
+                                    _vm.$set(_vm.params, "regions", $$c)
                                   }
                                 }
                               }
@@ -72229,8 +72737,8 @@ var render = function() {
                                 {
                                   name: "model",
                                   rawName: "v-model",
-                                  value: _vm.regions,
-                                  expression: "regions"
+                                  value: _vm.params.regions,
+                                  expression: "params.regions"
                                 }
                               ],
                               attrs: {
@@ -72239,13 +72747,13 @@ var render = function() {
                                 name: "region"
                               },
                               domProps: {
-                                checked: Array.isArray(_vm.regions)
-                                  ? _vm._i(_vm.regions, "14") > -1
-                                  : _vm.regions
+                                checked: Array.isArray(_vm.params.regions)
+                                  ? _vm._i(_vm.params.regions, "14") > -1
+                                  : _vm.params.regions
                               },
                               on: {
                                 change: function($event) {
-                                  var $$a = _vm.regions,
+                                  var $$a = _vm.params.regions,
                                     $$el = $event.target,
                                     $$c = $$el.checked ? true : false
                                   if (Array.isArray($$a)) {
@@ -72253,15 +72761,23 @@ var render = function() {
                                       $$i = _vm._i($$a, $$v)
                                     if ($$el.checked) {
                                       $$i < 0 &&
-                                        (_vm.regions = $$a.concat([$$v]))
+                                        _vm.$set(
+                                          _vm.params,
+                                          "regions",
+                                          $$a.concat([$$v])
+                                        )
                                     } else {
                                       $$i > -1 &&
-                                        (_vm.regions = $$a
-                                          .slice(0, $$i)
-                                          .concat($$a.slice($$i + 1)))
+                                        _vm.$set(
+                                          _vm.params,
+                                          "regions",
+                                          $$a
+                                            .slice(0, $$i)
+                                            .concat($$a.slice($$i + 1))
+                                        )
                                     }
                                   } else {
-                                    _vm.regions = $$c
+                                    _vm.$set(_vm.params, "regions", $$c)
                                   }
                                 }
                               }
@@ -72278,8 +72794,8 @@ var render = function() {
                                 {
                                   name: "model",
                                   rawName: "v-model",
-                                  value: _vm.regions,
-                                  expression: "regions"
+                                  value: _vm.params.regions,
+                                  expression: "params.regions"
                                 }
                               ],
                               attrs: {
@@ -72288,13 +72804,13 @@ var render = function() {
                                 name: "region"
                               },
                               domProps: {
-                                checked: Array.isArray(_vm.regions)
-                                  ? _vm._i(_vm.regions, "15") > -1
-                                  : _vm.regions
+                                checked: Array.isArray(_vm.params.regions)
+                                  ? _vm._i(_vm.params.regions, "15") > -1
+                                  : _vm.params.regions
                               },
                               on: {
                                 change: function($event) {
-                                  var $$a = _vm.regions,
+                                  var $$a = _vm.params.regions,
                                     $$el = $event.target,
                                     $$c = $$el.checked ? true : false
                                   if (Array.isArray($$a)) {
@@ -72302,15 +72818,23 @@ var render = function() {
                                       $$i = _vm._i($$a, $$v)
                                     if ($$el.checked) {
                                       $$i < 0 &&
-                                        (_vm.regions = $$a.concat([$$v]))
+                                        _vm.$set(
+                                          _vm.params,
+                                          "regions",
+                                          $$a.concat([$$v])
+                                        )
                                     } else {
                                       $$i > -1 &&
-                                        (_vm.regions = $$a
-                                          .slice(0, $$i)
-                                          .concat($$a.slice($$i + 1)))
+                                        _vm.$set(
+                                          _vm.params,
+                                          "regions",
+                                          $$a
+                                            .slice(0, $$i)
+                                            .concat($$a.slice($$i + 1))
+                                        )
                                     }
                                   } else {
-                                    _vm.regions = $$c
+                                    _vm.$set(_vm.params, "regions", $$c)
                                   }
                                 }
                               }
@@ -72327,8 +72851,8 @@ var render = function() {
                                 {
                                   name: "model",
                                   rawName: "v-model",
-                                  value: _vm.regions,
-                                  expression: "regions"
+                                  value: _vm.params.regions,
+                                  expression: "params.regions"
                                 }
                               ],
                               attrs: {
@@ -72337,13 +72861,13 @@ var render = function() {
                                 name: "region"
                               },
                               domProps: {
-                                checked: Array.isArray(_vm.regions)
-                                  ? _vm._i(_vm.regions, "16") > -1
-                                  : _vm.regions
+                                checked: Array.isArray(_vm.params.regions)
+                                  ? _vm._i(_vm.params.regions, "16") > -1
+                                  : _vm.params.regions
                               },
                               on: {
                                 change: function($event) {
-                                  var $$a = _vm.regions,
+                                  var $$a = _vm.params.regions,
                                     $$el = $event.target,
                                     $$c = $$el.checked ? true : false
                                   if (Array.isArray($$a)) {
@@ -72351,15 +72875,23 @@ var render = function() {
                                       $$i = _vm._i($$a, $$v)
                                     if ($$el.checked) {
                                       $$i < 0 &&
-                                        (_vm.regions = $$a.concat([$$v]))
+                                        _vm.$set(
+                                          _vm.params,
+                                          "regions",
+                                          $$a.concat([$$v])
+                                        )
                                     } else {
                                       $$i > -1 &&
-                                        (_vm.regions = $$a
-                                          .slice(0, $$i)
-                                          .concat($$a.slice($$i + 1)))
+                                        _vm.$set(
+                                          _vm.params,
+                                          "regions",
+                                          $$a
+                                            .slice(0, $$i)
+                                            .concat($$a.slice($$i + 1))
+                                        )
                                     }
                                   } else {
-                                    _vm.regions = $$c
+                                    _vm.$set(_vm.params, "regions", $$c)
                                   }
                                 }
                               }
@@ -72376,8 +72908,8 @@ var render = function() {
                                 {
                                   name: "model",
                                   rawName: "v-model",
-                                  value: _vm.regions,
-                                  expression: "regions"
+                                  value: _vm.params.regions,
+                                  expression: "params.regions"
                                 }
                               ],
                               attrs: {
@@ -72386,13 +72918,13 @@ var render = function() {
                                 name: "region"
                               },
                               domProps: {
-                                checked: Array.isArray(_vm.regions)
-                                  ? _vm._i(_vm.regions, "17") > -1
-                                  : _vm.regions
+                                checked: Array.isArray(_vm.params.regions)
+                                  ? _vm._i(_vm.params.regions, "17") > -1
+                                  : _vm.params.regions
                               },
                               on: {
                                 change: function($event) {
-                                  var $$a = _vm.regions,
+                                  var $$a = _vm.params.regions,
                                     $$el = $event.target,
                                     $$c = $$el.checked ? true : false
                                   if (Array.isArray($$a)) {
@@ -72400,15 +72932,23 @@ var render = function() {
                                       $$i = _vm._i($$a, $$v)
                                     if ($$el.checked) {
                                       $$i < 0 &&
-                                        (_vm.regions = $$a.concat([$$v]))
+                                        _vm.$set(
+                                          _vm.params,
+                                          "regions",
+                                          $$a.concat([$$v])
+                                        )
                                     } else {
                                       $$i > -1 &&
-                                        (_vm.regions = $$a
-                                          .slice(0, $$i)
-                                          .concat($$a.slice($$i + 1)))
+                                        _vm.$set(
+                                          _vm.params,
+                                          "regions",
+                                          $$a
+                                            .slice(0, $$i)
+                                            .concat($$a.slice($$i + 1))
+                                        )
                                     }
                                   } else {
-                                    _vm.regions = $$c
+                                    _vm.$set(_vm.params, "regions", $$c)
                                   }
                                 }
                               }
@@ -72425,8 +72965,8 @@ var render = function() {
                                 {
                                   name: "model",
                                   rawName: "v-model",
-                                  value: _vm.regions,
-                                  expression: "regions"
+                                  value: _vm.params.regions,
+                                  expression: "params.regions"
                                 }
                               ],
                               attrs: {
@@ -72435,13 +72975,13 @@ var render = function() {
                                 name: "region"
                               },
                               domProps: {
-                                checked: Array.isArray(_vm.regions)
-                                  ? _vm._i(_vm.regions, "18") > -1
-                                  : _vm.regions
+                                checked: Array.isArray(_vm.params.regions)
+                                  ? _vm._i(_vm.params.regions, "18") > -1
+                                  : _vm.params.regions
                               },
                               on: {
                                 change: function($event) {
-                                  var $$a = _vm.regions,
+                                  var $$a = _vm.params.regions,
                                     $$el = $event.target,
                                     $$c = $$el.checked ? true : false
                                   if (Array.isArray($$a)) {
@@ -72449,15 +72989,23 @@ var render = function() {
                                       $$i = _vm._i($$a, $$v)
                                     if ($$el.checked) {
                                       $$i < 0 &&
-                                        (_vm.regions = $$a.concat([$$v]))
+                                        _vm.$set(
+                                          _vm.params,
+                                          "regions",
+                                          $$a.concat([$$v])
+                                        )
                                     } else {
                                       $$i > -1 &&
-                                        (_vm.regions = $$a
-                                          .slice(0, $$i)
-                                          .concat($$a.slice($$i + 1)))
+                                        _vm.$set(
+                                          _vm.params,
+                                          "regions",
+                                          $$a
+                                            .slice(0, $$i)
+                                            .concat($$a.slice($$i + 1))
+                                        )
                                     }
                                   } else {
-                                    _vm.regions = $$c
+                                    _vm.$set(_vm.params, "regions", $$c)
                                   }
                                 }
                               }
@@ -72474,8 +73022,8 @@ var render = function() {
                                 {
                                   name: "model",
                                   rawName: "v-model",
-                                  value: _vm.regions,
-                                  expression: "regions"
+                                  value: _vm.params.regions,
+                                  expression: "params.regions"
                                 }
                               ],
                               attrs: {
@@ -72484,13 +73032,13 @@ var render = function() {
                                 name: "region"
                               },
                               domProps: {
-                                checked: Array.isArray(_vm.regions)
-                                  ? _vm._i(_vm.regions, "19") > -1
-                                  : _vm.regions
+                                checked: Array.isArray(_vm.params.regions)
+                                  ? _vm._i(_vm.params.regions, "19") > -1
+                                  : _vm.params.regions
                               },
                               on: {
                                 change: function($event) {
-                                  var $$a = _vm.regions,
+                                  var $$a = _vm.params.regions,
                                     $$el = $event.target,
                                     $$c = $$el.checked ? true : false
                                   if (Array.isArray($$a)) {
@@ -72498,15 +73046,23 @@ var render = function() {
                                       $$i = _vm._i($$a, $$v)
                                     if ($$el.checked) {
                                       $$i < 0 &&
-                                        (_vm.regions = $$a.concat([$$v]))
+                                        _vm.$set(
+                                          _vm.params,
+                                          "regions",
+                                          $$a.concat([$$v])
+                                        )
                                     } else {
                                       $$i > -1 &&
-                                        (_vm.regions = $$a
-                                          .slice(0, $$i)
-                                          .concat($$a.slice($$i + 1)))
+                                        _vm.$set(
+                                          _vm.params,
+                                          "regions",
+                                          $$a
+                                            .slice(0, $$i)
+                                            .concat($$a.slice($$i + 1))
+                                        )
                                     }
                                   } else {
-                                    _vm.regions = $$c
+                                    _vm.$set(_vm.params, "regions", $$c)
                                   }
                                 }
                               }
@@ -72523,8 +73079,8 @@ var render = function() {
                                 {
                                   name: "model",
                                   rawName: "v-model",
-                                  value: _vm.regions,
-                                  expression: "regions"
+                                  value: _vm.params.regions,
+                                  expression: "params.regions"
                                 }
                               ],
                               attrs: {
@@ -72533,13 +73089,13 @@ var render = function() {
                                 name: "region"
                               },
                               domProps: {
-                                checked: Array.isArray(_vm.regions)
-                                  ? _vm._i(_vm.regions, "20") > -1
-                                  : _vm.regions
+                                checked: Array.isArray(_vm.params.regions)
+                                  ? _vm._i(_vm.params.regions, "20") > -1
+                                  : _vm.params.regions
                               },
                               on: {
                                 change: function($event) {
-                                  var $$a = _vm.regions,
+                                  var $$a = _vm.params.regions,
                                     $$el = $event.target,
                                     $$c = $$el.checked ? true : false
                                   if (Array.isArray($$a)) {
@@ -72547,15 +73103,23 @@ var render = function() {
                                       $$i = _vm._i($$a, $$v)
                                     if ($$el.checked) {
                                       $$i < 0 &&
-                                        (_vm.regions = $$a.concat([$$v]))
+                                        _vm.$set(
+                                          _vm.params,
+                                          "regions",
+                                          $$a.concat([$$v])
+                                        )
                                     } else {
                                       $$i > -1 &&
-                                        (_vm.regions = $$a
-                                          .slice(0, $$i)
-                                          .concat($$a.slice($$i + 1)))
+                                        _vm.$set(
+                                          _vm.params,
+                                          "regions",
+                                          $$a
+                                            .slice(0, $$i)
+                                            .concat($$a.slice($$i + 1))
+                                        )
                                     }
                                   } else {
-                                    _vm.regions = $$c
+                                    _vm.$set(_vm.params, "regions", $$c)
                                   }
                                 }
                               }
@@ -72572,8 +73136,8 @@ var render = function() {
                                 {
                                   name: "model",
                                   rawName: "v-model",
-                                  value: _vm.regions,
-                                  expression: "regions"
+                                  value: _vm.params.regions,
+                                  expression: "params.regions"
                                 }
                               ],
                               attrs: {
@@ -72582,13 +73146,13 @@ var render = function() {
                                 name: "region"
                               },
                               domProps: {
-                                checked: Array.isArray(_vm.regions)
-                                  ? _vm._i(_vm.regions, "21") > -1
-                                  : _vm.regions
+                                checked: Array.isArray(_vm.params.regions)
+                                  ? _vm._i(_vm.params.regions, "21") > -1
+                                  : _vm.params.regions
                               },
                               on: {
                                 change: function($event) {
-                                  var $$a = _vm.regions,
+                                  var $$a = _vm.params.regions,
                                     $$el = $event.target,
                                     $$c = $$el.checked ? true : false
                                   if (Array.isArray($$a)) {
@@ -72596,15 +73160,23 @@ var render = function() {
                                       $$i = _vm._i($$a, $$v)
                                     if ($$el.checked) {
                                       $$i < 0 &&
-                                        (_vm.regions = $$a.concat([$$v]))
+                                        _vm.$set(
+                                          _vm.params,
+                                          "regions",
+                                          $$a.concat([$$v])
+                                        )
                                     } else {
                                       $$i > -1 &&
-                                        (_vm.regions = $$a
-                                          .slice(0, $$i)
-                                          .concat($$a.slice($$i + 1)))
+                                        _vm.$set(
+                                          _vm.params,
+                                          "regions",
+                                          $$a
+                                            .slice(0, $$i)
+                                            .concat($$a.slice($$i + 1))
+                                        )
                                     }
                                   } else {
-                                    _vm.regions = $$c
+                                    _vm.$set(_vm.params, "regions", $$c)
                                   }
                                 }
                               }
@@ -72621,8 +73193,8 @@ var render = function() {
                                 {
                                   name: "model",
                                   rawName: "v-model",
-                                  value: _vm.regions,
-                                  expression: "regions"
+                                  value: _vm.params.regions,
+                                  expression: "params.regions"
                                 }
                               ],
                               attrs: {
@@ -72631,13 +73203,13 @@ var render = function() {
                                 name: "region"
                               },
                               domProps: {
-                                checked: Array.isArray(_vm.regions)
-                                  ? _vm._i(_vm.regions, "22") > -1
-                                  : _vm.regions
+                                checked: Array.isArray(_vm.params.regions)
+                                  ? _vm._i(_vm.params.regions, "22") > -1
+                                  : _vm.params.regions
                               },
                               on: {
                                 change: function($event) {
-                                  var $$a = _vm.regions,
+                                  var $$a = _vm.params.regions,
                                     $$el = $event.target,
                                     $$c = $$el.checked ? true : false
                                   if (Array.isArray($$a)) {
@@ -72645,15 +73217,23 @@ var render = function() {
                                       $$i = _vm._i($$a, $$v)
                                     if ($$el.checked) {
                                       $$i < 0 &&
-                                        (_vm.regions = $$a.concat([$$v]))
+                                        _vm.$set(
+                                          _vm.params,
+                                          "regions",
+                                          $$a.concat([$$v])
+                                        )
                                     } else {
                                       $$i > -1 &&
-                                        (_vm.regions = $$a
-                                          .slice(0, $$i)
-                                          .concat($$a.slice($$i + 1)))
+                                        _vm.$set(
+                                          _vm.params,
+                                          "regions",
+                                          $$a
+                                            .slice(0, $$i)
+                                            .concat($$a.slice($$i + 1))
+                                        )
                                     }
                                   } else {
-                                    _vm.regions = $$c
+                                    _vm.$set(_vm.params, "regions", $$c)
                                   }
                                 }
                               }
@@ -72670,8 +73250,8 @@ var render = function() {
                                 {
                                   name: "model",
                                   rawName: "v-model",
-                                  value: _vm.regions,
-                                  expression: "regions"
+                                  value: _vm.params.regions,
+                                  expression: "params.regions"
                                 }
                               ],
                               attrs: {
@@ -72680,13 +73260,13 @@ var render = function() {
                                 name: "region"
                               },
                               domProps: {
-                                checked: Array.isArray(_vm.regions)
-                                  ? _vm._i(_vm.regions, "23") > -1
-                                  : _vm.regions
+                                checked: Array.isArray(_vm.params.regions)
+                                  ? _vm._i(_vm.params.regions, "23") > -1
+                                  : _vm.params.regions
                               },
                               on: {
                                 change: function($event) {
-                                  var $$a = _vm.regions,
+                                  var $$a = _vm.params.regions,
                                     $$el = $event.target,
                                     $$c = $$el.checked ? true : false
                                   if (Array.isArray($$a)) {
@@ -72694,15 +73274,23 @@ var render = function() {
                                       $$i = _vm._i($$a, $$v)
                                     if ($$el.checked) {
                                       $$i < 0 &&
-                                        (_vm.regions = $$a.concat([$$v]))
+                                        _vm.$set(
+                                          _vm.params,
+                                          "regions",
+                                          $$a.concat([$$v])
+                                        )
                                     } else {
                                       $$i > -1 &&
-                                        (_vm.regions = $$a
-                                          .slice(0, $$i)
-                                          .concat($$a.slice($$i + 1)))
+                                        _vm.$set(
+                                          _vm.params,
+                                          "regions",
+                                          $$a
+                                            .slice(0, $$i)
+                                            .concat($$a.slice($$i + 1))
+                                        )
                                     }
                                   } else {
-                                    _vm.regions = $$c
+                                    _vm.$set(_vm.params, "regions", $$c)
                                   }
                                 }
                               }
@@ -72719,8 +73307,8 @@ var render = function() {
                                 {
                                   name: "model",
                                   rawName: "v-model",
-                                  value: _vm.regions,
-                                  expression: "regions"
+                                  value: _vm.params.regions,
+                                  expression: "params.regions"
                                 }
                               ],
                               attrs: {
@@ -72729,13 +73317,13 @@ var render = function() {
                                 name: "region"
                               },
                               domProps: {
-                                checked: Array.isArray(_vm.regions)
-                                  ? _vm._i(_vm.regions, "24") > -1
-                                  : _vm.regions
+                                checked: Array.isArray(_vm.params.regions)
+                                  ? _vm._i(_vm.params.regions, "24") > -1
+                                  : _vm.params.regions
                               },
                               on: {
                                 change: function($event) {
-                                  var $$a = _vm.regions,
+                                  var $$a = _vm.params.regions,
                                     $$el = $event.target,
                                     $$c = $$el.checked ? true : false
                                   if (Array.isArray($$a)) {
@@ -72743,15 +73331,23 @@ var render = function() {
                                       $$i = _vm._i($$a, $$v)
                                     if ($$el.checked) {
                                       $$i < 0 &&
-                                        (_vm.regions = $$a.concat([$$v]))
+                                        _vm.$set(
+                                          _vm.params,
+                                          "regions",
+                                          $$a.concat([$$v])
+                                        )
                                     } else {
                                       $$i > -1 &&
-                                        (_vm.regions = $$a
-                                          .slice(0, $$i)
-                                          .concat($$a.slice($$i + 1)))
+                                        _vm.$set(
+                                          _vm.params,
+                                          "regions",
+                                          $$a
+                                            .slice(0, $$i)
+                                            .concat($$a.slice($$i + 1))
+                                        )
                                     }
                                   } else {
-                                    _vm.regions = $$c
+                                    _vm.$set(_vm.params, "regions", $$c)
                                   }
                                 }
                               }
@@ -72768,8 +73364,8 @@ var render = function() {
                                 {
                                   name: "model",
                                   rawName: "v-model",
-                                  value: _vm.regions,
-                                  expression: "regions"
+                                  value: _vm.params.regions,
+                                  expression: "params.regions"
                                 }
                               ],
                               attrs: {
@@ -72778,13 +73374,13 @@ var render = function() {
                                 name: "region"
                               },
                               domProps: {
-                                checked: Array.isArray(_vm.regions)
-                                  ? _vm._i(_vm.regions, "25") > -1
-                                  : _vm.regions
+                                checked: Array.isArray(_vm.params.regions)
+                                  ? _vm._i(_vm.params.regions, "25") > -1
+                                  : _vm.params.regions
                               },
                               on: {
                                 change: function($event) {
-                                  var $$a = _vm.regions,
+                                  var $$a = _vm.params.regions,
                                     $$el = $event.target,
                                     $$c = $$el.checked ? true : false
                                   if (Array.isArray($$a)) {
@@ -72792,15 +73388,23 @@ var render = function() {
                                       $$i = _vm._i($$a, $$v)
                                     if ($$el.checked) {
                                       $$i < 0 &&
-                                        (_vm.regions = $$a.concat([$$v]))
+                                        _vm.$set(
+                                          _vm.params,
+                                          "regions",
+                                          $$a.concat([$$v])
+                                        )
                                     } else {
                                       $$i > -1 &&
-                                        (_vm.regions = $$a
-                                          .slice(0, $$i)
-                                          .concat($$a.slice($$i + 1)))
+                                        _vm.$set(
+                                          _vm.params,
+                                          "regions",
+                                          $$a
+                                            .slice(0, $$i)
+                                            .concat($$a.slice($$i + 1))
+                                        )
                                     }
                                   } else {
-                                    _vm.regions = $$c
+                                    _vm.$set(_vm.params, "regions", $$c)
                                   }
                                 }
                               }
@@ -72817,8 +73421,8 @@ var render = function() {
                                 {
                                   name: "model",
                                   rawName: "v-model",
-                                  value: _vm.regions,
-                                  expression: "regions"
+                                  value: _vm.params.regions,
+                                  expression: "params.regions"
                                 }
                               ],
                               attrs: {
@@ -72827,13 +73431,13 @@ var render = function() {
                                 name: "region"
                               },
                               domProps: {
-                                checked: Array.isArray(_vm.regions)
-                                  ? _vm._i(_vm.regions, "26") > -1
-                                  : _vm.regions
+                                checked: Array.isArray(_vm.params.regions)
+                                  ? _vm._i(_vm.params.regions, "26") > -1
+                                  : _vm.params.regions
                               },
                               on: {
                                 change: function($event) {
-                                  var $$a = _vm.regions,
+                                  var $$a = _vm.params.regions,
                                     $$el = $event.target,
                                     $$c = $$el.checked ? true : false
                                   if (Array.isArray($$a)) {
@@ -72841,15 +73445,23 @@ var render = function() {
                                       $$i = _vm._i($$a, $$v)
                                     if ($$el.checked) {
                                       $$i < 0 &&
-                                        (_vm.regions = $$a.concat([$$v]))
+                                        _vm.$set(
+                                          _vm.params,
+                                          "regions",
+                                          $$a.concat([$$v])
+                                        )
                                     } else {
                                       $$i > -1 &&
-                                        (_vm.regions = $$a
-                                          .slice(0, $$i)
-                                          .concat($$a.slice($$i + 1)))
+                                        _vm.$set(
+                                          _vm.params,
+                                          "regions",
+                                          $$a
+                                            .slice(0, $$i)
+                                            .concat($$a.slice($$i + 1))
+                                        )
                                     }
                                   } else {
-                                    _vm.regions = $$c
+                                    _vm.$set(_vm.params, "regions", $$c)
                                   }
                                 }
                               }
@@ -72862,11 +73474,27 @@ var render = function() {
                     ])
                   ]),
                   _vm._v(" "),
+                  _vm._m(2),
+                  _vm._v(" "),
                   _c("hr", { attrs: { id: "apply-filters-mark" } }),
                   _vm._v(" "),
                   _c("div", { attrs: { id: "apply-filters" } }, [
                     _c("div", { staticClass: "row" }, [
-                      _vm._m(4),
+                      _c("div", { staticClass: "col-6 pl-1" }, [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-outline-info",
+                            attrs: { type: "reset" },
+                            on: {
+                              click: function($event) {
+                                _vm.resetFilters()
+                              }
+                            }
+                          },
+                          [_vm._v("Скинути")]
+                        )
+                      ]),
                       _vm._v(" "),
                       _c("div", { staticClass: "col-6" }, [
                         _c(
@@ -72890,12 +73518,26 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
-          _c("div", [_vm._v("Регіон-------------  " + _vm._s(this.regions))])
+          _c("div", [
+            _vm._v("Регіон------------- " + _vm._s(_vm.params.regions))
+          ]),
+          _vm._v(" "),
+          _c("div", [
+            _vm._v("Регіон------------- " + _vm._s(_vm.params.instance))
+          ]),
+          _vm._v(" "),
+          _c("div", [
+            _vm._v("Регіон------------- " + _vm._s(_vm.params.jurisdiction))
+          ]),
+          _vm._v(" "),
+          _c("div", [
+            _vm._v("Регіон------------- " + _vm._s(_vm.params.search))
+          ])
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "col-lg-9" }, [
           _c("div", { staticClass: "card card-outline-secondary my-4" }, [
-            _vm._m(5),
+            _vm._m(3),
             _vm._v(" "),
             _c(
               "div",
@@ -72914,46 +73556,21 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container mt-5" }, [
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "offset-lg-3 col-lg-9" }, [
-          _c("form", { attrs: { method: "get", autocomplete: "off" } }, [
-            _c("div", { staticClass: "form-row" }, [
-              _c(
-                "div",
-                { staticClass: "col-12 col-md-9 mb-2 mb-md-0 autocomplete" },
-                [
-                  _c("input", {
-                    staticClass: "form-control",
-                    attrs: {
-                      type: "search",
-                      id: "search-input",
-                      placeholder: "Пошук..."
-                    }
-                  })
-                ]
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-6 col-md-3" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-block btn btn-primary",
-                    attrs: { type: "button", onclick: "findJudge()" }
-                  },
-                  [
-                    _c("i", {
-                      staticClass: "fa fa-search",
-                      attrs: { "aria-hidden": "true" }
-                    }),
-                    _vm._v(" знайти")
-                  ]
-                )
-              ])
-            ])
-          ])
-        ])
-      ])
+    return _c("div", { staticClass: "col-6 col-md-3" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-block btn btn-primary",
+          attrs: { type: "button", onclick: "findJudge()" }
+        },
+        [
+          _c("i", {
+            staticClass: "fa fa-search",
+            attrs: { "aria-hidden": "true" }
+          }),
+          _vm._v(" знайти")
+        ]
+      )
     ])
   },
   function() {
@@ -72974,94 +73591,8 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "row" }, [
       _c("div", { staticClass: "col-lg-12" }, [
-        _c("h6", [_vm._v("Інстанція")]),
-        _vm._v(" "),
-        _c("ul", { staticClass: "list-unstyled mb-0" }, [
-          _c("li", [
-            _c("label", [
-              _c("input", {
-                attrs: { type: "checkbox", value: "3", name: "instance" }
-              }),
-              _c("span", { staticClass: "checkmark" }),
-              _vm._v(" Перша")
-            ])
-          ]),
-          _vm._v(" "),
-          _c("li", [
-            _c("label", [
-              _c("input", {
-                attrs: { type: "checkbox", value: "2", name: "instance" }
-              }),
-              _c("span", { staticClass: "checkmark" }),
-              _vm._v(" Апеляційна")
-            ])
-          ]),
-          _vm._v(" "),
-          _c("li", [
-            _c("label", [
-              _c("input", {
-                attrs: { type: "checkbox", value: "1", name: "instance" }
-              }),
-              _c("span", { staticClass: "checkmark" }),
-              _vm._v(" Касаційна")
-            ])
-          ])
-        ])
+        _c("input", { attrs: { type: "checkbox" } })
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-lg-12" }, [
-        _c("h6", [_vm._v("Юрисдикція")]),
-        _vm._v(" "),
-        _c("ul", { staticClass: "list-unstyled mb-0" }, [
-          _c("li", [
-            _c("label", [
-              _c("input", {
-                attrs: { type: "checkbox", value: "3", name: "jurisdiction" }
-              }),
-              _c("span", { staticClass: "checkmark" }),
-              _vm._v(" Господарська")
-            ])
-          ]),
-          _vm._v(" "),
-          _c("li", [
-            _c("label", [
-              _c("input", {
-                attrs: { type: "checkbox", value: "2", name: "jurisdiction" }
-              }),
-              _c("span", { staticClass: "checkmark" }),
-              _vm._v(" Адміністративна")
-            ])
-          ]),
-          _vm._v(" "),
-          _c("li", [
-            _c("label", [
-              _c("input", {
-                attrs: { type: "checkbox", value: "1", name: "jurisdiction" }
-              }),
-              _c("span", { staticClass: "checkmark" }),
-              _vm._v(" Загальна")
-            ])
-          ])
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-6 pl-1" }, [
-      _c(
-        "button",
-        { staticClass: "btn btn-outline-info", attrs: { type: "reset" } },
-        [_vm._v("Скинути")]
-      )
     ])
   },
   function() {

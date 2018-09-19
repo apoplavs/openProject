@@ -40,7 +40,6 @@
                 <router-link to="/registration" tag="li" class="nav-item">
                     <a class="nav-link">Реєстрація</a>
                 </router-link>
-                <!----------------------->
 
                 <li class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" id="dropdown-menu" role="button" aria-expanded="false" aria-haspopup="true" v-pre>

@@ -1,5 +1,9 @@
-@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);body {
+@import url(https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&subset=cyrillic);body {
   background-color: #eceaea;
   height: 100vh;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  color: #304040;
 }
 

@@ -138,10 +138,10 @@
                                 })
                             }
                         }).catch(error => {
-                            if (error.response && error.response.status === 422) {
+                            if (error.response && error.response.status) {
                                 if (error.response.data && error.response.data.message) {
                                     console.error(error.response.data.message);
-                                    this.$toasted.error('Даний email вже зареєстований!', {
+                                    this.$toasted.error(error.response.data.message, {
                                         theme: "primary",
                                         position: "top-right",
                                         duration: 5000
@@ -153,7 +153,7 @@
                                     this.$toasted.error('Щось пішло не так:( Спробуйте ще раз!', {
                                         theme: "primary",
                                         position: "top-right",
-                                        duration: 5000
+                                        duration: 10000
                                     })
                                 }
                             }
@@ -162,7 +162,7 @@
                         this.$toasted.error('Заповніть коректно всі поля!', {
                             theme: "primary",
                             position: "top-right",
-                            duration : 5000
+                            duration : 10000
                         })
                     }
                 });
