@@ -45,13 +45,15 @@ Vue.component('judges-list', require('./components/main/JudgesList.vue'));
 Vue.component('passport-clients', require('./components/passport/PassportClients.vue'));
 Vue.component('passport-authorized-clients', require('./components/passport/PassportAuthorizedClients.vue'));
 
+Vue.component('pagination', require('laravel-vue-pagination'));
+
 
 
 
 
 const router = new VueRouter({
     mode: 'history',
-     base: __dirname,
+    base: __dirname,
     routes: [
         {
             path: '/',

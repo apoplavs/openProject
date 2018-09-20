@@ -17,8 +17,8 @@
                     <div class="col-3">
                         <div> <i class="fa fa-line-chart" aria-hidden="true"> {{ judge.rating }} </i></div>
                         <div v-if="isAuth">
-                            <span v-if="judge.is_bookmark" @click="changeBookmarkStatus(judge)">відстежується</span> <i class="fa fa-bookmark" aria-hidden="true"></i>
-                            <span v-if="!judge.is_bookmark" @click="changeBookmarkStatus(judge)">відстежувати</span> <i class="fa fa-bookmark-o" aria-hidden="true"></i>
+                            <span v-if="judge.is_bookmark" @click="changeBookmarkStatus(judge)">відстежується<i class="fa fa-bookmark" aria-hidden="true"></i></span>
+                            <span v-if="!judge.is_bookmark" @click="changeBookmarkStatus(judge)">відстежувати <i class="fa fa-bookmark-o" aria-hidden="true"></i></span>
                         </div>
                         <div v-if="isAuth">
                             <span title="змінити статус судді">Змінити статус судді<i class="fa fa-pencil p-1" aria-hidden="true"  data-toggle="modal" data-target="#changeJudgeStatus"></i></span>
@@ -47,6 +47,7 @@
                 headers: {
                     "Content-Type": "application/json",
                     "X-Requested-With": "XMLHttpRequest"
+    
                 }
             }
         },
@@ -59,20 +60,39 @@
         // },
         methods: {
             changeBookmarkStatus(judge) {
-                console.log(judge)
-                // if (judge.is_bookmark === true) {
-                //     axios
-                //         .delete(`/api/v1//judges/${id}/bookmark`, this.headers)
-                //         .then(response => {
-    
-                //             // console.log(response);
-                //         })
-                //         .catch(error => {
-                //             console.log(error);
-                //         });
-                // } else {
-    
-                // }
+                // console.log(judge)
+                if (judge.is_bookmark === 0) {
+                    console.log('bootmark = 0')
+                    console.log(judge.id)
+                    axios
+                        .put(`/api/v1/judges/${judge.id}/bookmark`, {
+                            headers: {
+                                "Content-Type": "application/json",
+                                "X-Requested-With": "XMLHttpRequest",
+                                "Authorization": localStorage.getItem('token')
+                            }
+                        })
+                        .then(response => {
+                            console.log(response);
+                        })
+                        .catch(error => {
+                            console.log(error);
+                        });
+                } else {
+                    axios
+                        .delete(`/api/v1/judges/${judge.id}/bookmark`, { headers: {
+                                "Content-Type": "application/json",
+                                "X-Requested-With": "XMLHttpRequest",
+                                "Authorization": localStorage.getItem('token')
+                            }
+                        })
+                        .then(response => {
+                            console.log(response);
+                        })
+                        .catch(error => {
+                            console.log(error);
+                        });
+                }
             }
         },
         mounted() {

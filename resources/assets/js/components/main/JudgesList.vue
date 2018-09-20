@@ -91,7 +91,7 @@
                 </div>
                 <div class="row">
                   <div class="col-lg-12">
-                    <input type="checkbox">
+                    <input type="checkbox" v-model="params.expired">Закінчились повноваження
                   </div>
                 </div>
   
@@ -116,28 +116,28 @@
           <div>Регіон------------- {{ params.instance }}</div>
           <div>Регіон------------- {{ params.jurisdiction }}</div>
           <div>Регіон------------- {{ params.search}}</div>
+          <div>bool------------- {{ params.expired}}</div>
         </div>
         <!--  col-3 Filters  -->
-  
-  
-  
-  
+
         <!-- Main list -->
         <div class="col-lg-9">
           <div class="card card-outline-secondary my-4">
             <div class="card-header">
-              Список суддів <span class="ml-5"> сортувати: <label id="sorting-type">
-              							<input type="checkbox" onchange="changeSorting(this.checked)" form="form-filters" name="sorting">
-              							<i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
-              
-              						</label></span>
+              Список суддів
+              <span class="ml-5"> сортувати: 
+                  <label id="sorting-type">
+                    <input type="checkbox" @change="changeSorting()" form="form-filters" name="sorting">
+                    <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
+                  </label>
+                </span>
             </div>
             <div id="judges-list">
               <!--judges-judges-list-->
-  
               <judge-component :list="judgesList"></judge-component>
-  
-  
+            </div>
+            <div class="pagination">
+              <pagination :data="judgesList" @pagination-change-page="paginationChangePage(this)"></pagination>
             </div>
           </div>
           <!-- /.card -->
@@ -163,7 +163,7 @@
           regions: [],
           jurisdiction: [],
           instance: [],
-          search: "",
+          search: null,
           sort: 1,
           expired: 0
         },
@@ -175,23 +175,33 @@
         }
       }
     },
-    beforeMount() {
+    mounted() {
       this.getJudgesList();
     },
     methods: {
+      paginationChangePage(el) {
+        console.log(el);
+  
+      },
+      changeSorting(e) {
+        console.log('checkbox ', e);
+        
+      },
       getJudgesList() {
         if (localStorage.getItem('token')) {
           console.log('have token')
-           debugger;
+          // debugger;
           // this.headers["Authorization"] = localStorage.getItem('token');
-          console.log('token------', localStorage.getItem('token'))
+          // console.log('call with filters', this.params)
           axios
-            .get("/api/v1/judges/list", this.params.regions, this.params.instance, this.params.jurisdiction,
-              this.params.search, this.params.sort, this.params.expired, this.params.page, {
+            .get('/api/v1/judges/list', {
+              headers: {
                 "Content-Type": "application/json",
                 "X-Requested-With": "XMLHttpRequest",
                 "Authorization": localStorage.getItem('token')
-              })
+              },
+              params: this.params
+            })
             .then(response => {
               this.judgesList = response;
               console.log(response);
@@ -202,8 +212,14 @@
         } else {
           console.log('no token')
           axios
-            .get("/api/v1/guest/judges/list", this.params.regions, this.params.instance, this.params.jurisdiction,
-              this.params.search, this.params.sort, this.params.expired, this.params.page, this.headers)
+            .get("/api/v1/guest/judges/list", {
+              headers: {
+                "Content-Type": "application/json",
+                "X-Requested-With": "XMLHttpRequest",
+                "Authorization": localStorage.getItem('token')
+              },
+              params: this.params
+            })
             .then(response => {
               this.judgesList = response;
               console.log(response);
@@ -217,8 +233,8 @@
       resetFilters() {
         this.params.regions = [];
         this.params.instance = [],
-          this.params.jurisdiction = [],
-          this.params.expired = 0
+          this.params.jurisdiction = []
+        // this.params.expired = 0
       }
   
     },

@@ -25,8 +25,14 @@
 <style  scoped>
     /* styles for welcome page */
     #welcome-page {
-        background-image: linear-gradient(116deg, #5e72c4, #5b76c3 6%, #5b76c3 6%, #4c88bd 37%, #2facb0);
-        height: 100vh;
+       height: 100vh;
+    width: 100%;
+    background-color: #4686a08f;
+    background-attachment: fixed, fixed, fixed;
+    background-image: linear-gradient(45deg, #9dc66b9e 5%, #4fa49aab 30%, #4361c2ad);
+    background-position: top left, center center, center center;
+    background-size: auto, cover, cover;
+    overflow: hidden;
     }
 
     #title-label {
