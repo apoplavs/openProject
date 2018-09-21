@@ -9,7 +9,7 @@
 						Реєстрація
 					</div>
 					<div class="card-body">
-						<form class="form-group" method="POST" action="{{ route('register') }}">
+						<form class="form-group" method="POST" action="{{ url('/api/v1/register') }}">
 							{{ csrf_field() }}
 							
 							<div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">

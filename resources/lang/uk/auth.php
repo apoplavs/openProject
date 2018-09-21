@@ -15,5 +15,10 @@ return [
 
     'failed' => 'Неправильний логін або пароль.',
     'throttle' => 'Занадто багато спроб входу в систему. Спробуйте через :seconds секунд.',
+	'unconfirmed' => 'У вас не підтверджений email',
+	'via_google' => 'Ви зареєстровані через google',
+	'via_facebook' => 'Ви зареєстровані через facebook',
+	'successfully_created' => 'Користувач успішно створений',
+	'successfully_logout' => 'Успішно вийшов із системи'
 
 ];

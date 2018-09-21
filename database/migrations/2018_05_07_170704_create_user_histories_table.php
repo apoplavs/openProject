@@ -16,7 +16,7 @@ class CreateUserHistoriesTable extends Migration
         Schema::create('user_histories', function (Blueprint $table) {
 			$table->increments('id');
 			$table->unsignedInteger('user');
-			$table->integer('judge');
+			$table->unsignedSmallInteger('judge');
 			$table->timestamp('created_at')->useCurrent();
 	
 			$table->foreign('user')->references('id')->on('users');
