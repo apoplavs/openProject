@@ -26610,24 +26610,32 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             if (judge.is_bookmark === 0) {
                 console.log('bootmark = 0');
                 console.log(judge.id);
-                axios.put("/api/v1/judges/" + judge.id + "/bookmark", {
+                axios({
+                    methods: 'put',
+                    url: "/api/v1/judges/" + judge.id + "/bookmark",
                     headers: {
                         "Content-Type": "application/json",
                         "X-Requested-With": "XMLHttpRequest",
                         "Authorization": localStorage.getItem('token')
                     }
                 }).then(function (response) {
+                    judge.is_bookmark = 1;
                     console.log(response);
                 }).catch(function (error) {
                     console.log(error);
                 });
             } else {
-                axios.delete("/api/v1/judges/" + judge.id + "/bookmark", { headers: {
+                axios;
+                axios({
+                    methods: 'delete',
+                    url: "/api/v1/judges/" + judge.id + "/bookmark",
+                    headers: {
                         "Content-Type": "application/json",
                         "X-Requested-With": "XMLHttpRequest",
                         "Authorization": localStorage.getItem('token')
                     }
                 }).then(function (response) {
+                    judge.is_bookmark = 0;
                     console.log(response);
                 }).catch(function (error) {
                     console.log(error);
