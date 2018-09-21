@@ -1,32 +1,21 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-import json
-import pymysql.cursors
 import os
 import pickle
 import nltk
 import sys
 
+from db import get_edrsr_connection
+from config import PICKLES_PATH
+
 from nltk.tokenize import word_tokenize
+
 nltk.download('punkt')
 nltk.download('averaged_perceptron_tagger')
 
-config = json.loads(open('config.json', 'r').read())
-
-
-def get_connection():
-    connection = pymysql.connect(host=config['db_edrsr']['host'],
-                                 user=config['db_edrsr']['user'],
-                                 password=config['db_edrsr']['pass'],
-                                 db=config['db_edrsr']['dbname'],
-                                 charset=config['db_edrsr']['charset'],
-                                 cursorclass=pymysql.cursors.DictCursor)
-
-    return connection
-
 
 def get_data(categories):
-    connection = get_connection()
+    connection = get_edrsr_connection()
 
     with connection.cursor() as cursor:
         sql = "SELECT `category`, `doc_text` FROM `ml_datasets` WHERE category IN {}".format(
@@ -35,7 +24,6 @@ def get_data(categories):
         cursor.execute(sql)
         data = cursor.fetchall()
 
-    # list of your documents (each document is a string)
     return data
 
 
@@ -75,7 +63,7 @@ def train(clean_data):
 
 
 def dump_classifier(classifier, categories):
-    file_path = "pickles/{}.pickle".format('_'.join(categories))
+    file_path = f"{PICKLES_PATH}/{'_'.join(categories)}.pickle"
 
     if not os.path.exists('pickles'):
         os.makedirs('pickles')
@@ -86,6 +74,13 @@ def dump_classifier(classifier, categories):
     except Exception:
         print('Something went wrong')
     save_classifier.close()
+
+
+def train_for_guess(categories):
+
+    data = get_data(categories)
+    classifier = train(data)
+    dump_classifier(classifier, categories)
 
 
 if __name__ == '__main__':

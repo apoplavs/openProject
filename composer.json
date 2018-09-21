@@ -6,8 +6,10 @@
     "type": "project",
     "require": {
         "php": ">=7.0.0",
+        "darkaonline/l5-swagger": "~5.0",
         "fideloper/proxy": "~3.3",
         "laravel/framework": "5.5.*",
+        "laravel/passport": "4.0.3",
         "laravel/tinker": "~1.0",
         "laravelnews/laravel-twbs4": "^1.3"
     },

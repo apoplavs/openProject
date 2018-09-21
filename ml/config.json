@@ -3,7 +3,7 @@
 			"type":"mysql",	
 			"host":"develop-toecyd.ckbu3cst0zhm.eu-central-1.rds.amazonaws.com",
 			"dbname":"ml_toecyd",
-			"charset":"utf8",
+			"charset":"utf8mb4",
 			"user":"develop",
 			"pass":"openproject",
 			"port":"3306"
@@ -13,7 +13,7 @@
 			"type":"mysql",	
 			"host":"develop-toecyd.ckbu3cst0zhm.eu-central-1.rds.amazonaws.com",
 			"dbname":"develop_toecyd",
-			"charset":"utf8",
+			"charset":"utf8mb4",
 			"user":"develop",
 			"pass":"openproject",
 			"port":"3306"
