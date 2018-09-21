@@ -8,6 +8,7 @@ import os
 import pickle
 import nltk
 import sys
+import snowballstemmer
 
 from nltk.tokenize import word_tokenize
 
@@ -33,7 +34,7 @@ def get_data(categories):
     connection = get_connection()
 
     with connection.cursor() as cursor:
-        sql = "SELECT `ml_datasets`.`category`, `src_documents`.`doc_text` FROM `ml_datasets` RIGHT JOIN `src_documents` ON `ml_datasets`.`doc_id`=`src_documents`.`doc_id` WHERE `ml_datasets`.`category` IN {}".format(
+        sql = "SELECT `ml_datasets`.`category`, `src_documents`.`doc_text` FROM `ml_datasets` INNER JOIN `src_documents` ON `ml_datasets`.`doc_id`=`src_documents`.`doc_id` WHERE `ml_datasets`.`category` IN {}".format(
             str(tuple(categories))
         )
         cursor.execute(sql)
@@ -44,29 +45,29 @@ def get_data(categories):
 
 
 
-def train(clean_data):
+def train(clean_data, flag = False):
     all_words = []
     sent_detector = nltk.data.load('tokenizers/punkt/english.pickle')
 
     for title in clean_data:
-        # create an array of all words
-        # print(title['doc_text'])
-        #resolutive = re.search(reg_exp, title['doc_text'])
-        #words = sent_detector.tokenize(title['doc_text'])
-        words = word_tokenize(title['doc_text'])
+        # create an array of all sentences
+        words = sent_detector.tokenize(title['doc_text'])
+        #words = word_tokenize(title['doc_text'])
 
         # add part of speech to each word
         pos = nltk.pos_tag(words)
-        for w in pos:
+        for w in words:
             # w = ( "Word", 'RR')
             # all training sentences
-            all_words.append(w[0].lower())
+            if len(w) > 8 :
+                all_words.append(w)
 
     # save all descriptions with genre names
     all_words = nltk.FreqDist(all_words)
-    print(all_words.most_common(15000))
-    sys.exit()
     word_features = [w for (w, c) in all_words.most_common(500)]
+    if flag == '-w':
+        print(all_words.most_common(100))
+        sys.exit()
 
     def find_features(document):
         tokenized_words = sent_detector.tokenize(document)
@@ -77,11 +78,18 @@ def train(clean_data):
 
     featuresets = [(find_features(title['doc_text']), title['category']) for
                    title in clean_data]
-    # print(featuresets)
+    # якщо стоїть флаг -p (подивитись точність)
+    if flag == '-p' :
+        training_set = featuresets[:int(len(featuresets) / 2)]
+        testing_set = featuresets[int(len(featuresets) / 2):]
+
+        classifier = nltk.NaiveBayesClassifier.train(training_set)
+
+        print("Original Naive Bayes Algo accuracy percent:", (nltk.classify.accuracy(classifier, testing_set)) * 100)
+        sys.exit()
 
     classifier = nltk.NaiveBayesClassifier.train(featuresets)
-    #print(classifier)
-    #sys.exit()
+
 
     return classifier
 
@@ -105,18 +113,26 @@ if __name__ == '__main__':
     To run script you need to type 'python learn.py [category] [category]' 
     in your terminal
     """
-
-    input_categories = sys.argv[1:]
+    # якщо стоять флаги
+    # -р подититись accuracy percent
+    # -w подивитись найбільш частовживані слова
+    if sys.argv[-1:][0] == "-p" or sys.argv[-1:][0] == "-w" :
+        input_categories = sys.argv[1:-1]
+        flag = sys.argv[-1:][0]
+    else:
+        input_categories = sys.argv[1:]
+        flag = False
 
     if any(not c.isdigit() for c in input_categories):
         print('All arguments should be digits')
         sys.exit()
-    elif len(input_categories) > 40 or len(input_categories) < 2:
+    elif len(input_categories) > 4 or len(input_categories) < 2:
         print('Wrong number of categories')
         sys.exit()
 
     train_data = get_data(input_categories)
-    validator = Validator('full')
+    # ['full', 'operative', 'motive', 'introduction']
+    validator = Validator('operative')
     clean_data = validator.validate_list(train_data)
-    new_classifier = train(clean_data)
+    new_classifier = train(clean_data, flag)
     dump_classifier(new_classifier, input_categories)

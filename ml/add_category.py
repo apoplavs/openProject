@@ -8,7 +8,7 @@ import pickle
 import nltk
 import sys
 import re
-from pprint import pprint
+from validation import Validator
 
 from nltk.tokenize import word_tokenize
 #nltk.download('punkt')
@@ -33,7 +33,7 @@ def getQuery(category):
 	if category == 25 or category == 26:
 		query = "SELECT `doc_id`, `doc_text` FROM `src_documents` WHERE `justice_kind`=5 AND `instance_code`=2 AND `doc_id` NOT IN (SELECT `doc_id` FROM `ml_datasets` WHERE `category` IN (25, 26, 27))" # адмінправопорушення (апеляція)
 	elif category == 28 or category == 29:
-		query = "SELECT `doc_id`, `doc_text` FROM `src_documents` WHERE `justice_kind`=1 AND `judgment_code`=5 AND  `instance_code`=2 AND `doc_id` NOT IN (SELECT `doc_id` FROM `ml_datasets` WHERE category IN (28, 29, 30))" # цивільне (апеляція)
+		query = "SELECT `doc_id`, `doc_text` FROM `src_documents` WHERE `justice_kind`=1 AND `judgment_code`=5 AND  `instance_code`=2 AND `doc_id` NOT IN (SELECT `doc_id` FROM `ml_datasets` WHERE `category` IN (28, 29, 30))" # цивільне (апеляція)
 	elif category == 31 or category == 32:
 		query = "SELECT `doc_id`, `doc_text` FROM `src_documents` WHERE `justice_kind`=2 AND `judgment_code`=5 AND `instance_code`=2 AND `doc_id` NOT IN (SELECT `doc_id` FROM `ml_datasets` WHERE `category` IN (31, 32, 33))" # кримінальне (апеляція)
 	else:
@@ -55,32 +55,54 @@ def getDocuments(query, limit):
 	# list of your documents (each document is a string)
 	return data
 
-def getClassifier():
+def putDocument(connection, doc_id, category):
+	with connection.cursor() as cursor:
+		sql = "INSERT INTO `ml_datasets` (`doc_id`, `category`, `doc_text`, `by_user`) VALUES (%s, %s, %s, %s)"
+		cursor.execute(sql, (str(doc_id), str(category), 'немає, оскільки додано з ML', '100'))
+
+
+def getClassifier1():
 	#load our classifier from pickle 
-	open_file = open("pickles/28_29_30.pickle", "rb")
-	#open_file = open("pickles/originalnaivebayes.pickle", "rb")
+	open_file = open("pickles/28_29.pickle", "rb")
 	classifier = pickle.load(open_file)
 	open_file.close()
 	return classifier
 
+def getClassifier2():
+	#load our classifier from pickle 
+	open_file = open("pickles/28_29_30.pickle", "rb")
+	classifier = pickle.load(open_file)
+	open_file.close()
+	return classifier	
+
 def find_features(document):
-	words = word_tokenize(document)
+	sent_detector = nltk.data.load('tokenizers/punkt/english.pickle')
+	tokenized_words = sent_detector.tokenize(document)
 	features = {}
-	for w in words:
-		features[w] = (w in words)
-	return features	
+	for w in tokenized_words:
+		features[w] = (w in tokenized_words)
+	return features
 
 
 def sentiment(text):
 	#firstly we find featureset for desired text
 	feats = find_features(text)
-	classifier = getClassifier()
-	res = classifier.prob_classify(feats)
-	#print(res.prob(29))
-	#sys.exit()
-	#run our classifier
-	#res = classifier.classify(feats)
-	return res	
+	classifier1 = getClassifier1()
+	classifier2 = getClassifier2()
+
+	res1 = classifier1.prob_classify(feats)
+	res2 = classifier2.prob_classify(feats)
+	# if (res2.prob(30) * 100) > 70 :
+	# 	print(str(title['doc_id']) + ",")
+	#print(str(title['doc_id'])+'    25 = '+str(int(res1.prob(28) * 100))+'    26 = '+str(int(res1.prob(29) * 100))+' |  25 = '+str(int(res2.prob(28) * 100))+'    26 = '+str(int(res2.prob(29) * 100))+'    27 = '+str(int(res2.prob(30) * 100)))
+	if (res1.prob(28) * 100) > 90 and (res2.prob(28) * 100) > 80:
+		return 28
+	elif (res1.prob(29) * 100) > 87 and (res2.prob(29) * 100) > 80:
+		return 29
+	elif ((res1.prob(29) * 100) < 75 and (res1.prob(28) * 100) < 75 and (res2.prob(29) * 100) < 60 and (res2.prob(28) * 100) < 60) or ((res2.prob(30) * 100) > 40):
+		return 30
+	print(str(title['doc_id'])+'    25 = '+str(int(res1.prob(28) * 100))+'    26 = '+str(int(res1.prob(29) * 100))+' |  25 = '+str(int(res2.prob(28) * 100))+'    26 = '+str(int(res2.prob(29) * 100))+'    27 = '+str(int(res2.prob(30) * 100)))
+	return 0
 
 
 
@@ -100,15 +122,21 @@ if __name__ == '__main__':
 		print('All arguments should be digits')
 		sys.exit()
 
- 
+
 	query = getQuery(int(category))
 	documents = getDocuments(query, limit)
-	for title in documents:
-		reg_exp = re.compile(r"(ЗАСУДИ|ПОСТАНОВИ|ВИРІШИ|УХВАЛИ)\w+:?\n(.+)", re.MULTILINE | re.UNICODE | re.DOTALL)
-		resolutive = re.search(reg_exp, title['doc_text'])
-
-		res = sentiment(resolutive.group(2))
-		print(str(title['doc_id'])+'    28 = '+str(res.prob(28))+'    29 = '+str(res.prob(29))+'    30 = '+str(res.prob(30)))
+	validator = Validator('operative')
+	clean_data = validator.validate_list(documents)
+	connection = get_connection()
+	for title in clean_data:
+		category = sentiment(title['doc_text'])
+		if (not category == 0) and category == 29 :
+			#pass
+			putDocument(connection, title['doc_id'], category)
+	connection.commit()
+	connection.close()
+		#print(str(title['doc_id'])+'   category = ' + str(category))
+		#print(str(title['doc_id'])+'    25 = '+str(int(res.prob(28) * 100))+'    26 = '+str(int(res.prob(29) * 100))+'    30 = '+str(int(res.prob(30) * 100)))
 
 	#pprint(documents)
 	sys.exit()
