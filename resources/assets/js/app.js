@@ -16,7 +16,7 @@ Validator.localize('uk', uk);
 
 
 window.axios = axios;
-require('./bootstrap');
+// require('./bootstrap');
 
 
 import AppComponent from './components/AppComponent.vue';
