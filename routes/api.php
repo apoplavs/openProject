@@ -62,8 +62,12 @@ Route::group(['prefix' => 'v1/', 'namespace' => 'Api\V1',], function () {
 		
 		// поставити лайк судді
 		Route::put('/judges/{id}/like', 'JudgesController@putLike')->middleware('checkId:judge');
+		// видалити лайк судді
+		Route::delete('/judges/{id}/like', 'JudgesController@deleteLike')->middleware('checkId:judge');
 		// поставити дизлайк судді
 		Route::put('/judges/{id}/unlike', 'JudgesController@putUnlike')->middleware('checkId:judge');
+		// видалити дизлайк судді
+		Route::delete('/judges/{id}/unlike', 'JudgesController@deleteUnlike')->middleware('checkId:judge');
 		
 	});
 	

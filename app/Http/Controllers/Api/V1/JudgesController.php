@@ -1040,12 +1040,72 @@ class JudgesController extends Controller
 	
 	
 	
-	// todo написати документацію, і прописати маршрути для delete, протестити
 	/**
-	 * Поставити лайк судді
+	 * @SWG\Put(
+	 *     path="/judges/{id}/like",
+	 *     summary="Поставити лайк судді",
+	 *     description="Поставити лайк судді від імені поточного користувача",
+	 *     operationId="judges-addLike",
+	 *     produces={"application/json"},
+	 *     tags={"Судді"},
+	 *     security={
+	 *     {"passport": {}},
+	 *   	},
+	 *     @SWG\Parameter(
+	 *     	ref="#/parameters/Content-Type",
+	 *     ),
+	 *     @SWG\Parameter(
+	 *     	ref="#/parameters/X-Requested-With",
+	 *     ),
 	 *
-	 * @param  int  $id
-	 * @return \Illuminate\Http\Response
+	 * 	  @SWG\Parameter(
+	 *     name="id",
+	 *     in="path",
+	 *     required=true,
+	 *     description="Id судді, якому поставити лайк",
+	 *     type="integer",
+	 *     collectionFormat="multi",
+	 *     uniqueItems=true,
+	 *     minimum=1,
+	 *     maximum=15000,
+	 *     allowEmptyValue=false
+	 *     ),
+	 *
+	 *     @SWG\Response(
+	 *         response=200,
+	 *         description="Лайк упішно поставлений",
+	 *     	   examples={"application/json":
+	 *              {
+	 *     				"message": "ОК"
+	 *              }
+	 *     		}
+	 *     ),
+	 *
+	 *     @SWG\Response(
+	 *         response=401,
+	 *         description="Необхідна аутентифікація користувача",
+	 *     	   examples={"application/json":
+	 *              {
+	 *     				"message": "Unauthenticated",
+	 *              }
+	 *     		}
+	 *     ),
+	 *
+	 *     @SWG\Response(
+	 *         response=405,
+	 *         description="Метод, з яким виконувався запит, не дозволено використовувати для заданого ресурсу; наприклад, запит був здійснений за методом POST, хоча очікується PUT.",
+	 *     ),
+	 *
+	 *     @SWG\Response(
+	 *         response=422,
+	 *         description="Передані не валідні дані, неіснуючий id, або користувач вже ставив лайк для цього судді",
+	 *     	   examples={"application/json":
+	 *              {
+	 *     				"message": "Даний користувач вже ставив лайк для цього судді",
+	 *              }
+	 *     		}
+	 *     ),
+	 * )
 	 */
 	public function putLike($id) {
 		// перевіряємо чи користувач вже ставив лайк
@@ -1060,14 +1120,70 @@ class JudgesController extends Controller
 		UsersLikesJudge::putLike($id);
 		return response()->json([
 			'message' => 'ОК'
-		], 201);
+		], 200);
 	}
 	
 	/**
-	 * Поставити лайк судді
+	 * @SWG\Delete(
+	 *     path="/judges/{id}/like",
+	 *     summary="Видалити лайк судді",
+	 *     description="Видалити раніше поставлений від імені поточного користувача лайк судді",
+	 *     operationId="judges-delLike",
+	 *     produces={"application/json"},
+	 *     tags={"Судді"},
+	 *     security={
+	 *     {"passport": {}},
+	 *   	},
+	 *     @SWG\Parameter(
+	 *     	ref="#/parameters/Content-Type",
+	 *     ),
+	 *     @SWG\Parameter(
+	 *     	ref="#/parameters/X-Requested-With",
+	 *     ),
 	 *
-	 * @param  int  $id
-	 * @return \Illuminate\Http\Response
+	 * 	  @SWG\Parameter(
+	 *     name="id",
+	 *     in="path",
+	 *     required=true,
+	 *     description="Id судді, для якого видалити лайк",
+	 *     type="integer",
+	 *     collectionFormat="multi",
+	 *     uniqueItems=true,
+	 *     minimum=1,
+	 *     maximum=15000,
+	 *     allowEmptyValue=false
+	 *     ),
+	 *
+	 *     @SWG\Response(
+	 *         response=204,
+	 *         description="Лайк упішно видалений"
+	 *     ),
+	 *
+	 *     @SWG\Response(
+	 *         response=401,
+	 *         description="Необхідна аутентифікація користувача",
+	 *     	   examples={"application/json":
+	 *              {
+	 *     				"message": "Unauthenticated",
+	 *              }
+	 *     		}
+	 *     ),
+	 *
+	 *     @SWG\Response(
+	 *         response=405,
+	 *         description="Метод, з яким виконувався запит, не дозволено використовувати для заданого ресурсу; наприклад, запит був здійснений за методом POST, хоча очікується DELETE.",
+	 *     ),
+	 *
+	 *     @SWG\Response(
+	 *         response=422,
+	 *         description="Передані не валідні дані, неіснуючий id, або користувач не ставив лайк для цього судді",
+	 *     	   examples={"application/json":
+	 *              {
+	 *     				"message": "Даний користувач не ставив лайк для цього судді",
+	 *              }
+	 *     		}
+	 *     ),
+	 * )
 	 */
 	public function deleteLike($id) {
 		// перевіряємо чи користувач ставив лайк
@@ -1085,10 +1201,71 @@ class JudgesController extends Controller
 	
 	
 	/**
-	 * Поставити дизлайк судді
+	 * @SWG\Put(
+	 *     path="/judges/{id}/unlike",
+	 *     summary="Поставити дизлайк судді",
+	 *     description="Поставити дизлайк судді від імені поточного користувача",
+	 *     operationId="judges-addUnlike",
+	 *     produces={"application/json"},
+	 *     tags={"Судді"},
+	 *     security={
+	 *     {"passport": {}},
+	 *   	},
+	 *     @SWG\Parameter(
+	 *     	ref="#/parameters/Content-Type",
+	 *     ),
+	 *     @SWG\Parameter(
+	 *     	ref="#/parameters/X-Requested-With",
+	 *     ),
 	 *
-	 * @param  int  $id
-	 * @return \Illuminate\Http\Response
+	 * 	  @SWG\Parameter(
+	 *     name="id",
+	 *     in="path",
+	 *     required=true,
+	 *     description="Id судді, якому поставити дизлайк",
+	 *     type="integer",
+	 *     collectionFormat="multi",
+	 *     uniqueItems=true,
+	 *     minimum=1,
+	 *     maximum=15000,
+	 *     allowEmptyValue=false
+	 *     ),
+	 *
+	 *     @SWG\Response(
+	 *         response=200,
+	 *         description="Дизлайк упішно поставлений",
+	 *     	   examples={"application/json":
+	 *              {
+	 *     				"message": "ОК"
+	 *              }
+	 *     		}
+	 *     ),
+	 *
+	 *     @SWG\Response(
+	 *         response=401,
+	 *         description="Необхідна аутентифікація користувача",
+	 *     	   examples={"application/json":
+	 *              {
+	 *     				"message": "Unauthenticated",
+	 *              }
+	 *     		}
+	 *     ),
+	 *
+	 *     @SWG\Response(
+	 *         response=405,
+	 *         description="Метод, з яким виконувався запит, не дозволено використовувати для заданого ресурсу; наприклад, запит був здійснений за методом POST, хоча очікується PUT.",
+	 *     ),
+	 *
+	 *     @SWG\Response(
+	 *         response=422,
+	 *         description="Передані не валідні дані, неіснуючий id, або користувач вже ставив дизлайк для цього судді",
+	 *     	   examples={"application/json":
+	 *              {
+	 *     				"message": "Даний користувач вже ставив дизлайк для цього судді",
+	 *              }
+	 *     		}
+	 *     ),
+	 * )
 	 */
 	public function putUnlike($id) {
 		// перевіряємо чи користувач вже ставив дизлайк
@@ -1103,36 +1280,84 @@ class JudgesController extends Controller
 		UsersUnlikesJudge::putUnlike($id);
 		return response()->json([
 			'message' => 'ОК'
-		], 201);
+		], 200);
 	}
 	
 	
-	// todo привести до коректного вигляду
 	/**
-	 * Поставити дизлайк судді
+	 * @SWG\Delete(
+	 *     path="/judges/{id}/unlike",
+	 *     summary="Видалити дизлайк судді",
+	 *     description="Видалити раніше поставлений від імені поточного користувача дизлайк судді",
+	 *     operationId="judges-delUnlike",
+	 *     produces={"application/json"},
+	 *     tags={"Судді"},
+	 *     security={
+	 *     {"passport": {}},
+	 *   	},
+	 *     @SWG\Parameter(
+	 *     	ref="#/parameters/Content-Type",
+	 *     ),
+	 *     @SWG\Parameter(
+	 *     	ref="#/parameters/X-Requested-With",
+	 *     ),
 	 *
-	 * @param  int  $id
-	 * @return \Illuminate\Http\Response
+	 * 	  @SWG\Parameter(
+	 *     name="id",
+	 *     in="path",
+	 *     required=true,
+	 *     description="Id судді, для якого видалити дизлайк",
+	 *     type="integer",
+	 *     collectionFormat="multi",
+	 *     uniqueItems=true,
+	 *     minimum=1,
+	 *     maximum=15000,
+	 *     allowEmptyValue=false
+	 *     ),
+	 *
+	 *     @SWG\Response(
+	 *         response=204,
+	 *         description="Дизайк упішно видалений"
+	 *     ),
+	 *
+	 *     @SWG\Response(
+	 *         response=401,
+	 *         description="Необхідна аутентифікація користувача",
+	 *     	   examples={"application/json":
+	 *              {
+	 *     				"message": "Unauthenticated",
+	 *              }
+	 *     		}
+	 *     ),
+	 *
+	 *     @SWG\Response(
+	 *         response=405,
+	 *         description="Метод, з яким виконувався запит, не дозволено використовувати для заданого ресурсу; наприклад, запит був здійснений за методом POST, хоча очікується DELETE.",
+	 *     ),
+	 *
+	 *     @SWG\Response(
+	 *         response=422,
+	 *         description="Передані не валідні дані, неіснуючий id, або користувач не ставив дизлайк для цього судді",
+	 *     	   examples={"application/json":
+	 *              {
+	 *     				"message": "Даний користувач не ставив дизлайк для цього судді",
+	 *              }
+	 *     		}
+	 *     ),
+	 * )
 	 */
 	public function deleteUnlike($id) {
 		// перевіряємо чи користувач вже ставив дизлайк
 		$is_unliked = UsersUnlikesJudge::isUnlikedJudge($id);
 		
-		// якщо ставив - то прибираємо, в іншому випадку ставимо
+		// якщо користувач не ставив дизлайк - 422
 		if (!$is_unliked) {
-			$judge_data = UsersUnlikesJudge::deleteUnlike($id);
-			return (view('judges.judge-likes-unlikes')
-				->with(['judge' => $judge_data,
-					'liked' => false,
-					'unliked' => false
-				]));
+			return response()->json([
+				'message' => 'Даний користувач не ставив дизлайк для цього судді'
+			], 422);
 		} else {
-			$judge_data = UsersUnlikesJudge::putUnlike($id);
-			return (view('judges.judge-likes-unlikes')
-				->with(['judge' => $judge_data,
-					'liked' => false,
-					'unliked' => true
-				]));
+			UsersUnlikesJudge::deleteUnlike($id);
+			return response()->json([], 204);
 		}
 	}
 	
