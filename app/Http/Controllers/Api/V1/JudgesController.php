@@ -314,7 +314,7 @@ class JudgesController extends Controller
 	 * @SWG\Get(
 	 *     path="/guest/judges/list",
 	 *     summary="Отримати список суддів для незареєстрованого користувача",
-	 *     description="Даний маршрут працює так же як /judges/list, за винятком того, що не вимагає авторизації користувача і не повертає даних що стосуються користувача (напр. is_bookmark) і id суддів",
+	 *     description="Даний маршрут працює так же як /judges/list, за винятком того, що не вимагає авторизації користувача і не повертає даних що стосуються користувача (напр. is_bookmark)",
 	 *     operationId="guest-judges-list",
 	 *     produces={"application/json"},
 	 *     tags={"Судді"},
@@ -479,6 +479,7 @@ class JudgesController extends Controller
 	 *					"current_page": 1,
 	 *					"data": {
 	 *					{
+	 *            		"id": 4012,
 	 *					"court_name": "Господарський суд Київської області",
 	 *					"surname": "Євграфова",
 	 *					"name": "Є",
@@ -490,6 +491,7 @@ class JudgesController extends Controller
 	 *					"rating": 0
 	 *					},
 	 *					{
+	 *          		"id": 114,
 	 *					"court_name": "Шосткинський міськрайонний суд Сумської області",
 	 *					"surname": "Євдокімова",
 	 *					"name": "Олена",
@@ -501,6 +503,7 @@ class JudgesController extends Controller
 	 *					"rating": 0
 	 *					},
 	 *					{
+	 *     				"id": 1518,
 	 *					"court_name": "Соснівський районний суд м. Черкаси",
 	 *					"surname": "Євтушенко",
 	 *					"name": "П",
@@ -641,30 +644,7 @@ class JudgesController extends Controller
         //
     }
 	
-	/**
-	 * Оновлює статус судді
-	 *
-	 * @param  \Illuminate\Http\Request  $request
-	 * @param  int  $id
-	 * @return string || \Illuminate\Http\Response
-	 */
-    public function updateJudgeStatus(Request $request, $id) {
-    	$set_status = intval($request->setstatus);
-    	$due_date = $request->date;
-    	
-    	// вілідація форми для зміни статусу
-		$validator = Validator::make(['setstatus'=>$set_status, 'date'=>$due_date], [
-    		'setstatus' => 'required|integer|between:1,5',
-			'date' => 'date|date_format:Y-m-d|after:yesterday|nullable'
-		]);
-		if ($validator->fails()) {
-			return('we check it');
-		}
-		// отримання статусу судді
-		$judge = Judge::setNewStatus($id, $set_status, $due_date);
 	
-		return view('judges.judge-statuses', compact('judge'));
-	}
 
     /**
      * Remove the specified resource from storage.
@@ -817,7 +797,7 @@ class JudgesController extends Controller
 	 *         description="Закладка упішно створена",
 	 *     	   examples={"application/json":
 	 *              {
-	 *     				"message": "Bookmark successfully created!"
+	 *     				"message": "Закладка успішно створена"
 	 *              }
 	 *     		}
 	 *     ),
@@ -850,11 +830,7 @@ class JudgesController extends Controller
 	 */
 	public function addJudgeBookmark($id) {
 		$id = intval($id);
-		if (!Judge::checkJudgeById($id)) {
-			return response()->json([
-				'message' => 'Неіснуючий id'
-			], 422);
-		}
+
 		if (UserBookmarkJudge::checkBookmark(Auth::user()->id, $id)) {
 			return response()->json([
 				'message' => 'Закладка вже існує'
@@ -862,12 +838,11 @@ class JudgesController extends Controller
 		}
 		UserBookmarkJudge::createBookmark(Auth::user()->id, $id);
 		return response()->json([
-			'message' => 'Bookmark successfully created'
+			'message' => 'Закладка успішно створена'
 		], 201);
 	}
 	
 	
-	// todo дописати документацію, і прописати route в api.php
 	
 	/**
 	 * @SWG\Delete(
@@ -933,11 +908,7 @@ class JudgesController extends Controller
 	 */
 	public function delJudgeBookmark($id) {
 		$id = intval($id);
-		if (!Judge::checkJudgeById($id)) {
-			return response()->json([
-				'message' => 'Неіснуючий id'
-			], 422);
-		}
+
 		if (!UserBookmarkJudge::checkBookmark(Auth::user()->id, $id)) {
 			return response()->json([
 				'message' => 'Закладки не існує'
@@ -949,63 +920,449 @@ class JudgesController extends Controller
 	
 	
 	
+	/**
+	 * @SWG\Put(
+	 *     path="/judges/{id}/update-status",
+	 *     summary="Оновити статус судді",
+	 *     description="Встановии новий статус для судді, наприклад: суддя був на роботі, і пішов у відпустку",
+	 *     operationId="judges-updateStatus",
+	 *     produces={"application/json"},
+	 *     tags={"Судді"},
+	 *     security={
+	 *     {"passport": {}},
+	 *   	},
+	 *     @SWG\Parameter(
+	 *     	ref="#/parameters/Content-Type",
+	 *     ),
+	 *     @SWG\Parameter(
+	 *     	ref="#/parameters/X-Requested-With",
+	 *     ),
+	 *
+	 * 	  @SWG\Parameter(
+	 *     name="id",
+	 *     in="path",
+	 *     required=true,
+	 *     description="Id судді, для якого потрібно встановити новий статус",
+	 *     type="integer",
+	 *     collectionFormat="multi",
+	 *     uniqueItems=true,
+	 *     minimum=1,
+	 *     maximum=15000,
+	 *     allowEmptyValue=false
+	 *     ),
+	 *
+	 *     @SWG\Parameter(
+	 *     name="Дані нового статусу",
+	 *     in="body",
+	 *     required=true,
+	 *     description="Існує 5 статусів, які свідчать про перебування судді на робочому місці:
+	1 - На роботі
+	2 - На лікарняному
+	3 - У відпустці
+	4 - Відсутній на робочому місці з інших причин
+	5 - Припинено повноваження
+	 *  Щоб встановити новий статус, потрібно передати id нового статусу, і якщо відома, то дату дії статусу, тобто до якого часу даний статус буде діяти
+	 *	Дата дії може бути передана для статусів 2-4.  Для статусів 1,5 дата дії не враховується",
+	 *     @SWG\Schema(
+	 *          type="object",
+	 *     		required={"set_status"},
+	 *          @SWG\Property(property="set_status",  type="integer", example="3", description="id статусу"),
+	 *          @SWG\Property(property="due_date", type="date", example="2018-09-21", description="Дата дії статусу, у форматі Y-m-d,
+	 * мінімальне значення >= поточний день
+	 * максимальне значення <= поточний день + 1 місяць")
+	 *       )
+	 *     ),
+	 *
+	 *     @SWG\Response(
+	 *         response=200,
+	 *         description="Статус судді був успішно оновлений",
+	 *     	   examples={"application/json":
+	 *              {
+	 *     				"message": "Статус успішно оновлено"
+	 *              }
+	 *     		}
+	 *     ),
+	 *
+	 *     @SWG\Response(
+	 *         response=401,
+	 *         description="Необхідна аутентифікація користувача",
+	 *     	   examples={"application/json":
+	 *              {
+	 *     				"message": "Unauthenticated",
+	 *              }
+	 *     		}
+	 *     ),
+	 *
+	 *     @SWG\Response(
+	 *         response=405,
+	 *         description="Метод, з яким виконувався запит, не дозволено використовувати для заданого ресурсу; наприклад, запит був здійснений за методом POST, хоча очікується PUT.",
+	 *     ),
+	 *
+	 *     @SWG\Response(
+	 *         response=422,
+	 *         description="Передані не валідні дані, неіснуючий id, некоректний формат даних",
+	 *     	   examples={"application/json":
+	 *              {
+	 *     				"message": "The given data was invalid.",
+	 *     				"errors": {
+	 *						"due_date": {
+	 *						"due date не валідна дата.",
+	 *						"due date не відповідає формату Y-m-d.",
+	 *						"due date повинна бути дата, що пізніша або рівна today."
+	 *						}
+	 *					}
+	 *              }
+	 *     		}
+	 *     ),
+	 * )
+	 */
+	public function updateJudgeStatus(Request $request, $id) {
+		// валідація вхідних даних
+		$request->validate([
+			'set_status' => 'required|integer|between:1,5',
+			'due_date' => 'date|date_format:Y-m-d|after_or_equal:today|before_or_equal:+1 month|nullable'
+		]);
+
+		$new_status = intval($request->set_status);
+		// якщо due_date не передана, або передано статуси 1,5 due_date=null
+		$due_date = $request->due_date ?? NULL;
+		if ($new_status == 1 || $new_status == 5) {
+			$due_date = NULL;
+		}
+		// оновлення статусу судді
+		Judge::setNewStatus($id, $new_status, $due_date);
+		
+		return response()->json([
+			'message' => 'Статус успішно оновлено'
+		], 200);
+	}
+	
+	
 	
 	
 	/**
-	 * Поставити лайк судді
+	 * @SWG\Put(
+	 *     path="/judges/{id}/like",
+	 *     summary="Поставити лайк судді",
+	 *     description="Поставити лайк судді від імені поточного користувача",
+	 *     operationId="judges-addLike",
+	 *     produces={"application/json"},
+	 *     tags={"Судді"},
+	 *     security={
+	 *     {"passport": {}},
+	 *   	},
+	 *     @SWG\Parameter(
+	 *     	ref="#/parameters/Content-Type",
+	 *     ),
+	 *     @SWG\Parameter(
+	 *     	ref="#/parameters/X-Requested-With",
+	 *     ),
 	 *
-	 * @param  int  $id
-	 * @return \Illuminate\Http\Response
+	 * 	  @SWG\Parameter(
+	 *     name="id",
+	 *     in="path",
+	 *     required=true,
+	 *     description="Id судді, якому поставити лайк",
+	 *     type="integer",
+	 *     collectionFormat="multi",
+	 *     uniqueItems=true,
+	 *     minimum=1,
+	 *     maximum=15000,
+	 *     allowEmptyValue=false
+	 *     ),
+	 *
+	 *     @SWG\Response(
+	 *         response=200,
+	 *         description="Лайк упішно поставлений",
+	 *     	   examples={"application/json":
+	 *              {
+	 *     				"message": "ОК"
+	 *              }
+	 *     		}
+	 *     ),
+	 *
+	 *     @SWG\Response(
+	 *         response=401,
+	 *         description="Необхідна аутентифікація користувача",
+	 *     	   examples={"application/json":
+	 *              {
+	 *     				"message": "Unauthenticated",
+	 *              }
+	 *     		}
+	 *     ),
+	 *
+	 *     @SWG\Response(
+	 *         response=405,
+	 *         description="Метод, з яким виконувався запит, не дозволено використовувати для заданого ресурсу; наприклад, запит був здійснений за методом POST, хоча очікується PUT.",
+	 *     ),
+	 *
+	 *     @SWG\Response(
+	 *         response=422,
+	 *         description="Передані не валідні дані, неіснуючий id, або користувач вже ставив лайк для цього судді",
+	 *     	   examples={"application/json":
+	 *              {
+	 *     				"message": "Даний користувач вже ставив лайк для цього судді",
+	 *              }
+	 *     		}
+	 *     ),
+	 * )
 	 */
 	public function putLike($id) {
 		// перевіряємо чи користувач вже ставив лайк
 		$is_liked = UsersLikesJudge::isLikedJudge($id);
 		
-		// якщо ставив - то прибираємо, в іншому випадку ставимо
+		// якщо ставив - то 422, в іншому випадку ставимо
 		if ($is_liked) {
-			$judge_data = UsersLikesJudge::deleteLike($id);
-			return (view('judges.judge-likes-unlikes')
-				->with(['judge' => $judge_data,
-					'liked' => false,
-					'unliked' => false
-				]));
-		} else {
-			$judge_data = UsersLikesJudge::putLike($id);
-			return (view('judges.judge-likes-unlikes')
-				->with(['judge' => $judge_data,
-					'liked' => true,
-					'unliked' => false
-				]));
+			return response()->json([
+				'message' => 'Даний користувач вже ставив лайк для цього судді'
+			], 422);
 		}
+		UsersLikesJudge::putLike($id);
+		return response()->json([
+			'message' => 'ОК'
+		], 200);
 	}
 	
 	/**
-	 * Поставити дизлайк судді
+	 * @SWG\Delete(
+	 *     path="/judges/{id}/like",
+	 *     summary="Видалити лайк судді",
+	 *     description="Видалити раніше поставлений від імені поточного користувача лайк судді",
+	 *     operationId="judges-delLike",
+	 *     produces={"application/json"},
+	 *     tags={"Судді"},
+	 *     security={
+	 *     {"passport": {}},
+	 *   	},
+	 *     @SWG\Parameter(
+	 *     	ref="#/parameters/Content-Type",
+	 *     ),
+	 *     @SWG\Parameter(
+	 *     	ref="#/parameters/X-Requested-With",
+	 *     ),
 	 *
-	 * @param  int  $id
-	 * @return \Illuminate\Http\Response
+	 * 	  @SWG\Parameter(
+	 *     name="id",
+	 *     in="path",
+	 *     required=true,
+	 *     description="Id судді, для якого видалити лайк",
+	 *     type="integer",
+	 *     collectionFormat="multi",
+	 *     uniqueItems=true,
+	 *     minimum=1,
+	 *     maximum=15000,
+	 *     allowEmptyValue=false
+	 *     ),
+	 *
+	 *     @SWG\Response(
+	 *         response=204,
+	 *         description="Лайк упішно видалений"
+	 *     ),
+	 *
+	 *     @SWG\Response(
+	 *         response=401,
+	 *         description="Необхідна аутентифікація користувача",
+	 *     	   examples={"application/json":
+	 *              {
+	 *     				"message": "Unauthenticated",
+	 *              }
+	 *     		}
+	 *     ),
+	 *
+	 *     @SWG\Response(
+	 *         response=405,
+	 *         description="Метод, з яким виконувався запит, не дозволено використовувати для заданого ресурсу; наприклад, запит був здійснений за методом POST, хоча очікується DELETE.",
+	 *     ),
+	 *
+	 *     @SWG\Response(
+	 *         response=422,
+	 *         description="Передані не валідні дані, неіснуючий id, або користувач не ставив лайк для цього судді",
+	 *     	   examples={"application/json":
+	 *              {
+	 *     				"message": "Даний користувач не ставив лайк для цього судді",
+	 *              }
+	 *     		}
+	 *     ),
+	 * )
+	 */
+	public function deleteLike($id) {
+		// перевіряємо чи користувач ставив лайк
+		$is_liked = UsersLikesJudge::isLikedJudge($id);
+		
+		// якщо користувач не ставив лайк - 422
+		if (!$is_liked) {
+			return response()->json([
+				'message' => 'Даний користувач не ставив лайк для цього судді'
+			], 422);
+		}
+		UsersLikesJudge::deleteLike($id);
+		return response()->json([], 204);
+	}
+	
+	
+	/**
+	 * @SWG\Put(
+	 *     path="/judges/{id}/unlike",
+	 *     summary="Поставити дизлайк судді",
+	 *     description="Поставити дизлайк судді від імені поточного користувача",
+	 *     operationId="judges-addUnlike",
+	 *     produces={"application/json"},
+	 *     tags={"Судді"},
+	 *     security={
+	 *     {"passport": {}},
+	 *   	},
+	 *     @SWG\Parameter(
+	 *     	ref="#/parameters/Content-Type",
+	 *     ),
+	 *     @SWG\Parameter(
+	 *     	ref="#/parameters/X-Requested-With",
+	 *     ),
+	 *
+	 * 	  @SWG\Parameter(
+	 *     name="id",
+	 *     in="path",
+	 *     required=true,
+	 *     description="Id судді, якому поставити дизлайк",
+	 *     type="integer",
+	 *     collectionFormat="multi",
+	 *     uniqueItems=true,
+	 *     minimum=1,
+	 *     maximum=15000,
+	 *     allowEmptyValue=false
+	 *     ),
+	 *
+	 *     @SWG\Response(
+	 *         response=200,
+	 *         description="Дизлайк упішно поставлений",
+	 *     	   examples={"application/json":
+	 *              {
+	 *     				"message": "ОК"
+	 *              }
+	 *     		}
+	 *     ),
+	 *
+	 *     @SWG\Response(
+	 *         response=401,
+	 *         description="Необхідна аутентифікація користувача",
+	 *     	   examples={"application/json":
+	 *              {
+	 *     				"message": "Unauthenticated",
+	 *              }
+	 *     		}
+	 *     ),
+	 *
+	 *     @SWG\Response(
+	 *         response=405,
+	 *         description="Метод, з яким виконувався запит, не дозволено використовувати для заданого ресурсу; наприклад, запит був здійснений за методом POST, хоча очікується PUT.",
+	 *     ),
+	 *
+	 *     @SWG\Response(
+	 *         response=422,
+	 *         description="Передані не валідні дані, неіснуючий id, або користувач вже ставив дизлайк для цього судді",
+	 *     	   examples={"application/json":
+	 *              {
+	 *     				"message": "Даний користувач вже ставив дизлайк для цього судді",
+	 *              }
+	 *     		}
+	 *     ),
+	 * )
 	 */
 	public function putUnlike($id) {
 		// перевіряємо чи користувач вже ставив дизлайк
 		$is_unliked = UsersUnlikesJudge::isUnlikedJudge($id);
 		
-		// якщо ставив - то прибираємо, в іншому випадку ставимо
+		// якщо ставив - то 422, в іншому випадку ставимо
 		if ($is_unliked) {
-			$judge_data = UsersUnlikesJudge::deleteUnlike($id);
-			return (view('judges.judge-likes-unlikes')
-				->with(['judge' => $judge_data,
-					'liked' => false,
-					'unliked' => false
-				]));
+			return response()->json([
+				'message' => 'Даний користувач вже ставив дизлайк для цього судді'
+			], 422);
+		}
+		UsersUnlikesJudge::putUnlike($id);
+		return response()->json([
+			'message' => 'ОК'
+		], 200);
+	}
+	
+	
+	/**
+	 * @SWG\Delete(
+	 *     path="/judges/{id}/unlike",
+	 *     summary="Видалити дизлайк судді",
+	 *     description="Видалити раніше поставлений від імені поточного користувача дизлайк судді",
+	 *     operationId="judges-delUnlike",
+	 *     produces={"application/json"},
+	 *     tags={"Судді"},
+	 *     security={
+	 *     {"passport": {}},
+	 *   	},
+	 *     @SWG\Parameter(
+	 *     	ref="#/parameters/Content-Type",
+	 *     ),
+	 *     @SWG\Parameter(
+	 *     	ref="#/parameters/X-Requested-With",
+	 *     ),
+	 *
+	 * 	  @SWG\Parameter(
+	 *     name="id",
+	 *     in="path",
+	 *     required=true,
+	 *     description="Id судді, для якого видалити дизлайк",
+	 *     type="integer",
+	 *     collectionFormat="multi",
+	 *     uniqueItems=true,
+	 *     minimum=1,
+	 *     maximum=15000,
+	 *     allowEmptyValue=false
+	 *     ),
+	 *
+	 *     @SWG\Response(
+	 *         response=204,
+	 *         description="Дизайк упішно видалений"
+	 *     ),
+	 *
+	 *     @SWG\Response(
+	 *         response=401,
+	 *         description="Необхідна аутентифікація користувача",
+	 *     	   examples={"application/json":
+	 *              {
+	 *     				"message": "Unauthenticated",
+	 *              }
+	 *     		}
+	 *     ),
+	 *
+	 *     @SWG\Response(
+	 *         response=405,
+	 *         description="Метод, з яким виконувався запит, не дозволено використовувати для заданого ресурсу; наприклад, запит був здійснений за методом POST, хоча очікується DELETE.",
+	 *     ),
+	 *
+	 *     @SWG\Response(
+	 *         response=422,
+	 *         description="Передані не валідні дані, неіснуючий id, або користувач не ставив дизлайк для цього судді",
+	 *     	   examples={"application/json":
+	 *              {
+	 *     				"message": "Даний користувач не ставив дизлайк для цього судді",
+	 *              }
+	 *     		}
+	 *     ),
+	 * )
+	 */
+	public function deleteUnlike($id) {
+		// перевіряємо чи користувач вже ставив дизлайк
+		$is_unliked = UsersUnlikesJudge::isUnlikedJudge($id);
+		
+		// якщо користувач не ставив дизлайк - 422
+		if (!$is_unliked) {
+			return response()->json([
+				'message' => 'Даний користувач не ставив дизлайк для цього судді'
+			], 422);
 		} else {
-			$judge_data = UsersUnlikesJudge::putUnlike($id);
-			return (view('judges.judge-likes-unlikes')
-				->with(['judge' => $judge_data,
-					'liked' => false,
-					'unliked' => true
-				]));
+			UsersUnlikesJudge::deleteUnlike($id);
+			return response()->json([], 204);
 		}
 	}
+	
+	
+	
 	
 	
 	/**

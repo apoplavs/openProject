@@ -29,14 +29,11 @@ class UsersLikesJudge extends Model
 	 * @return bool
 	 */
 	public static function isLikedJudge($judge) {
-		if (!Auth::check()) {
-			return (false);
-		}
 		$data_status = static::select('id')
 			->where('user', '=', Auth::user()->id)
 			->where('judge', '=', $judge)
 			->first();
-		return (($data_status && $data_status->id )  ? (true) : (false));
+		return (($data_status && $data_status->id )  ? true : false);
 	}
 	
 
@@ -44,13 +41,12 @@ class UsersLikesJudge extends Model
 	
 	
 	/**
-	 * оновлює існуючий або створює новий запис в БД
+	 * створює новий запис в БД
 	 * про те, що користувач поставив лайк судді
 	 * @param $judge
-	 * @return array
 	 */
 	public static function putLike($judge) {
-		// відмічаєм, що цей користувач поставив лайк
+		// створюємо запис, що цей користувач поставив лайк
 		static::insert(
 		['user' => Auth::user()->id,
 		'judge' => $judge]);
@@ -61,7 +57,6 @@ class UsersLikesJudge extends Model
 	 * видаляє запис з БД про те, що користувач
 	 * ставив лайк судді
 	 * @param $judge
-	 * @return array
 	 */
 	public static function deleteLike($judge) {
 		// видаляємо запис про лайк
