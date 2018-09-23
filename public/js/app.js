@@ -1798,7 +1798,7 @@ module.exports = Component.exports
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(22);
-module.exports = __webpack_require__(93);
+module.exports = __webpack_require__(94);
 
 
 /***/ }),
@@ -1874,7 +1874,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('judges-list', __webpack_r
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('passport-clients', __webpack_require__(19));
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('passport-authorized-clients', __webpack_require__(20));
 
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('pagination', __webpack_require__(197));
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('pagination', __webpack_require__(93));
 
 var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
     mode: 'history',
@@ -71047,7 +71047,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* Стилі для фільтрів */\n#filters[data-v-e9915f2e] {\n  font-size: 0.9em;\n}\n#filters h6[data-v-e9915f2e] {\n  color: #4c88bd;\n}\n\n\n/* Customize the label (the container) */\n#filters ul label[data-v-e9915f2e] {\n  display: block;\n  position: relative;\n  padding-left: 35px;\n  margin-bottom: 10px;\n  cursor: pointer;\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  user-select: none;\n}\n\n\n/* Hide the browser's default checkbox */\n#filters ul input[data-v-e9915f2e] {\n  position: absolute;\n  opacity: 0;\n  cursor: pointer;\n}\n\n\n/* Create a custom checkbox */\n.checkmark[data-v-e9915f2e] {\n  position: absolute;\n  top: 0;\n  left: 0;\n  height: 21px;\n  width: 21px;\n  background-color: #eee;\n}\n\n\n/* When the checkbox is checked, add a blue background */\n#filters ul label input:checked~.checkmark[data-v-e9915f2e] {\n  background-color: #2b989b;\n}\n\n\n/* Create the checkmark/indicator (hidden when not checked) */\n.checkmark[data-v-e9915f2e]:after {\n  content: \"\";\n  position: absolute;\n  display: none;\n}\n\n\n/* Show the checkmark when checked */\n#filters ul label input:checked~.checkmark[data-v-e9915f2e]:after {\n  display: block;\n}\n\n\n/* Style the checkmark/indicator */\n#filters ul label .checkmark[data-v-e9915f2e]:after {\n  left: 9px;\n  top: 5px;\n  width: 5px;\n  height: 10px;\n  border: solid white;\n  border-width: 0 3px 3px 0;\n  -webkit-transform: rotate(45deg);\n  transform: rotate(45deg);\n}\n#apply-filters[data-v-e9915f2e] {\n  background-color: white;\n  position: -webkit-sticky;\n  position: sticky;\n  bottom: 0;\n}\n\n\n/* if display is bigger then 1200px, correct position */\n@media (min-width: 1200px) {\n}\n\n\n/* styles for page elements */\ndiv.col-12.col-lg-2>img[data-v-e9915f2e] {\n  width: 120px;\n  height: 120px;\n}\n#sorting-type[data-v-e9915f2e],\n.bookmark[data-v-e9915f2e],\n.fa-pencil[data-v-e9915f2e] {\n  cursor: pointer;\n}\n#sorting-type input[data-v-e9915f2e] {\n  display: none;\n}\ndiv.card-body.p-2 h5 a[data-v-e9915f2e] {\n  color: #3d7ee5;\n}\n\n\n/* if display is small then 992 hide part of pagination */\n@media (max-width: 992px) {\n.pagination li[data-v-e9915f2e]:nth-child(even) {\n    display: none;\n}\n}\n\n\n/* styles for font awesome */\n.fa-filter[data-v-e9915f2e] {\n  font-size: 21px;\n  color: #6291ba;\n}\n.fa-sort-alpha-asc[data-v-e9915f2e],\n.fa-sort-alpha-desc[data-v-e9915f2e] {\n  font-size: 18px;\n  color: #3d7ee5;\n}\n.fa-bookmark-o[data-v-e9915f2e],\n.fa-bookmark[data-v-e9915f2e] {\n  font-size: 18px;\n  color: #2b989b;\n}\n.fa-briefcase[data-v-e9915f2e] {\n  color: green;\n  font-size: 15px;\n}\n.fa-line-chart[data-v-e9915f2e] {\n  color: #6291ba;\n}\n.fa-medkit[data-v-e9915f2e] {\n  font-size: 17px;\n  color: red;\n}\n.fa-calendar-check-o[data-v-e9915f2e],\n.fa-calendar-minus-o[data-v-e9915f2e],\n.fa-calendar-times-o[data-v-e9915f2e] {\n  font-size: 17px;\n  color: #2b989b;\n}\n.fa-pencil[data-v-e9915f2e] {\n  color: #6c757d;\n  -webkit-transition-duration: 0.3s;\n  transition-duration: 0.3s;\n}\n.fa-pencil[data-v-e9915f2e]:hover {\n  color: #6291ba;\n  -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 0.5), inset 0 0 1px rgba(0, 0, 0, 0.7);\n          box-shadow: 0 0 3px rgba(0, 0, 0, 0.5), inset 0 0 1px rgba(0, 0, 0, 0.7);\n}\n\n\n/* styles for autocomplete field  */\n.autocomplete[data-v-e9915f2e] {\n  /*the container must be positioned relative:*/\n  position: relative;\n  display: inline-block;\n}\n.autocomplete-items[data-v-e9915f2e] {\n  position: absolute;\n  font-size: 0.9em;\n  border: 1px solid #d4d4d4;\n  border-bottom: none;\n  border-top: none;\n  z-index: 99;\n  /*position the autocomplete items to be the same width as the container:*/\n  top: 100%;\n  left: 0;\n  right: 0;\n  -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);\n          box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);\n}\n.autocomplete-items div[data-v-e9915f2e] {\n  padding: 10px;\n  cursor: pointer;\n  background-color: #fff;\n  border-bottom: 1px solid #d4d4d4;\n}\n.autocomplete-items div[data-v-e9915f2e]:hover {\n  /*when hovering an item:*/\n  background-color: #e9e9e9;\n}\n.autocomplete-active[data-v-e9915f2e] {\n  /*when navigating through the items using the arrow keys:*/\n  background-color: DodgerBlue !important;\n  color: #ffffff;\n}\n\n\n/* styles for pop-up form changing status */\nselect#chooser-judge-status[data-v-e9915f2e] {\n  font-family: \"FontAwesome\", Helvetica, serif;\n}\nselect#chooser-judge-status option[data-v-e9915f2e]:first-child {\n  color: green;\n}\nselect#chooser-judge-status option[data-v-e9915f2e]:nth-child(2) {\n  color: red;\n}\nselect#chooser-judge-status option[data-v-e9915f2e]:nth-child(3) {\n  color: #2b989b;\n}\nselect#chooser-judge-status option[data-v-e9915f2e]:nth-child(4) {\n  color: #2b989b;\n}\nselect#chooser-judge-status option[data-v-e9915f2e]:last-child {\n  color: #6291ba;\n}\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* Стилі для фільтрів */\n#filters[data-v-e9915f2e] {\n  font-size: 0.9em;\n}\n#filters h6[data-v-e9915f2e] {\n  color: #4c88bd;\n}\n\n\n/* Customize the label (the container) */\n#filters ul label[data-v-e9915f2e] {\n  display: block;\n  position: relative;\n  padding-left: 35px;\n  margin-bottom: 10px;\n  cursor: pointer;\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  user-select: none;\n}\n\n\n/* Hide the browser's default checkbox */\n#filters ul input[data-v-e9915f2e] {\n  position: absolute;\n  opacity: 0;\n  cursor: pointer;\n}\n\n\n/* Create a custom checkbox */\n.checkmark[data-v-e9915f2e] {\n  position: absolute;\n  top: 0;\n  left: 0;\n  height: 21px;\n  width: 21px;\n  background-color: #eee;\n}\n\n\n/* When the checkbox is checked, add a blue background */\n#filters ul label input:checked~.checkmark[data-v-e9915f2e] {\n  background-color: #2b989b;\n}\n\n\n/* Create the checkmark/indicator (hidden when not checked) */\n.checkmark[data-v-e9915f2e]:after {\n  content: \"\";\n  position: absolute;\n  display: none;\n}\n\n\n/* Show the checkmark when checked */\n#filters ul label input:checked~.checkmark[data-v-e9915f2e]:after {\n  display: block;\n}\n\n\n/* Style the checkmark/indicator */\n#filters ul label .checkmark[data-v-e9915f2e]:after {\n  left: 9px;\n  top: 5px;\n  width: 5px;\n  height: 10px;\n  border: solid white;\n  border-width: 0 3px 3px 0;\n  -webkit-transform: rotate(45deg);\n  transform: rotate(45deg);\n}\n#apply-filters[data-v-e9915f2e] {\n  background-color: white;\n  position: -webkit-sticky;\n  position: sticky;\n  bottom: 0;\n}\n\n\n/* if display is bigger then 1200px, correct position */\n@media (min-width: 1200px) {\n}\n\n\n/* styles for page elements */\ndiv.col-12.col-lg-2>img[data-v-e9915f2e] {\n  width: 120px;\n  height: 120px;\n}\n#sorting-type[data-v-e9915f2e],\n.bookmark[data-v-e9915f2e],\n.fa-pencil[data-v-e9915f2e] {\n  cursor: pointer;\n}\n#sorting-type input[data-v-e9915f2e] {\n  display: none;\n}\ndiv.card-body.p-2 h5 a[data-v-e9915f2e] {\n  color: #3d7ee5;\n}\n\n\n/* if display is small then 992 hide part of pagination */\n@media (max-width: 992px) {\n.pagination li[data-v-e9915f2e]:nth-child(even) {\n    display: none;\n}\n}\n\n\n/* styles for font awesome */\n.fa-filter[data-v-e9915f2e] {\n  font-size: 21px;\n  color: #6291ba;\n}\n.fa-sort-alpha-asc[data-v-e9915f2e],\n.fa-sort-alpha-desc[data-v-e9915f2e] {\n  font-size: 18px;\n  color: #3d7ee5;\n}\n.fa-bookmark-o[data-v-e9915f2e],\n.fa-bookmark[data-v-e9915f2e] {\n  font-size: 18px;\n  color: #2b989b;\n}\n.fa-briefcase[data-v-e9915f2e] {\n  color: green;\n  font-size: 15px;\n}\n.fa-line-chart[data-v-e9915f2e] {\n  color: #6291ba;\n}\n.fa-medkit[data-v-e9915f2e] {\n  font-size: 17px;\n  color: red;\n}\n.fa-calendar-check-o[data-v-e9915f2e],\n.fa-calendar-minus-o[data-v-e9915f2e],\n.fa-calendar-times-o[data-v-e9915f2e] {\n  font-size: 17px;\n  color: #2b989b;\n}\n.fa-pencil[data-v-e9915f2e] {\n  color: #6c757d;\n  -webkit-transition-duration: 0.3s;\n  transition-duration: 0.3s;\n}\n.fa-pencil[data-v-e9915f2e]:hover {\n  color: #6291ba;\n  -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 0.5), inset 0 0 1px rgba(0, 0, 0, 0.7);\n          box-shadow: 0 0 3px rgba(0, 0, 0, 0.5), inset 0 0 1px rgba(0, 0, 0, 0.7);\n}\n\n\n/* styles for autocomplete field  */\n.autocomplete[data-v-e9915f2e] {\n  /*the container must be positioned relative:*/\n  position: relative;\n  display: inline-block;\n}\n.autocomplete-items[data-v-e9915f2e] {\n  position: absolute;\n  font-size: 0.9em;\n  border: 1px solid #d4d4d4;\n  border-bottom: none;\n  border-top: none;\n  z-index: 99;\n  /*position the autocomplete items to be the same width as the container:*/\n  top: 100%;\n  left: 0;\n  right: 0;\n  -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);\n          box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);\n}\n.autocomplete-items div[data-v-e9915f2e] {\n  padding: 10px;\n  cursor: pointer;\n  background-color: #fff;\n  border-bottom: 1px solid #d4d4d4;\n}\n.autocomplete-items div[data-v-e9915f2e]:hover {\n  /*when hovering an item:*/\n  background-color: #e9e9e9;\n}\n.autocomplete-active[data-v-e9915f2e] {\n  /*when navigating through the items using the arrow keys:*/\n  background-color: DodgerBlue !important;\n  color: #ffffff;\n}\n\n\n/* styles for pop-up form changing status */\nselect#chooser-judge-status[data-v-e9915f2e] {\n  font-family: \"FontAwesome\", Helvetica, serif;\n}\nselect#chooser-judge-status option[data-v-e9915f2e]:first-child {\n  color: green;\n}\nselect#chooser-judge-status option[data-v-e9915f2e]:nth-child(2) {\n  color: red;\n}\nselect#chooser-judge-status option[data-v-e9915f2e]:nth-child(3) {\n  color: #2b989b;\n}\nselect#chooser-judge-status option[data-v-e9915f2e]:nth-child(4) {\n  color: #2b989b;\n}\nselect#chooser-judge-status option[data-v-e9915f2e]:last-child {\n  color: #6291ba;\n}\n", ""]);
 
 // exports
 
@@ -71271,16 +71271,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         });
       } else {
         console.log('no token');
+        // debugger;
         axios.get("/api/v1/guest/judges/list", {
           headers: {
             "Content-Type": "application/json",
-            "X-Requested-With": "XMLHttpRequest",
-            "Authorization": localStorage.getItem('token')
+            "X-Requested-With": "XMLHttpRequest"
+            // "Authorization": localStorage.getItem('token')
           },
           params: this.params
         }).then(function (response) {
           _this.judgesList = response;
-          console.log(response);
+          console.log('response--', response);
         }).catch(function (error) {
           console.log(error);
           console.log('Ну нє не логінився я ще');
@@ -74280,115 +74281,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* 93 */
 /***/ (function(module, exports) {
 
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 94 */,
-/* 95 */,
-/* 96 */,
-/* 97 */,
-/* 98 */,
-/* 99 */,
-/* 100 */,
-/* 101 */,
-/* 102 */,
-/* 103 */,
-/* 104 */,
-/* 105 */,
-/* 106 */,
-/* 107 */,
-/* 108 */,
-/* 109 */,
-/* 110 */,
-/* 111 */,
-/* 112 */,
-/* 113 */,
-/* 114 */,
-/* 115 */,
-/* 116 */,
-/* 117 */,
-/* 118 */,
-/* 119 */,
-/* 120 */,
-/* 121 */,
-/* 122 */,
-/* 123 */,
-/* 124 */,
-/* 125 */,
-/* 126 */,
-/* 127 */,
-/* 128 */,
-/* 129 */,
-/* 130 */,
-/* 131 */,
-/* 132 */,
-/* 133 */,
-/* 134 */,
-/* 135 */,
-/* 136 */,
-/* 137 */,
-/* 138 */,
-/* 139 */,
-/* 140 */,
-/* 141 */,
-/* 142 */,
-/* 143 */,
-/* 144 */,
-/* 145 */,
-/* 146 */,
-/* 147 */,
-/* 148 */,
-/* 149 */,
-/* 150 */,
-/* 151 */,
-/* 152 */,
-/* 153 */,
-/* 154 */,
-/* 155 */,
-/* 156 */,
-/* 157 */,
-/* 158 */,
-/* 159 */,
-/* 160 */,
-/* 161 */,
-/* 162 */,
-/* 163 */,
-/* 164 */,
-/* 165 */,
-/* 166 */,
-/* 167 */,
-/* 168 */,
-/* 169 */,
-/* 170 */,
-/* 171 */,
-/* 172 */,
-/* 173 */,
-/* 174 */,
-/* 175 */,
-/* 176 */,
-/* 177 */,
-/* 178 */,
-/* 179 */,
-/* 180 */,
-/* 181 */,
-/* 182 */,
-/* 183 */,
-/* 184 */,
-/* 185 */,
-/* 186 */,
-/* 187 */,
-/* 188 */,
-/* 189 */,
-/* 190 */,
-/* 191 */,
-/* 192 */,
-/* 193 */,
-/* 194 */,
-/* 195 */,
-/* 196 */,
-/* 197 */
-/***/ (function(module, exports) {
-
 module.exports =
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
@@ -75650,6 +75542,12 @@ module.exports = '\x09\x0A\x0B\x0C\x0D\x20\xA0\u1680\u180E\u2000\u2001\u2002\u20
 
 /******/ })["default"];
 //# sourceMappingURL=laravel-vue-pagination.common.js.map
+
+/***/ }),
+/* 94 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);

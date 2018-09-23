@@ -7,3 +7,5 @@ composer global require "laravel/installer";
 composer require "darkaonline/l5-swagger:~5.0";
 composer require laravel/passport "4.0.3"  # в корне
 php artisan passport:install
+
+

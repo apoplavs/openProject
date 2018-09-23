@@ -211,18 +211,19 @@
             });
         } else {
           console.log('no token')
+          // debugger;
           axios
             .get("/api/v1/guest/judges/list", {
               headers: {
                 "Content-Type": "application/json",
                 "X-Requested-With": "XMLHttpRequest",
-                "Authorization": localStorage.getItem('token')
+                // "Authorization": localStorage.getItem('token')
               },
               params: this.params
             })
             .then(response => {
               this.judgesList = response;
-              console.log(response);
+              console.log('response--',response);
             })
             .catch(error => {
               console.log(error);
