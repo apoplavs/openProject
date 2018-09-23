@@ -25,6 +25,8 @@ Route::group(['prefix' => 'v1/', 'namespace' => 'Api\V1',], function () {
 	
 	// Аутенфікація користувача
 	Route::post('login', 'AuthController@login');
+    Route::post('login/google', 'AuthController@loginGoogle');
+    Route::post('login/facebook', 'AuthController@loginFacebook');
 	Route::post('signup', 'AuthController@signup');
 	
 	/**

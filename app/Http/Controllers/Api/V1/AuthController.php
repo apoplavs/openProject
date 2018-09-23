@@ -12,6 +12,7 @@ namespace Toecyd\Http\Controllers\Api\V1;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Storage;
 use Toecyd\Http\Controllers\Controller;
 use Carbon\Carbon;
 use Toecyd\User;
@@ -123,10 +124,7 @@ class AuthController extends Controller
 			'message' => 'Successfully created user!'
 		], 201);
 	}
-	
-	
-	
-	
+
 	/**
 	 * Login user and create token
 	 *
@@ -250,6 +248,225 @@ class AuthController extends Controller
 			)->toDateTimeString()
 		]);
 	}
+
+    /**
+     * Авторизація через Google
+     * @SWG\Post(
+     *     path="/login/google",
+     *     summary="Login Google",
+     *     description="Логін через акаунт в Google",
+     *     operationId="login_google",
+     *     produces={"application/json"},
+     *     tags={"Автентифікація користувача"},
+     *     @SWG\Parameter(
+     *     	ref="#/parameters/Content-Type",
+     *     ),
+     *     @SWG\Parameter(
+     *     	ref="#/parameters/X-Requested-With",
+     *     ),
+     *
+     *     @SWG\Parameter(
+     *     name="Дані користувача",
+     *     in="body",
+     *     description="Щоб здійснити логін користувача через Google, потрібно надіслати його google_id, email, ім'я (можливо, ще й прізвище), посилання на Google-аккаунт та посилання на Google-аватарку.",
+     *     @SWG\Schema(
+     *          type="object",
+     *     		required={"id", "email", "name", "link", "picture"},
+     *          @SWG\Property(property="id", type="string", example="111483939504700006800", description="google_id Користувача (повинно складатися від 3 до 255 цифр)"),
+     *          @SWG\Property(property="name", type="string", example="NameOfUser", description="Ім'я Користувача (повинно складатися від 3 до 255 символів)"),
+     *          @SWG\Property(property="email", type="string", example="example@gmail.com", description="Email Користувача (існуючий, валідний, унікальний в системі)"),
+     *          @SWG\Property(property="link", type="string", example="https://plus.google.com/111483939504700006800", description="Посилання на Google аккаунт користувача (валідний URL)"),
+     *          @SWG\Property(property="picture", type="string", example="https://lh3.googleusercontent.com/-LC0h1Ai3sXg/W6XiqkKewLI/AAAAAAAAAMQ/olvDX7mRLlwgDnzE9ARggY3dXaNu7Rh-ACJkCGAYYCw/w1024-h576-n-rw-no/my-photo.jpg", description="Посилання на google-аватарку користувача")
+     *       )
+     *     ),
+     *
+     *     @SWG\Response(
+     *         response=201,
+     *         description="Користувач успішно зареєстрований",
+     *     	   examples={"application/json":
+     *              {
+     *     				"token": "hfadlkfjha"
+     *              }
+     *     		}
+     *     ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Користувач успішно залогінився",
+     *     	   examples={"application/json":
+     *              {
+     *     				"token": "hfadlkfjha"
+     *              }
+     *     		}
+     *     ),
+     *     @SWG\Response(
+     *         response=302,
+     *         description="Передані не валідні дані по формі (наприклад, завелика довжина рядка)"
+     *     ),
+     *     @SWG\Response(
+     *         response=401,
+     *         description="Передані не валідні дані по змісту (наприклад, за URL не завантажується аватарка)"
+     *     ),
+     *     @SWG\Response(
+     *         response=405,
+     *         description="Метод, з яким виконувався запит, не дозволено використовувати для заданого ресурсу; наприклад, запит був здійснений за методом GET, хоча очікується що дані будуть надіслані методом POST.",
+     *     )
+     * )
+     *
+     * @param  [string] id
+     * @param  [string] email
+     * @param  [string] name
+     * @param  [string] link
+     * @param  [string] picture
+     * @return [string] token
+     */
+	public function loginGoogle(Request $request)
+    {
+        $userAlreadyExists = true;
+
+        $request->validate([
+            'id' => 'required|string',
+            'email' => 'required|string|email',
+            'name' => 'required|string',
+            'surname' => 'string',
+            'link' => 'required|string',
+            'picture' => 'required|string',
+        ]);
+
+        $user = User::where('email', $request->email)->first();
+        if (empty($user)) {
+            $user = factory(User::class)->create([
+                'name' => $request->name,
+                'email' => $request->email,
+            ]);
+            $userAlreadyExists = false;
+        }
+        $user->google_id = $request->id;
+        $user->password = bcrypt($request->id);
+        $user->surname = $request->surname;
+        $user->usertype = 2;
+        $user->remember_token = str_random(10);
+
+        if ($this->getHttpStatusByUrl($request->link) != 200) {
+            return response()->json([
+                'message' => 'Unauthorized (bad link)'
+            ], 401);
+        }
+
+        if (!$this->savePhoto($request->picture, $user)) {
+            return response()->json([
+                'message' => 'Unauthorized (bad picture)'
+            ], 401);
+        }
+
+        $user->save();
+
+        return response()->json([
+            'token' => $user->remember_token
+        ], $userAlreadyExists ? 200 : 201);
+    }
+
+    /**
+     * Авторизація через Facebook
+     * @SWG\Post(
+     *     path="/login/facebook",
+     *     summary="Login Facebook",
+     *     description="Логін через акаунт в Facebook",
+     *     operationId="login_facebook",
+     *     produces={"application/json"},
+     *     tags={"Автентифікація користувача"},
+     *     @SWG\Parameter(
+     *     	ref="#/parameters/Content-Type",
+     *     ),
+     *     @SWG\Parameter(
+     *     	ref="#/parameters/X-Requested-With",
+     *     ),
+     *
+     *     @SWG\Parameter(
+     *     name="Дані користувача",
+     *     in="body",
+     *     description="Щоб здійснити логін користувача через Facebook, потрібно надіслати його facebook_id, email, ім'я (можливо, ще й прізвище)",
+     *     @SWG\Schema(
+     *          type="object",
+     *     		required={"id", "email", "name"},
+     *          @SWG\Property(property="id", type="string", example="100001887847445", description="google_id Користувача (повинно складатися від 3 до 255 цифр)"),
+     *          @SWG\Property(property="name", type="string", example="NameOfUser", description="Ім'я Користувача (повинно складатися від 3 до 255 символів)"),
+     *          @SWG\Property(property="email", type="string", example="example@gmail.com", description="Email Користувача (існуючий, валідний, унікальний в системі)"),
+     *       )
+     *     ),
+     *
+     *     @SWG\Response(
+     *         response=201,
+     *         description="Користувач успішно зареєстрований",
+     *     	   examples={"application/json":
+     *              {
+     *     				"token": "hfadlkfjha"
+     *              }
+     *     		}
+     *     ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Користувач успішно залогінився",
+     *     	   examples={"application/json":
+     *              {
+     *     				"token": "hfadlkfjha"
+     *              }
+     *     		}
+     *     ),
+     *     @SWG\Response(
+     *         response=302,
+     *         description="Передані не валідні дані по формі (наприклад, завелика довжина рядка)"
+     *     ),
+     *     @SWG\Response(
+     *         response=401,
+     *         description="Передані не валідні дані по змісту (наприклад, за URL не завантажується аватарка)"
+     *     ),
+     *     @SWG\Response(
+     *         response=405,
+     *         description="Метод, з яким виконувався запит, не дозволено використовувати для заданого ресурсу; наприклад, запит був здійснений за методом GET, хоча очікується що дані будуть надіслані методом POST.",
+     *     )
+     * )
+     *
+     * @param  [string] id
+     * @param  [string] email
+     * @param  [string] name
+     * @return [string] token
+     */
+    public function loginFacebook(Request $request)
+    {
+        $userAlreadyExists = true;
+
+        $request->validate([
+            'id' => 'required|string',
+            'email' => 'required|string|email',
+            'name' => 'required|string',
+            'surname' => 'string',
+        ]);
+
+        $user = User::where('email', $request->email)->first();
+        if (empty($user)) {
+            $user = factory(User::class)->create([
+                'name' => $request->name,
+                'email' => $request->email,
+            ]);
+            $userAlreadyExists = false;
+        }
+        $user->facebook_id = $request->id;
+        $user->password = bcrypt($request->id);
+        $user->surname = $request->surname;
+        $user->usertype = 2;
+        $user->remember_token = str_random(10);
+
+        if (!$this->savePhoto("https://graph.facebook.com/v3.1/{$request->id}/picture?width=200&height=200", $user)) {
+            return response()->json([
+                'message' => 'Unauthorized (bad picture)'
+            ], 401);
+        }
+
+        $user->save();
+        return response()->json([
+            'token' => $user->remember_token
+        ], $userAlreadyExists ? 200 : 201);
+    }
 	
 	/**
 	 * Logout user (Revoke the token)
@@ -367,4 +584,42 @@ class AuthController extends Controller
 	{
 		return response()->json($request->user());
 	}
+
+    private function getHttpStatusByUrl(string $url):int
+    {
+        $handle = curl_init($url);
+        curl_setopt($handle,  CURLOPT_RETURNTRANSFER, TRUE);
+
+        curl_exec($handle);
+
+        $httpCode = curl_getinfo($handle, CURLINFO_HTTP_CODE);
+        curl_close($handle);
+
+        return $httpCode;
+    }
+
+    private function savePhoto($photoUrl, $user)
+    {
+        $fileExtension = pathinfo($photoUrl, PATHINFO_EXTENSION);
+        if (empty($fileExtension)) {
+            $fileExtension = 'jpg';
+        }
+
+        if (!in_array($fileExtension, ['jpg', 'jpeg', 'png', 'gif'])) {
+            return false;
+        }
+
+        $localPhotoUrl = "img/users/{$user->id}.{$fileExtension}";
+        $photoContents = @file_get_contents($photoUrl);
+        if (!$photoContents || !Storage::put($localPhotoUrl, file_get_contents($photoUrl))) {
+            return false;
+        }
+
+        if (!Storage::exists($localPhotoUrl) || Storage::size($localPhotoUrl) == 0) {
+            return false;
+        }
+
+        $user->photo = $localPhotoUrl;
+        return true;
+    }
 }
