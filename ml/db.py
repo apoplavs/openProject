@@ -26,57 +26,38 @@ def get_toecyd_connection():
     return toecyd_connection
 
 
-def get_count_result(judge_id, justice_kind):
-    connection = get_edrsr_connection()
-    # connection = get_toecyd_connection()
+def write_to_db(sql_query, db_name, values):
+    connections = {
+        'edrsr':get_edrsr_connection(),
+        'toecyd': get_toecyd_connection()
+    }
+
+    if not db_name in connections:
+        raise Exception('Please provide valid db_name')
+
+    connection = connections[db_name]
 
     with connection.cursor() as cursor:
-        sql_query = (f"SELECT  DISTINCT cause_num FROM reg10 "
-                     f"WHERE judge={judge_id} "
-                     f"AND justice_kind={justice_kind}")
+        cursor.execute(sql_query, values)
 
-        cursor.execute(sql_query)
-        result_count = cursor.fetchall()
-
-    return result_count
+    connection.commit()
 
 
-def get_count_appeal(result):
-    """ Amount of applications examined by judge """
+def read_from_db(sql_query, db_name):
+    connections = {
+        'edrsr': get_edrsr_connection(),
+        'toecyd': get_toecyd_connection()
+    }
 
-    connection = get_edrsr_connection()
-    with connection.cursor() as cursor:
-        # in order to avoid coding error I add '' to each appeal id
-        all_results = ', '.join("'" + num['cause_num'] + "'"for num in result)
-        sql_query = ("SELECT DISTINCT cause_num FROM reg10 "
-                     "WHERE court_code=1090 "
-                     f"AND cause_num IN ({all_results})")
+    if db_name not in connections:
+        raise Exception(f'Please provide valid db_name. '
+                        f'Examples :{list(connections.keys())}')
 
-        cursor.execute(sql_query)
-        appeals = cursor.fetchall()
-    return appeals
-
-
-def get_appeal_documents(current_cause_num):
-    """ Returns all documents of appeal """
-
-    connection = get_edrsr_connection()
-    # connection = get_toecyd_connection()
-
-    with connection.cursor() as cursor:
-
-        sql_query = (f"SELECT * FROM reg10 "
-                     f"WHERE court_code=1090 "
-                     f"AND cause_num='{current_cause_num}' "
-                     f"ORDER BY adjudication_date DESC")
-
-        cursor.execute(sql_query)
-        documents = cursor.fetchall()
-
-    return documents
-
-def execute_sql_query(sql_query):
-    connection = get_edrsr_connection()
+    connection = connections[db_name]
 
     with connection.cursor() as cursor:
         cursor.execute(sql_query)
+        result = cursor.fetchall()
+
+    return result
+

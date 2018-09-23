@@ -1,7 +1,4 @@
-import sys
-
-from civil import count_civil
-from db import get_toecyd_connection
+from civil import Civil, Judge
 
 if __name__ == '__main__':
     """
@@ -19,7 +16,9 @@ if __name__ == '__main__':
     #     print('You should provide the valid judge id')
     #     sys.exit()
 
-    input_judge = 1211
-    toecyd_conn = get_toecyd_connection()
+    input_judge = '1211'
 
-    count_civil(input_judge)
+    judge = Judge(judge_id=input_judge)
+    civil = Civil(judge=judge)
+    civil.count()
+    civil.save()
