@@ -4,12 +4,10 @@ import os
 import pickle
 import nltk
 import sys
-import snowballstemmer
 
 from db import get_edrsr_connection
 from config import PICKLES_PATH
 
-from nltk.tokenize import word_tokenize
 from validation import Validator
 
 nltk.download('punkt')
@@ -75,7 +73,6 @@ def train(clean_data, flag = False):
         sys.exit()
 
     classifier = nltk.NaiveBayesClassifier.train(featuresets)
-
 
     return classifier
 

@@ -4,7 +4,10 @@
 import pickle
 import nltk
 import sys
+
 from validation import Validator
+from config import *
+
 
 alias_category = {
     1: 1, 22: 6,
@@ -55,7 +58,7 @@ def getClassifier(file):
         return None
     # try to load our classifier from pickle
     try:
-        open_file = open(file, "rb")
+        open_file = open(f'{ROOT_PATH}/' + file, "rb")
     except Exception:
         print('Exception: file "' + file + '" not found')
         sys.exit(2)

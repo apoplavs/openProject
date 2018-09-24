@@ -1444,4 +1444,4 @@ class Validator():
         try:
             return part_text.group(3)
         except Exception:
-            print('Exception: Cannot separate text')
+            raise Exception('Exception: Cannot separate text')

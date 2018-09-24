@@ -1,5 +1,7 @@
 from sections import *
 
+import sys
+
 if __name__ == '__main__':
     """
     To run script you need to type 'python analyze.py [judge id]' 
@@ -16,26 +18,26 @@ if __name__ == '__main__':
     #     print('You should provide the valid judge id')
     #     sys.exit()
 
-    input_judge = '1211'
+    for judge_id in ['1211', '194']:
 
-    judge = Judge(judge_id=input_judge)
+        judge = Judge(judge_id=judge_id)
 
-    civil = Civil(judge=judge)
-    civil.count()
-    civil.save()
+        civil = Civil(judge=judge)
+        civil.count()
+        civil.save()
 
-    criminal = Criminal(judge=judge)
-    criminal.count()
-    criminal.save()
+        criminal = Criminal(judge=judge)
+        criminal.count()
+        criminal.save()
 
-    comm = Commercial(judge=judge)
-    comm.count()
-    comm.save()
+        comm = Commercial(judge=judge)
+        comm.count()
+        comm.save()
 
-    admin = Admin(judge=judge)
-    admin.count()
-    admin.save()
+        admin = Admin(judge=judge)
+        admin.count()
+        admin.save()
 
-    admin_offence = AdminOffence(judge=judge)
-    admin_offence.count()
-    admin_offence.save()
+        admin_offence = AdminOffence(judge=judge)
+        admin_offence.count()
+        admin_offence.save()

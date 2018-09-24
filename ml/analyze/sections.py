@@ -10,11 +10,12 @@ from db import (
 class Section:
     data_dict = {}
 
-    def __init__(self, judge: Judge, justice_kind, judge_results_table, anticipated_category=None):
+    def __init__(self, judge: Judge, justice_kind, judge_results_table, judgment_codes=None, anticipated_category=None):
         self.judge = judge
         self.justice_kind = justice_kind
         self.anticipated_category = anticipated_category
         self.judge_results_table = judge_results_table
+        self.judgement_codes = judgment_codes
 
     def _get_all_applications(self):
         """
@@ -42,9 +43,13 @@ class Section:
         all_applications = ', '.join(
             "'" + num['cause_num'] + "'" for num in all_applications
         )
+        j_codes = ', '.join(
+            str(code)  for code in self.judgement_codes
+        )
 
         sql_query = (f"SELECT DISTINCT cause_num FROM reg{self.judge.region} "
-                     f"WHERE court_code={self.judge.court_code} "
+                     f"WHERE court_code={self.judge.region + '90'} "
+                     f"AND judgment_code IN ({j_codes}) "
                      f"AND cause_num IN ({all_applications})")
 
         appeals = read_from_db(sql_query, EDRSR)
@@ -56,9 +61,14 @@ class Section:
         :param cause_num
         :return:
         """
+        j_codes = ', '.join(
+            str(code)  for code in self.judgement_codes
+        )
+
         sql_query = (f"SELECT * FROM reg{self.judge.region} "
-                     f"WHERE court_code={self.judge.court_code} "
+                     f"WHERE court_code={self.judge.region + '90'} "
                      f"AND cause_num='{cause_num}' "
+                     f"AND judgment_code IN ({j_codes}) "
                      f"ORDER BY adjudication_date DESC")
 
         documents = read_from_db(sql_query, EDRSR)
@@ -87,7 +97,8 @@ class Civil(Section):
             judge=judge,
             justice_kind="1",
             anticipated_category=28,
-            judge_results_table='judges_civil_statistic'
+            judge_results_table='judges_civil_statistic',
+            judgment_codes=[3, 5]
         )
 
     def count(self):
@@ -99,7 +110,7 @@ class Civil(Section):
         self.data_dict['approved_by_appeal'] = 0
         self.data_dict['not_approved_by_appeal'] = 0
 
-        if len(civil_in_appeal) < 50:
+        if len(civil_in_appeal) < 30:
             return
 
         for appeal in civil_in_appeal:
@@ -122,7 +133,8 @@ class Criminal(Section):
             judge=judge,
             justice_kind="2",
             anticipated_category=31,
-            judge_results_table='judges_criminal_statistic'
+            judge_results_table='judges_criminal_statistic',
+            judgment_codes=[5, 1]
         )
 
     def count(self):
@@ -134,7 +146,7 @@ class Criminal(Section):
         self.data_dict['approved_by_appeal'] = 0
         self.data_dict['not_approved_by_appeal'] = 0
 
-        if len(civil_in_appeal) < 50:
+        if len(civil_in_appeal) < 30:
             return
 
         for appeal in civil_in_appeal:
@@ -183,7 +195,8 @@ class AdminOffence(Section):
             judge=judge,
             justice_kind="5",
             judge_results_table='judges_adminoffence_statistic',
-            anticipated_category=25
+            anticipated_category=25,
+            judgment_codes=[5, 2]
         )
 
     def count(self):
@@ -195,7 +208,7 @@ class AdminOffence(Section):
         self.data_dict['approved_by_appeal'] = 0
         self.data_dict['not_approved_by_appeal'] = 0
 
-        if len(civil_in_appeal) < 50:
+        if len(civil_in_appeal) < 30:
             return
 
         for appeal in civil_in_appeal:
