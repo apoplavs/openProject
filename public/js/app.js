@@ -30528,7 +30528,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n.courtSessions[data-v-1157e9ac] {\n  width: 100%;\n  height: auto;\n  margin-top: 50px;\n  background-color: #ffffff;\n}\n.courtSessions .container-component[data-v-1157e9ac] {\n    padding: 20px;\n    font-size: .9rem;\n}\n.courtSessions .row[data-v-1157e9ac] {\n    margin: 0;\n    padding: 10px 0;\n}\n.courtSessions .row[data-v-1157e9ac]:not(:last-child) {\n      border-bottom: 1px solid lightgrey;\n}\n", ""]);
+exports.push([module.i, "\n.courtSessions[data-v-1157e9ac] {\n  width: 100%;\n  height: auto;\n  margin-top: 50px;\n  font-size: .9rem;\n}\n.courtSessions .infoCard[data-v-1157e9ac] {\n    padding: 20px;\n}\n.courtSessions .infoCard > p[data-v-1157e9ac]:first-child {\n      font-size: 1.1rem;\n}\n.courtSessions .container-component[data-v-1157e9ac] {\n    padding: 20px;\n    background-color: #ffffff;\n}\n.courtSessions .row[data-v-1157e9ac] {\n    margin: 0;\n    padding: 15px 0;\n}\n.courtSessions .row[data-v-1157e9ac]:not(:last-child) {\n      border-bottom: 1px solid lightgrey;\n}\n", ""]);
 
 // exports
 
@@ -30539,6 +30539,11 @@ exports.push([module.i, "\n.courtSessions[data-v-1157e9ac] {\n  width: 100%;\n  
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
 //
 //
 //
@@ -30632,6 +30637,12 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "courtSessions" }, [
+      _c("div", { staticClass: "d-flex justify-content-between infoCard" }, [
+        _c("p", [_vm._v("Призначено до розгляду")]),
+        _vm._v(" "),
+        _c("p", [_vm._v("Актуально на 22.09.2018")])
+      ]),
+      _vm._v(" "),
       _c("div", { staticClass: "container-component" }, [
         _c("div", { staticClass: "row header text-muted" }, [
           _c("div", { staticClass: "col-1 pl-0" }, [_vm._v("Дата розгляду")]),

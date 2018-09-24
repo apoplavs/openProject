@@ -1,5 +1,10 @@
 <template>
     <div class="courtSessions">
+        <div class="d-flex justify-content-between infoCard">
+            <p>Призначено до розгляду</p>
+            <p>Актуально на 22.09.2018</p>
+        </div>
+        
         <div class="container-component">
             <div class="row header text-muted">
                 <div class="col-1 pl-0">Дата розгляду</div>
@@ -81,15 +86,22 @@
     width: 100%;
     height: auto;
     margin-top: 50px;
-    background-color: #ffffff;
-    .container-component {
+    font-size: .9rem;
+    .infoCard {
         padding: 20px;
-        font-size: .9rem;
+        > p:first-child {
+            font-size: 1.1rem;
+        }
+    }
+    
+    .container-component {
+        padding: 20px;      
+        background-color: #ffffff;
     }
     
     .row {
         margin: 0;
-        padding: 10px 0;
+        padding: 15px 0;
         &:not(:last-child){
             border-bottom: 1px solid lightgrey;
         }
