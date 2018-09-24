@@ -153,7 +153,6 @@ class Judge extends Model
 	
 	/**
 	 * встановлює новий статус судді
-	 * і повертає його
 	 * @param $judge_id
 	 * @param $status
 	 * @param $due_date
@@ -162,11 +161,6 @@ class Judge extends Model
 		static::where('judges.id', '=', $judge_id)
 			->update(['judges.status' => $status,
 				'judges.due_date_status' => $due_date]);
-		return (static::select('judges.status',
-			DB::raw('DATE_FORMAT(judges.updated_status, "%d.%m.%Y") AS updated_status'),
-			DB::raw('DATE_FORMAT(judges.due_date_status, "%d.%m.%Y") AS due_date_status'))
-			->where('judges.id', '=', $judge_id)
-			->first());
 	}
 	
 	
@@ -232,7 +226,7 @@ class Judge extends Model
 
     public static function getJudgeIdByParsedName(int $courtCode, JudgeNameParsed $judgeNameParsed)
     {
-        $judgeId = Db::table('judges')
+        $judgeId = DB::table('judges')
             ->select('id')
             ->where('court', '=', $courtCode)
             ->where('surname', 'LIKE', $judgeNameParsed->surname)
@@ -241,7 +235,7 @@ class Judge extends Model
             ->value('id');
 
         if (empty($judgeId)) {
-            $judgeId = Db::table('judges')->insertGetId([
+            $judgeId = DB::table('judges')->insertGetId([
                 'court'         => $courtCode,
                 'surname'       => $judgeNameParsed->surname,
                 'name'          => $judgeNameParsed->name,

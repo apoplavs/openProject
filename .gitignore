@@ -9,8 +9,12 @@
 Homestead.json
 Homestead.yaml
 npm-debug.log
+package.json
+composer.json
+composer.lock
 yarn-error.log
 .env
-composer.lock
-composer.json
-/ml/*
+/venv/*
+/ml/nltk_packages
+/ml/pickles
+/ml/.idea
