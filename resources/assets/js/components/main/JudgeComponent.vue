@@ -26,12 +26,6 @@
     
                     </div>
     
-    
-    
-    
-    
-    
-    
                 </div>
             </div>
         </div>
@@ -46,18 +40,12 @@
                 isAuth: localStorage.getItem('token'),
                 headers: {
                     "Content-Type": "application/json",
-                    "X-Requested-With": "XMLHttpRequest"
-    
+                    "X-Requested-With": "XMLHttpRequest",
+                    "Authorization": localStorage.getItem('token')
                 }
             }
         },
         props: ['list'],
-        // data() {
-        //     return {
-        //         // list: this.data,
-    
-        //     }
-        // },
         methods: {
             changeBookmarkStatus(judge) {
                 // console.log(judge)
@@ -81,8 +69,7 @@
                             console.log(error);
                         });
                 } else {
-                    axios
-                         axios({
+                    axios({
                             methods: 'delete',
                             url: `/api/v1/judges/${judge.id}/bookmark`,
                             headers: {
@@ -101,10 +88,6 @@
                 }
             }
         },
-        mounted() {
-            //  console.log('props ----- ', this.data);
-    
-        }
     }
 </script>
 

@@ -1,10 +1,10 @@
 
 <template>
     <nav class="navbar  sticky-top navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Navbar</a>
+        <a class="navbar-brand" href="#"><img src="../../../../public/img/logo.png" width="40" alt="logo" />ТОЕсуд</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#NavbarMenu" aria-controls="NavbarMenu" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                  </button>
+                                <span class="navbar-toggler-icon"></span>
+                              </button>
         <div class="collapse navbar-collapse" id="NavbarMenu">
     
             <ul class="navbar-nav">
@@ -15,8 +15,8 @@
     
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Рейтинг
-                    </a>
+                                    Рейтинг
+                                </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <router-link to="/judges-list">
                             <a class="dropdown-item">Судді</a>
@@ -36,38 +36,40 @@
                     <a class="nav-link  disabled">Контакти</a>
                 </router-link>
     
-                <router-link to="/login" tag="li" class="nav-item" active-class="active">
-                    <a class="nav-link">Вхід</a>
-                </router-link>
+                <div class="d-lg-flex ml-lg-5">
+                    <router-link to="/login" tag="li" class="nav-item" active-class="active">
+                        <a class="nav-link">Вхід</a>
+                    </router-link>
     
-                <router-link to="/registration" tag="li" class="nav-item" active-class="active">
-                    <a class="nav-link">Реєстрація</a>
-                </router-link>
-    
-    
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Тетяна
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li>
-                            <span class="text-muted">tatka_28@gmail.com</span>
-                        </li>
-                        <router-link to="#" tag="li" class="nav-item" active-class="active">
-                            <a class="dropdown-item">Особистий кабінет <i class="fa fa-home text-muted float-right" aria-hidden="true"></i></a>
-                        </router-link>
-                        <router-link to="#" tag="li" class="nav-item" active-class="active">
-                            <a class="dropdown-item">Налаштування <i class="fa fa-cog text-muted float-right" aria-hidden="true"></i></a>
-                        </router-link>
-                        <router-link to="#" tag="li" class="nav-item" active-class="active">
-                            <a class="dropdown-item">Вийти <i class="fa fa-sign-out text-muted float-right" aria-hidden="true"></i></a>
-                        </router-link>
+                    <router-link to="/registration" tag="li" class="nav-item" active-class="active">
+                        <a class="nav-link">Реєстрація</a>
+                    </router-link>
     
     
-                    </div>
-                </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Тетяна
+                                </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li>
+                                <span class="text-muted">tatka_28@gmail.com</span>
+                            </li>
+                            <router-link to="#" tag="li" class="nav-item" active-class="active">
+                                <a class="dropdown-item">Особистий кабінет <i class="fa fa-home text-muted float-right" aria-hidden="true"></i></a>
+                            </router-link>
+                            <router-link to="#" tag="li" class="nav-item" active-class="active">
+                                <a class="dropdown-item">Налаштування <i class="fa fa-cog text-muted float-right" aria-hidden="true"></i></a>
+                            </router-link>
+                            <router-link to="#" tag="li" class="nav-item" active-class="active">
+                                <a class="dropdown-item">Вийти <i class="fa fa-sign-out text-muted float-right" aria-hidden="true"></i></a>
+                            </router-link>
+    
+    
+                        </div>
+                    </li>
+                     </div>
             </ul>
-        </div>
+            </div>
     </nav>
 </template>
 
@@ -89,6 +91,12 @@
     
     ul li a i {
         font-size: 1.1em;
+    }
+    
+    @media (min-width: 992px) {
+        .navbar-expand-lg .navbar-collapse {
+            justify-content: flex-end;
+        }
     }
 </style>
 
