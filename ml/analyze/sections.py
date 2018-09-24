@@ -10,9 +10,11 @@ from db import (
 class Section:
     data_dict = {}
 
-    def __init__(self, judge: Judge, justice_kind):
+    def __init__(self, judge: Judge, justice_kind, judge_results_table, anticipated_category=None):
         self.judge = judge
         self.justice_kind = justice_kind
+        self.anticipated_category = anticipated_category
+        self.judge_results_table = judge_results_table
 
     def _get_all_applications(self):
         """
@@ -66,17 +68,30 @@ class Section:
         raise NotImplementedError
 
     def save(self):
-        raise NotImplementedError
+
+        self.data_dict['judge'] = self.judge.id
+        keys = ','.join(["`" + k + "`" for k in self.data_dict])
+
+        values = list(self.data_dict.values())
+
+        sql_query = (f"REPLACE INTO `{self.judge_results_table}` ({keys}) "
+                     f"VALUES ({','.join('%s' for i in range(len(values)))})")
+
+        write_to_db(sql_query, TOECYD,  values)
 
 
 class Civil(Section):
-    anticipated_category = 28
 
     def __init__(self, judge):
-        super().__init__(judge, "1")
+        super().__init__(
+            judge=judge,
+            justice_kind="1",
+            anticipated_category=28,
+            judge_results_table='judges_civil_statistic'
+        )
 
     def count(self):
-        all_applications = self._get_all_applications()[:10]
+        all_applications = self._get_all_applications()
         self.data_dict['amount'] = len(all_applications)
 
         civil_in_appeal = self._get_all_appeals(all_applications)
@@ -100,41 +115,101 @@ class Civil(Section):
                 elif category == 29:
                     self.data_dict['not_approved_by_appeal'] += 1
 
-    def save(self):
-
-        self.data_dict['judge'] = self.judge.id
-        keys = ','.join(["`" + k + "`" for k in self.data_dict])
-        values = list(self.data_dict.values())
-        values = ','.join(["`" + str(k) + "`" for k in values])
-
-        # sql_query = (f"INSERT INTO c ('amount', 'was_appeal') "
-        #              f"VALUES (%s, %s) "
-        #              f"WHERE judge={self.judge.id}")
-
-        sql_query = (f"INSERT INTO `judges_civil_statistic` ({keys}) "
-                     f"VALUES (%s, %s, %s, %s)")
-
-        write_to_db(sql_query, TOECYD,  values)
-
 
 class Criminal(Section):
     def __init__(self, judge):
-        super().__init__(judge, "2")
+        super().__init__(
+            judge=judge,
+            justice_kind="2",
+            anticipated_category=31,
+            judge_results_table='judges_criminal_statistic'
+        )
+
+    def count(self):
+        all_applications = self._get_all_applications()
+        self.data_dict['amount'] = len(all_applications)
+
+        civil_in_appeal = self._get_all_appeals(all_applications)
+        self.data_dict['was_appeal'] = len(civil_in_appeal)
+        self.data_dict['approved_by_appeal'] = 0
+        self.data_dict['not_approved_by_appeal'] = 0
+
+        if len(civil_in_appeal) < 50:
+            return
+
+        for appeal in civil_in_appeal:
+            documents = self._get_appeal_documents(appeal['cause_num'])
+            for document in documents:
+                doc_text = document['doc_text']
+                category = guess_category(
+                    text=doc_text,
+                    anticipated_category=self.anticipated_category
+                )
+                if category == 31:
+                    self.data_dict['approved_by_appeal'] += 1
+                elif category == 32:
+                    self.data_dict['not_approved_by_appeal'] += 1
 
 
 class Commercial(Section):
     def __init__(self, judge):
-        super().__init__(judge, "3")
+        super().__init__(
+            judge=judge,
+            justice_kind="3",
+            judge_results_table='judges_commercial_statistic'
+        )
+
+    def count(self):
+        all_applications = self._get_all_applications()
+        self.data_dict['amount'] = len(all_applications)
 
 
 class Admin(Section):
     def __init__(self, judge):
-        super().__init__(judge, "4")
+        super().__init__(
+            judge=judge,
+            justice_kind="4",
+            judge_results_table='judges_admin_statistic'
+        )
+
+    def count(self):
+        all_applications = self._get_all_applications()
+        self.data_dict['amount'] = len(all_applications)
 
 
 class AdminOffence(Section):
     def __init__(self, judge):
-        super().__init__(judge, "5")
+        super().__init__(
+            judge=judge,
+            justice_kind="5",
+            judge_results_table='judges_adminoffence_statistic',
+            anticipated_category=25
+        )
+
+    def count(self):
+        all_applications = self._get_all_applications()
+        self.data_dict['amount'] = len(all_applications)
+
+        civil_in_appeal = self._get_all_appeals(all_applications)
+        self.data_dict['was_appeal'] = len(civil_in_appeal)
+        self.data_dict['approved_by_appeal'] = 0
+        self.data_dict['not_approved_by_appeal'] = 0
+
+        if len(civil_in_appeal) < 50:
+            return
+
+        for appeal in civil_in_appeal:
+            documents = self._get_appeal_documents(appeal['cause_num'])
+            for document in documents:
+                doc_text = document['doc_text']
+                category = guess_category(
+                    text=doc_text,
+                    anticipated_category=self.anticipated_category
+                )
+                if category == 25:
+                    self.data_dict['approved_by_appeal'] += 1
+                elif category == 26:
+                    self.data_dict['not_approved_by_appeal'] += 1
 
 
 

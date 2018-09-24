@@ -1,4 +1,4 @@
-from sections import Civil, Judge
+from sections import *
 
 if __name__ == '__main__':
     """
@@ -19,6 +19,23 @@ if __name__ == '__main__':
     input_judge = '1211'
 
     judge = Judge(judge_id=input_judge)
+
     civil = Civil(judge=judge)
     civil.count()
     civil.save()
+
+    criminal = Criminal(judge=judge)
+    criminal.count()
+    criminal.save()
+
+    comm = Commercial(judge=judge)
+    comm.count()
+    comm.save()
+
+    admin = Admin(judge=judge)
+    admin.count()
+    admin.save()
+
+    admin_offence = AdminOffence(judge=judge)
+    admin_offence.count()
+    admin_offence.save()
