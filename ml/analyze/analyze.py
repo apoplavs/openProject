@@ -1,4 +1,4 @@
-from civil import Civil, Judge
+from sections import Civil, Judge
 
 if __name__ == '__main__':
     """

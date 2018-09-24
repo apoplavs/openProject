@@ -1,3 +1,4 @@
+from judge import Judge
 from classifier import guess_category
 from config import *
 from db import (
@@ -6,29 +7,8 @@ from db import (
 )
 
 
-class Judge:
-
-    def __init__(self, judge_id):
-        self.id = judge_id
-        self.court_code = str(self._get_court_code())
-        self.region = self._count_region()
-
-    def _get_court_code(self):
-        sql_query = f'SELECT court_code FROM judges WHERE id={self.id}'
-        res_court_code = read_from_db(sql_query, EDRSR)
-
-        if not res_court_code:
-            raise Exception(f'Judge with id: {self.id}'
-                            f' not found in the database')
-
-        return res_court_code[0]['court_code']
-
-    def _count_region(self):
-        # get the region from court_code
-        return self.court_code[:len(self.court_code)-2]
-
-
 class Section:
+    data_dict = {}
 
     def __init__(self, judge: Judge, justice_kind):
         self.judge = judge
@@ -90,7 +70,6 @@ class Section:
 
 
 class Civil(Section):
-    civil_dict = {}
     anticipated_category = 28
 
     def __init__(self, judge):
@@ -98,12 +77,12 @@ class Civil(Section):
 
     def count(self):
         all_applications = self._get_all_applications()[:10]
-        self.civil_dict['amount'] = len(all_applications)
+        self.data_dict['amount'] = len(all_applications)
 
         civil_in_appeal = self._get_all_appeals(all_applications)
-        self.civil_dict['was_appeal'] = len(civil_in_appeal)
-        self.civil_dict['approved_by_appeal'] = 0
-        self.civil_dict['not_approved_by_appeal'] = 0
+        self.data_dict['was_appeal'] = len(civil_in_appeal)
+        self.data_dict['approved_by_appeal'] = 0
+        self.data_dict['not_approved_by_appeal'] = 0
 
         if len(civil_in_appeal) < 50:
             return
@@ -117,22 +96,25 @@ class Civil(Section):
                     anticipated_category=self.anticipated_category
                 )
                 if category == 28:
-                    self.civil_dict['approved_by_appeal']+=1
+                    self.data_dict['approved_by_appeal'] += 1
                 elif category == 29:
-                    self.civil_dict['not_approved_by_appeal']+=1
+                    self.data_dict['not_approved_by_appeal'] += 1
 
     def save(self):
 
-        # keys =
+        self.data_dict['judge'] = self.judge.id
+        keys = ','.join(["`" + k + "`" for k in self.data_dict])
+        values = list(self.data_dict.values())
+        values = ','.join(["`" + str(k) + "`" for k in values])
 
-        sql_query = (f"INSERT INTO c ('amount', 'was_appeal') "
-                     f"VALUES (%s, %s) "
-                     f"WHERE judge={self.judge.id}")
+        # sql_query = (f"INSERT INTO c ('amount', 'was_appeal') "
+        #              f"VALUES (%s, %s) "
+        #              f"WHERE judge={self.judge.id}")
 
-        sql_query = (f"INSERT INTO `judges_civil_statistic` (`judge`, `amount`, `was_appeal`) "
-                     f"VALUES (%s, %s, %s)")
+        sql_query = (f"INSERT INTO `judges_civil_statistic` ({keys}) "
+                     f"VALUES (%s, %s, %s, %s)")
 
-        write_to_db(sql_query, TOECYD,  ('2', '323', '44'))
+        write_to_db(sql_query, TOECYD,  values)
 
 
 class Criminal(Section):
