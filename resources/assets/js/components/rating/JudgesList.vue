@@ -86,7 +86,6 @@
                       <li><label><input type="checkbox" value="25" name="region" v-model="params.regions"><span class="checkmark"></span> Чернігівська</label></li>
                       <li><label><input type="checkbox" value="26" name="region" v-model="params.regions"><span class="checkmark"></span> м. Київ</label></li>
                     </ul>
-  
                   </div>
                 </div>
                 <div class="row">
@@ -190,9 +189,6 @@
       getJudgesList() {
         if (localStorage.getItem('token')) {
           console.log('have token')
-          // debugger;
-          // this.headers["Authorization"] = localStorage.getItem('token');
-          // console.log('call with filters', this.params)
           axios
             .get('/api/v1/judges/list', {
               headers: {
@@ -211,18 +207,19 @@
             });
         } else {
           console.log('no token')
+          // debugger;
           axios
             .get("/api/v1/guest/judges/list", {
               headers: {
                 "Content-Type": "application/json",
                 "X-Requested-With": "XMLHttpRequest",
-                "Authorization": localStorage.getItem('token')
+                // "Authorization": localStorage.getItem('token')
               },
               params: this.params
             })
             .then(response => {
               this.judgesList = response;
-              console.log(response);
+              console.log('response--',response);
             })
             .catch(error => {
               console.log(error);
@@ -239,8 +236,8 @@
   
     },
     components: {
-      JudgeComponent,
-    }
+      JudgeComponent
+  }
   
   };
 </script>

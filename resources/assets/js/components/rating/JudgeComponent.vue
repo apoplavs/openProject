@@ -3,8 +3,7 @@
         <div class="card-body px-4 py-2">
             <div v-if="!this.list">За заданими параметрами нічого не знайдено</div>
             <div v-if="this.list" class="container">
-                <div class="judge-component row py-3 " v-for="(judge, index) of this.list.data.data" :key="index">
-    
+                <div class="judge-component row py-3 " v-for="(judge, index) of this.list.data.data" :key="index">   
                     <div class="col-9 d-flex pl-0">
                         <div class="mr-3"><img class="avatar" :src="judge.photo" alt="фото" /></div>
                         <div>
@@ -23,7 +22,9 @@
                         <div v-if="isAuth">
                             <span title="змінити статус судді">Змінити статус судді<i class="fa fa-pencil p-1" aria-hidden="true"  data-toggle="modal" data-target="#changeJudgeStatus"></i></span>
                         </div>
-                    </div>  
+    
+                    </div>
+    
                 </div>
             </div>
         </div>
@@ -38,18 +39,12 @@
                 isAuth: localStorage.getItem('token'),
                 headers: {
                     "Content-Type": "application/json",
-                    "X-Requested-With": "XMLHttpRequest"
-    
+                    "X-Requested-With": "XMLHttpRequest",
+                    "Authorization": localStorage.getItem('token')
                 }
             }
         },
         props: ['list'],
-        // data() {
-        //     return {
-        //         // list: this.data,
-    
-        //     }
-        // },
         methods: {
             changeBookmarkStatus(judge) {
                 // console.log(judge)
@@ -73,8 +68,7 @@
                             console.log(error);
                         });
                 } else {
-                    axios
-                         axios({
+                    axios({
                             methods: 'delete',
                             url: `/api/v1/judges/${judge.id}/bookmark`,
                             headers: {
@@ -93,10 +87,6 @@
                 }
             }
         },
-        mounted() {
-            //  console.log('props ----- ', this.data);
-    
-        }
     }
 </script>
 

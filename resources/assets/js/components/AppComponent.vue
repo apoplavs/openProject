@@ -8,17 +8,17 @@
 </template>
 
 <script>
-    import HeaderComponent from './HeaderComponent.vue';
+    import HeaderComponent from './main/HeaderComponent.vue';
     // import FooterComponent from './FooterComponent.vue';
 
     export default {
         name: "app-component",
         
 
-        components: [
+        components: {
             HeaderComponent,
             // FooterComponent,
-        ]
+        }
     }
 </script>
 
