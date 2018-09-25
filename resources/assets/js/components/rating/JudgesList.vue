@@ -136,7 +136,7 @@
               <judge-component :list="judgesList"></judge-component>
             </div>
             <div class="pagination">
-              <pagination :data="judgesList" @pagination-change-page="paginationChangePage(this)"></pagination>
+              <pagination :data="judgesList" @pagination-change-page="paginationChangePage()"></pagination>
             </div>
           </div>
           <!-- /.card -->
@@ -200,7 +200,7 @@
             })
             .then(response => {
               this.judgesList = response;
-              console.log(response);
+              console.log('Response',judgesList);
             })
             .catch(error => {
               console.log('Каже що не авторизований пффф та Канеха');
@@ -213,7 +213,6 @@
               headers: {
                 "Content-Type": "application/json",
                 "X-Requested-With": "XMLHttpRequest",
-                // "Authorization": localStorage.getItem('token')
               },
               params: this.params
             })
@@ -242,7 +241,7 @@
   };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
   /* Стилі для фільтрів */
   
   #filters {

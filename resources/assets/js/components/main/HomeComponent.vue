@@ -25,16 +25,6 @@
     /* styles for welcome page */
     
     #welcome-page {
-<<<<<<< HEAD:resources/assets/js/components/HomeComponent.vue
-        height: 100vh;
-        width: 100%;
-        background-color: #4686a08f;
-        background-attachment: fixed, fixed, fixed;
-        background-image: linear-gradient(45deg, #9dc66b9e 5%, #4fa49aab 30%, #4361c2ad);
-        background-position: top left, center center, center center;
-        background-size: auto, cover, cover;
-        overflow: hidden;
-=======
        height: 100vh;
     width: 100%;
     background-color: #4686a08f;
@@ -43,7 +33,6 @@
     /* background-position: top left, center center, center center;
     background-size: auto, cover, cover; */
     overflow: hidden;
->>>>>>> f3dc4164f723ddb4a3428e0fe5c4aeade373ce51:resources/assets/js/components/main/HomeComponent.vue
     }
     
     #title-label {
