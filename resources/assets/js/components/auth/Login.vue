@@ -12,44 +12,44 @@
                 <form @submit.prevent="validateBeforeSubmit">
                     <div class="form-group">
                         <label for="email" class="form-control-label">
-                                            E-Mail
-                                        </label>
+                                                E-Mail
+                                            </label>
                         <p class="control has-icon has-icon-right">
                             <input id="email" type="email" class="form-control" name="email" v-model="user.email" v-validate="'required|email'" :class="{'input': true, 'is-danger': errors.has('email') }">
                             <small>
-                                                <i v-show="errors.has('email')" class="fa fa-warning"></i>
-                                                <span v-show="errors.has('email')"
-                                                      class="help is-danger">{{ errors.first('email') }}</span>
-                                            </small>
+                                                    <i v-show="errors.has('email')" class="fa fa-warning"></i>
+                                                    <span v-show="errors.has('email')"
+                                                          class="help is-danger">{{ errors.first('email') }}</span>
+                                                </small>
                         </p>
                     </div>
                     <div class="form-group">
                         <label for="password" class="form-control-label">
-                                            Пароль
-                                        </label>
+                                                Пароль
+                                            </label>
                         <p class="control has-icon has-icon-right">
                             <input id="password" type="password" class="form-control" name="password" v-model="user.password" v-validate="'required|min:6|max:32'">
                             <small>
-                                                <i v-show="errors.has('password')" class="fa fa-warning"></i>
-                                                <span v-show="errors.has('password')" class="help is-danger">{{ errors.first('password') }}</span>
-                                            </small>
+                                                    <i v-show="errors.has('password')" class="fa fa-warning"></i>
+                                                    <span v-show="errors.has('password')" class="help is-danger">{{ errors.first('password') }}</span>
+                                                </small>
                         </p>
                     </div>
                     <div class="form-check">
                         <label class="form-check-label">
-                                            <input
-                                                    type="checkbox"
-                                                    class="form-check-input"
-                                                    name="remember"
-                                            >
-                                            Запамятати мене
-                                        </label>
+                                                <input
+                                                        type="checkbox"
+                                                        class="form-check-input"
+                                                        name="remember"
+                                                >
+                                                Запамятати мене
+                                            </label>
                     </div>
                     <div class="form-group mt-3">
                         <div class="d-flex justify-content-between">
                             <button type="submit" class="btn btn-my-primary" id="submit-btn">
-                                                Увійти
-                                            </button>
+                                                    Увійти
+                                                </button>
                             <div class="footer-link d-flex align-items-center">
                                 <router-link to="/registration">
                                     <a>Забув пароль?</a>
@@ -70,7 +70,6 @@
 </template>
 
 <script>
-    
     export default {
         name: "login",
         data: () => {
@@ -78,56 +77,57 @@
                 user: {
                     email: "",
                     password: ""
-                },
+                }
             };
         },
         methods: {
             validateBeforeSubmit() {
                 this.$validator.validateAll().then(result => {
                     if (result) {
-                        axios.post('/api/v1/login', this.user, {
-                            headers: {
-                                'Content-Type': 'application/json',
-                                'X-Requested-With': 'XMLHttpRequest'
-                            }
-                        }).then(response => {
-                            if (response) {
-                                let token =
-                                    response.data.token_type + " " + response.data.access_token;
-                                localStorage.setItem("token", token);
-                                this.$router.push("/");
-                            }
-    
-                        }).catch(error => {
-                            if (error.response && error.response) {
-                                if (error.response.data && error.response.data.message) {
-                                    this.$toasted.error(error.response.data.message, {
+                        axios
+                            .post("/api/v1/login", this.user, {
+                                headers: {
+                                    "Content-Type": "application/json",
+                                    "X-Requested-With": "XMLHttpRequest"
+                                }
+                            })
+                            .then(response => {
+                                if (response) {
+                                    let token =
+                                        response.data.token_type + " " + response.data.access_token;
+                                    localStorage.setItem("token", token);
+                                    this.$router.push("/");
+                                }
+                            })
+                            .catch(error => {
+                                if (error.response && error.response) {
+                                    if (error.response.data && error.response.data.message) {
+                                        this.$toasted.error(error.response.data.message, {
+                                            theme: "primary",
+                                            position: "top-right",
+                                            duration: 5000
+                                        });
+                                    }
+                                } else {
+                                    this.$toasted.error("Щось пішло не так :( Cпробу", {
                                         theme: "primary",
                                         position: "top-right",
                                         duration: 5000
                                     });
+                                    alert("Something wrong:( Try again!");
                                 }
-                            } else {
-                                this.$toasted.error("Щось пішло не так :( Cпробу", {
-                                    theme: "primary",
-                                    position: "top-right",
-                                    duration: 5000
-                                });
-                                alert("Something wrong:( Try again!");
-                            }
-                        })
+                            });
                     } else {
-                        this.$toasted.error('Заповніть коректно всі поля!', {
+                        this.$toasted.error("Заповніть коректно всі поля!", {
                             theme: "primary",
                             position: "top-right",
-                            duration : 5000
-                        })
+                            duration: 5000
+                        });
                     }
-    
-                })
+                });
             }
         }
-    }
+    };
 </script>
 
 <style lang="scss" scoped>

@@ -229,7 +229,7 @@
       resetFilters() {
         this.params.regions = [];
         this.params.instance = [],
-          this.params.jurisdiction = []
+              this.params.jurisdiction = []
         // this.params.expired = 0
       }
   
