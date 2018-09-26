@@ -204,67 +204,31 @@ class Judge extends Model
     public static function parseJudgeName(string $judgeNameRaw)
     {
         $matches = [];
-        if (preg_match("/головуючий суддя:\s{0,}([^,;]+)/iu", $judgeNameRaw, $matches))
+        if (preg_match("/головуючий суддя:\s*([^,;]+)/iu", $judgeNameRaw, $matches))
         {
             $judgeNameRaw = $matches[1];
         }
 
+        // хак для обробки кейсу "Косач (Драгоманова) Лариса Петрівна"
+        $judgeNameRaw = str_replace(' (', '(', $judgeNameRaw);
+
         $matches = [];
-        $regExpName = "(\w*)\s*";
-        $regExpSurname = "\s*(\w*\-*\w*)\s*";
-        $regExpInitial = "(\w{1})\.*\s*";
-        if (preg_match("/^{$regExpSurname}{$regExpInitial}{$regExpInitial}$/Uui", $judgeNameRaw, $matches)) {
-            // Варіант "Шевченко А.Б."
-            return new JudgeNameParsed($matches[1], $matches[2], $matches[3]);
-        } elseif (preg_match("/^{$regExpSurname}{$regExpName}{$regExpName}$/Uui", $judgeNameRaw, $matches)) {
+
+        $charGood = "[^\s\.]";
+        $charBad = str_replace('^', '', $charGood);
+
+        $regExpName = "{$charBad}*({$charGood}+){$charBad}*";
+        $regExpSurname = $regExpName . $charBad . '+';
+        $regExpInitial = "({$charGood}{1}){$charBad}*";
+
+        if (preg_match("/^{$regExpSurname}{$regExpName}{$regExpName}/ui", $judgeNameRaw, $matches)) {
             // Варіант "Шевченко Анатолій Борисович"
             return new JudgeNameParsed($matches[1], mb_substr($matches[2], 0, 1), mb_substr($matches[3], 0, 1));
-        } else {
+        } elseif (preg_match("/^{$regExpSurname}{$regExpInitial}{$regExpInitial}/ui", $judgeNameRaw, $matches)) {
+             // Варіант "Шевченко А.Б."
+             return new JudgeNameParsed($matches[1], $matches[2], $matches[3]);
+         } else {
             throw new Exception("Не вдалось розпарсити ім'я судді: '{$judgeNameRaw}'");
         }
-    }
-
-    public static function getJudgeIdByParsedName(int $courtCode, JudgeNameParsed $judgeNameParsed)
-    {
-        $judgeId = DB::table('judges')
-            ->select('id')
-            ->where('court', '=', $courtCode)
-            ->where('surname', 'LIKE', $judgeNameParsed->surname)
-            ->where('name', 'LIKE', $judgeNameParsed->name . '%')
-            ->where('patronymic', 'LIKE', $judgeNameParsed->patronymic . '%')
-            ->value('id');
-
-        if (empty($judgeId)) {
-            $judgeId = DB::table('judges')->insertGetId([
-                'court'         => $courtCode,
-                'surname'       => $judgeNameParsed->surname,
-                'name'          => $judgeNameParsed->name,
-                'patronymic'    => $judgeNameParsed->patronymic,
-            ]);
-        }
-
-        return $judgeId;
-    }
-}
-
-class JudgeNameParsed
-{
-    public $surname;
-    public $name;
-    public $patronymic;
-
-    public function __construct($surname, $name, $patronymic)
-    {
-        $this->surname = $surname;
-
-        if (mb_strlen($name) != 1) {
-            throw new Exception("Ініціал має складатися з однієї букви, проте маємо " . var_export($name, 1));
-        }
-        $this->name = $name;
-
-        if (mb_strlen($patronymic) != 1) {
-            throw new Exception("Ініціал має складатися з однієї букви, проте маємо " . var_export($patronymic, 1));
-        }
-        $this->patronymic = $patronymic;
     }
 }
