@@ -200,8 +200,15 @@ class Judge extends Model
 
 		return !empty($judge);
 	}
-
-    public static function parseJudgeName(string $judgeNameRaw)
+	
+	
+	/**
+	 * Парсить ПІБ судді
+	 * @param string $judgeNameRaw
+	 * @return JudgeNameParsed
+	 * @throws Exception
+	 */
+	public static function parseJudgeName(string $judgeNameRaw)
     {
         $matches = [];
         if (preg_match("/головуючий суддя:\s{0,}([^,;]+)/iu", $judgeNameRaw, $matches))
