@@ -2,6 +2,7 @@
 
 namespace Toecyd;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 
@@ -44,13 +45,12 @@ class Court extends Model
 		// отримання id користувача
 		$user_id = Auth::check() ? Auth::user()->id : 0;
 		return (static::select('courts.court_code', 'courts.name AS court_name', 'instances.name', 'regions.name',
-			'jurisdictions.title', 'courts.address',
-			'judges.patronymic', 'judges.photo', 'judges.status',
-			DB::raw('DATE_FORMAT(judges.updated_status, "%d.%m.%Y") AS updated_status'),
-			DB::raw('DATE_FORMAT(judges.due_date_status, "%d.%m.%Y") AS due_date_status'),
-			'judges.rating', DB::raw('(CASE WHEN user_bookmark_judges.user = '.$user_id.' THEN 1 ELSE 0 END) AS is_bookmark'))
-			->join('courts', 'judges.court', '=', 'courts.court_code')
-			->leftJoin('user_bookmark_judges', 'judges.id', '=', 'user_bookmark_judges.judge')
+			'jurisdictions.title', 'courts.address', 'judges.surname', 'judges.name', 'judges.patronymic',
+			'courts.rating', DB::raw('(CASE WHEN user_bookmark_courts.user = '.$user_id.' THEN 1 ELSE 0 END) AS is_bookmark'))
+			->leftJoin('instances', 'courts.instance', '=', 'instances.instance_code')
+			->leftJoin('regions', 'courts.region', '=', 'regions.region_code')
+			->leftJoin('jurisdictions', 'courts.jurisdiction', '=', 'jurisdictions.id')
+			->leftJoin('judges', 'courts.head_judge', '=', 'judges.id')
 			// фільтрція за регіоном
 			->when(!empty($regions), function ($query) use ($regions) {
 				return $query->whereIn('courts.region_code', $regions);
@@ -65,20 +65,20 @@ class Court extends Model
 			})
 			// якщо застосовано пошук
 			->when(!empty($search), function ($query) use ($search) {
-				return $query->where('judges.surname', 'LIKE', $search.'%');
+				return $query->where('courts.name', 'LIKE', $search.'%');
 			})
 			// визначення порядку сортування
 			->when($sort_order == 1, function ($query) {
-				return $query->orderBy('judges.surname', 'ASC');
+				return $query->orderBy('courts.name', 'ASC');
 			})
 			->when($sort_order == 2, function ($query) {
-				return $query->orderBy('judges.surname', 'DESC');
+				return $query->orderBy('courts.name', 'DESC');
 			})
 			->when($sort_order == 3, function ($query) {
-				return $query->orderBy('judges.rating', 'ASC');
+				return $query->orderBy('courts.rating', 'ASC');
 			})
 			->when($sort_order == 4, function ($query) {
-				return $query->orderBy('judges.rating', 'DESC');
+				return $query->orderBy('courts.rating', 'DESC');
 			})
 			->paginate(10));
 	}

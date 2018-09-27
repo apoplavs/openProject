@@ -71,6 +71,14 @@ Route::group(['prefix' => 'v1/', 'namespace' => 'Api\V1',], function () {
 		// видалити дизлайк судді
 		Route::delete('/judges/{id}/unlike', 'JudgesController@deleteUnlike')->middleware('checkId:judge');
 		
+		
+		/**
+		 * Судді
+		 */
+		// список судів з застосованими фільтрами (Рейтинг->суди)
+		Route::get('courts/list', 'CourtsController@index');
+		// todo протестувати, дописати документацію, (розділ Responses)
+		
 	});
 	
 });
