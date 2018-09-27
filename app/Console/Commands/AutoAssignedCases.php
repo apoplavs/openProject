@@ -36,6 +36,8 @@ class AutoAssignedCases extends Command
     /* @var string */
     private $dateFormat = 'd.m.Y';
 
+    private $timeStatistics = [];
+
     /**
      * Create a new command instance.
      *
@@ -56,6 +58,8 @@ class AutoAssignedCases extends Command
         $this->initDateParams();
 
         foreach (Court::getCourtCodes() as $courtCode) {
+            $this->timeStatistics['start'] = microtime(true);
+
             $this->saveCurlResponseToDb($courtCode, $this->getCurlResponse($courtCode));
         }
     }
@@ -119,29 +123,83 @@ class AutoAssignedCases extends Command
 
     private function saveCurlResponseToDb($courtCode, $response)
     {
+        $this->timeStatistics['after_curl'] = microtime(true);
+
         $countTotal = 0;
         $countAlreadyExists = 0;
 
+
         if (!empty($response) && !empty($response->iTotalDisplayRecords) && !empty($response->aaData)) {
+            $alreadyExistedCases = $this->getAlreadyExistedCases($courtCode, $response->aaData);
+            $judgesInfo = $this->getJudgesInfo($courtCode);
+
+            $casesToInsert = [];
+
             foreach ($response->aaData as $item) {
                 $countTotal++;
 
-                $itemObj = new AutoAssignedCaseHelper($courtCode, $item);
+                $itemObj = new AutoAssignedCaseHelper($courtCode, $item, $alreadyExistedCases, $judgesInfo);
                 if (empty($itemObj->caseId)) {
-                    Db::table('auto_assigned_cases')->insert([
+                    $casesToInsert[] = [
                         'court'             => $itemObj->courtCode,
                         'number'            => $itemObj->number,
                         'date_registration' => $itemObj->dateRegistration,
                         'judge'             => $itemObj->judgeId,
                         'date_composition'  => $itemObj->dateComposition,
-                    ]);
+                    ];
                 } else {
                     $countAlreadyExists++;
                 }
             }
+
+            Db::table('auto_assigned_cases')->insert($casesToInsert);
         }
 
-        echo "Court {$courtCode} complete. Total cases: {$countTotal}. Already existed cases: {$countAlreadyExists}\n";
+        $this->timeStatistics['after_all'] = microtime(true);
+
+        $curlTime = number_format($this->timeStatistics['after_curl'] - $this->timeStatistics['start'], 3);
+        $totalTime = number_format($this->timeStatistics['after_all'] - $this->timeStatistics['start'], 3);
+
+        echo "Court {$courtCode} complete. Total cases: {$countTotal}. Already existed cases: {$countAlreadyExists}. Curl time: {$curlTime} seconds. Total time: {$totalTime} seconds.\n";
+    }
+
+    private function getAlreadyExistedCases($courtCode, $responseData)
+    {
+        $numbers = [];
+
+        foreach ($responseData as $item) {
+            $numbers[] = $item[0];
+        }
+
+        $casesData = DB::table('auto_assigned_cases')
+            ->select('id', 'number', 'date_registration')
+            ->where('court', '=', $courtCode)
+            ->whereIn('number', $numbers)
+            ->get()
+            ->toArray();
+
+        $result = [];
+
+        foreach ($casesData as $casesItem) {
+            $result[$casesItem->number][$casesItem->date_registration] = $casesItem->id;
+        }
+
+        return $result;
+    }
+
+    private function getJudgesInfo($courtCode)
+    {
+        $judgesData = DB::table('judges')
+            ->select('id', 'name', 'surname', 'patronymic')
+            ->where('court', '=', $courtCode)
+            ->get()
+            ->toArray();
+
+        $result = [];
+        foreach ($judgesData as $item) {
+            $result[$item->surname][mb_strtoupper(mb_substr($item->name, 0, 1))][mb_strtoupper(mb_substr($item->patronymic, 0, 1))] = $item->id;
+        }
+        return $result;
     }
 }
 
@@ -156,20 +214,31 @@ class AutoAssignedCaseHelper
 
     public $dateComposition;
 
-    public function __construct(int $courtCode, array $item)
+    public function __construct(int $courtCode, array $item, $alreadyExistedCases, &$judgesInfo)
     {
         $this->courtCode = $courtCode;
 
         $this->number = $item[0];
         $this->dateRegistration = date('Y-m-d', strtotime($item[1]));
-        $judgeNameRaw = $item[2];
 
-        if (!empty($this->caseId = AutoAssignedCase::getCaseId($this->courtCode, $this->dateRegistration, $this->number))) {
+        if (!empty($this->caseId = ($alreadyExistedCases[$this->number][$this->dateRegistration] ?? 0))) {
             return;
         }
 
+        $judgeNameRaw = $item[2];
         $judgeNameParsed = Judge::parseJudgeName($judgeNameRaw);
-        $this->judgeId = Judge::getJudgeIdByParsedName($this->courtCode, $judgeNameParsed);
+
+        $this->judgeId = $judgesInfo[$judgeNameParsed->surname][$judgeNameParsed->name][$judgeNameParsed->patronymic] ?? 0;
+        if (empty($this->judgeId)) {
+            $this->judgeId = DB::table('judges')->insertGetId([
+                'court'         => $courtCode,
+                'surname'       => $judgeNameParsed->surname,
+                'name'          => $judgeNameParsed->name,
+                'patronymic'    => $judgeNameParsed->patronymic,
+            ]);
+
+            $judgesInfo[$judgeNameParsed->surname][$judgeNameParsed->name][$judgeNameParsed->patronymic] = $this->judgeId;
+        }
 
         $this->dateComposition = date('Y-m-d', strtotime($item[5]));
     }
