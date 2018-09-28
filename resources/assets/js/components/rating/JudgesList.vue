@@ -88,10 +88,15 @@
                     </ul>
                   </div>
                 </div>
+
+                 <hr>
+  
                 <div class="row">
                   <div class="col-lg-12">
-                    <input type="checkbox" v-model="params.expired">Закінчились повноваження
-                  </div>
+                    <ul class="list-unstyled mb-0">
+                      <li><label><input type="checkbox" value="1" name="expired" v-model="params.expired"><span class="checkmark"></span>Закінчилися повноваження</label></li>
+                    </ul>
+              </div>
                 </div>
   
                 <hr id="apply-filters-mark">
@@ -116,6 +121,7 @@
           <div>Регіон------------- {{ params.jurisdiction }}</div>
           <div>Регіон------------- {{ params.search}}</div>
           <div>bool------------- {{ params.expired}}</div>
+          {{params}}
         </div>
         <!--  col-3 Filters  -->
 
@@ -164,7 +170,7 @@
           instance: [],
           search: null,
           sort: 1,
-          expired: 0
+          expired: 1
         },
         message: "",
         judgesList: {},

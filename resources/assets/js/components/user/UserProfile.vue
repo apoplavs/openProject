@@ -55,18 +55,42 @@
     
     export default {
         name: "personal-account",
+        data() {
+            return {
+                user: {}
+            }
+        },
+    
+        beforeMount() {
+            axios
+                .get('/api/v1/user', {
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-Requested-With": "XMLHttpRequest",
+                        "Authorization": localStorage.getItem('token')
+                    }
+    
+                })
+                .then(response => {
+                    this.user = response;
+                    console.log('Response', response);
+                })
+                .catch(error => {
+                    console.log('ERR userProfile ', error);
+                });
+        },
         components: {
             CourtSessions,
             CourtPractice,
             Establishments,
             ViewsHistory,
             Templates
-        }
+        },
     }
 </script>
 
 <style scoped lang="scss">
-// @import "_variables";
+    // @import "_variables";
     .user-profile {
         display: flex;
         justify-content: center;
@@ -95,8 +119,8 @@
         background-color: #eceaea; // $body-bg;
         border: 2px solid #408080; // $logo-color;
         border-bottom: none;
-
     }
+    
     .nav-tabs .nav-item.show .nav-link,
     .nav-tabs .nav-link:not(.active) {
         color: #636b6f; //$text-color;
@@ -104,6 +128,5 @@
         border: 2px solid #eceaea; // $body-bg;
         border-bottom: none;
     }
-    
 </style>
 

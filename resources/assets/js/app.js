@@ -6,13 +6,16 @@ import axios from 'axios';
 import VeeValidate, { Validator } from 'vee-validate';
 import uk from 'vee-validate/dist/locale/uk';
 import Toasted from 'vue-toasted';
-// import Pagination from 'laravel-vue-pagination';
+import Vuex from 'vuex';
+
+import Pagination from 'laravel-vue-pagination';
 
 
 Vue.use(VeeValidate);
 Vue.use(VueRouter);
 Vue.use(Toasted);
-// Vue.use(Pagination);
+Vue.use(Vuex);
+Vue.use(Pagination);
 
 Validator.localize('uk', uk);
 window.axios = axios;
