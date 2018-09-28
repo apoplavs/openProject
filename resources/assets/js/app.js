@@ -8,19 +8,16 @@ import uk from 'vee-validate/dist/locale/uk';
 import Toasted from 'vue-toasted';
 import Vuex from 'vuex';
 
-import Pagination from 'laravel-vue-pagination';
 
 
 Vue.use(VeeValidate);
 Vue.use(VueRouter);
 Vue.use(Toasted);
 Vue.use(Vuex);
-Vue.use(Pagination);
 
 Validator.localize('uk', uk);
 window.axios = axios;
 
-Vue.component('pagination', require('laravel-vue-pagination'));
 
 import AppComponent from './components/AppComponent.vue';
 import HomeComponent from './components/main/HomeComponent.vue';

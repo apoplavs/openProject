@@ -3,7 +3,7 @@
         <div class="card-body px-4 py-2">
             <div v-if="!this.list">За заданими параметрами нічого не знайдено</div>
             <div v-if="this.list" class="container">
-                <div class="judge-component row py-3 " v-for="(judge, index) of this.list.data.data" :key="index">   
+                <div class="judge-component row py-3 " v-for="(judge, index) of this.list.data" :key="index">   
                     <div class="col-9 d-flex pl-0">
                         <div class="mr-3"><img class="avatar" :src="judge.photo" alt="фото" /></div>
                         <div>
@@ -34,7 +34,7 @@
 <script>
     export default {
         name: "judge-component",
-        data: () => {
+        data(){
             return {
                 isAuth: localStorage.getItem('token'),
                 headers: {
