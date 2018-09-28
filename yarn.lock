@@ -4099,12 +4099,6 @@ laravel-mix@^1.0:
     webpack-notifier "^1.5.0"
     yargs "^8.0.1"
 
-laravel-vue-pagination@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/laravel-vue-pagination/-/laravel-vue-pagination-2.0.1.tgz#2e74ac4e586db4407731076fcc3d4de4800095e1"
-  dependencies:
-    vue "^2.5.17"
-
 lazy-cache@^1.0.3:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/lazy-cache/-/lazy-cache-1.0.4.tgz#a1d78fc3a50474cb80845d3b3b6e1da49a446e8e"
@@ -7248,6 +7242,12 @@ vm-browserify@0.0.4:
   dependencies:
     indexof "0.0.1"
 
+vue-ads-pagination@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/vue-ads-pagination/-/vue-ads-pagination-1.1.0.tgz#331be1d22a230a2a998d2152e837d646c8da3063"
+  dependencies:
+    vue "^2.5.16"
+
 vue-hot-reload-api@^2.2.0:
   version "2.3.1"
   resolved "https://registry.yarnpkg.com/vue-hot-reload-api/-/vue-hot-reload-api-2.3.1.tgz#b2d3d95402a811602380783ea4f566eb875569a2"
@@ -7304,9 +7304,13 @@ vue-toastr@^2.0.14:
   version "2.0.14"
   resolved "https://registry.yarnpkg.com/vue-toastr/-/vue-toastr-2.0.14.tgz#c9e9a105eea1a8d14a4dfcbeb6c6e92510646a88"
 
-vue@^2.5.17, vue@^2.5.7:
+vue@^2.5.16, vue@^2.5.7:
   version "2.5.17"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.5.17.tgz#0f8789ad718be68ca1872629832ed533589c6ada"
+
+vuex@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/vuex/-/vuex-3.0.1.tgz#e761352ebe0af537d4bb755a9b9dc4be3df7efd2"
 
 ware@^1.2.0:
   version "1.3.0"

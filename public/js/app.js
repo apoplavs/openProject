@@ -2678,20 +2678,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_vue_toasted__ = __webpack_require__(40);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_vue_toasted___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_vue_toasted__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_vuex__ = __webpack_require__(41);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_laravel_vue_pagination__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_laravel_vue_pagination___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_laravel_vue_pagination__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_AppComponent_vue__ = __webpack_require__(42);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_AppComponent_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8__components_AppComponent_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_main_HomeComponent_vue__ = __webpack_require__(54);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_main_HomeComponent_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9__components_main_HomeComponent_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_auth_Login_vue__ = __webpack_require__(59);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_auth_Login_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10__components_auth_Login_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_auth_Registration_vue__ = __webpack_require__(64);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_auth_Registration_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_11__components_auth_Registration_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_rating_JudgesList_vue__ = __webpack_require__(69);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_rating_JudgesList_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_12__components_rating_JudgesList_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_user_UserProfile_vue__ = __webpack_require__(79);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_user_UserProfile_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_13__components_user_UserProfile_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_AppComponent_vue__ = __webpack_require__(42);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_AppComponent_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__components_AppComponent_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_main_HomeComponent_vue__ = __webpack_require__(54);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_main_HomeComponent_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8__components_main_HomeComponent_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_auth_Login_vue__ = __webpack_require__(59);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_auth_Login_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9__components_auth_Login_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_auth_Registration_vue__ = __webpack_require__(64);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_auth_Registration_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10__components_auth_Registration_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_rating_JudgesList_vue__ = __webpack_require__(69);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_rating_JudgesList_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_11__components_rating_JudgesList_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_user_UserProfile_vue__ = __webpack_require__(79);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_user_UserProfile_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_12__components_user_UserProfile_vue__);
 
 
 
@@ -2702,18 +2700,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
-
-
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_3_vee_validate__["b" /* default */]);
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]);
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_5_vue_toasted___default.a);
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_6_vuex__["a" /* default */]);
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_7_laravel_vue_pagination___default.a);
 
 __WEBPACK_IMPORTED_MODULE_3_vee_validate__["a" /* Validator */].localize('uk', __WEBPACK_IMPORTED_MODULE_4_vee_validate_dist_locale_uk___default.a);
 window.axios = __WEBPACK_IMPORTED_MODULE_2_axios___default.a;
-
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('pagination', __webpack_require__(12));
 
 
 
@@ -2727,23 +2720,23 @@ var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
     base: __dirname,
     routes: [{
         path: '/',
-        component: __WEBPACK_IMPORTED_MODULE_9__components_main_HomeComponent_vue___default.a,
+        component: __WEBPACK_IMPORTED_MODULE_8__components_main_HomeComponent_vue___default.a,
         name: 'home-component'
     }, {
         path: '/login',
-        component: __WEBPACK_IMPORTED_MODULE_10__components_auth_Login_vue___default.a,
+        component: __WEBPACK_IMPORTED_MODULE_9__components_auth_Login_vue___default.a,
         name: 'login'
     }, {
         path: '/registration',
-        component: __WEBPACK_IMPORTED_MODULE_11__components_auth_Registration_vue___default.a,
+        component: __WEBPACK_IMPORTED_MODULE_10__components_auth_Registration_vue___default.a,
         name: 'registration'
     }, {
         path: '/user-profile',
-        component: __WEBPACK_IMPORTED_MODULE_13__components_user_UserProfile_vue___default.a,
+        component: __WEBPACK_IMPORTED_MODULE_12__components_user_UserProfile_vue___default.a,
         name: 'user-profile'
     }, {
         path: '/judges-list',
-        component: __WEBPACK_IMPORTED_MODULE_12__components_rating_JudgesList_vue___default.a,
+        component: __WEBPACK_IMPORTED_MODULE_11__components_rating_JudgesList_vue___default.a,
         name: 'judges-list'
     }]
 });
@@ -2751,7 +2744,7 @@ var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
 var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
     el: '#app',
     render: function render(h) {
-        return h(__WEBPACK_IMPORTED_MODULE_8__components_AppComponent_vue___default.a);
+        return h(__WEBPACK_IMPORTED_MODULE_7__components_AppComponent_vue___default.a);
     },
     router: router
 
@@ -2764,7 +2757,7 @@ var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(global, setImmediate) {/*!
- * Vue.js v2.5.16
+ * Vue.js v2.5.17
  * (c) 2014-2018 Evan You
  * Released under the MIT License.
  */
@@ -7853,7 +7846,7 @@ Object.defineProperty(Vue, 'FunctionalRenderContext', {
   value: FunctionalRenderContext
 });
 
-Vue.version = '2.5.16';
+Vue.version = '2.5.17';
 
 /*  */
 
@@ -17523,7 +17516,7 @@ module.exports = function spread(callback) {
 /* unused harmony export ErrorComponent */
 /* unused harmony export version */
 /**
-  * vee-validate v2.1.0-beta.7
+  * vee-validate v2.1.0-beta.9
   * (c) 2018 Abdelrahman Awad
   * @license MIT
   */
@@ -17747,15 +17740,15 @@ var debounce = function (fn, wait, immediate, token) {
  */
 var appendRule = function (rule, rules) {
   if (!rules) {
-    return rule;
+    return normalizeRules(rule);
   }
 
   if (!rule) {
-    return rules;
+    return normalizeRules(rules);
   }
 
   if (typeof rules === 'string') {
-    return (rules + "|" + rule);
+    rules = normalizeRules(rules);
   }
 
   return assign({}, rules, normalizeRules(rule));
@@ -17778,6 +17771,8 @@ var normalizeRules = function (rules) {
       if (rules[curr] === true) {
         params = [];
       } else if (Array.isArray(rules[curr])) {
+        params = rules[curr];
+      } else if (isObject(rules[curr])) {
         params = rules[curr];
       } else {
         params = [rules[curr]];
@@ -18059,7 +18054,7 @@ var fillRulesFromElement = function (el, rules) {
     }
 
     if (el.pattern) {
-      rules = appendRule(("regex:" + (el.pattern)), rules);
+      rules = appendRule({ regex: el.pattern }, rules);
     }
 
     // 524288 is the max on some browsers and test environments.
@@ -18627,7 +18622,7 @@ ErrorBag.prototype.any = function any (scope) {
 ErrorBag.prototype.clear = function clear (scope) {
     var this$1 = this;
 
-  var matchesVM = isNullOrUndefined(this.id) ? function () { return true; } : function (i) { return i.vmId === this$1.vmId; };
+  var matchesVM = isNullOrUndefined(this.vmId) ? function () { return true; } : function (i) { return i.vmId === this$1.vmId; };
   if (isNullOrUndefined(scope)) {
     scope = null;
   }
@@ -18794,7 +18789,7 @@ ErrorBag.prototype.removeById = function removeById (id) {
 /**
  * Removes all error messages associated with a specific field.
  */
-ErrorBag.prototype.remove = function remove (field, scope) {
+ErrorBag.prototype.remove = function remove (field, scope, vmId) {
     var this$1 = this;
 
   if (isNullOrUndefined(field)) {
@@ -18804,9 +18799,14 @@ ErrorBag.prototype.remove = function remove (field, scope) {
   var selector = isNullOrUndefined(scope) ? String(field) : (scope + "." + field);
   var ref = this._makeCandidateFilters(selector);
     var isPrimary = ref.isPrimary;
+  var shouldRemove = function (item) {
+    if (isNullOrUndefined(vmId)) { return isPrimary(item); }
+
+    return isPrimary(item) && item.vmId === vmId;
+  };
 
   for (var i = 0; i < this.items.length; ++i) {
-    if (isPrimary(this$1.items[i])) {
+    if (shouldRemove(this$1.items[i])) {
       this$1.items.splice(i, 1);
       --i;
     }
@@ -19047,6 +19047,11 @@ Resolver.resolveEvents = function resolveEvents (el, vnode) {
   if (events && vnode.componentInstance && includes(events, 'input')) {
     var ref = vnode.componentInstance.$options.model || { event: 'input' };
       var event = ref.event;
+    // if the prop was configured but not the model.
+    if (!event) {
+      return events;
+    }
+
     events = events.replace('input', event);
   }
 
@@ -19290,6 +19295,7 @@ Validator.extend = function extend (name, validator, options) {
   Validator._guardExtend(name, validator);
   Validator._merge(name, {
     validator: validator,
+    paramNames: options && options.paramNames,
     options: assign({}, { hasTarget: false, immediate: true }, options || {})
   });
 };
@@ -19361,7 +19367,7 @@ Validator.prototype.attach = function attach (fieldOpts) {
 
   // validate the field initially
   if (field.immediate) {
-    this.validate(("#" + (field.id)), value || field.value);
+    this.validate(("#" + (field.id)), value || field.value, { vmId: fieldOpts.vmId });
   } else {
     this._validate(field, value || field.value, { initial: true }).then(function (result) {
       field.flags.valid = result.valid;
@@ -19394,7 +19400,7 @@ Validator.prototype.detach = function detach (name, scope, uid) {
   if (!field) { return; }
 
   field.destroy();
-  this.errors.remove(field.name, field.scope, field.id);
+  this.errors.remove(field.name, field.scope, field.vmId);
   this.fields.remove(field);
 };
 
@@ -19416,7 +19422,7 @@ Validator.prototype.reset = function reset (matcher) {
   }).then(function () {
     this$1.fields.filter(matcher).forEach(function (field) {
       field.reset(); // reset field flags.
-      this$1.errors.remove(field.name, field.scope, field.id);
+      this$1.errors.remove(field.name, field.scope);
     });
   });
 };
@@ -19480,7 +19486,7 @@ Validator.prototype.validate = function validate (fieldDescriptor, value, ref) {
 
   return this._validate(field, value).then(function (result) {
     if (!silent) {
-      this$1._handleValidationResults([result]);
+      this$1._handleValidationResults([result], vmId);
     }
 
     return result.valid;
@@ -19538,7 +19544,7 @@ Validator.prototype.validateAll = function validateAll (values$$1, ref) {
     this.fields.filter(matcher).map(function (field) { return this$1._validate(field, providedValues ? values$$1[field.name] : field.value); })
   ).then(function (results) {
     if (!silent) {
-      this$1._handleValidationResults(results);
+      this$1._handleValidationResults(results, vmId);
     }
 
     return results.every(function (t) { return t.valid; });
@@ -19560,10 +19566,22 @@ Validator.prototype.validateScopes = function validateScopes (ref) {
     this.fields.filter({ vmId: vmId }).map(function (field) { return this$1._validate(field, field.value); })
   ).then(function (results) {
     if (!silent) {
-      this$1._handleValidationResults(results);
+      this$1._handleValidationResults(results, vmId);
     }
 
     return results.every(function (t) { return t.valid; });
+  });
+};
+
+/**
+ * Validates a value against the rules.
+ */
+Validator.prototype.verify = function verify (value, rules) {
+  var field = { name: '{field}', rules: normalizeRules(rules) };
+  field.isRequired = field.rules.required;
+
+  return this._validate(field, value).then(function (result) {
+    return { valid: result.valid, errors: result.errors.map(function (e) { return e.msg; }) };
   });
 };
 
@@ -19614,17 +19632,40 @@ Validator.prototype._formatErrorMessage = function _formatErrorMessage (field, r
 };
 
 /**
+ * We need to convert any object param to an array format since the locales do not handle params as objects yet.
+ */
+Validator.prototype._convertParamObjectToArray = function _convertParamObjectToArray (obj, ruleName) {
+  if (Array.isArray(obj)) {
+    return obj;
+  }
+
+  var paramNames = RULES[ruleName] && RULES[ruleName].paramNames;
+  if (!paramNames || !isObject(obj)) {
+    return obj;
+  }
+
+  return paramNames.reduce(function (prev, paramName) {
+    if (paramName in obj) {
+      prev.push(obj[paramName]);
+    }
+
+    return prev;
+  }, []);
+};
+
+/**
  * Translates the parameters passed to the rule (mainly for target fields).
  */
 Validator.prototype._getLocalizedParams = function _getLocalizedParams (rule, targetName) {
     if ( targetName === void 0 ) targetName = null;
 
-  if (rule.options.hasTarget && rule.params && rule.params[0]) {
-    var localizedName = targetName || this.dictionary.getAttribute(this.locale, rule.params[0], rule.params[0]);
-    return [localizedName].concat(rule.params.slice(1));
+  var params = this._convertParamObjectToArray(rule.params, rule.name);
+  if (rule.options.hasTarget && params && params[0]) {
+    var localizedName = targetName || this.dictionary.getAttribute(this.locale, params[0], params[0]);
+    return [localizedName].concat(params.slice(1));
   }
 
-  return rule.params;
+  return params;
 };
 
 /**
@@ -19635,13 +19676,47 @@ Validator.prototype._getFieldDisplayName = function _getFieldDisplayName (field)
 };
 
 /**
+ * Converts an array of params to an object with named properties.
+ * Only works if the rule is configured with a paramNames array.
+ * Returns the same params if it cannot convert it.
+ */
+Validator.prototype._convertParamArrayToObj = function _convertParamArrayToObj (params, ruleName) {
+  var paramNames = RULES[ruleName] && RULES[ruleName].paramNames;
+  if (!paramNames) {
+    return params;
+  }
+
+  if (isObject(params)) {
+    // check if the object is either a config object or a single parameter that is an object.
+    var hasKeys = paramNames.some(function (name) { return Object.keys(params).indexOf(name) !== -1; });
+    // if it has some of the keys, return it as is.
+    if (hasKeys) {
+      return params;
+    }
+    // otherwise wrap the object in an array.
+    params = [params];
+  }
+
+  // Reduce the paramsNames to a param object.
+  return params.reduce(function (prev, value, idx) {
+    prev[paramNames[idx]] = value;
+
+    return prev;
+  }, {});
+};
+
+/**
  * Tests a single input value against a rule.
  */
 Validator.prototype._test = function _test (field, value, rule) {
     var this$1 = this;
 
   var validator = RULES[rule.name] ? RULES[rule.name].validate : null;
-  var params = Array.isArray(rule.params) ? toArray(rule.params) : [];
+  var params = Array.isArray(rule.params) ? toArray(rule.params) : rule.params;
+  if (!params) {
+    params = [];
+  }
+
   var targetName = null;
   if (!validator || typeof validator !== 'function') {
     return Promise.reject(createError(("No such validator '" + (rule.name) + "' exists.")));
@@ -19666,7 +19741,7 @@ Validator.prototype._test = function _test (field, value, rule) {
     }
   }
 
-  var result = validator(value, params);
+  var result = validator(value, this._convertParamArrayToObj(params, rule.name));
 
   // If it is a promise.
   if (isCallable(result.then)) {
@@ -19703,6 +19778,7 @@ Validator.prototype._test = function _test (field, value, rule) {
 Validator._merge = function _merge (name, ref) {
     var validator = ref.validator;
     var options = ref.options;
+    var paramNames = ref.paramNames;
 
   var validate = isCallable(validator) ? validator : validator.validate;
   if (validator.getMessage) {
@@ -19711,7 +19787,8 @@ Validator._merge = function _merge (name, ref) {
 
   RULES[name] = {
     validate: validate,
-    options: options
+    options: options,
+    paramNames: paramNames
   };
 };
 
@@ -19790,14 +19867,14 @@ Validator.prototype._handleFieldNotFound = function _handleFieldNotFound (name, 
 /**
  * Handles validation results.
  */
-Validator.prototype._handleValidationResults = function _handleValidationResults (results) {
+Validator.prototype._handleValidationResults = function _handleValidationResults (results, vmId) {
     var this$1 = this;
 
   var matchers = results.map(function (result) { return ({ id: result.id }); });
   this.errors.removeById(matchers.map(function (m) { return m.id; }));
   // remove by name and scope to remove any custom errors added.
   results.forEach(function (result) {
-    this$1.errors.remove(result.field, result.scope);
+    this$1.errors.remove(result.field, result.scope, vmId);
   });
   var allErrors = results.reduce(function (prev, curr) {
     prev.push.apply(prev, curr.errors);
@@ -20373,8 +20450,8 @@ Field.prototype._determineInputEvent = function _determineInputEvent () {
     return (this.componentInstance.$options.model && this.componentInstance.$options.model.event) || 'input';
   }
 
-  if (this.model) {
-    return this.model.lazy ? 'change' : 'input';
+  if (this.model && this.model.lazy) {
+    return 'change';
   }
 
   if (isTextInput(this.el)) {
@@ -23810,23 +23887,25 @@ function parseDate$1 (date, format$$1) {
 }
 
 var afterValidator = function (value, ref) {
-  var otherValue = ref[0];
-  var inclusion = ref[1];
-  var format$$1 = ref[2];
+  if ( ref === void 0 ) ref = {};
+  var targetValue = ref.targetValue;
+  var inclusion = ref.inclusion; if ( inclusion === void 0 ) inclusion = false;
+  var format$$1 = ref.format;
 
   if (typeof format$$1 === 'undefined') {
     format$$1 = inclusion;
     inclusion = false;
   }
+
   value = parseDate$1(value, format$$1);
-  otherValue = parseDate$1(otherValue, format$$1);
+  targetValue = parseDate$1(targetValue, format$$1);
 
   // if either is not valid.
-  if (!value || !otherValue) {
+  if (!value || !targetValue) {
     return false;
   }
 
-  return isAfter(value, otherValue) || (inclusion && isEqual$1(value, otherValue));
+  return isAfter(value, targetValue) || (inclusion && isEqual$1(value, targetValue));
 };
 
 var options = {
@@ -23834,9 +23913,13 @@ var options = {
   isDate: true
 };
 
+// required to convert from a list of array values to an object.
+var paramNames = ['targetValue', 'inclusion', 'format'];
+
 var after = {
   validate: afterValidator,
-  options: options
+  options: options,
+  paramNames: paramNames
 };
 
 /**
@@ -23925,8 +24008,8 @@ var alphaDash = {
 };
 
 var validate = function (value, ref) {
-  if ( ref === void 0 ) ref = [];
-  var locale = ref[0]; if ( locale === void 0 ) locale = null;
+  if ( ref === void 0 ) ref = {};
+  var locale = ref.locale;
 
   if (Array.isArray(value)) {
     return value.every(function (val) { return validate(val, [locale]); });
@@ -23940,13 +24023,16 @@ var validate = function (value, ref) {
   return (alpha[locale] || alpha.en).test(value);
 };
 
+var paramNames$1 = ['locale'];
+
 var alpha$1 = {
-  validate: validate
+  validate: validate,
+  paramNames: paramNames$1
 };
 
 var validate$1 = function (value, ref) {
-  if ( ref === void 0 ) ref = [];
-  var locale = ref[0]; if ( locale === void 0 ) locale = null;
+  if ( ref === void 0 ) ref = {};
+  var locale = ref.locale;
 
   if (Array.isArray(value)) {
     return value.every(function (val) { return validate$1(val, [locale]); });
@@ -23960,13 +24046,16 @@ var validate$1 = function (value, ref) {
   return (alphaDash[locale] || alphaDash.en).test(value);
 };
 
+var paramNames$2 = ['locale'];
+
 var alpha_dash = {
-  validate: validate$1
+  validate: validate$1,
+  paramNames: paramNames$2
 };
 
 var validate$2 = function (value, ref) {
-  if ( ref === void 0 ) ref = [];
-  var locale = ref[0]; if ( locale === void 0 ) locale = null;
+  if ( ref === void 0 ) ref = {};
+  var locale = ref.locale;
 
   if (Array.isArray(value)) {
     return value.every(function (val) { return validate$2(val, [locale]); });
@@ -23980,13 +24069,16 @@ var validate$2 = function (value, ref) {
   return (alphanumeric[locale] || alphanumeric.en).test(value);
 };
 
+var paramNames$3 = ['locale'];
+
 var alpha_num = {
-  validate: validate$2
+  validate: validate$2,
+  paramNames: paramNames$3
 };
 
 var validate$3 = function (value, ref) {
-  if ( ref === void 0 ) ref = [];
-  var locale = ref[0]; if ( locale === void 0 ) locale = null;
+  if ( ref === void 0 ) ref = {};
+  var locale = ref.locale;
 
   if (Array.isArray(value)) {
     return value.every(function (val) { return validate$3(val, [locale]); });
@@ -24000,28 +24092,33 @@ var validate$3 = function (value, ref) {
   return (alphaSpaces[locale] || alphaSpaces.en).test(value);
 };
 
+var paramNames$4 = ['locale'];
+
 var alpha_spaces = {
-  validate: validate$3
+  validate: validate$3,
+  paramNames: paramNames$4
 };
 
 var validate$4 = function (value, ref) {
-  var otherValue = ref[0];
-  var inclusion = ref[1];
-  var format$$1 = ref[2];
+  if ( ref === void 0 ) ref = {};
+  var targetValue = ref.targetValue;
+  var inclusion = ref.inclusion; if ( inclusion === void 0 ) inclusion = false;
+  var format$$1 = ref.format;
 
   if (typeof format$$1 === 'undefined') {
     format$$1 = inclusion;
     inclusion = false;
   }
+
   value = parseDate$1(value, format$$1);
-  otherValue = parseDate$1(otherValue, format$$1);
+  targetValue = parseDate$1(targetValue, format$$1);
 
   // if either is not valid.
-  if (!value || !otherValue) {
+  if (!value || !targetValue) {
     return false;
   }
 
-  return isBefore(value, otherValue) || (inclusion && isEqual$1(value, otherValue));
+  return isBefore(value, targetValue) || (inclusion && isEqual$1(value, targetValue));
 };
 
 var options$1 = {
@@ -24029,34 +24126,48 @@ var options$1 = {
   isDate: true
 };
 
+var paramNames$5 = ['targetValue', 'inclusion', 'format'];
+
 var before = {
   validate: validate$4,
-  options: options$1
+  options: options$1,
+  paramNames: paramNames$5
 };
 
 var validate$5 = function (value, ref) {
-  var min = ref[0];
-  var max = ref[1];
+  if ( ref === void 0 ) ref = {};
+  var min = ref.min;
+  var max = ref.max;
 
   if (Array.isArray(value)) {
-    return value.every(function (val) { return validate$5(val, [min, max]); });
+    return value.every(function (val) { return validate$5(val, { min: min, max: max }); });
   }
 
   return Number(min) <= value && Number(max) >= value;
 };
 
+var paramNames$6 = ['min', 'max'];
+
 var between = {
-  validate: validate$5
+  validate: validate$5,
+  paramNames: paramNames$6
 };
 
-var validate$6 = function (value, other) { return String(value) === String(other); };
+var validate$6 = function (value, ref) {
+  var targetValue = ref.targetValue;
+
+  return String(value) === String(targetValue);
+};
 var options$2 = {
   hasTarget: true
 };
 
+var paramNames$7 = ['targetValue'];
+
 var confirmed = {
   validate: validate$6,
-  options: options$2
+  options: options$2,
+  paramNames: paramNames$7
 };
 
 function unwrapExports (x) {
@@ -24140,18 +24251,16 @@ var credit_card = {
   validate: validate$7
 };
 
-var validate$8 = function (value, params) {
-  var assign, assign$1;
+var validate$8 = function (value, ref) {
+  if ( ref === void 0 ) ref = {};
+  var min$$1 = ref.min;
+  var max$$1 = ref.max;
+  var inclusivity = ref.inclusivity; if ( inclusivity === void 0 ) inclusivity = '()';
+  var format$$1 = ref.format;
 
-  var min$$1;
-  var max$$1;
-  var format$$1;
-  var inclusivity = '()';
-
-  if (params.length > 3) {
-    (assign = params, min$$1 = assign[0], max$$1 = assign[1], inclusivity = assign[2], format$$1 = assign[3]);
-  } else {
-    (assign$1 = params, min$$1 = assign$1[0], max$$1 = assign$1[1], format$$1 = assign$1[2]);
+  if (typeof format$$1 === 'undefined') {
+    format$$1 = inclusivity;
+    inclusivity = '()';
   }
 
   var minDate = parseDate$1(String(min$$1), format$$1);
@@ -24182,13 +24291,16 @@ var options$3 = {
   isDate: true
 };
 
+var paramNames$8 = ['min', 'max', 'inclusivity', 'format'];
+
 var date_between = {
   validate: validate$8,
-  options: options$3
+  options: options$3,
+  paramNames: paramNames$8
 };
 
 var validate$9 = function (value, ref) {
-  var format = ref[0];
+  var format = ref.format;
 
   return !!parseDate$1(value, format);
 };
@@ -24197,18 +24309,21 @@ var options$4 = {
   isDate: true
 };
 
+var paramNames$9 = ['format'];
+
 var date_format = {
   validate: validate$9,
-  options: options$4
+  options: options$4,
+  paramNames: paramNames$9
 };
 
 var validate$a = function (value, ref) {
-  if ( ref === void 0 ) ref = [];
-  var decimals = ref[0]; if ( decimals === void 0 ) decimals = '*';
-  var separator = ref[1]; if ( separator === void 0 ) separator = '.';
+  if ( ref === void 0 ) ref = {};
+  var decimals = ref.decimals; if ( decimals === void 0 ) decimals = '*';
+  var separator = ref.separator; if ( separator === void 0 ) separator = '.';
 
   if (Array.isArray(value)) {
-    return value.every(function (val) { return validate$a(val, [decimals, separator]); });
+    return value.every(function (val) { return validate$a(val, { decimals: decimals, separator: separator }); });
   }
 
   if (value === null || value === undefined || value === '') {
@@ -24233,8 +24348,11 @@ var validate$a = function (value, ref) {
     return parsedValue === parsedValue;
 };
 
+var paramNames$a = ['decimals', 'separator'];
+
 var decimal = {
-  validate: validate$a
+  validate: validate$a,
+  paramNames: paramNames$a
 };
 
 var validate$b = function (value, ref) {
@@ -24415,196 +24533,6 @@ module.exports = exports['default'];
 
 unwrapExports(isFQDN_1);
 
-var isEmail_1 = createCommonjsModule(function (module, exports) {
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = isEmail;
-
-
-
-var _assertString2 = _interopRequireDefault(assertString_1);
-
-
-
-var _merge2 = _interopRequireDefault(merge_1);
-
-
-
-var _isByteLength2 = _interopRequireDefault(isByteLength_1);
-
-
-
-var _isFQDN2 = _interopRequireDefault(isFQDN_1);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var default_email_options = {
-  allow_display_name: false,
-  require_display_name: false,
-  allow_utf8_local_part: true,
-  require_tld: true
-};
-
-/* eslint-disable max-len */
-/* eslint-disable no-control-regex */
-var displayName = /^[a-z\d!#\$%&'\*\+\-\/=\?\^_`{\|}~\.\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+[a-z\d!#\$%&'\*\+\-\/=\?\^_`{\|}~\,\.\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF\s]*<(.+)>$/i;
-var emailUserPart = /^[a-z\d!#\$%&'\*\+\-\/=\?\^_`{\|}~]+$/i;
-var gmailUserPart = /^[a-z\d]+$/;
-var quotedEmailUser = /^([\s\x01-\x08\x0b\x0c\x0e-\x1f\x7f\x21\x23-\x5b\x5d-\x7e]|(\\[\x01-\x09\x0b\x0c\x0d-\x7f]))*$/i;
-var emailUserUtf8Part = /^[a-z\d!#\$%&'\*\+\-\/=\?\^_`{\|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+$/i;
-var quotedEmailUserUtf8 = /^([\s\x01-\x08\x0b\x0c\x0e-\x1f\x7f\x21\x23-\x5b\x5d-\x7e\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|(\\[\x01-\x09\x0b\x0c\x0d-\x7f\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))*$/i;
-/* eslint-enable max-len */
-/* eslint-enable no-control-regex */
-
-function isEmail(str, options) {
-  (0, _assertString2.default)(str);
-  options = (0, _merge2.default)(options, default_email_options);
-
-  if (options.require_display_name || options.allow_display_name) {
-    var display_email = str.match(displayName);
-    if (display_email) {
-      str = display_email[1];
-    } else if (options.require_display_name) {
-      return false;
-    }
-  }
-
-  var parts = str.split('@');
-  var domain = parts.pop();
-  var user = parts.join('@');
-
-  var lower_domain = domain.toLowerCase();
-
-  if (lower_domain === 'gmail.com' || lower_domain === 'googlemail.com') {
-    /*
-      Previously we removed dots for gmail addresses before validating.
-      This was removed because it allows `multiple..dots@gmail.com`
-      to be reported as valid, but it is not.
-      Gmail only normalizes single dots, removing them from here is pointless,
-      should be done in normalizeEmail
-    */
-    user = user.toLowerCase();
-
-    // Removing sub-address from username before gmail validation
-    var username = user.split('+')[0];
-
-    // Dots are not included in gmail length restriction
-    if (!(0, _isByteLength2.default)(username.replace('.', ''), { min: 6, max: 30 })) {
-      return false;
-    }
-
-    var _user_parts = username.split('.');
-    for (var i = 0; i < _user_parts.length; i++) {
-      if (!gmailUserPart.test(_user_parts[i])) {
-        return false;
-      }
-    }
-  }
-
-  if (!(0, _isByteLength2.default)(user, { max: 64 }) || !(0, _isByteLength2.default)(domain, { max: 254 })) {
-    return false;
-  }
-
-  if (!(0, _isFQDN2.default)(domain, { require_tld: options.require_tld })) {
-    return false;
-  }
-
-  if (user[0] === '"') {
-    user = user.slice(1, user.length - 1);
-    return options.allow_utf8_local_part ? quotedEmailUserUtf8.test(user) : quotedEmailUser.test(user);
-  }
-
-  var pattern = options.allow_utf8_local_part ? emailUserUtf8Part : emailUserPart;
-
-  var user_parts = user.split('.');
-  for (var _i = 0; _i < user_parts.length; _i++) {
-    if (!pattern.test(user_parts[_i])) {
-      return false;
-    }
-  }
-
-  return true;
-}
-module.exports = exports['default'];
-});
-
-var isEmail = unwrapExports(isEmail_1);
-
-var validate$d = function (value, ref) {
-  if ( ref === void 0 ) ref = [];
-  var multiple = ref[0]; if ( multiple === void 0 ) multiple = false;
-
-  if (multiple) {
-    value = value.split(',').map(function (emailStr) { return emailStr.trim(); });
-  }
-
-  if (Array.isArray(value)) {
-    return value.every(function (val) { return isEmail(String(val)); });
-  }
-
-  return isEmail(String(value));
-};
-
-var email = {
-  validate: validate$d
-};
-
-var validate$e = function (value, options) {
-  if (Array.isArray(value)) {
-    return value.every(function (val) { return validate$e(val, options); });
-  }
-
-  return toArray(options).some(function (item) {
-    // eslint-disable-next-line
-    return item == value;
-  });
-};
-
-var included = {
-  validate: validate$e
-};
-
-var validate$f = function () {
-  var args = [], len = arguments.length;
-  while ( len-- ) args[ len ] = arguments[ len ];
-
-  return !validate$e.apply(void 0, args);
-};
-
-var excluded = {
-  validate: validate$f
-};
-
-var validate$g = function (files, extensions) {
-  var regex = new RegExp((".(" + (extensions.join('|')) + ")$"), 'i');
-
-  return files.every(function (file) { return regex.test(file.name); });
-};
-
-var ext = {
-  validate: validate$g
-};
-
-var validate$h = function (files) { return files.every(function (file) { return /\.(jpg|svg|jpeg|png|bmp|gif)$/i.test(file.name); }); };
-
-var image = {
-  validate: validate$h
-};
-
-var validate$i = function (value) {
-  if (Array.isArray(value)) {
-    return value.every(function (val) { return /^-?[0-9]+$/.test(String(val)); });
-  }
-
-  return /^-?[0-9]+$/.test(String(value));
-};
-
-var integer = {
-  validate: validate$i
-};
-
 var isIP_1 = createCommonjsModule(function (module, exports) {
 
 Object.defineProperty(exports, "__esModule", {
@@ -24687,9 +24615,216 @@ module.exports = exports['default'];
 
 var isIP = unwrapExports(isIP_1);
 
+var isEmail_1 = createCommonjsModule(function (module, exports) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = isEmail;
+
+
+
+var _assertString2 = _interopRequireDefault(assertString_1);
+
+
+
+var _merge2 = _interopRequireDefault(merge_1);
+
+
+
+var _isByteLength2 = _interopRequireDefault(isByteLength_1);
+
+
+
+var _isFQDN2 = _interopRequireDefault(isFQDN_1);
+
+
+
+var _isIP2 = _interopRequireDefault(isIP_1);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var default_email_options = {
+  allow_display_name: false,
+  require_display_name: false,
+  allow_utf8_local_part: true,
+  require_tld: true
+};
+
+/* eslint-disable max-len */
+/* eslint-disable no-control-regex */
+var displayName = /^[a-z\d!#\$%&'\*\+\-\/=\?\^_`{\|}~\.\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+[a-z\d!#\$%&'\*\+\-\/=\?\^_`{\|}~\,\.\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF\s]*<(.+)>$/i;
+var emailUserPart = /^[a-z\d!#\$%&'\*\+\-\/=\?\^_`{\|}~]+$/i;
+var gmailUserPart = /^[a-z\d]+$/;
+var quotedEmailUser = /^([\s\x01-\x08\x0b\x0c\x0e-\x1f\x7f\x21\x23-\x5b\x5d-\x7e]|(\\[\x01-\x09\x0b\x0c\x0d-\x7f]))*$/i;
+var emailUserUtf8Part = /^[a-z\d!#\$%&'\*\+\-\/=\?\^_`{\|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+$/i;
+var quotedEmailUserUtf8 = /^([\s\x01-\x08\x0b\x0c\x0e-\x1f\x7f\x21\x23-\x5b\x5d-\x7e\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|(\\[\x01-\x09\x0b\x0c\x0d-\x7f\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))*$/i;
+/* eslint-enable max-len */
+/* eslint-enable no-control-regex */
+
+function isEmail(str, options) {
+  (0, _assertString2.default)(str);
+  options = (0, _merge2.default)(options, default_email_options);
+
+  if (options.require_display_name || options.allow_display_name) {
+    var display_email = str.match(displayName);
+    if (display_email) {
+      str = display_email[1];
+    } else if (options.require_display_name) {
+      return false;
+    }
+  }
+
+  var parts = str.split('@');
+  var domain = parts.pop();
+  var user = parts.join('@');
+
+  var lower_domain = domain.toLowerCase();
+
+  if (options.domain_specific_validation && (lower_domain === 'gmail.com' || lower_domain === 'googlemail.com')) {
+    /*
+      Previously we removed dots for gmail addresses before validating.
+      This was removed because it allows `multiple..dots@gmail.com`
+      to be reported as valid, but it is not.
+      Gmail only normalizes single dots, removing them from here is pointless,
+      should be done in normalizeEmail
+    */
+    user = user.toLowerCase();
+
+    // Removing sub-address from username before gmail validation
+    var username = user.split('+')[0];
+
+    // Dots are not included in gmail length restriction
+    if (!(0, _isByteLength2.default)(username.replace('.', ''), { min: 6, max: 30 })) {
+      return false;
+    }
+
+    var _user_parts = username.split('.');
+    for (var i = 0; i < _user_parts.length; i++) {
+      if (!gmailUserPart.test(_user_parts[i])) {
+        return false;
+      }
+    }
+  }
+
+  if (!(0, _isByteLength2.default)(user, { max: 64 }) || !(0, _isByteLength2.default)(domain, { max: 254 })) {
+    return false;
+  }
+
+  if (!(0, _isFQDN2.default)(domain, { require_tld: options.require_tld })) {
+    if (!options.allow_ip_domain) {
+      return false;
+    }
+
+    if (!(0, _isIP2.default)(domain)) {
+      if (!domain.startsWith('[') || !domain.endsWith(']')) {
+        return false;
+      }
+
+      var noBracketdomain = domain.substr(1, domain.length - 2);
+
+      if (noBracketdomain.length === 0 || !(0, _isIP2.default)(noBracketdomain)) {
+        return false;
+      }
+    }
+  }
+
+  if (user[0] === '"') {
+    user = user.slice(1, user.length - 1);
+    return options.allow_utf8_local_part ? quotedEmailUserUtf8.test(user) : quotedEmailUser.test(user);
+  }
+
+  var pattern = options.allow_utf8_local_part ? emailUserUtf8Part : emailUserPart;
+
+  var user_parts = user.split('.');
+  for (var _i = 0; _i < user_parts.length; _i++) {
+    if (!pattern.test(user_parts[_i])) {
+      return false;
+    }
+  }
+
+  return true;
+}
+module.exports = exports['default'];
+});
+
+var isEmail = unwrapExports(isEmail_1);
+
+var validate$d = function (value, options) {
+  if ( options === void 0 ) options = {};
+
+  if (options.multiple) {
+    value = value.split(',').map(function (emailStr) { return emailStr.trim(); });
+  }
+
+  if (Array.isArray(value)) {
+    return value.every(function (val) { return isEmail(String(val), options); });
+  }
+
+  return isEmail(String(value), options);
+};
+
+var email = {
+  validate: validate$d
+};
+
+var validate$e = function (value, options) {
+  if (Array.isArray(value)) {
+    return value.every(function (val) { return validate$e(val, options); });
+  }
+
+  return toArray(options).some(function (item) {
+    // eslint-disable-next-line
+    return item == value;
+  });
+};
+
+var included = {
+  validate: validate$e
+};
+
+var validate$f = function () {
+  var args = [], len = arguments.length;
+  while ( len-- ) args[ len ] = arguments[ len ];
+
+  return !validate$e.apply(void 0, args);
+};
+
+var excluded = {
+  validate: validate$f
+};
+
+var validate$g = function (files, extensions) {
+  var regex = new RegExp((".(" + (extensions.join('|')) + ")$"), 'i');
+
+  return files.every(function (file) { return regex.test(file.name); });
+};
+
+var ext = {
+  validate: validate$g
+};
+
+var validate$h = function (files) { return files.every(function (file) { return /\.(jpg|svg|jpeg|png|bmp|gif)$/i.test(file.name); }); };
+
+var image = {
+  validate: validate$h
+};
+
+var validate$i = function (value) {
+  if (Array.isArray(value)) {
+    return value.every(function (val) { return /^-?[0-9]+$/.test(String(val)); });
+  }
+
+  return /^-?[0-9]+$/.test(String(value));
+};
+
+var integer = {
+  validate: validate$i
+};
+
 var validate$j = function (value, ref) {
-  if ( ref === void 0 ) ref = [];
-  var version = ref[0]; if ( version === void 0 ) version = 4;
+  if ( ref === void 0 ) ref = {};
+  var version = ref.version; if ( version === void 0 ) version = 4;
 
   if (isNullOrUndefined(value)) {
     value = '';
@@ -24702,8 +24837,11 @@ var validate$j = function (value, ref) {
   return isIP(value, version);
 };
 
+var paramNames$b = ['version'];
+
 var ip = {
-  validate: validate$j
+  validate: validate$j,
+  paramNames: paramNames$b
 };
 
 var validate$k = function (value, ref) {
@@ -24775,6 +24913,10 @@ var validate$n = function (value, ref) {
     return length >= 0;
   }
 
+  if (Array.isArray(value)) {
+    return value.every(function (val) { return validate$n(val, [length]); });
+  }
+
   return String(value).length <= length;
 };
 
@@ -24785,8 +24927,12 @@ var max$1 = {
 var validate$o = function (value, ref) {
   var max = ref[0];
 
-  if (Array.isArray(value) || value === null || value === undefined || value === '') {
+  if (value === null || value === undefined || value === '') {
     return false;
+  }
+
+  if (Array.isArray(value)) {
+    return value.length > 0 && value.every(function (val) { return validate$o(val, [max]); });
   }
 
   return Number(value) <= max;
@@ -24812,6 +24958,11 @@ var validate$q = function (value, ref) {
   if (value === undefined || value === null) {
     return false;
   }
+
+  if (Array.isArray(value)) {
+    return value.every(function (val) { return validate$q(val, [length]); });
+  }
+
   return String(value).length >= length;
 };
 
@@ -24822,8 +24973,12 @@ var min$1 = {
 var validate$r = function (value, ref) {
   var min = ref[0];
 
-  if (Array.isArray(value) || value === null || value === undefined || value === '') {
+  if (value === null || value === undefined || value === '') {
     return false;
+  }
+
+  if (Array.isArray(value)) {
+    return value.length > 0 && value.every(function (val) { return validate$r(val, [min]); });
   }
 
   return Number(value) >= min;
@@ -24846,18 +25001,20 @@ var numeric = {
 };
 
 var validate$t = function (value, ref) {
-  var regex = ref[0];
-  var flags = ref.slice(1);
+  var expression = ref.expression;
 
-  if (regex instanceof RegExp) {
-    return regex.test(value);
+  if (typeof expression === 'string') {
+    expression = new RegExp(expression);
   }
 
-  return new RegExp(regex, flags).test(String(value));
+  return expression.test(String(value));
 };
 
+var paramNames$c = ['expression'];
+
 var regex = {
-  validate: validate$t
+  validate: validate$t,
+  paramNames: paramNames$c
 };
 
 var validate$u = function (value, ref) {
@@ -24983,13 +25140,16 @@ function isURL(url, options) {
 
   split = url.split('://');
   if (split.length > 1) {
-    protocol = split.shift();
+    protocol = split.shift().toLowerCase();
     if (options.require_valid_protocol && options.protocols.indexOf(protocol) === -1) {
       return false;
     }
   } else if (options.require_protocol) {
     return false;
-  } else if (options.allow_protocol_relative_urls && url.substr(0, 2) === '//') {
+  } else if (url.substr(0, 2) === '//') {
+    if (!options.allow_protocol_relative_urls) {
+      return false;
+    }
     split[0] = url.substr(2);
   }
   url = split.join('://');
@@ -25056,11 +25216,9 @@ module.exports = exports['default'];
 
 var isURL = unwrapExports(isURL_1);
 
-var validate$w = function (value, ref) {
-  if ( ref === void 0 ) ref = [];
-  var requireProtocol = ref[0]; if ( requireProtocol === void 0 ) requireProtocol = false;
+var validate$w = function (value, options) {
+  if ( options === void 0 ) options = {};
 
-  var options = { require_protocol: !!requireProtocol, allow_underscores: true };
   if (isNullOrUndefined(value)) {
     value = '';
   }
@@ -25252,13 +25410,13 @@ var ErrorComponent = {
   }
 };
 
-var version = '2.1.0-beta.7';
+var version = '2.1.0-beta.9';
 
 var rulesPlugin = function (ref) {
   var Validator$$1 = ref.Validator;
 
   Object.keys(Rules).forEach(function (rule) {
-    Validator$$1.extend(rule, Rules[rule].validate, Rules[rule].options);
+    Validator$$1.extend(rule, Rules[rule].validate, assign({}, Rules[rule].options, { paramNames: Rules[rule].paramNames }));
   });
 
   // Merge the english messages.
@@ -28363,6 +28521,26 @@ exports.push([module.i, "\n@charset \"UTF-8\";\n/* Стилі для фільт�
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__JudgeComponent_vue__ = __webpack_require__(73);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__JudgeComponent_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__JudgeComponent_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_laravel_vue_pagination__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_laravel_vue_pagination___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_laravel_vue_pagination__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -28522,6 +28700,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+
+
+// import VueAdsPagination from 'vue-ads-pagination';
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -28542,6 +28723,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       headers: {
         "Content-Type": "application/json",
         "X-Requested-With": "XMLHttpRequest"
+      },
+      'buttonClasses': {
+        'default': ['border-none', 'bg-grey-lightest'],
+        'active': ['bg-orange', 'border-none'],
+        'dots': ['bg-white'],
+        'disabled': ['bg-grey-light']
       }
     };
   },
@@ -28550,15 +28737,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
 
   methods: {
-    paginationChangePage: function paginationChangePage(el) {
-      console.log(el);
+    getResults: function getResults() {
+      event.preventDefault();
+    },
+    pageChange: function pageChange(page, range) {
+      console.log(page, range);
     },
     changeSorting: function changeSorting(e) {
       console.log('checkbox ', e);
     },
     getJudgesList: function getJudgesList() {
-      var _this = this;
+      var _this2 = this;
 
+      var _this = this;
       if (localStorage.getItem('token')) {
         console.log('have token');
         axios.get('/api/v1/judges/list', {
@@ -28569,8 +28760,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           },
           params: this.params
         }).then(function (response) {
-          _this.judgesList = response;
-          console.log('Response', judgesList);
+          _this.judgesList = response.data;
+          console.log('Response', _this.judgesList);
         }).catch(function (error) {
           console.log('Каже що не авторизований пффф та Канеха');
         });
@@ -28584,7 +28775,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           },
           params: this.params
         }).then(function (response) {
-          _this.judgesList = response;
+          _this2.judgesList = response;
           console.log('response--', response);
         }).catch(function (error) {
           console.log(error);
@@ -28599,7 +28790,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     }
   },
   components: {
-    JudgeComponent: __WEBPACK_IMPORTED_MODULE_0__JudgeComponent_vue___default.a
+    JudgeComponent: __WEBPACK_IMPORTED_MODULE_0__JudgeComponent_vue___default.a,
+    Pagination: __WEBPACK_IMPORTED_MODULE_1_laravel_vue_pagination___default.a
+    // VueAdsPagination
   }
 
 });
@@ -28747,6 +28940,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
         };
     },
+
     props: ['list'],
     methods: {
         changeBookmarkStatus: function changeBookmarkStatus(judge) {
@@ -28806,7 +29000,7 @@ var render = function() {
         ? _c(
             "div",
             { staticClass: "container" },
-            _vm._l(this.list.data.data, function(judge, index) {
+            _vm._l(this.list.data, function(judge, index) {
               return _c(
                 "div",
                 { key: index, staticClass: "judge-component row py-3 " },
@@ -30930,15 +31124,15 @@ var render = function() {
           _c("div", [
             _vm._v("bool------------- " + _vm._s(_vm.params.expired))
           ]),
-          _vm._v("\n        " + _vm._s(_vm.params) + "\n      ")
+          _vm._v("\n          " + _vm._s(_vm.params) + "\n        ")
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "col-lg-9" }, [
           _c("div", { staticClass: "card card-outline-secondary my-4" }, [
             _c("div", { staticClass: "card-header" }, [
-              _vm._v("\n            Список суддів\n            "),
+              _vm._v("\n              Список суддів\n              "),
               _c("span", { staticClass: "ml-5" }, [
-                _vm._v(" сортувати: \n                "),
+                _vm._v(" сортувати: \n                      "),
                 _c("label", { attrs: { id: "sorting-type" } }, [
                   _c("input", {
                     attrs: {
@@ -30972,14 +31166,23 @@ var render = function() {
               "div",
               { staticClass: "pagination" },
               [
-                _c("pagination", {
-                  attrs: { data: _vm.judgesList },
-                  on: {
-                    "pagination-change-page": function($event) {
-                      _vm.paginationChangePage()
-                    }
-                  }
-                })
+                _c(
+                  "pagination",
+                  { attrs: { data: _vm.judgesList, limit: 5 } },
+                  [
+                    _c(
+                      "span",
+                      { attrs: { slot: "prev-nav" }, slot: "prev-nav" },
+                      [_vm._v("< Previous")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "span",
+                      { attrs: { slot: "next-nav" }, slot: "next-nav" },
+                      [_vm._v("Next >")]
+                    )
+                  ]
+                )
               ],
               1
             )

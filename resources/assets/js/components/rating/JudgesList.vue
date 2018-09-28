@@ -88,15 +88,15 @@
                     </ul>
                   </div>
                 </div>
-
-                 <hr>
+  
+                <hr>
   
                 <div class="row">
                   <div class="col-lg-12">
                     <ul class="list-unstyled mb-0">
                       <li><label><input type="checkbox" value="1" name="expired" v-model="params.expired"><span class="checkmark"></span>Закінчилися повноваження</label></li>
                     </ul>
-              </div>
+                  </div>
                 </div>
   
                 <hr id="apply-filters-mark">
@@ -124,44 +124,65 @@
           {{params}}
         </div>
         <!--  col-3 Filters  -->
-
+  
         <!-- Main list -->
         <div class="col-lg-9">
           <div class="card card-outline-secondary my-4">
             <div class="card-header">
               Список суддів
               <span class="ml-5"> сортувати: 
-                  <label id="sorting-type">
-                    <input type="checkbox" @change="changeSorting()" form="form-filters" name="sorting">
-                    <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
-                  </label>
-                </span>
+                      <label id="sorting-type">
+                        <input type="checkbox" @change="changeSorting()" form="form-filters" name="sorting">
+                        <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
+                      </label>
+                    </span>
             </div>
             <div id="judges-list">
               <!--judges-judges-list-->
               <judge-component :list="judgesList"></judge-component>
             </div>
             <div class="pagination">
-              <pagination :data="judgesList" @pagination-change-page="paginationChangePage()"></pagination>
-            </div>
-          </div>
-          <!-- /.card -->
-        </div>
-        <!-- col-lg-9 -->
-      </div>
-      <!-- row -->
-    </div>
-    <!-- container -->
+          <!-- <vue-ads-pagination
+                  :total-items="200"
+                  :max-visible-pages="10"
+                  :page = 'judgesList.data.current_page'
+                  @page-change="pageChange"
+                  :detail-classes="['underline']"
+                  :button-classes="buttonClasses"
+                  :loading="true"
+              >
+                  <template slot-scope="props">
+                      Items {{ props.range.start }} tot {{ props.range.end }} van de {{ props.range.total }}
+                  </template>
+              </vue-ads-pagination> -->
+              <!-- <pagination :data="judgesList" @pagination-change-page="getResults" :limit="8"></pagination> -->
+<pagination :data="judgesList" :limit="5">
+	<span slot="prev-nav">&lt; Previous</span>
+	<span slot="next-nav">Next &gt;</span>
+</pagination>
   
-  </div>
+              </div>
+            </div>
+            <!-- /.card -->
+          </div>
+          <!-- col-lg-9 -->
+        </div>
+        <!-- row -->
+      </div>
+      <!-- container -->
+    
+    </div>
 </template>
 
 <script>
   import JudgeComponent from './JudgeComponent.vue';
+  import Pagination from 'laravel-vue-pagination';
+  // import VueAdsPagination from 'vue-ads-pagination';
+
   
   export default {
     name: "judges-list",
-    data: () => {
+    data() {
       return {
         params: {
           page: 1,
@@ -177,22 +198,32 @@
         headers: {
           "Content-Type": "application/json",
           "X-Requested-With": "XMLHttpRequest",
-        }
+        },
+        'buttonClasses': {
+                'default': ['border-none', 'bg-grey-lightest'],
+                'active': ['bg-orange', 'border-none'],
+                'dots': ['bg-white'],
+                'disabled': ['bg-grey-light'],
+            },
       }
     },
     mounted() {
       this.getJudgesList();
     },
     methods: {
-      paginationChangePage(el) {
-        console.log(el);
-  
+      getResults() {
+        event.preventDefault();
+
       },
+      pageChange(page, range) {
+            console.log(page, range);
+        },
       changeSorting(e) {
         console.log('checkbox ', e);
-        
+  
       },
       getJudgesList() {
+        const _this = this;
         if (localStorage.getItem('token')) {
           console.log('have token')
           axios
@@ -205,8 +236,8 @@
               params: this.params
             })
             .then(response => {
-              this.judgesList = response;
-              console.log('Response',judgesList);
+              _this.judgesList = response.data;
+              console.log('Response', _this.judgesList);
             })
             .catch(error => {
               console.log('Каже що не авторизований пффф та Канеха');
@@ -224,7 +255,7 @@
             })
             .then(response => {
               this.judgesList = response;
-              console.log('response--',response);
+              console.log('response--', response);
             })
             .catch(error => {
               console.log(error);
@@ -235,14 +266,16 @@
       resetFilters() {
         this.params.regions = [];
         this.params.instance = [],
-              this.params.jurisdiction = []
+          this.params.jurisdiction = []
         // this.params.expired = 0
       }
   
     },
     components: {
-      JudgeComponent
-  }
+      JudgeComponent,
+      Pagination,
+      // VueAdsPagination
+    }
   
   };
 </script>
