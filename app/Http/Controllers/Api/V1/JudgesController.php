@@ -5,7 +5,6 @@ namespace Toecyd\Http\Controllers\Api\V1;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Validator;
 use Toecyd\Http\Controllers\Controller;
 use Toecyd\Judge;
 use Toecyd\JudgesStatistic;

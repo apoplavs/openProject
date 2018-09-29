@@ -36,9 +36,14 @@ Route::group(['prefix' => 'v1/', 'namespace' => 'Api\V1',], function () {
 	Route::get('guest/judges/list', 'JudgesController@indexGuest');
 	// сторінка судді з інформацією про нього
 	//Route::get('guest/judges/{id}', 'JudgesController@show')->middleware('checkId:judge');
-	
 	// швидкий пошук за прізвищем судді, для поля автодоповнення
 	Route::get('judges/autocomplete', 'JudgesController@autocomplete');
+	
+	/**
+	 * Суди
+	 */
+	// список судів з застосованими фільтрами (Рейтинг->суди)
+	Route::get('guest/courts/list', 'CourtsController@indexGuest');
 	
 	
 	// Маршрути які вимагають реєстрації користувача
@@ -73,11 +78,10 @@ Route::group(['prefix' => 'v1/', 'namespace' => 'Api\V1',], function () {
 		
 		
 		/**
-		 * Судді
+		 * Суди
 		 */
 		// список судів з застосованими фільтрами (Рейтинг->суди)
 		Route::get('courts/list', 'CourtsController@index');
-		// todo протестувати, дописати документацію, (розділ Responses)
 		
 	});
 	
