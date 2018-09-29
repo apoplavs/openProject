@@ -4,6 +4,7 @@ namespace Toecyd\Http\Controllers\Api\V1;
 
 use Illuminate\Http\Request;
 use Toecyd\Http\Controllers\Controller;
+use Toecyd\UserBookmarkJudge;
 use Toecyd\UserHistory;
 
 /**
@@ -222,6 +223,17 @@ class HomeController extends Controller
 	public function indexHistory() {
 		$judges_history = UserHistory::getHistoryJudges();
 		return response()->json($judges_history);
+	}
+	
+	
+	
+	
+	
+	public function indexBookmark() {
+		
+		$judges_bookmarks = UserBookmarkJudge::getBookmarkJudges();
+		//
+		return response()->json(['judges' => $judges_bookmarks, 'courts' => $courts_bookmarks]);
 	}
     
 }

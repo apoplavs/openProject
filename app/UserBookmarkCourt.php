@@ -62,4 +62,15 @@ class UserBookmarkCourt extends Model
 		}
 		return (true);
 	}
+	
+	
+	/**
+	 * Отримати всі суди, що перебувають
+	 * в закладках користувача
+	 * @return mixed
+	 */
+	public static function getBookmarkCourts() {
+		
+		//
+	}
 }
