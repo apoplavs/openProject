@@ -7,3 +7,9 @@
   color: #304040;
 }
 
+button,
+button:active,
+button:focus {
+  outline: none;
+}
+

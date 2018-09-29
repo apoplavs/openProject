@@ -15,3 +15,8 @@ body {
   // text-shadow: 4px 4px 4px #aaa;
   
 }
+button, 
+button:active, 
+button:focus {
+    outline: none;
+}

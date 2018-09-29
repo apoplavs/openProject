@@ -8,7 +8,7 @@
                         <div class="mr-3"><img class="avatar" :src="judge.photo" alt="фото" /></div>
                         <div>
                             <h4>
-                                <router-link to="/"> {{ judge.surname }} {{ (judge.name.length > 1) ? judge.name : judge.name + '.' }} {{ judge.patronymic.length > 1 ? judge.patronymic : judge.patronymic + '.' }} </router-link>
+                                <router-link to="/"> {{ judge.surname }} {{ (judge.name.length != 1) ? judge.name : judge.name + '.' }} {{ judge.patronymic.length != 1 ? judge.patronymic : judge.patronymic + '.' }} </router-link>
                             </h4>
                             <h5>{{ judge.court_name }}</h5>
                         </div>
@@ -98,5 +98,11 @@
     .avatar {
         width: 130px;
         height: 130px;
+    }
+    a {
+        color: #6291ba;
+    }
+    h5 {
+        font-size: 1.2rem;
     }
 </style>

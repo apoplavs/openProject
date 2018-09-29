@@ -40,8 +40,7 @@
     "vue-rx": "^6.0.1",
     "vue-toasted": "^1.1.24",
     "vue-toastr": "^2.0.14",
-    "vuex": "^3.0.1",
-    "yarn": "^1.10.1"
+    "vuex": "^3.0.1"
   },
   "repository": {
     "type": "git",

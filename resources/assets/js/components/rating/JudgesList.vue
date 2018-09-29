@@ -131,54 +131,37 @@
             <div class="card-header">
               Список суддів
               <span class="ml-5"> сортувати: 
-                      <label id="sorting-type">
-                        <input type="checkbox" @change="changeSorting()" form="form-filters" name="sorting">
-                        <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
-                      </label>
-                    </span>
+                          <label id="sorting-type">
+                            <input type="checkbox" @change="changeSorting()" form="form-filters" name="sorting">
+                            <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
+                          </label>
+                        </span>
             </div>
             <div id="judges-list">
               <!--judges-judges-list-->
               <judge-component :list="judgesList"></judge-component>
             </div>
-            <div class="pagination">
-          <!-- <vue-ads-pagination
-                  :total-items="200"
-                  :max-visible-pages="10"
-                  :page = 'judgesList.data.current_page'
-                  @page-change="pageChange"
-                  :detail-classes="['underline']"
-                  :button-classes="buttonClasses"
-                  :loading="true"
-              >
-                  <template slot-scope="props">
-                      Items {{ props.range.start }} tot {{ props.range.end }} van de {{ props.range.total }}
-                  </template>
-              </vue-ads-pagination> -->
-              <!-- <pagination :data="judgesList" @pagination-change-page="getResults" :limit="8"></pagination> -->
-<pagination :data="judgesList" :limit="5">
-	<span slot="prev-nav">&lt; Previous</span>
-	<span slot="next-nav">Next &gt;</span>
-</pagination>
-  
-              </div>
-            </div>
-            <!-- /.card -->
           </div>
-          <!-- col-lg-9 -->
+           <div class="pagination mb-5">
+              <vue-ads-pagination :total-items="judgesList.total" :max-visible-pages="5" @page-change="pageChange" :button-classes="buttonClasses" :loading="false">
+              </vue-ads-pagination>
+            </div>
+          <!-- /.card -->
         </div>
-        <!-- row -->
+        <!-- col-lg-9 -->
       </div>
-      <!-- container -->
-    
+      <!-- row -->
     </div>
+    <!-- container -->
+  
+  </div>
 </template>
 
 <script>
   import JudgeComponent from './JudgeComponent.vue';
-  import Pagination from 'laravel-vue-pagination';
-  // import VueAdsPagination from 'vue-ads-pagination';
-
+  // import Pagination from 'laravel-vue-pagination';
+  import VueAdsPagination from 'vue-ads-pagination';
+  
   
   export default {
     name: "judges-list",
@@ -191,8 +174,9 @@
           instance: [],
           search: null,
           sort: 1,
-          expired: 1
+          expired: 0
         },
+        // current_page: 1,
         message: "",
         judgesList: {},
         headers: {
@@ -200,32 +184,30 @@
           "X-Requested-With": "XMLHttpRequest",
         },
         'buttonClasses': {
-                'default': ['border-none', 'bg-grey-lightest'],
-                'active': ['bg-orange', 'border-none'],
-                'dots': ['bg-white'],
-                'disabled': ['bg-grey-light'],
-            },
+          'default': ['border-none', 'bg-grey-lightest'],
+          'active': ['bg-active', 'border-none'],
+          // 'dots': ['bg-white'],
+          'disabled': ['bg-grey-light'],
+        },
       }
     },
     mounted() {
-      this.getJudgesList();
+      // this.getJudgesList();
     },
     methods: {
-      getResults() {
-        event.preventDefault();
-
+      pageChange(page) {
+        this.getJudgesList(page + 1);
       },
-      pageChange(page, range) {
-            console.log(page, range);
-        },
-      changeSorting(e) {
-        console.log('checkbox ', e);
+      // changeSorting(e) {
+      //   console.log('checkbox ', e);
   
-      },
-      getJudgesList() {
+      // },
+      getJudgesList(page) {
         const _this = this;
+        this.params.page = page;
         if (localStorage.getItem('token')) {
           console.log('have token')
+          //this.params.page = page + 1;
           axios
             .get('/api/v1/judges/list', {
               headers: {
@@ -255,7 +237,7 @@
             })
             .then(response => {
               this.judgesList = response;
-              console.log('response--', response);
+              // console.log('response--', response);
             })
             .catch(error => {
               console.log(error);
@@ -265,23 +247,51 @@
       },
       resetFilters() {
         this.params.regions = [];
-        this.params.instance = [],
-          this.params.jurisdiction = []
-        // this.params.expired = 0
+        this.params.instance = [];
+        this.params.jurisdiction = [];
+        this.params.expired = 0;
+        this.params.search = null;
       }
   
     },
     components: {
       JudgeComponent,
-      Pagination,
-      // VueAdsPagination
+      // Pagination,
+      VueAdsPagination
     }
   
   };
 </script>
 
+<style>
+  button {
+    cursor: pointer;
+  }
+  
+  .bg-active {
+    background-color: #2b989b;
+  }
+  
+  .button:active {
+    outline: none;
+  }
+  
+  .button:focus {
+    outline: none;
+  }
+  
+  div.pr-2.leading-loose {
+    display: none !important;
+  }
+</style>
+
+
 <style scoped lang="scss">
   /* Стилі для фільтрів */
+  .pagination {
+    display: flex;
+    justify-content: center;
+  }
   
   #filters {
     font-size: 0.9em;
