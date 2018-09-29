@@ -3,9 +3,11 @@
 namespace Toecyd\Http\Controllers\Api\V1;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Toecyd\Court;
 use Toecyd\Http\Controllers\Controller;
+use Toecyd\UserBookmarkCourt;
 
 /**
  * Class CourtsController
@@ -625,6 +627,168 @@ class CourtsController extends Controller
 		$search = mb_convert_case($search, MB_CASE_TITLE, "UTF-8");
 		$autocomplete = Court::getAutocomplete($search);
 		return response()->json($autocomplete);
+	}
+	
+	
+	
+	
+	
+	
+	/**
+	 * @SWG\Put(
+	 *     path="/courts/{id}/bookmark",
+	 *     summary="Додати суд в закладки",
+	 *     description="Додати суд, в закладки поточного користувача",
+	 *     operationId="courts-addBookmark",
+	 *     produces={"application/json"},
+	 *     tags={"Суди"},
+	 *     security={
+	 *     {"passport": {}},
+	 *   	},
+	 *     @SWG\Parameter(
+	 *     	ref="#/parameters/Content-Type",
+	 *     ),
+	 *     @SWG\Parameter(
+	 *     	ref="#/parameters/X-Requested-With",
+	 *     ),
+	 *
+	 * 	  @SWG\Parameter(
+	 *     name="id",
+	 *     in="path",
+	 *     required=true,
+	 *     description="Id суду, який потрібно додати в закладки поточного користувача",
+	 *     type="integer",
+	 *     collectionFormat="multi",
+	 *     uniqueItems=true,
+	 *     minimum=100,
+	 *     maximum=10000,
+	 *     allowEmptyValue=false
+	 *     ),
+	 *
+	 *     @SWG\Response(
+	 *         response=201,
+	 *         description="Закладка упішно створена",
+	 *     	   examples={"application/json":
+	 *              {
+	 *     				"message": "Закладка успішно створена"
+	 *              }
+	 *     		}
+	 *     ),
+	 *
+	 *     @SWG\Response(
+	 *         response=401,
+	 *         description="Необхідна аутентифікація користувача",
+	 *     	   examples={"application/json":
+	 *              {
+	 *     				"message": "Unauthenticated",
+	 *              }
+	 *     		}
+	 *     ),
+	 *
+	 *     @SWG\Response(
+	 *         response=405,
+	 *         description="Метод, з яким виконувався запит, не дозволено використовувати для заданого ресурсу; наприклад, запит був здійснений за методом POST, хоча очікується PUT.",
+	 *     ),
+	 *
+	 *     @SWG\Response(
+	 *         response=422,
+	 *         description="Передані не валідні дані, неіснуючий id, або дана закладка вже існує",
+	 *     	   examples={"application/json":
+	 *              {
+	 *     				"message": "Неіснуючий id",
+	 *              }
+	 *     		}
+	 *     ),
+	 * )
+	 */
+	public function addCourtBookmark($id) {
+		$id = intval($id);
+		
+		if (UserBookmarkCourt::checkBookmark(Auth::user()->id, $id)) {
+			return response()->json([
+				'message' => 'Закладка вже існує'
+			], 422);
+		}
+		UserBookmarkCourt::createBookmark(Auth::user()->id, $id);
+		return response()->json([
+			'message' => 'Закладка успішно створена'
+		], 201);
+	}
+	
+	
+	
+	/**
+	 * @SWG\Delete(
+	 *     path="/courts/{id}/bookmark",
+	 *     summary="Видалити суд з закладок",
+	 *     description="Видалити суд, з закладок поточного користувача",
+	 *     operationId="courts-delBookmark",
+	 *     produces={"application/json"},
+	 *     tags={"Суди"},
+	 *     security={
+	 *     {"passport": {}},
+	 *   	},
+	 *     @SWG\Parameter(
+	 *     	ref="#/parameters/Content-Type",
+	 *     ),
+	 *     @SWG\Parameter(
+	 *     	ref="#/parameters/X-Requested-With",
+	 *     ),
+	 *
+	 * 	  @SWG\Parameter(
+	 *     name="id",
+	 *     in="path",
+	 *     required=true,
+	 *     description="Id суду, який потрібно видалити з закладок поточного користувача",
+	 *     type="integer",
+	 *     collectionFormat="multi",
+	 *     uniqueItems=true,
+	 *     minimum=100,
+	 *     maximum=10000,
+	 *     allowEmptyValue=false
+	 *     ),
+	 *
+	 *     @SWG\Response(
+	 *         response=204,
+	 *         description="Закладка упішно видалена"
+	 *     ),
+	 *
+	 *     @SWG\Response(
+	 *         response=401,
+	 *         description="Необхідна аутентифікація користувача",
+	 *     	   examples={"application/json":
+	 *              {
+	 *     				"message": "Unauthenticated",
+	 *              }
+	 *     		}
+	 *     ),
+	 *
+	 *     @SWG\Response(
+	 *         response=405,
+	 *         description="Метод, з яким виконувався запит, не дозволено використовувати для заданого ресурсу; наприклад, запит був здійснений за методом POST, хоча очікується DELETE.",
+	 *     ),
+	 *
+	 *     @SWG\Response(
+	 *         response=422,
+	 *         description="Передані не валідні дані, неіснуючий id, або даної закладки не існує",
+	 *     	   examples={"application/json":
+	 *              {
+	 *     				"message": "Закладки не існує",
+	 *              }
+	 *     		}
+	 *     ),
+	 * )
+	 */
+	public function delCourtBookmark($id) {
+		$id = intval($id);
+		
+		if (!UserBookmarkCourt::checkBookmark(Auth::user()->id, $id)) {
+			return response()->json([
+				'message' => 'Закладки не існує'
+			], 422);
+		}
+		UserBookmarkCourt::deleteBookmark(Auth::user()->id, $id);
+		return response()->json([], 204);
 	}
 	
 	

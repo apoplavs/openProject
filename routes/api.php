@@ -62,21 +62,21 @@ Route::group(['prefix' => 'v1/', 'namespace' => 'Api\V1',], function () {
 		//Route::get('judges/{id}', 'JudgesController@show')->middleware('checkId:judge');
 		
 		// додати суддю в закладки
-		Route::put('/judges/{id}/bookmark', 'JudgesController@addJudgeBookmark')->middleware('checkId:judge');
+		Route::put('judges/{id}/bookmark', 'JudgesController@addJudgeBookmark')->middleware('checkId:judge');
 		// видалити суддю з закладок
-		Route::delete('/judges/{id}/bookmark', 'JudgesController@delJudgeBookmark')->middleware('checkId:judge');
+		Route::delete('judges/{id}/bookmark', 'JudgesController@delJudgeBookmark')->middleware('checkId:judge');
 
 		// оновити статус судді
 		Route::put('judges/{id}/update-status', 'JudgesController@updateJudgeStatus')->middleware('checkId:judge');
 		
 		// поставити лайк судді
-		Route::put('/judges/{id}/like', 'JudgesController@putLike')->middleware('checkId:judge');
+		Route::put('judges/{id}/like', 'JudgesController@putLike')->middleware('checkId:judge');
 		// видалити лайк судді
-		Route::delete('/judges/{id}/like', 'JudgesController@deleteLike')->middleware('checkId:judge');
+		Route::delete('judges/{id}/like', 'JudgesController@deleteLike')->middleware('checkId:judge');
 		// поставити дизлайк судді
-		Route::put('/judges/{id}/unlike', 'JudgesController@putUnlike')->middleware('checkId:judge');
+		Route::put('judges/{id}/unlike', 'JudgesController@putUnlike')->middleware('checkId:judge');
 		// видалити дизлайк судді
-		Route::delete('/judges/{id}/unlike', 'JudgesController@deleteUnlike')->middleware('checkId:judge');
+		Route::delete('judges/{id}/unlike', 'JudgesController@deleteUnlike')->middleware('checkId:judge');
 		
 		
 		/**
@@ -84,6 +84,18 @@ Route::group(['prefix' => 'v1/', 'namespace' => 'Api\V1',], function () {
 		 */
 		// список судів з застосованими фільтрами (Рейтинг->суди)
 		Route::get('courts/list', 'CourtsController@index');
+		// додати суд в закладки
+		Route::put('courts/{id}/bookmark', 'CourtsController@addCourtBookmark')->middleware('checkId:court');
+		// видалити суд з закладок
+		Route::delete('courts/{id}/bookmark', 'CourtsController@delCourtBookmark')->middleware('checkId:court');
+		
+		
+		
+		/**
+		 * Особистий кабінет
+		 */
+		// Історія переглядів користувача
+		Route::get('user/history', 'HomeController@indexHistory');
 		
 	});
 	

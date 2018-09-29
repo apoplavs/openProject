@@ -597,6 +597,14 @@ class AuthController extends Controller
 	{
 		return response()->json($request->user());
 	}
+	
+	
+	
+	
+	
+	
+	
+	
 
     private function getHttpStatusByUrl(string $url):int
     {

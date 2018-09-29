@@ -4,7 +4,12 @@ namespace Toecyd\Http\Controllers\Api\V1;
 
 use Illuminate\Http\Request;
 use Toecyd\Http\Controllers\Controller;
+use Toecyd\UserHistory;
 
+/**
+ * Class HomeController
+ * @package Toecyd\Http\Controllers\Api\V1
+ */
 class HomeController extends Controller
 {
     /**
@@ -82,9 +87,141 @@ class HomeController extends Controller
     {
         //
     }
-    
-    
-    
-    
+	
+	
+	
+	/**
+	 * Get the User the history of user
+	 *
+	 * @SWG\Get(
+	 *     path="/user/history",
+	 *     summary="Отримати історію переглядів",
+	 *     description="Отримати історію переглядів поточного користувача",
+	 *     operationId="user-history",
+	 *     produces={"application/json"},
+	 *     tags={"Особистий кабінет"},
+	 *     security={
+	 *     {"passport": {}},
+	 *   	},
+	 *     @SWG\Parameter(
+	 *     	ref="#/parameters/Content-Type",
+	 *     ),
+	 *     @SWG\Parameter(
+	 *     	ref="#/parameters/X-Requested-With",
+	 *     ),
+	 *
+	 *     @SWG\Response(
+	 *         response=200,
+	 *         description="ОК",
+	 *        @SWG\Schema(
+	 *     	   @SWG\Property(property="id", type="string", description="id судді"),
+	 *     	   @SWG\Property(property="court_name", type="string", description="Назва суду, в якому даний суддя працює"),
+	 *     	   @SWG\Property(property="surname", type="string", description="Прізвище судді"),
+	 *     	   @SWG\Property(property="name", type="string", description="Ім'я судді"),
+	 *     	   @SWG\Property(property="patronymic", type="string", description="По батькові судді"),
+	 *     	   @SWG\Property(property="photo", type="string", description="URL фото судді"),
+	 *     	   @SWG\Property(property="status", type="integer", description="Id поточного статусу судді
+	 * 	 1 - суддя на роботі
+	 *	 2 - На лікарняному
+	 *	 3 - У відпустці
+	 *	 4 - Відсуній на робочому місці з інших причин
+	 *	 5 - Припинено повноваження"),
+	 *     	   @SWG\Property(property="updated_status", type="string", description="Дата останнього оновлення статусу"),
+	 *     	   @SWG\Property(property="due_date_status", type="string", description="Дата дії статусу (до якого часу даний статус буде діяти)"),
+	 *     	   @SWG\Property(property="rating", type="integer", description="Місце в рейтингу серед усіх суддів"),
+	 *     	   @SWG\Property(property="is_bookmark", type="integer", description="Чи знаходиться в закладках в поточного користувача 1 - так,  0 - ні")
+	 *     	   ),
+	 *     	   examples={"application/json":
+	 *              {
+	 *						{
+	 *						"id": 7514,
+	 *						"court_name": "Овруцький районний суд Житомирської області",
+	 *						"surname": "Чичирко",
+	 *						"name": "В",
+	 *						"patronymic": "А",
+	 *						"photo": "/img/judges/no_photo.jpg",
+	 *						"status": 1,
+	 *						"updated_status": "23.5.2018",
+	 *						"due_date_status": null,
+	 *						"rating": 0,
+	 *						"is_bookmark": 1
+	 *						},
+	 *						{
+	 *						"id": 5650,
+	 *						"court_name": "Апеляційний суд Чернігівської області",
+	 *						"surname": "Шарапова",
+	 *						"name": "Олена",
+	 *						"patronymic": "Леонідівна",
+	 *						"photo": "/img/judges/no_photo.jpg",
+	 *						"status": 1,
+	 *						"updated_status": "23.5.2018",
+	 *						"due_date_status": null,
+	 *						"rating": 0,
+	 *						"is_bookmark": 0
+	 *						},
+	 *						{
+	 *						"id": 1078,
+	 *						"court_name": "Господарський суд Одеської області",
+	 *						"surname": "Шаратов",
+	 *						"name": "Юрій",
+	 *						"patronymic": "Анатолійович",
+	 *						"photo": "/img/judges/no_photo.jpg",
+	 *						"status": 1,
+	 *						"updated_status": "21.7.2018",
+	 *						"due_date_status": null,
+	 *						"rating": 0,
+	 *						"is_bookmark": 0
+	 *						},
+	 *						{
+	 *						"id": 9064,
+	 *						"court_name": "Вищий господарський суд України",
+	 *						"surname": "Шаргало",
+	 *						"name": "В",
+	 *						"patronymic": "І",
+	 *						"photo": "/img/judges/no_photo.jpg",
+	 *						"status": 1,
+	 *						"updated_status": "23.5.2018",
+	 *						"due_date_status": null,
+	 *						"rating": 0,
+	 *						"is_bookmark": 0
+	 *						},
+	 *						{
+	 *						"id": 4526,
+	 *						 "court_name": "Господарський суд Запорізької області",
+	 *						 "surname": "Шевченко",
+	 *						"name": "Т",
+	 *						"patronymic": "М",
+	 *						"photo": "/img/judges/no_photo.jpg",
+	 *						"status": 1,
+	 *						"updated_status": "23.5.2018",
+	 *						"due_date_status": null,
+	 *						"rating": 0,
+	 *						"is_bookmark": 0
+	 *						}
+	 *				}
+	 *     		}
+	 *     ),
+	 *
+	 *     @SWG\Response(
+	 *         response=401,
+	 *         description="Необхідна аутентифікація користувача, можливо токен не існує, або анульований",
+	 *     	   examples={"application/json":
+	 *              {
+	 *     				"message": "Unauthenticated",
+	 *              }
+	 *     		}
+	 *     ),
+	 *     @SWG\Response(
+	 *         response=405,
+	 *         description="Метод, з яким виконувався запит, не дозволено використовувати для заданого ресурсу; наприклад, запит був здійснений за методом POST, хоча очікується GET.",
+	 *     )
+	 * )
+	 *
+	 * @return [json] user object
+	 */
+	public function indexHistory() {
+		$judges_history = UserHistory::getHistoryJudges();
+		return response()->json($judges_history);
+	}
     
 }

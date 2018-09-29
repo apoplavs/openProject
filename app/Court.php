@@ -21,11 +21,10 @@ class Court extends Model
 	 */
 	public static function getCourtCodes()
     {
-        return DB::table('courts')
-            ->select('court_code')
+        return (static::select('court_code')
             ->whereNotIn('region_code', [1, 5, 12]) //відкидаємо АР Крим, Донецьку, Луганську області
             ->where('court_code', '<', 2800) // відкидаємо спеціалізовані суди
-            ->pluck('court_code');
+            ->pluck('court_code'));
     }
 	
 	
@@ -156,6 +155,20 @@ class Court extends Model
 			->get();
 		return ($results);
 		
+	}
+	
+	
+	/**
+	 * перевірити чи існує суд з даним id
+	 * @param $id
+	 * @return boolean
+	 */
+	public static function checkCourtById($id) {
+		$court = static::select('courts.court_code')
+			->where('courts.court_code', '=', $id)
+			->first();
+		
+		return !empty($court);
 	}
 	
 }
