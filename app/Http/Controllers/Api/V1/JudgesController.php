@@ -657,12 +657,11 @@ class JudgesController extends Controller
     }
     
 	/**
-	 * Display a listing of the resource.
 	 *
 	 * @SWG\Get(
 	 *     path="/judges/autocomplete",
 	 *     summary="Перелік ПІБ суддів для поля автодоповнення",
-	 *     description="Отримати швидкий перелік ПІБ суддів для 'живого пошуку' Всі результати пошуку повертаються по 5 шт.",
+	 *     description="Швидко отримати перелік ПІБ суддів для 'живого пошуку' Всі результати пошуку повертаються по 5 шт.",
 	 *     operationId="judges-autocomplete",
 	 *     produces={"application/json"},
 	 *     tags={"Судді"},

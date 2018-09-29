@@ -538,6 +538,106 @@ class CourtsController extends Controller
 	
 	
 	
+	/**
+	 * @SWG\Get(
+	 *     path="/courts/autocomplete",
+	 *     summary="Перелік назв судових установ для поля автодоповнення",
+	 *     description="Швидко отримати перелік назв судів для 'живого пошуку' Всі результати пошуку повертаються по 5 шт.",
+	 *     operationId="courts-autocomplete",
+	 *     produces={"application/json"},
+	 *     tags={"Суди"},
+	 *     @SWG\Parameter(
+	 *     	ref="#/parameters/Content-Type",
+	 *     ),
+	 *     @SWG\Parameter(
+	 *     	ref="#/parameters/X-Requested-With",
+	 *     ),
+	 *
+	 * 	  @SWG\Parameter(
+	 *     name="search",
+	 *     in="query",
+	 *     description="Пошук за назвою суду. Повинен містити від 1 до 20 символів. Будуть повернуті назви всіх судів, початок назви яких співпадає з заданим параметром.
+	НАПРИКЛАД: 'host/api/v1/courts/autocomplete?search=Дніпр' - означає, що потрібно отримати суди, назва яких починається на 'Дніпр%'",
+	 *     type="string",
+	 *     collectionFormat="multi",
+	 *     uniqueItems=true,
+	 *	   required=true,
+	 *     minLength=1,
+	 *     maxLength=20,
+	 *     allowEmptyValue=false
+	 *     ),
+	 *
+	 *     @SWG\Response(
+	 *         response=200,
+	 *         description="ОК",
+	 *     	   @SWG\Schema(
+	 *     	   @SWG\Property(property="name", type="string", description="Назва суду"),
+	 *     	   ),
+	 *     	   examples={"application/json":
+	 *              {
+	 *					{
+ 	 *					"name": "Шевченківський районний суд м. Запоріжжя"
+ 	 *					},
+ 	 *					{
+ 	 *					"name": "Шевченківський районний суд м. Львова"
+ 	 *					},
+ 	 *					{
+ 	 *					"name": "Шевченківський районний суд Харківської області"
+ 	 *					},
+ 	 *					{
+ 	 *					"name": "Шепетівський міськрайонний суд Хмельницької області"
+ 	 *					},
+ 	 *					{
+ 	 *					"name": "Шевченківський районний суд м. Чернівців"
+	 *					}
+	 *				}
+	 *     		}
+	 *     ),
+	 *     @SWG\Response(
+	 *         response=422,
+	 *         description="Передані не валідні дані, у відповіді буде зазначена причина",
+	 *     	   examples={"application/json":
+	 *              {
+	 *     				"message": "The given data was invalid.",
+	 *                  "errors": {
+	 *                  	"search": {
+	 *     							"search може містити лише літери."
+	 * 						}
+	 *     				}
+	 *              }
+	 *     		}
+	 *     ),
+	 *
+	 *     @SWG\Response(
+	 *         response=405,
+	 *         description="Метод, з яким виконувався запит, не дозволено використовувати для заданого ресурсу; наприклад, запит був здійснений за методом POST, хоча очікується GET.",
+	 *     )
+	 * )
+	 */
+	public function autocomplete(Request $request) {
+		$search = Input::has('search') ? Input::get('search') : '';
+		
+		// валідація фільтрів
+		$request->validate([
+			'search' => 'string|alpha|min:1|max:20'
+		]);
+		// приведення першої букви в верхній регістр для валідного пошуку
+		$search = mb_convert_case($search, MB_CASE_TITLE, "UTF-8");
+		$autocomplete = Court::getAutocomplete($search);
+		return response()->json($autocomplete);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

@@ -44,6 +44,8 @@ Route::group(['prefix' => 'v1/', 'namespace' => 'Api\V1',], function () {
 	 */
 	// список судів з застосованими фільтрами (Рейтинг->суди)
 	Route::get('guest/courts/list', 'CourtsController@indexGuest');
+	// швидкий пошук за назвою суду, для поля автодоповнення
+	Route::get('courts/autocomplete', 'CourtsController@autocomplete');
 	
 	
 	// Маршрути які вимагають реєстрації користувача

@@ -140,4 +140,22 @@ class Court extends Model
 			->paginate(10));
 	}
 	
+	
+	
+	/**
+	 * отримує результати автодоповнення
+	 * для поля пошуку суду
+	 * @param string $search
+	 * @return mixed
+	 */
+	public static function getAutocomplete(string $search) {
+		
+		$results = static::select('courts.name')
+			->where('courts.name', 'LIKE', $search.'%')
+			->limit(5)
+			->get();
+		return ($results);
+		
+	}
+	
 }
