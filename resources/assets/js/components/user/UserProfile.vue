@@ -54,7 +54,7 @@
     
     
     export default {
-        name: "personal-account",
+        name: "user-profile",
         data() {
             return {
                 user: {}
@@ -62,22 +62,7 @@
         },
     
         beforeMount() {
-            axios
-                .get('/api/v1/user', {
-                    headers: {
-                        "Content-Type": "application/json",
-                        "X-Requested-With": "XMLHttpRequest",
-                        "Authorization": localStorage.getItem('token')
-                    }
-    
-                })
-                .then(response => {
-                    this.user = response;
-                    console.log('Response', response);
-                })
-                .catch(error => {
-                    console.log('ERR userProfile ', error);
-                });
+           
         },
         components: {
             CourtSessions,

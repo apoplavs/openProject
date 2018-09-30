@@ -2,8 +2,8 @@
     <nav class="navbar  sticky-top navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#"><img src="../../../images/logo.png" width="40" alt="logo" />ТОЕсуд</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#NavbarMenu" aria-controls="NavbarMenu" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+                    <span class="navbar-toggler-icon"></span>
+                </button>
         <div class="collapse navbar-collapse" id="NavbarMenu">
     
             <!-- NAVIGATION -->
@@ -39,11 +39,11 @@
                     </router-link>
                     <li class="nav-item dropdown" v-if="isAuth">
                         <a class="nav-link dropdown-toggle" href="#" id="Second" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Тетяна
-                            </a>
+                                    {{ name }}
+                                </a>
                         <div class="dropdown-menu" aria-labelledby="Second">
                             <li>
-                                <span class="dropdown-item">tatka_28@gmail.com</span>
+                                <span class="dropdown-item">{{ email }}</span>
                             </li>
                             <router-link to="/user-profile" tag="li" class="nav-item" active-class="active">
                                 <a class="dropdown-item">Особистий кабінет <i class="fa fa-home text-muted float-right" aria-hidden="true"></i></a>
@@ -67,16 +67,21 @@
         name: "header-component",
         data: () => {
             return {
-                isAuth: localStorage.getItem('token')
+                name: localStorage.getItem('name'),
+                email: localStorage.getItem('email'),
+                isAuth: localStorage.getItem('token'),
             }
         },
-        computed: {
-            watcherAuth: function() {
-                this.isAuth = localStorage.getItem('token')
+        watch: {
+            userData: function() {
+                this.isAuth = localStorage.getItem('token');
+                this.name = localStorage.getItem('name');
+                this.email = localStorage.getItem('email')
     
             }
         },
         methods: {
+            
             logout() {
                 axios
                     .get("/api/v1/logout", {
@@ -88,14 +93,15 @@
                     })
                     .then(response => {
                         console.log(response);
+                        console.log('logout');
+                        localStorage.clear();
+                        this.$router.push('/login')
                     })
                     .catch(error => {
                         console.log(error);
                     });
     
-                console.log('logout');
-                localStorage.removeItem('token');
-                this.$router.push('/login')
+    
             }
         }
     };

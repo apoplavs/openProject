@@ -13,14 +13,14 @@
                             <h5>{{ judge.court_name }}</h5>
                         </div>
                     </div>
-                    <div class="col-3">
+                    <div class="col-3 pl-0">
                         <div> <i class="fa fa-line-chart" aria-hidden="true"> {{ judge.rating }} </i></div>
                         <div v-if="isAuth">
-                            <span v-if="judge.is_bookmark" @click="changeBookmarkStatus(judge)">відстежується<i class="fa fa-bookmark" aria-hidden="true"></i></span>
+                            <span v-if="judge.is_bookmark" @click="changeBookmarkStatus(judge)">відстежується <i class="fa fa-bookmark" aria-hidden="true"></i></span>
                             <span v-if="!judge.is_bookmark" @click="changeBookmarkStatus(judge)">відстежувати <i class="fa fa-bookmark-o" aria-hidden="true"></i></span>
                         </div>
                         <div v-if="isAuth">
-                            <span title="змінити статус судді">Змінити статус судді<i class="fa fa-pencil p-1" aria-hidden="true"  data-toggle="modal" data-target="#changeJudgeStatus"></i></span>
+                            <span title="змінити статус судді">Змінити статус <i class="fa fa-pencil p-1" aria-hidden="true"  data-toggle="modal" data-target="#changeJudgeStatus"></i></span>
                         </div>
     
                     </div>
@@ -62,7 +62,7 @@
                         })
                         .then(response => {
                             judge.is_bookmark = 1;
-                            console.log(response);
+                            console.log('Response Bookmark',response);
                         })
                         .catch(error => {
                             console.log(error);
@@ -93,8 +93,7 @@
 <style scoped lang="scss">
     .judge-component:not(:last-child) {
         border-bottom: 1px solid lightgray;
-    }
-    
+    }  
     .avatar {
         width: 130px;
         height: 130px;

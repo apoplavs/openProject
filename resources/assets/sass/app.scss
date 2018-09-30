@@ -20,3 +20,9 @@ button:active,
 button:focus {
     outline: none;
 }
+
+.btn-primary {
+  color: #ffff;
+  background-color: $primary;
+  border-color: $primary;
+}

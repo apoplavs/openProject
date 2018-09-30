@@ -13,3 +13,9 @@ button:focus {
   outline: none;
 }
 
+.btn-primary {
+  color: #ffff;
+  background-color: #6291ba;
+  border-color: #6291ba;
+}
+

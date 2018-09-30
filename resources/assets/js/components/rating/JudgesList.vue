@@ -116,36 +116,39 @@
             </div>
           </div>
           <!-- Card -->
-          <div>Регіон------------- {{params.regions }}</div>
-          <div>Регіон------------- {{ params.instance }}</div>
-          <div>Регіон------------- {{ params.jurisdiction }}</div>
-          <div>Регіон------------- {{ params.search}}</div>
-          <div>bool------------- {{ params.expired}}</div>
-          {{params}}
+          <div>Регіон-------- {{params.regions }}</div>
+          <div>інстанція--------- {{ params.instance }}</div>
+          <div>юрисдикція--------- {{ params.jurisdiction }}</div>
+          <div>пошук-------- {{ params.search}}</div>
+          <div>sort-------- {{ params.sort}}</div>
+          <div> expired-------- {{ params.expired}}</div>
         </div>
         <!--  col-3 Filters  -->
   
         <!-- Main list -->
         <div class="col-lg-9">
           <div class="card card-outline-secondary my-4">
-            <div class="card-header">
-              Список суддів
-              <span class="ml-5"> сортувати: 
-                          <label id="sorting-type">
-                            <input type="checkbox" @change="changeSorting()" form="form-filters" name="sorting">
-                            <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
-                          </label>
-                        </span>
+            <div class="card-header d-flex justify-content-between">
+              <h4 class="d-flex align-items-center">Список суддів</h4>
+              <div class="d-flex align-items-center">
+                <span class="mr-2"> сортувати за: </span>
+                <select class="form-control select-sort" name="sorting" v-model="params.sort" @change="sortJudges()">
+                    <option value="1" selected>прізвищем ‘А->Я’ <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i></option>
+                    <option value="2">прізвищем ‘Я->А’</option>
+                    <option value="3">рейтингом ‘низький->високий’</option>
+                    <option value="4">рейтингом ‘високий->низький’</option>
+                  </select>
+              </div>
             </div>
             <div id="judges-list">
               <!--judges-judges-list-->
               <judge-component :list="judgesList"></judge-component>
             </div>
           </div>
-           <div class="pagination mb-5">
-              <vue-ads-pagination :total-items="judgesList.total" :max-visible-pages="5" @page-change="pageChange" :button-classes="buttonClasses" :loading="false">
-              </vue-ads-pagination>
-            </div>
+          <div class="pagination mb-5">
+            <vue-ads-pagination @page-change="pageChange" :total-items="judgesList.total" :max-visible-pages="5" :button-classes="buttonClasses" :loading="false">
+            </vue-ads-pagination>
+          </div>
           <!-- /.card -->
         </div>
         <!-- col-lg-9 -->
@@ -159,10 +162,9 @@
 
 <script>
   import JudgeComponent from './JudgeComponent.vue';
-  // import Pagination from 'laravel-vue-pagination';
   import VueAdsPagination from 'vue-ads-pagination';
-  
-  
+  import _ from 'lodash';  
+
   export default {
     name: "judges-list",
     data() {
@@ -176,9 +178,11 @@
           sort: 1,
           expired: 0
         },
-        // current_page: 1,
         message: "",
-        judgesList: {},
+        total: 100,
+        judgesList: {
+          total: 0
+        },
         headers: {
           "Content-Type": "application/json",
           "X-Requested-With": "XMLHttpRequest",
@@ -187,7 +191,7 @@
           'default': ['border-none', 'bg-grey-lightest'],
           'active': ['bg-active', 'border-none'],
           // 'dots': ['bg-white'],
-          'disabled': ['bg-grey-light'],
+          'disabled': ['disabled'],
         },
       }
     },
@@ -195,70 +199,72 @@
       // this.getJudgesList();
     },
     methods: {
-      pageChange(page) {
-        this.getJudgesList(page + 1);
-      },
-      // changeSorting(e) {
-      //   console.log('checkbox ', e);
+      sortJudges: _.debounce(function(event) {
+        console.log(this.params.sort);
+        this.getJudgesList();
+      }, 10),
   
-      // },
-      getJudgesList(page) {
-        const _this = this;
-        this.params.page = page;
-        if (localStorage.getItem('token')) {
-          console.log('have token')
-          //this.params.page = page + 1;
-          axios
-            .get('/api/v1/judges/list', {
-              headers: {
-                "Content-Type": "application/json",
-                "X-Requested-With": "XMLHttpRequest",
-                "Authorization": localStorage.getItem('token')
-              },
-              params: this.params
-            })
-            .then(response => {
-              _this.judgesList = response.data;
-              console.log('Response', _this.judgesList);
-            })
-            .catch(error => {
-              console.log('Каже що не авторизований пффф та Канеха');
-            });
-        } else {
-          console.log('no token')
-          // debugger;
-          axios
-            .get("/api/v1/guest/judges/list", {
-              headers: {
-                "Content-Type": "application/json",
-                "X-Requested-With": "XMLHttpRequest",
-              },
-              params: this.params
-            })
-            .then(response => {
-              this.judgesList = response;
-              // console.log('response--', response);
-            })
-            .catch(error => {
-              console.log(error);
-              console.log('Ну нє не логінився я ще');
-            });
-        }
-      },
-      resetFilters() {
-        this.params.regions = [];
-        this.params.instance = [];
-        this.params.jurisdiction = [];
-        this.params.expired = 0;
-        this.params.search = null;
-      }
-  
+    pageChange(page) {
+      this.params.page = page + 1;
+      this.getJudgesList();
     },
-    components: {
-      JudgeComponent,
-      // Pagination,
-      VueAdsPagination
+    getJudgesList() {
+      const _this = this;
+      // 
+      this.params.search === '' ? this.params.search = null : false;
+      if (localStorage.getItem('token')) {
+        console.log('have token')
+        //this.params.page = page + 1;
+        axios
+          .get('/api/v1/judges/list', {
+            headers: {
+              "Content-Type": "application/json",
+              "X-Requested-With": "XMLHttpRequest",
+              "Authorization": localStorage.getItem('token')
+            },
+            params: this.params
+          })
+          .then(response => {
+            _this.judgesList = response.data;
+            window.scrollTo(0, 0);
+            console.log('Response', _this.judgesList);
+            console.log(response.data.total);
+          })
+          .catch(error => {
+            console.log('Каже що не авторизований пффф та Канеха');
+          });
+      } else {
+        console.log('no token')
+        axios
+          .get("/api/v1/guest/judges/list", {
+            headers: {
+              "Content-Type": "application/json",
+              "X-Requested-With": "XMLHttpRequest",
+            },
+            params: this.params
+          })
+          .then(response => {
+            this.judgesList = response;
+          })
+          .catch(error => {
+            console.log(error);
+            console.log('Ну нє не логінився я ще');
+          });
+      }
+    },
+    resetFilters() {
+      this.params.regions = [];
+      this.params.instance = [];
+      this.params.jurisdiction = [];
+      this.params.expired = 0;
+      this.params.search = null;
     }
+  
+  },
+  components: {
+    JudgeComponent,
+    VueAdsPagination,
+  }
   
   };
 </script>
@@ -283,14 +289,22 @@
   div.pr-2.leading-loose {
     display: none !important;
   }
+  .disabled {
+    color: grey;
+  }
 </style>
 
 
 <style scoped lang="scss">
   /* Стилі для фільтрів */
+  
   .pagination {
     display: flex;
     justify-content: center;
+  }
+  
+  .select-sort {
+    width: 290px;
   }
   
   #filters {
@@ -512,30 +526,23 @@
     color: #ffffff;
   }
   
-  
-  /* styles for pop-up form changing status */
-  
-  select#chooser-judge-status {
-    font-family: "FontAwesome", Helvetica, serif;
-  }
-  
-  select#chooser-judge-status option:first-child {
-    color: green;
-  }
-  
-  select#chooser-judge-status option:nth-child(2) {
-    color: red;
-  }
-  
-  select#chooser-judge-status option:nth-child(3) {
-    color: #2b989b;
-  }
-  
-  select#chooser-judge-status option:nth-child(4) {
-    color: #2b989b;
-  }
-  
-  select#chooser-judge-status option:last-child {
-    color: #6291ba;
-  }
+  // /* styles for pop-up form changing status */
+  // select#chooser-judge-status {
+  //   font-family: "FontAwesome", Helvetica, serif;
+  // }
+  // select#chooser-judge-status option:first-child {
+  //   color: green;
+  // }
+  // select#chooser-judge-status option:nth-child(2) {
+  //   color: red;
+  // }
+  // select#chooser-judge-status option:nth-child(3) {
+  //   color: #2b989b;
+  // }
+  // select#chooser-judge-status option:nth-child(4) {
+  //   color: #2b989b;
+  // }
+  // select#chooser-judge-status option:last-child {
+  //   color: #6291ba;
+  // }
 </style>
