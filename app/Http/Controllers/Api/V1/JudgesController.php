@@ -142,7 +142,7 @@ class JudgesController extends Controller
 	 * 	  @SWG\Parameter(
 	 *     name="expired",
 	 *     in="query",
-	 *     description="Якщо переданий цей параметр, то в результати пошуку будуть включені судді зі статусом 'закінчились повноваження'",
+	 *     description="Якщо переданий цей параметр із значенням > 0, то в результати пошуку будуть включені судді зі статусом 'закінчились повноваження'",
 	 *     type="integer",
 	 *     collectionFormat="multi",
 	 *     uniqueItems=true,
@@ -427,7 +427,7 @@ class JudgesController extends Controller
 	 * 	  @SWG\Parameter(
 	 *     name="expired",
 	 *     in="query",
-	 *     description="Якщо переданий цей параметр, то в результати пошуку будуть включені судді зі статусом 'закінчились повноваження'",
+	 *     description="Якщо переданий цей параметр із значенням > 0, то в результати пошуку будуть включені судді зі статусом 'закінчились повноваження'",
 	 *     type="integer",
 	 *     collectionFormat="multi",
 	 *     uniqueItems=true,
@@ -1402,7 +1402,7 @@ class JudgesController extends Controller
 		$jurisdictions = Input::has('jurisdictions') ? Input::get('jurisdictions') : [];
 		$sort_order = Input::has('sort') ? intval(Input::get('sort')) : 1;
 		$search = Input::has('search') ? Input::get('search') : '';
-		$powers_expired = Input::has('expired') ? true : false;
+		$powers_expired = (Input::has('expired') && Input::get('expired')) ? true : false;
 		
 		// приведення всіх фільтрів до Integer
 		$int_regions = [];
