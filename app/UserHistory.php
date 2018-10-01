@@ -59,8 +59,8 @@ class UserHistory extends Model
 		// отримуємо і повертаємо 5 останніх позицій з історії переглядів користувача
 		return (DB::table('judges')->select('judges.id', 'courts.name AS court_name', 'judges.surname', 'judges.name',
 			'judges.patronymic', 'judges.photo', 'judges.status',
-			DB::raw('DATE_FORMAT(judges.updated_status, "%d.%c.%Y") AS updated_status'),
-			DB::raw('DATE_FORMAT(judges.due_date_status, "%d.%c.%Y") AS due_date_status'),
+			DB::raw('DATE_FORMAT(judges.updated_status, "%d.%m.%Y") AS updated_status'),
+			DB::raw('DATE_FORMAT(judges.due_date_status, "%d.%m.%Y") AS due_date_status'),
 			'judges.rating', DB::raw('(CASE WHEN user_bookmark_judges.user = '.Auth::user()->id.' THEN 1 ELSE 0 END) AS is_bookmark'))
 			->join('courts', 'judges.court', '=', 'courts.court_code')
 			->join('user_histories', 'user_histories.judge', '=', 'judges.id')

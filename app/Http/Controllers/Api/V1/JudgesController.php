@@ -5,7 +5,6 @@ namespace Toecyd\Http\Controllers\Api\V1;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Validator;
 use Toecyd\Http\Controllers\Controller;
 use Toecyd\Judge;
 use Toecyd\JudgesStatistic;
@@ -143,7 +142,7 @@ class JudgesController extends Controller
 	 * 	  @SWG\Parameter(
 	 *     name="expired",
 	 *     in="query",
-	 *     description="Якщо переданий цей параметр, то в результати пошуку будуть включені судді зі статусом 'закінчились повноваження'",
+	 *     description="Якщо переданий цей параметр із значенням > 0, то в результати пошуку будуть включені судді зі статусом 'закінчились повноваження'",
 	 *     type="integer",
 	 *     collectionFormat="multi",
 	 *     uniqueItems=true,
@@ -428,7 +427,7 @@ class JudgesController extends Controller
 	 * 	  @SWG\Parameter(
 	 *     name="expired",
 	 *     in="query",
-	 *     description="Якщо переданий цей параметр, то в результати пошуку будуть включені судді зі статусом 'закінчились повноваження'",
+	 *     description="Якщо переданий цей параметр із значенням > 0, то в результати пошуку будуть включені судді зі статусом 'закінчились повноваження'",
 	 *     type="integer",
 	 *     collectionFormat="multi",
 	 *     uniqueItems=true,
@@ -658,12 +657,11 @@ class JudgesController extends Controller
     }
     
 	/**
-	 * Display a listing of the resource.
 	 *
 	 * @SWG\Get(
 	 *     path="/judges/autocomplete",
 	 *     summary="Перелік ПІБ суддів для поля автодоповнення",
-	 *     description="Отримати швидкий перелік ПІБ суддів для 'живого пошуку' Всі результати пошуку повертаються по 5 шт.",
+	 *     description="Швидко отримати перелік ПІБ суддів для 'живого пошуку' Всі результати пошуку повертаються по 5 шт.",
 	 *     operationId="judges-autocomplete",
 	 *     produces={"application/json"},
 	 *     tags={"Судді"},
@@ -1404,7 +1402,7 @@ class JudgesController extends Controller
 		$jurisdictions = Input::has('jurisdictions') ? Input::get('jurisdictions') : [];
 		$sort_order = Input::has('sort') ? intval(Input::get('sort')) : 1;
 		$search = Input::has('search') ? Input::get('search') : '';
-		$powers_expired = Input::has('expired') ? true : false;
+		$powers_expired = (Input::has('expired') && Input::get('expired')) ? true : false;
 		
 		// приведення всіх фільтрів до Integer
 		$int_regions = [];
