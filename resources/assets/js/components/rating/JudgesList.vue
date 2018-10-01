@@ -9,7 +9,7 @@
           <form method="get" autocomplete="off">
             <div class="form-row">
               <div class="col-12 col-md-9 mb-2 mb-md-0 autocomplete">
-                <input type="search" class="form-control" id="search-input" placeholder="Пошук..." v-model="params.search">
+                <input type="search" class="form-control"  placeholder="Пошук..." v-model="params.search" @keyup="liveSearch()">
               </div>
               <div class="col-6 col-md-3">
                 <button type="button" class="btn btn-block btn btn-primary" onclick="findJudge()"><i class="fa fa-search" aria-hidden="true"></i> знайти</button>
@@ -18,6 +18,11 @@
           </form>
         </div>
       </div>
+    <div class="row">
+  <div class="col-12" v-for="(search, index) in autocomplete" :key="index">
+    {{search.name}} {{search.sername}} {{search.patronymic}}
+  </div>
+    </div>
     </div>
   
     <!-- Filters -->
@@ -133,10 +138,10 @@
               <div class="d-flex align-items-center">
                 <span class="mr-2"> сортувати за: </span>
                 <select class="form-control select-sort" name="sorting" v-model="params.sort" @change="sortJudges()">
-                    <option value="1" selected>прізвищем ‘А->Я’ <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i></option>
-                    <option value="2">прізвищем ‘Я->А’</option>
-                    <option value="3">рейтингом ‘низький->високий’</option>
-                    <option value="4">рейтингом ‘високий->низький’</option>
+                    <option value="1" selected>прізвищем 'А->Я' <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i></option>
+                    <option value="2">прізвищем 'Я->А'</option>
+                    <option value="3">рейтингом 'низький->високий'</option>
+                    <option value="4">рейтингом 'високий->низький'</option>
                   </select>
               </div>
             </div>
@@ -178,6 +183,7 @@
           sort: 1,
           expired: 0
         },
+        autocomplete: {},
         message: "",
         total: 100,
         judgesList: {
@@ -199,6 +205,26 @@
       // this.getJudgesList();
     },
     methods: {
+      liveSearch:  _.debounce(function(event) {
+        let _this = this;
+        console.log(this.params.search);       
+        axios
+          .get('/api/v1/judges/autocomplete', {
+            headers: {
+              "Content-Type": "application/json",
+              "X-Requested-With": "XMLHttpRequest",
+            },
+            params: { search: _this.params.search }
+          })
+          .then(response => {
+            _this.autocomplete = response.data;
+            console.log('Autocomplete', response.data);
+          })
+          .catch(error => {
+            console.log(error);
+          });
+
+       }, 1000),
       sortJudges: _.debounce(function(event) {
         console.log(this.params.sort);
         this.getJudgesList();
@@ -403,7 +429,7 @@
   
   /* styles for page elements */
   
-  div.col-12.col-lg-2>img {
+  div.col-12.col-lg-2 > img {
     width: 120px;
     height: 120px;
   }
