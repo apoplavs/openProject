@@ -13,14 +13,14 @@ class LoginFacebookTest extends TestCase
 
     private $testUsers = [];
     private $url = 'api/v1/login/facebook';
+    private $headers = ['accept' => 'application/json'];
 
     public function testLoginWithoutParams()
     {
         $data = [];
-        $response = $this->post($this->url, $data);
+        $response = $this->post($this->url, $data, $this->headers);
 
-        //Коли параметри відсутні, валідатор повинен переадресувати користувача на сторінку помилки
-        $response->assertStatus(302);
+        $response->assertStatus(422);
     }
 
     public function testLoginExistingUser()
@@ -33,7 +33,7 @@ class LoginFacebookTest extends TestCase
             'name' => $user->name,
             'surname' => $user->surname,
         ];
-        $response = $this->post($this->url, $data);
+        $response = $this->post($this->url, $data, $this->headers);
 
         $response->assertStatus(200);
         $response->assertSee('token');
@@ -54,7 +54,7 @@ class LoginFacebookTest extends TestCase
             'name' => $user->name,
             'surname' => $user->surname,
         ];
-        $response = $this->post($this->url, $data);
+        $response = $this->post($this->url, $data, $this->headers);
 
         $response->assertStatus(200);
         $response->assertSee('token');
@@ -71,7 +71,7 @@ class LoginFacebookTest extends TestCase
     {
         $user = $this->testUsers[0];
 
-        // удаляем пользователей из базы. Отныне $user у нас -- несуществующий
+        // Видаляємо користувачів із бази. Відтепер user у нас nonExisting
         $this->deleteTestUsers();
 
         $data = [
@@ -80,7 +80,7 @@ class LoginFacebookTest extends TestCase
             'name' => $user->name,
             'surname' => $user->surname,
         ];
-        $response = $this->post($this->url, $data);
+        $response = $this->post($this->url, $data, $this->headers);
 
         $response->assertStatus(201);
         $response->assertSee('token');
@@ -101,7 +101,7 @@ class LoginFacebookTest extends TestCase
             'name' => $user->name,
             'surname' => $user->surname,
         ];
-        $response = $this->post($this->url, $data);
+        $response = $this->post($this->url, $data, $this->headers);
 
         $response->assertStatus(401);
     }

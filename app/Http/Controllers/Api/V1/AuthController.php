@@ -202,7 +202,7 @@ class AuthController extends Controller
 			'password' => 'required|string',
 			'remember_me' => 'int|min:1|max:3',
 		]);
-		
+
 		$credentials = request(['email', 'password']);
 		$user_check = User::checkUser($request->email);
 		// якщо в користувача неправильний пароль, або є інші причини чому він не може ввійти
@@ -281,7 +281,7 @@ class AuthController extends Controller
      *     @SWG\Schema(
      *          type="object",
      *     		required={"id", "email", "name", "link", "picture"},
-     *          @SWG\Property(property="id", type="string", example="111483939504700006800", description="google_id Користувача (повинно складатися від 3 до 255 цифр)"),
+     *          @SWG\Property(property="id", type="string", example="111483939504700006800", description="google_id Користувача (повинно складатися від 12 до 255 цифр)"),
      *          @SWG\Property(property="name", type="string", example="NameOfUser", description="Ім'я Користувача (повинно складатися від 3 до 255 символів)"),
      *          @SWG\Property(property="email", type="string", example="example@gmail.com", description="Email Користувача (існуючий, валідний, унікальний в системі)"),
      *          @SWG\Property(property="link", type="string", example="https://plus.google.com/111483939504700006800", description="Посилання на Google аккаунт користувача (валідний URL)"),
@@ -294,7 +294,7 @@ class AuthController extends Controller
      *         description="Користувач успішно зареєстрований",
      *     	   examples={"application/json":
      *              {
-     *     				"token": "hfadlkfjha"
+     *     				"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6Ijc4ZjZjYmU4M2Y0YTJiOTM0MTA0ZjVmMjhiMzJiYzZiYTMyZjJmNDJkNWFmMmZjYmY3NDRkODJjYzMyZWE0NThkZTgzNDQ5NjExNjIyZDExIn0.eyJhdWQiOiIzIiwianRpIjoiNzhmNmNiZTgzZjRhMmI5MzQxMDRmNWYyOGIzMmJjNmJhMzJmMmY0MmQ1YWYyZmNiZjc0NGQ4MmNjMzJlYTQ1OGRlODM0NDk2MTE2MjJkMTEiLCJpYXQiOjE1Mzg0MTg1MzEsIm5iZiI6MTUzODQxODUzMSwiZXhwIjoxNTY5OTU0NTMxLCJzdWIiOiIxNTgiLCJzY29wZXMiOltdfQ.ivQ04ahWZlVc6OdsHCF-mYnuieYPqGscIQQ_FrddgIo9PSl6I_lN04CDvr-yc5u39ASIm6BA-rTueJD-OVgp1S7qTZFwUR_0QU2hGklQZmYaXzTAYjG8YwW1LecZpe1Gdrcnoqr-m-qN1IeTY8GlOOluvjH6qzH9Tb5Abo-Ql4Uz2vjtCDAqpcl-Q8wFLeWKwGYJ_-euciHKAJvNGYF4ks9Bln4o1UCwwLFbE9godp1G4LHvyp9OgbAsaofz-L7Cg0SbByUxVZ0tDgpnuoZxpfeyQ2-dpaO3byCOfMkK1E714V8KL-2k3O091Ra9_ifCSpTAsmnaAIkKp1NMhL1AUP2rR_DUevSg7Di7oBC0sqB45FDxQNJBZ6eyde358hQhtThcYkN7E8b1wi64L-R6bZ18SzzvXkVgsf3iOqiEj461DzDYweptjhRWMPq-eki0IqfL-HbfD7VuAPChFazCsqRqTgrg4Fdc084NJx8Eu_78lz0F6WNGo8xOa-HzeqCBKm99LfJKSNZvoBUKe6fnFXu5eRHhfma1Ya4-x1wwZSFKqpelmgK_3WNAh-N0YNeY-3h9h5mTXra-C9xfI9mWz0sjwfLMwd6VHoIJUGtPFmytMmLxb8onPO7j3ptLKL_mqf0kVehfM-_v4QArsqenstO4FJKFJSlvAEf35jqmkEo"
      *              }
      *     		}
      *     ),
@@ -303,12 +303,12 @@ class AuthController extends Controller
      *         description="Користувач успішно залогінився",
      *     	   examples={"application/json":
      *              {
-     *     				"token": "hfadlkfjha"
+     *     				"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6Ijc4ZjZjYmU4M2Y0YTJiOTM0MTA0ZjVmMjhiMzJiYzZiYTMyZjJmNDJkNWFmMmZjYmY3NDRkODJjYzMyZWE0NThkZTgzNDQ5NjExNjIyZDExIn0.eyJhdWQiOiIzIiwianRpIjoiNzhmNmNiZTgzZjRhMmI5MzQxMDRmNWYyOGIzMmJjNmJhMzJmMmY0MmQ1YWYyZmNiZjc0NGQ4MmNjMzJlYTQ1OGRlODM0NDk2MTE2MjJkMTEiLCJpYXQiOjE1Mzg0MTg1MzEsIm5iZiI6MTUzODQxODUzMSwiZXhwIjoxNTY5OTU0NTMxLCJzdWIiOiIxNTgiLCJzY29wZXMiOltdfQ.ivQ04ahWZlVc6OdsHCF-mYnuieYPqGscIQQ_FrddgIo9PSl6I_lN04CDvr-yc5u39ASIm6BA-rTueJD-OVgp1S7qTZFwUR_0QU2hGklQZmYaXzTAYjG8YwW1LecZpe1Gdrcnoqr-m-qN1IeTY8GlOOluvjH6qzH9Tb5Abo-Ql4Uz2vjtCDAqpcl-Q8wFLeWKwGYJ_-euciHKAJvNGYF4ks9Bln4o1UCwwLFbE9godp1G4LHvyp9OgbAsaofz-L7Cg0SbByUxVZ0tDgpnuoZxpfeyQ2-dpaO3byCOfMkK1E714V8KL-2k3O091Ra9_ifCSpTAsmnaAIkKp1NMhL1AUP2rR_DUevSg7Di7oBC0sqB45FDxQNJBZ6eyde358hQhtThcYkN7E8b1wi64L-R6bZ18SzzvXkVgsf3iOqiEj461DzDYweptjhRWMPq-eki0IqfL-HbfD7VuAPChFazCsqRqTgrg4Fdc084NJx8Eu_78lz0F6WNGo8xOa-HzeqCBKm99LfJKSNZvoBUKe6fnFXu5eRHhfma1Ya4-x1wwZSFKqpelmgK_3WNAh-N0YNeY-3h9h5mTXra-C9xfI9mWz0sjwfLMwd6VHoIJUGtPFmytMmLxb8onPO7j3ptLKL_mqf0kVehfM-_v4QArsqenstO4FJKFJSlvAEf35jqmkEo"
      *              }
      *     		}
      *     ),
      *     @SWG\Response(
-     *         response=302,
+     *         response=422,
      *         description="Передані не валідні дані по формі (наприклад, завелика довжина рядка)"
      *     ),
      *     @SWG\Response(
@@ -330,7 +330,7 @@ class AuthController extends Controller
      */
 	public function loginGoogle(Request $request)
     {
-        $userAlreadyExists = true;
+        $user_already_exists = true;
 
         $request->validate([
             'id' => 'required|string',
@@ -343,35 +343,31 @@ class AuthController extends Controller
 
         $user = User::where('email', $request->email)->first();
         if (empty($user)) {
-            $user = factory(User::class)->create([
+            $user = new User([
                 'name' => $request->name,
                 'email' => $request->email,
+                'password' => bcrypt($request->id),
             ]);
-            $userAlreadyExists = false;
+            $user->save();
+            $user_already_exists = false;
         }
         $user->google_id = $request->id;
         $user->password = bcrypt($request->id);
         $user->surname = $request->surname;
         $user->usertype = 2;
-        $user->remember_token = str_random(10);
 
         if ($this->getHttpStatusByUrl($request->link) != 200) {
-            return response()->json([
-                'message' => 'Unauthorized (bad link)'
-            ], 401);
+            return response()->json(['message' => Lang::get('auth.bad_link')], 401);
         }
 
         if (!$this->savePhoto($request->picture, $user)) {
-            return response()->json([
-                'message' => 'Unauthorized (bad picture)'
-            ], 401);
+            return response()->json(['message' => Lang::get('auth.bad_photo')], 401);
         }
 
         $user->save();
+        Auth::login($user);
 
-        return response()->json([
-            'token' => $user->remember_token
-        ], $userAlreadyExists ? 200 : 201);
+        return response()->json(['token' => $this->getToken($request)], $user_already_exists ? 200 : 201);
     }
 
     /**
@@ -397,8 +393,9 @@ class AuthController extends Controller
      *     @SWG\Schema(
      *          type="object",
      *     		required={"id", "email", "name"},
-     *          @SWG\Property(property="id", type="string", example="100001887847445", description="google_id Користувача (повинно складатися від 3 до 255 цифр)"),
+     *          @SWG\Property(property="id", type="string", example="100001887847445", description="facebook_id Користувача (повинно складатися від 12 до 255 цифр)"),
      *          @SWG\Property(property="name", type="string", example="NameOfUser", description="Ім'я Користувача (повинно складатися від 3 до 255 символів)"),
+     *          @SWG\Property(property="surname", type="string", example="SurnameOfUser", description="Прізвище Користувача (повинно складатися від 3 до 255 символів)"),
      *          @SWG\Property(property="email", type="string", example="example@gmail.com", description="Email Користувача (існуючий, валідний, унікальний в системі)"),
      *       )
      *     ),
@@ -408,7 +405,7 @@ class AuthController extends Controller
      *         description="Користувач успішно зареєстрований",
      *     	   examples={"application/json":
      *              {
-     *     				"token": "hfadlkfjha"
+     *     				"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6Ijc4ZjZjYmU4M2Y0YTJiOTM0MTA0ZjVmMjhiMzJiYzZiYTMyZjJmNDJkNWFmMmZjYmY3NDRkODJjYzMyZWE0NThkZTgzNDQ5NjExNjIyZDExIn0.eyJhdWQiOiIzIiwianRpIjoiNzhmNmNiZTgzZjRhMmI5MzQxMDRmNWYyOGIzMmJjNmJhMzJmMmY0MmQ1YWYyZmNiZjc0NGQ4MmNjMzJlYTQ1OGRlODM0NDk2MTE2MjJkMTEiLCJpYXQiOjE1Mzg0MTg1MzEsIm5iZiI6MTUzODQxODUzMSwiZXhwIjoxNTY5OTU0NTMxLCJzdWIiOiIxNTgiLCJzY29wZXMiOltdfQ.ivQ04ahWZlVc6OdsHCF-mYnuieYPqGscIQQ_FrddgIo9PSl6I_lN04CDvr-yc5u39ASIm6BA-rTueJD-OVgp1S7qTZFwUR_0QU2hGklQZmYaXzTAYjG8YwW1LecZpe1Gdrcnoqr-m-qN1IeTY8GlOOluvjH6qzH9Tb5Abo-Ql4Uz2vjtCDAqpcl-Q8wFLeWKwGYJ_-euciHKAJvNGYF4ks9Bln4o1UCwwLFbE9godp1G4LHvyp9OgbAsaofz-L7Cg0SbByUxVZ0tDgpnuoZxpfeyQ2-dpaO3byCOfMkK1E714V8KL-2k3O091Ra9_ifCSpTAsmnaAIkKp1NMhL1AUP2rR_DUevSg7Di7oBC0sqB45FDxQNJBZ6eyde358hQhtThcYkN7E8b1wi64L-R6bZ18SzzvXkVgsf3iOqiEj461DzDYweptjhRWMPq-eki0IqfL-HbfD7VuAPChFazCsqRqTgrg4Fdc084NJx8Eu_78lz0F6WNGo8xOa-HzeqCBKm99LfJKSNZvoBUKe6fnFXu5eRHhfma1Ya4-x1wwZSFKqpelmgK_3WNAh-N0YNeY-3h9h5mTXra-C9xfI9mWz0sjwfLMwd6VHoIJUGtPFmytMmLxb8onPO7j3ptLKL_mqf0kVehfM-_v4QArsqenstO4FJKFJSlvAEf35jqmkEo"
      *              }
      *     		}
      *     ),
@@ -417,12 +414,12 @@ class AuthController extends Controller
      *         description="Користувач успішно залогінився",
      *     	   examples={"application/json":
      *              {
-     *     				"token": "hfadlkfjha"
+     *     				"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6Ijc4ZjZjYmU4M2Y0YTJiOTM0MTA0ZjVmMjhiMzJiYzZiYTMyZjJmNDJkNWFmMmZjYmY3NDRkODJjYzMyZWE0NThkZTgzNDQ5NjExNjIyZDExIn0.eyJhdWQiOiIzIiwianRpIjoiNzhmNmNiZTgzZjRhMmI5MzQxMDRmNWYyOGIzMmJjNmJhMzJmMmY0MmQ1YWYyZmNiZjc0NGQ4MmNjMzJlYTQ1OGRlODM0NDk2MTE2MjJkMTEiLCJpYXQiOjE1Mzg0MTg1MzEsIm5iZiI6MTUzODQxODUzMSwiZXhwIjoxNTY5OTU0NTMxLCJzdWIiOiIxNTgiLCJzY29wZXMiOltdfQ.ivQ04ahWZlVc6OdsHCF-mYnuieYPqGscIQQ_FrddgIo9PSl6I_lN04CDvr-yc5u39ASIm6BA-rTueJD-OVgp1S7qTZFwUR_0QU2hGklQZmYaXzTAYjG8YwW1LecZpe1Gdrcnoqr-m-qN1IeTY8GlOOluvjH6qzH9Tb5Abo-Ql4Uz2vjtCDAqpcl-Q8wFLeWKwGYJ_-euciHKAJvNGYF4ks9Bln4o1UCwwLFbE9godp1G4LHvyp9OgbAsaofz-L7Cg0SbByUxVZ0tDgpnuoZxpfeyQ2-dpaO3byCOfMkK1E714V8KL-2k3O091Ra9_ifCSpTAsmnaAIkKp1NMhL1AUP2rR_DUevSg7Di7oBC0sqB45FDxQNJBZ6eyde358hQhtThcYkN7E8b1wi64L-R6bZ18SzzvXkVgsf3iOqiEj461DzDYweptjhRWMPq-eki0IqfL-HbfD7VuAPChFazCsqRqTgrg4Fdc084NJx8Eu_78lz0F6WNGo8xOa-HzeqCBKm99LfJKSNZvoBUKe6fnFXu5eRHhfma1Ya4-x1wwZSFKqpelmgK_3WNAh-N0YNeY-3h9h5mTXra-C9xfI9mWz0sjwfLMwd6VHoIJUGtPFmytMmLxb8onPO7j3ptLKL_mqf0kVehfM-_v4QArsqenstO4FJKFJSlvAEf35jqmkEo"
      *              }
      *     		}
      *     ),
      *     @SWG\Response(
-     *         response=302,
+     *         response=422,
      *         description="Передані не валідні дані по формі (наприклад, завелика довжина рядка)"
      *     ),
      *     @SWG\Response(
@@ -438,11 +435,12 @@ class AuthController extends Controller
      * @param  [string] id
      * @param  [string] email
      * @param  [string] name
+     * @param  [string] surname
      * @return [string] token
      */
     public function loginFacebook(Request $request)
     {
-        $userAlreadyExists = true;
+        $user_already_exists = true;
 
         $request->validate([
             'id' => 'required|string',
@@ -457,24 +455,21 @@ class AuthController extends Controller
                 'name' => $request->name,
                 'email' => $request->email,
             ]);
-            $userAlreadyExists = false;
+            $user_already_exists = false;
         }
         $user->facebook_id = $request->id;
         $user->password = bcrypt($request->id);
         $user->surname = $request->surname;
         $user->usertype = 2;
-        $user->remember_token = str_random(10);
 
         if (!$this->savePhoto("https://graph.facebook.com/v3.1/{$request->id}/picture?width=200&height=200", $user)) {
-            return response()->json([
-                'message' => 'Unauthorized (bad picture)'
-            ], 401);
+            return response()->json(['message' => Lang::get('auth.bad_photo')], 401);
         }
 
         $user->save();
-        return response()->json([
-            'token' => $user->remember_token
-        ], $userAlreadyExists ? 200 : 201);
+        Auth::login($user);
+
+        return response()->json(['token' => $this->getToken($request)], $user_already_exists ? 200 : 201);
     }
 	
 	

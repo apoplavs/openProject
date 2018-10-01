@@ -16,13 +16,14 @@ class LoginGoogleTest extends TestCase
     private $googleLink = 'https://plus.google.com/111483939504700006800';
     private $googlePicture = 'https://lh3.googleusercontent.com/-LC0h1Ai3sXg/W6XiqkKewLI/AAAAAAAAAMQ/olvDX7mRLlwgDnzE9ARggY3dXaNu7Rh-ACJkCGAYYCw/w1024-h576-n-rw-no/my-photo.jpg';
 
+    private $headers = ['accept' => 'application/json'];
+
     public function testLoginWithoutParams()
     {
         $data = [];
-        $response = $this->post($this->url, $data);
+        $response = $this->post($this->url, $data, $this->headers);
 
-        //Коли параметри відсутні, валідатор повинен переадресувати користувача на сторінку помилки
-        $response->assertStatus(302);
+        $response->assertStatus(422);
     }
 
     public function testLoginExistingUser()
@@ -37,7 +38,7 @@ class LoginGoogleTest extends TestCase
             'link' => $this->googleLink,
             'picture' => $this->googlePicture,
         ];
-        $response = $this->post($this->url, $data);
+        $response = $this->post($this->url, $data, $this->headers);
 
         $response->assertStatus(200);
         $this->assertNotEmpty($response->decodeResponseJson()['token']);
@@ -60,7 +61,7 @@ class LoginGoogleTest extends TestCase
             'link' => $this->googleLink,
             'picture' => $this->googlePicture,
         ];
-        $response = $this->post($this->url, $data);
+        $response = $this->post($this->url, $data, $this->headers);
 
         $response->assertStatus(200);
         $response->assertSee('token');
@@ -88,7 +89,7 @@ class LoginGoogleTest extends TestCase
             'link' => $this->googleLink,
             'picture' => $this->googlePicture,
         ];
-        $response = $this->post($this->url, $data);
+        $response = $this->post($this->url, $data, $this->headers);
 
         $response->assertStatus(201);
         $this->assertNotEmpty($response->decodeResponseJson()['token']);
@@ -97,7 +98,6 @@ class LoginGoogleTest extends TestCase
         $this->assertTrue(!empty($userInserted));
         $this->assertContains($userInserted->id . '.jpg', $userInserted->photo);
         $this->assertEquals($userInserted->usertype, 2);
-        $this->assertNotEmpty($userInserted->remember_token);
     }
 
     public function setUp()
