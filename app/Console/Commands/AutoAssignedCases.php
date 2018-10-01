@@ -128,17 +128,16 @@ class AutoAssignedCases extends Command
         $countTotal = 0;
         $countAlreadyExists = 0;
 
-
         if (!empty($response) && !empty($response->iTotalDisplayRecords) && !empty($response->aaData)) {
             $alreadyExistedCases = $this->getAlreadyExistedCases($courtCode, $response->aaData);
-            $judgesInfo = $this->getJudgesInfo($courtCode);
+            $alreadyExistedJudges = $this->getAlreadyExistedJudges($courtCode);
 
             $casesToInsert = [];
 
             foreach ($response->aaData as $item) {
                 $countTotal++;
 
-                $itemObj = new AutoAssignedCaseHelper($courtCode, $item, $alreadyExistedCases, $judgesInfo);
+                $itemObj = new AutoAssignedCaseHelper($courtCode, $item, $alreadyExistedCases, $alreadyExistedJudges);
                 if (empty($itemObj->caseId)) {
                     $casesToInsert[] = [
                         'court'             => $itemObj->courtCode,
@@ -187,19 +186,13 @@ class AutoAssignedCases extends Command
         return $result;
     }
 
-    private function getJudgesInfo($courtCode)
+    private function getAlreadyExistedJudges($courtCode)
     {
-        $judgesData = DB::table('judges')
+        return DB::table('judges')
             ->select('id', 'name', 'surname', 'patronymic')
             ->where('court', '=', $courtCode)
             ->get()
             ->toArray();
-
-        $result = [];
-        foreach ($judgesData as $item) {
-            $result[$item->surname][mb_strtoupper(mb_substr($item->name, 0, 1))][mb_strtoupper(mb_substr($item->patronymic, 0, 1))] = $item->id;
-        }
-        return $result;
     }
 }
 
@@ -214,7 +207,7 @@ class AutoAssignedCaseHelper
 
     public $dateComposition;
 
-    public function __construct(int $courtCode, array $item, $alreadyExistedCases, &$judgesInfo)
+    public function __construct(int $courtCode, array $item, array $alreadyExistedCases, array &$alreadyExistedJudges)
     {
         $this->courtCode = $courtCode;
 
@@ -228,16 +221,44 @@ class AutoAssignedCaseHelper
         $judgeNameRaw = $item[2];
         $judgeNameParsed = Judge::parseJudgeName($judgeNameRaw);
 
-        $this->judgeId = $judgesInfo[$judgeNameParsed->surname][$judgeNameParsed->name][$judgeNameParsed->patronymic] ?? 0;
+        $this->judgeId = 0;
+
+        foreach ($alreadyExistedJudges as $key => $row) {
+            if ($row->surname == $judgeNameParsed->surname
+                && ($row->name == $judgeNameParsed->name || mb_substr($row->name, 0, 1) == $judgeNameParsed->name)
+                && ($row->patronymic == $judgeNameParsed->patronymic || mb_substr($row->patronymic, 0, 1) == $judgeNameParsed->patronymic))
+            {
+                $this->judgeId = $row->id;
+            }
+
+            if ($row->surname == $judgeNameParsed->surname
+                && mb_substr($judgeNameParsed->name, 0, 1) == $row->name && mb_strlen($judgeNameParsed->name) > 1
+                && mb_substr($judgeNameParsed->patronymic, 0, 1) == $row->patronymic && mb_strlen($judgeNameParsed->patronymic) > 1)
+            {
+                // Випадок, коли у базі лежать лише ініціали судді, а прийшло повне ім'я.
+                // Запам'ятовуємо judgeId, а також оновлюємо інфу в базі і в масивi $alreadyExistedJudges
+                $this->judgeId = $row->id;
+
+                DB::table('judges')
+                    ->where('id', $this->judgeId)
+                    ->update(['name' => $judgeNameParsed->name, 'patronymic' => $judgeNameParsed->patronymic]);
+
+                $alreadyExistedJudges[$key]->name = $judgeNameParsed->name;
+                $alreadyExistedJudges[$key]->patronymic = $judgeNameParsed->patronymic;
+            }
+        }
+
         if (empty($this->judgeId)) {
-            $this->judgeId = DB::table('judges')->insertGetId([
+            $insertedData = [
                 'court'         => $courtCode,
                 'surname'       => $judgeNameParsed->surname,
                 'name'          => $judgeNameParsed->name,
                 'patronymic'    => $judgeNameParsed->patronymic,
-            ]);
+            ];
 
-            $judgesInfo[$judgeNameParsed->surname][$judgeNameParsed->name][$judgeNameParsed->patronymic] = $this->judgeId;
+            $this->judgeId = DB::table('judges')->insertGetId($insertedData);
+            $insertedData['id'] = $this->judgeId;
+            $alreadyExistedJudges[] = (object)$insertedData;
         }
 
         $this->dateComposition = date('Y-m-d', strtotime($item[5]));

@@ -10,16 +10,13 @@ class JudgeNameParsed
 
     public function __construct($surname, $name, $patronymic)
     {
-        $this->surname = $surname;
+        $this->surname = $this->myMbUcFirst($surname);
+        $this->name = $this->myMbUcFirst($name);
+        $this->patronymic = $this->myMbUcFirst($patronymic);
+    }
 
-        if (mb_strlen($name) != 1) {
-            throw new Exception("Ініціал має складатися з однієї букви, проте маємо " . var_export($name, 1));
-        }
-        $this->name = mb_strtoupper($name);
-
-        if (mb_strlen($patronymic) != 1) {
-            throw new Exception("Ініціал має складатися з однієї букви, проте маємо " . var_export($patronymic, 1));
-        }
-        $this->patronymic = mb_strtoupper($patronymic);
+    private function myMbUcFirst(string $str):string
+    {
+        return mb_strtoupper(mb_substr($str, 0, 1)) . mb_substr($str, 1);
     }
 }

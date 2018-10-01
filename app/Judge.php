@@ -5,7 +5,7 @@ namespace Toecyd;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Exception;
+use Symfony\Component\Console\Exception;
 
 /**
  * Class Judge
@@ -223,7 +223,7 @@ class Judge extends Model
 
         if (preg_match("/^{$regExpSurname}{$regExpName}{$regExpName}/ui", $judgeNameRaw, $matches)) {
             // Варіант "Шевченко Анатолій Борисович"
-            return new JudgeNameParsed($matches[1], mb_substr($matches[2], 0, 1), mb_substr($matches[3], 0, 1));
+            return new JudgeNameParsed($matches[1], $matches[2], $matches[3]);
         } elseif (preg_match("/^{$regExpSurname}{$regExpInitial}{$regExpInitial}/ui", $judgeNameRaw, $matches)) {
              // Варіант "Шевченко А.Б."
              return new JudgeNameParsed($matches[1], $matches[2], $matches[3]);
