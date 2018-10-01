@@ -142,7 +142,7 @@
             </div>
             <div id="judges-list">
               <!--judges-judges-list-->
-              <judge-component :list="judgesList"></judge-component>
+              <judge-component :judgesList="judgesList.data"></judge-component>
             </div>
           </div>
           <div class="pagination mb-5">
@@ -227,7 +227,7 @@
           .then(response => {
             _this.judgesList = response.data;
             window.scrollTo(0, 0);
-            console.log('Response', _this.judgesList);
+            console.log('Response', response.data);
             console.log(response.data.total);
           })
           .catch(error => {
