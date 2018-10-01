@@ -19,9 +19,10 @@
         </div>
       </div>
     <div class="row">
-  <div class="col-12" v-for="(search, index) in autocomplete" :key="index">
-    {{search.name}} {{search.sername}} {{search.patronymic}}
-  </div>
+      <div class="offset-lg-3 col-lg-9" v-for="(search, index) in autocomplete" :key="index">
+        {{search.surname}} {{search.name}} {{search.patronymic}}
+        <hr>
+      </div>
     </div>
     </div>
   
@@ -205,7 +206,7 @@
       // this.getJudgesList();
     },
     methods: {
-      liveSearch:  _.debounce(function(event) {
+      liveSearch()  {
         let _this = this;
         console.log(this.params.search);       
         axios
@@ -224,7 +225,7 @@
             console.log(error);
           });
 
-       }, 1000),
+       },
       sortJudges: _.debounce(function(event) {
         console.log(this.params.sort);
         this.getJudgesList();
