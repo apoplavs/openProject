@@ -17,4 +17,6 @@ yarn-error.log
 /venv/*
 /ml/nltk_packages
 /ml/pickles
+/ml/config.json
+/ml/config.py
 /ml/.idea

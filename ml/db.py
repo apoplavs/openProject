@@ -1,7 +1,7 @@
 import pymysql.cursors
 import json
 
-config = json.loads(open('/Users/oleksandrbaranov/unitprojects/openproject/ml/config.json', 'r').read())
+config = json.loads(open(f'{ROOT_PATH}/config.json', 'r').read())
 
 edrsr_connection = pymysql.connect(host=config['db_edrsr']['host'],
                                    user=config['db_edrsr']['user'],

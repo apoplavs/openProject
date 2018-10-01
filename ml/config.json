@@ -1,21 +1,21 @@
 {
 	"db_edrsr":{
-			"type":"mysql",	
-			"host":"develop-toecyd.ckbu3cst0zhm.eu-central-1.rds.amazonaws.com",
-			"dbname":"ml_toecyd",
+			"type":"mysql",
+			"host":"127.0.0.1",
+			"dbname":"edrsr",
 			"charset":"utf8",
-			"user":"develop",
-			"pass":"openproject",
+			"user":"root",
+			"pass":"1",
 			"port":"3306"
 	},
 
 	"db_toecyd":{
-			"type":"mysql",	
-			"host":"develop-toecyd.ckbu3cst0zhm.eu-central-1.rds.amazonaws.com",
-			"dbname":"develop_toecyd",
+			"type":"mysql",
+			"host":"127.0.0.1",
+			"dbname":"test_toecyd",
 			"charset":"utf8",
-			"user":"develop",
-			"pass":"openproject",
+			"user":"root",
+			"pass":"1",
 			"port":"3306"
 	},
 

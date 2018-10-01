@@ -1,6 +1,6 @@
-ROOT_PATH = '/Users/oleksandrbaranov/unitprojects/openproject/ml'
+ROOT_PATH = '~/apache/toecyd.local/ml'
 
 PICKLES_PATH = f'{ROOT_PATH}/pickles'
 
 EDRSR = 'edrsr'
-TOECYD = 'toecyd'
+TOECYD = 'test_toecyd'
