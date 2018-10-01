@@ -1,9 +1,9 @@
 <template>
     <div>
         <div class="card-body px-4 py-2">
-            <div v-if="!this.list">За заданими параметрами нічого не знайдено</div>
-            <div v-if="this.list" class="container">
-                <div class="judge-component row py-3 " v-for="(judge, index) of this.list.data" :key="index">   
+            <div v-if="!this.judgesList">За заданими параметрами нічого не знайдено</div>
+            <div v-if="this.judgesList" class="container">
+                <div class="judge-component row py-3 " v-for="(judge, index) of this.judgesList" :key="index">   
                     <div class="col-9 d-flex pl-0">
                         <div class="mr-3"><img class="avatar" :src="judge.photo" alt="фото" /></div>
                         <div>
@@ -44,7 +44,7 @@
                 }
             }
         },
-        props: ['list'],
+        props: ['judgesList'],
         methods: {
             changeBookmarkStatus(judge) {
                 // console.log(judge)
@@ -52,7 +52,7 @@
                     console.log('bootmark = 0')
                     console.log(judge.id)
                     axios({
-                            methods: 'put',
+                            method: 'put',
                             url: `/api/v1/judges/${judge.id}/bookmark`,
                             headers: {
                                 "Content-Type": "application/json",
@@ -61,6 +61,11 @@
                             }
                         })
                         .then(response => {
+                            // judgesList.forEach(element => {
+                            //     if (element.id === judge.id) {
+                            //         element.is_bookmark = 1;
+                            //     }                              
+                            // });
                             judge.is_bookmark = 1;
                             console.log('Response Bookmark',response);
                         })
@@ -69,7 +74,7 @@
                         });
                 } else {
                     axios({
-                            methods: 'delete',
+                            method: 'delete',
                             url: `/api/v1/judges/${judge.id}/bookmark`,
                             headers: {
                                 "Content-Type": "application/json",
