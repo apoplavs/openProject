@@ -36,7 +36,7 @@ class LoginFacebookTest extends TestCase
         $response = $this->post($this->url, $data, $this->headers);
 
         $response->assertStatus(200);
-        $response->assertSee('token');
+        $this->assertNotEmpty($response->decodeResponseJson()['access_token']);
 
         $userUpdated = User::where('email', $user->email)->first();
 
@@ -57,7 +57,7 @@ class LoginFacebookTest extends TestCase
         $response = $this->post($this->url, $data, $this->headers);
 
         $response->assertStatus(200);
-        $response->assertSee('token');
+        $this->assertNotEmpty($response->decodeResponseJson()['access_token']);
 
         $userUpdated = User::where('email', $user->email)->first();
 
@@ -83,7 +83,7 @@ class LoginFacebookTest extends TestCase
         $response = $this->post($this->url, $data, $this->headers);
 
         $response->assertStatus(201);
-        $response->assertSee('token');
+        $this->assertNotEmpty($response->decodeResponseJson()['access_token']);
 
         $userInserted = User::where('email', $user->email)->first();
         $this->assertTrue(!empty($userInserted));
