@@ -12,6 +12,7 @@ use Toecyd\UserBookmarkJudge;
 use Toecyd\UserHistory;
 use Toecyd\UsersLikesJudge;
 use Toecyd\UsersUnlikesJudge;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class JudgesController
@@ -285,8 +286,8 @@ class JudgesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
-    {
+    public function index(Request $request) {
+    	DB::enableQueryLog();
     	// валідація фільтрів
 		$request->validate([
 			'regions' => 'array',
@@ -304,8 +305,9 @@ class JudgesController extends Controller
     	// отримання результатів
     	$judges_list = Judge::getJudgesList($filters['regions'], $filters['instances'], $filters['jurisdictions'],
 			$filters['sort_order'], $filters['search'], $filters['powers_expired']);
+    	// dd(DB::getQueryLog());
 		
-		return response()->json($judges_list);
+		return response()->json(DB::getQueryLog());
     }
 	
 	

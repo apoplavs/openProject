@@ -40,19 +40,21 @@ class Court extends Model
 	 * @return mixed
 	 */
 	public static function getCourtsList($regions, $instances, $jurisdictions, $sort_order, $search) {
-		
 		// отримання id користувача
 		$user_id = Auth::check() ? Auth::user()->id : 0;
 		return (static::select('courts.court_code', 'courts.name AS court_name',
 			DB::raw('instances.name AS instance'), DB::raw('regions.name AS region'),
 			DB::raw('jurisdictions.title AS jurisdiction'), 'courts.address',
-			DB::raw('CONCAT(judges.surname, " ", judges.name, " ", judges.patronymic) AS head_judge'),
-			'courts.rating', DB::raw('(CASE WHEN user_bookmark_courts.user = '.$user_id.' THEN 1 ELSE 0 END) AS is_bookmark'))
+			DB::raw('CONCAT(judges.surname, " ", judges.name, " ", judges.patronymic) AS head_judge'), 'courts.rating',
+			DB::raw('(CASE WHEN user_bookmark_courts.user = '.$user_id.' THEN 1 ELSE 0 END) AS is_bookmark'))
 			->leftJoin('instances', 'courts.instance_code', '=', 'instances.instance_code')
 			->leftJoin('regions', 'courts.region_code', '=', 'regions.region_code')
 			->leftJoin('jurisdictions', 'courts.jurisdiction', '=', 'jurisdictions.id')
 			->leftJoin('judges', 'courts.head_judge', '=', 'judges.id')
-			->leftJoin('user_bookmark_courts', 'courts.court_code', '=', 'user_bookmark_courts.court')
+			->leftJoin('user_bookmark_courts', function ($join)use($user_id) {
+				$join->on('courts.court_code', '=', 'user_bookmark_courts.court');
+				$join->on('user_bookmark_courts.user', '=',  DB::raw($user_id));
+			})
 			// фільтрція за регіоном
 			->when(!empty($regions), function ($query) use ($regions) {
 				return $query->whereIn('courts.region_code', $regions);
@@ -97,12 +99,10 @@ class Court extends Model
 	 * @return mixed
 	 */
 	public static function getCourtsListGuest($regions, $instances, $jurisdictions, $sort_order, $search) {
-
 		return (static::select('courts.court_code', 'courts.name AS court_name',
 			DB::raw('instances.name AS instance'), DB::raw('regions.name AS region'),
 			DB::raw('jurisdictions.title AS jurisdiction'), 'courts.address',
-			DB::raw('CONCAT(judges.surname, " ", judges.name, " ", judges.patronymic) AS head_judge'),
-			'courts.rating')
+			DB::raw('CONCAT(judges.surname, " ", judges.name, " ", judges.patronymic) AS head_judge'), 'courts.rating')
 			->leftJoin('instances', 'courts.instance_code', '=', 'instances.instance_code')
 			->leftJoin('regions', 'courts.region_code', '=', 'regions.region_code')
 			->leftJoin('jurisdictions', 'courts.jurisdiction', '=', 'jurisdictions.id')

@@ -17,7 +17,8 @@ class Judge extends Model
 	public $timestamps = false;
 	 // The attributes that are mass assignable.
 	protected $fillable = [
-		'surname', 'name', 'patronymic', 'photo', 'facebook', 'chesnosud', 'status', 'phone', 'rating', 'likes', 'unlikes'
+		'surname', 'name', 'patronymic', 'photo', 'facebook', 'chesnosud',
+		'status', 'phone', 'rating', 'likes', 'unlikes'
 	];
 	
 	/**
@@ -37,10 +38,13 @@ class Judge extends Model
 		return (static::select('judges.id', 'courts.name AS court_name', 'judges.surname', 'judges.name',
 			'judges.patronymic', 'judges.photo', 'judges.status',
 			DB::raw('DATE_FORMAT(judges.updated_status, "%d.%m.%Y") AS updated_status'),
-			DB::raw('DATE_FORMAT(judges.due_date_status, "%d.%m.%Y") AS due_date_status'),
-			'judges.rating', DB::raw('(CASE WHEN user_bookmark_judges.user = '.$user_id.' THEN 1 ELSE 0 END) AS is_bookmark'))
+			DB::raw('DATE_FORMAT(judges.due_date_status, "%d.%m.%Y") AS due_date_status'), 'judges.rating',
+			DB::raw('(CASE WHEN user_bookmark_judges.user = '.$user_id.' THEN 1 ELSE 0 END) AS is_bookmark'))
 			->join('courts', 'judges.court', '=', 'courts.court_code')
-			->leftJoin('user_bookmark_judges', 'judges.id', '=', 'user_bookmark_judges.judge')
+			->leftJoin('user_bookmark_judges', function ($join)use($user_id) {
+					$join->on('judges.id', '=', 'user_bookmark_judges.judge');
+					$join->on('user_bookmark_judges.user', '=',  DB::raw($user_id));
+				})
 			// фільтрція за регіоном
 			->when(!empty($regions), function ($query) use ($regions) {
 				return $query->whereIn('courts.region_code', $regions);
@@ -88,7 +92,8 @@ class Judge extends Model
 	 * @param $powers_expired  boolean
 	 * @return mixed
 	 */
-	public static function getJudgesListGuest($regions, $instances, $jurisdictions, $sort_order, $search, $powers_expired) {
+	public static function getJudgesListGuest($regions, $instances, $jurisdictions,
+		$sort_order, $search, $powers_expired) {
 		
 		// отримання id користувача
 		return (static::select('judges.id', 'courts.name AS court_name', 'judges.surname', 'judges.name',
@@ -179,8 +184,8 @@ class Judge extends Model
 			DB::raw('(SELECT COUNT(*) FROM users_likes_judges WHERE users_likes_judges.judge=judges.id) AS likes'),
 			DB::raw('(SELECT COUNT(*) FROM users_unlikes_judges WHERE users_unlikes_judges.judge=judges.id) AS unlikes'),
 			DB::raw('DATE_FORMAT(judges.updated_status, "%d.%m.%Y") AS updated_status'),
-			DB::raw('DATE_FORMAT(judges.due_date_status, "%d.%m.%Y") AS due_date_status'),
-			'judges.rating', DB::raw('(CASE WHEN user_bookmark_judges.user = '.$user_id.' THEN 1 ELSE 0 END) AS is_bookmark'))
+			DB::raw('DATE_FORMAT(judges.due_date_status, "%d.%m.%Y") AS due_date_status'), 'judges.rating',
+			DB::raw('(CASE WHEN user_bookmark_judges.user = '.$user_id.' THEN 1 ELSE 0 END) AS is_bookmark'))
 			->join('courts', 'judges.court', '=', 'courts.court_code')
 			->leftJoin('user_bookmark_judges', 'judges.id', '=', 'user_bookmark_judges.judge')
 			->where('judges.id', '=', $judge_id)

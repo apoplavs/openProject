@@ -257,8 +257,7 @@ class CourtsController extends Controller
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
-	public function index(Request $request)
-	{
+	public function index(Request $request)	{
 		// валідація фільтрів
 		$request->validate([
 			'regions' => 'array',
@@ -274,8 +273,8 @@ class CourtsController extends Controller
 		// приведення фільтрів до коректного вигляду
 		$filters = $this->getFilters();
 		// отримання результатів
-		$courts_list = Court::getCourtsList($filters['regions'], $filters['instances'], $filters['jurisdictions'],
-			$filters['sort_order'], $filters['search']);
+		$courts_list = Court::getCourtsList($filters['regions'], $filters['instances'],
+			$filters['jurisdictions'], $filters['sort_order'], $filters['search']);
 		
 		return response()->json($courts_list);
 	}
@@ -510,8 +509,7 @@ class CourtsController extends Controller
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
-	public function indexGuest(Request $request)
-	{
+	public function indexGuest(Request $request) {
 		// валідація фільтрів
 		$request->validate([
 			'regions' => 'array',
@@ -527,8 +525,8 @@ class CourtsController extends Controller
 		// приведення фільтрів до коректного вигляду
 		$filters = $this->getFilters();
 		// отримання результатів
-		$courts_list = Court::getCourtsListGuest($filters['regions'], $filters['instances'], $filters['jurisdictions'],
-			$filters['sort_order'], $filters['search']);
+		$courts_list = Court::getCourtsListGuest($filters['regions'], $filters['instances'],
+			$filters['jurisdictions'],	$filters['sort_order'], $filters['search']);
 		
 		return response()->json($courts_list);
 	}
