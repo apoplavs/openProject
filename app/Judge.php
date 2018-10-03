@@ -5,7 +5,6 @@ namespace Toecyd;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Symfony\Component\Console\Exception;
 
 /**
  * Class Judge
@@ -205,42 +204,4 @@ class Judge extends Model
 
 		return !empty($judge);
 	}
-	
-	
-	/**
-	 * Парсить ПІБ судді
-	 * @param string $judgeNameRaw
-	 * @return JudgeNameParsed
-	 * @throws Exception
-	 */
-	public static function parseJudgeName(string $judgeNameRaw)
-    {
-        $matches = [];
-        if (preg_match("/головуючий суддя:\s*([^,;]+)/iu", $judgeNameRaw, $matches))
-        {
-            $judgeNameRaw = $matches[1];
-        }
-
-        // хак для обробки кейсу "Косач (Драгоманова) Лариса Петрівна"
-        $judgeNameRaw = str_replace(' (', '(', $judgeNameRaw);
-
-        $matches = [];
-
-        $charGood = "[^\s\.]";
-        $charBad = str_replace('^', '', $charGood);
-
-        $regExpName = "{$charBad}*({$charGood}+){$charBad}*";
-        $regExpSurname = $regExpName . $charBad . '+';
-        $regExpInitial = "({$charGood}{1}){$charBad}*";
-
-        if (preg_match("/^{$regExpSurname}{$regExpName}{$regExpName}/ui", $judgeNameRaw, $matches)) {
-            // Варіант "Шевченко Анатолій Борисович"
-            return new JudgeNameParsed($matches[1], $matches[2], $matches[3]);
-        } elseif (preg_match("/^{$regExpSurname}{$regExpInitial}{$regExpInitial}/ui", $judgeNameRaw, $matches)) {
-             // Варіант "Шевченко А.Б."
-             return new JudgeNameParsed($matches[1], $matches[2], $matches[3]);
-         } else {
-            throw new Exception("Не вдалось розпарсити ім'я судді: '{$judgeNameRaw}'");
-        }
-    }
 }

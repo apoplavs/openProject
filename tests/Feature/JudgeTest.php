@@ -2,18 +2,23 @@
 
 namespace Tests\Feature;
 
-use Toecyd\Judge;
 use Toecyd\JudgeNameParsed;
 use Tests\TestCase;
 
 class JudgeTest extends TestCase
 {
+    public function testParseIncorrectJudgeName()
+    {
+        $this->expectException(\Exception::class);
+        JudgeNameParsed::parseJudgeName('');
+    }
+
     /**
      * @dataProvider judgeNamesProvider
      */
     public function testParseJudgeName(string $nameRaw, JudgeNameParsed $nameParsedEtalon)
     {
-        $nameParsedTest = Judge::parseJudgeName($nameRaw);
+        $nameParsedTest = JudgeNameParsed::parseJudgeName($nameRaw);
         $this->assertEquals($nameParsedEtalon, $nameParsedTest);
     }
 
