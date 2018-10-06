@@ -4,6 +4,7 @@ namespace Toecyd\Http\Middleware;
 
 use Closure;
 use Exception;
+use Toecyd\Court;
 use Toecyd\Judge;
 
 /**
@@ -62,6 +63,12 @@ class CheckById
 	 * @return mixed
 	 */
 	private function checkCourtById($request, Closure $next) {
+		
+		if (!Court::checkCourtById($this->id)) {
+			return response()->json([
+				'message' => 'Неіснуючий код суду!'
+			], 422);
+		}
 		
 		return $next($request);
 	}

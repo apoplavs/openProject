@@ -2,35 +2,47 @@
 
 namespace Tests\Feature;
 
-use Toecyd\Judge;
 use Toecyd\JudgeNameParsed;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class JudgeTest extends TestCase
 {
+    public function testParseIncorrectJudgeName()
+    {
+        $this->expectException(\Exception::class);
+        JudgeNameParsed::parseJudgeName('');
+    }
+
     /**
      * @dataProvider judgeNamesProvider
      */
     public function testParseJudgeName(string $nameRaw, JudgeNameParsed $nameParsedEtalon)
     {
-        $nameParsedTest = Judge::parseJudgeName($nameRaw);
+        $nameParsedTest = JudgeNameParsed::parseJudgeName($nameRaw);
         $this->assertEquals($nameParsedEtalon, $nameParsedTest);
     }
 
     public function judgeNamesProvider()
     {
-        $ukrainkaJudgeName = new JudgeNameParsed('Українка', 'Л', 'П');
+        $ukrainkaJudgeName = new JudgeNameParsed('Українка', 'Лариса', 'Петрівна');
+        $ukrainkaJudgeInitials = new JudgeNameParsed('Українка', 'Л', 'П');
 
         return [
             ['Українка Лариса Петрівна', $ukrainkaJudgeName],
             ['Українка  Лариса Петрівна', $ukrainkaJudgeName],
-            ['Українка Л. П.', $ukrainkaJudgeName],
-            ['Українка Л.П.', $ukrainkaJudgeName],
-            [' Українка Л.П.', $ukrainkaJudgeName],
-            ['Українка Л П', $ukrainkaJudgeName],
-            ['Косач-Драгоманова Лариса Петрівна', new JudgeNameParsed('Косач-Драгоманова', 'Л', 'П')],
+            ['Українка Л. П.', $ukrainkaJudgeInitials],
+            ['Українка Л.П.', $ukrainkaJudgeInitials],
+            [' Українка Л.П.', $ukrainkaJudgeInitials],
+            ['Українка Л П', $ukrainkaJudgeInitials],
+            ['Косач-Драгоманова Лариса Петрівна', new JudgeNameParsed('Косач-Драгоманова', 'Лариса', 'Петрівна')],
+            ['Іваненко Дар\'я Петрівна', new JudgeNameParsed('Іваненко', 'Дар\'я', 'Петрівна')],
+            ['Іваненко Дар"я Петрівна', new JudgeNameParsed('Іваненко', 'Дар"я', 'Петрівна')],
+            ['Іваненко Анна-Віола Петрівна', new JudgeNameParsed('Іваненко', 'Анна-Віола', 'Петрівна')],
+            ['Косач (Драгоманова) Лариса Петрівна', new JudgeNameParsed('Косач(Драгоманова)', 'Лариса', 'Петрівна')],
+            ['Косач(Драгоманова) Лариса Петрівна', new JudgeNameParsed('Косач(Драгоманова)', 'Лариса', 'Петрівна')],
+            ['Кропив"янська Лариса Петрівна', new JudgeNameParsed('Кропив"янська', 'Лариса', 'Петрівна')],
+            ['Кропив\'янська Лариса Петрівна', new JudgeNameParsed('Кропив\'янська', 'Лариса', 'Петрівна')],
+            ['Українка Л.П. Лариса Петрівна', $ukrainkaJudgeInitials],
             ['головуючий суддя: Українка Лариса Петрівна', $ukrainkaJudgeName],
             ['головуючий суддя: Українка Лариса Петрівна, суддя-учасник колегії: Драгоманов Михайло Петрович', $ukrainkaJudgeName],
             ['головуючий суддя: Українка Лариса Петрівна; суддя-учасник колегії: Драгоманов Михайло Петрович', $ukrainkaJudgeName],

@@ -5,7 +5,6 @@ namespace Toecyd;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Exception;
 
 /**
  * Class Judge
@@ -17,7 +16,8 @@ class Judge extends Model
 	public $timestamps = false;
 	 // The attributes that are mass assignable.
 	protected $fillable = [
-		'surname', 'name', 'patronymic', 'photo', 'facebook', 'chesnosud', 'status', 'phone', 'rating', 'likes', 'unlikes'
+		'surname', 'name', 'patronymic', 'photo', 'facebook', 'chesnosud',
+		'status', 'phone', 'rating', 'likes', 'unlikes'
 	];
 	
 	/**
@@ -37,10 +37,13 @@ class Judge extends Model
 		return (static::select('judges.id', 'courts.name AS court_name', 'judges.surname', 'judges.name',
 			'judges.patronymic', 'judges.photo', 'judges.status',
 			DB::raw('DATE_FORMAT(judges.updated_status, "%d.%m.%Y") AS updated_status'),
-			DB::raw('DATE_FORMAT(judges.due_date_status, "%d.%m.%Y") AS due_date_status'),
-			'judges.rating', DB::raw('(CASE WHEN user_bookmark_judges.user = '.$user_id.' THEN 1 ELSE 0 END) AS is_bookmark'))
+			DB::raw('DATE_FORMAT(judges.due_date_status, "%d.%m.%Y") AS due_date_status'), 'judges.rating',
+			DB::raw('(CASE WHEN user_bookmark_judges.user = '.$user_id.' THEN 1 ELSE 0 END) AS is_bookmark'))
 			->join('courts', 'judges.court', '=', 'courts.court_code')
-			->leftJoin('user_bookmark_judges', 'judges.id', '=', 'user_bookmark_judges.judge')
+			->leftJoin('user_bookmark_judges', function ($join)use($user_id) {
+					$join->on('judges.id', '=', 'user_bookmark_judges.judge');
+					$join->on('user_bookmark_judges.user', '=',  DB::raw($user_id));
+				})
 			// фільтрція за регіоном
 			->when(!empty($regions), function ($query) use ($regions) {
 				return $query->whereIn('courts.region_code', $regions);
@@ -88,7 +91,8 @@ class Judge extends Model
 	 * @param $powers_expired  boolean
 	 * @return mixed
 	 */
-	public static function getJudgesListGuest($regions, $instances, $jurisdictions, $sort_order, $search, $powers_expired) {
+	public static function getJudgesListGuest($regions, $instances, $jurisdictions,
+		$sort_order, $search, $powers_expired) {
 		
 		// отримання id користувача
 		return (static::select('judges.id', 'courts.name AS court_name', 'judges.surname', 'judges.name',
@@ -179,8 +183,8 @@ class Judge extends Model
 			DB::raw('(SELECT COUNT(*) FROM users_likes_judges WHERE users_likes_judges.judge=judges.id) AS likes'),
 			DB::raw('(SELECT COUNT(*) FROM users_unlikes_judges WHERE users_unlikes_judges.judge=judges.id) AS unlikes'),
 			DB::raw('DATE_FORMAT(judges.updated_status, "%d.%m.%Y") AS updated_status'),
-			DB::raw('DATE_FORMAT(judges.due_date_status, "%d.%m.%Y") AS due_date_status'),
-			'judges.rating', DB::raw('(CASE WHEN user_bookmark_judges.user = '.$user_id.' THEN 1 ELSE 0 END) AS is_bookmark'))
+			DB::raw('DATE_FORMAT(judges.due_date_status, "%d.%m.%Y") AS due_date_status'), 'judges.rating',
+			DB::raw('(CASE WHEN user_bookmark_judges.user = '.$user_id.' THEN 1 ELSE 0 END) AS is_bookmark'))
 			->join('courts', 'judges.court', '=', 'courts.court_code')
 			->leftJoin('user_bookmark_judges', 'judges.id', '=', 'user_bookmark_judges.judge')
 			->where('judges.id', '=', $judge_id)
@@ -200,71 +204,4 @@ class Judge extends Model
 
 		return !empty($judge);
 	}
-
-    public static function parseJudgeName(string $judgeNameRaw)
-    {
-        $matches = [];
-        if (preg_match("/головуючий суддя:\s{0,}([^,;]+)/iu", $judgeNameRaw, $matches))
-        {
-            $judgeNameRaw = $matches[1];
-        }
-
-        $matches = [];
-        $regExpName = "(\w*)\s*";
-        $regExpSurname = "\s*(\w*\-*\w*)\s*";
-        $regExpInitial = "(\w{1})\.*\s*";
-        if (preg_match("/^{$regExpSurname}{$regExpInitial}{$regExpInitial}$/Uui", $judgeNameRaw, $matches)) {
-            // Варіант "Шевченко А.Б."
-            return new JudgeNameParsed($matches[1], $matches[2], $matches[3]);
-        } elseif (preg_match("/^{$regExpSurname}{$regExpName}{$regExpName}$/Uui", $judgeNameRaw, $matches)) {
-            // Варіант "Шевченко Анатолій Борисович"
-            return new JudgeNameParsed($matches[1], mb_substr($matches[2], 0, 1), mb_substr($matches[3], 0, 1));
-        } else {
-            throw new Exception("Не вдалось розпарсити ім'я судді: '{$judgeNameRaw}'");
-        }
-    }
-
-    public static function getJudgeIdByParsedName(int $courtCode, JudgeNameParsed $judgeNameParsed)
-    {
-        $judgeId = DB::table('judges')
-            ->select('id')
-            ->where('court', '=', $courtCode)
-            ->where('surname', 'LIKE', $judgeNameParsed->surname)
-            ->where('name', 'LIKE', $judgeNameParsed->name . '%')
-            ->where('patronymic', 'LIKE', $judgeNameParsed->patronymic . '%')
-            ->value('id');
-
-        if (empty($judgeId)) {
-            $judgeId = DB::table('judges')->insertGetId([
-                'court'         => $courtCode,
-                'surname'       => $judgeNameParsed->surname,
-                'name'          => $judgeNameParsed->name,
-                'patronymic'    => $judgeNameParsed->patronymic,
-            ]);
-        }
-
-        return $judgeId;
-    }
-}
-
-class JudgeNameParsed
-{
-    public $surname;
-    public $name;
-    public $patronymic;
-
-    public function __construct($surname, $name, $patronymic)
-    {
-        $this->surname = $surname;
-
-        if (mb_strlen($name) != 1) {
-            throw new Exception("Ініціал має складатися з однієї букви, проте маємо " . var_export($name, 1));
-        }
-        $this->name = $name;
-
-        if (mb_strlen($patronymic) != 1) {
-            throw new Exception("Ініціал має складатися з однієї букви, проте маємо " . var_export($patronymic, 1));
-        }
-        $this->patronymic = $patronymic;
-    }
 }

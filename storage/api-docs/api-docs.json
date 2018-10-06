@@ -196,6 +196,179 @@
                 }
             }
         },
+        "/login/google": {
+            "post": {
+                "tags": [
+                    "\u0410\u0432\u0442\u0435\u043d\u0442\u0438\u0444\u0456\u043a\u0430\u0446\u0456\u044f \u043a\u043e\u0440\u0438\u0441\u0442\u0443\u0432\u0430\u0447\u0430"
+                ],
+                "summary": "Login Google",
+                "description": "\u041b\u043e\u0433\u0456\u043d \u0447\u0435\u0440\u0435\u0437 \u0430\u043a\u0430\u0443\u043d\u0442 \u0432 Google",
+                "operationId": "login_google",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/Content-Type"
+                    },
+                    {
+                        "$ref": "#/parameters/X-Requested-With"
+                    },
+                    {
+                        "name": "\u0414\u0430\u043d\u0456 \u043a\u043e\u0440\u0438\u0441\u0442\u0443\u0432\u0430\u0447\u0430",
+                        "in": "body",
+                        "description": "\u0429\u043e\u0431 \u0437\u0434\u0456\u0439\u0441\u043d\u0438\u0442\u0438 \u043b\u043e\u0433\u0456\u043d \u043a\u043e\u0440\u0438\u0441\u0442\u0443\u0432\u0430\u0447\u0430 \u0447\u0435\u0440\u0435\u0437 Google, \u043f\u043e\u0442\u0440\u0456\u0431\u043d\u043e \u043d\u0430\u0434\u0456\u0441\u043b\u0430\u0442\u0438 \u0439\u043e\u0433\u043e google_id, email, \u0456\u043c'\u044f (\u043c\u043e\u0436\u043b\u0438\u0432\u043e, \u0449\u0435 \u0439 \u043f\u0440\u0456\u0437\u0432\u0438\u0449\u0435), \u043f\u043e\u0441\u0438\u043b\u0430\u043d\u043d\u044f \u043d\u0430 Google-\u0430\u043a\u043a\u0430\u0443\u043d\u0442 \u0442\u0430 \u043f\u043e\u0441\u0438\u043b\u0430\u043d\u043d\u044f \u043d\u0430 Google-\u0430\u0432\u0430\u0442\u0430\u0440\u043a\u0443.",
+                        "schema": {
+                            "required": [
+                                "id",
+                                "email",
+                                "name",
+                                "link",
+                                "picture"
+                            ],
+                            "properties": {
+                                "id": {
+                                    "description": "google_id \u041a\u043e\u0440\u0438\u0441\u0442\u0443\u0432\u0430\u0447\u0430 (\u043f\u043e\u0432\u0438\u043d\u043d\u043e \u0441\u043a\u043b\u0430\u0434\u0430\u0442\u0438\u0441\u044f \u0432\u0456\u0434 12 \u0434\u043e 255 \u0446\u0438\u0444\u0440)",
+                                    "type": "string",
+                                    "example": "111483939504700006800"
+                                },
+                                "name": {
+                                    "description": "\u0406\u043c'\u044f \u041a\u043e\u0440\u0438\u0441\u0442\u0443\u0432\u0430\u0447\u0430 (\u043f\u043e\u0432\u0438\u043d\u043d\u043e \u0441\u043a\u043b\u0430\u0434\u0430\u0442\u0438\u0441\u044f \u0432\u0456\u0434 3 \u0434\u043e 255 \u0441\u0438\u043c\u0432\u043e\u043b\u0456\u0432)",
+                                    "type": "string",
+                                    "example": "NameOfUser"
+                                },
+                                "email": {
+                                    "description": "Email \u041a\u043e\u0440\u0438\u0441\u0442\u0443\u0432\u0430\u0447\u0430 (\u0456\u0441\u043d\u0443\u044e\u0447\u0438\u0439, \u0432\u0430\u043b\u0456\u0434\u043d\u0438\u0439, \u0443\u043d\u0456\u043a\u0430\u043b\u044c\u043d\u0438\u0439 \u0432 \u0441\u0438\u0441\u0442\u0435\u043c\u0456)",
+                                    "type": "string",
+                                    "example": "example@gmail.com"
+                                },
+                                "link": {
+                                    "description": "\u041f\u043e\u0441\u0438\u043b\u0430\u043d\u043d\u044f \u043d\u0430 Google \u0430\u043a\u043a\u0430\u0443\u043d\u0442 \u043a\u043e\u0440\u0438\u0441\u0442\u0443\u0432\u0430\u0447\u0430 (\u0432\u0430\u043b\u0456\u0434\u043d\u0438\u0439 URL)",
+                                    "type": "string",
+                                    "example": "https://plus.google.com/111483939504700006800"
+                                },
+                                "picture": {
+                                    "description": "\u041f\u043e\u0441\u0438\u043b\u0430\u043d\u043d\u044f \u043d\u0430 google-\u0430\u0432\u0430\u0442\u0430\u0440\u043a\u0443 \u043a\u043e\u0440\u0438\u0441\u0442\u0443\u0432\u0430\u0447\u0430",
+                                    "type": "string",
+                                    "example": "https://lh3.googleusercontent.com/-LC0h1Ai3sXg/W6XiqkKewLI/AAAAAAAAAMQ/olvDX7mRLlwgDnzE9ARggY3dXaNu7Rh-ACJkCGAYYCw/w1024-h576-n-rw-no/my-photo.jpg"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "\u041a\u043e\u0440\u0438\u0441\u0442\u0443\u0432\u0430\u0447 \u0443\u0441\u043f\u0456\u0448\u043d\u043e \u0437\u0430\u0440\u0435\u0454\u0441\u0442\u0440\u043e\u0432\u0430\u043d\u0438\u0439",
+                        "examples": {
+                            "application/json": {
+                                "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6Ijc4ZjZjYmU4M2Y0YTJiOTM0MTA0ZjVmMjhiMzJiYzZiYTMyZjJmNDJkNWFmMmZjYmY3NDRkODJjYzMyZWE0NThkZTgzNDQ5NjExNjIyZDExIn0.eyJhdWQiOiIzIiwianRpIjoiNzhmNmNiZTgzZjRhMmI5MzQxMDRmNWYyOGIzMmJjNmJhMzJmMmY0MmQ1YWYyZmNiZjc0NGQ4MmNjMzJlYTQ1OGRlODM0NDk2MTE2MjJkMTEiLCJpYXQiOjE1Mzg0MTg1MzEsIm5iZiI6MTUzODQxODUzMSwiZXhwIjoxNTY5OTU0NTMxLCJzdWIiOiIxNTgiLCJzY29wZXMiOltdfQ.ivQ04ahWZlVc6OdsHCF-mYnuieYPqGscIQQ_FrddgIo9PSl6I_lN04CDvr-yc5u39ASIm6BA-rTueJD-OVgp1S7qTZFwUR_0QU2hGklQZmYaXzTAYjG8YwW1LecZpe1Gdrcnoqr-m-qN1IeTY8GlOOluvjH6qzH9Tb5Abo-Ql4Uz2vjtCDAqpcl-Q8wFLeWKwGYJ_-euciHKAJvNGYF4ks9Bln4o1UCwwLFbE9godp1G4LHvyp9OgbAsaofz-L7Cg0SbByUxVZ0tDgpnuoZxpfeyQ2-dpaO3byCOfMkK1E714V8KL-2k3O091Ra9_ifCSpTAsmnaAIkKp1NMhL1AUP2rR_DUevSg7Di7oBC0sqB45FDxQNJBZ6eyde358hQhtThcYkN7E8b1wi64L-R6bZ18SzzvXkVgsf3iOqiEj461DzDYweptjhRWMPq-eki0IqfL-HbfD7VuAPChFazCsqRqTgrg4Fdc084NJx8Eu_78lz0F6WNGo8xOa-HzeqCBKm99LfJKSNZvoBUKe6fnFXu5eRHhfma1Ya4-x1wwZSFKqpelmgK_3WNAh-N0YNeY-3h9h5mTXra-C9xfI9mWz0sjwfLMwd6VHoIJUGtPFmytMmLxb8onPO7j3ptLKL_mqf0kVehfM-_v4QArsqenstO4FJKFJSlvAEf35jqmkEo"
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "\u041a\u043e\u0440\u0438\u0441\u0442\u0443\u0432\u0430\u0447 \u0443\u0441\u043f\u0456\u0448\u043d\u043e \u0437\u0430\u043b\u043e\u0433\u0456\u043d\u0438\u0432\u0441\u044f",
+                        "examples": {
+                            "application/json": {
+                                "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6Ijc4ZjZjYmU4M2Y0YTJiOTM0MTA0ZjVmMjhiMzJiYzZiYTMyZjJmNDJkNWFmMmZjYmY3NDRkODJjYzMyZWE0NThkZTgzNDQ5NjExNjIyZDExIn0.eyJhdWQiOiIzIiwianRpIjoiNzhmNmNiZTgzZjRhMmI5MzQxMDRmNWYyOGIzMmJjNmJhMzJmMmY0MmQ1YWYyZmNiZjc0NGQ4MmNjMzJlYTQ1OGRlODM0NDk2MTE2MjJkMTEiLCJpYXQiOjE1Mzg0MTg1MzEsIm5iZiI6MTUzODQxODUzMSwiZXhwIjoxNTY5OTU0NTMxLCJzdWIiOiIxNTgiLCJzY29wZXMiOltdfQ.ivQ04ahWZlVc6OdsHCF-mYnuieYPqGscIQQ_FrddgIo9PSl6I_lN04CDvr-yc5u39ASIm6BA-rTueJD-OVgp1S7qTZFwUR_0QU2hGklQZmYaXzTAYjG8YwW1LecZpe1Gdrcnoqr-m-qN1IeTY8GlOOluvjH6qzH9Tb5Abo-Ql4Uz2vjtCDAqpcl-Q8wFLeWKwGYJ_-euciHKAJvNGYF4ks9Bln4o1UCwwLFbE9godp1G4LHvyp9OgbAsaofz-L7Cg0SbByUxVZ0tDgpnuoZxpfeyQ2-dpaO3byCOfMkK1E714V8KL-2k3O091Ra9_ifCSpTAsmnaAIkKp1NMhL1AUP2rR_DUevSg7Di7oBC0sqB45FDxQNJBZ6eyde358hQhtThcYkN7E8b1wi64L-R6bZ18SzzvXkVgsf3iOqiEj461DzDYweptjhRWMPq-eki0IqfL-HbfD7VuAPChFazCsqRqTgrg4Fdc084NJx8Eu_78lz0F6WNGo8xOa-HzeqCBKm99LfJKSNZvoBUKe6fnFXu5eRHhfma1Ya4-x1wwZSFKqpelmgK_3WNAh-N0YNeY-3h9h5mTXra-C9xfI9mWz0sjwfLMwd6VHoIJUGtPFmytMmLxb8onPO7j3ptLKL_mqf0kVehfM-_v4QArsqenstO4FJKFJSlvAEf35jqmkEo"
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "\u041f\u0435\u0440\u0435\u0434\u0430\u043d\u0456 \u043d\u0435 \u0432\u0430\u043b\u0456\u0434\u043d\u0456 \u0434\u0430\u043d\u0456 \u043f\u043e \u0444\u043e\u0440\u043c\u0456 (\u043d\u0430\u043f\u0440\u0438\u043a\u043b\u0430\u0434, \u0437\u0430\u0432\u0435\u043b\u0438\u043a\u0430 \u0434\u043e\u0432\u0436\u0438\u043d\u0430 \u0440\u044f\u0434\u043a\u0430)"
+                    },
+                    "401": {
+                        "description": "\u041f\u0435\u0440\u0435\u0434\u0430\u043d\u0456 \u043d\u0435 \u0432\u0430\u043b\u0456\u0434\u043d\u0456 \u0434\u0430\u043d\u0456 \u043f\u043e \u0437\u043c\u0456\u0441\u0442\u0443 (\u043d\u0430\u043f\u0440\u0438\u043a\u043b\u0430\u0434, \u0437\u0430 URL \u043d\u0435 \u0437\u0430\u0432\u0430\u043d\u0442\u0430\u0436\u0443\u0454\u0442\u044c\u0441\u044f \u0430\u0432\u0430\u0442\u0430\u0440\u043a\u0430)"
+                    },
+                    "405": {
+                        "description": "\u041c\u0435\u0442\u043e\u0434, \u0437 \u044f\u043a\u0438\u043c \u0432\u0438\u043a\u043e\u043d\u0443\u0432\u0430\u0432\u0441\u044f \u0437\u0430\u043f\u0438\u0442, \u043d\u0435 \u0434\u043e\u0437\u0432\u043e\u043b\u0435\u043d\u043e \u0432\u0438\u043a\u043e\u0440\u0438\u0441\u0442\u043e\u0432\u0443\u0432\u0430\u0442\u0438 \u0434\u043b\u044f \u0437\u0430\u0434\u0430\u043d\u043e\u0433\u043e \u0440\u0435\u0441\u0443\u0440\u0441\u0443; \u043d\u0430\u043f\u0440\u0438\u043a\u043b\u0430\u0434, \u0437\u0430\u043f\u0438\u0442 \u0431\u0443\u0432 \u0437\u0434\u0456\u0439\u0441\u043d\u0435\u043d\u0438\u0439 \u0437\u0430 \u043c\u0435\u0442\u043e\u0434\u043e\u043c GET, \u0445\u043e\u0447\u0430 \u043e\u0447\u0456\u043a\u0443\u0454\u0442\u044c\u0441\u044f \u0449\u043e \u0434\u0430\u043d\u0456 \u0431\u0443\u0434\u0443\u0442\u044c \u043d\u0430\u0434\u0456\u0441\u043b\u0430\u043d\u0456 \u043c\u0435\u0442\u043e\u0434\u043e\u043c POST."
+                    }
+                }
+            }
+        },
+        "/login/facebook": {
+            "post": {
+                "tags": [
+                    "\u0410\u0432\u0442\u0435\u043d\u0442\u0438\u0444\u0456\u043a\u0430\u0446\u0456\u044f \u043a\u043e\u0440\u0438\u0441\u0442\u0443\u0432\u0430\u0447\u0430"
+                ],
+                "summary": "Login Facebook",
+                "description": "\u041b\u043e\u0433\u0456\u043d \u0447\u0435\u0440\u0435\u0437 \u0430\u043a\u0430\u0443\u043d\u0442 \u0432 Facebook",
+                "operationId": "login_facebook",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/Content-Type"
+                    },
+                    {
+                        "$ref": "#/parameters/X-Requested-With"
+                    },
+                    {
+                        "name": "\u0414\u0430\u043d\u0456 \u043a\u043e\u0440\u0438\u0441\u0442\u0443\u0432\u0430\u0447\u0430",
+                        "in": "body",
+                        "description": "\u0429\u043e\u0431 \u0437\u0434\u0456\u0439\u0441\u043d\u0438\u0442\u0438 \u043b\u043e\u0433\u0456\u043d \u043a\u043e\u0440\u0438\u0441\u0442\u0443\u0432\u0430\u0447\u0430 \u0447\u0435\u0440\u0435\u0437 Facebook, \u043f\u043e\u0442\u0440\u0456\u0431\u043d\u043e \u043d\u0430\u0434\u0456\u0441\u043b\u0430\u0442\u0438 \u0439\u043e\u0433\u043e facebook_id, email, \u0456\u043c'\u044f (\u043c\u043e\u0436\u043b\u0438\u0432\u043e, \u0449\u0435 \u0439 \u043f\u0440\u0456\u0437\u0432\u0438\u0449\u0435)",
+                        "schema": {
+                            "required": [
+                                "id",
+                                "email",
+                                "name"
+                            ],
+                            "properties": {
+                                "id": {
+                                    "description": "facebook_id \u041a\u043e\u0440\u0438\u0441\u0442\u0443\u0432\u0430\u0447\u0430 (\u043f\u043e\u0432\u0438\u043d\u043d\u043e \u0441\u043a\u043b\u0430\u0434\u0430\u0442\u0438\u0441\u044f \u0432\u0456\u0434 12 \u0434\u043e 255 \u0446\u0438\u0444\u0440)",
+                                    "type": "string",
+                                    "example": "100001887847445"
+                                },
+                                "name": {
+                                    "description": "\u0406\u043c'\u044f \u041a\u043e\u0440\u0438\u0441\u0442\u0443\u0432\u0430\u0447\u0430 (\u043f\u043e\u0432\u0438\u043d\u043d\u043e \u0441\u043a\u043b\u0430\u0434\u0430\u0442\u0438\u0441\u044f \u0432\u0456\u0434 3 \u0434\u043e 255 \u0441\u0438\u043c\u0432\u043e\u043b\u0456\u0432)",
+                                    "type": "string",
+                                    "example": "NameOfUser"
+                                },
+                                "surname": {
+                                    "description": "\u041f\u0440\u0456\u0437\u0432\u0438\u0449\u0435 \u041a\u043e\u0440\u0438\u0441\u0442\u0443\u0432\u0430\u0447\u0430 (\u043f\u043e\u0432\u0438\u043d\u043d\u043e \u0441\u043a\u043b\u0430\u0434\u0430\u0442\u0438\u0441\u044f \u0432\u0456\u0434 3 \u0434\u043e 255 \u0441\u0438\u043c\u0432\u043e\u043b\u0456\u0432)",
+                                    "type": "string",
+                                    "example": "SurnameOfUser"
+                                },
+                                "email": {
+                                    "description": "Email \u041a\u043e\u0440\u0438\u0441\u0442\u0443\u0432\u0430\u0447\u0430 (\u0456\u0441\u043d\u0443\u044e\u0447\u0438\u0439, \u0432\u0430\u043b\u0456\u0434\u043d\u0438\u0439, \u0443\u043d\u0456\u043a\u0430\u043b\u044c\u043d\u0438\u0439 \u0432 \u0441\u0438\u0441\u0442\u0435\u043c\u0456)",
+                                    "type": "string",
+                                    "example": "example@gmail.com"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "\u041a\u043e\u0440\u0438\u0441\u0442\u0443\u0432\u0430\u0447 \u0443\u0441\u043f\u0456\u0448\u043d\u043e \u0437\u0430\u0440\u0435\u0454\u0441\u0442\u0440\u043e\u0432\u0430\u043d\u0438\u0439",
+                        "examples": {
+                            "application/json": {
+                                "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6Ijc4ZjZjYmU4M2Y0YTJiOTM0MTA0ZjVmMjhiMzJiYzZiYTMyZjJmNDJkNWFmMmZjYmY3NDRkODJjYzMyZWE0NThkZTgzNDQ5NjExNjIyZDExIn0.eyJhdWQiOiIzIiwianRpIjoiNzhmNmNiZTgzZjRhMmI5MzQxMDRmNWYyOGIzMmJjNmJhMzJmMmY0MmQ1YWYyZmNiZjc0NGQ4MmNjMzJlYTQ1OGRlODM0NDk2MTE2MjJkMTEiLCJpYXQiOjE1Mzg0MTg1MzEsIm5iZiI6MTUzODQxODUzMSwiZXhwIjoxNTY5OTU0NTMxLCJzdWIiOiIxNTgiLCJzY29wZXMiOltdfQ.ivQ04ahWZlVc6OdsHCF-mYnuieYPqGscIQQ_FrddgIo9PSl6I_lN04CDvr-yc5u39ASIm6BA-rTueJD-OVgp1S7qTZFwUR_0QU2hGklQZmYaXzTAYjG8YwW1LecZpe1Gdrcnoqr-m-qN1IeTY8GlOOluvjH6qzH9Tb5Abo-Ql4Uz2vjtCDAqpcl-Q8wFLeWKwGYJ_-euciHKAJvNGYF4ks9Bln4o1UCwwLFbE9godp1G4LHvyp9OgbAsaofz-L7Cg0SbByUxVZ0tDgpnuoZxpfeyQ2-dpaO3byCOfMkK1E714V8KL-2k3O091Ra9_ifCSpTAsmnaAIkKp1NMhL1AUP2rR_DUevSg7Di7oBC0sqB45FDxQNJBZ6eyde358hQhtThcYkN7E8b1wi64L-R6bZ18SzzvXkVgsf3iOqiEj461DzDYweptjhRWMPq-eki0IqfL-HbfD7VuAPChFazCsqRqTgrg4Fdc084NJx8Eu_78lz0F6WNGo8xOa-HzeqCBKm99LfJKSNZvoBUKe6fnFXu5eRHhfma1Ya4-x1wwZSFKqpelmgK_3WNAh-N0YNeY-3h9h5mTXra-C9xfI9mWz0sjwfLMwd6VHoIJUGtPFmytMmLxb8onPO7j3ptLKL_mqf0kVehfM-_v4QArsqenstO4FJKFJSlvAEf35jqmkEo"
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "\u041a\u043e\u0440\u0438\u0441\u0442\u0443\u0432\u0430\u0447 \u0443\u0441\u043f\u0456\u0448\u043d\u043e \u0437\u0430\u043b\u043e\u0433\u0456\u043d\u0438\u0432\u0441\u044f",
+                        "examples": {
+                            "application/json": {
+                                "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6Ijc4ZjZjYmU4M2Y0YTJiOTM0MTA0ZjVmMjhiMzJiYzZiYTMyZjJmNDJkNWFmMmZjYmY3NDRkODJjYzMyZWE0NThkZTgzNDQ5NjExNjIyZDExIn0.eyJhdWQiOiIzIiwianRpIjoiNzhmNmNiZTgzZjRhMmI5MzQxMDRmNWYyOGIzMmJjNmJhMzJmMmY0MmQ1YWYyZmNiZjc0NGQ4MmNjMzJlYTQ1OGRlODM0NDk2MTE2MjJkMTEiLCJpYXQiOjE1Mzg0MTg1MzEsIm5iZiI6MTUzODQxODUzMSwiZXhwIjoxNTY5OTU0NTMxLCJzdWIiOiIxNTgiLCJzY29wZXMiOltdfQ.ivQ04ahWZlVc6OdsHCF-mYnuieYPqGscIQQ_FrddgIo9PSl6I_lN04CDvr-yc5u39ASIm6BA-rTueJD-OVgp1S7qTZFwUR_0QU2hGklQZmYaXzTAYjG8YwW1LecZpe1Gdrcnoqr-m-qN1IeTY8GlOOluvjH6qzH9Tb5Abo-Ql4Uz2vjtCDAqpcl-Q8wFLeWKwGYJ_-euciHKAJvNGYF4ks9Bln4o1UCwwLFbE9godp1G4LHvyp9OgbAsaofz-L7Cg0SbByUxVZ0tDgpnuoZxpfeyQ2-dpaO3byCOfMkK1E714V8KL-2k3O091Ra9_ifCSpTAsmnaAIkKp1NMhL1AUP2rR_DUevSg7Di7oBC0sqB45FDxQNJBZ6eyde358hQhtThcYkN7E8b1wi64L-R6bZ18SzzvXkVgsf3iOqiEj461DzDYweptjhRWMPq-eki0IqfL-HbfD7VuAPChFazCsqRqTgrg4Fdc084NJx8Eu_78lz0F6WNGo8xOa-HzeqCBKm99LfJKSNZvoBUKe6fnFXu5eRHhfma1Ya4-x1wwZSFKqpelmgK_3WNAh-N0YNeY-3h9h5mTXra-C9xfI9mWz0sjwfLMwd6VHoIJUGtPFmytMmLxb8onPO7j3ptLKL_mqf0kVehfM-_v4QArsqenstO4FJKFJSlvAEf35jqmkEo"
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "\u041f\u0435\u0440\u0435\u0434\u0430\u043d\u0456 \u043d\u0435 \u0432\u0430\u043b\u0456\u0434\u043d\u0456 \u0434\u0430\u043d\u0456 \u043f\u043e \u0444\u043e\u0440\u043c\u0456 (\u043d\u0430\u043f\u0440\u0438\u043a\u043b\u0430\u0434, \u0437\u0430\u0432\u0435\u043b\u0438\u043a\u0430 \u0434\u043e\u0432\u0436\u0438\u043d\u0430 \u0440\u044f\u0434\u043a\u0430)"
+                    },
+                    "401": {
+                        "description": "\u041f\u0435\u0440\u0435\u0434\u0430\u043d\u0456 \u043d\u0435 \u0432\u0430\u043b\u0456\u0434\u043d\u0456 \u0434\u0430\u043d\u0456 \u043f\u043e \u0437\u043c\u0456\u0441\u0442\u0443 (\u043d\u0430\u043f\u0440\u0438\u043a\u043b\u0430\u0434, \u0437\u0430 URL \u043d\u0435 \u0437\u0430\u0432\u0430\u043d\u0442\u0430\u0436\u0443\u0454\u0442\u044c\u0441\u044f \u0430\u0432\u0430\u0442\u0430\u0440\u043a\u0430)"
+                    },
+                    "405": {
+                        "description": "\u041c\u0435\u0442\u043e\u0434, \u0437 \u044f\u043a\u0438\u043c \u0432\u0438\u043a\u043e\u043d\u0443\u0432\u0430\u0432\u0441\u044f \u0437\u0430\u043f\u0438\u0442, \u043d\u0435 \u0434\u043e\u0437\u0432\u043e\u043b\u0435\u043d\u043e \u0432\u0438\u043a\u043e\u0440\u0438\u0441\u0442\u043e\u0432\u0443\u0432\u0430\u0442\u0438 \u0434\u043b\u044f \u0437\u0430\u0434\u0430\u043d\u043e\u0433\u043e \u0440\u0435\u0441\u0443\u0440\u0441\u0443; \u043d\u0430\u043f\u0440\u0438\u043a\u043b\u0430\u0434, \u0437\u0430\u043f\u0438\u0442 \u0431\u0443\u0432 \u0437\u0434\u0456\u0439\u0441\u043d\u0435\u043d\u0438\u0439 \u0437\u0430 \u043c\u0435\u0442\u043e\u0434\u043e\u043c GET, \u0445\u043e\u0447\u0430 \u043e\u0447\u0456\u043a\u0443\u0454\u0442\u044c\u0441\u044f \u0449\u043e \u0434\u0430\u043d\u0456 \u0431\u0443\u0434\u0443\u0442\u044c \u043d\u0430\u0434\u0456\u0441\u043b\u0430\u043d\u0456 \u043c\u0435\u0442\u043e\u0434\u043e\u043c POST."
+                    }
+                }
+            }
+        },
         "/logout": {
             "get": {
                 "tags": [
@@ -303,6 +476,855 @@
                 ]
             }
         },
+        "/courts/list": {
+            "get": {
+                "tags": [
+                    "\u0421\u0443\u0434\u0438"
+                ],
+                "summary": "\u041e\u0442\u0440\u0438\u043c\u0430\u0442\u0438 \u0441\u043f\u0438\u0441\u043e\u043a \u0441\u0443\u0434\u043e\u0432\u0438\u0445 \u0443\u0441\u0442\u0430\u043d\u043e\u0432",
+                "description": "\u041e\u0442\u0440\u0438\u043c\u0430\u0442\u0438 \u0441\u043f\u0438\u0441\u043e\u043a \u0441\u0443\u0434\u043e\u0432\u0438\u0445 \u0443\u0441\u0442\u0430\u043d\u043e\u0432 \u0437\u0430 \u0437\u0430\u0434\u0430\u043d\u0438\u043c\u0438 \u043f\u0430\u0440\u0430\u043c\u0435\u0442\u0440\u0430\u043c\u0438 \u043c\u043e\u0436\u043d\u0430 \u043f\u0435\u0440\u0435\u0434\u0430\u0432\u0448\u0438 \u043f\u0430\u0440\u0430\u043c\u0435\u0442\u0440\u0438 (\u0444\u0456\u043b\u044c\u0442\u0440\u0438) \u043f\u043e\u0448\u0443\u043a\u0443 \u043e\u043f\u0438\u0441\u0430\u043d\u0456 \u043d\u0438\u0436\u0447\u0435. \u0412\u0441\u0456 \u043f\u0430\u0440\u0430\u043c\u0435\u0442\u0440\u0438 \u043c\u043e\u0436\u043d\u0430 \u0432\u0438\u043a\u043e\u0440\u0438\u0441\u0442\u043e\u0432\u0443\u0432\u0430\u0442\u0438 \u044f\u043a \u043e\u043a\u0440\u0435\u043c\u043e, \u0442\u0430\u043a \u0456 \u0441\u0443\u043c\u0456\u0449\u0430\u0442\u0438 \u0434\u0435\u043a\u0456\u043b\u044c\u043a\u0430 \u043f\u0430\u0440\u0430\u043c\u0435\u0442\u0440\u0456\u0432 \u043e\u0434\u043d\u043e\u0447\u0430\u0441\u043d\u043e. \u0412\u0441\u0456 \u0440\u0435\u0437\u0443\u043b\u044c\u0442\u0430\u0442\u0438 \u043f\u043e\u0448\u0443\u043a\u0443 \u043f\u043e\u0432\u0435\u0440\u0442\u0430\u044e\u0442\u044c\u0441\u044f \u043f\u043e 10 \u0448\u0442. \u043d\u0430 \u043e\u0434\u043d\u0456\u0439 \u0441\u0442\u043e\u0440\u0456\u043d\u0446\u0456",
+                "operationId": "courts-list",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/Content-Type"
+                    },
+                    {
+                        "$ref": "#/parameters/X-Requested-With"
+                    },
+                    {
+                        "name": "regions[]",
+                        "in": "query",
+                        "description": "\u041f\u0435\u0440\u0435\u043b\u0456\u043a \u0440\u0435\u0433\u0456\u043e\u043d\u0456\u0432 (\u043e\u0431\u043b\u0430\u0441\u0442\u0435\u0439), \u0432 \u044f\u043a\u0438\u0445 \u043f\u043e\u0442\u0440\u0456\u0431\u043d\u043e \u0437\u0434\u0456\u0439\u0441\u043d\u044e\u0432\u0430\u0442\u0438 \u043f\u043e\u0448\u0443\u043a. \u0412\u0456\u0434\u0441\u0443\u0442\u043d\u0456\u0441\u0442\u044c \u0434\u0430\u043d\u043e\u0433\u043e \u043f\u0430\u0440\u0430\u043c\u0435\u0442\u0440\u0443 \u043e\u0437\u043d\u0430\u0447\u0430\u0454, \u0449\u043e \u043f\u043e\u0448\u0443\u043a \u0431\u0443\u0434\u0435 \u0432\u0456\u0434\u0431\u0443\u0432\u0430\u0442\u0438\u0441\u044c \u043f\u043e \u0432\u0441\u0456\u0445 \u0440\u0435\u0433\u0456\u043e\u043d\u0430\u0445. \u041a\u043e\u0434\u0438 \u0440\u0435\u0433\u0456\u043e\u043d\u0456\u0432:\n  *   2 - \u0412\u0456\u043d\u043d\u0438\u0446\u044c\u043a\u0430 \u043e\u0431\u043b\u0430\u0441\u0442\u044c\n  *  3 - \u0412\u043e\u043b\u0438\u043d\u0441\u044c\u043a\u0430 \u043e\u0431\u043b\u0430\u0441\u0442\u044c\n  *  4 - \u0414\u043d\u0456\u043f\u0440\u043e\u043f\u0435\u0442\u0440\u043e\u0432\u0441\u044c\u043a\u0430 \u043e\u0431\u043b\u0430\u0441\u0442\u044c\n  *  5 - \u0414\u043e\u043d\u0435\u0446\u044c\u043a\u0430 \u043e\u0431\u043b\u0430\u0441\u0442\u044c\n  *  6 - \u0416\u0438\u0442\u043e\u043c\u0438\u0440\u0441\u044c\u043a\u0430 \u043e\u0431\u043b\u0430\u0441\u0442\u044c\n  *  7 - \u0417\u0430\u043a\u0430\u0440\u043f\u0430\u0442\u0441\u044c\u043a\u0430 \u043e\u0431\u043b\u0430\u0441\u0442\u044c\n  *  8 - \u0417\u0430\u043f\u043e\u0440\u0456\u0437\u044c\u043a\u0430 \u043e\u0431\u043b\u0430\u0441\u0442\u044c\n  *  9 - \u0406\u0432\u0430\u043d\u043e-\u0424\u0440\u0430\u043d\u043a\u0456\u0432\u0441\u044c\u043a\u0430 \u043e\u0431\u043b\u0430\u0441\u0442\u044c\n  *  10 - \u041a\u0438\u0457\u0432\u0441\u044c\u043a\u0430 \u043e\u0431\u043b\u0430\u0441\u0442\u044c\n  *  11 - \u041a\u0456\u0440\u043e\u0432\u043e\u0433\u0440\u0430\u0434\u0441\u044c\u043a\u0430 \u043e\u0431\u043b\u0430\u0441\u0442\u044c\n  *  12 - \u041b\u0443\u0433\u0430\u043d\u0441\u044c\u043a\u0430 \u043e\u0431\u043b\u0430\u0441\u0442\u044c\n  *  13 - \u041b\u044c\u0432\u0456\u0432\u0441\u044c\u043a\u0430 \u043e\u0431\u043b\u0430\u0441\u0442\u044c\n  *  14 - \u041c\u0438\u043a\u043e\u043b\u0430\u0457\u0432\u0441\u044c\u043a\u0430 \u043e\u0431\u043b\u0430\u0441\u0442\u044c\n  *  15 - \u041e\u0434\u0435\u0441\u044c\u043a\u0430 \u043e\u0431\u043b\u0430\u0441\u0442\u044c\n  *  16 - \u041f\u043e\u043b\u0442\u0430\u0432\u0441\u044c\u043a\u0430 \u043e\u0431\u043b\u0430\u0441\u0442\u044c\n  *  17 - \u0420\u0456\u0432\u043d\u0435\u043d\u0441\u044c\u043a\u0430 \u043e\u0431\u043b\u0430\u0441\u0442\u044c\n  *  18 - \u0421\u0443\u043c\u0441\u044c\u043a\u0430 \u043e\u0431\u043b\u0430\u0441\u0442\u044c\n  *  19 - \u0422\u0435\u0440\u043d\u043e\u043f\u0456\u043b\u044c\u0441\u044c\u043a\u0430 \u043e\u0431\u043b\u0430\u0441\u0442\u044c\n  *  20 - \u0425\u0430\u0440\u043a\u0456\u0432\u0441\u044c\u043a\u0430 \u043e\u0431\u043b\u0430\u0441\u0442\u044c\n  *  21 - \u0425\u0435\u0440\u0441\u043e\u043d\u0441\u044c\u043a\u0430 \u043e\u0431\u043b\u0430\u0441\u0442\u044c\n  *  22 - \u0425\u043c\u0435\u043b\u044c\u043d\u0438\u0446\u044c\u043a\u0430 \u043e\u0431\u043b\u0430\u0441\u0442\u044c\n  *  23 - \u0427\u0435\u0440\u043a\u0430\u0441\u044c\u043a\u0430 \u043e\u0431\u043b\u0430\u0441\u0442\u044c\n  *  24 - \u0427\u0435\u0440\u043d\u0456\u0432\u0435\u0446\u044c\u043a\u0430 \u043e\u0431\u043b\u0430\u0441\u0442\u044c\n  *  25 - \u0427\u0435\u0440\u043d\u0456\u0433\u0456\u0432\u0441\u044c\u043a\u0430 \u043e\u0431\u043b\u0430\u0441\u0442\u044c\n  *  26 - \u043c. \u041a\u0438\u0457\u0432\n\t\u041d\u0410\u041f\u0420\u0418\u041a\u041b\u0410\u0414: 'host/api/v1/courts/list?regions[]=2&regions[]=3&regions[]=4' - \u043e\u0437\u043d\u0430\u0447\u0430\u0454, \u0449\u043e \u043f\u043e\u0442\u0440\u0456\u0431\u043d\u043e \u043e\u0442\u0440\u0438\u043c\u0430\u0442\u0438 \u0432\u0441\u0456 \u0441\u0443\u0434\u0438 \u0437 \u0412\u0456\u043d\u043d\u0438\u0446\u044c\u043a\u043e\u0457, \u0412\u043e\u043b\u0438\u043d\u0441\u044c\u043a\u043e\u0457 \u0456 \u0414\u043d\u0456\u043f\u0440\u043e\u043f\u0435\u0442\u0440\u043e\u0432\u0441\u044c\u043a\u043e\u0457 \u043e\u0431\u043b\u0430\u0441\u0442\u0435\u0439",
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "example": "7"
+                        },
+                        "collectionFormat": "multi",
+                        "uniqueItems": true
+                    },
+                    {
+                        "name": "instances[]",
+                        "in": "query",
+                        "description": "\u0406\u043d\u0441\u0442\u0430\u043d\u0446\u0456\u0457 \u0432 \u044f\u043a\u0438\u0445 \u043f\u043e\u0442\u0440\u0456\u0431\u043d\u043e \u0437\u0434\u0456\u0439\u0441\u043d\u044e\u0432\u0430\u0442\u0438 \u043f\u043e\u0448\u0443\u043a. \u0412\u0456\u0434\u0441\u0443\u0442\u043d\u0456\u0441\u0442\u044c \u0434\u0430\u043d\u043e\u0433\u043e \u043f\u0430\u0440\u0430\u043c\u0435\u0442\u0440\u0443 \u043e\u0437\u043d\u0430\u0447\u0430\u0454, \u0449\u043e \u043f\u043e\u0448\u0443\u043a \u0431\u0443\u0434\u0435 \u0432\u0456\u0434\u0431\u0443\u0432\u0430\u0442\u0438\u0441\u044c \u0443 \u0432\u0441\u0456\u0445 \u0456\u043d\u0441\u0442\u0430\u043d\u0446\u0456\u044f\u0445. \u041a\u043e\u0434\u0438 \u0456\u043d\u0441\u0442\u0430\u043d\u0446\u0456\u0439:\n  *   1 - \u041a\u0430\u0441\u0430\u0446\u0456\u0439\u043d\u0430 \u0456\u043d\u0441\u0442\u0430\u043d\u0446\u0456\u044f\n  *  2 - \u0410\u043f\u0435\u043b\u044f\u0446\u0456\u0439\u043d\u0430 \u0456\u043d\u0441\u0442\u0430\u043d\u0446\u0456\u044f\n  *  3 - \u041f\u0435\u0440\u0448\u0430 \u0456\u043d\u0441\u0442\u0430\u043d\u0446\u0456\u044f",
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "example": "2"
+                        },
+                        "collectionFormat": "multi",
+                        "uniqueItems": true
+                    },
+                    {
+                        "name": "jurisdictions[]",
+                        "in": "query",
+                        "description": "\u042e\u0440\u0438\u0441\u0434\u0438\u043a\u0446\u0456\u0457 \u0432 \u044f\u043a\u0438\u0445 \u043f\u043e\u0442\u0440\u0456\u0431\u043d\u043e \u0437\u0434\u0456\u0439\u0441\u043d\u044e\u0432\u0430\u0442\u0438 \u043f\u043e\u0448\u0443\u043a. \u0412\u0456\u0434\u0441\u0443\u0442\u043d\u0456\u0441\u0442\u044c \u0434\u0430\u043d\u043e\u0433\u043e \u043f\u0430\u0440\u0430\u043c\u0435\u0442\u0440\u0443 \u043e\u0437\u043d\u0430\u0447\u0430\u0454, \u0449\u043e \u043f\u043e\u0448\u0443\u043a \u0431\u0443\u0434\u0435 \u0432\u0456\u0434\u0431\u0443\u0432\u0430\u0442\u0438\u0441\u044c \u0443 \u0432\u0441\u0456\u0445 \u044e\u0440\u0438\u0441\u0434\u0438\u043a\u0446\u0456\u044f\u0445. \u041a\u043e\u0434\u0438 \u044e\u0440\u0438\u0441\u0434\u0438\u043a\u0446\u0456\u0439:\n  *   1 - \u0417\u0430\u0433\u0430\u043b\u044c\u043d\u0430 \u044e\u0440\u0438\u0441\u0434\u0438\u043a\u0446\u0456\u044f \u0441\u0443\u0434\u0443\n  *  2 - \u0410\u0434\u043c\u0456\u043d\u0456\u0441\u0442\u0440\u0430\u0442\u0438\u0432\u043d\u0430 \u044e\u0440\u0438\u0441\u0434\u0438\u043a\u0446\u0456\u044f \u0441\u0443\u0434\u0443\n  *  3 - \u0413\u043e\u0441\u043f\u043e\u0434\u0430\u0440\u0441\u044c\u043a\u0430 \u044e\u0440\u0438\u0441\u0434\u0438\u043a\u0446\u0456\u044f \u0441\u0443\u0434\u0443",
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "example": "1"
+                        },
+                        "collectionFormat": "multi",
+                        "uniqueItems": true
+                    },
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "description": "\u041f\u043e\u0448\u0443\u043a \u0437\u0430 \u043d\u0430\u0437\u0432\u043e\u044e \u0441\u0443\u0434\u0443. \u041f\u043e\u0432\u0438\u043d\u0435\u043d \u043c\u0456\u0441\u0442\u0438\u0442\u0438 \u0432\u0456\u0434 1 \u0434\u043e 20 \u0441\u0438\u043c\u0432\u043e\u043b\u0456\u0432. \u0411\u0443\u0434\u0443\u0442\u044c \u043f\u043e\u0432\u0435\u0440\u043d\u0443\u0442\u0456 \u0432\u0441\u0456 \u0441\u0443\u0434\u0438 \u043f\u043e\u0447\u0430\u0442\u043e\u043a \u043d\u0430\u0437\u0432\u0438 \u044f\u043a\u0438\u0445 \u0441\u043f\u0456\u0432\u043f\u0430\u0434\u0430\u0454 \u0437 \u0437\u0430\u0434\u0430\u043d\u0438\u043c \u043f\u0430\u0440\u0430\u043c\u0435\u0442\u0440\u043e\u043c.\n\t\u041d\u0410\u041f\u0420\u0418\u041a\u041b\u0410\u0414: 'host/api/v1/courts/list?search=\u0414\u043d\u0456\u043f\u0440' - \u043e\u0437\u043d\u0430\u0447\u0430\u0454, \u0449\u043e \u043f\u043e\u0442\u0440\u0456\u0431\u043d\u043e \u043e\u0442\u0440\u0438\u043c\u0430\u0442\u0438 \u0432\u0441\u0456 \u0441\u0443\u0434\u0438 \u043d\u0430\u0437\u0432\u0430 \u044f\u043a\u0438\u0445 \u043f\u043e\u0447\u0438\u043d\u0430\u0454\u0442\u044c\u0441\u044f \u043d\u0430 '\u0414\u043d\u0456\u043f\u0440%'",
+                        "type": "string",
+                        "allowEmptyValue": false,
+                        "collectionFormat": "multi",
+                        "maxLength": 20,
+                        "minLength": 1,
+                        "uniqueItems": true
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "\u0422\u0438\u043f \u0441\u043e\u0440\u0442\u0443\u0432\u0430\u043d\u043d\u044f \u043f\u0440\u0438 \u043f\u043e\u0432\u0435\u0440\u043d\u0435\u043d\u043d\u0456 \u0440\u0435\u0437\u0443\u043b\u044c\u0442\u0430\u0442\u0456\u0432. \u041a\u043e\u0434\u0438 \u0442\u0438\u043f\u0456\u0432:\n  *   1 - \u0421\u043e\u0440\u0442\u0443\u0432\u0430\u0442\u0438 \u0437\u0430 \u043d\u0430\u0437\u0432\u043e\u044e '\u0410->\u042f'\n  *  2 - \u0421\u043e\u0440\u0442\u0443\u0432\u0430\u0442\u0438 \u0437\u0430 \u043d\u0430\u0437\u0432\u043e\u044e '\u042f->\u0410'\n  *  3 - \u0421\u043e\u0440\u0442\u0443\u0432\u0430\u0442\u0438 \u0437\u0430 \u0440\u0435\u0439\u0442\u0438\u043d\u0433\u043e\u043c '\u043d\u0438\u0437\u044c\u043a\u0438\u0439->\u0432\u0438\u0441\u043e\u043a\u0438\u0439'\n  *  4 - \u0421\u043e\u0440\u0442\u0443\u0432\u0430\u0442\u0438 \u0437\u0430 \u0440\u0435\u0439\u0442\u0438\u043d\u0433\u043e\u043c '\u0432\u0438\u0441\u043e\u043a\u0438\u0439->\u043d\u0438\u0437\u044c\u043a\u0438\u0439'",
+                        "type": "integer",
+                        "allowEmptyValue": false,
+                        "collectionFormat": "multi",
+                        "maximum": 4,
+                        "minimum": 1,
+                        "uniqueItems": true
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "\u041e\u0441\u043a\u0456\u043b\u044c\u043a\u0438 \u0440\u0435\u0437\u0443\u043b\u044c\u0442\u0430\u0442\u0438 \u0432\u0456\u0434\u043e\u0431\u0440\u0430\u0436\u0430\u044e\u0442\u044c\u0441\u044f \u043f\u043e 10 \u0448\u0442. \u043d\u0430 \u0441\u0442\u043e\u0440\u0456\u043d\u0446\u0456, \u0434\u0430\u043d\u0438\u0439 \u043f\u0430\u0440\u0430\u043c\u0435\u0442\u0440 \u0432\u043a\u0430\u0437\u0443\u0454 \u043d\u043e\u043c\u0435\u0440 \u0441\u0442\u043e\u0440\u0456\u043d\u043a\u0438 \u044f\u043a\u0443 \u043f\u043e\u0442\u0440\u0456\u0431\u043d\u043e \u043e\u0442\u0440\u0438\u043c\u0430\u0442\u0438",
+                        "type": "integer",
+                        "allowEmptyValue": false,
+                        "collectionFormat": "multi",
+                        "minimum": 1,
+                        "uniqueItems": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "\u041e\u041a",
+                        "schema": {
+                            "properties": {
+                                "current_page": {
+                                    "description": "\u041f\u043e\u0442\u043e\u0447\u043d\u0430 \u0441\u0442\u043e\u0440\u0456\u043d\u043a\u0430 \u043f\u043e\u0448\u0443\u043a\u0443",
+                                    "type": "integer"
+                                },
+                                "data": {
+                                    "description": "\u0421\u043f\u0438\u0441\u043e\u043a \u0441\u0443\u0434\u043e\u0432\u0438\u0445 \u0443\u0441\u0442\u0430\u043d\u043e\u0432",
+                                    "type": "json"
+                                },
+                                "court_code": {
+                                    "description": "\u041a\u043e\u0434 \u0441\u0443\u0434\u0443",
+                                    "type": "string"
+                                },
+                                "court_name": {
+                                    "description": "\u041d\u0430\u0437\u0432\u0430 \u0441\u0443\u0434\u0443",
+                                    "type": "string"
+                                },
+                                "instance": {
+                                    "description": "\u0406\u043d\u0441\u0442\u0430\u043d\u0446\u0456\u044f \u0441\u0443\u0434\u0443 [\u041f\u0435\u0440\u0448\u0430, \u0410\u043f\u0435\u043b\u044f\u0446\u0456\u0439\u043d\u0430, \u041a\u0430\u0441\u0430\u0446\u0456\u0439\u043d\u0430]",
+                                    "type": "string"
+                                },
+                                "region": {
+                                    "description": "\u0420\u0435\u0433\u0456\u043e\u043d \u0441\u0443\u0434\u0443",
+                                    "type": "string"
+                                },
+                                "jurisdiction": {
+                                    "description": "\u042e\u0440\u0438\u0441\u0434\u0438\u043a\u0446\u0456\u044f \u0441\u0443\u0434\u0443 [\u0417\u0430\u0433\u0430\u043b\u044c\u043d\u0430, \u0410\u0434\u043c\u0456\u043d\u0456\u0441\u0442\u0440\u0430\u0442\u0438\u0432\u043d\u0430, \u0413\u043e\u0441\u043f\u043e\u0434\u0430\u0440\u0441\u044c\u043a\u0430]",
+                                    "type": "string"
+                                },
+                                "address": {
+                                    "description": "\u0410\u0434\u0440\u0435\u0441\u0430 \u0441\u0443\u0434\u0443",
+                                    "type": "string"
+                                },
+                                "head_judge": {
+                                    "description": "\u041f\u0406\u0411 \u0433\u043e\u043b\u043e\u0432\u0443\u044e\u0447\u043e\u0433\u043e \u0441\u0443\u0434\u0434\u0456  || null \u044f\u043a\u0449\u043e \u043d\u0435\u0432\u0456\u0434\u043e\u043c\u043e",
+                                    "type": "string"
+                                },
+                                "rating": {
+                                    "description": "\u041c\u0456\u0441\u0446\u0435 \u0432 \u0440\u0435\u0439\u0442\u0438\u043d\u0433\u0443 \u0441\u0435\u0440\u0435\u0434 \u0443\u0441\u0456\u0445 \u0441\u0443\u0434\u043e\u0432\u0438\u0445 \u0443\u0441\u0442\u0430\u043d\u043e\u0432",
+                                    "type": "integer"
+                                },
+                                "is_bookmark": {
+                                    "description": "\u0427\u0438 \u0437\u043d\u0430\u0445\u043e\u0434\u0438\u0442\u044c\u0441\u044f \u0432 \u0437\u0430\u043a\u043b\u0430\u0434\u043a\u0430\u0445 \u0432 \u043f\u043e\u0442\u043e\u0447\u043d\u043e\u0433\u043e \u043a\u043e\u0440\u0438\u0441\u0442\u0443\u0432\u0430\u0447\u0430 1 - \u0442\u0430\u043a,  0 - \u043d\u0456",
+                                    "type": "integer"
+                                },
+                                "from": {
+                                    "description": "\u0417\u0430\u0433\u0430\u043b\u044c\u043d\u0438\u0439 \u043d\u043e\u043c\u0435\u0440 \u0440\u0435\u0437\u0443\u043b\u044c\u0442\u0430\u0442\u0443 \u0432 \u043f\u043e\u0448\u0443\u043a\u0443, \u044f\u043a\u0438\u0439 \u0454 \u043f\u0435\u0440\u0448\u0438\u043c \u043d\u0430 \u0434\u0430\u043d\u0456\u0439 \u0441\u0442\u043e\u0440\u0456\u043d\u0446\u0456",
+                                    "type": "integer"
+                                },
+                                "last_page": {
+                                    "description": "\u041e\u0441\u0442\u0430\u043d\u043d\u044f \u0441\u0442\u043e\u0440\u0456\u043d\u043a\u0430 \u0432 \u043f\u043e\u0448\u0443\u043a\u0443",
+                                    "type": "integer"
+                                },
+                                "path": {
+                                    "description": "URL \u043f\u043e\u0442\u043e\u0447\u043d\u043e\u0433\u043e \u0440\u0435\u0441\u0443\u0440\u0441\u0443",
+                                    "type": "string"
+                                },
+                                "per_page": {
+                                    "description": "\u041a\u0456\u043b\u044c\u043a\u0456\u0441\u0442\u044c \u0440\u0435\u0437\u0443\u043b\u044c\u0442\u0430\u0442\u0456\u0432 \u043d\u0430 \u043f\u043e\u0442\u043e\u0447\u043d\u0456\u0439 \u0441\u0442\u043e\u0440\u0456\u043d\u0446\u0456",
+                                    "type": "integer"
+                                },
+                                "total": {
+                                    "description": "\u0417\u0430\u0433\u0430\u043b\u044c\u043d\u0430 \u043a\u0456\u043b\u044c\u043a\u0456\u0441\u0442\u044c \u0440\u0435\u0437\u0443\u043b\u044c\u0442\u0430\u0442\u0456\u0432",
+                                    "type": "integer"
+                                },
+                                "to": {
+                                    "description": "\u0417\u0430\u0433\u0430\u043b\u044c\u043d\u0438\u0439 \u043d\u043e\u043c\u0435\u0440 \u0440\u0435\u0437\u0443\u043b\u044c\u0442\u0430\u0442\u0443 \u0432 \u043f\u043e\u0448\u0443\u043a\u0443, \u044f\u043a\u0438\u0439 \u0454 \u043e\u0441\u0442\u0430\u043d\u043d\u0456\u043c \u043d\u0430 \u0434\u0430\u043d\u0456\u0439 \u0441\u0442\u043e\u0440\u0456\u043d\u0446\u0456",
+                                    "type": "integer"
+                                }
+                            }
+                        },
+                        "examples": {
+                            "application/json": {
+                                "current_page": 1,
+                                "data": [
+                                    {
+                                        "court_code": 2390,
+                                        "court_name": "\u0410\u043f\u0435\u043b\u044f\u0446\u0456\u0439\u043d\u0438\u0439 \u0441\u0443\u0434 \u0427\u0435\u0440\u043a\u0430\u0441\u044c\u043a\u043e\u0457 \u043e\u0431\u043b\u0430\u0441\u0442\u0456",
+                                        "instance": "\u0410\u043f\u0435\u043b\u044f\u0446\u0456\u0439\u043d\u0430",
+                                        "region": "\u0427\u0435\u0440\u043a\u0430\u0441\u044c\u043a\u0430 \u043e\u0431\u043b\u0430\u0441\u0442\u044c",
+                                        "jurisdiction": "\u0417\u0430\u0433\u0430\u043b\u044c\u043d\u0430",
+                                        "address": "\u0432\u0443\u043b.\u0413\u043e\u0433\u043e\u043b\u044f, 316;  \u0432\u0443\u043b. \u0412\u0435\u0440\u0445\u043d\u044f \u0413\u043e\u0440\u043e\u0432\u0430, 29, \u043c.\u0427\u0435\u0440\u043a\u0430\u0441\u0438, 18001",
+                                        "head_judge": null,
+                                        "rating": 142,
+                                        "is_bookmark": 0
+                                    },
+                                    {
+                                        "court_code": 2690,
+                                        "court_name": "\u0410\u043f\u0435\u043b\u044f\u0446\u0456\u0439\u043d\u0438\u0439 \u0441\u0443\u0434 \u043c\u0456\u0441\u0442\u0430 \u041a\u0438\u0454\u0432\u0430",
+                                        "instance": "\u0410\u043f\u0435\u043b\u044f\u0446\u0456\u0439\u043d\u0430",
+                                        "region": "\u043c. \u041a\u0438\u0457\u0432",
+                                        "jurisdiction": "\u0417\u0430\u0433\u0430\u043b\u044c\u043d\u0430",
+                                        "address": "03110, \u043c. \u041a\u0438\u0457\u0432, \u0432\u0443\u043b. \u0421\u043e\u043b\u043e\u043c'\u044f\u043d\u0441\u044c\u043a\u0430, 2-\u0410",
+                                        "head_judge": null,
+                                        "rating": 0,
+                                        "is_bookmark": 0
+                                    },
+                                    {
+                                        "court_code": 607,
+                                        "court_name": "\u0404\u043c\u0456\u043b\u044c\u0447\u0438\u043d\u0441\u044c\u043a\u0438\u0439 \u0440\u0430\u0439\u043e\u043d\u043d\u0438\u0439 \u0441\u0443\u0434 \u0416\u0438\u0442\u043e\u043c\u0438\u0440\u0441\u044c\u043a\u043e\u0457 \u043e\u0431\u043b\u0430\u0441\u0442\u0456",
+                                        "instance": "\u041f\u0435\u0440\u0448\u0430",
+                                        "region": "\u0416\u0438\u0442\u043e\u043c\u0438\u0440\u0441\u044c\u043a\u0430 \u043e\u0431\u043b\u0430\u0441\u0442\u044c",
+                                        "jurisdiction": "\u0417\u0430\u0433\u0430\u043b\u044c\u043d\u0430",
+                                        "address": "11200, \u0441\u043c\u0442. \u0404\u043c\u0456\u043b\u044c\u0447\u0438\u043d\u0435, \u0432\u0443\u043b \u041d\u0435\u0437\u0430\u043b\u0435\u0436\u043d\u043e\u0441\u0442\u0456, 2",
+                                        "head_judge": null,
+                                        "rating": 0,
+                                        "is_bookmark": 0
+                                    }
+                                ],
+                                "first_page_url": "http://toecyd.top/api/v1/judges/list?page=1",
+                                "from": 1,
+                                "last_page": 745,
+                                "last_page_url": "http://toecyd.top/api/v1/judges/list?page=745",
+                                "next_page_url": "http://toecyd.top/api/v1/judges/list?page=2",
+                                "path": "http://toecyd.local/api/v1/judges/list",
+                                "per_page": 10,
+                                "prev_page_url": null,
+                                "to": 10,
+                                "total": 7445
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "\u041d\u0435\u043e\u0431\u0445\u0456\u0434\u043d\u0430 \u0430\u0443\u0442\u0435\u043d\u0442\u0438\u0444\u0456\u043a\u0430\u0446\u0456\u044f \u043a\u043e\u0440\u0438\u0441\u0442\u0443\u0432\u0430\u0447\u0430, \u043c\u043e\u0436\u043b\u0438\u0432\u043e \u0442\u043e\u043a\u0435\u043d \u043d\u0435 \u0456\u0441\u043d\u0443\u0454, \u0430\u0431\u043e \u0430\u043d\u0443\u043b\u044c\u043e\u0432\u0430\u043d\u0438\u0439",
+                        "examples": {
+                            "application/json": {
+                                "message": "Unauthenticated"
+                            }
+                        }
+                    },
+                    "405": {
+                        "description": "\u041c\u0435\u0442\u043e\u0434, \u0437 \u044f\u043a\u0438\u043c \u0432\u0438\u043a\u043e\u043d\u0443\u0432\u0430\u0432\u0441\u044f \u0437\u0430\u043f\u0438\u0442, \u043d\u0435 \u0434\u043e\u0437\u0432\u043e\u043b\u0435\u043d\u043e \u0432\u0438\u043a\u043e\u0440\u0438\u0441\u0442\u043e\u0432\u0443\u0432\u0430\u0442\u0438 \u0434\u043b\u044f \u0437\u0430\u0434\u0430\u043d\u043e\u0433\u043e \u0440\u0435\u0441\u0443\u0440\u0441\u0443; \u043d\u0430\u043f\u0440\u0438\u043a\u043b\u0430\u0434, \u0437\u0430\u043f\u0438\u0442 \u0431\u0443\u0432 \u0437\u0434\u0456\u0439\u0441\u043d\u0435\u043d\u0438\u0439 \u0437\u0430 \u043c\u0435\u0442\u043e\u0434\u043e\u043c POST, \u0445\u043e\u0447\u0430 \u043e\u0447\u0456\u043a\u0443\u0454\u0442\u044c\u0441\u044f GET."
+                    },
+                    "422": {
+                        "description": "\u041f\u0435\u0440\u0435\u0434\u0430\u043d\u0456 \u043d\u0435 \u0432\u0430\u043b\u0456\u0434\u043d\u0456 \u0434\u0430\u043d\u0456, \u0443 \u0432\u0456\u0434\u043f\u043e\u0432\u0456\u0434\u0456 \u0431\u0443\u0434\u0435 \u0437\u0430\u0437\u043d\u0430\u0447\u0435\u043d\u0430 \u043f\u0440\u0438\u0447\u0438\u043d\u0430",
+                        "examples": {
+                            "application/json": {
+                                "message": "The given data was invalid.",
+                                "errors": {
+                                    "regions.0": [
+                                        "\u043c\u0430\u043a\u0441\u0438\u043c\u0430\u043b\u044c\u043d\u0435 \u0437\u043d\u0430\u0447\u0435\u043d\u043d\u044f \u0434\u043b\u044f regions.0 = 26."
+                                    ],
+                                    "instances.0": [
+                                        "\u043c\u0456\u043d\u0456\u043c\u0430\u043b\u044c\u043d\u0435 \u0437\u043d\u0430\u0447\u0435\u043d\u043d\u044f \u0434\u043b\u044f instances.0 = 1."
+                                    ],
+                                    "instances.1": [
+                                        "\u043c\u0430\u043a\u0441\u0438\u043c\u0430\u043b\u044c\u043d\u0435 \u0437\u043d\u0430\u0447\u0435\u043d\u043d\u044f \u0434\u043b\u044f instances.1 = 3."
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
+            }
+        },
+        "/guest/courts/list": {
+            "get": {
+                "tags": [
+                    "\u0421\u0443\u0434\u0438"
+                ],
+                "summary": "\u041e\u0442\u0440\u0438\u043c\u0430\u0442\u0438 \u0441\u043f\u0438\u0441\u043e\u043a \u0441\u0443\u0434\u043e\u0432\u0438\u0445 \u0443\u0441\u0442\u0430\u043d\u043e\u0432 \u0434\u043b\u044f \u043d\u0435\u0437\u0430\u0440\u0435\u0454\u0441\u0442\u0440\u043e\u0432\u0430\u043d\u043e\u0433\u043e \u043a\u043e\u0440\u0438\u0441\u0442\u0443\u0432\u0430\u0447\u0430",
+                "description": "\u0414\u0430\u043d\u0438\u0439 \u043c\u0430\u0440\u0448\u0440\u0443\u0442 \u043f\u0440\u0430\u0446\u044e\u0454 \u0442\u0430\u043a \u0436\u0435 \u044f\u043a /courts/list, \u0437\u0430 \u0432\u0438\u043d\u044f\u0442\u043a\u043e\u043c \u0442\u043e\u0433\u043e, \u0449\u043e \u043d\u0435 \u0432\u0438\u043c\u0430\u0433\u0430\u0454 \u0430\u0432\u0442\u043e\u0440\u0438\u0437\u0430\u0446\u0456\u0457 \u043a\u043e\u0440\u0438\u0441\u0442\u0443\u0432\u0430\u0447\u0430 \u0456 \u043d\u0435 \u043f\u043e\u0432\u0435\u0440\u0442\u0430\u0454 \u0434\u0430\u043d\u0438\u0445 \u0449\u043e \u0441\u0442\u043e\u0441\u0443\u044e\u0442\u044c\u0441\u044f \u043a\u043e\u0440\u0438\u0441\u0442\u0443\u0432\u0430\u0447\u0430 (\u043d\u0430\u043f\u0440. is_bookmark)",
+                "operationId": "guest-courts-list",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/Content-Type"
+                    },
+                    {
+                        "$ref": "#/parameters/X-Requested-With"
+                    },
+                    {
+                        "name": "regions[]",
+                        "in": "query",
+                        "description": "\u041f\u0435\u0440\u0435\u043b\u0456\u043a \u0440\u0435\u0433\u0456\u043e\u043d\u0456\u0432 (\u043e\u0431\u043b\u0430\u0441\u0442\u0435\u0439), \u0432 \u044f\u043a\u0438\u0445 \u043f\u043e\u0442\u0440\u0456\u0431\u043d\u043e \u0437\u0434\u0456\u0439\u0441\u043d\u044e\u0432\u0430\u0442\u0438 \u043f\u043e\u0448\u0443\u043a. \u0412\u0456\u0434\u0441\u0443\u0442\u043d\u0456\u0441\u0442\u044c \u0434\u0430\u043d\u043e\u0433\u043e \u043f\u0430\u0440\u0430\u043c\u0435\u0442\u0440\u0443 \u043e\u0437\u043d\u0430\u0447\u0430\u0454, \u0449\u043e \u043f\u043e\u0448\u0443\u043a \u0431\u0443\u0434\u0435 \u0432\u0456\u0434\u0431\u0443\u0432\u0430\u0442\u0438\u0441\u044c \u043f\u043e \u0432\u0441\u0456\u0445 \u0440\u0435\u0433\u0456\u043e\u043d\u0430\u0445. \u041a\u043e\u0434\u0438 \u0440\u0435\u0433\u0456\u043e\u043d\u0456\u0432:\n  *   2 - \u0412\u0456\u043d\u043d\u0438\u0446\u044c\u043a\u0430 \u043e\u0431\u043b\u0430\u0441\u0442\u044c\n  *  3 - \u0412\u043e\u043b\u0438\u043d\u0441\u044c\u043a\u0430 \u043e\u0431\u043b\u0430\u0441\u0442\u044c\n  *  4 - \u0414\u043d\u0456\u043f\u0440\u043e\u043f\u0435\u0442\u0440\u043e\u0432\u0441\u044c\u043a\u0430 \u043e\u0431\u043b\u0430\u0441\u0442\u044c\n  *  5 - \u0414\u043e\u043d\u0435\u0446\u044c\u043a\u0430 \u043e\u0431\u043b\u0430\u0441\u0442\u044c\n  *  6 - \u0416\u0438\u0442\u043e\u043c\u0438\u0440\u0441\u044c\u043a\u0430 \u043e\u0431\u043b\u0430\u0441\u0442\u044c\n  *  7 - \u0417\u0430\u043a\u0430\u0440\u043f\u0430\u0442\u0441\u044c\u043a\u0430 \u043e\u0431\u043b\u0430\u0441\u0442\u044c\n  *  8 - \u0417\u0430\u043f\u043e\u0440\u0456\u0437\u044c\u043a\u0430 \u043e\u0431\u043b\u0430\u0441\u0442\u044c\n  *  9 - \u0406\u0432\u0430\u043d\u043e-\u0424\u0440\u0430\u043d\u043a\u0456\u0432\u0441\u044c\u043a\u0430 \u043e\u0431\u043b\u0430\u0441\u0442\u044c\n  *  10 - \u041a\u0438\u0457\u0432\u0441\u044c\u043a\u0430 \u043e\u0431\u043b\u0430\u0441\u0442\u044c\n  *  11 - \u041a\u0456\u0440\u043e\u0432\u043e\u0433\u0440\u0430\u0434\u0441\u044c\u043a\u0430 \u043e\u0431\u043b\u0430\u0441\u0442\u044c\n  *  12 - \u041b\u0443\u0433\u0430\u043d\u0441\u044c\u043a\u0430 \u043e\u0431\u043b\u0430\u0441\u0442\u044c\n  *  13 - \u041b\u044c\u0432\u0456\u0432\u0441\u044c\u043a\u0430 \u043e\u0431\u043b\u0430\u0441\u0442\u044c\n  *  14 - \u041c\u0438\u043a\u043e\u043b\u0430\u0457\u0432\u0441\u044c\u043a\u0430 \u043e\u0431\u043b\u0430\u0441\u0442\u044c\n  *  15 - \u041e\u0434\u0435\u0441\u044c\u043a\u0430 \u043e\u0431\u043b\u0430\u0441\u0442\u044c\n  *  16 - \u041f\u043e\u043b\u0442\u0430\u0432\u0441\u044c\u043a\u0430 \u043e\u0431\u043b\u0430\u0441\u0442\u044c\n  *  17 - \u0420\u0456\u0432\u043d\u0435\u043d\u0441\u044c\u043a\u0430 \u043e\u0431\u043b\u0430\u0441\u0442\u044c\n  *  18 - \u0421\u0443\u043c\u0441\u044c\u043a\u0430 \u043e\u0431\u043b\u0430\u0441\u0442\u044c\n  *  19 - \u0422\u0435\u0440\u043d\u043e\u043f\u0456\u043b\u044c\u0441\u044c\u043a\u0430 \u043e\u0431\u043b\u0430\u0441\u0442\u044c\n  *  20 - \u0425\u0430\u0440\u043a\u0456\u0432\u0441\u044c\u043a\u0430 \u043e\u0431\u043b\u0430\u0441\u0442\u044c\n  *  21 - \u0425\u0435\u0440\u0441\u043e\u043d\u0441\u044c\u043a\u0430 \u043e\u0431\u043b\u0430\u0441\u0442\u044c\n  *  22 - \u0425\u043c\u0435\u043b\u044c\u043d\u0438\u0446\u044c\u043a\u0430 \u043e\u0431\u043b\u0430\u0441\u0442\u044c\n  *  23 - \u0427\u0435\u0440\u043a\u0430\u0441\u044c\u043a\u0430 \u043e\u0431\u043b\u0430\u0441\u0442\u044c\n  *  24 - \u0427\u0435\u0440\u043d\u0456\u0432\u0435\u0446\u044c\u043a\u0430 \u043e\u0431\u043b\u0430\u0441\u0442\u044c\n  *  25 - \u0427\u0435\u0440\u043d\u0456\u0433\u0456\u0432\u0441\u044c\u043a\u0430 \u043e\u0431\u043b\u0430\u0441\u0442\u044c\n  *  26 - \u043c. \u041a\u0438\u0457\u0432\n\t\u041d\u0410\u041f\u0420\u0418\u041a\u041b\u0410\u0414: 'host/api/v1/courts/list?regions[]=2&regions[]=3&regions[]=4' - \u043e\u0437\u043d\u0430\u0447\u0430\u0454, \u0449\u043e \u043f\u043e\u0442\u0440\u0456\u0431\u043d\u043e \u043e\u0442\u0440\u0438\u043c\u0430\u0442\u0438 \u0432\u0441\u0456 \u0441\u0443\u0434\u0438 \u0437 \u0412\u0456\u043d\u043d\u0438\u0446\u044c\u043a\u043e\u0457, \u0412\u043e\u043b\u0438\u043d\u0441\u044c\u043a\u043e\u0457 \u0456 \u0414\u043d\u0456\u043f\u0440\u043e\u043f\u0435\u0442\u0440\u043e\u0432\u0441\u044c\u043a\u043e\u0457 \u043e\u0431\u043b\u0430\u0441\u0442\u0435\u0439",
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "example": "7"
+                        },
+                        "collectionFormat": "multi",
+                        "uniqueItems": true
+                    },
+                    {
+                        "name": "instances[]",
+                        "in": "query",
+                        "description": "\u0406\u043d\u0441\u0442\u0430\u043d\u0446\u0456\u0457 \u0432 \u044f\u043a\u0438\u0445 \u043f\u043e\u0442\u0440\u0456\u0431\u043d\u043e \u0437\u0434\u0456\u0439\u0441\u043d\u044e\u0432\u0430\u0442\u0438 \u043f\u043e\u0448\u0443\u043a. \u0412\u0456\u0434\u0441\u0443\u0442\u043d\u0456\u0441\u0442\u044c \u0434\u0430\u043d\u043e\u0433\u043e \u043f\u0430\u0440\u0430\u043c\u0435\u0442\u0440\u0443 \u043e\u0437\u043d\u0430\u0447\u0430\u0454, \u0449\u043e \u043f\u043e\u0448\u0443\u043a \u0431\u0443\u0434\u0435 \u0432\u0456\u0434\u0431\u0443\u0432\u0430\u0442\u0438\u0441\u044c \u0443 \u0432\u0441\u0456\u0445 \u0456\u043d\u0441\u0442\u0430\u043d\u0446\u0456\u044f\u0445. \u041a\u043e\u0434\u0438 \u0456\u043d\u0441\u0442\u0430\u043d\u0446\u0456\u0439:\n  *   1 - \u041a\u0430\u0441\u0430\u0446\u0456\u0439\u043d\u0430 \u0456\u043d\u0441\u0442\u0430\u043d\u0446\u0456\u044f\n  *  2 - \u0410\u043f\u0435\u043b\u044f\u0446\u0456\u0439\u043d\u0430 \u0456\u043d\u0441\u0442\u0430\u043d\u0446\u0456\u044f\n  *  3 - \u041f\u0435\u0440\u0448\u0430 \u0456\u043d\u0441\u0442\u0430\u043d\u0446\u0456\u044f",
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "example": "2"
+                        },
+                        "collectionFormat": "multi",
+                        "uniqueItems": true
+                    },
+                    {
+                        "name": "jurisdictions[]",
+                        "in": "query",
+                        "description": "\u042e\u0440\u0438\u0441\u0434\u0438\u043a\u0446\u0456\u0457 \u0432 \u044f\u043a\u0438\u0445 \u043f\u043e\u0442\u0440\u0456\u0431\u043d\u043e \u0437\u0434\u0456\u0439\u0441\u043d\u044e\u0432\u0430\u0442\u0438 \u043f\u043e\u0448\u0443\u043a. \u0412\u0456\u0434\u0441\u0443\u0442\u043d\u0456\u0441\u0442\u044c \u0434\u0430\u043d\u043e\u0433\u043e \u043f\u0430\u0440\u0430\u043c\u0435\u0442\u0440\u0443 \u043e\u0437\u043d\u0430\u0447\u0430\u0454, \u0449\u043e \u043f\u043e\u0448\u0443\u043a \u0431\u0443\u0434\u0435 \u0432\u0456\u0434\u0431\u0443\u0432\u0430\u0442\u0438\u0441\u044c \u0443 \u0432\u0441\u0456\u0445 \u044e\u0440\u0438\u0441\u0434\u0438\u043a\u0446\u0456\u044f\u0445. \u041a\u043e\u0434\u0438 \u044e\u0440\u0438\u0441\u0434\u0438\u043a\u0446\u0456\u0439:\n  *   1 - \u0417\u0430\u0433\u0430\u043b\u044c\u043d\u0430 \u044e\u0440\u0438\u0441\u0434\u0438\u043a\u0446\u0456\u044f \u0441\u0443\u0434\u0443\n  *  2 - \u0410\u0434\u043c\u0456\u043d\u0456\u0441\u0442\u0440\u0430\u0442\u0438\u0432\u043d\u0430 \u044e\u0440\u0438\u0441\u0434\u0438\u043a\u0446\u0456\u044f \u0441\u0443\u0434\u0443\n  *  3 - \u0413\u043e\u0441\u043f\u043e\u0434\u0430\u0440\u0441\u044c\u043a\u0430 \u044e\u0440\u0438\u0441\u0434\u0438\u043a\u0446\u0456\u044f \u0441\u0443\u0434\u0443",
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "example": "1"
+                        },
+                        "collectionFormat": "multi",
+                        "uniqueItems": true
+                    },
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "description": "\u041f\u043e\u0448\u0443\u043a \u0437\u0430 \u043d\u0430\u0437\u0432\u043e\u044e \u0441\u0443\u0434\u0443. \u041f\u043e\u0432\u0438\u043d\u0435\u043d \u043c\u0456\u0441\u0442\u0438\u0442\u0438 \u0432\u0456\u0434 1 \u0434\u043e 20 \u0441\u0438\u043c\u0432\u043e\u043b\u0456\u0432. \u0411\u0443\u0434\u0443\u0442\u044c \u043f\u043e\u0432\u0435\u0440\u043d\u0443\u0442\u0456 \u0432\u0441\u0456 \u0441\u0443\u0434\u0438 \u043f\u043e\u0447\u0430\u0442\u043e\u043a \u043d\u0430\u0437\u0432\u0438 \u044f\u043a\u0438\u0445 \u0441\u043f\u0456\u0432\u043f\u0430\u0434\u0430\u0454 \u0437 \u0437\u0430\u0434\u0430\u043d\u0438\u043c \u043f\u0430\u0440\u0430\u043c\u0435\u0442\u0440\u043e\u043c.\n\t\u041d\u0410\u041f\u0420\u0418\u041a\u041b\u0410\u0414: 'host/api/v1/courts/list?search=\u0414\u043d\u0456\u043f\u0440' - \u043e\u0437\u043d\u0430\u0447\u0430\u0454, \u0449\u043e \u043f\u043e\u0442\u0440\u0456\u0431\u043d\u043e \u043e\u0442\u0440\u0438\u043c\u0430\u0442\u0438 \u0432\u0441\u0456 \u0441\u0443\u0434\u0438 \u043d\u0430\u0437\u0432\u0430 \u044f\u043a\u0438\u0445 \u043f\u043e\u0447\u0438\u043d\u0430\u0454\u0442\u044c\u0441\u044f \u043d\u0430 '\u0414\u043d\u0456\u043f\u0440%'",
+                        "type": "string",
+                        "allowEmptyValue": false,
+                        "collectionFormat": "multi",
+                        "maxLength": 20,
+                        "minLength": 1,
+                        "uniqueItems": true
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "\u0422\u0438\u043f \u0441\u043e\u0440\u0442\u0443\u0432\u0430\u043d\u043d\u044f \u043f\u0440\u0438 \u043f\u043e\u0432\u0435\u0440\u043d\u0435\u043d\u043d\u0456 \u0440\u0435\u0437\u0443\u043b\u044c\u0442\u0430\u0442\u0456\u0432. \u041a\u043e\u0434\u0438 \u0442\u0438\u043f\u0456\u0432:\n  *   1 - \u0421\u043e\u0440\u0442\u0443\u0432\u0430\u0442\u0438 \u0437\u0430 \u043d\u0430\u0437\u0432\u043e\u044e '\u0410->\u042f'\n  *  2 - \u0421\u043e\u0440\u0442\u0443\u0432\u0430\u0442\u0438 \u0437\u0430 \u043d\u0430\u0437\u0432\u043e\u044e '\u042f->\u0410'\n  *  3 - \u0421\u043e\u0440\u0442\u0443\u0432\u0430\u0442\u0438 \u0437\u0430 \u0440\u0435\u0439\u0442\u0438\u043d\u0433\u043e\u043c '\u043d\u0438\u0437\u044c\u043a\u0438\u0439->\u0432\u0438\u0441\u043e\u043a\u0438\u0439'\n  *  4 - \u0421\u043e\u0440\u0442\u0443\u0432\u0430\u0442\u0438 \u0437\u0430 \u0440\u0435\u0439\u0442\u0438\u043d\u0433\u043e\u043c '\u0432\u0438\u0441\u043e\u043a\u0438\u0439->\u043d\u0438\u0437\u044c\u043a\u0438\u0439'",
+                        "type": "integer",
+                        "allowEmptyValue": false,
+                        "collectionFormat": "multi",
+                        "maximum": 4,
+                        "minimum": 1,
+                        "uniqueItems": true
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "\u041e\u0441\u043a\u0456\u043b\u044c\u043a\u0438 \u0440\u0435\u0437\u0443\u043b\u044c\u0442\u0430\u0442\u0438 \u0432\u0456\u0434\u043e\u0431\u0440\u0430\u0436\u0430\u044e\u0442\u044c\u0441\u044f \u043f\u043e 10 \u0448\u0442. \u043d\u0430 \u0441\u0442\u043e\u0440\u0456\u043d\u0446\u0456, \u0434\u0430\u043d\u0438\u0439 \u043f\u0430\u0440\u0430\u043c\u0435\u0442\u0440 \u0432\u043a\u0430\u0437\u0443\u0454 \u043d\u043e\u043c\u0435\u0440 \u0441\u0442\u043e\u0440\u0456\u043d\u043a\u0438 \u044f\u043a\u0443 \u043f\u043e\u0442\u0440\u0456\u0431\u043d\u043e \u043e\u0442\u0440\u0438\u043c\u0430\u0442\u0438",
+                        "type": "integer",
+                        "allowEmptyValue": false,
+                        "collectionFormat": "multi",
+                        "minimum": 1,
+                        "uniqueItems": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "\u041e\u041a",
+                        "schema": {
+                            "properties": {
+                                "current_page": {
+                                    "description": "\u041f\u043e\u0442\u043e\u0447\u043d\u0430 \u0441\u0442\u043e\u0440\u0456\u043d\u043a\u0430 \u043f\u043e\u0448\u0443\u043a\u0443",
+                                    "type": "integer"
+                                },
+                                "data": {
+                                    "description": "\u0421\u043f\u0438\u0441\u043e\u043a \u0441\u0443\u0434\u043e\u0432\u0438\u0445 \u0443\u0441\u0442\u0430\u043d\u043e\u0432",
+                                    "type": "json"
+                                },
+                                "court_code": {
+                                    "description": "\u041a\u043e\u0434 \u0441\u0443\u0434\u0443",
+                                    "type": "string"
+                                },
+                                "court_name": {
+                                    "description": "\u041d\u0430\u0437\u0432\u0430 \u0441\u0443\u0434\u0443",
+                                    "type": "string"
+                                },
+                                "instance": {
+                                    "description": "\u0406\u043d\u0441\u0442\u0430\u043d\u0446\u0456\u044f \u0441\u0443\u0434\u0443 [\u041f\u0435\u0440\u0448\u0430, \u0410\u043f\u0435\u043b\u044f\u0446\u0456\u0439\u043d\u0430, \u041a\u0430\u0441\u0430\u0446\u0456\u0439\u043d\u0430]",
+                                    "type": "string"
+                                },
+                                "region": {
+                                    "description": "\u0420\u0435\u0433\u0456\u043e\u043d \u0441\u0443\u0434\u0443",
+                                    "type": "string"
+                                },
+                                "jurisdiction": {
+                                    "description": "\u042e\u0440\u0438\u0441\u0434\u0438\u043a\u0446\u0456\u044f \u0441\u0443\u0434\u0443 [\u0417\u0430\u0433\u0430\u043b\u044c\u043d\u0430, \u0410\u0434\u043c\u0456\u043d\u0456\u0441\u0442\u0440\u0430\u0442\u0438\u0432\u043d\u0430, \u0413\u043e\u0441\u043f\u043e\u0434\u0430\u0440\u0441\u044c\u043a\u0430]",
+                                    "type": "string"
+                                },
+                                "address": {
+                                    "description": "\u0410\u0434\u0440\u0435\u0441\u0430 \u0441\u0443\u0434\u0443",
+                                    "type": "string"
+                                },
+                                "head_judge": {
+                                    "description": "\u041f\u0406\u0411 \u0433\u043e\u043b\u043e\u0432\u0443\u044e\u0447\u043e\u0433\u043e \u0441\u0443\u0434\u0434\u0456  || null \u044f\u043a\u0449\u043e \u043d\u0435\u0432\u0456\u0434\u043e\u043c\u043e",
+                                    "type": "string"
+                                },
+                                "rating": {
+                                    "description": "\u041c\u0456\u0441\u0446\u0435 \u0432 \u0440\u0435\u0439\u0442\u0438\u043d\u0433\u0443 \u0441\u0435\u0440\u0435\u0434 \u0443\u0441\u0456\u0445 \u0441\u0443\u0434\u043e\u0432\u0438\u0445 \u0443\u0441\u0442\u0430\u043d\u043e\u0432",
+                                    "type": "integer"
+                                },
+                                "from": {
+                                    "description": "\u0417\u0430\u0433\u0430\u043b\u044c\u043d\u0438\u0439 \u043d\u043e\u043c\u0435\u0440 \u0440\u0435\u0437\u0443\u043b\u044c\u0442\u0430\u0442\u0443 \u0432 \u043f\u043e\u0448\u0443\u043a\u0443, \u044f\u043a\u0438\u0439 \u0454 \u043f\u0435\u0440\u0448\u0438\u043c \u043d\u0430 \u0434\u0430\u043d\u0456\u0439 \u0441\u0442\u043e\u0440\u0456\u043d\u0446\u0456",
+                                    "type": "integer"
+                                },
+                                "last_page": {
+                                    "description": "\u041e\u0441\u0442\u0430\u043d\u043d\u044f \u0441\u0442\u043e\u0440\u0456\u043d\u043a\u0430 \u0432 \u043f\u043e\u0448\u0443\u043a\u0443",
+                                    "type": "integer"
+                                },
+                                "path": {
+                                    "description": "URL \u043f\u043e\u0442\u043e\u0447\u043d\u043e\u0433\u043e \u0440\u0435\u0441\u0443\u0440\u0441\u0443",
+                                    "type": "string"
+                                },
+                                "per_page": {
+                                    "description": "\u041a\u0456\u043b\u044c\u043a\u0456\u0441\u0442\u044c \u0440\u0435\u0437\u0443\u043b\u044c\u0442\u0430\u0442\u0456\u0432 \u043d\u0430 \u043f\u043e\u0442\u043e\u0447\u043d\u0456\u0439 \u0441\u0442\u043e\u0440\u0456\u043d\u0446\u0456",
+                                    "type": "integer"
+                                },
+                                "total": {
+                                    "description": "\u0417\u0430\u0433\u0430\u043b\u044c\u043d\u0430 \u043a\u0456\u043b\u044c\u043a\u0456\u0441\u0442\u044c \u0440\u0435\u0437\u0443\u043b\u044c\u0442\u0430\u0442\u0456\u0432",
+                                    "type": "integer"
+                                },
+                                "to": {
+                                    "description": "\u0417\u0430\u0433\u0430\u043b\u044c\u043d\u0438\u0439 \u043d\u043e\u043c\u0435\u0440 \u0440\u0435\u0437\u0443\u043b\u044c\u0442\u0430\u0442\u0443 \u0432 \u043f\u043e\u0448\u0443\u043a\u0443, \u044f\u043a\u0438\u0439 \u0454 \u043e\u0441\u0442\u0430\u043d\u043d\u0456\u043c \u043d\u0430 \u0434\u0430\u043d\u0456\u0439 \u0441\u0442\u043e\u0440\u0456\u043d\u0446\u0456",
+                                    "type": "integer"
+                                }
+                            }
+                        },
+                        "examples": {
+                            "application/json": {
+                                "current_page": 1,
+                                "data": [
+                                    {
+                                        "court_code": 2390,
+                                        "court_name": "\u0410\u043f\u0435\u043b\u044f\u0446\u0456\u0439\u043d\u0438\u0439 \u0441\u0443\u0434 \u0427\u0435\u0440\u043a\u0430\u0441\u044c\u043a\u043e\u0457 \u043e\u0431\u043b\u0430\u0441\u0442\u0456",
+                                        "instance": "\u0410\u043f\u0435\u043b\u044f\u0446\u0456\u0439\u043d\u0430",
+                                        "region": "\u0427\u0435\u0440\u043a\u0430\u0441\u044c\u043a\u0430 \u043e\u0431\u043b\u0430\u0441\u0442\u044c",
+                                        "jurisdiction": "\u0417\u0430\u0433\u0430\u043b\u044c\u043d\u0430",
+                                        "address": "\u0432\u0443\u043b.\u0413\u043e\u0433\u043e\u043b\u044f, 316;  \u0432\u0443\u043b. \u0412\u0435\u0440\u0445\u043d\u044f \u0413\u043e\u0440\u043e\u0432\u0430, 29, \u043c.\u0427\u0435\u0440\u043a\u0430\u0441\u0438, 18001",
+                                        "head_judge": null,
+                                        "rating": 142
+                                    },
+                                    {
+                                        "court_code": 2690,
+                                        "court_name": "\u0410\u043f\u0435\u043b\u044f\u0446\u0456\u0439\u043d\u0438\u0439 \u0441\u0443\u0434 \u043c\u0456\u0441\u0442\u0430 \u041a\u0438\u0454\u0432\u0430",
+                                        "instance": "\u0410\u043f\u0435\u043b\u044f\u0446\u0456\u0439\u043d\u0430",
+                                        "region": "\u043c. \u041a\u0438\u0457\u0432",
+                                        "jurisdiction": "\u0417\u0430\u0433\u0430\u043b\u044c\u043d\u0430",
+                                        "address": "03110, \u043c. \u041a\u0438\u0457\u0432, \u0432\u0443\u043b. \u0421\u043e\u043b\u043e\u043c'\u044f\u043d\u0441\u044c\u043a\u0430, 2-\u0410",
+                                        "head_judge": null,
+                                        "rating": 0
+                                    },
+                                    {
+                                        "court_code": 607,
+                                        "court_name": "\u0404\u043c\u0456\u043b\u044c\u0447\u0438\u043d\u0441\u044c\u043a\u0438\u0439 \u0440\u0430\u0439\u043e\u043d\u043d\u0438\u0439 \u0441\u0443\u0434 \u0416\u0438\u0442\u043e\u043c\u0438\u0440\u0441\u044c\u043a\u043e\u0457 \u043e\u0431\u043b\u0430\u0441\u0442\u0456",
+                                        "instance": "\u041f\u0435\u0440\u0448\u0430",
+                                        "region": "\u0416\u0438\u0442\u043e\u043c\u0438\u0440\u0441\u044c\u043a\u0430 \u043e\u0431\u043b\u0430\u0441\u0442\u044c",
+                                        "jurisdiction": "\u0417\u0430\u0433\u0430\u043b\u044c\u043d\u0430",
+                                        "address": "11200, \u0441\u043c\u0442. \u0404\u043c\u0456\u043b\u044c\u0447\u0438\u043d\u0435, \u0432\u0443\u043b \u041d\u0435\u0437\u0430\u043b\u0435\u0436\u043d\u043e\u0441\u0442\u0456, 2",
+                                        "head_judge": null,
+                                        "rating": 0
+                                    }
+                                ],
+                                "first_page_url": "http://toecyd.top/api/v1/judges/list?page=1",
+                                "from": 1,
+                                "last_page": 745,
+                                "last_page_url": "http://toecyd.top/api/v1/judges/list?page=745",
+                                "next_page_url": "http://toecyd.top/api/v1/judges/list?page=2",
+                                "path": "http://toecyd.local/api/v1/judges/list",
+                                "per_page": 10,
+                                "prev_page_url": null,
+                                "to": 10,
+                                "total": 7445
+                            }
+                        }
+                    },
+                    "405": {
+                        "description": "\u041c\u0435\u0442\u043e\u0434, \u0437 \u044f\u043a\u0438\u043c \u0432\u0438\u043a\u043e\u043d\u0443\u0432\u0430\u0432\u0441\u044f \u0437\u0430\u043f\u0438\u0442, \u043d\u0435 \u0434\u043e\u0437\u0432\u043e\u043b\u0435\u043d\u043e \u0432\u0438\u043a\u043e\u0440\u0438\u0441\u0442\u043e\u0432\u0443\u0432\u0430\u0442\u0438 \u0434\u043b\u044f \u0437\u0430\u0434\u0430\u043d\u043e\u0433\u043e \u0440\u0435\u0441\u0443\u0440\u0441\u0443; \u043d\u0430\u043f\u0440\u0438\u043a\u043b\u0430\u0434, \u0437\u0430\u043f\u0438\u0442 \u0431\u0443\u0432 \u0437\u0434\u0456\u0439\u0441\u043d\u0435\u043d\u0438\u0439 \u0437\u0430 \u043c\u0435\u0442\u043e\u0434\u043e\u043c POST, \u0445\u043e\u0447\u0430 \u043e\u0447\u0456\u043a\u0443\u0454\u0442\u044c\u0441\u044f GET."
+                    },
+                    "422": {
+                        "description": "\u041f\u0435\u0440\u0435\u0434\u0430\u043d\u0456 \u043d\u0435 \u0432\u0430\u043b\u0456\u0434\u043d\u0456 \u0434\u0430\u043d\u0456, \u0443 \u0432\u0456\u0434\u043f\u043e\u0432\u0456\u0434\u0456 \u0431\u0443\u0434\u0435 \u0437\u0430\u0437\u043d\u0430\u0447\u0435\u043d\u0430 \u043f\u0440\u0438\u0447\u0438\u043d\u0430",
+                        "examples": {
+                            "application/json": {
+                                "message": "The given data was invalid.",
+                                "errors": {
+                                    "regions.0": [
+                                        "\u043c\u0430\u043a\u0441\u0438\u043c\u0430\u043b\u044c\u043d\u0435 \u0437\u043d\u0430\u0447\u0435\u043d\u043d\u044f \u0434\u043b\u044f regions.0 = 26."
+                                    ],
+                                    "instances.0": [
+                                        "\u043c\u0456\u043d\u0456\u043c\u0430\u043b\u044c\u043d\u0435 \u0437\u043d\u0430\u0447\u0435\u043d\u043d\u044f \u0434\u043b\u044f instances.0 = 1."
+                                    ],
+                                    "instances.1": [
+                                        "\u043c\u0430\u043a\u0441\u0438\u043c\u0430\u043b\u044c\u043d\u0435 \u0437\u043d\u0430\u0447\u0435\u043d\u043d\u044f \u0434\u043b\u044f instances.1 = 3."
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/courts/autocomplete": {
+            "get": {
+                "tags": [
+                    "\u0421\u0443\u0434\u0438"
+                ],
+                "summary": "\u041f\u0435\u0440\u0435\u043b\u0456\u043a \u043d\u0430\u0437\u0432 \u0441\u0443\u0434\u043e\u0432\u0438\u0445 \u0443\u0441\u0442\u0430\u043d\u043e\u0432 \u0434\u043b\u044f \u043f\u043e\u043b\u044f \u0430\u0432\u0442\u043e\u0434\u043e\u043f\u043e\u0432\u043d\u0435\u043d\u043d\u044f",
+                "description": "\u0428\u0432\u0438\u0434\u043a\u043e \u043e\u0442\u0440\u0438\u043c\u0430\u0442\u0438 \u043f\u0435\u0440\u0435\u043b\u0456\u043a \u043d\u0430\u0437\u0432 \u0441\u0443\u0434\u0456\u0432 \u0434\u043b\u044f '\u0436\u0438\u0432\u043e\u0433\u043e \u043f\u043e\u0448\u0443\u043a\u0443' \u0412\u0441\u0456 \u0440\u0435\u0437\u0443\u043b\u044c\u0442\u0430\u0442\u0438 \u043f\u043e\u0448\u0443\u043a\u0443 \u043f\u043e\u0432\u0435\u0440\u0442\u0430\u044e\u0442\u044c\u0441\u044f \u043f\u043e 5 \u0448\u0442.",
+                "operationId": "courts-autocomplete",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/Content-Type"
+                    },
+                    {
+                        "$ref": "#/parameters/X-Requested-With"
+                    },
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "description": "\u041f\u043e\u0448\u0443\u043a \u0437\u0430 \u043d\u0430\u0437\u0432\u043e\u044e \u0441\u0443\u0434\u0443. \u041f\u043e\u0432\u0438\u043d\u0435\u043d \u043c\u0456\u0441\u0442\u0438\u0442\u0438 \u0432\u0456\u0434 1 \u0434\u043e 20 \u0441\u0438\u043c\u0432\u043e\u043b\u0456\u0432. \u0411\u0443\u0434\u0443\u0442\u044c \u043f\u043e\u0432\u0435\u0440\u043d\u0443\u0442\u0456 \u043d\u0430\u0437\u0432\u0438 \u0432\u0441\u0456\u0445 \u0441\u0443\u0434\u0456\u0432, \u043f\u043e\u0447\u0430\u0442\u043e\u043a \u043d\u0430\u0437\u0432\u0438 \u044f\u043a\u0438\u0445 \u0441\u043f\u0456\u0432\u043f\u0430\u0434\u0430\u0454 \u0437 \u0437\u0430\u0434\u0430\u043d\u0438\u043c \u043f\u0430\u0440\u0430\u043c\u0435\u0442\u0440\u043e\u043c.\n\t\u041d\u0410\u041f\u0420\u0418\u041a\u041b\u0410\u0414: 'host/api/v1/courts/autocomplete?search=\u0414\u043d\u0456\u043f\u0440' - \u043e\u0437\u043d\u0430\u0447\u0430\u0454, \u0449\u043e \u043f\u043e\u0442\u0440\u0456\u0431\u043d\u043e \u043e\u0442\u0440\u0438\u043c\u0430\u0442\u0438 \u0441\u0443\u0434\u0438, \u043d\u0430\u0437\u0432\u0430 \u044f\u043a\u0438\u0445 \u043f\u043e\u0447\u0438\u043d\u0430\u0454\u0442\u044c\u0441\u044f \u043d\u0430 '\u0414\u043d\u0456\u043f\u0440%'",
+                        "required": true,
+                        "type": "string",
+                        "allowEmptyValue": false,
+                        "collectionFormat": "multi",
+                        "maxLength": 20,
+                        "minLength": 1,
+                        "uniqueItems": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "\u041e\u041a",
+                        "schema": {
+                            "properties": {
+                                "name": {
+                                    "description": "\u041d\u0430\u0437\u0432\u0430 \u0441\u0443\u0434\u0443",
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "name": "\u0428\u0435\u0432\u0447\u0435\u043d\u043a\u0456\u0432\u0441\u044c\u043a\u0438\u0439 \u0440\u0430\u0439\u043e\u043d\u043d\u0438\u0439 \u0441\u0443\u0434 \u043c. \u0417\u0430\u043f\u043e\u0440\u0456\u0436\u0436\u044f"
+                                },
+                                {
+                                    "name": "\u0428\u0435\u0432\u0447\u0435\u043d\u043a\u0456\u0432\u0441\u044c\u043a\u0438\u0439 \u0440\u0430\u0439\u043e\u043d\u043d\u0438\u0439 \u0441\u0443\u0434 \u043c. \u041b\u044c\u0432\u043e\u0432\u0430"
+                                },
+                                {
+                                    "name": "\u0428\u0435\u0432\u0447\u0435\u043d\u043a\u0456\u0432\u0441\u044c\u043a\u0438\u0439 \u0440\u0430\u0439\u043e\u043d\u043d\u0438\u0439 \u0441\u0443\u0434 \u0425\u0430\u0440\u043a\u0456\u0432\u0441\u044c\u043a\u043e\u0457 \u043e\u0431\u043b\u0430\u0441\u0442\u0456"
+                                },
+                                {
+                                    "name": "\u0428\u0435\u043f\u0435\u0442\u0456\u0432\u0441\u044c\u043a\u0438\u0439 \u043c\u0456\u0441\u044c\u043a\u0440\u0430\u0439\u043e\u043d\u043d\u0438\u0439 \u0441\u0443\u0434 \u0425\u043c\u0435\u043b\u044c\u043d\u0438\u0446\u044c\u043a\u043e\u0457 \u043e\u0431\u043b\u0430\u0441\u0442\u0456"
+                                },
+                                {
+                                    "name": "\u0428\u0435\u0432\u0447\u0435\u043d\u043a\u0456\u0432\u0441\u044c\u043a\u0438\u0439 \u0440\u0430\u0439\u043e\u043d\u043d\u0438\u0439 \u0441\u0443\u0434 \u043c. \u0427\u0435\u0440\u043d\u0456\u0432\u0446\u0456\u0432"
+                                }
+                            ]
+                        }
+                    },
+                    "422": {
+                        "description": "\u041f\u0435\u0440\u0435\u0434\u0430\u043d\u0456 \u043d\u0435 \u0432\u0430\u043b\u0456\u0434\u043d\u0456 \u0434\u0430\u043d\u0456, \u0443 \u0432\u0456\u0434\u043f\u043e\u0432\u0456\u0434\u0456 \u0431\u0443\u0434\u0435 \u0437\u0430\u0437\u043d\u0430\u0447\u0435\u043d\u0430 \u043f\u0440\u0438\u0447\u0438\u043d\u0430",
+                        "examples": {
+                            "application/json": {
+                                "message": "The given data was invalid.",
+                                "errors": {
+                                    "search": [
+                                        "search \u043c\u043e\u0436\u0435 \u043c\u0456\u0441\u0442\u0438\u0442\u0438 \u043b\u0438\u0448\u0435 \u043b\u0456\u0442\u0435\u0440\u0438."
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "405": {
+                        "description": "\u041c\u0435\u0442\u043e\u0434, \u0437 \u044f\u043a\u0438\u043c \u0432\u0438\u043a\u043e\u043d\u0443\u0432\u0430\u0432\u0441\u044f \u0437\u0430\u043f\u0438\u0442, \u043d\u0435 \u0434\u043e\u0437\u0432\u043e\u043b\u0435\u043d\u043e \u0432\u0438\u043a\u043e\u0440\u0438\u0441\u0442\u043e\u0432\u0443\u0432\u0430\u0442\u0438 \u0434\u043b\u044f \u0437\u0430\u0434\u0430\u043d\u043e\u0433\u043e \u0440\u0435\u0441\u0443\u0440\u0441\u0443; \u043d\u0430\u043f\u0440\u0438\u043a\u043b\u0430\u0434, \u0437\u0430\u043f\u0438\u0442 \u0431\u0443\u0432 \u0437\u0434\u0456\u0439\u0441\u043d\u0435\u043d\u0438\u0439 \u0437\u0430 \u043c\u0435\u0442\u043e\u0434\u043e\u043c POST, \u0445\u043e\u0447\u0430 \u043e\u0447\u0456\u043a\u0443\u0454\u0442\u044c\u0441\u044f GET."
+                    }
+                }
+            }
+        },
+        "/courts/{id}/bookmark": {
+            "put": {
+                "tags": [
+                    "\u0421\u0443\u0434\u0438"
+                ],
+                "summary": "\u0414\u043e\u0434\u0430\u0442\u0438 \u0441\u0443\u0434 \u0432 \u0437\u0430\u043a\u043b\u0430\u0434\u043a\u0438",
+                "description": "\u0414\u043e\u0434\u0430\u0442\u0438 \u0441\u0443\u0434, \u0432 \u0437\u0430\u043a\u043b\u0430\u0434\u043a\u0438 \u043f\u043e\u0442\u043e\u0447\u043d\u043e\u0433\u043e \u043a\u043e\u0440\u0438\u0441\u0442\u0443\u0432\u0430\u0447\u0430",
+                "operationId": "courts-addBookmark",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/Content-Type"
+                    },
+                    {
+                        "$ref": "#/parameters/X-Requested-With"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id \u0441\u0443\u0434\u0443, \u044f\u043a\u0438\u0439 \u043f\u043e\u0442\u0440\u0456\u0431\u043d\u043e \u0434\u043e\u0434\u0430\u0442\u0438 \u0432 \u0437\u0430\u043a\u043b\u0430\u0434\u043a\u0438 \u043f\u043e\u0442\u043e\u0447\u043d\u043e\u0433\u043e \u043a\u043e\u0440\u0438\u0441\u0442\u0443\u0432\u0430\u0447\u0430",
+                        "required": true,
+                        "type": "integer",
+                        "allowEmptyValue": false,
+                        "collectionFormat": "multi",
+                        "maximum": 10000,
+                        "minimum": 100,
+                        "uniqueItems": true
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "\u0417\u0430\u043a\u043b\u0430\u0434\u043a\u0430 \u0443\u043f\u0456\u0448\u043d\u043e \u0441\u0442\u0432\u043e\u0440\u0435\u043d\u0430",
+                        "examples": {
+                            "application/json": {
+                                "message": "\u0417\u0430\u043a\u043b\u0430\u0434\u043a\u0430 \u0443\u0441\u043f\u0456\u0448\u043d\u043e \u0441\u0442\u0432\u043e\u0440\u0435\u043d\u0430"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "\u041d\u0435\u043e\u0431\u0445\u0456\u0434\u043d\u0430 \u0430\u0443\u0442\u0435\u043d\u0442\u0438\u0444\u0456\u043a\u0430\u0446\u0456\u044f \u043a\u043e\u0440\u0438\u0441\u0442\u0443\u0432\u0430\u0447\u0430",
+                        "examples": {
+                            "application/json": {
+                                "message": "Unauthenticated"
+                            }
+                        }
+                    },
+                    "405": {
+                        "description": "\u041c\u0435\u0442\u043e\u0434, \u0437 \u044f\u043a\u0438\u043c \u0432\u0438\u043a\u043e\u043d\u0443\u0432\u0430\u0432\u0441\u044f \u0437\u0430\u043f\u0438\u0442, \u043d\u0435 \u0434\u043e\u0437\u0432\u043e\u043b\u0435\u043d\u043e \u0432\u0438\u043a\u043e\u0440\u0438\u0441\u0442\u043e\u0432\u0443\u0432\u0430\u0442\u0438 \u0434\u043b\u044f \u0437\u0430\u0434\u0430\u043d\u043e\u0433\u043e \u0440\u0435\u0441\u0443\u0440\u0441\u0443; \u043d\u0430\u043f\u0440\u0438\u043a\u043b\u0430\u0434, \u0437\u0430\u043f\u0438\u0442 \u0431\u0443\u0432 \u0437\u0434\u0456\u0439\u0441\u043d\u0435\u043d\u0438\u0439 \u0437\u0430 \u043c\u0435\u0442\u043e\u0434\u043e\u043c POST, \u0445\u043e\u0447\u0430 \u043e\u0447\u0456\u043a\u0443\u0454\u0442\u044c\u0441\u044f PUT."
+                    },
+                    "422": {
+                        "description": "\u041f\u0435\u0440\u0435\u0434\u0430\u043d\u0456 \u043d\u0435 \u0432\u0430\u043b\u0456\u0434\u043d\u0456 \u0434\u0430\u043d\u0456, \u043d\u0435\u0456\u0441\u043d\u0443\u044e\u0447\u0438\u0439 id, \u0430\u0431\u043e \u0434\u0430\u043d\u0430 \u0437\u0430\u043a\u043b\u0430\u0434\u043a\u0430 \u0432\u0436\u0435 \u0456\u0441\u043d\u0443\u0454",
+                        "examples": {
+                            "application/json": {
+                                "message": "\u041d\u0435\u0456\u0441\u043d\u0443\u044e\u0447\u0438\u0439 id"
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "\u0421\u0443\u0434\u0438"
+                ],
+                "summary": "\u0412\u0438\u0434\u0430\u043b\u0438\u0442\u0438 \u0441\u0443\u0434 \u0437 \u0437\u0430\u043a\u043b\u0430\u0434\u043e\u043a",
+                "description": "\u0412\u0438\u0434\u0430\u043b\u0438\u0442\u0438 \u0441\u0443\u0434, \u0437 \u0437\u0430\u043a\u043b\u0430\u0434\u043e\u043a \u043f\u043e\u0442\u043e\u0447\u043d\u043e\u0433\u043e \u043a\u043e\u0440\u0438\u0441\u0442\u0443\u0432\u0430\u0447\u0430",
+                "operationId": "courts-delBookmark",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/Content-Type"
+                    },
+                    {
+                        "$ref": "#/parameters/X-Requested-With"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id \u0441\u0443\u0434\u0443, \u044f\u043a\u0438\u0439 \u043f\u043e\u0442\u0440\u0456\u0431\u043d\u043e \u0432\u0438\u0434\u0430\u043b\u0438\u0442\u0438 \u0437 \u0437\u0430\u043a\u043b\u0430\u0434\u043e\u043a \u043f\u043e\u0442\u043e\u0447\u043d\u043e\u0433\u043e \u043a\u043e\u0440\u0438\u0441\u0442\u0443\u0432\u0430\u0447\u0430",
+                        "required": true,
+                        "type": "integer",
+                        "allowEmptyValue": false,
+                        "collectionFormat": "multi",
+                        "maximum": 10000,
+                        "minimum": 100,
+                        "uniqueItems": true
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "\u0417\u0430\u043a\u043b\u0430\u0434\u043a\u0430 \u0443\u043f\u0456\u0448\u043d\u043e \u0432\u0438\u0434\u0430\u043b\u0435\u043d\u0430"
+                    },
+                    "401": {
+                        "description": "\u041d\u0435\u043e\u0431\u0445\u0456\u0434\u043d\u0430 \u0430\u0443\u0442\u0435\u043d\u0442\u0438\u0444\u0456\u043a\u0430\u0446\u0456\u044f \u043a\u043e\u0440\u0438\u0441\u0442\u0443\u0432\u0430\u0447\u0430",
+                        "examples": {
+                            "application/json": {
+                                "message": "Unauthenticated"
+                            }
+                        }
+                    },
+                    "405": {
+                        "description": "\u041c\u0435\u0442\u043e\u0434, \u0437 \u044f\u043a\u0438\u043c \u0432\u0438\u043a\u043e\u043d\u0443\u0432\u0430\u0432\u0441\u044f \u0437\u0430\u043f\u0438\u0442, \u043d\u0435 \u0434\u043e\u0437\u0432\u043e\u043b\u0435\u043d\u043e \u0432\u0438\u043a\u043e\u0440\u0438\u0441\u0442\u043e\u0432\u0443\u0432\u0430\u0442\u0438 \u0434\u043b\u044f \u0437\u0430\u0434\u0430\u043d\u043e\u0433\u043e \u0440\u0435\u0441\u0443\u0440\u0441\u0443; \u043d\u0430\u043f\u0440\u0438\u043a\u043b\u0430\u0434, \u0437\u0430\u043f\u0438\u0442 \u0431\u0443\u0432 \u0437\u0434\u0456\u0439\u0441\u043d\u0435\u043d\u0438\u0439 \u0437\u0430 \u043c\u0435\u0442\u043e\u0434\u043e\u043c POST, \u0445\u043e\u0447\u0430 \u043e\u0447\u0456\u043a\u0443\u0454\u0442\u044c\u0441\u044f DELETE."
+                    },
+                    "422": {
+                        "description": "\u041f\u0435\u0440\u0435\u0434\u0430\u043d\u0456 \u043d\u0435 \u0432\u0430\u043b\u0456\u0434\u043d\u0456 \u0434\u0430\u043d\u0456, \u043d\u0435\u0456\u0441\u043d\u0443\u044e\u0447\u0438\u0439 id, \u0430\u0431\u043e \u0434\u0430\u043d\u043e\u0457 \u0437\u0430\u043a\u043b\u0430\u0434\u043a\u0438 \u043d\u0435 \u0456\u0441\u043d\u0443\u0454",
+                        "examples": {
+                            "application/json": {
+                                "message": "\u0417\u0430\u043a\u043b\u0430\u0434\u043a\u0438 \u043d\u0435 \u0456\u0441\u043d\u0443\u0454"
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
+            }
+        },
+        "/user/history": {
+            "get": {
+                "tags": [
+                    "\u041e\u0441\u043e\u0431\u0438\u0441\u0442\u0438\u0439 \u043a\u0430\u0431\u0456\u043d\u0435\u0442"
+                ],
+                "summary": "\u041e\u0442\u0440\u0438\u043c\u0430\u0442\u0438 \u0456\u0441\u0442\u043e\u0440\u0456\u044e \u043f\u0435\u0440\u0435\u0433\u043b\u044f\u0434\u0456\u0432",
+                "description": "\u041e\u0442\u0440\u0438\u043c\u0430\u0442\u0438 \u0456\u0441\u0442\u043e\u0440\u0456\u044e \u043f\u0435\u0440\u0435\u0433\u043b\u044f\u0434\u0456\u0432 \u043f\u043e\u0442\u043e\u0447\u043d\u043e\u0433\u043e \u043a\u043e\u0440\u0438\u0441\u0442\u0443\u0432\u0430\u0447\u0430",
+                "operationId": "user-history",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/Content-Type"
+                    },
+                    {
+                        "$ref": "#/parameters/X-Requested-With"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "\u041e\u041a",
+                        "schema": {
+                            "properties": {
+                                "id": {
+                                    "description": "id \u0441\u0443\u0434\u0434\u0456",
+                                    "type": "string"
+                                },
+                                "court_name": {
+                                    "description": "\u041d\u0430\u0437\u0432\u0430 \u0441\u0443\u0434\u0443, \u0432 \u044f\u043a\u043e\u043c\u0443 \u0434\u0430\u043d\u0438\u0439 \u0441\u0443\u0434\u0434\u044f \u043f\u0440\u0430\u0446\u044e\u0454",
+                                    "type": "string"
+                                },
+                                "surname": {
+                                    "description": "\u041f\u0440\u0456\u0437\u0432\u0438\u0449\u0435 \u0441\u0443\u0434\u0434\u0456",
+                                    "type": "string"
+                                },
+                                "name": {
+                                    "description": "\u0406\u043c'\u044f \u0441\u0443\u0434\u0434\u0456",
+                                    "type": "string"
+                                },
+                                "patronymic": {
+                                    "description": "\u041f\u043e \u0431\u0430\u0442\u044c\u043a\u043e\u0432\u0456 \u0441\u0443\u0434\u0434\u0456",
+                                    "type": "string"
+                                },
+                                "photo": {
+                                    "description": "URL \u0444\u043e\u0442\u043e \u0441\u0443\u0434\u0434\u0456",
+                                    "type": "string"
+                                },
+                                "status": {
+                                    "description": "Id \u043f\u043e\u0442\u043e\u0447\u043d\u043e\u0433\u043e \u0441\u0442\u0430\u0442\u0443\u0441\u0443 \u0441\u0443\u0434\u0434\u0456\n  *   1 - \u0441\u0443\u0434\u0434\u044f \u043d\u0430 \u0440\u043e\u0431\u043e\u0442\u0456\n  *  2 - \u041d\u0430 \u043b\u0456\u043a\u0430\u0440\u043d\u044f\u043d\u043e\u043c\u0443\n  *  3 - \u0423 \u0432\u0456\u0434\u043f\u0443\u0441\u0442\u0446\u0456\n  *  4 - \u0412\u0456\u0434\u0441\u0443\u043d\u0456\u0439 \u043d\u0430 \u0440\u043e\u0431\u043e\u0447\u043e\u043c\u0443 \u043c\u0456\u0441\u0446\u0456 \u0437 \u0456\u043d\u0448\u0438\u0445 \u043f\u0440\u0438\u0447\u0438\u043d\n  *  5 - \u041f\u0440\u0438\u043f\u0438\u043d\u0435\u043d\u043e \u043f\u043e\u0432\u043d\u043e\u0432\u0430\u0436\u0435\u043d\u043d\u044f",
+                                    "type": "integer"
+                                },
+                                "updated_status": {
+                                    "description": "\u0414\u0430\u0442\u0430 \u043e\u0441\u0442\u0430\u043d\u043d\u044c\u043e\u0433\u043e \u043e\u043d\u043e\u0432\u043b\u0435\u043d\u043d\u044f \u0441\u0442\u0430\u0442\u0443\u0441\u0443",
+                                    "type": "string"
+                                },
+                                "due_date_status": {
+                                    "description": "\u0414\u0430\u0442\u0430 \u0434\u0456\u0457 \u0441\u0442\u0430\u0442\u0443\u0441\u0443 (\u0434\u043e \u044f\u043a\u043e\u0433\u043e \u0447\u0430\u0441\u0443 \u0434\u0430\u043d\u0438\u0439 \u0441\u0442\u0430\u0442\u0443\u0441 \u0431\u0443\u0434\u0435 \u0434\u0456\u044f\u0442\u0438)",
+                                    "type": "string"
+                                },
+                                "rating": {
+                                    "description": "\u041c\u0456\u0441\u0446\u0435 \u0432 \u0440\u0435\u0439\u0442\u0438\u043d\u0433\u0443 \u0441\u0435\u0440\u0435\u0434 \u0443\u0441\u0456\u0445 \u0441\u0443\u0434\u0434\u0456\u0432",
+                                    "type": "integer"
+                                },
+                                "is_bookmark": {
+                                    "description": "\u0427\u0438 \u0437\u043d\u0430\u0445\u043e\u0434\u0438\u0442\u044c\u0441\u044f \u0432 \u0437\u0430\u043a\u043b\u0430\u0434\u043a\u0430\u0445 \u0432 \u043f\u043e\u0442\u043e\u0447\u043d\u043e\u0433\u043e \u043a\u043e\u0440\u0438\u0441\u0442\u0443\u0432\u0430\u0447\u0430 1 - \u0442\u0430\u043a,  0 - \u043d\u0456",
+                                    "type": "integer"
+                                }
+                            }
+                        },
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "id": 7514,
+                                    "court_name": "\u041e\u0432\u0440\u0443\u0446\u044c\u043a\u0438\u0439 \u0440\u0430\u0439\u043e\u043d\u043d\u0438\u0439 \u0441\u0443\u0434 \u0416\u0438\u0442\u043e\u043c\u0438\u0440\u0441\u044c\u043a\u043e\u0457 \u043e\u0431\u043b\u0430\u0441\u0442\u0456",
+                                    "surname": "\u0427\u0438\u0447\u0438\u0440\u043a\u043e",
+                                    "name": "\u0412",
+                                    "patronymic": "\u0410",
+                                    "photo": "/img/judges/no_photo.jpg",
+                                    "status": 1,
+                                    "updated_status": "23.5.2018",
+                                    "due_date_status": null,
+                                    "rating": 0,
+                                    "is_bookmark": 1
+                                },
+                                {
+                                    "id": 5650,
+                                    "court_name": "\u0410\u043f\u0435\u043b\u044f\u0446\u0456\u0439\u043d\u0438\u0439 \u0441\u0443\u0434 \u0427\u0435\u0440\u043d\u0456\u0433\u0456\u0432\u0441\u044c\u043a\u043e\u0457 \u043e\u0431\u043b\u0430\u0441\u0442\u0456",
+                                    "surname": "\u0428\u0430\u0440\u0430\u043f\u043e\u0432\u0430",
+                                    "name": "\u041e\u043b\u0435\u043d\u0430",
+                                    "patronymic": "\u041b\u0435\u043e\u043d\u0456\u0434\u0456\u0432\u043d\u0430",
+                                    "photo": "/img/judges/no_photo.jpg",
+                                    "status": 1,
+                                    "updated_status": "23.5.2018",
+                                    "due_date_status": null,
+                                    "rating": 0,
+                                    "is_bookmark": 0
+                                },
+                                {
+                                    "id": 1078,
+                                    "court_name": "\u0413\u043e\u0441\u043f\u043e\u0434\u0430\u0440\u0441\u044c\u043a\u0438\u0439 \u0441\u0443\u0434 \u041e\u0434\u0435\u0441\u044c\u043a\u043e\u0457 \u043e\u0431\u043b\u0430\u0441\u0442\u0456",
+                                    "surname": "\u0428\u0430\u0440\u0430\u0442\u043e\u0432",
+                                    "name": "\u042e\u0440\u0456\u0439",
+                                    "patronymic": "\u0410\u043d\u0430\u0442\u043e\u043b\u0456\u0439\u043e\u0432\u0438\u0447",
+                                    "photo": "/img/judges/no_photo.jpg",
+                                    "status": 1,
+                                    "updated_status": "21.7.2018",
+                                    "due_date_status": null,
+                                    "rating": 0,
+                                    "is_bookmark": 0
+                                },
+                                {
+                                    "id": 9064,
+                                    "court_name": "\u0412\u0438\u0449\u0438\u0439 \u0433\u043e\u0441\u043f\u043e\u0434\u0430\u0440\u0441\u044c\u043a\u0438\u0439 \u0441\u0443\u0434 \u0423\u043a\u0440\u0430\u0457\u043d\u0438",
+                                    "surname": "\u0428\u0430\u0440\u0433\u0430\u043b\u043e",
+                                    "name": "\u0412",
+                                    "patronymic": "\u0406",
+                                    "photo": "/img/judges/no_photo.jpg",
+                                    "status": 1,
+                                    "updated_status": "23.5.2018",
+                                    "due_date_status": null,
+                                    "rating": 0,
+                                    "is_bookmark": 0
+                                },
+                                {
+                                    "id": 4526,
+                                    "court_name": "\u0413\u043e\u0441\u043f\u043e\u0434\u0430\u0440\u0441\u044c\u043a\u0438\u0439 \u0441\u0443\u0434 \u0417\u0430\u043f\u043e\u0440\u0456\u0437\u044c\u043a\u043e\u0457 \u043e\u0431\u043b\u0430\u0441\u0442\u0456",
+                                    "surname": "\u0428\u0435\u0432\u0447\u0435\u043d\u043a\u043e",
+                                    "name": "\u0422",
+                                    "patronymic": "\u041c",
+                                    "photo": "/img/judges/no_photo.jpg",
+                                    "status": 1,
+                                    "updated_status": "23.5.2018",
+                                    "due_date_status": null,
+                                    "rating": 0,
+                                    "is_bookmark": 0
+                                }
+                            ]
+                        }
+                    },
+                    "401": {
+                        "description": "\u041d\u0435\u043e\u0431\u0445\u0456\u0434\u043d\u0430 \u0430\u0443\u0442\u0435\u043d\u0442\u0438\u0444\u0456\u043a\u0430\u0446\u0456\u044f \u043a\u043e\u0440\u0438\u0441\u0442\u0443\u0432\u0430\u0447\u0430, \u043c\u043e\u0436\u043b\u0438\u0432\u043e \u0442\u043e\u043a\u0435\u043d \u043d\u0435 \u0456\u0441\u043d\u0443\u0454, \u0430\u0431\u043e \u0430\u043d\u0443\u043b\u044c\u043e\u0432\u0430\u043d\u0438\u0439",
+                        "examples": {
+                            "application/json": {
+                                "message": "Unauthenticated"
+                            }
+                        }
+                    },
+                    "405": {
+                        "description": "\u041c\u0435\u0442\u043e\u0434, \u0437 \u044f\u043a\u0438\u043c \u0432\u0438\u043a\u043e\u043d\u0443\u0432\u0430\u0432\u0441\u044f \u0437\u0430\u043f\u0438\u0442, \u043d\u0435 \u0434\u043e\u0437\u0432\u043e\u043b\u0435\u043d\u043e \u0432\u0438\u043a\u043e\u0440\u0438\u0441\u0442\u043e\u0432\u0443\u0432\u0430\u0442\u0438 \u0434\u043b\u044f \u0437\u0430\u0434\u0430\u043d\u043e\u0433\u043e \u0440\u0435\u0441\u0443\u0440\u0441\u0443; \u043d\u0430\u043f\u0440\u0438\u043a\u043b\u0430\u0434, \u0437\u0430\u043f\u0438\u0442 \u0431\u0443\u0432 \u0437\u0434\u0456\u0439\u0441\u043d\u0435\u043d\u0438\u0439 \u0437\u0430 \u043c\u0435\u0442\u043e\u0434\u043e\u043c POST, \u0445\u043e\u0447\u0430 \u043e\u0447\u0456\u043a\u0443\u0454\u0442\u044c\u0441\u044f GET."
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
+            }
+        },
         "/judges/list": {
             "get": {
                 "tags": [
@@ -382,7 +1404,7 @@
                     {
                         "name": "expired",
                         "in": "query",
-                        "description": "\u042f\u043a\u0449\u043e \u043f\u0435\u0440\u0435\u0434\u0430\u043d\u0438\u0439 \u0446\u0435\u0439 \u043f\u0430\u0440\u0430\u043c\u0435\u0442\u0440, \u0442\u043e \u0432 \u0440\u0435\u0437\u0443\u043b\u044c\u0442\u0430\u0442\u0438 \u043f\u043e\u0448\u0443\u043a\u0443 \u0431\u0443\u0434\u0443\u0442\u044c \u0432\u043a\u043b\u044e\u0447\u0435\u043d\u0456 \u0441\u0443\u0434\u0434\u0456 \u0437\u0456 \u0441\u0442\u0430\u0442\u0443\u0441\u043e\u043c '\u0437\u0430\u043a\u0456\u043d\u0447\u0438\u043b\u0438\u0441\u044c \u043f\u043e\u0432\u043d\u043e\u0432\u0430\u0436\u0435\u043d\u043d\u044f'",
+                        "description": "\u042f\u043a\u0449\u043e \u043f\u0435\u0440\u0435\u0434\u0430\u043d\u0438\u0439 \u0446\u0435\u0439 \u043f\u0430\u0440\u0430\u043c\u0435\u0442\u0440 \u0456\u0437 \u0437\u043d\u0430\u0447\u0435\u043d\u043d\u044f\u043c > 0, \u0442\u043e \u0432 \u0440\u0435\u0437\u0443\u043b\u044c\u0442\u0430\u0442\u0438 \u043f\u043e\u0448\u0443\u043a\u0443 \u0431\u0443\u0434\u0443\u0442\u044c \u0432\u043a\u043b\u044e\u0447\u0435\u043d\u0456 \u0441\u0443\u0434\u0434\u0456 \u0437\u0456 \u0441\u0442\u0430\u0442\u0443\u0441\u043e\u043c '\u0437\u0430\u043a\u0456\u043d\u0447\u0438\u043b\u0438\u0441\u044c \u043f\u043e\u0432\u043d\u043e\u0432\u0430\u0436\u0435\u043d\u043d\u044f'",
                         "type": "integer",
                         "allowEmptyValue": false,
                         "collectionFormat": "multi",
@@ -657,7 +1679,7 @@
                     {
                         "name": "expired",
                         "in": "query",
-                        "description": "\u042f\u043a\u0449\u043e \u043f\u0435\u0440\u0435\u0434\u0430\u043d\u0438\u0439 \u0446\u0435\u0439 \u043f\u0430\u0440\u0430\u043c\u0435\u0442\u0440, \u0442\u043e \u0432 \u0440\u0435\u0437\u0443\u043b\u044c\u0442\u0430\u0442\u0438 \u043f\u043e\u0448\u0443\u043a\u0443 \u0431\u0443\u0434\u0443\u0442\u044c \u0432\u043a\u043b\u044e\u0447\u0435\u043d\u0456 \u0441\u0443\u0434\u0434\u0456 \u0437\u0456 \u0441\u0442\u0430\u0442\u0443\u0441\u043e\u043c '\u0437\u0430\u043a\u0456\u043d\u0447\u0438\u043b\u0438\u0441\u044c \u043f\u043e\u0432\u043d\u043e\u0432\u0430\u0436\u0435\u043d\u043d\u044f'",
+                        "description": "\u042f\u043a\u0449\u043e \u043f\u0435\u0440\u0435\u0434\u0430\u043d\u0438\u0439 \u0446\u0435\u0439 \u043f\u0430\u0440\u0430\u043c\u0435\u0442\u0440 \u0456\u0437 \u0437\u043d\u0430\u0447\u0435\u043d\u043d\u044f\u043c > 0, \u0442\u043e \u0432 \u0440\u0435\u0437\u0443\u043b\u044c\u0442\u0430\u0442\u0438 \u043f\u043e\u0448\u0443\u043a\u0443 \u0431\u0443\u0434\u0443\u0442\u044c \u0432\u043a\u043b\u044e\u0447\u0435\u043d\u0456 \u0441\u0443\u0434\u0434\u0456 \u0437\u0456 \u0441\u0442\u0430\u0442\u0443\u0441\u043e\u043c '\u0437\u0430\u043a\u0456\u043d\u0447\u0438\u043b\u0438\u0441\u044c \u043f\u043e\u0432\u043d\u043e\u0432\u0430\u0436\u0435\u043d\u043d\u044f'",
                         "type": "integer",
                         "allowEmptyValue": false,
                         "collectionFormat": "multi",
@@ -835,7 +1857,7 @@
                     "\u0421\u0443\u0434\u0434\u0456"
                 ],
                 "summary": "\u041f\u0435\u0440\u0435\u043b\u0456\u043a \u041f\u0406\u0411 \u0441\u0443\u0434\u0434\u0456\u0432 \u0434\u043b\u044f \u043f\u043e\u043b\u044f \u0430\u0432\u0442\u043e\u0434\u043e\u043f\u043e\u0432\u043d\u0435\u043d\u043d\u044f",
-                "description": "\u041e\u0442\u0440\u0438\u043c\u0430\u0442\u0438 \u0448\u0432\u0438\u0434\u043a\u0438\u0439 \u043f\u0435\u0440\u0435\u043b\u0456\u043a \u041f\u0406\u0411 \u0441\u0443\u0434\u0434\u0456\u0432 \u0434\u043b\u044f '\u0436\u0438\u0432\u043e\u0433\u043e \u043f\u043e\u0448\u0443\u043a\u0443' \u0412\u0441\u0456 \u0440\u0435\u0437\u0443\u043b\u044c\u0442\u0430\u0442\u0438 \u043f\u043e\u0448\u0443\u043a\u0443 \u043f\u043e\u0432\u0435\u0440\u0442\u0430\u044e\u0442\u044c\u0441\u044f \u043f\u043e 5 \u0448\u0442.",
+                "description": "\u0428\u0432\u0438\u0434\u043a\u043e \u043e\u0442\u0440\u0438\u043c\u0430\u0442\u0438 \u043f\u0435\u0440\u0435\u043b\u0456\u043a \u041f\u0406\u0411 \u0441\u0443\u0434\u0434\u0456\u0432 \u0434\u043b\u044f '\u0436\u0438\u0432\u043e\u0433\u043e \u043f\u043e\u0448\u0443\u043a\u0443' \u0412\u0441\u0456 \u0440\u0435\u0437\u0443\u043b\u044c\u0442\u0430\u0442\u0438 \u043f\u043e\u0448\u0443\u043a\u0443 \u043f\u043e\u0432\u0435\u0440\u0442\u0430\u044e\u0442\u044c\u0441\u044f \u043f\u043e 5 \u0448\u0442.",
                 "operationId": "judges-autocomplete",
                 "produces": [
                     "application/json"

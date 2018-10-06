@@ -24,7 +24,7 @@ class CourtSessions extends Command
      *
      * @var string
      */
-    protected $description = 'Отримати список всіх судових засідаль всіх судів';
+    protected $description = 'Отримати список всіх судових засідань всіх судів';
 
     /**
      * Create a new command instance.
