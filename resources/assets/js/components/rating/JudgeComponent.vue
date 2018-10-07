@@ -1,10 +1,10 @@
 <template>
     <div>
         <div class="card-body px-4 py-2">
-            <div v-if="!this.judgesList">За заданими параметрами нічого не знайдено</div>
-            <div v-if="this.judgesList" class="container">
-                <div class="judge-component row py-3 " v-for="(judge, index) of this.judgesList" :key="index">   
-                    <div class="col-9 d-flex pl-0">
+            <div v-if="!this.judgesList || this.judgesList.length == 0">За заданими параметрами нічого не знайдено</div>
+            <div v-if="this.judgesList && this.judgesList.length > 0">
+                <div class="judge-component row py-3 " v-for="(judge, index) of this.judgesList" :key="index">
+                    <div class="col-9 d-flex pl-0 main-info">
                         <div class="mr-3"><img class="avatar" :src="judge.photo" alt="фото" /></div>
                         <div>
                             <h4>
@@ -13,29 +13,56 @@
                             <h5>{{ judge.court_name }}</h5>
                         </div>
                     </div>
-                    <div class="col-3 pl-0">
-                        <div> <i class="fa fa-line-chart" aria-hidden="true"> {{ judge.rating }} </i></div>
-                        <div v-if="isAuth">
-                            <span v-if="judge.is_bookmark" @click="changeBookmarkStatus(judge)">відстежується <i class="fa fa-bookmark" aria-hidden="true"></i></span>
-                            <span v-if="!judge.is_bookmark" @click="changeBookmarkStatus(judge)">відстежувати <i class="fa fa-bookmark-o" aria-hidden="true"></i></span>
+                    <div class="col-3 pl-0 additional-info">
+                        <div>
+                            <span v-if="isAuth">
+                                <span v-if="judge.is_bookmark" @click="changeBookmarkStatus(judge)">відстежується <i class="fa fa-bookmark" aria-hidden="true"></i></span>
+                                <span v-if="!judge.is_bookmark" @click="changeBookmarkStatus(judge)">відстежувати <i class="fa fa-bookmark-o" aria-hidden="true"></i></span>
+                            </span>
+                            <i class="fa fa-line-chart float-right" aria-hidden="true"> {{ judge.rating }} </i>
                         </div>
-                        <div v-if="isAuth">
-                            <span title="змінити статус судді">Змінити статус <i class="fa fa-pencil p-1" aria-hidden="true"  data-toggle="modal" data-target="#changeJudgeStatus"></i></span>
+                        <div>
+                            <span v-if="judge.status === 1"> <!-- Cуддя на роботі  -->
+                                            <i class="fa fa-briefcase" aria-hidden="true"></i>
+                                             на роботі {{ judge.due_date_status ? '('+judge.due_date_status+')' : null }}
+                                        </span>
+                            <span v-if="judge.status === 2"> <!-- На лікарняному  -->
+                                            <i class="fa fa-medkit" aria-hidden="true"></i>
+                                             на лікарняному {{ judge.due_date_status ? '(до '+judge.due_date_status+')' : null }}
+                                        </span>
+                            <span v-if="judge.status === 3"> <!-- У відпустці   -->
+                                            <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
+                                             у відпустці {{ judge.due_date_status ? '(до '+judge.due_date_status+')' : null }}
+                                        </span>
+                            <span v-if="judge.status === 4"> <!-- Відсуній на робочому місці з інших причин  -->
+                                            <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
+                                             відсуній на робочому місці з інших причин {{ judge.due_date_status ? '(до '+judge.due_date_status+')' : null }}
+                                        </span>
+                            <span v-if="judge.status === 5"> <!-- Припинено повноваження  -->
+                                            <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
+                                             припинено повноваження {{ judge.due_date_status ? '(до '+judge.due_date_status+')' : null }}
+                                        </span>
+                            <i v-if="isAuth" class="fa fa-pencil p-1" aria-hidden="true" @click="this.showModal = true"></i>
                         </div>
-    
                     </div>
     
                 </div>
+    
             </div>
         </div>
+        <judge-update-status v-if="showModal"></judge-update-status>
     </div>
+    <!-- </div> -->
 </template>
 
 <script>
+import JudgeUpdateStatus from './JudgeUpdateStatus.vue';
+
     export default {
         name: "judge-component",
-        data(){
+        data() {
             return {
+                showModal: false,
                 isAuth: localStorage.getItem('token'),
                 headers: {
                     "Content-Type": "application/json",
@@ -49,8 +76,8 @@
             changeBookmarkStatus(judge) {
                 // console.log(judge)
                 if (judge.is_bookmark === 0) {
-                    console.log('bootmark = 0')
-                    console.log(judge.id)
+                    // console.log('bootmark = 0')
+                    // console.log(judge.id)
                     axios({
                             method: 'put',
                             url: `/api/v1/judges/${judge.id}/bookmark`,
@@ -67,7 +94,7 @@
                             //     }                              
                             // });
                             judge.is_bookmark = 1;
-                            console.log('Response Bookmark',response);
+                            // console.log('Response Bookmark',response);
                         })
                         .catch(error => {
                             console.log(error);
@@ -84,7 +111,7 @@
                         })
                         .then(response => {
                             judge.is_bookmark = 0;
-                            console.log(response);
+                            // console.log(response);
                         })
                         .catch(error => {
                             console.log(error);
@@ -92,21 +119,70 @@
                 }
             }
         },
+        components: {
+            JudgeUpdateStatus
+        }
     }
 </script>
 
 <style scoped lang="scss">
+    @import "../../../sass/_variables.scss";
     .judge-component:not(:last-child) {
         border-bottom: 1px solid lightgray;
-    }  
-    .avatar {
-        width: 130px;
-        height: 130px;
     }
-    a {
-        color: #6291ba;
+    
+    .additional-info {
+        font-size: .8rem;
+        color: grey;
+        .fa {
+            font-size: 1rem;
+        }
+        .bookmark,
+        .fa-pencil {
+            cursor: pointer;
+        }
+        /* styles for font awesome */
+        .fa-bookmark-o,
+        .fa-bookmark {
+            color: #2b989b;
+        }
+        .fa-briefcase {
+            color: green;
+        }
+        .fa-line-chart {
+            color: #6291ba;
+        }
+        .fa-medkit {
+            color: red;
+        }
+        .fa-calendar-check-o,
+        .fa-calendar-minus-o,
+        .fa-calendar-times-o {
+            color: #2b989b;
+        }
+        .fa-pencil {
+            color: #6c757d;
+            -webkit-transition-duration: 0.3s;
+            -o-transition-duration: 0.3s;
+            -moz-transition-duration: 0.3s;
+            transition-duration: 0.3s;
+        }
+        .fa-pencil:hover {
+            color: #6291ba;
+            box-shadow: 0 0 3px rgba(0, 0, 0, 0.5), inset 0 0 1px rgba(0, 0, 0, 0.7);
+        }
     }
-    h5 {
-        font-size: 1.2rem;
+    
+    .main-info {
+        .avatar {
+            width: 120px;
+            height: 120px;
+        }
+        a {
+            color: #6291ba;
+        }
+        h5 {
+            font-size: 1.2rem;
+        }
     }
 </style>

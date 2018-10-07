@@ -9,5 +9,7 @@
 </script>
 
 <style scoped>
+  @import "../../../sass/_variables.scss";
+
 
 </style>

@@ -1382,7 +1382,7 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(13);
-module.exports = __webpack_require__(113);
+module.exports = __webpack_require__(114);
 
 
 /***/ }),
@@ -1412,7 +1412,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_auth_Registration_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10__components_auth_Registration_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_rating_JudgesList_vue__ = __webpack_require__(68);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_rating_JudgesList_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_11__components_rating_JudgesList_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_user_UserProfile_vue__ = __webpack_require__(83);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_user_UserProfile_vue__ = __webpack_require__(84);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_user_UserProfile_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_12__components_user_UserProfile_vue__);
 
 
@@ -25744,10 +25744,10 @@ if(false) {
 
 exports = module.exports = __webpack_require__(0)(false);
 // imports
-
+exports.i(__webpack_require__(71), "");
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* styles for welcome page */\n#welcome-page[data-v-52579982] {\n   height: 100vh;\nwidth: 100%;\nbackground-color: #4686a08f;\nbackground-attachment: fixed, fixed, fixed;\nbackground-image: -webkit-gradient(linear, left top, left bottom, from(rgb(48, 129, 207)), to(rgb(130, 219, 133)));\nbackground-image: linear-gradient(to bottom, rgb(48, 129, 207) 0%, rgb(130, 219, 133) 100%);\n/* background-position: top left, center center, center center;\nbackground-size: auto, cover, cover; */\noverflow: hidden;\n}\n#title-label[data-v-52579982] {\n    font-family: BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif;\n    color: white;\n}\n#title-label h1[data-v-52579982] {\n    font-size: 7em;\n    -webkit-animation-name: title1-data-v-52579982;\n            animation-name: title1-data-v-52579982;\n    -webkit-animation-duration: 1s;\n            animation-duration: 1s;\n}\n#title-label div[data-v-52579982] {\n    font-size: 2.8em;\n    text-decoration: overline;\n    margin-top: -22px;\n    -webkit-animation-name: title2-data-v-52579982;\n            animation-name: title2-data-v-52579982;\n    -webkit-animation-duration: 1s;\n            animation-duration: 1s;\n}\n\n\n/* Анімація для welcome.blade.php титульного надпису */\n@-webkit-keyframes title1-data-v-52579982 {\n0% {\n        color: rgba(255, 255, 255, 0.1);\n        font-size: 4.5em;\n}\n10% {\n        color: rgba(255, 255, 255, 0.2);\n        font-size: 5em;\n}\n20% {\n        color: rgba(255, 255, 255, 0.3);\n        font-size: 5.4em;\n}\n30% {\n        color: rgba(255, 255, 255, 0.4);\n        font-size: 5.7em;\n}\n40% {\n        color: rgba(255, 255, 255, 0.5);\n        font-size: 6em;\n}\n50% {\n        color: rgba(255, 255, 255, 0.6);\n        font-size: 6.3em;\n}\n60% {\n        color: rgba(255, 255, 255, 0.7);\n        font-size: 6.5em;\n}\n70% {\n        color: rgba(255, 255, 255, 0.7);\n        font-size: 6.7em;\n}\n80% {\n        color: rgba(255, 255, 255, 0.8);\n        font-size: 6.8em;\n}\n90% {\n        color: rgba(255, 255, 255, 0.9);\n        font-size: 6.9em;\n}\n}\n@keyframes title1-data-v-52579982 {\n0% {\n        color: rgba(255, 255, 255, 0.1);\n        font-size: 4.5em;\n}\n10% {\n        color: rgba(255, 255, 255, 0.2);\n        font-size: 5em;\n}\n20% {\n        color: rgba(255, 255, 255, 0.3);\n        font-size: 5.4em;\n}\n30% {\n        color: rgba(255, 255, 255, 0.4);\n        font-size: 5.7em;\n}\n40% {\n        color: rgba(255, 255, 255, 0.5);\n        font-size: 6em;\n}\n50% {\n        color: rgba(255, 255, 255, 0.6);\n        font-size: 6.3em;\n}\n60% {\n        color: rgba(255, 255, 255, 0.7);\n        font-size: 6.5em;\n}\n70% {\n        color: rgba(255, 255, 255, 0.7);\n        font-size: 6.7em;\n}\n80% {\n        color: rgba(255, 255, 255, 0.8);\n        font-size: 6.8em;\n}\n90% {\n        color: rgba(255, 255, 255, 0.9);\n        font-size: 6.9em;\n}\n}\n@-webkit-keyframes title2-data-v-52579982 {\n0% {\n        color: rgba(255, 255, 255, 0.1);\n        font-size: 1em;\n        text-decoration: none;\n}\n10% {\n        color: rgba(255, 255, 255, 0.2);\n        font-size: 1.3em;\n}\n20% {\n        color: rgba(255, 255, 255, 0.3);\n        font-size: 1.5em;\n}\n30% {\n        color: rgba(255, 255, 255, 0.4);\n        font-size: 1.7em;\n}\n40% {\n        color: rgba(255, 255, 255, 0.5);\n        font-size: 1.9em;\n}\n50% {\n        color: rgba(255, 255, 255, 0.6);\n        font-size: 2.1em;\n}\n60% {\n        color: rgba(255, 255, 255, 0.7);\n        font-size: 2.3em;\n}\n70% {\n        color: rgba(255, 255, 255, 0.7);\n        font-size: 2.5em;\n}\n80% {\n        color: rgba(255, 255, 255, 0.8);\n        font-size: 2.6em;\n}\n90% {\n        color: rgba(255, 255, 255, 0.9);\n        font-size: 2.7em;\n        text-decoration: none;\n}\n}\n@keyframes title2-data-v-52579982 {\n0% {\n        color: rgba(255, 255, 255, 0.1);\n        font-size: 1em;\n        text-decoration: none;\n}\n10% {\n        color: rgba(255, 255, 255, 0.2);\n        font-size: 1.3em;\n}\n20% {\n        color: rgba(255, 255, 255, 0.3);\n        font-size: 1.5em;\n}\n30% {\n        color: rgba(255, 255, 255, 0.4);\n        font-size: 1.7em;\n}\n40% {\n        color: rgba(255, 255, 255, 0.5);\n        font-size: 1.9em;\n}\n50% {\n        color: rgba(255, 255, 255, 0.6);\n        font-size: 2.1em;\n}\n60% {\n        color: rgba(255, 255, 255, 0.7);\n        font-size: 2.3em;\n}\n70% {\n        color: rgba(255, 255, 255, 0.7);\n        font-size: 2.5em;\n}\n80% {\n        color: rgba(255, 255, 255, 0.8);\n        font-size: 2.6em;\n}\n90% {\n        color: rgba(255, 255, 255, 0.9);\n        font-size: 2.7em;\n        text-decoration: none;\n}\n}\n", ""]);
+exports.push([module.i, "\n/* styles for welcome page */\n#welcome-page[data-v-52579982] {\n     height: 100vh;\n  width: 100%;\n  background-color: #4686a08f;\n  background-attachment: fixed, fixed, fixed;\n  background-image: -webkit-gradient(linear, left top, left bottom, from(rgb(48, 129, 207)), to(rgb(130, 219, 133)));\n  background-image: linear-gradient(to bottom, rgb(48, 129, 207) 0%, rgb(130, 219, 133) 100%);\n  /* background-position: top left, center center, center center;\n  background-size: auto, cover, cover; */\n  overflow: hidden;\n}\n#title-label[data-v-52579982] {\n      font-family: BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif;\n      color: white;\n}\n#title-label h1[data-v-52579982] {\n      font-size: 7em;\n      -webkit-animation-name: title1-data-v-52579982;\n              animation-name: title1-data-v-52579982;\n      -webkit-animation-duration: 1s;\n              animation-duration: 1s;\n}\n#title-label div[data-v-52579982] {\n      font-size: 2.8em;\n      text-decoration: overline;\n      margin-top: -22px;\n      -webkit-animation-name: title2-data-v-52579982;\n              animation-name: title2-data-v-52579982;\n      -webkit-animation-duration: 1s;\n              animation-duration: 1s;\n}\n  \n  \n  /* Анімація для welcome.blade.php титульного надпису */\n@-webkit-keyframes title1-data-v-52579982 {\n0% {\n          color: rgba(255, 255, 255, 0.1);\n          font-size: 4.5em;\n}\n10% {\n          color: rgba(255, 255, 255, 0.2);\n          font-size: 5em;\n}\n20% {\n          color: rgba(255, 255, 255, 0.3);\n          font-size: 5.4em;\n}\n30% {\n          color: rgba(255, 255, 255, 0.4);\n          font-size: 5.7em;\n}\n40% {\n          color: rgba(255, 255, 255, 0.5);\n          font-size: 6em;\n}\n50% {\n          color: rgba(255, 255, 255, 0.6);\n          font-size: 6.3em;\n}\n60% {\n          color: rgba(255, 255, 255, 0.7);\n          font-size: 6.5em;\n}\n70% {\n          color: rgba(255, 255, 255, 0.7);\n          font-size: 6.7em;\n}\n80% {\n          color: rgba(255, 255, 255, 0.8);\n          font-size: 6.8em;\n}\n90% {\n          color: rgba(255, 255, 255, 0.9);\n          font-size: 6.9em;\n}\n}\n@keyframes title1-data-v-52579982 {\n0% {\n          color: rgba(255, 255, 255, 0.1);\n          font-size: 4.5em;\n}\n10% {\n          color: rgba(255, 255, 255, 0.2);\n          font-size: 5em;\n}\n20% {\n          color: rgba(255, 255, 255, 0.3);\n          font-size: 5.4em;\n}\n30% {\n          color: rgba(255, 255, 255, 0.4);\n          font-size: 5.7em;\n}\n40% {\n          color: rgba(255, 255, 255, 0.5);\n          font-size: 6em;\n}\n50% {\n          color: rgba(255, 255, 255, 0.6);\n          font-size: 6.3em;\n}\n60% {\n          color: rgba(255, 255, 255, 0.7);\n          font-size: 6.5em;\n}\n70% {\n          color: rgba(255, 255, 255, 0.7);\n          font-size: 6.7em;\n}\n80% {\n          color: rgba(255, 255, 255, 0.8);\n          font-size: 6.8em;\n}\n90% {\n          color: rgba(255, 255, 255, 0.9);\n          font-size: 6.9em;\n}\n}\n@-webkit-keyframes title2-data-v-52579982 {\n0% {\n          color: rgba(255, 255, 255, 0.1);\n          font-size: 1em;\n          text-decoration: none;\n}\n10% {\n          color: rgba(255, 255, 255, 0.2);\n          font-size: 1.3em;\n}\n20% {\n          color: rgba(255, 255, 255, 0.3);\n          font-size: 1.5em;\n}\n30% {\n          color: rgba(255, 255, 255, 0.4);\n          font-size: 1.7em;\n}\n40% {\n          color: rgba(255, 255, 255, 0.5);\n          font-size: 1.9em;\n}\n50% {\n          color: rgba(255, 255, 255, 0.6);\n          font-size: 2.1em;\n}\n60% {\n          color: rgba(255, 255, 255, 0.7);\n          font-size: 2.3em;\n}\n70% {\n          color: rgba(255, 255, 255, 0.7);\n          font-size: 2.5em;\n}\n80% {\n          color: rgba(255, 255, 255, 0.8);\n          font-size: 2.6em;\n}\n90% {\n          color: rgba(255, 255, 255, 0.9);\n          font-size: 2.7em;\n          text-decoration: none;\n}\n}\n@keyframes title2-data-v-52579982 {\n0% {\n          color: rgba(255, 255, 255, 0.1);\n          font-size: 1em;\n          text-decoration: none;\n}\n10% {\n          color: rgba(255, 255, 255, 0.2);\n          font-size: 1.3em;\n}\n20% {\n          color: rgba(255, 255, 255, 0.3);\n          font-size: 1.5em;\n}\n30% {\n          color: rgba(255, 255, 255, 0.4);\n          font-size: 1.7em;\n}\n40% {\n          color: rgba(255, 255, 255, 0.5);\n          font-size: 1.9em;\n}\n50% {\n          color: rgba(255, 255, 255, 0.6);\n          font-size: 2.1em;\n}\n60% {\n          color: rgba(255, 255, 255, 0.7);\n          font-size: 2.3em;\n}\n70% {\n          color: rgba(255, 255, 255, 0.7);\n          font-size: 2.5em;\n}\n80% {\n          color: rgba(255, 255, 255, 0.8);\n          font-size: 2.6em;\n}\n90% {\n          color: rgba(255, 255, 255, 0.9);\n          font-size: 2.7em;\n          text-decoration: none;\n}\n}\n", ""]);
 
 // exports
 
@@ -27049,13 +27049,13 @@ var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
   __webpack_require__(69)
-  __webpack_require__(71)
+  __webpack_require__(72)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(73)
+var __vue_script__ = __webpack_require__(74)
 /* template */
-var __vue_template__ = __webpack_require__(82)
+var __vue_template__ = __webpack_require__(83)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -27125,10 +27125,10 @@ if(false) {
 
 exports = module.exports = __webpack_require__(0)(false);
 // imports
-
+exports.i(__webpack_require__(71), "");
 
 // module
-exports.push([module.i, "\nbutton {\n  cursor: pointer;\n}\n.bg-active {\n  background-color: #2b989b;\n}\n.button:active {\n  outline: none;\n}\n.button:focus {\n  outline: none;\n}\ndiv.pr-2.leading-loose {\n  display: none !important;\n}\n.disabled {\n  color: grey;\n}\n", ""]);
+exports.push([module.i, "\n/* styles for pagination must be not scoped */\nbutton {\n  cursor: pointer;\n}\n.bg-active {\n  background-color: #2b989b;\n}\n.button:active {\n  outline: none;\n}\n.button:focus {\n  outline: none;\n}\ndiv.pr-2.leading-loose {\n  display: none !important;\n}\n.disabled {\n  color: grey;\n}\n.dots {\n  background-color: transparent;\n  border: none !important;\n}\n", ""]);
 
 // exports
 
@@ -27137,10 +27137,24 @@ exports.push([module.i, "\nbutton {\n  cursor: pointer;\n}\n.bg-active {\n  back
 /* 71 */
 /***/ (function(module, exports, __webpack_require__) {
 
+exports = module.exports = __webpack_require__(0)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n// Body\n$body-bg: #eceaea;;\n\n// Borders\n$laravel-border-color: darken($body-bg, 10%);\n$list-group-border-color: $laravel-border-color;\n\n$card-border-color: $laravel-border-color;\n\n// Brands\n$main: #304040;\n$primary: #6291ba;\n$info: #8eb4cb;\n$success: #2ab27b;\n$warning: #cbb956;\n$danger: #bf5329;\n\n// Typography\n$font-family-sans-serif: \"Raleway\", sans-serif;\n$font-size-base: .875rem; // 14px\n$line-height-base: 1.6;\n$text-color: #636b6f;\n\n// Inputs\n$input-border-color: lighten($text-color, 40%);\n$input-placeholder-color: lighten($text-color, 30%);\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 72 */
+/***/ (function(module, exports, __webpack_require__) {
+
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(72);
+var content = __webpack_require__(73);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -27160,7 +27174,7 @@ if(false) {
 }
 
 /***/ }),
-/* 72 */
+/* 73 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(false);
@@ -27168,42 +27182,23 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n@charset \"UTF-8\";\n/* Стилі для фільтрів */\n.pagination[data-v-6e5d8876] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n}\n.select-sort[data-v-6e5d8876] {\n  width: 290px;\n}\n#filters[data-v-6e5d8876] {\n  font-size: 0.9em;\n}\n#filters h6[data-v-6e5d8876] {\n  color: #4c88bd;\n}\n\n/* Customize the label (the container) */\n#filters ul label[data-v-6e5d8876] {\n  display: block;\n  position: relative;\n  padding-left: 35px;\n  margin-bottom: 10px;\n  cursor: pointer;\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  user-select: none;\n}\n\n/* Hide the browser's default checkbox */\n#filters ul input[data-v-6e5d8876] {\n  position: absolute;\n  opacity: 0;\n  cursor: pointer;\n}\n\n/* Create a custom checkbox */\n.checkmark[data-v-6e5d8876] {\n  position: absolute;\n  top: 0;\n  left: 0;\n  height: 21px;\n  width: 21px;\n  background-color: #eee;\n}\n\n/* When the checkbox is checked, add a blue background */\n#filters ul label input:checked ~ .checkmark[data-v-6e5d8876] {\n  background-color: #2b989b;\n}\n\n/* Create the checkmark/indicator (hidden when not checked) */\n.checkmark[data-v-6e5d8876]:after {\n  content: \"\";\n  position: absolute;\n  display: none;\n}\n\n/* Show the checkmark when checked */\n#filters ul label input:checked ~ .checkmark[data-v-6e5d8876]:after {\n  display: block;\n}\n\n/* Style the checkmark/indicator */\n#filters ul label .checkmark[data-v-6e5d8876]:after {\n  left: 9px;\n  top: 5px;\n  width: 5px;\n  height: 10px;\n  border: solid white;\n  border-width: 0 3px 3px 0;\n  -webkit-transform: rotate(45deg);\n  transform: rotate(45deg);\n}\n#apply-filters[data-v-6e5d8876] {\n  background-color: white;\n  position: -webkit-sticky;\n  position: sticky;\n  bottom: 0;\n}\n\n/* if display is bigger then 1200px, correct position */\n/* styles for page elements */\ndiv.col-12.col-lg-2 > img[data-v-6e5d8876] {\n  width: 120px;\n  height: 120px;\n}\n#sorting-type[data-v-6e5d8876],\n.bookmark[data-v-6e5d8876],\n.fa-pencil[data-v-6e5d8876] {\n  cursor: pointer;\n}\n#sorting-type input[data-v-6e5d8876] {\n  display: none;\n}\ndiv.card-body.p-2 h5 a[data-v-6e5d8876] {\n  color: #3d7ee5;\n}\n\n/* if display is small then 992 hide part of pagination */\n@media (max-width: 992px) {\n.pagination li[data-v-6e5d8876]:nth-child(even) {\n    display: none;\n}\n}\n\n/* styles for font awesome */\n.fa-filter[data-v-6e5d8876] {\n  font-size: 21px;\n  color: #6291ba;\n}\n.fa-sort-alpha-asc[data-v-6e5d8876],\n.fa-sort-alpha-desc[data-v-6e5d8876] {\n  font-size: 18px;\n  color: #3d7ee5;\n}\n.fa-bookmark-o[data-v-6e5d8876],\n.fa-bookmark[data-v-6e5d8876] {\n  font-size: 18px;\n  color: #2b989b;\n}\n.fa-briefcase[data-v-6e5d8876] {\n  color: green;\n  font-size: 15px;\n}\n.fa-line-chart[data-v-6e5d8876] {\n  color: #6291ba;\n}\n.fa-medkit[data-v-6e5d8876] {\n  font-size: 17px;\n  color: red;\n}\n.fa-calendar-check-o[data-v-6e5d8876],\n.fa-calendar-minus-o[data-v-6e5d8876],\n.fa-calendar-times-o[data-v-6e5d8876] {\n  font-size: 17px;\n  color: #2b989b;\n}\n.fa-pencil[data-v-6e5d8876] {\n  color: #6c757d;\n  -webkit-transition-duration: 0.3s;\n  transition-duration: 0.3s;\n}\n.fa-pencil[data-v-6e5d8876]:hover {\n  color: #6291ba;\n  -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 0.5), inset 0 0 1px rgba(0, 0, 0, 0.7);\n          box-shadow: 0 0 3px rgba(0, 0, 0, 0.5), inset 0 0 1px rgba(0, 0, 0, 0.7);\n}\n\n/* styles for autocomplete field  */\n.autocomplete[data-v-6e5d8876] {\n  /*the container must be positioned relative:*/\n  position: relative;\n  display: inline-block;\n}\n.autocomplete-items[data-v-6e5d8876] {\n  position: absolute;\n  font-size: 0.9em;\n  border: 1px solid #d4d4d4;\n  border-bottom: none;\n  border-top: none;\n  z-index: 99;\n  /*position the autocomplete items to be the same width as the container:*/\n  top: 100%;\n  left: 0;\n  right: 0;\n  -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);\n          box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);\n}\n.autocomplete-items div[data-v-6e5d8876] {\n  padding: 10px;\n  cursor: pointer;\n  background-color: #fff;\n  border-bottom: 1px solid #d4d4d4;\n}\n.autocomplete-items div[data-v-6e5d8876]:hover {\n  /*when hovering an item:*/\n  background-color: #e9e9e9;\n}\n.autocomplete-active[data-v-6e5d8876] {\n  /*when navigating through the items using the arrow keys:*/\n  background-color: DodgerBlue !important;\n  color: #ffffff;\n}\n", ""]);
+exports.push([module.i, "\n@charset \"UTF-8\";\n.min-width[data-v-6e5d8876] {\n  min-width: 1200px !important;\n}\n\n/* Стилі для фільтрів */\n.filters[data-v-6e5d8876] {\n  margin-top: 58px;\n  font-size: 0.9em;\n  /* Customize the label (the container) */\n  /* Hide the browser's default checkbox */\n  /* Create a custom checkbox */\n  /* When the checkbox is checked, add a blue background */\n  /* Create the checkmark/indicator (hidden when not checked) */\n  /* Show the checkmark when checked */\n  /* Style the checkmark/indicator */\n}\n.filters h6[data-v-6e5d8876] {\n    color: #4c88bd;\n}\n.filters ul label[data-v-6e5d8876] {\n    display: block;\n    position: relative;\n    padding-left: 35px;\n    margin-bottom: 10px;\n    cursor: pointer;\n    -webkit-user-select: none;\n    -moz-user-select: none;\n    -ms-user-select: none;\n    user-select: none;\n}\n.filters ul input[data-v-6e5d8876] {\n    position: absolute;\n    opacity: 0;\n    cursor: pointer;\n}\n.filters .checkmark[data-v-6e5d8876] {\n    position: absolute;\n    top: 0;\n    left: 0;\n    height: 21px;\n    width: 21px;\n    background-color: #eee;\n}\n.filters ul label input:checked ~ .checkmark[data-v-6e5d8876] {\n    background-color: #2b989b;\n}\n.filters .checkmark[data-v-6e5d8876]:after {\n    content: \"\";\n    position: absolute;\n    display: none;\n}\n.filters ul label input:checked ~ .checkmark[data-v-6e5d8876]:after {\n    display: block;\n}\n.filters ul label .checkmark[data-v-6e5d8876]:after {\n    left: 9px;\n    top: 5px;\n    width: 5px;\n    height: 10px;\n    border: solid white;\n    border-width: 0 3px 3px 0;\n    -webkit-transform: rotate(45deg);\n    transform: rotate(45deg);\n}\n.filters .apply-filters[data-v-6e5d8876] {\n    background-color: white;\n    position: -webkit-sticky;\n    position: sticky;\n    bottom: 0;\n}\n.filters .fa-filter[data-v-6e5d8876] {\n    font-size: 21px;\n    color: #6291ba;\n}\n.list-data-container[data-v-6e5d8876] {\n  /* styles for autocomplete field  */\n}\n.list-data-container .card[data-v-6e5d8876] {\n    margin-top: 20px;\n}\n.list-data-container .pagination[data-v-6e5d8876] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n}\n.list-data-container .select-sort[data-v-6e5d8876] {\n    width: 290px;\n}\n.list-data-container .autocomplete[data-v-6e5d8876] {\n    /*the container must be positioned relative:*/\n    position: relative;\n    display: inline-block;\n}\n.list-data-container .autocomplete-block-result[data-v-6e5d8876] {\n    position: absolute;\n    font-size: 0.9rem;\n    border: none;\n    z-index: 99;\n    top: 100%;\n    left: 16px;\n    right: 16px;\n    padding: 10px;\n    -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);\n    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);\n    border-radius: 4px;\n    border-top-left-radius: 0px;\n    border-top-right-radius: 0;\n    background-color: #f7f7f7;\n}\n\n/* styles for page elements */\n", ""]);
 
 // exports
 
 
 /***/ }),
-/* 73 */
+/* 74 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__JudgeComponent_vue__ = __webpack_require__(74);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__JudgeComponent_vue__ = __webpack_require__(75);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__JudgeComponent_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__JudgeComponent_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_ads_pagination__ = __webpack_require__(79);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_ads_pagination__ = __webpack_require__(80);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_ads_pagination___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vue_ads_pagination__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash__ = __webpack_require__(80);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash__ = __webpack_require__(81);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_lodash__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -27371,9 +27366,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         sort: 1,
         expired: 0
       },
-      autocomplete: {},
+      autocomplete: [],
       message: "",
-      total: 100,
       judgesList: {
         total: 0
       },
@@ -27384,7 +27378,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       'buttonClasses': {
         'default': ['border-none', 'bg-grey-lightest'],
         'active': ['bg-active', 'border-none'],
-        // 'dots': ['bg-white'],
+        'dots': ['dots'],
         'disabled': ['disabled']
       }
     };
@@ -27396,18 +27390,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   methods: {
     liveSearch: function liveSearch() {
       var _this = this;
-      console.log(this.params.search);
+
+      // console.log(this.params.search);
+      console.log('Виклик автокомплит');
+
+      this.params.search === '' ? this.params.search = null : false;
       axios.get('/api/v1/judges/autocomplete', {
         headers: {
           "Content-Type": "application/json",
           "X-Requested-With": "XMLHttpRequest"
         },
-        params: { search: _this.params.search }
+        params: {
+          search: this.params.search
+        }
       }).then(function (response) {
         _this.autocomplete = response.data;
-        console.log('Autocomplete', response.data);
+        // console.log('Autocomplete', response.data);
       }).catch(function (error) {
-        console.log(error);
+        // console.log(error);
       });
     },
 
@@ -27423,9 +27423,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     getJudgesList: function getJudgesList() {
       var _this2 = this;
 
-      var _this = this;
-      // 
-      this.params.search === '' ? this.params.search = null : false;
+      console.log('getJudgesList()');
+      this.autocomplete = []; // коли визиваємо цей метод liveSearch маємо закрити
+      this.params.search === '' ? this.params.search = null : false; // тупо треба переробити
       if (localStorage.getItem('token')) {
         console.log('have token');
         //this.params.page = page + 1;
@@ -27437,10 +27437,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           },
           params: this.params
         }).then(function (response) {
-          _this.judgesList = response.data;
+          _this2.judgesList = response.data;
           window.scrollTo(0, 0);
-          console.log('Response', response.data);
-          console.log(response.data.total);
+          console.log('getJudges Response', _this2.judgesList);
         }).catch(function (error) {
           console.log('Каже що не авторизований пффф та Канеха');
         });
@@ -27453,7 +27452,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           },
           params: this.params
         }).then(function (response) {
-          _this2.judgesList = response;
+          _this2.judgesList = response.data;
         }).catch(function (error) {
           console.log(error);
           console.log('Ну нє не логінився я ще');
@@ -27476,19 +27475,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 74 */
+/* 75 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(75)
+  __webpack_require__(76)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(77)
+var __vue_script__ = __webpack_require__(78)
 /* template */
-var __vue_template__ = __webpack_require__(78)
+var __vue_template__ = __webpack_require__(79)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -27527,13 +27526,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 75 */
+/* 76 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(76);
+var content = __webpack_require__(77);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -27553,7 +27552,7 @@ if(false) {
 }
 
 /***/ }),
-/* 76 */
+/* 77 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(false);
@@ -27561,17 +27560,19 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n.judge-component[data-v-dab41e1e]:not(:last-child) {\n  border-bottom: 1px solid lightgray;\n}\n.avatar[data-v-dab41e1e] {\n  width: 130px;\n  height: 130px;\n}\na[data-v-dab41e1e] {\n  color: #6291ba;\n}\nh5[data-v-dab41e1e] {\n  font-size: 1.2rem;\n}\n", ""]);
+exports.push([module.i, "\n.judge-component[data-v-dab41e1e]:not(:last-child) {\n  border-bottom: 1px solid lightgray;\n}\n.additional-info[data-v-dab41e1e] {\n  font-size: .8rem;\n  color: grey;\n  /* styles for font awesome */\n}\n.additional-info .fa[data-v-dab41e1e] {\n    font-size: 1rem;\n}\n.additional-info .bookmark[data-v-dab41e1e],\n  .additional-info .fa-pencil[data-v-dab41e1e] {\n    cursor: pointer;\n}\n.additional-info .fa-bookmark-o[data-v-dab41e1e],\n  .additional-info .fa-bookmark[data-v-dab41e1e] {\n    color: #2b989b;\n}\n.additional-info .fa-briefcase[data-v-dab41e1e] {\n    color: green;\n}\n.additional-info .fa-line-chart[data-v-dab41e1e] {\n    color: #6291ba;\n}\n.additional-info .fa-medkit[data-v-dab41e1e] {\n    color: red;\n}\n.additional-info .fa-calendar-check-o[data-v-dab41e1e],\n  .additional-info .fa-calendar-minus-o[data-v-dab41e1e],\n  .additional-info .fa-calendar-times-o[data-v-dab41e1e] {\n    color: #2b989b;\n}\n.additional-info .fa-pencil[data-v-dab41e1e] {\n    color: #6c757d;\n    -webkit-transition-duration: 0.3s;\n    transition-duration: 0.3s;\n}\n.additional-info .fa-pencil[data-v-dab41e1e]:hover {\n    color: #6291ba;\n    -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 0.5), inset 0 0 1px rgba(0, 0, 0, 0.7);\n            box-shadow: 0 0 3px rgba(0, 0, 0, 0.5), inset 0 0 1px rgba(0, 0, 0, 0.7);\n}\n.main-info .avatar[data-v-dab41e1e] {\n  width: 120px;\n  height: 120px;\n}\n.main-info a[data-v-dab41e1e] {\n  color: #6291ba;\n}\n.main-info h5[data-v-dab41e1e] {\n  font-size: 1.2rem;\n}\n", ""]);
 
 // exports
 
 
 /***/ }),
-/* 77 */
+/* 78 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__JudgeUpdateStatus_vue__ = __webpack_require__(119);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__JudgeUpdateStatus_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__JudgeUpdateStatus_vue__);
 //
 //
 //
@@ -27605,11 +27606,38 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "judge-component",
     data: function data() {
         return {
+            showModal: false,
             isAuth: localStorage.getItem('token'),
             headers: {
                 "Content-Type": "application/json",
@@ -27624,11 +27652,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         changeBookmarkStatus: function changeBookmarkStatus(judge) {
             // console.log(judge)
             if (judge.is_bookmark === 0) {
-                console.log('bootmark = 0');
-                console.log(judge.id);
+                // console.log('bootmark = 0')
+                // console.log(judge.id)
                 axios({
                     method: 'put',
-                    url: "/api/v1/judges/" + judge.id + "/bookmark",
+                    url: '/api/v1/judges/' + judge.id + '/bookmark',
                     headers: {
                         "Content-Type": "application/json",
                         "X-Requested-With": "XMLHttpRequest",
@@ -27641,14 +27669,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     //     }                              
                     // });
                     judge.is_bookmark = 1;
-                    console.log('Response Bookmark', response);
+                    // console.log('Response Bookmark',response);
                 }).catch(function (error) {
                     console.log(error);
                 });
             } else {
                 axios({
                     method: 'delete',
-                    url: "/api/v1/judges/" + judge.id + "/bookmark",
+                    url: '/api/v1/judges/' + judge.id + '/bookmark',
                     headers: {
                         "Content-Type": "application/json",
                         "X-Requested-With": "XMLHttpRequest",
@@ -27656,161 +27684,254 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     }
                 }).then(function (response) {
                     judge.is_bookmark = 0;
-                    console.log(response);
+                    // console.log(response);
                 }).catch(function (error) {
                     console.log(error);
                 });
             }
         }
+    },
+    components: {
+        JudgeUpdateStatus: __WEBPACK_IMPORTED_MODULE_0__JudgeUpdateStatus_vue___default.a
     }
 });
 
 /***/ }),
-/* 78 */
+/* 79 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("div", { staticClass: "card-body px-4 py-2" }, [
-      !this.judgesList
-        ? _c("div", [_vm._v("За заданими параметрами нічого не знайдено")])
-        : _vm._e(),
-      _vm._v(" "),
-      this.judgesList
-        ? _c(
-            "div",
-            { staticClass: "container" },
-            _vm._l(this.judgesList, function(judge, index) {
-              return _c(
-                "div",
-                { key: index, staticClass: "judge-component row py-3 " },
-                [
-                  _c("div", { staticClass: "col-9 d-flex pl-0" }, [
-                    _c("div", { staticClass: "mr-3" }, [
-                      _c("img", {
-                        staticClass: "avatar",
-                        attrs: { src: judge.photo, alt: "фото" }
-                      })
-                    ]),
-                    _vm._v(" "),
-                    _c("div", [
-                      _c(
-                        "h4",
-                        [
-                          _c("router-link", { attrs: { to: "/" } }, [
-                            _vm._v(
-                              " " +
-                                _vm._s(judge.surname) +
-                                " " +
-                                _vm._s(
-                                  judge.name.length != 1
-                                    ? judge.name
-                                    : judge.name + "."
-                                ) +
-                                " " +
-                                _vm._s(
-                                  judge.patronymic.length != 1
-                                    ? judge.patronymic
-                                    : judge.patronymic + "."
-                                ) +
-                                " "
-                            )
-                          ])
-                        ],
-                        1
-                      ),
+  return _c(
+    "div",
+    [
+      _c("div", { staticClass: "card-body px-4 py-2" }, [
+        !this.judgesList || this.judgesList.length == 0
+          ? _c("div", [_vm._v("За заданими параметрами нічого не знайдено")])
+          : _vm._e(),
+        _vm._v(" "),
+        this.judgesList && this.judgesList.length > 0
+          ? _c(
+              "div",
+              _vm._l(this.judgesList, function(judge, index) {
+                return _c(
+                  "div",
+                  { key: index, staticClass: "judge-component row py-3 " },
+                  [
+                    _c("div", { staticClass: "col-9 d-flex pl-0 main-info" }, [
+                      _c("div", { staticClass: "mr-3" }, [
+                        _c("img", {
+                          staticClass: "avatar",
+                          attrs: { src: judge.photo, alt: "фото" }
+                        })
+                      ]),
                       _vm._v(" "),
-                      _c("h5", [_vm._v(_vm._s(judge.court_name))])
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-3 pl-0" }, [
-                    _c("div", [
-                      _c(
-                        "i",
-                        {
-                          staticClass: "fa fa-line-chart",
-                          attrs: { "aria-hidden": "true" }
-                        },
-                        [_vm._v(" " + _vm._s(judge.rating) + " ")]
-                      )
+                      _c("div", [
+                        _c(
+                          "h4",
+                          [
+                            _c("router-link", { attrs: { to: "/" } }, [
+                              _vm._v(
+                                " " +
+                                  _vm._s(judge.surname) +
+                                  " " +
+                                  _vm._s(
+                                    judge.name.length != 1
+                                      ? judge.name
+                                      : judge.name + "."
+                                  ) +
+                                  " " +
+                                  _vm._s(
+                                    judge.patronymic.length != 1
+                                      ? judge.patronymic
+                                      : judge.patronymic + "."
+                                  ) +
+                                  " "
+                              )
+                            ])
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c("h5", [_vm._v(_vm._s(judge.court_name))])
+                      ])
                     ]),
                     _vm._v(" "),
-                    _vm.isAuth
-                      ? _c("div", [
-                          judge.is_bookmark
-                            ? _c(
-                                "span",
-                                {
-                                  on: {
-                                    click: function($event) {
-                                      _vm.changeBookmarkStatus(judge)
-                                    }
-                                  }
-                                },
-                                [
-                                  _vm._v("відстежується "),
-                                  _c("i", {
-                                    staticClass: "fa fa-bookmark",
-                                    attrs: { "aria-hidden": "true" }
-                                  })
-                                ]
+                    _c("div", { staticClass: "col-3 pl-0 additional-info" }, [
+                      _c("div", [
+                        _vm.isAuth
+                          ? _c("span", [
+                              judge.is_bookmark
+                                ? _c(
+                                    "span",
+                                    {
+                                      on: {
+                                        click: function($event) {
+                                          _vm.changeBookmarkStatus(judge)
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _vm._v("відстежується "),
+                                      _c("i", {
+                                        staticClass: "fa fa-bookmark",
+                                        attrs: { "aria-hidden": "true" }
+                                      })
+                                    ]
+                                  )
+                                : _vm._e(),
+                              _vm._v(" "),
+                              !judge.is_bookmark
+                                ? _c(
+                                    "span",
+                                    {
+                                      on: {
+                                        click: function($event) {
+                                          _vm.changeBookmarkStatus(judge)
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _vm._v("відстежувати "),
+                                      _c("i", {
+                                        staticClass: "fa fa-bookmark-o",
+                                        attrs: { "aria-hidden": "true" }
+                                      })
+                                    ]
+                                  )
+                                : _vm._e()
+                            ])
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _c(
+                          "i",
+                          {
+                            staticClass: "fa fa-line-chart float-right",
+                            attrs: { "aria-hidden": "true" }
+                          },
+                          [_vm._v(" " + _vm._s(judge.rating) + " ")]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", [
+                        judge.status === 1
+                          ? _c("span", [
+                              _c("i", {
+                                staticClass: "fa fa-briefcase",
+                                attrs: { "aria-hidden": "true" }
+                              }),
+                              _vm._v(
+                                "\n                                         на роботі " +
+                                  _vm._s(
+                                    judge.due_date_status
+                                      ? "(" + judge.due_date_status + ")"
+                                      : null
+                                  ) +
+                                  "\n                                    "
                               )
-                            : _vm._e(),
-                          _vm._v(" "),
-                          !judge.is_bookmark
-                            ? _c(
-                                "span",
-                                {
-                                  on: {
-                                    click: function($event) {
-                                      _vm.changeBookmarkStatus(judge)
-                                    }
-                                  }
-                                },
-                                [
-                                  _vm._v("відстежувати "),
-                                  _c("i", {
-                                    staticClass: "fa fa-bookmark-o",
-                                    attrs: { "aria-hidden": "true" }
-                                  })
-                                ]
+                            ])
+                          : _vm._e(),
+                        _vm._v(" "),
+                        judge.status === 2
+                          ? _c("span", [
+                              _c("i", {
+                                staticClass: "fa fa-medkit",
+                                attrs: { "aria-hidden": "true" }
+                              }),
+                              _vm._v(
+                                "\n                                         на лікарняному " +
+                                  _vm._s(
+                                    judge.due_date_status
+                                      ? "(до " + judge.due_date_status + ")"
+                                      : null
+                                  ) +
+                                  "\n                                    "
                               )
-                            : _vm._e()
-                        ])
-                      : _vm._e(),
-                    _vm._v(" "),
-                    _vm.isAuth ? _c("div", [_vm._m(0, true)]) : _vm._e()
-                  ])
-                ]
-              )
-            })
-          )
-        : _vm._e()
-    ])
-  ])
+                            ])
+                          : _vm._e(),
+                        _vm._v(" "),
+                        judge.status === 3
+                          ? _c("span", [
+                              _c("i", {
+                                staticClass: "fa fa-calendar-check-o",
+                                attrs: { "aria-hidden": "true" }
+                              }),
+                              _vm._v(
+                                "\n                                         у відпустці " +
+                                  _vm._s(
+                                    judge.due_date_status
+                                      ? "(до " + judge.due_date_status + ")"
+                                      : null
+                                  ) +
+                                  "\n                                    "
+                              )
+                            ])
+                          : _vm._e(),
+                        _vm._v(" "),
+                        judge.status === 4
+                          ? _c("span", [
+                              _c("i", {
+                                staticClass: "fa fa-calendar-check-o",
+                                attrs: { "aria-hidden": "true" }
+                              }),
+                              _vm._v(
+                                "\n                                         відсуній на робочому місці з інших причин " +
+                                  _vm._s(
+                                    judge.due_date_status
+                                      ? "(до " + judge.due_date_status + ")"
+                                      : null
+                                  ) +
+                                  "\n                                    "
+                              )
+                            ])
+                          : _vm._e(),
+                        _vm._v(" "),
+                        judge.status === 5
+                          ? _c("span", [
+                              _c("i", {
+                                staticClass: "fa fa-calendar-check-o",
+                                attrs: { "aria-hidden": "true" }
+                              }),
+                              _vm._v(
+                                "\n                                         припинено повноваження " +
+                                  _vm._s(
+                                    judge.due_date_status
+                                      ? "(до " + judge.due_date_status + ")"
+                                      : null
+                                  ) +
+                                  "\n                                    "
+                              )
+                            ])
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _vm.isAuth
+                          ? _c("i", {
+                              staticClass: "fa fa-pencil p-1",
+                              attrs: { "aria-hidden": "true" },
+                              on: {
+                                click: function($event) {
+                                  this.showModal = true
+                                }
+                              }
+                            })
+                          : _vm._e()
+                      ])
+                    ])
+                  ]
+                )
+              })
+            )
+          : _vm._e()
+      ]),
+      _vm._v(" "),
+      _vm.showModal ? _c("judge-update-status") : _vm._e()
+    ],
+    1
+  )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("span", { attrs: { title: "змінити статус судді" } }, [
-      _vm._v("Змінити статус "),
-      _c("i", {
-        staticClass: "fa fa-pencil p-1",
-        attrs: {
-          "aria-hidden": "true",
-          "data-toggle": "modal",
-          "data-target": "#changeJudgeStatus"
-        }
-      })
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -27821,7 +27942,7 @@ if (false) {
 }
 
 /***/ }),
-/* 79 */
+/* 80 */
 /***/ (function(module, exports) {
 
 module.exports =
@@ -29809,7 +29930,7 @@ module.exports = function (object, names) {
 //# sourceMappingURL=vue-ads-pagination.common.js.map
 
 /***/ }),
-/* 80 */
+/* 81 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, module) {var __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -46921,10 +47042,10 @@ module.exports = function (object, names) {
   }
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4), __webpack_require__(81)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4), __webpack_require__(82)(module)))
 
 /***/ }),
-/* 81 */
+/* 82 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -46952,2140 +47073,2027 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 82 */
+/* 83 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container" }, [
-    _c("div", { staticClass: "container mt-5" }, [
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "offset-lg-3 col-lg-9" }, [
-          _c("form", { attrs: { method: "get", autocomplete: "off" } }, [
-            _c("div", { staticClass: "form-row" }, [
-              _c(
-                "div",
-                { staticClass: "col-12 col-md-9 mb-2 mb-md-0 autocomplete" },
-                [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.params.search,
-                        expression: "params.search"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: { type: "search", placeholder: "Пошук..." },
-                    domProps: { value: _vm.params.search },
-                    on: {
-                      keyup: function($event) {
-                        _vm.liveSearch()
-                      },
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
+  return _c("div", { staticClass: "container mt-5" }, [
+    _c("div", { staticClass: "row min-width" }, [
+      _c("div", { staticClass: "col-3 filters" }, [
+        _c("div", { staticClass: "card" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-body" }, [
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-12" }, [
+                _c("h6", [_vm._v("Інстанція")]),
+                _vm._v(" "),
+                _c("ul", { staticClass: "list-unstyled mb-0" }, [
+                  _c("li", [
+                    _c("label", [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.params.instance,
+                            expression: "params.instance"
+                          }
+                        ],
+                        attrs: {
+                          type: "checkbox",
+                          value: "3",
+                          name: "instance"
+                        },
+                        domProps: {
+                          checked: Array.isArray(_vm.params.instance)
+                            ? _vm._i(_vm.params.instance, "3") > -1
+                            : _vm.params.instance
+                        },
+                        on: {
+                          change: function($event) {
+                            var $$a = _vm.params.instance,
+                              $$el = $event.target,
+                              $$c = $$el.checked ? true : false
+                            if (Array.isArray($$a)) {
+                              var $$v = "3",
+                                $$i = _vm._i($$a, $$v)
+                              if ($$el.checked) {
+                                $$i < 0 &&
+                                  _vm.$set(
+                                    _vm.params,
+                                    "instance",
+                                    $$a.concat([$$v])
+                                  )
+                              } else {
+                                $$i > -1 &&
+                                  _vm.$set(
+                                    _vm.params,
+                                    "instance",
+                                    $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                                  )
+                              }
+                            } else {
+                              _vm.$set(_vm.params, "instance", $$c)
+                            }
+                          }
                         }
-                        _vm.$set(_vm.params, "search", $event.target.value)
-                      }
-                    }
-                  })
-                ]
-              ),
-              _vm._v(" "),
-              _vm._m(0)
-            ])
+                      }),
+                      _c("span", { staticClass: "checkmark" }),
+                      _vm._v(" Перша")
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _c("label", [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.params.instance,
+                            expression: "params.instance"
+                          }
+                        ],
+                        attrs: {
+                          type: "checkbox",
+                          value: "2",
+                          name: "instance"
+                        },
+                        domProps: {
+                          checked: Array.isArray(_vm.params.instance)
+                            ? _vm._i(_vm.params.instance, "2") > -1
+                            : _vm.params.instance
+                        },
+                        on: {
+                          change: function($event) {
+                            var $$a = _vm.params.instance,
+                              $$el = $event.target,
+                              $$c = $$el.checked ? true : false
+                            if (Array.isArray($$a)) {
+                              var $$v = "2",
+                                $$i = _vm._i($$a, $$v)
+                              if ($$el.checked) {
+                                $$i < 0 &&
+                                  _vm.$set(
+                                    _vm.params,
+                                    "instance",
+                                    $$a.concat([$$v])
+                                  )
+                              } else {
+                                $$i > -1 &&
+                                  _vm.$set(
+                                    _vm.params,
+                                    "instance",
+                                    $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                                  )
+                              }
+                            } else {
+                              _vm.$set(_vm.params, "instance", $$c)
+                            }
+                          }
+                        }
+                      }),
+                      _c("span", { staticClass: "checkmark" }),
+                      _vm._v(" Апеляційна")
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _c("label", [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.params.instance,
+                            expression: "params.instance"
+                          }
+                        ],
+                        attrs: {
+                          type: "checkbox",
+                          value: "1",
+                          name: "instance"
+                        },
+                        domProps: {
+                          checked: Array.isArray(_vm.params.instance)
+                            ? _vm._i(_vm.params.instance, "1") > -1
+                            : _vm.params.instance
+                        },
+                        on: {
+                          change: function($event) {
+                            var $$a = _vm.params.instance,
+                              $$el = $event.target,
+                              $$c = $$el.checked ? true : false
+                            if (Array.isArray($$a)) {
+                              var $$v = "1",
+                                $$i = _vm._i($$a, $$v)
+                              if ($$el.checked) {
+                                $$i < 0 &&
+                                  _vm.$set(
+                                    _vm.params,
+                                    "instance",
+                                    $$a.concat([$$v])
+                                  )
+                              } else {
+                                $$i > -1 &&
+                                  _vm.$set(
+                                    _vm.params,
+                                    "instance",
+                                    $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                                  )
+                              }
+                            } else {
+                              _vm.$set(_vm.params, "instance", $$c)
+                            }
+                          }
+                        }
+                      }),
+                      _c("span", { staticClass: "checkmark" }),
+                      _vm._v(" Касаційна")
+                    ])
+                  ])
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("hr"),
+            _vm._v(" "),
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-lg-12" }, [
+                _c("h6", [_vm._v("Юрисдикція")]),
+                _vm._v(" "),
+                _c("ul", { staticClass: "list-unstyled mb-0" }, [
+                  _c("li", [
+                    _c("label", [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.params.jurisdiction,
+                            expression: "params.jurisdiction"
+                          }
+                        ],
+                        attrs: {
+                          type: "checkbox",
+                          value: "3",
+                          name: "jurisdiction"
+                        },
+                        domProps: {
+                          checked: Array.isArray(_vm.params.jurisdiction)
+                            ? _vm._i(_vm.params.jurisdiction, "3") > -1
+                            : _vm.params.jurisdiction
+                        },
+                        on: {
+                          change: function($event) {
+                            var $$a = _vm.params.jurisdiction,
+                              $$el = $event.target,
+                              $$c = $$el.checked ? true : false
+                            if (Array.isArray($$a)) {
+                              var $$v = "3",
+                                $$i = _vm._i($$a, $$v)
+                              if ($$el.checked) {
+                                $$i < 0 &&
+                                  _vm.$set(
+                                    _vm.params,
+                                    "jurisdiction",
+                                    $$a.concat([$$v])
+                                  )
+                              } else {
+                                $$i > -1 &&
+                                  _vm.$set(
+                                    _vm.params,
+                                    "jurisdiction",
+                                    $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                                  )
+                              }
+                            } else {
+                              _vm.$set(_vm.params, "jurisdiction", $$c)
+                            }
+                          }
+                        }
+                      }),
+                      _c("span", { staticClass: "checkmark" }),
+                      _vm._v(" Господарська")
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _c("label", [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.params.jurisdiction,
+                            expression: "params.jurisdiction"
+                          }
+                        ],
+                        attrs: {
+                          type: "checkbox",
+                          value: "2",
+                          name: "jurisdiction"
+                        },
+                        domProps: {
+                          checked: Array.isArray(_vm.params.jurisdiction)
+                            ? _vm._i(_vm.params.jurisdiction, "2") > -1
+                            : _vm.params.jurisdiction
+                        },
+                        on: {
+                          change: function($event) {
+                            var $$a = _vm.params.jurisdiction,
+                              $$el = $event.target,
+                              $$c = $$el.checked ? true : false
+                            if (Array.isArray($$a)) {
+                              var $$v = "2",
+                                $$i = _vm._i($$a, $$v)
+                              if ($$el.checked) {
+                                $$i < 0 &&
+                                  _vm.$set(
+                                    _vm.params,
+                                    "jurisdiction",
+                                    $$a.concat([$$v])
+                                  )
+                              } else {
+                                $$i > -1 &&
+                                  _vm.$set(
+                                    _vm.params,
+                                    "jurisdiction",
+                                    $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                                  )
+                              }
+                            } else {
+                              _vm.$set(_vm.params, "jurisdiction", $$c)
+                            }
+                          }
+                        }
+                      }),
+                      _c("span", { staticClass: "checkmark" }),
+                      _vm._v(" Адміністративна")
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _c("label", [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.params.jurisdiction,
+                            expression: "params.jurisdiction"
+                          }
+                        ],
+                        attrs: {
+                          type: "checkbox",
+                          value: "1",
+                          name: "jurisdiction"
+                        },
+                        domProps: {
+                          checked: Array.isArray(_vm.params.jurisdiction)
+                            ? _vm._i(_vm.params.jurisdiction, "1") > -1
+                            : _vm.params.jurisdiction
+                        },
+                        on: {
+                          change: function($event) {
+                            var $$a = _vm.params.jurisdiction,
+                              $$el = $event.target,
+                              $$c = $$el.checked ? true : false
+                            if (Array.isArray($$a)) {
+                              var $$v = "1",
+                                $$i = _vm._i($$a, $$v)
+                              if ($$el.checked) {
+                                $$i < 0 &&
+                                  _vm.$set(
+                                    _vm.params,
+                                    "jurisdiction",
+                                    $$a.concat([$$v])
+                                  )
+                              } else {
+                                $$i > -1 &&
+                                  _vm.$set(
+                                    _vm.params,
+                                    "jurisdiction",
+                                    $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                                  )
+                              }
+                            } else {
+                              _vm.$set(_vm.params, "jurisdiction", $$c)
+                            }
+                          }
+                        }
+                      }),
+                      _c("span", { staticClass: "checkmark" }),
+                      _vm._v(" Загальна")
+                    ])
+                  ])
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("hr"),
+            _vm._v(" "),
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-lg-12" }, [
+                _c("h6", [_vm._v("Регіон суду")]),
+                _vm._v(" "),
+                _c("ul", { staticClass: "list-unstyled mb-0" }, [
+                  _c("li", [
+                    _c("label", [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.params.regions,
+                            expression: "params.regions"
+                          }
+                        ],
+                        attrs: { type: "checkbox", value: "2", name: "region" },
+                        domProps: {
+                          checked: Array.isArray(_vm.params.regions)
+                            ? _vm._i(_vm.params.regions, "2") > -1
+                            : _vm.params.regions
+                        },
+                        on: {
+                          change: function($event) {
+                            var $$a = _vm.params.regions,
+                              $$el = $event.target,
+                              $$c = $$el.checked ? true : false
+                            if (Array.isArray($$a)) {
+                              var $$v = "2",
+                                $$i = _vm._i($$a, $$v)
+                              if ($$el.checked) {
+                                $$i < 0 &&
+                                  _vm.$set(
+                                    _vm.params,
+                                    "regions",
+                                    $$a.concat([$$v])
+                                  )
+                              } else {
+                                $$i > -1 &&
+                                  _vm.$set(
+                                    _vm.params,
+                                    "regions",
+                                    $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                                  )
+                              }
+                            } else {
+                              _vm.$set(_vm.params, "regions", $$c)
+                            }
+                          }
+                        }
+                      }),
+                      _c("span", { staticClass: "checkmark" }),
+                      _vm._v(" Вінницька")
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _c("label", [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.params.regions,
+                            expression: "params.regions"
+                          }
+                        ],
+                        attrs: { type: "checkbox", value: "3", name: "region" },
+                        domProps: {
+                          checked: Array.isArray(_vm.params.regions)
+                            ? _vm._i(_vm.params.regions, "3") > -1
+                            : _vm.params.regions
+                        },
+                        on: {
+                          change: function($event) {
+                            var $$a = _vm.params.regions,
+                              $$el = $event.target,
+                              $$c = $$el.checked ? true : false
+                            if (Array.isArray($$a)) {
+                              var $$v = "3",
+                                $$i = _vm._i($$a, $$v)
+                              if ($$el.checked) {
+                                $$i < 0 &&
+                                  _vm.$set(
+                                    _vm.params,
+                                    "regions",
+                                    $$a.concat([$$v])
+                                  )
+                              } else {
+                                $$i > -1 &&
+                                  _vm.$set(
+                                    _vm.params,
+                                    "regions",
+                                    $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                                  )
+                              }
+                            } else {
+                              _vm.$set(_vm.params, "regions", $$c)
+                            }
+                          }
+                        }
+                      }),
+                      _c("span", { staticClass: "checkmark" }),
+                      _vm._v(" Волинська")
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _c("label", [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.params.regions,
+                            expression: "params.regions"
+                          }
+                        ],
+                        attrs: { type: "checkbox", value: "4", name: "region" },
+                        domProps: {
+                          checked: Array.isArray(_vm.params.regions)
+                            ? _vm._i(_vm.params.regions, "4") > -1
+                            : _vm.params.regions
+                        },
+                        on: {
+                          change: function($event) {
+                            var $$a = _vm.params.regions,
+                              $$el = $event.target,
+                              $$c = $$el.checked ? true : false
+                            if (Array.isArray($$a)) {
+                              var $$v = "4",
+                                $$i = _vm._i($$a, $$v)
+                              if ($$el.checked) {
+                                $$i < 0 &&
+                                  _vm.$set(
+                                    _vm.params,
+                                    "regions",
+                                    $$a.concat([$$v])
+                                  )
+                              } else {
+                                $$i > -1 &&
+                                  _vm.$set(
+                                    _vm.params,
+                                    "regions",
+                                    $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                                  )
+                              }
+                            } else {
+                              _vm.$set(_vm.params, "regions", $$c)
+                            }
+                          }
+                        }
+                      }),
+                      _c("span", { staticClass: "checkmark" }),
+                      _vm._v(" Дніпропетровська")
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _c("label", [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.params.regions,
+                            expression: "params.regions"
+                          }
+                        ],
+                        attrs: { type: "checkbox", value: "5", name: "region" },
+                        domProps: {
+                          checked: Array.isArray(_vm.params.regions)
+                            ? _vm._i(_vm.params.regions, "5") > -1
+                            : _vm.params.regions
+                        },
+                        on: {
+                          change: function($event) {
+                            var $$a = _vm.params.regions,
+                              $$el = $event.target,
+                              $$c = $$el.checked ? true : false
+                            if (Array.isArray($$a)) {
+                              var $$v = "5",
+                                $$i = _vm._i($$a, $$v)
+                              if ($$el.checked) {
+                                $$i < 0 &&
+                                  _vm.$set(
+                                    _vm.params,
+                                    "regions",
+                                    $$a.concat([$$v])
+                                  )
+                              } else {
+                                $$i > -1 &&
+                                  _vm.$set(
+                                    _vm.params,
+                                    "regions",
+                                    $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                                  )
+                              }
+                            } else {
+                              _vm.$set(_vm.params, "regions", $$c)
+                            }
+                          }
+                        }
+                      }),
+                      _c("span", { staticClass: "checkmark" }),
+                      _vm._v(" Донецька")
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _c("label", [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.params.regions,
+                            expression: "params.regions"
+                          }
+                        ],
+                        attrs: { type: "checkbox", value: "6", name: "region" },
+                        domProps: {
+                          checked: Array.isArray(_vm.params.regions)
+                            ? _vm._i(_vm.params.regions, "6") > -1
+                            : _vm.params.regions
+                        },
+                        on: {
+                          change: function($event) {
+                            var $$a = _vm.params.regions,
+                              $$el = $event.target,
+                              $$c = $$el.checked ? true : false
+                            if (Array.isArray($$a)) {
+                              var $$v = "6",
+                                $$i = _vm._i($$a, $$v)
+                              if ($$el.checked) {
+                                $$i < 0 &&
+                                  _vm.$set(
+                                    _vm.params,
+                                    "regions",
+                                    $$a.concat([$$v])
+                                  )
+                              } else {
+                                $$i > -1 &&
+                                  _vm.$set(
+                                    _vm.params,
+                                    "regions",
+                                    $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                                  )
+                              }
+                            } else {
+                              _vm.$set(_vm.params, "regions", $$c)
+                            }
+                          }
+                        }
+                      }),
+                      _c("span", { staticClass: "checkmark" }),
+                      _vm._v(" Житомирська")
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _c("label", [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.params.regions,
+                            expression: "params.regions"
+                          }
+                        ],
+                        attrs: { type: "checkbox", value: "7", name: "region" },
+                        domProps: {
+                          checked: Array.isArray(_vm.params.regions)
+                            ? _vm._i(_vm.params.regions, "7") > -1
+                            : _vm.params.regions
+                        },
+                        on: {
+                          change: function($event) {
+                            var $$a = _vm.params.regions,
+                              $$el = $event.target,
+                              $$c = $$el.checked ? true : false
+                            if (Array.isArray($$a)) {
+                              var $$v = "7",
+                                $$i = _vm._i($$a, $$v)
+                              if ($$el.checked) {
+                                $$i < 0 &&
+                                  _vm.$set(
+                                    _vm.params,
+                                    "regions",
+                                    $$a.concat([$$v])
+                                  )
+                              } else {
+                                $$i > -1 &&
+                                  _vm.$set(
+                                    _vm.params,
+                                    "regions",
+                                    $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                                  )
+                              }
+                            } else {
+                              _vm.$set(_vm.params, "regions", $$c)
+                            }
+                          }
+                        }
+                      }),
+                      _c("span", { staticClass: "checkmark" }),
+                      _vm._v(" Закарпатська")
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _c("label", [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.params.regions,
+                            expression: "params.regions"
+                          }
+                        ],
+                        attrs: { type: "checkbox", value: "8", name: "region" },
+                        domProps: {
+                          checked: Array.isArray(_vm.params.regions)
+                            ? _vm._i(_vm.params.regions, "8") > -1
+                            : _vm.params.regions
+                        },
+                        on: {
+                          change: function($event) {
+                            var $$a = _vm.params.regions,
+                              $$el = $event.target,
+                              $$c = $$el.checked ? true : false
+                            if (Array.isArray($$a)) {
+                              var $$v = "8",
+                                $$i = _vm._i($$a, $$v)
+                              if ($$el.checked) {
+                                $$i < 0 &&
+                                  _vm.$set(
+                                    _vm.params,
+                                    "regions",
+                                    $$a.concat([$$v])
+                                  )
+                              } else {
+                                $$i > -1 &&
+                                  _vm.$set(
+                                    _vm.params,
+                                    "regions",
+                                    $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                                  )
+                              }
+                            } else {
+                              _vm.$set(_vm.params, "regions", $$c)
+                            }
+                          }
+                        }
+                      }),
+                      _c("span", { staticClass: "checkmark" }),
+                      _vm._v(" Запорізька")
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _c("label", [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.params.regions,
+                            expression: "params.regions"
+                          }
+                        ],
+                        attrs: { type: "checkbox", value: "9", name: "region" },
+                        domProps: {
+                          checked: Array.isArray(_vm.params.regions)
+                            ? _vm._i(_vm.params.regions, "9") > -1
+                            : _vm.params.regions
+                        },
+                        on: {
+                          change: function($event) {
+                            var $$a = _vm.params.regions,
+                              $$el = $event.target,
+                              $$c = $$el.checked ? true : false
+                            if (Array.isArray($$a)) {
+                              var $$v = "9",
+                                $$i = _vm._i($$a, $$v)
+                              if ($$el.checked) {
+                                $$i < 0 &&
+                                  _vm.$set(
+                                    _vm.params,
+                                    "regions",
+                                    $$a.concat([$$v])
+                                  )
+                              } else {
+                                $$i > -1 &&
+                                  _vm.$set(
+                                    _vm.params,
+                                    "regions",
+                                    $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                                  )
+                              }
+                            } else {
+                              _vm.$set(_vm.params, "regions", $$c)
+                            }
+                          }
+                        }
+                      }),
+                      _c("span", { staticClass: "checkmark" }),
+                      _vm._v(" Івано-Франківська")
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _c("label", [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.params.regions,
+                            expression: "params.regions"
+                          }
+                        ],
+                        attrs: {
+                          type: "checkbox",
+                          value: "10",
+                          name: "region"
+                        },
+                        domProps: {
+                          checked: Array.isArray(_vm.params.regions)
+                            ? _vm._i(_vm.params.regions, "10") > -1
+                            : _vm.params.regions
+                        },
+                        on: {
+                          change: function($event) {
+                            var $$a = _vm.params.regions,
+                              $$el = $event.target,
+                              $$c = $$el.checked ? true : false
+                            if (Array.isArray($$a)) {
+                              var $$v = "10",
+                                $$i = _vm._i($$a, $$v)
+                              if ($$el.checked) {
+                                $$i < 0 &&
+                                  _vm.$set(
+                                    _vm.params,
+                                    "regions",
+                                    $$a.concat([$$v])
+                                  )
+                              } else {
+                                $$i > -1 &&
+                                  _vm.$set(
+                                    _vm.params,
+                                    "regions",
+                                    $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                                  )
+                              }
+                            } else {
+                              _vm.$set(_vm.params, "regions", $$c)
+                            }
+                          }
+                        }
+                      }),
+                      _c("span", { staticClass: "checkmark" }),
+                      _vm._v(" Київська")
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _c("label", [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.params.regions,
+                            expression: "params.regions"
+                          }
+                        ],
+                        attrs: {
+                          type: "checkbox",
+                          value: "11",
+                          name: "region"
+                        },
+                        domProps: {
+                          checked: Array.isArray(_vm.params.regions)
+                            ? _vm._i(_vm.params.regions, "11") > -1
+                            : _vm.params.regions
+                        },
+                        on: {
+                          change: function($event) {
+                            var $$a = _vm.params.regions,
+                              $$el = $event.target,
+                              $$c = $$el.checked ? true : false
+                            if (Array.isArray($$a)) {
+                              var $$v = "11",
+                                $$i = _vm._i($$a, $$v)
+                              if ($$el.checked) {
+                                $$i < 0 &&
+                                  _vm.$set(
+                                    _vm.params,
+                                    "regions",
+                                    $$a.concat([$$v])
+                                  )
+                              } else {
+                                $$i > -1 &&
+                                  _vm.$set(
+                                    _vm.params,
+                                    "regions",
+                                    $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                                  )
+                              }
+                            } else {
+                              _vm.$set(_vm.params, "regions", $$c)
+                            }
+                          }
+                        }
+                      }),
+                      _c("span", { staticClass: "checkmark" }),
+                      _vm._v(" Кіровоградська")
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _c("label", [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.params.regions,
+                            expression: "params.regions"
+                          }
+                        ],
+                        attrs: {
+                          type: "checkbox",
+                          value: "12",
+                          name: "region"
+                        },
+                        domProps: {
+                          checked: Array.isArray(_vm.params.regions)
+                            ? _vm._i(_vm.params.regions, "12") > -1
+                            : _vm.params.regions
+                        },
+                        on: {
+                          change: function($event) {
+                            var $$a = _vm.params.regions,
+                              $$el = $event.target,
+                              $$c = $$el.checked ? true : false
+                            if (Array.isArray($$a)) {
+                              var $$v = "12",
+                                $$i = _vm._i($$a, $$v)
+                              if ($$el.checked) {
+                                $$i < 0 &&
+                                  _vm.$set(
+                                    _vm.params,
+                                    "regions",
+                                    $$a.concat([$$v])
+                                  )
+                              } else {
+                                $$i > -1 &&
+                                  _vm.$set(
+                                    _vm.params,
+                                    "regions",
+                                    $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                                  )
+                              }
+                            } else {
+                              _vm.$set(_vm.params, "regions", $$c)
+                            }
+                          }
+                        }
+                      }),
+                      _c("span", { staticClass: "checkmark" }),
+                      _vm._v(" Луганська")
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _c("label", [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.params.regions,
+                            expression: "params.regions"
+                          }
+                        ],
+                        attrs: {
+                          type: "checkbox",
+                          value: "13",
+                          name: "region"
+                        },
+                        domProps: {
+                          checked: Array.isArray(_vm.params.regions)
+                            ? _vm._i(_vm.params.regions, "13") > -1
+                            : _vm.params.regions
+                        },
+                        on: {
+                          change: function($event) {
+                            var $$a = _vm.params.regions,
+                              $$el = $event.target,
+                              $$c = $$el.checked ? true : false
+                            if (Array.isArray($$a)) {
+                              var $$v = "13",
+                                $$i = _vm._i($$a, $$v)
+                              if ($$el.checked) {
+                                $$i < 0 &&
+                                  _vm.$set(
+                                    _vm.params,
+                                    "regions",
+                                    $$a.concat([$$v])
+                                  )
+                              } else {
+                                $$i > -1 &&
+                                  _vm.$set(
+                                    _vm.params,
+                                    "regions",
+                                    $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                                  )
+                              }
+                            } else {
+                              _vm.$set(_vm.params, "regions", $$c)
+                            }
+                          }
+                        }
+                      }),
+                      _c("span", { staticClass: "checkmark" }),
+                      _vm._v(" Львівська")
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _c("label", [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.params.regions,
+                            expression: "params.regions"
+                          }
+                        ],
+                        attrs: {
+                          type: "checkbox",
+                          value: "14",
+                          name: "region"
+                        },
+                        domProps: {
+                          checked: Array.isArray(_vm.params.regions)
+                            ? _vm._i(_vm.params.regions, "14") > -1
+                            : _vm.params.regions
+                        },
+                        on: {
+                          change: function($event) {
+                            var $$a = _vm.params.regions,
+                              $$el = $event.target,
+                              $$c = $$el.checked ? true : false
+                            if (Array.isArray($$a)) {
+                              var $$v = "14",
+                                $$i = _vm._i($$a, $$v)
+                              if ($$el.checked) {
+                                $$i < 0 &&
+                                  _vm.$set(
+                                    _vm.params,
+                                    "regions",
+                                    $$a.concat([$$v])
+                                  )
+                              } else {
+                                $$i > -1 &&
+                                  _vm.$set(
+                                    _vm.params,
+                                    "regions",
+                                    $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                                  )
+                              }
+                            } else {
+                              _vm.$set(_vm.params, "regions", $$c)
+                            }
+                          }
+                        }
+                      }),
+                      _c("span", { staticClass: "checkmark" }),
+                      _vm._v(" Миколаївська")
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _c("label", [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.params.regions,
+                            expression: "params.regions"
+                          }
+                        ],
+                        attrs: {
+                          type: "checkbox",
+                          value: "15",
+                          name: "region"
+                        },
+                        domProps: {
+                          checked: Array.isArray(_vm.params.regions)
+                            ? _vm._i(_vm.params.regions, "15") > -1
+                            : _vm.params.regions
+                        },
+                        on: {
+                          change: function($event) {
+                            var $$a = _vm.params.regions,
+                              $$el = $event.target,
+                              $$c = $$el.checked ? true : false
+                            if (Array.isArray($$a)) {
+                              var $$v = "15",
+                                $$i = _vm._i($$a, $$v)
+                              if ($$el.checked) {
+                                $$i < 0 &&
+                                  _vm.$set(
+                                    _vm.params,
+                                    "regions",
+                                    $$a.concat([$$v])
+                                  )
+                              } else {
+                                $$i > -1 &&
+                                  _vm.$set(
+                                    _vm.params,
+                                    "regions",
+                                    $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                                  )
+                              }
+                            } else {
+                              _vm.$set(_vm.params, "regions", $$c)
+                            }
+                          }
+                        }
+                      }),
+                      _c("span", { staticClass: "checkmark" }),
+                      _vm._v(" Одеська")
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _c("label", [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.params.regions,
+                            expression: "params.regions"
+                          }
+                        ],
+                        attrs: {
+                          type: "checkbox",
+                          value: "16",
+                          name: "region"
+                        },
+                        domProps: {
+                          checked: Array.isArray(_vm.params.regions)
+                            ? _vm._i(_vm.params.regions, "16") > -1
+                            : _vm.params.regions
+                        },
+                        on: {
+                          change: function($event) {
+                            var $$a = _vm.params.regions,
+                              $$el = $event.target,
+                              $$c = $$el.checked ? true : false
+                            if (Array.isArray($$a)) {
+                              var $$v = "16",
+                                $$i = _vm._i($$a, $$v)
+                              if ($$el.checked) {
+                                $$i < 0 &&
+                                  _vm.$set(
+                                    _vm.params,
+                                    "regions",
+                                    $$a.concat([$$v])
+                                  )
+                              } else {
+                                $$i > -1 &&
+                                  _vm.$set(
+                                    _vm.params,
+                                    "regions",
+                                    $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                                  )
+                              }
+                            } else {
+                              _vm.$set(_vm.params, "regions", $$c)
+                            }
+                          }
+                        }
+                      }),
+                      _c("span", { staticClass: "checkmark" }),
+                      _vm._v(" Полтавська")
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _c("label", [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.params.regions,
+                            expression: "params.regions"
+                          }
+                        ],
+                        attrs: {
+                          type: "checkbox",
+                          value: "17",
+                          name: "region"
+                        },
+                        domProps: {
+                          checked: Array.isArray(_vm.params.regions)
+                            ? _vm._i(_vm.params.regions, "17") > -1
+                            : _vm.params.regions
+                        },
+                        on: {
+                          change: function($event) {
+                            var $$a = _vm.params.regions,
+                              $$el = $event.target,
+                              $$c = $$el.checked ? true : false
+                            if (Array.isArray($$a)) {
+                              var $$v = "17",
+                                $$i = _vm._i($$a, $$v)
+                              if ($$el.checked) {
+                                $$i < 0 &&
+                                  _vm.$set(
+                                    _vm.params,
+                                    "regions",
+                                    $$a.concat([$$v])
+                                  )
+                              } else {
+                                $$i > -1 &&
+                                  _vm.$set(
+                                    _vm.params,
+                                    "regions",
+                                    $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                                  )
+                              }
+                            } else {
+                              _vm.$set(_vm.params, "regions", $$c)
+                            }
+                          }
+                        }
+                      }),
+                      _c("span", { staticClass: "checkmark" }),
+                      _vm._v(" Рівненська")
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _c("label", [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.params.regions,
+                            expression: "params.regions"
+                          }
+                        ],
+                        attrs: {
+                          type: "checkbox",
+                          value: "18",
+                          name: "region"
+                        },
+                        domProps: {
+                          checked: Array.isArray(_vm.params.regions)
+                            ? _vm._i(_vm.params.regions, "18") > -1
+                            : _vm.params.regions
+                        },
+                        on: {
+                          change: function($event) {
+                            var $$a = _vm.params.regions,
+                              $$el = $event.target,
+                              $$c = $$el.checked ? true : false
+                            if (Array.isArray($$a)) {
+                              var $$v = "18",
+                                $$i = _vm._i($$a, $$v)
+                              if ($$el.checked) {
+                                $$i < 0 &&
+                                  _vm.$set(
+                                    _vm.params,
+                                    "regions",
+                                    $$a.concat([$$v])
+                                  )
+                              } else {
+                                $$i > -1 &&
+                                  _vm.$set(
+                                    _vm.params,
+                                    "regions",
+                                    $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                                  )
+                              }
+                            } else {
+                              _vm.$set(_vm.params, "regions", $$c)
+                            }
+                          }
+                        }
+                      }),
+                      _c("span", { staticClass: "checkmark" }),
+                      _vm._v(" Сумська")
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _c("label", [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.params.regions,
+                            expression: "params.regions"
+                          }
+                        ],
+                        attrs: {
+                          type: "checkbox",
+                          value: "19",
+                          name: "region"
+                        },
+                        domProps: {
+                          checked: Array.isArray(_vm.params.regions)
+                            ? _vm._i(_vm.params.regions, "19") > -1
+                            : _vm.params.regions
+                        },
+                        on: {
+                          change: function($event) {
+                            var $$a = _vm.params.regions,
+                              $$el = $event.target,
+                              $$c = $$el.checked ? true : false
+                            if (Array.isArray($$a)) {
+                              var $$v = "19",
+                                $$i = _vm._i($$a, $$v)
+                              if ($$el.checked) {
+                                $$i < 0 &&
+                                  _vm.$set(
+                                    _vm.params,
+                                    "regions",
+                                    $$a.concat([$$v])
+                                  )
+                              } else {
+                                $$i > -1 &&
+                                  _vm.$set(
+                                    _vm.params,
+                                    "regions",
+                                    $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                                  )
+                              }
+                            } else {
+                              _vm.$set(_vm.params, "regions", $$c)
+                            }
+                          }
+                        }
+                      }),
+                      _c("span", { staticClass: "checkmark" }),
+                      _vm._v(" Тернопільська")
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _c("label", [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.params.regions,
+                            expression: "params.regions"
+                          }
+                        ],
+                        attrs: {
+                          type: "checkbox",
+                          value: "20",
+                          name: "region"
+                        },
+                        domProps: {
+                          checked: Array.isArray(_vm.params.regions)
+                            ? _vm._i(_vm.params.regions, "20") > -1
+                            : _vm.params.regions
+                        },
+                        on: {
+                          change: function($event) {
+                            var $$a = _vm.params.regions,
+                              $$el = $event.target,
+                              $$c = $$el.checked ? true : false
+                            if (Array.isArray($$a)) {
+                              var $$v = "20",
+                                $$i = _vm._i($$a, $$v)
+                              if ($$el.checked) {
+                                $$i < 0 &&
+                                  _vm.$set(
+                                    _vm.params,
+                                    "regions",
+                                    $$a.concat([$$v])
+                                  )
+                              } else {
+                                $$i > -1 &&
+                                  _vm.$set(
+                                    _vm.params,
+                                    "regions",
+                                    $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                                  )
+                              }
+                            } else {
+                              _vm.$set(_vm.params, "regions", $$c)
+                            }
+                          }
+                        }
+                      }),
+                      _c("span", { staticClass: "checkmark" }),
+                      _vm._v(" Харківська")
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _c("label", [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.params.regions,
+                            expression: "params.regions"
+                          }
+                        ],
+                        attrs: {
+                          type: "checkbox",
+                          value: "21",
+                          name: "region"
+                        },
+                        domProps: {
+                          checked: Array.isArray(_vm.params.regions)
+                            ? _vm._i(_vm.params.regions, "21") > -1
+                            : _vm.params.regions
+                        },
+                        on: {
+                          change: function($event) {
+                            var $$a = _vm.params.regions,
+                              $$el = $event.target,
+                              $$c = $$el.checked ? true : false
+                            if (Array.isArray($$a)) {
+                              var $$v = "21",
+                                $$i = _vm._i($$a, $$v)
+                              if ($$el.checked) {
+                                $$i < 0 &&
+                                  _vm.$set(
+                                    _vm.params,
+                                    "regions",
+                                    $$a.concat([$$v])
+                                  )
+                              } else {
+                                $$i > -1 &&
+                                  _vm.$set(
+                                    _vm.params,
+                                    "regions",
+                                    $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                                  )
+                              }
+                            } else {
+                              _vm.$set(_vm.params, "regions", $$c)
+                            }
+                          }
+                        }
+                      }),
+                      _c("span", { staticClass: "checkmark" }),
+                      _vm._v(" Херсонська")
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _c("label", [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.params.regions,
+                            expression: "params.regions"
+                          }
+                        ],
+                        attrs: {
+                          type: "checkbox",
+                          value: "22",
+                          name: "region"
+                        },
+                        domProps: {
+                          checked: Array.isArray(_vm.params.regions)
+                            ? _vm._i(_vm.params.regions, "22") > -1
+                            : _vm.params.regions
+                        },
+                        on: {
+                          change: function($event) {
+                            var $$a = _vm.params.regions,
+                              $$el = $event.target,
+                              $$c = $$el.checked ? true : false
+                            if (Array.isArray($$a)) {
+                              var $$v = "22",
+                                $$i = _vm._i($$a, $$v)
+                              if ($$el.checked) {
+                                $$i < 0 &&
+                                  _vm.$set(
+                                    _vm.params,
+                                    "regions",
+                                    $$a.concat([$$v])
+                                  )
+                              } else {
+                                $$i > -1 &&
+                                  _vm.$set(
+                                    _vm.params,
+                                    "regions",
+                                    $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                                  )
+                              }
+                            } else {
+                              _vm.$set(_vm.params, "regions", $$c)
+                            }
+                          }
+                        }
+                      }),
+                      _c("span", { staticClass: "checkmark" }),
+                      _vm._v(" Хмельницька")
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _c("label", [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.params.regions,
+                            expression: "params.regions"
+                          }
+                        ],
+                        attrs: {
+                          type: "checkbox",
+                          value: "23",
+                          name: "region"
+                        },
+                        domProps: {
+                          checked: Array.isArray(_vm.params.regions)
+                            ? _vm._i(_vm.params.regions, "23") > -1
+                            : _vm.params.regions
+                        },
+                        on: {
+                          change: function($event) {
+                            var $$a = _vm.params.regions,
+                              $$el = $event.target,
+                              $$c = $$el.checked ? true : false
+                            if (Array.isArray($$a)) {
+                              var $$v = "23",
+                                $$i = _vm._i($$a, $$v)
+                              if ($$el.checked) {
+                                $$i < 0 &&
+                                  _vm.$set(
+                                    _vm.params,
+                                    "regions",
+                                    $$a.concat([$$v])
+                                  )
+                              } else {
+                                $$i > -1 &&
+                                  _vm.$set(
+                                    _vm.params,
+                                    "regions",
+                                    $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                                  )
+                              }
+                            } else {
+                              _vm.$set(_vm.params, "regions", $$c)
+                            }
+                          }
+                        }
+                      }),
+                      _c("span", { staticClass: "checkmark" }),
+                      _vm._v(" Черкаська")
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _c("label", [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.params.regions,
+                            expression: "params.regions"
+                          }
+                        ],
+                        attrs: {
+                          type: "checkbox",
+                          value: "24",
+                          name: "region"
+                        },
+                        domProps: {
+                          checked: Array.isArray(_vm.params.regions)
+                            ? _vm._i(_vm.params.regions, "24") > -1
+                            : _vm.params.regions
+                        },
+                        on: {
+                          change: function($event) {
+                            var $$a = _vm.params.regions,
+                              $$el = $event.target,
+                              $$c = $$el.checked ? true : false
+                            if (Array.isArray($$a)) {
+                              var $$v = "24",
+                                $$i = _vm._i($$a, $$v)
+                              if ($$el.checked) {
+                                $$i < 0 &&
+                                  _vm.$set(
+                                    _vm.params,
+                                    "regions",
+                                    $$a.concat([$$v])
+                                  )
+                              } else {
+                                $$i > -1 &&
+                                  _vm.$set(
+                                    _vm.params,
+                                    "regions",
+                                    $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                                  )
+                              }
+                            } else {
+                              _vm.$set(_vm.params, "regions", $$c)
+                            }
+                          }
+                        }
+                      }),
+                      _c("span", { staticClass: "checkmark" }),
+                      _vm._v(" Чернівецька")
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _c("label", [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.params.regions,
+                            expression: "params.regions"
+                          }
+                        ],
+                        attrs: {
+                          type: "checkbox",
+                          value: "25",
+                          name: "region"
+                        },
+                        domProps: {
+                          checked: Array.isArray(_vm.params.regions)
+                            ? _vm._i(_vm.params.regions, "25") > -1
+                            : _vm.params.regions
+                        },
+                        on: {
+                          change: function($event) {
+                            var $$a = _vm.params.regions,
+                              $$el = $event.target,
+                              $$c = $$el.checked ? true : false
+                            if (Array.isArray($$a)) {
+                              var $$v = "25",
+                                $$i = _vm._i($$a, $$v)
+                              if ($$el.checked) {
+                                $$i < 0 &&
+                                  _vm.$set(
+                                    _vm.params,
+                                    "regions",
+                                    $$a.concat([$$v])
+                                  )
+                              } else {
+                                $$i > -1 &&
+                                  _vm.$set(
+                                    _vm.params,
+                                    "regions",
+                                    $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                                  )
+                              }
+                            } else {
+                              _vm.$set(_vm.params, "regions", $$c)
+                            }
+                          }
+                        }
+                      }),
+                      _c("span", { staticClass: "checkmark" }),
+                      _vm._v(" Чернігівська")
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _c("label", [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.params.regions,
+                            expression: "params.regions"
+                          }
+                        ],
+                        attrs: {
+                          type: "checkbox",
+                          value: "26",
+                          name: "region"
+                        },
+                        domProps: {
+                          checked: Array.isArray(_vm.params.regions)
+                            ? _vm._i(_vm.params.regions, "26") > -1
+                            : _vm.params.regions
+                        },
+                        on: {
+                          change: function($event) {
+                            var $$a = _vm.params.regions,
+                              $$el = $event.target,
+                              $$c = $$el.checked ? true : false
+                            if (Array.isArray($$a)) {
+                              var $$v = "26",
+                                $$i = _vm._i($$a, $$v)
+                              if ($$el.checked) {
+                                $$i < 0 &&
+                                  _vm.$set(
+                                    _vm.params,
+                                    "regions",
+                                    $$a.concat([$$v])
+                                  )
+                              } else {
+                                $$i > -1 &&
+                                  _vm.$set(
+                                    _vm.params,
+                                    "regions",
+                                    $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                                  )
+                              }
+                            } else {
+                              _vm.$set(_vm.params, "regions", $$c)
+                            }
+                          }
+                        }
+                      }),
+                      _c("span", { staticClass: "checkmark" }),
+                      _vm._v(" м. Київ")
+                    ])
+                  ])
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("hr"),
+            _vm._v(" "),
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-lg-12" }, [
+                _c("ul", { staticClass: "list-unstyled mb-0" }, [
+                  _c("li", [
+                    _c("label", [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.params.expired,
+                            expression: "params.expired"
+                          }
+                        ],
+                        attrs: {
+                          type: "checkbox",
+                          value: "1",
+                          name: "expired"
+                        },
+                        domProps: {
+                          checked: Array.isArray(_vm.params.expired)
+                            ? _vm._i(_vm.params.expired, "1") > -1
+                            : _vm.params.expired
+                        },
+                        on: {
+                          change: function($event) {
+                            var $$a = _vm.params.expired,
+                              $$el = $event.target,
+                              $$c = $$el.checked ? true : false
+                            if (Array.isArray($$a)) {
+                              var $$v = "1",
+                                $$i = _vm._i($$a, $$v)
+                              if ($$el.checked) {
+                                $$i < 0 &&
+                                  _vm.$set(
+                                    _vm.params,
+                                    "expired",
+                                    $$a.concat([$$v])
+                                  )
+                              } else {
+                                $$i > -1 &&
+                                  _vm.$set(
+                                    _vm.params,
+                                    "expired",
+                                    $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                                  )
+                              }
+                            } else {
+                              _vm.$set(_vm.params, "expired", $$c)
+                            }
+                          }
+                        }
+                      }),
+                      _c("span", { staticClass: "checkmark" }),
+                      _vm._v("Закінчилися повноваження")
+                    ])
+                  ])
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "apply-filters", attrs: { id: "apply-filters" } },
+              [
+                _c("hr"),
+                _vm._v(" "),
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-6 pl-1" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-outline-info",
+                        attrs: { type: "reset" },
+                        on: {
+                          click: function($event) {
+                            _vm.resetFilters()
+                          }
+                        }
+                      },
+                      [_vm._v("Скинути")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-6" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary",
+                        attrs: { type: "button" },
+                        on: {
+                          click: function($event) {
+                            _vm.getJudgesList()
+                          }
+                        }
+                      },
+                      [_vm._v("Показати")]
+                    )
+                  ])
+                ])
+              ]
+            )
           ])
         ])
       ]),
       _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "row" },
-        _vm._l(_vm.autocomplete, function(search, index) {
-          return _c(
-            "div",
-            { key: index, staticClass: "offset-lg-3 col-lg-9" },
-            [
-              _vm._v(
-                "\n      " +
-                  _vm._s(search.surname) +
-                  " " +
-                  _vm._s(search.name) +
-                  " " +
-                  _vm._s(search.patronymic) +
-                  "\n      "
-              ),
-              _c("hr")
-            ]
-          )
-        })
-      )
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-lg-3", attrs: { id: "filters" } }, [
-          _c("div", { staticClass: "card my-4" }, [
-            _vm._m(1),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-body" }, [
-              _c(
-                "form",
+      _c("div", { staticClass: "col-9 list-data-container" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-10 autocomplete" }, [
+            _c("input", {
+              directives: [
                 {
-                  attrs: { method: "get", id: "form-filters", name: "filters" }
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.params.search,
+                  expression: "params.search"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "search", placeholder: "Пошук..." },
+              domProps: { value: _vm.params.search },
+              on: {
+                keyup: function($event) {
+                  _vm.liveSearch()
                 },
-                [
-                  _c("div", { staticClass: "row" }, [
-                    _c("div", { staticClass: "col-lg-12" }, [
-                      _c("h6", [_vm._v("Інстанція")]),
-                      _vm._v(" "),
-                      _c("ul", { staticClass: "list-unstyled mb-0" }, [
-                        _c("li", [
-                          _c("label", [
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.params.instance,
-                                  expression: "params.instance"
-                                }
-                              ],
-                              attrs: {
-                                type: "checkbox",
-                                value: "3",
-                                name: "instance"
-                              },
-                              domProps: {
-                                checked: Array.isArray(_vm.params.instance)
-                                  ? _vm._i(_vm.params.instance, "3") > -1
-                                  : _vm.params.instance
-                              },
-                              on: {
-                                change: function($event) {
-                                  var $$a = _vm.params.instance,
-                                    $$el = $event.target,
-                                    $$c = $$el.checked ? true : false
-                                  if (Array.isArray($$a)) {
-                                    var $$v = "3",
-                                      $$i = _vm._i($$a, $$v)
-                                    if ($$el.checked) {
-                                      $$i < 0 &&
-                                        _vm.$set(
-                                          _vm.params,
-                                          "instance",
-                                          $$a.concat([$$v])
-                                        )
-                                    } else {
-                                      $$i > -1 &&
-                                        _vm.$set(
-                                          _vm.params,
-                                          "instance",
-                                          $$a
-                                            .slice(0, $$i)
-                                            .concat($$a.slice($$i + 1))
-                                        )
-                                    }
-                                  } else {
-                                    _vm.$set(_vm.params, "instance", $$c)
-                                  }
-                                }
-                              }
-                            }),
-                            _c("span", { staticClass: "checkmark" }),
-                            _vm._v(" Перша")
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("li", [
-                          _c("label", [
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.params.instance,
-                                  expression: "params.instance"
-                                }
-                              ],
-                              attrs: {
-                                type: "checkbox",
-                                value: "2",
-                                name: "instance"
-                              },
-                              domProps: {
-                                checked: Array.isArray(_vm.params.instance)
-                                  ? _vm._i(_vm.params.instance, "2") > -1
-                                  : _vm.params.instance
-                              },
-                              on: {
-                                change: function($event) {
-                                  var $$a = _vm.params.instance,
-                                    $$el = $event.target,
-                                    $$c = $$el.checked ? true : false
-                                  if (Array.isArray($$a)) {
-                                    var $$v = "2",
-                                      $$i = _vm._i($$a, $$v)
-                                    if ($$el.checked) {
-                                      $$i < 0 &&
-                                        _vm.$set(
-                                          _vm.params,
-                                          "instance",
-                                          $$a.concat([$$v])
-                                        )
-                                    } else {
-                                      $$i > -1 &&
-                                        _vm.$set(
-                                          _vm.params,
-                                          "instance",
-                                          $$a
-                                            .slice(0, $$i)
-                                            .concat($$a.slice($$i + 1))
-                                        )
-                                    }
-                                  } else {
-                                    _vm.$set(_vm.params, "instance", $$c)
-                                  }
-                                }
-                              }
-                            }),
-                            _c("span", { staticClass: "checkmark" }),
-                            _vm._v(" Апеляційна")
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("li", [
-                          _c("label", [
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.params.instance,
-                                  expression: "params.instance"
-                                }
-                              ],
-                              attrs: {
-                                type: "checkbox",
-                                value: "1",
-                                name: "instance"
-                              },
-                              domProps: {
-                                checked: Array.isArray(_vm.params.instance)
-                                  ? _vm._i(_vm.params.instance, "1") > -1
-                                  : _vm.params.instance
-                              },
-                              on: {
-                                change: function($event) {
-                                  var $$a = _vm.params.instance,
-                                    $$el = $event.target,
-                                    $$c = $$el.checked ? true : false
-                                  if (Array.isArray($$a)) {
-                                    var $$v = "1",
-                                      $$i = _vm._i($$a, $$v)
-                                    if ($$el.checked) {
-                                      $$i < 0 &&
-                                        _vm.$set(
-                                          _vm.params,
-                                          "instance",
-                                          $$a.concat([$$v])
-                                        )
-                                    } else {
-                                      $$i > -1 &&
-                                        _vm.$set(
-                                          _vm.params,
-                                          "instance",
-                                          $$a
-                                            .slice(0, $$i)
-                                            .concat($$a.slice($$i + 1))
-                                        )
-                                    }
-                                  } else {
-                                    _vm.$set(_vm.params, "instance", $$c)
-                                  }
-                                }
-                              }
-                            }),
-                            _c("span", { staticClass: "checkmark" }),
-                            _vm._v(" Касаційна")
-                          ])
-                        ])
-                      ])
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("hr"),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "row" }, [
-                    _c("div", { staticClass: "col-lg-12" }, [
-                      _c("h6", [_vm._v("Юрисдикція")]),
-                      _vm._v(" "),
-                      _c("ul", { staticClass: "list-unstyled mb-0" }, [
-                        _c("li", [
-                          _c("label", [
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.params.jurisdiction,
-                                  expression: "params.jurisdiction"
-                                }
-                              ],
-                              attrs: {
-                                type: "checkbox",
-                                value: "3",
-                                name: "jurisdiction"
-                              },
-                              domProps: {
-                                checked: Array.isArray(_vm.params.jurisdiction)
-                                  ? _vm._i(_vm.params.jurisdiction, "3") > -1
-                                  : _vm.params.jurisdiction
-                              },
-                              on: {
-                                change: function($event) {
-                                  var $$a = _vm.params.jurisdiction,
-                                    $$el = $event.target,
-                                    $$c = $$el.checked ? true : false
-                                  if (Array.isArray($$a)) {
-                                    var $$v = "3",
-                                      $$i = _vm._i($$a, $$v)
-                                    if ($$el.checked) {
-                                      $$i < 0 &&
-                                        _vm.$set(
-                                          _vm.params,
-                                          "jurisdiction",
-                                          $$a.concat([$$v])
-                                        )
-                                    } else {
-                                      $$i > -1 &&
-                                        _vm.$set(
-                                          _vm.params,
-                                          "jurisdiction",
-                                          $$a
-                                            .slice(0, $$i)
-                                            .concat($$a.slice($$i + 1))
-                                        )
-                                    }
-                                  } else {
-                                    _vm.$set(_vm.params, "jurisdiction", $$c)
-                                  }
-                                }
-                              }
-                            }),
-                            _c("span", { staticClass: "checkmark" }),
-                            _vm._v(" Господарська")
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("li", [
-                          _c("label", [
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.params.jurisdiction,
-                                  expression: "params.jurisdiction"
-                                }
-                              ],
-                              attrs: {
-                                type: "checkbox",
-                                value: "2",
-                                name: "jurisdiction"
-                              },
-                              domProps: {
-                                checked: Array.isArray(_vm.params.jurisdiction)
-                                  ? _vm._i(_vm.params.jurisdiction, "2") > -1
-                                  : _vm.params.jurisdiction
-                              },
-                              on: {
-                                change: function($event) {
-                                  var $$a = _vm.params.jurisdiction,
-                                    $$el = $event.target,
-                                    $$c = $$el.checked ? true : false
-                                  if (Array.isArray($$a)) {
-                                    var $$v = "2",
-                                      $$i = _vm._i($$a, $$v)
-                                    if ($$el.checked) {
-                                      $$i < 0 &&
-                                        _vm.$set(
-                                          _vm.params,
-                                          "jurisdiction",
-                                          $$a.concat([$$v])
-                                        )
-                                    } else {
-                                      $$i > -1 &&
-                                        _vm.$set(
-                                          _vm.params,
-                                          "jurisdiction",
-                                          $$a
-                                            .slice(0, $$i)
-                                            .concat($$a.slice($$i + 1))
-                                        )
-                                    }
-                                  } else {
-                                    _vm.$set(_vm.params, "jurisdiction", $$c)
-                                  }
-                                }
-                              }
-                            }),
-                            _c("span", { staticClass: "checkmark" }),
-                            _vm._v(" Адміністративна")
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("li", [
-                          _c("label", [
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.params.jurisdiction,
-                                  expression: "params.jurisdiction"
-                                }
-                              ],
-                              attrs: {
-                                type: "checkbox",
-                                value: "1",
-                                name: "jurisdiction"
-                              },
-                              domProps: {
-                                checked: Array.isArray(_vm.params.jurisdiction)
-                                  ? _vm._i(_vm.params.jurisdiction, "1") > -1
-                                  : _vm.params.jurisdiction
-                              },
-                              on: {
-                                change: function($event) {
-                                  var $$a = _vm.params.jurisdiction,
-                                    $$el = $event.target,
-                                    $$c = $$el.checked ? true : false
-                                  if (Array.isArray($$a)) {
-                                    var $$v = "1",
-                                      $$i = _vm._i($$a, $$v)
-                                    if ($$el.checked) {
-                                      $$i < 0 &&
-                                        _vm.$set(
-                                          _vm.params,
-                                          "jurisdiction",
-                                          $$a.concat([$$v])
-                                        )
-                                    } else {
-                                      $$i > -1 &&
-                                        _vm.$set(
-                                          _vm.params,
-                                          "jurisdiction",
-                                          $$a
-                                            .slice(0, $$i)
-                                            .concat($$a.slice($$i + 1))
-                                        )
-                                    }
-                                  } else {
-                                    _vm.$set(_vm.params, "jurisdiction", $$c)
-                                  }
-                                }
-                              }
-                            }),
-                            _c("span", { staticClass: "checkmark" }),
-                            _vm._v(" Загальна")
-                          ])
-                        ])
-                      ])
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("hr"),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "row" }, [
-                    _c("div", { staticClass: "col-lg-12" }, [
-                      _c("h6", [_vm._v("Регіон суду")]),
-                      _vm._v(" "),
-                      _c("ul", { staticClass: "list-unstyled mb-0" }, [
-                        _c("li", [
-                          _c("label", [
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.params.regions,
-                                  expression: "params.regions"
-                                }
-                              ],
-                              attrs: {
-                                type: "checkbox",
-                                value: "2",
-                                name: "region"
-                              },
-                              domProps: {
-                                checked: Array.isArray(_vm.params.regions)
-                                  ? _vm._i(_vm.params.regions, "2") > -1
-                                  : _vm.params.regions
-                              },
-                              on: {
-                                change: function($event) {
-                                  var $$a = _vm.params.regions,
-                                    $$el = $event.target,
-                                    $$c = $$el.checked ? true : false
-                                  if (Array.isArray($$a)) {
-                                    var $$v = "2",
-                                      $$i = _vm._i($$a, $$v)
-                                    if ($$el.checked) {
-                                      $$i < 0 &&
-                                        _vm.$set(
-                                          _vm.params,
-                                          "regions",
-                                          $$a.concat([$$v])
-                                        )
-                                    } else {
-                                      $$i > -1 &&
-                                        _vm.$set(
-                                          _vm.params,
-                                          "regions",
-                                          $$a
-                                            .slice(0, $$i)
-                                            .concat($$a.slice($$i + 1))
-                                        )
-                                    }
-                                  } else {
-                                    _vm.$set(_vm.params, "regions", $$c)
-                                  }
-                                }
-                              }
-                            }),
-                            _c("span", { staticClass: "checkmark" }),
-                            _vm._v(" Вінницька")
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("li", [
-                          _c("label", [
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.params.regions,
-                                  expression: "params.regions"
-                                }
-                              ],
-                              attrs: {
-                                type: "checkbox",
-                                value: "3",
-                                name: "region"
-                              },
-                              domProps: {
-                                checked: Array.isArray(_vm.params.regions)
-                                  ? _vm._i(_vm.params.regions, "3") > -1
-                                  : _vm.params.regions
-                              },
-                              on: {
-                                change: function($event) {
-                                  var $$a = _vm.params.regions,
-                                    $$el = $event.target,
-                                    $$c = $$el.checked ? true : false
-                                  if (Array.isArray($$a)) {
-                                    var $$v = "3",
-                                      $$i = _vm._i($$a, $$v)
-                                    if ($$el.checked) {
-                                      $$i < 0 &&
-                                        _vm.$set(
-                                          _vm.params,
-                                          "regions",
-                                          $$a.concat([$$v])
-                                        )
-                                    } else {
-                                      $$i > -1 &&
-                                        _vm.$set(
-                                          _vm.params,
-                                          "regions",
-                                          $$a
-                                            .slice(0, $$i)
-                                            .concat($$a.slice($$i + 1))
-                                        )
-                                    }
-                                  } else {
-                                    _vm.$set(_vm.params, "regions", $$c)
-                                  }
-                                }
-                              }
-                            }),
-                            _c("span", { staticClass: "checkmark" }),
-                            _vm._v(" Волинська")
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("li", [
-                          _c("label", [
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.params.regions,
-                                  expression: "params.regions"
-                                }
-                              ],
-                              attrs: {
-                                type: "checkbox",
-                                value: "4",
-                                name: "region"
-                              },
-                              domProps: {
-                                checked: Array.isArray(_vm.params.regions)
-                                  ? _vm._i(_vm.params.regions, "4") > -1
-                                  : _vm.params.regions
-                              },
-                              on: {
-                                change: function($event) {
-                                  var $$a = _vm.params.regions,
-                                    $$el = $event.target,
-                                    $$c = $$el.checked ? true : false
-                                  if (Array.isArray($$a)) {
-                                    var $$v = "4",
-                                      $$i = _vm._i($$a, $$v)
-                                    if ($$el.checked) {
-                                      $$i < 0 &&
-                                        _vm.$set(
-                                          _vm.params,
-                                          "regions",
-                                          $$a.concat([$$v])
-                                        )
-                                    } else {
-                                      $$i > -1 &&
-                                        _vm.$set(
-                                          _vm.params,
-                                          "regions",
-                                          $$a
-                                            .slice(0, $$i)
-                                            .concat($$a.slice($$i + 1))
-                                        )
-                                    }
-                                  } else {
-                                    _vm.$set(_vm.params, "regions", $$c)
-                                  }
-                                }
-                              }
-                            }),
-                            _c("span", { staticClass: "checkmark" }),
-                            _vm._v(" Дніпропетровська")
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("li", [
-                          _c("label", [
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.params.regions,
-                                  expression: "params.regions"
-                                }
-                              ],
-                              attrs: {
-                                type: "checkbox",
-                                value: "5",
-                                name: "region"
-                              },
-                              domProps: {
-                                checked: Array.isArray(_vm.params.regions)
-                                  ? _vm._i(_vm.params.regions, "5") > -1
-                                  : _vm.params.regions
-                              },
-                              on: {
-                                change: function($event) {
-                                  var $$a = _vm.params.regions,
-                                    $$el = $event.target,
-                                    $$c = $$el.checked ? true : false
-                                  if (Array.isArray($$a)) {
-                                    var $$v = "5",
-                                      $$i = _vm._i($$a, $$v)
-                                    if ($$el.checked) {
-                                      $$i < 0 &&
-                                        _vm.$set(
-                                          _vm.params,
-                                          "regions",
-                                          $$a.concat([$$v])
-                                        )
-                                    } else {
-                                      $$i > -1 &&
-                                        _vm.$set(
-                                          _vm.params,
-                                          "regions",
-                                          $$a
-                                            .slice(0, $$i)
-                                            .concat($$a.slice($$i + 1))
-                                        )
-                                    }
-                                  } else {
-                                    _vm.$set(_vm.params, "regions", $$c)
-                                  }
-                                }
-                              }
-                            }),
-                            _c("span", { staticClass: "checkmark" }),
-                            _vm._v(" Донецька")
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("li", [
-                          _c("label", [
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.params.regions,
-                                  expression: "params.regions"
-                                }
-                              ],
-                              attrs: {
-                                type: "checkbox",
-                                value: "6",
-                                name: "region"
-                              },
-                              domProps: {
-                                checked: Array.isArray(_vm.params.regions)
-                                  ? _vm._i(_vm.params.regions, "6") > -1
-                                  : _vm.params.regions
-                              },
-                              on: {
-                                change: function($event) {
-                                  var $$a = _vm.params.regions,
-                                    $$el = $event.target,
-                                    $$c = $$el.checked ? true : false
-                                  if (Array.isArray($$a)) {
-                                    var $$v = "6",
-                                      $$i = _vm._i($$a, $$v)
-                                    if ($$el.checked) {
-                                      $$i < 0 &&
-                                        _vm.$set(
-                                          _vm.params,
-                                          "regions",
-                                          $$a.concat([$$v])
-                                        )
-                                    } else {
-                                      $$i > -1 &&
-                                        _vm.$set(
-                                          _vm.params,
-                                          "regions",
-                                          $$a
-                                            .slice(0, $$i)
-                                            .concat($$a.slice($$i + 1))
-                                        )
-                                    }
-                                  } else {
-                                    _vm.$set(_vm.params, "regions", $$c)
-                                  }
-                                }
-                              }
-                            }),
-                            _c("span", { staticClass: "checkmark" }),
-                            _vm._v(" Житомирська")
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("li", [
-                          _c("label", [
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.params.regions,
-                                  expression: "params.regions"
-                                }
-                              ],
-                              attrs: {
-                                type: "checkbox",
-                                value: "7",
-                                name: "region"
-                              },
-                              domProps: {
-                                checked: Array.isArray(_vm.params.regions)
-                                  ? _vm._i(_vm.params.regions, "7") > -1
-                                  : _vm.params.regions
-                              },
-                              on: {
-                                change: function($event) {
-                                  var $$a = _vm.params.regions,
-                                    $$el = $event.target,
-                                    $$c = $$el.checked ? true : false
-                                  if (Array.isArray($$a)) {
-                                    var $$v = "7",
-                                      $$i = _vm._i($$a, $$v)
-                                    if ($$el.checked) {
-                                      $$i < 0 &&
-                                        _vm.$set(
-                                          _vm.params,
-                                          "regions",
-                                          $$a.concat([$$v])
-                                        )
-                                    } else {
-                                      $$i > -1 &&
-                                        _vm.$set(
-                                          _vm.params,
-                                          "regions",
-                                          $$a
-                                            .slice(0, $$i)
-                                            .concat($$a.slice($$i + 1))
-                                        )
-                                    }
-                                  } else {
-                                    _vm.$set(_vm.params, "regions", $$c)
-                                  }
-                                }
-                              }
-                            }),
-                            _c("span", { staticClass: "checkmark" }),
-                            _vm._v(" Закарпатська")
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("li", [
-                          _c("label", [
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.params.regions,
-                                  expression: "params.regions"
-                                }
-                              ],
-                              attrs: {
-                                type: "checkbox",
-                                value: "8",
-                                name: "region"
-                              },
-                              domProps: {
-                                checked: Array.isArray(_vm.params.regions)
-                                  ? _vm._i(_vm.params.regions, "8") > -1
-                                  : _vm.params.regions
-                              },
-                              on: {
-                                change: function($event) {
-                                  var $$a = _vm.params.regions,
-                                    $$el = $event.target,
-                                    $$c = $$el.checked ? true : false
-                                  if (Array.isArray($$a)) {
-                                    var $$v = "8",
-                                      $$i = _vm._i($$a, $$v)
-                                    if ($$el.checked) {
-                                      $$i < 0 &&
-                                        _vm.$set(
-                                          _vm.params,
-                                          "regions",
-                                          $$a.concat([$$v])
-                                        )
-                                    } else {
-                                      $$i > -1 &&
-                                        _vm.$set(
-                                          _vm.params,
-                                          "regions",
-                                          $$a
-                                            .slice(0, $$i)
-                                            .concat($$a.slice($$i + 1))
-                                        )
-                                    }
-                                  } else {
-                                    _vm.$set(_vm.params, "regions", $$c)
-                                  }
-                                }
-                              }
-                            }),
-                            _c("span", { staticClass: "checkmark" }),
-                            _vm._v(" Запорізька")
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("li", [
-                          _c("label", [
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.params.regions,
-                                  expression: "params.regions"
-                                }
-                              ],
-                              attrs: {
-                                type: "checkbox",
-                                value: "9",
-                                name: "region"
-                              },
-                              domProps: {
-                                checked: Array.isArray(_vm.params.regions)
-                                  ? _vm._i(_vm.params.regions, "9") > -1
-                                  : _vm.params.regions
-                              },
-                              on: {
-                                change: function($event) {
-                                  var $$a = _vm.params.regions,
-                                    $$el = $event.target,
-                                    $$c = $$el.checked ? true : false
-                                  if (Array.isArray($$a)) {
-                                    var $$v = "9",
-                                      $$i = _vm._i($$a, $$v)
-                                    if ($$el.checked) {
-                                      $$i < 0 &&
-                                        _vm.$set(
-                                          _vm.params,
-                                          "regions",
-                                          $$a.concat([$$v])
-                                        )
-                                    } else {
-                                      $$i > -1 &&
-                                        _vm.$set(
-                                          _vm.params,
-                                          "regions",
-                                          $$a
-                                            .slice(0, $$i)
-                                            .concat($$a.slice($$i + 1))
-                                        )
-                                    }
-                                  } else {
-                                    _vm.$set(_vm.params, "regions", $$c)
-                                  }
-                                }
-                              }
-                            }),
-                            _c("span", { staticClass: "checkmark" }),
-                            _vm._v(" Івано-Франківська")
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("li", [
-                          _c("label", [
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.params.regions,
-                                  expression: "params.regions"
-                                }
-                              ],
-                              attrs: {
-                                type: "checkbox",
-                                value: "10",
-                                name: "region"
-                              },
-                              domProps: {
-                                checked: Array.isArray(_vm.params.regions)
-                                  ? _vm._i(_vm.params.regions, "10") > -1
-                                  : _vm.params.regions
-                              },
-                              on: {
-                                change: function($event) {
-                                  var $$a = _vm.params.regions,
-                                    $$el = $event.target,
-                                    $$c = $$el.checked ? true : false
-                                  if (Array.isArray($$a)) {
-                                    var $$v = "10",
-                                      $$i = _vm._i($$a, $$v)
-                                    if ($$el.checked) {
-                                      $$i < 0 &&
-                                        _vm.$set(
-                                          _vm.params,
-                                          "regions",
-                                          $$a.concat([$$v])
-                                        )
-                                    } else {
-                                      $$i > -1 &&
-                                        _vm.$set(
-                                          _vm.params,
-                                          "regions",
-                                          $$a
-                                            .slice(0, $$i)
-                                            .concat($$a.slice($$i + 1))
-                                        )
-                                    }
-                                  } else {
-                                    _vm.$set(_vm.params, "regions", $$c)
-                                  }
-                                }
-                              }
-                            }),
-                            _c("span", { staticClass: "checkmark" }),
-                            _vm._v(" Київська")
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("li", [
-                          _c("label", [
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.params.regions,
-                                  expression: "params.regions"
-                                }
-                              ],
-                              attrs: {
-                                type: "checkbox",
-                                value: "11",
-                                name: "region"
-                              },
-                              domProps: {
-                                checked: Array.isArray(_vm.params.regions)
-                                  ? _vm._i(_vm.params.regions, "11") > -1
-                                  : _vm.params.regions
-                              },
-                              on: {
-                                change: function($event) {
-                                  var $$a = _vm.params.regions,
-                                    $$el = $event.target,
-                                    $$c = $$el.checked ? true : false
-                                  if (Array.isArray($$a)) {
-                                    var $$v = "11",
-                                      $$i = _vm._i($$a, $$v)
-                                    if ($$el.checked) {
-                                      $$i < 0 &&
-                                        _vm.$set(
-                                          _vm.params,
-                                          "regions",
-                                          $$a.concat([$$v])
-                                        )
-                                    } else {
-                                      $$i > -1 &&
-                                        _vm.$set(
-                                          _vm.params,
-                                          "regions",
-                                          $$a
-                                            .slice(0, $$i)
-                                            .concat($$a.slice($$i + 1))
-                                        )
-                                    }
-                                  } else {
-                                    _vm.$set(_vm.params, "regions", $$c)
-                                  }
-                                }
-                              }
-                            }),
-                            _c("span", { staticClass: "checkmark" }),
-                            _vm._v(" Кіровоградська")
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("li", [
-                          _c("label", [
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.params.regions,
-                                  expression: "params.regions"
-                                }
-                              ],
-                              attrs: {
-                                type: "checkbox",
-                                value: "12",
-                                name: "region"
-                              },
-                              domProps: {
-                                checked: Array.isArray(_vm.params.regions)
-                                  ? _vm._i(_vm.params.regions, "12") > -1
-                                  : _vm.params.regions
-                              },
-                              on: {
-                                change: function($event) {
-                                  var $$a = _vm.params.regions,
-                                    $$el = $event.target,
-                                    $$c = $$el.checked ? true : false
-                                  if (Array.isArray($$a)) {
-                                    var $$v = "12",
-                                      $$i = _vm._i($$a, $$v)
-                                    if ($$el.checked) {
-                                      $$i < 0 &&
-                                        _vm.$set(
-                                          _vm.params,
-                                          "regions",
-                                          $$a.concat([$$v])
-                                        )
-                                    } else {
-                                      $$i > -1 &&
-                                        _vm.$set(
-                                          _vm.params,
-                                          "regions",
-                                          $$a
-                                            .slice(0, $$i)
-                                            .concat($$a.slice($$i + 1))
-                                        )
-                                    }
-                                  } else {
-                                    _vm.$set(_vm.params, "regions", $$c)
-                                  }
-                                }
-                              }
-                            }),
-                            _c("span", { staticClass: "checkmark" }),
-                            _vm._v(" Луганська")
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("li", [
-                          _c("label", [
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.params.regions,
-                                  expression: "params.regions"
-                                }
-                              ],
-                              attrs: {
-                                type: "checkbox",
-                                value: "13",
-                                name: "region"
-                              },
-                              domProps: {
-                                checked: Array.isArray(_vm.params.regions)
-                                  ? _vm._i(_vm.params.regions, "13") > -1
-                                  : _vm.params.regions
-                              },
-                              on: {
-                                change: function($event) {
-                                  var $$a = _vm.params.regions,
-                                    $$el = $event.target,
-                                    $$c = $$el.checked ? true : false
-                                  if (Array.isArray($$a)) {
-                                    var $$v = "13",
-                                      $$i = _vm._i($$a, $$v)
-                                    if ($$el.checked) {
-                                      $$i < 0 &&
-                                        _vm.$set(
-                                          _vm.params,
-                                          "regions",
-                                          $$a.concat([$$v])
-                                        )
-                                    } else {
-                                      $$i > -1 &&
-                                        _vm.$set(
-                                          _vm.params,
-                                          "regions",
-                                          $$a
-                                            .slice(0, $$i)
-                                            .concat($$a.slice($$i + 1))
-                                        )
-                                    }
-                                  } else {
-                                    _vm.$set(_vm.params, "regions", $$c)
-                                  }
-                                }
-                              }
-                            }),
-                            _c("span", { staticClass: "checkmark" }),
-                            _vm._v(" Львівська")
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("li", [
-                          _c("label", [
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.params.regions,
-                                  expression: "params.regions"
-                                }
-                              ],
-                              attrs: {
-                                type: "checkbox",
-                                value: "14",
-                                name: "region"
-                              },
-                              domProps: {
-                                checked: Array.isArray(_vm.params.regions)
-                                  ? _vm._i(_vm.params.regions, "14") > -1
-                                  : _vm.params.regions
-                              },
-                              on: {
-                                change: function($event) {
-                                  var $$a = _vm.params.regions,
-                                    $$el = $event.target,
-                                    $$c = $$el.checked ? true : false
-                                  if (Array.isArray($$a)) {
-                                    var $$v = "14",
-                                      $$i = _vm._i($$a, $$v)
-                                    if ($$el.checked) {
-                                      $$i < 0 &&
-                                        _vm.$set(
-                                          _vm.params,
-                                          "regions",
-                                          $$a.concat([$$v])
-                                        )
-                                    } else {
-                                      $$i > -1 &&
-                                        _vm.$set(
-                                          _vm.params,
-                                          "regions",
-                                          $$a
-                                            .slice(0, $$i)
-                                            .concat($$a.slice($$i + 1))
-                                        )
-                                    }
-                                  } else {
-                                    _vm.$set(_vm.params, "regions", $$c)
-                                  }
-                                }
-                              }
-                            }),
-                            _c("span", { staticClass: "checkmark" }),
-                            _vm._v(" Миколаївська")
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("li", [
-                          _c("label", [
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.params.regions,
-                                  expression: "params.regions"
-                                }
-                              ],
-                              attrs: {
-                                type: "checkbox",
-                                value: "15",
-                                name: "region"
-                              },
-                              domProps: {
-                                checked: Array.isArray(_vm.params.regions)
-                                  ? _vm._i(_vm.params.regions, "15") > -1
-                                  : _vm.params.regions
-                              },
-                              on: {
-                                change: function($event) {
-                                  var $$a = _vm.params.regions,
-                                    $$el = $event.target,
-                                    $$c = $$el.checked ? true : false
-                                  if (Array.isArray($$a)) {
-                                    var $$v = "15",
-                                      $$i = _vm._i($$a, $$v)
-                                    if ($$el.checked) {
-                                      $$i < 0 &&
-                                        _vm.$set(
-                                          _vm.params,
-                                          "regions",
-                                          $$a.concat([$$v])
-                                        )
-                                    } else {
-                                      $$i > -1 &&
-                                        _vm.$set(
-                                          _vm.params,
-                                          "regions",
-                                          $$a
-                                            .slice(0, $$i)
-                                            .concat($$a.slice($$i + 1))
-                                        )
-                                    }
-                                  } else {
-                                    _vm.$set(_vm.params, "regions", $$c)
-                                  }
-                                }
-                              }
-                            }),
-                            _c("span", { staticClass: "checkmark" }),
-                            _vm._v(" Одеська")
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("li", [
-                          _c("label", [
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.params.regions,
-                                  expression: "params.regions"
-                                }
-                              ],
-                              attrs: {
-                                type: "checkbox",
-                                value: "16",
-                                name: "region"
-                              },
-                              domProps: {
-                                checked: Array.isArray(_vm.params.regions)
-                                  ? _vm._i(_vm.params.regions, "16") > -1
-                                  : _vm.params.regions
-                              },
-                              on: {
-                                change: function($event) {
-                                  var $$a = _vm.params.regions,
-                                    $$el = $event.target,
-                                    $$c = $$el.checked ? true : false
-                                  if (Array.isArray($$a)) {
-                                    var $$v = "16",
-                                      $$i = _vm._i($$a, $$v)
-                                    if ($$el.checked) {
-                                      $$i < 0 &&
-                                        _vm.$set(
-                                          _vm.params,
-                                          "regions",
-                                          $$a.concat([$$v])
-                                        )
-                                    } else {
-                                      $$i > -1 &&
-                                        _vm.$set(
-                                          _vm.params,
-                                          "regions",
-                                          $$a
-                                            .slice(0, $$i)
-                                            .concat($$a.slice($$i + 1))
-                                        )
-                                    }
-                                  } else {
-                                    _vm.$set(_vm.params, "regions", $$c)
-                                  }
-                                }
-                              }
-                            }),
-                            _c("span", { staticClass: "checkmark" }),
-                            _vm._v(" Полтавська")
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("li", [
-                          _c("label", [
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.params.regions,
-                                  expression: "params.regions"
-                                }
-                              ],
-                              attrs: {
-                                type: "checkbox",
-                                value: "17",
-                                name: "region"
-                              },
-                              domProps: {
-                                checked: Array.isArray(_vm.params.regions)
-                                  ? _vm._i(_vm.params.regions, "17") > -1
-                                  : _vm.params.regions
-                              },
-                              on: {
-                                change: function($event) {
-                                  var $$a = _vm.params.regions,
-                                    $$el = $event.target,
-                                    $$c = $$el.checked ? true : false
-                                  if (Array.isArray($$a)) {
-                                    var $$v = "17",
-                                      $$i = _vm._i($$a, $$v)
-                                    if ($$el.checked) {
-                                      $$i < 0 &&
-                                        _vm.$set(
-                                          _vm.params,
-                                          "regions",
-                                          $$a.concat([$$v])
-                                        )
-                                    } else {
-                                      $$i > -1 &&
-                                        _vm.$set(
-                                          _vm.params,
-                                          "regions",
-                                          $$a
-                                            .slice(0, $$i)
-                                            .concat($$a.slice($$i + 1))
-                                        )
-                                    }
-                                  } else {
-                                    _vm.$set(_vm.params, "regions", $$c)
-                                  }
-                                }
-                              }
-                            }),
-                            _c("span", { staticClass: "checkmark" }),
-                            _vm._v(" Рівненська")
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("li", [
-                          _c("label", [
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.params.regions,
-                                  expression: "params.regions"
-                                }
-                              ],
-                              attrs: {
-                                type: "checkbox",
-                                value: "18",
-                                name: "region"
-                              },
-                              domProps: {
-                                checked: Array.isArray(_vm.params.regions)
-                                  ? _vm._i(_vm.params.regions, "18") > -1
-                                  : _vm.params.regions
-                              },
-                              on: {
-                                change: function($event) {
-                                  var $$a = _vm.params.regions,
-                                    $$el = $event.target,
-                                    $$c = $$el.checked ? true : false
-                                  if (Array.isArray($$a)) {
-                                    var $$v = "18",
-                                      $$i = _vm._i($$a, $$v)
-                                    if ($$el.checked) {
-                                      $$i < 0 &&
-                                        _vm.$set(
-                                          _vm.params,
-                                          "regions",
-                                          $$a.concat([$$v])
-                                        )
-                                    } else {
-                                      $$i > -1 &&
-                                        _vm.$set(
-                                          _vm.params,
-                                          "regions",
-                                          $$a
-                                            .slice(0, $$i)
-                                            .concat($$a.slice($$i + 1))
-                                        )
-                                    }
-                                  } else {
-                                    _vm.$set(_vm.params, "regions", $$c)
-                                  }
-                                }
-                              }
-                            }),
-                            _c("span", { staticClass: "checkmark" }),
-                            _vm._v(" Сумська")
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("li", [
-                          _c("label", [
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.params.regions,
-                                  expression: "params.regions"
-                                }
-                              ],
-                              attrs: {
-                                type: "checkbox",
-                                value: "19",
-                                name: "region"
-                              },
-                              domProps: {
-                                checked: Array.isArray(_vm.params.regions)
-                                  ? _vm._i(_vm.params.regions, "19") > -1
-                                  : _vm.params.regions
-                              },
-                              on: {
-                                change: function($event) {
-                                  var $$a = _vm.params.regions,
-                                    $$el = $event.target,
-                                    $$c = $$el.checked ? true : false
-                                  if (Array.isArray($$a)) {
-                                    var $$v = "19",
-                                      $$i = _vm._i($$a, $$v)
-                                    if ($$el.checked) {
-                                      $$i < 0 &&
-                                        _vm.$set(
-                                          _vm.params,
-                                          "regions",
-                                          $$a.concat([$$v])
-                                        )
-                                    } else {
-                                      $$i > -1 &&
-                                        _vm.$set(
-                                          _vm.params,
-                                          "regions",
-                                          $$a
-                                            .slice(0, $$i)
-                                            .concat($$a.slice($$i + 1))
-                                        )
-                                    }
-                                  } else {
-                                    _vm.$set(_vm.params, "regions", $$c)
-                                  }
-                                }
-                              }
-                            }),
-                            _c("span", { staticClass: "checkmark" }),
-                            _vm._v(" Тернопільська")
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("li", [
-                          _c("label", [
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.params.regions,
-                                  expression: "params.regions"
-                                }
-                              ],
-                              attrs: {
-                                type: "checkbox",
-                                value: "20",
-                                name: "region"
-                              },
-                              domProps: {
-                                checked: Array.isArray(_vm.params.regions)
-                                  ? _vm._i(_vm.params.regions, "20") > -1
-                                  : _vm.params.regions
-                              },
-                              on: {
-                                change: function($event) {
-                                  var $$a = _vm.params.regions,
-                                    $$el = $event.target,
-                                    $$c = $$el.checked ? true : false
-                                  if (Array.isArray($$a)) {
-                                    var $$v = "20",
-                                      $$i = _vm._i($$a, $$v)
-                                    if ($$el.checked) {
-                                      $$i < 0 &&
-                                        _vm.$set(
-                                          _vm.params,
-                                          "regions",
-                                          $$a.concat([$$v])
-                                        )
-                                    } else {
-                                      $$i > -1 &&
-                                        _vm.$set(
-                                          _vm.params,
-                                          "regions",
-                                          $$a
-                                            .slice(0, $$i)
-                                            .concat($$a.slice($$i + 1))
-                                        )
-                                    }
-                                  } else {
-                                    _vm.$set(_vm.params, "regions", $$c)
-                                  }
-                                }
-                              }
-                            }),
-                            _c("span", { staticClass: "checkmark" }),
-                            _vm._v(" Харківська")
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("li", [
-                          _c("label", [
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.params.regions,
-                                  expression: "params.regions"
-                                }
-                              ],
-                              attrs: {
-                                type: "checkbox",
-                                value: "21",
-                                name: "region"
-                              },
-                              domProps: {
-                                checked: Array.isArray(_vm.params.regions)
-                                  ? _vm._i(_vm.params.regions, "21") > -1
-                                  : _vm.params.regions
-                              },
-                              on: {
-                                change: function($event) {
-                                  var $$a = _vm.params.regions,
-                                    $$el = $event.target,
-                                    $$c = $$el.checked ? true : false
-                                  if (Array.isArray($$a)) {
-                                    var $$v = "21",
-                                      $$i = _vm._i($$a, $$v)
-                                    if ($$el.checked) {
-                                      $$i < 0 &&
-                                        _vm.$set(
-                                          _vm.params,
-                                          "regions",
-                                          $$a.concat([$$v])
-                                        )
-                                    } else {
-                                      $$i > -1 &&
-                                        _vm.$set(
-                                          _vm.params,
-                                          "regions",
-                                          $$a
-                                            .slice(0, $$i)
-                                            .concat($$a.slice($$i + 1))
-                                        )
-                                    }
-                                  } else {
-                                    _vm.$set(_vm.params, "regions", $$c)
-                                  }
-                                }
-                              }
-                            }),
-                            _c("span", { staticClass: "checkmark" }),
-                            _vm._v(" Херсонська")
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("li", [
-                          _c("label", [
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.params.regions,
-                                  expression: "params.regions"
-                                }
-                              ],
-                              attrs: {
-                                type: "checkbox",
-                                value: "22",
-                                name: "region"
-                              },
-                              domProps: {
-                                checked: Array.isArray(_vm.params.regions)
-                                  ? _vm._i(_vm.params.regions, "22") > -1
-                                  : _vm.params.regions
-                              },
-                              on: {
-                                change: function($event) {
-                                  var $$a = _vm.params.regions,
-                                    $$el = $event.target,
-                                    $$c = $$el.checked ? true : false
-                                  if (Array.isArray($$a)) {
-                                    var $$v = "22",
-                                      $$i = _vm._i($$a, $$v)
-                                    if ($$el.checked) {
-                                      $$i < 0 &&
-                                        _vm.$set(
-                                          _vm.params,
-                                          "regions",
-                                          $$a.concat([$$v])
-                                        )
-                                    } else {
-                                      $$i > -1 &&
-                                        _vm.$set(
-                                          _vm.params,
-                                          "regions",
-                                          $$a
-                                            .slice(0, $$i)
-                                            .concat($$a.slice($$i + 1))
-                                        )
-                                    }
-                                  } else {
-                                    _vm.$set(_vm.params, "regions", $$c)
-                                  }
-                                }
-                              }
-                            }),
-                            _c("span", { staticClass: "checkmark" }),
-                            _vm._v(" Хмельницька")
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("li", [
-                          _c("label", [
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.params.regions,
-                                  expression: "params.regions"
-                                }
-                              ],
-                              attrs: {
-                                type: "checkbox",
-                                value: "23",
-                                name: "region"
-                              },
-                              domProps: {
-                                checked: Array.isArray(_vm.params.regions)
-                                  ? _vm._i(_vm.params.regions, "23") > -1
-                                  : _vm.params.regions
-                              },
-                              on: {
-                                change: function($event) {
-                                  var $$a = _vm.params.regions,
-                                    $$el = $event.target,
-                                    $$c = $$el.checked ? true : false
-                                  if (Array.isArray($$a)) {
-                                    var $$v = "23",
-                                      $$i = _vm._i($$a, $$v)
-                                    if ($$el.checked) {
-                                      $$i < 0 &&
-                                        _vm.$set(
-                                          _vm.params,
-                                          "regions",
-                                          $$a.concat([$$v])
-                                        )
-                                    } else {
-                                      $$i > -1 &&
-                                        _vm.$set(
-                                          _vm.params,
-                                          "regions",
-                                          $$a
-                                            .slice(0, $$i)
-                                            .concat($$a.slice($$i + 1))
-                                        )
-                                    }
-                                  } else {
-                                    _vm.$set(_vm.params, "regions", $$c)
-                                  }
-                                }
-                              }
-                            }),
-                            _c("span", { staticClass: "checkmark" }),
-                            _vm._v(" Черкаська")
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("li", [
-                          _c("label", [
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.params.regions,
-                                  expression: "params.regions"
-                                }
-                              ],
-                              attrs: {
-                                type: "checkbox",
-                                value: "24",
-                                name: "region"
-                              },
-                              domProps: {
-                                checked: Array.isArray(_vm.params.regions)
-                                  ? _vm._i(_vm.params.regions, "24") > -1
-                                  : _vm.params.regions
-                              },
-                              on: {
-                                change: function($event) {
-                                  var $$a = _vm.params.regions,
-                                    $$el = $event.target,
-                                    $$c = $$el.checked ? true : false
-                                  if (Array.isArray($$a)) {
-                                    var $$v = "24",
-                                      $$i = _vm._i($$a, $$v)
-                                    if ($$el.checked) {
-                                      $$i < 0 &&
-                                        _vm.$set(
-                                          _vm.params,
-                                          "regions",
-                                          $$a.concat([$$v])
-                                        )
-                                    } else {
-                                      $$i > -1 &&
-                                        _vm.$set(
-                                          _vm.params,
-                                          "regions",
-                                          $$a
-                                            .slice(0, $$i)
-                                            .concat($$a.slice($$i + 1))
-                                        )
-                                    }
-                                  } else {
-                                    _vm.$set(_vm.params, "regions", $$c)
-                                  }
-                                }
-                              }
-                            }),
-                            _c("span", { staticClass: "checkmark" }),
-                            _vm._v(" Чернівецька")
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("li", [
-                          _c("label", [
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.params.regions,
-                                  expression: "params.regions"
-                                }
-                              ],
-                              attrs: {
-                                type: "checkbox",
-                                value: "25",
-                                name: "region"
-                              },
-                              domProps: {
-                                checked: Array.isArray(_vm.params.regions)
-                                  ? _vm._i(_vm.params.regions, "25") > -1
-                                  : _vm.params.regions
-                              },
-                              on: {
-                                change: function($event) {
-                                  var $$a = _vm.params.regions,
-                                    $$el = $event.target,
-                                    $$c = $$el.checked ? true : false
-                                  if (Array.isArray($$a)) {
-                                    var $$v = "25",
-                                      $$i = _vm._i($$a, $$v)
-                                    if ($$el.checked) {
-                                      $$i < 0 &&
-                                        _vm.$set(
-                                          _vm.params,
-                                          "regions",
-                                          $$a.concat([$$v])
-                                        )
-                                    } else {
-                                      $$i > -1 &&
-                                        _vm.$set(
-                                          _vm.params,
-                                          "regions",
-                                          $$a
-                                            .slice(0, $$i)
-                                            .concat($$a.slice($$i + 1))
-                                        )
-                                    }
-                                  } else {
-                                    _vm.$set(_vm.params, "regions", $$c)
-                                  }
-                                }
-                              }
-                            }),
-                            _c("span", { staticClass: "checkmark" }),
-                            _vm._v(" Чернігівська")
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("li", [
-                          _c("label", [
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.params.regions,
-                                  expression: "params.regions"
-                                }
-                              ],
-                              attrs: {
-                                type: "checkbox",
-                                value: "26",
-                                name: "region"
-                              },
-                              domProps: {
-                                checked: Array.isArray(_vm.params.regions)
-                                  ? _vm._i(_vm.params.regions, "26") > -1
-                                  : _vm.params.regions
-                              },
-                              on: {
-                                change: function($event) {
-                                  var $$a = _vm.params.regions,
-                                    $$el = $event.target,
-                                    $$c = $$el.checked ? true : false
-                                  if (Array.isArray($$a)) {
-                                    var $$v = "26",
-                                      $$i = _vm._i($$a, $$v)
-                                    if ($$el.checked) {
-                                      $$i < 0 &&
-                                        _vm.$set(
-                                          _vm.params,
-                                          "regions",
-                                          $$a.concat([$$v])
-                                        )
-                                    } else {
-                                      $$i > -1 &&
-                                        _vm.$set(
-                                          _vm.params,
-                                          "regions",
-                                          $$a
-                                            .slice(0, $$i)
-                                            .concat($$a.slice($$i + 1))
-                                        )
-                                    }
-                                  } else {
-                                    _vm.$set(_vm.params, "regions", $$c)
-                                  }
-                                }
-                              }
-                            }),
-                            _c("span", { staticClass: "checkmark" }),
-                            _vm._v(" м. Київ")
-                          ])
-                        ])
-                      ])
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("hr"),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "row" }, [
-                    _c("div", { staticClass: "col-lg-12" }, [
-                      _c("ul", { staticClass: "list-unstyled mb-0" }, [
-                        _c("li", [
-                          _c("label", [
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.params.expired,
-                                  expression: "params.expired"
-                                }
-                              ],
-                              attrs: {
-                                type: "checkbox",
-                                value: "1",
-                                name: "expired"
-                              },
-                              domProps: {
-                                checked: Array.isArray(_vm.params.expired)
-                                  ? _vm._i(_vm.params.expired, "1") > -1
-                                  : _vm.params.expired
-                              },
-                              on: {
-                                change: function($event) {
-                                  var $$a = _vm.params.expired,
-                                    $$el = $event.target,
-                                    $$c = $$el.checked ? true : false
-                                  if (Array.isArray($$a)) {
-                                    var $$v = "1",
-                                      $$i = _vm._i($$a, $$v)
-                                    if ($$el.checked) {
-                                      $$i < 0 &&
-                                        _vm.$set(
-                                          _vm.params,
-                                          "expired",
-                                          $$a.concat([$$v])
-                                        )
-                                    } else {
-                                      $$i > -1 &&
-                                        _vm.$set(
-                                          _vm.params,
-                                          "expired",
-                                          $$a
-                                            .slice(0, $$i)
-                                            .concat($$a.slice($$i + 1))
-                                        )
-                                    }
-                                  } else {
-                                    _vm.$set(_vm.params, "expired", $$c)
-                                  }
-                                }
-                              }
-                            }),
-                            _c("span", { staticClass: "checkmark" }),
-                            _vm._v("Закінчилися повноваження")
-                          ])
-                        ])
-                      ])
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("hr", { attrs: { id: "apply-filters-mark" } }),
-                  _vm._v(" "),
-                  _c("div", { attrs: { id: "apply-filters" } }, [
-                    _c("div", { staticClass: "row" }, [
-                      _c("div", { staticClass: "col-6 pl-1" }, [
-                        _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-outline-info",
-                            attrs: { type: "reset" },
-                            on: {
-                              click: function($event) {
-                                _vm.resetFilters()
-                              }
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.params, "search", $event.target.value)
+                }
+              }
+            }),
+            _vm._v(" "),
+            _vm.autocomplete.length
+              ? _c(
+                  "div",
+                  { staticClass: "autocomplete-block-result" },
+                  _vm._l(_vm.autocomplete, function(el, ind_1) {
+                    return _c("div", { key: ind_1 }, [
+                      _c(
+                        "a",
+                        {
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              _vm.getJudgesList()
                             }
-                          },
-                          [_vm._v("Скинути")]
-                        )
-                      ]),
+                          }
+                        },
+                        [
+                          _vm._v(
+                            "\n                " +
+                              _vm._s(el.surname) +
+                              " " +
+                              _vm._s(
+                                el.name.length === 1 ? el.name + "." : el.name
+                              ) +
+                              " \n                " +
+                              _vm._s(
+                                el.patronymic.length === 1
+                                  ? el.patronymic + "."
+                                  : el.patronymic
+                              ) +
+                              "\n              "
+                          )
+                        ]
+                      ),
                       _vm._v(" "),
-                      _c("div", { staticClass: "col-6" }, [
-                        _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-primary",
-                            attrs: { type: "button" },
-                            on: {
-                              click: function($event) {
-                                _vm.getJudgesList()
-                              }
-                            }
-                          },
-                          [_vm._v("Показати")]
-                        )
-                      ])
+                      _c("hr")
                     ])
-                  ])
-                ]
-              )
-            ])
+                  })
+                )
+              : _vm._e()
           ]),
           _vm._v(" "),
-          _c("div", [_vm._v("Регіон-------- " + _vm._s(_vm.params.regions))]),
-          _vm._v(" "),
-          _c("div", [
-            _vm._v("інстанція--------- " + _vm._s(_vm.params.instance))
-          ]),
-          _vm._v(" "),
-          _c("div", [
-            _vm._v("юрисдикція--------- " + _vm._s(_vm.params.jurisdiction))
-          ]),
-          _vm._v(" "),
-          _c("div", [_vm._v("пошук-------- " + _vm._s(_vm.params.search))]),
-          _vm._v(" "),
-          _c("div", [_vm._v("sort-------- " + _vm._s(_vm.params.sort))]),
-          _vm._v(" "),
-          _c("div", [_vm._v(" expired-------- " + _vm._s(_vm.params.expired))])
+          _c("div", { staticClass: "col-2 pl-0" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-block btn btn-primary",
+                attrs: { type: "button" },
+                on: {
+                  click: function($event) {
+                    _vm.getJudgesList()
+                  }
+                }
+              },
+              [
+                _c("i", {
+                  staticClass: "fa fa-search",
+                  attrs: { "aria-hidden": "true" }
+                }),
+                _vm._v(" знайти")
+              ]
+            )
+          ])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "col-lg-9" }, [
-          _c("div", { staticClass: "card card-outline-secondary my-4" }, [
-            _c(
-              "div",
-              { staticClass: "card-header d-flex justify-content-between" },
-              [
-                _c("h4", { staticClass: "d-flex align-items-center" }, [
-                  _vm._v("Список суддів")
+        _c("div", { staticClass: "card card-outline-secondary " }, [
+          _c(
+            "div",
+            { staticClass: "card-header d-flex justify-content-between" },
+            [
+              _c("h4", { staticClass: "d-flex align-items-center" }, [
+                _vm._v("Список суддів")
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "d-flex align-items-center" }, [
+                _c("span", { staticClass: "mr-2" }, [
+                  _vm._v(" сортувати за: ")
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "d-flex align-items-center" }, [
-                  _c("span", { staticClass: "mr-2" }, [
-                    _vm._v(" сортувати за: ")
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "select",
-                    {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.params.sort,
-                          expression: "params.sort"
-                        }
-                      ],
-                      staticClass: "form-control select-sort",
-                      attrs: { name: "sorting" },
-                      on: {
-                        change: [
-                          function($event) {
-                            var $$selectedVal = Array.prototype.filter
-                              .call($event.target.options, function(o) {
-                                return o.selected
-                              })
-                              .map(function(o) {
-                                var val = "_value" in o ? o._value : o.value
-                                return val
-                              })
-                            _vm.$set(
-                              _vm.params,
-                              "sort",
-                              $event.target.multiple
-                                ? $$selectedVal
-                                : $$selectedVal[0]
-                            )
-                          },
-                          function($event) {
-                            _vm.sortJudges()
-                          }
-                        ]
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.params.sort,
+                        expression: "params.sort"
                       }
-                    },
-                    [
-                      _vm._m(2),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "2" } }, [
-                        _vm._v("прізвищем 'Я->А'")
-                      ]),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "3" } }, [
-                        _vm._v("рейтингом 'низький->високий'")
-                      ]),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "4" } }, [
-                        _vm._v("рейтингом 'високий->низький'")
-                      ])
-                    ]
-                  )
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              { attrs: { id: "judges-list" } },
-              [
-                _c("judge-component", {
-                  attrs: { judgesList: _vm.judgesList.data }
-                })
-              ],
-              1
-            )
-          ]),
+                    ],
+                    staticClass: "form-control select-sort",
+                    attrs: { name: "sorting" },
+                    on: {
+                      change: [
+                        function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.$set(
+                            _vm.params,
+                            "sort",
+                            $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          )
+                        },
+                        function($event) {
+                          _vm.sortJudges()
+                        }
+                      ]
+                    }
+                  },
+                  [
+                    _vm._m(1),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "2" } }, [
+                      _vm._v("прізвищем (Я->А)")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "3" } }, [
+                      _vm._v("рейтингом (низький->високий)")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "4" } }, [
+                      _vm._v("рейтингом (високий->низький)")
+                    ])
+                  ]
+                )
+              ])
+            ]
+          ),
           _vm._v(" "),
           _c(
             "div",
-            { staticClass: "pagination mb-5" },
+            { attrs: { id: "judges-list" } },
             [
-              _c("vue-ads-pagination", {
-                attrs: {
-                  "total-items": _vm.judgesList.total,
-                  "max-visible-pages": 5,
-                  "button-classes": _vm.buttonClasses,
-                  loading: false
-                },
-                on: { "page-change": _vm.pageChange }
+              _c("judge-component", {
+                attrs: { judgesList: _vm.judgesList.data }
               })
             ],
             1
           )
-        ])
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "pagination mb-5" },
+          [
+            _c("vue-ads-pagination", {
+              attrs: {
+                "total-items": _vm.judgesList.total,
+                "max-visible-pages": 5,
+                "button-classes": _vm.buttonClasses,
+                loading: false
+              },
+              on: { "page-change": _vm.pageChange }
+            })
+          ],
+          1
+        )
       ])
     ])
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-6 col-md-3" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-block btn btn-primary",
-          attrs: { type: "button", onclick: "findJudge()" }
-        },
-        [
-          _c("i", {
-            staticClass: "fa fa-search",
-            attrs: { "aria-hidden": "true" }
-          }),
-          _vm._v(" знайти")
-        ]
-      )
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -49103,7 +49111,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("option", { attrs: { value: "1", selected: "" } }, [
-      _vm._v("прізвищем 'А->Я' "),
+      _vm._v("прізвищем (А->Я) "),
       _c("i", {
         staticClass: "fa fa-sort-alpha-asc",
         attrs: { "aria-hidden": "true" }
@@ -49121,19 +49129,19 @@ if (false) {
 }
 
 /***/ }),
-/* 83 */
+/* 84 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(84)
+  __webpack_require__(85)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(86)
+var __vue_script__ = __webpack_require__(87)
 /* template */
-var __vue_template__ = __webpack_require__(112)
+var __vue_template__ = __webpack_require__(113)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -49172,13 +49180,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 84 */
+/* 85 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(85);
+var content = __webpack_require__(86);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -49198,7 +49206,7 @@ if(false) {
 }
 
 /***/ }),
-/* 85 */
+/* 86 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(false);
@@ -49212,20 +49220,20 @@ exports.push([module.i, "\n.user-profile[data-v-3c3fa7de] {\n  display: -webkit-
 
 
 /***/ }),
-/* 86 */
+/* 87 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_CourtSessions_vue__ = __webpack_require__(87);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_CourtSessions_vue__ = __webpack_require__(88);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_CourtSessions_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_CourtSessions_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_CourtPractice_vue__ = __webpack_require__(92);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_CourtPractice_vue__ = __webpack_require__(93);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_CourtPractice_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_CourtPractice_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_Establishments_vue__ = __webpack_require__(97);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_Establishments_vue__ = __webpack_require__(98);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_Establishments_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_Establishments_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_ViewsHistory_vue__ = __webpack_require__(102);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_ViewsHistory_vue__ = __webpack_require__(103);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_ViewsHistory_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_ViewsHistory_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_Templates_vue__ = __webpack_require__(107);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_Templates_vue__ = __webpack_require__(108);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_Templates_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_Templates_vue__);
 //
 //
@@ -49300,19 +49308,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 87 */
+/* 88 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(88)
+  __webpack_require__(89)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(90)
+var __vue_script__ = __webpack_require__(91)
 /* template */
-var __vue_template__ = __webpack_require__(91)
+var __vue_template__ = __webpack_require__(92)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -49351,13 +49359,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 88 */
+/* 89 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(89);
+var content = __webpack_require__(90);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -49377,7 +49385,7 @@ if(false) {
 }
 
 /***/ }),
-/* 89 */
+/* 90 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(false);
@@ -49391,7 +49399,7 @@ exports.push([module.i, "\n.courtSessions[data-v-1157e9ac] {\n  width: 100%;\n  
 
 
 /***/ }),
-/* 90 */
+/* 91 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -49479,7 +49487,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 91 */
+/* 92 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -49648,19 +49656,19 @@ if (false) {
 }
 
 /***/ }),
-/* 92 */
+/* 93 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(93)
+  __webpack_require__(94)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(95)
+var __vue_script__ = __webpack_require__(96)
 /* template */
-var __vue_template__ = __webpack_require__(96)
+var __vue_template__ = __webpack_require__(97)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -49699,13 +49707,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 93 */
+/* 94 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(94);
+var content = __webpack_require__(95);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -49725,7 +49733,7 @@ if(false) {
 }
 
 /***/ }),
-/* 94 */
+/* 95 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(false);
@@ -49739,7 +49747,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 
 /***/ }),
-/* 95 */
+/* 96 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -49756,7 +49764,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 96 */
+/* 97 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -49776,19 +49784,19 @@ if (false) {
 }
 
 /***/ }),
-/* 97 */
+/* 98 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(98)
+  __webpack_require__(99)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(100)
+var __vue_script__ = __webpack_require__(101)
 /* template */
-var __vue_template__ = __webpack_require__(101)
+var __vue_template__ = __webpack_require__(102)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -49827,13 +49835,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 98 */
+/* 99 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(99);
+var content = __webpack_require__(100);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -49853,7 +49861,7 @@ if(false) {
 }
 
 /***/ }),
-/* 99 */
+/* 100 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(false);
@@ -49867,7 +49875,7 @@ exports.push([module.i, "", ""]);
 
 
 /***/ }),
-/* 100 */
+/* 101 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -49884,7 +49892,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 101 */
+/* 102 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -49906,19 +49914,19 @@ if (false) {
 }
 
 /***/ }),
-/* 102 */
+/* 103 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(103)
+  __webpack_require__(104)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(105)
+var __vue_script__ = __webpack_require__(106)
 /* template */
-var __vue_template__ = __webpack_require__(106)
+var __vue_template__ = __webpack_require__(107)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -49957,13 +49965,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 103 */
+/* 104 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(104);
+var content = __webpack_require__(105);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -49983,7 +49991,7 @@ if(false) {
 }
 
 /***/ }),
-/* 104 */
+/* 105 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(false);
@@ -49997,7 +50005,7 @@ exports.push([module.i, "", ""]);
 
 
 /***/ }),
-/* 105 */
+/* 106 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -50014,7 +50022,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 106 */
+/* 107 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -50036,19 +50044,19 @@ if (false) {
 }
 
 /***/ }),
-/* 107 */
+/* 108 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(108)
+  __webpack_require__(109)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(110)
+var __vue_script__ = __webpack_require__(111)
 /* template */
-var __vue_template__ = __webpack_require__(111)
+var __vue_template__ = __webpack_require__(112)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -50087,13 +50095,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 108 */
+/* 109 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(109);
+var content = __webpack_require__(110);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -50113,7 +50121,7 @@ if(false) {
 }
 
 /***/ }),
-/* 109 */
+/* 110 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(false);
@@ -50127,7 +50135,7 @@ exports.push([module.i, "", ""]);
 
 
 /***/ }),
-/* 110 */
+/* 111 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -50144,7 +50152,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 111 */
+/* 112 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -50164,7 +50172,7 @@ if (false) {
 }
 
 /***/ }),
-/* 112 */
+/* 113 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -50322,10 +50330,336 @@ if (false) {
 }
 
 /***/ }),
-/* 113 */
+/* 114 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 115 */,
+/* 116 */,
+/* 117 */,
+/* 118 */,
+/* 119 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(120)
+}
+var normalizeComponent = __webpack_require__(2)
+/* script */
+var __vue_script__ = __webpack_require__(122)
+/* template */
+var __vue_template__ = __webpack_require__(123)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-42cd3c52"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/rating/JudgeUpdateStatus.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-42cd3c52", Component.options)
+  } else {
+    hotAPI.reload("data-v-42cd3c52", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 120 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(121);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(1)("1050807f", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-42cd3c52\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./JudgeUpdateStatus.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-42cd3c52\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./JudgeUpdateStatus.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 121 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(0)(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/***/ }),
+/* 122 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+        name: 'modal-satus-judge'
+        // data: () => {
+        //return {}
+        // }
+});
+
+/***/ }),
+/* 123 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "changeJudgeStatus",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "changeJudgeStatusLabel",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "modal-dialog", attrs: { role: "document" } },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _c("div", { staticClass: "modal-header" }, [
+                _c(
+                  "h5",
+                  {
+                    staticClass: "modal-title",
+                    attrs: { id: "changeJudgeStatusLabel" }
+                  },
+                  [_vm._v("Оновити статус судді")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "close",
+                    attrs: {
+                      type: "button",
+                      "data-dismiss": "modal",
+                      "aria-label": "Close"
+                    }
+                  },
+                  [
+                    _c("span", { attrs: { "aria-hidden": "true" } }, [
+                      _vm._v("×")
+                    ])
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _c("form", [
+                  _c("div", { staticClass: "form-group row mt-1" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-2 col-form-label",
+                        attrs: { for: "chooser-judge-status" }
+                      },
+                      [_vm._v("Статус")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "select",
+                      {
+                        staticClass: "form-control col-8 ml-4",
+                        attrs: { id: "chooser-judge-status" }
+                      },
+                      [
+                        _c("option", { attrs: { value: "1" } }, [
+                          _vm._v("   на роботі")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "2" } }, [
+                          _vm._v("   на лікарняному")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "3" } }, [
+                          _vm._v("   у відпустці")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "4" } }, [
+                          _vm._v("   відсутній на робочому місці")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "5" } }, [
+                          _vm._v("   припиено повноваження")
+                        ])
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c("input", {
+                      attrs: {
+                        type: "hidden",
+                        id: "judge-for-new-status",
+                        value: "0"
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group row mt-1" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-6 col-form-label",
+                        attrs: { for: "status-end-date" }
+                      },
+                      [
+                        _vm._v("Дата завершення дії статусу "),
+                        _c("br"),
+                        _c("sup", { staticClass: "text-muted" }, [
+                          _vm._v("(якщо відома)")
+                        ])
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-5" }, [
+                      _c("input", {
+                        staticClass: "form-control",
+                        attrs: { type: "date", id: "status-end-date" }
+                      })
+                    ])
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-footer" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-secondary",
+                    attrs: { type: "button", "data-dismiss": "modal" }
+                  },
+                  [_vm._v("Закрити")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary",
+                    attrs: {
+                      type: "button",
+                      "data-dismiss": "modal",
+                      onclick: "updateJudgeStatus()"
+                    }
+                  },
+                  [_vm._v("Змінити статус")]
+                )
+              ])
+            ])
+          ]
+        )
+      ]
+    )
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-42cd3c52", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

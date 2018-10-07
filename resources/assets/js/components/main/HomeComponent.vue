@@ -22,6 +22,8 @@
 </script>
 
 <style scoped>
+  @import "../../../sass/_variables.scss";
+
     /* styles for welcome page */
     
     #welcome-page {

@@ -172,6 +172,8 @@
 </script>
 
 <style lang="scss" scoped>
+  @import "../../../sass/_variables.scss";
+
     .card {
         width: 100%;
         max-width: 450px;

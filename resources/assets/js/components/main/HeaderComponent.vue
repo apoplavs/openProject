@@ -108,6 +108,8 @@
 </script>
 
 <style scoped lang="scss">
+  @import "../../../sass/_variables.scss";
+
     .navbar-light {
         box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.2), 0 4px 15px 0 rgba(0, 0, 0, 0.19);
     }
