@@ -253,7 +253,7 @@ class AuthController extends Controller
      * Авторизація через Google
      * @SWG\Post(
      *     path="/login/google",
-     *     summary="Login Google",
+     *     summary="Авторизація через Google",
      *     description="Вхід через акаунт в Google",
      *     operationId="login_google",
      *     produces={"application/json"},
@@ -268,12 +268,13 @@ class AuthController extends Controller
      *     @SWG\Parameter(
      *     name="Дані користувача",
      *     in="body",
-     *     description="Щоб здійснити логін користувача через Google, потрібно надіслати його google_id, email, ім'я (можливо, ще й прізвище), посилання на Google-аккаунт та посилання на Google-аватарку.",
+     *     description="Щоб здійснити логін користувача через Google, потрібно надіслати його google_id, email, ім'я, прізвище, посилання на Google-аккаунт та посилання на Google-аватарку.",
      *     @SWG\Schema(
      *          type="object",
-     *            required={"id", "email", "name", "link", "picture"},
-     *          @SWG\Property(property="id", type="string", example="111483939504700006800", description="google_id Користувача (повинно складатися від 12 до 255 цифр)"),
+     *            required={"id", "email", "name", "surname", "link", "picture"},
+     *          @SWG\Property(property="id", type="string", example="111483939504700006800", description="google_id Користувача (повинно складатися з від 12 до 25 цифр)"),
      *          @SWG\Property(property="name", type="string", example="NameOfUser", description="Ім'я Користувача (повинно складатися від 3 до 255 символів)"),
+     *          @SWG\Property(property="surname", type="string", example="SurameOfUser", description="Прізвище Користувача (повинно складатися від 3 до 255 символів)"),
      *          @SWG\Property(property="email", type="string", example="example@gmail.com", description="Email Користувача (існуючий, валідний, унікальний в системі)"),
      *          @SWG\Property(property="link", type="string", example="https://plus.google.com/111483939504700006800", description="Посилання на Google аккаунт користувача (валідний URL)"),
      *          @SWG\Property(property="picture", type="string", example="https://lh3.googleusercontent.com/-LC0h1Ai3sXg/W6XiqkKewLI/AAAAAAAAAMQ/olvDX7mRLlwgDnzE9ARggY3dXaNu7Rh-ACJkCGAYYCw/w1024-h576-n-rw-no/my-photo.jpg", description="Посилання на google-аватарку користувача")
@@ -281,17 +282,20 @@ class AuthController extends Controller
      *     ),
      *
      *     @SWG\Response(
-     *         response=201,
-     *         description="Користувач успішно зареєстрований",
+     *         response=200,
+     *         description="Токен успішно згенерований",
+     *     	   @SWG\Schema(ref="#/definitions/Token"),
      *           examples={"application/json":
      *              {
-     *                    "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6Ijc4ZjZjYmU4M2Y0YTJiOTM0MTA0ZjVmMjhiMzJiYzZiYTMyZjJmNDJkNWFmMmZjYmY3NDRkODJjYzMyZWE0NThkZTgzNDQ5NjExNjIyZDExIn0.eyJhdWQiOiIzIiwianRpIjoiNzhmNmNiZTgzZjRhMmI5MzQxMDRmNWYyOGIzMmJjNmJhMzJmMmY0MmQ1YWYyZmNiZjc0NGQ4MmNjMzJlYTQ1OGRlODM0NDk2MTE2MjJkMTEiLCJpYXQiOjE1Mzg0MTg1MzEsIm5iZiI6MTUzODQxODUzMSwiZXhwIjoxNTY5OTU0NTMxLCJzdWIiOiIxNTgiLCJzY29wZXMiOltdfQ.ivQ04ahWZlVc6OdsHCF-mYnuieYPqGscIQQ_FrddgIo9PSl6I_lN04CDvr-yc5u39ASIm6BA-rTueJD-OVgp1S7qTZFwUR_0QU2hGklQZmYaXzTAYjG8YwW1LecZpe1Gdrcnoqr-m-qN1IeTY8GlOOluvjH6qzH9Tb5Abo-Ql4Uz2vjtCDAqpcl-Q8wFLeWKwGYJ_-euciHKAJvNGYF4ks9Bln4o1UCwwLFbE9godp1G4LHvyp9OgbAsaofz-L7Cg0SbByUxVZ0tDgpnuoZxpfeyQ2-dpaO3byCOfMkK1E714V8KL-2k3O091Ra9_ifCSpTAsmnaAIkKp1NMhL1AUP2rR_DUevSg7Di7oBC0sqB45FDxQNJBZ6eyde358hQhtThcYkN7E8b1wi64L-R6bZ18SzzvXkVgsf3iOqiEj461DzDYweptjhRWMPq-eki0IqfL-HbfD7VuAPChFazCsqRqTgrg4Fdc084NJx8Eu_78lz0F6WNGo8xOa-HzeqCBKm99LfJKSNZvoBUKe6fnFXu5eRHhfma1Ya4-x1wwZSFKqpelmgK_3WNAh-N0YNeY-3h9h5mTXra-C9xfI9mWz0sjwfLMwd6VHoIJUGtPFmytMmLxb8onPO7j3ptLKL_mqf0kVehfM-_v4QArsqenstO4FJKFJSlvAEf35jqmkEo"
-     *              }
+     *                    "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjYwODMxYTExMzQwODJmMmJlN2YyYjRhYzc4NjZkN2EzZDI5YjQ5YmQ0MWI1ZjVmNjhlMDAxZDc1NGQ5ZjlhZjFlMGFhNzcxMzM1Yjk2YzU5In0.eyJhdWQiOiIxIiwianRpIjoiNjA4MzFhMTEzNDA4MmYyYmU3ZjJiNGFjNzg2NmQ3YTNkMjliNDliZDQxYjVmNWY2OGUwMDFkNzU0ZDlmOWFmMWUwYWE3NzEzMzViOTZjNTkiLCJpYXQiOjE1MzMyMjExMTksIm5iZiI6MTUzMzIyMTExOSwiZXhwIjoxNTY0NzU3MTE5LCJzdWIiOiI0Iiwic2NvcGVzIjpbXX0.lGr3pzgbh7GZVmfyFcuHEo_gDeHbRmRoh8_UzmmL6PH_X0HgufZSg5jQH9LmBpC5p_FSGJ2bzRAWHg65CbIW0GBbh0bGHwZbBfJ2UF2n8adUfgaJbbxmKqCQmZzFkHaMs_bWG2bDP0RGYvuuqx7UgLVT_lMOjzs5bcNfK8BBY3h_1lQ0EroQJp6cRm67f6UN9GclALMQJvK5Az-jlqjWqpv61bayKoOTdITSvI4Wa6h3VKWACkVRn81oLdnDyAQ6gygM9bEJlYRKBEhPfOL23T_Jvc0tjyfe13VTpGy9FlEb5MnBUH8NfZSEZJfCBgwKrmDFnr6TFGKWaTCZRdgBEhOvv5wrh0hqW45ZiRGKqEvzQ25tgq5UYUaAwKA4vMAZg1QjdSaMkA5G7cveCXQV0o_vfF77T2sxKjA0UFNnjwCCIipuz7xMKtf0aKK53B_vccAuCPgIIR4ACzPo6YEyCpKNYfGVvSTlWN9YkMrgAaX6DBKF91r2zUisA5-xCPKHXnlkUwZX-QqlYPPkeIFDXa-9AqdqT243oLvqIq4ieOrlr4II8w96XJPHZk1PKTaXJQlVT3t3lJOY2qmrMZOL80I9RijoCHIaAWDD7jeaTaN8fcgR8sI1LIVd5N5bl4UM03nm4CbKon8P16vs22swG4zfWSHWenOLiJbqGVxsEQs",
+     *                    "token_type": "Bearer",
+     *                    "expires_at": "2019-08-02 14:45:19"
+     *                }
      *            }
      *     ),
      *     @SWG\Response(
-     *         response=200,
-     *         description="Токен успішно згенерований",
+     *         response=201,
+     *         description="Користувач успішно зареєстрований",
      *     	   @SWG\Schema(ref="#/definitions/Token"),
      *           examples={"application/json":
      *              {
@@ -331,6 +335,7 @@ class AuthController extends Controller
      * @param  [string] id
      * @param  [string] email
      * @param  [string] name
+     * @param  [string] surname
      * @param  [string] link
      * @param  [string] picture
      *
@@ -342,10 +347,10 @@ class AuthController extends Controller
         $already_exists = true;
 
         $request->validate([
-            'id'      => 'required|string',
+            'id'      => 'required|string|min:12|max:25',
             'email'   => 'required|string|email',
-            'name'    => 'required|string',
-            'surname' => 'string',
+            'name'    => 'required|string|min:3|max:255',
+            'surname' => 'required|string|min:3|max:255',
             'link'    => 'required|string',
             'picture' => 'required|string',
         ]);
@@ -373,7 +378,7 @@ class AuthController extends Controller
      * Авторизація через Facebook
      * @SWG\Post(
      *     path="/login/facebook",
-     *     summary="Login Facebook",
+     *     summary="Авторизація через Facebook",
      *     description="Вхід через акаунт в Facebook",
      *     operationId="login_facebook",
      *     produces={"application/json"},
@@ -388,11 +393,11 @@ class AuthController extends Controller
      *     @SWG\Parameter(
      *     name="Дані користувача",
      *     in="body",
-     *     description="Щоб здійснити вхід користувача через Facebook, потрібно надіслати його facebook_id, email, ім'я (можливо, ще й прізвище)",
+     *     description="Щоб здійснити вхід користувача через Facebook, потрібно надіслати його facebook_id, email, ім'я, прізвище",
      *     @SWG\Schema(
      *          type="object",
-     *            required={"id", "email", "name"},
-     *          @SWG\Property(property="id", type="string", example="100001887847445", description="facebook_id Користувача (повинно складатися від 12 до 255 цифр)"),
+     *            required={"id", "email", "name", "surname"},
+     *          @SWG\Property(property="id", type="string", example="100001887847445", description="facebook_id Користувача (повинно складатися від 12 до 25 цифр)"),
      *          @SWG\Property(property="name", type="string", example="NameOfUser", description="Ім'я Користувача (повинно складатися від 3 до 255 символів)"),
      *          @SWG\Property(property="surname", type="string", example="SurnameOfUser", description="Прізвище Користувача (повинно складатися від 3 до 255 символів)"),
      *          @SWG\Property(property="email", type="string", example="example@gmail.com", description="Email Користувача (існуючий, валідний, унікальний в системі)"),
@@ -400,21 +405,27 @@ class AuthController extends Controller
      *     ),
      *
      *     @SWG\Response(
-     *         response=201,
-     *         description="Користувач успішно зареєстрований",
+     *         response=200,
+     *         description="Токен успішно згенерований",
+     *     	   @SWG\Schema(ref="#/definitions/Token"),
      *           examples={"application/json":
      *              {
-     *                    "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6Ijc4ZjZjYmU4M2Y0YTJiOTM0MTA0ZjVmMjhiMzJiYzZiYTMyZjJmNDJkNWFmMmZjYmY3NDRkODJjYzMyZWE0NThkZTgzNDQ5NjExNjIyZDExIn0.eyJhdWQiOiIzIiwianRpIjoiNzhmNmNiZTgzZjRhMmI5MzQxMDRmNWYyOGIzMmJjNmJhMzJmMmY0MmQ1YWYyZmNiZjc0NGQ4MmNjMzJlYTQ1OGRlODM0NDk2MTE2MjJkMTEiLCJpYXQiOjE1Mzg0MTg1MzEsIm5iZiI6MTUzODQxODUzMSwiZXhwIjoxNTY5OTU0NTMxLCJzdWIiOiIxNTgiLCJzY29wZXMiOltdfQ.ivQ04ahWZlVc6OdsHCF-mYnuieYPqGscIQQ_FrddgIo9PSl6I_lN04CDvr-yc5u39ASIm6BA-rTueJD-OVgp1S7qTZFwUR_0QU2hGklQZmYaXzTAYjG8YwW1LecZpe1Gdrcnoqr-m-qN1IeTY8GlOOluvjH6qzH9Tb5Abo-Ql4Uz2vjtCDAqpcl-Q8wFLeWKwGYJ_-euciHKAJvNGYF4ks9Bln4o1UCwwLFbE9godp1G4LHvyp9OgbAsaofz-L7Cg0SbByUxVZ0tDgpnuoZxpfeyQ2-dpaO3byCOfMkK1E714V8KL-2k3O091Ra9_ifCSpTAsmnaAIkKp1NMhL1AUP2rR_DUevSg7Di7oBC0sqB45FDxQNJBZ6eyde358hQhtThcYkN7E8b1wi64L-R6bZ18SzzvXkVgsf3iOqiEj461DzDYweptjhRWMPq-eki0IqfL-HbfD7VuAPChFazCsqRqTgrg4Fdc084NJx8Eu_78lz0F6WNGo8xOa-HzeqCBKm99LfJKSNZvoBUKe6fnFXu5eRHhfma1Ya4-x1wwZSFKqpelmgK_3WNAh-N0YNeY-3h9h5mTXra-C9xfI9mWz0sjwfLMwd6VHoIJUGtPFmytMmLxb8onPO7j3ptLKL_mqf0kVehfM-_v4QArsqenstO4FJKFJSlvAEf35jqmkEo"
-     *              }
+     *                    "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjYwODMxYTExMzQwODJmMmJlN2YyYjRhYzc4NjZkN2EzZDI5YjQ5YmQ0MWI1ZjVmNjhlMDAxZDc1NGQ5ZjlhZjFlMGFhNzcxMzM1Yjk2YzU5In0.eyJhdWQiOiIxIiwianRpIjoiNjA4MzFhMTEzNDA4MmYyYmU3ZjJiNGFjNzg2NmQ3YTNkMjliNDliZDQxYjVmNWY2OGUwMDFkNzU0ZDlmOWFmMWUwYWE3NzEzMzViOTZjNTkiLCJpYXQiOjE1MzMyMjExMTksIm5iZiI6MTUzMzIyMTExOSwiZXhwIjoxNTY0NzU3MTE5LCJzdWIiOiI0Iiwic2NvcGVzIjpbXX0.lGr3pzgbh7GZVmfyFcuHEo_gDeHbRmRoh8_UzmmL6PH_X0HgufZSg5jQH9LmBpC5p_FSGJ2bzRAWHg65CbIW0GBbh0bGHwZbBfJ2UF2n8adUfgaJbbxmKqCQmZzFkHaMs_bWG2bDP0RGYvuuqx7UgLVT_lMOjzs5bcNfK8BBY3h_1lQ0EroQJp6cRm67f6UN9GclALMQJvK5Az-jlqjWqpv61bayKoOTdITSvI4Wa6h3VKWACkVRn81oLdnDyAQ6gygM9bEJlYRKBEhPfOL23T_Jvc0tjyfe13VTpGy9FlEb5MnBUH8NfZSEZJfCBgwKrmDFnr6TFGKWaTCZRdgBEhOvv5wrh0hqW45ZiRGKqEvzQ25tgq5UYUaAwKA4vMAZg1QjdSaMkA5G7cveCXQV0o_vfF77T2sxKjA0UFNnjwCCIipuz7xMKtf0aKK53B_vccAuCPgIIR4ACzPo6YEyCpKNYfGVvSTlWN9YkMrgAaX6DBKF91r2zUisA5-xCPKHXnlkUwZX-QqlYPPkeIFDXa-9AqdqT243oLvqIq4ieOrlr4II8w96XJPHZk1PKTaXJQlVT3t3lJOY2qmrMZOL80I9RijoCHIaAWDD7jeaTaN8fcgR8sI1LIVd5N5bl4UM03nm4CbKon8P16vs22swG4zfWSHWenOLiJbqGVxsEQs",
+     *                    "token_type": "Bearer",
+     *                    "expires_at": "2019-08-02 14:45:19"
+     *                }
      *            }
      *     ),
      *     @SWG\Response(
-     *         response=200,
-     *         description="Користувач успішно залогінився",
+     *         response=201,
+     *         description="Користувач успішно зареєстрований",
+     *     	   @SWG\Schema(ref="#/definitions/Token"),
      *           examples={"application/json":
      *              {
-     *                    "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6Ijc4ZjZjYmU4M2Y0YTJiOTM0MTA0ZjVmMjhiMzJiYzZiYTMyZjJmNDJkNWFmMmZjYmY3NDRkODJjYzMyZWE0NThkZTgzNDQ5NjExNjIyZDExIn0.eyJhdWQiOiIzIiwianRpIjoiNzhmNmNiZTgzZjRhMmI5MzQxMDRmNWYyOGIzMmJjNmJhMzJmMmY0MmQ1YWYyZmNiZjc0NGQ4MmNjMzJlYTQ1OGRlODM0NDk2MTE2MjJkMTEiLCJpYXQiOjE1Mzg0MTg1MzEsIm5iZiI6MTUzODQxODUzMSwiZXhwIjoxNTY5OTU0NTMxLCJzdWIiOiIxNTgiLCJzY29wZXMiOltdfQ.ivQ04ahWZlVc6OdsHCF-mYnuieYPqGscIQQ_FrddgIo9PSl6I_lN04CDvr-yc5u39ASIm6BA-rTueJD-OVgp1S7qTZFwUR_0QU2hGklQZmYaXzTAYjG8YwW1LecZpe1Gdrcnoqr-m-qN1IeTY8GlOOluvjH6qzH9Tb5Abo-Ql4Uz2vjtCDAqpcl-Q8wFLeWKwGYJ_-euciHKAJvNGYF4ks9Bln4o1UCwwLFbE9godp1G4LHvyp9OgbAsaofz-L7Cg0SbByUxVZ0tDgpnuoZxpfeyQ2-dpaO3byCOfMkK1E714V8KL-2k3O091Ra9_ifCSpTAsmnaAIkKp1NMhL1AUP2rR_DUevSg7Di7oBC0sqB45FDxQNJBZ6eyde358hQhtThcYkN7E8b1wi64L-R6bZ18SzzvXkVgsf3iOqiEj461DzDYweptjhRWMPq-eki0IqfL-HbfD7VuAPChFazCsqRqTgrg4Fdc084NJx8Eu_78lz0F6WNGo8xOa-HzeqCBKm99LfJKSNZvoBUKe6fnFXu5eRHhfma1Ya4-x1wwZSFKqpelmgK_3WNAh-N0YNeY-3h9h5mTXra-C9xfI9mWz0sjwfLMwd6VHoIJUGtPFmytMmLxb8onPO7j3ptLKL_mqf0kVehfM-_v4QArsqenstO4FJKFJSlvAEf35jqmkEo"
-     *              }
+     *                    "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjYwODMxYTExMzQwODJmMmJlN2YyYjRhYzc4NjZkN2EzZDI5YjQ5YmQ0MWI1ZjVmNjhlMDAxZDc1NGQ5ZjlhZjFlMGFhNzcxMzM1Yjk2YzU5In0.eyJhdWQiOiIxIiwianRpIjoiNjA4MzFhMTEzNDA4MmYyYmU3ZjJiNGFjNzg2NmQ3YTNkMjliNDliZDQxYjVmNWY2OGUwMDFkNzU0ZDlmOWFmMWUwYWE3NzEzMzViOTZjNTkiLCJpYXQiOjE1MzMyMjExMTksIm5iZiI6MTUzMzIyMTExOSwiZXhwIjoxNTY0NzU3MTE5LCJzdWIiOiI0Iiwic2NvcGVzIjpbXX0.lGr3pzgbh7GZVmfyFcuHEo_gDeHbRmRoh8_UzmmL6PH_X0HgufZSg5jQH9LmBpC5p_FSGJ2bzRAWHg65CbIW0GBbh0bGHwZbBfJ2UF2n8adUfgaJbbxmKqCQmZzFkHaMs_bWG2bDP0RGYvuuqx7UgLVT_lMOjzs5bcNfK8BBY3h_1lQ0EroQJp6cRm67f6UN9GclALMQJvK5Az-jlqjWqpv61bayKoOTdITSvI4Wa6h3VKWACkVRn81oLdnDyAQ6gygM9bEJlYRKBEhPfOL23T_Jvc0tjyfe13VTpGy9FlEb5MnBUH8NfZSEZJfCBgwKrmDFnr6TFGKWaTCZRdgBEhOvv5wrh0hqW45ZiRGKqEvzQ25tgq5UYUaAwKA4vMAZg1QjdSaMkA5G7cveCXQV0o_vfF77T2sxKjA0UFNnjwCCIipuz7xMKtf0aKK53B_vccAuCPgIIR4ACzPo6YEyCpKNYfGVvSTlWN9YkMrgAaX6DBKF91r2zUisA5-xCPKHXnlkUwZX-QqlYPPkeIFDXa-9AqdqT243oLvqIq4ieOrlr4II8w96XJPHZk1PKTaXJQlVT3t3lJOY2qmrMZOL80I9RijoCHIaAWDD7jeaTaN8fcgR8sI1LIVd5N5bl4UM03nm4CbKon8P16vs22swG4zfWSHWenOLiJbqGVxsEQs",
+     *                    "token_type": "Bearer",
+     *                    "expires_at": "2019-08-02 14:45:19"
+     *                }
      *            }
      *     ),
      *     @SWG\Response(
@@ -457,10 +468,10 @@ class AuthController extends Controller
         $already_exists = true;
 
         $request->validate([
-            'id'      => 'required|string',
+            'id'      => 'required|string|min:12|max:25',
             'email'   => 'required|string|email',
-            'name'    => 'required|string',
-            'surname' => 'string',
+            'name'    => 'required|string|min:3|max:255',
+            'surname' => 'required|string|min:3|max:255',
         ]);
 
         $user = $this->getUserForGFLogin($request, 'facebook', $already_exists);

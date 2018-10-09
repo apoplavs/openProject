@@ -617,9 +617,13 @@ class CourtsController extends Controller
 	public function autocomplete(Request $request) {
 		$search = Input::has('search') ? Input::get('search') : '';
 		
+		if (strlen($search) < 1 || !preg_match("/[а-яєіїґ]+/iu", $search)) {
+			return response()->json([]);
+		}
+		
 		// валідація фільтрів
 		$request->validate([
-			'search' => 'string|alpha|min:1|max:20'
+			'search' => 'string|min:1|max:20'
 		]);
 		// приведення першої букви в верхній регістр для валідного пошуку
 		$search = mb_convert_case($search, MB_CASE_TITLE, "UTF-8");
