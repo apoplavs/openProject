@@ -105,7 +105,7 @@
             <input type="search" class="form-control" placeholder="Пошук..." v-model="params.search" @keyup="liveSearch()">
             <div class="autocomplete-block-result" v-if="autocomplete.length">
               <div v-for="(el, ind_1) in autocomplete" :key="ind_1">
-                <a href="#" @click="getJudgesList()">
+                <a href="#" @click="getAvtocompeteSearch(el.surname)">
                   {{ el.surname }} {{ (el.name.length === 1) ? el.name + '.' : el.name }} 
                   {{ (el.patronymic.length === 1) ? el.patronymic + '.' : el.patronymic }}
                 </a>
@@ -186,11 +186,20 @@
       // this.getJudgesList();
     },
     methods: {
+      getAvtocompeteSearch(surname) {
+        this.params.search = surname; // по кліку на суддю в параметр запусую його прізвище і визиваю getJudgesList();
+        getJudgesList();
+      },
       liveSearch() {
         // console.log(this.params.search);
         console.log('Виклик автокомплит');
-        
-        this.params.search === '' ? this.params.search = null : false;
+        const regexp = new RegExp(/^[а-яії]+$/i);
+        let str = _.trim(this.params.search);
+        if (str.search(regexp) === -1 || str === ''){
+          this.autocomplete = [];
+          return;
+        } else {
+        // this.params.search === '' ? this.params.search = null : false;
         axios
           .get('/api/v1/judges/autocomplete', {
             headers: {
@@ -208,7 +217,7 @@
           .catch(error => {
             // console.log(error);
           });
-  
+        }
       },
       sortJudges: _.debounce(function(event) {
         console.log(this.params.sort);
