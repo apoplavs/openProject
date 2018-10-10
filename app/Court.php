@@ -149,7 +149,7 @@ class Court extends Model
 	 */
 	public static function getAutocomplete(string $search) {
 		
-		$results = static::select('courts.name')
+		$results = static::select('courts.court_code', 'courts.name')
 			->where('courts.name', 'LIKE', $search.'%')
 			->limit(5)
 			->get();

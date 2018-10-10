@@ -146,7 +146,7 @@ class Judge extends Model
 	 */
 	public static function getAutocomplete(string $search) {
 		
-		$results = static::select('judges.surname', 'judges.name', 'judges.patronymic')
+		$results = static::select('judges.id', 'judges.surname', 'judges.name', 'judges.patronymic')
 		->where('judges.surname', 'LIKE', $search.'%')
 		->limit(5)
 		->get();
