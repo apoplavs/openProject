@@ -571,23 +571,29 @@ class CourtsController extends Controller
 	 *         response=200,
 	 *         description="ОК",
 	 *     	   @SWG\Schema(
+	 *     	   @SWG\Property(property="court_code", type="string", description="Код суду"),
 	 *     	   @SWG\Property(property="name", type="string", description="Назва суду"),
 	 *     	   ),
 	 *     	   examples={"application/json":
 	 *              {
 	 *					{
+	 *     				"court_code": 2320,
  	 *					"name": "Шевченківський районний суд м. Запоріжжя"
  	 *					},
  	 *					{
+	 *     				"court_code": 390,
  	 *					"name": "Шевченківський районний суд м. Львова"
  	 *					},
  	 *					{
+	 *     				"court_code": 2140,
  	 *					"name": "Шевченківський районний суд Харківської області"
  	 *					},
  	 *					{
+	 *     				"court_code": 210,
  	 *					"name": "Шепетівський міськрайонний суд Хмельницької області"
  	 *					},
  	 *					{
+	 *     				"court_code": 350,
  	 *					"name": "Шевченківський районний суд м. Чернівців"
 	 *					}
 	 *				}
@@ -615,11 +621,15 @@ class CourtsController extends Controller
 	 * )
 	 */
 	public function autocomplete(Request $request) {
-		$search = Input::has('search') ? Input::get('search') : '';
+		$search = Input::has('search') ? trim(Input::get('search')) : '';
+		
+		if (strlen($search) < 1 || !preg_match("/^[а-яєіїґ' ]+$/iu", $search)) {
+			return response()->json([]);
+		}
 		
 		// валідація фільтрів
 		$request->validate([
-			'search' => 'string|alpha|min:1|max:20'
+			'search' => 'string|min:1|max:20'
 		]);
 		// приведення першої букви в верхній регістр для валідного пошуку
 		$search = mb_convert_case($search, MB_CASE_TITLE, "UTF-8");
@@ -819,7 +829,7 @@ class CourtsController extends Controller
 		$instances = Input::has('instances') ? Input::get('instances') : [];
 		$jurisdictions = Input::has('jurisdictions') ? Input::get('jurisdictions') : [];
 		$sort_order = Input::has('sort') ? intval(Input::get('sort')) : 1;
-		$search = Input::has('search') ? Input::get('search') : '';
+		$search = Input::has('search') ? trim(Input::get('search')) : '';
 		
 		// приведення всіх фільтрів до Integer
 		$int_regions = [];

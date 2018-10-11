@@ -106,6 +106,44 @@ class LoginFacebookTest extends TestCase
         $response->assertStatus(401);
     }
 
+    /**
+     * @param $attrName
+     * @param $minLen
+     * @param $maxLen
+     *
+     * @dataProvider providerLoginForValidationFail
+     */
+    public function testLoginForValidationFail($attrName, $minLen, $maxLen)
+    {
+        $user = $this->testUsers[0];
+
+        $data = [
+            'id' => $user->facebook_id,
+            'email' => $user->email,
+            'name' => $user->name,
+            'surname' => $user->surname,
+        ];
+
+        // Перевіряю, що при замалій довжині атрибута я отримаю помилку
+        $data[$attrName] = str_repeat('1', $minLen - 1);
+        $response = $this->post($this->url, $data, $this->headers);
+        $response->assertStatus(422);
+
+        // Перевіряю, що при завеликій довжині атрибута я отримаю помилку
+        $data[$attrName] = str_repeat('1', $maxLen + 1);
+        $response = $this->post($this->url, $data, $this->headers);
+        $response->assertStatus(422);
+    }
+
+    public function providerLoginForValidationFail()
+    {
+        return [
+            ['id', 12, 25],
+            ['name', 3, 255],
+            ['surname', 3, 255],
+        ];
+    }
+
     public function setUp()
     {
         parent::setUp();
