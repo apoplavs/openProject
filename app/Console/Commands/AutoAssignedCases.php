@@ -8,6 +8,12 @@ use Toecyd\Court;
 use Toecyd\JudgeNameParsed;
 use DateTime;
 
+/**
+ * Class AutoAssignedCases
+ * @package Toecyd\Console\Commands
+ *
+ * Отримує автопризначені судові справи з Державного реєстру судових рішень та записує їх в БД
+ */
 class AutoAssignedCases extends Command
 {
     /**

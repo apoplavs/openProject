@@ -452,6 +452,7 @@ class JudgesController extends Controller
 	 *     	   @SWG\Schema(
 	 *		   @SWG\Property(property="current_page", type="integer", description="Поточна сторінка пошуку"),
 	 *		   @SWG\Property(property="data", type="json", description="Список суддів"),
+	 *     	   @SWG\Property(property="id", type="string", description="id судді"),
 	 *     	   @SWG\Property(property="court_name", type="string", description="Назва суду, в якому даний суддя працює"),
 	 *     	   @SWG\Property(property="surname", type="string", description="Прізвище судді"),
 	 *     	   @SWG\Property(property="name", type="string", description="Ім'я судді"),
@@ -690,6 +691,7 @@ class JudgesController extends Controller
 	 *         response=200,
 	 *         description="ОК",
 	 *     	   @SWG\Schema(
+	 *     	   @SWG\Property(property="id", type="string", description="id судді"),
 	 *     	   @SWG\Property(property="surname", type="string", description="Прізвище судді"),
 	 *     	   @SWG\Property(property="name", type="string", description="Ім'я судді"),
 	 *     	   @SWG\Property(property="patronymic", type="string", description="По батькові судді"),
@@ -697,26 +699,31 @@ class JudgesController extends Controller
 	 *     	   examples={"application/json":
 	 *              {
 	 *					{
+	 *     					"id": 1518,
 	 *						"surname": "Борсук",
 	 *						"name": "Петро",
 	 *						"patronymic": "Павлович"
 	 *						},
 	 *						{
+	 *     					"id": 1620,
 	 *						"surname": "Коваленко",
 	 *						"name": "Валентина",
 	 *						"patronymic": "Петрівна"
 	 *						},
 	 *						{
+	 *     					"id": 12518,
 	 *						"surname": "Петрова",
 	 *						"name": "О",
 	 *						"patronymic": "Ф"
 	 *						},
 	 *						{
+	 *     					"id": 23182,
 	 *						"surname": "Галинчук",
 	 *						"name": "Володимир",
 	 *						"patronymic": "Петрович"
 	 *						},
 	 *						{
+	 *     					"id": 18864,
 	 *						"surname": "Борисенко",
 	 *						"name": "Петро",
 	 *						"patronymic": "Іванович"
@@ -746,11 +753,14 @@ class JudgesController extends Controller
 	 * )
 	 */
 	public function autocomplete(Request $request) {
-		$search = Input::has('search') ? Input::get('search') : '';
+		$search = Input::has('search') ? trim(Input::get('search')) : '';
+		if (strlen($search) < 1 || !preg_match("/^[а-яєіїґ'-]+$/iu", $search)) {
+			return response()->json([]);
+		}
 		
 		// валідація фільтрів
 		$request->validate([
-			'search' => 'string|alpha|min:1|max:20'
+			'search' => 'string|min:1|max:20'
 		]);
 		// приведення першої букви в верхній регістр для валідного пошуку
 		$search = mb_convert_case($search, MB_CASE_TITLE, "UTF-8");
@@ -1401,7 +1411,7 @@ class JudgesController extends Controller
 		$instances = Input::has('instances') ? Input::get('instances') : [];
 		$jurisdictions = Input::has('jurisdictions') ? Input::get('jurisdictions') : [];
 		$sort_order = Input::has('sort') ? intval(Input::get('sort')) : 1;
-		$search = Input::has('search') ? Input::get('search') : '';
+		$search = Input::has('search') ? trim(Input::get('search')) : '';
 		$powers_expired = (Input::has('expired') && Input::get('expired')) ? true : false;
 		
 		// приведення всіх фільтрів до Integer
