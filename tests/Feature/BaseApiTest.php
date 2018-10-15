@@ -11,13 +11,19 @@ class BaseApiTest extends TestCase
 {
     use DatabaseTransactions;
 
-    /* Заголовки для HTTP-запитів */
+    /**
+     * Заголовки для HTTP-запитів
+     */
     protected $headers = ['accept' => 'application/json'];
 
-    /* Імена полів, які мають бути заповненими, коли ми отримуємо токен*/
+    /**
+     * Імена полів, які мають бути заповненими, коли ми отримуємо токен
+     */
     protected $token_keys = ['access_token', 'token_type', 'expires_at'];
 
-    /* Дані про тестового користувача; мають бути такими, яких нема у БД */
+    /**
+     * Дані про тестового користувача; мають бути такими, яких нема у БД
+     */
     protected $user_data = [
         'name' => 'slualexvas_test_name',
         'surname'   => 'slualexvas_test_surname',
@@ -67,7 +73,9 @@ class BaseApiTest extends TestCase
         $this->assertNotEmpty($response_data['token_type']);
         $this->assertNotEmpty($response_data['access_token']);
 
-        return array_merge($this->headers, ['Authorization' => $response_data['token_type'] . ' ' . $response_data['access_token']]);
+        return array_merge($this->headers,
+            ['Authorization' => $response_data['token_type'] . ' ' . $response_data['access_token']]
+        );
     }
 
     /**
@@ -85,7 +93,9 @@ class BaseApiTest extends TestCase
         }
     }
 
-    /* Щоб не викидався warning про те, що в цьому класі нема тестів */
+    /**
+     * Щоб не викидався warning про те, що в цьому класі нема тестів
+     */
     public function testTrivial()
     {
         $this->assertTrue(true);

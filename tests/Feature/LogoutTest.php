@@ -19,7 +19,7 @@ class LogoutTest extends BaseApiTest
         $response = $this->login($this->user_data);
         $response->assertStatus(200);
 
-        // Коли авторизовані, пробуємо вийти з системи
+        // Пробуємо вийти з системи
         $headers_with_token = $this->headersWithToken($response);
         $this->get($this->url, $headers_with_token)->assertStatus(200);
 

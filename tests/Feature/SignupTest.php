@@ -28,7 +28,7 @@ class SignupTest extends BaseApiTest
     }
 
     /**
-     * Реєстрація користувача
+     * Якщо користувач уже існує, має видаватись помилка
      */
     public function testErrorExistingUser()
     {

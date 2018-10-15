@@ -6,21 +6,17 @@ use Toecyd\User;
 
 class LoginGoogleTest extends BaseApiTest
 {
-    /**
-     * @var string
-     */
     private $google_link = 'https://plus.google.com/111483939504700006800';
 
-    /**
-     * @var string
-     */
     private $google_picture = 'https://lh3.googleusercontent.com/-LC0h1Ai3sXg/W6XiqkKewLI/AAAAAAAAAMQ/olvDX7mRLlwgDnzE9ARggY3dXaNu7Rh-ACJkCGAYYCw/w1024-h576-n-rw-no/my-photo.jpg';
 
     public function testLoginWithoutParams() {
         $this->post($this->url, [], $this->headers)->assertStatus(422);
     }
 
-    /* Авторизуємося під уже існуючим користувачем */
+    /**
+     * Авторизуємося під уже існуючим користувачем
+     */
     public function testLoginExistingUser() {
         $response = $this->post($this->url, $this->getDataToPost(), $this->headers);
         $this->assertToken($response);
@@ -30,7 +26,9 @@ class LoginGoogleTest extends BaseApiTest
         $this->assertContains($userUpdated->id . '.jpg', $userUpdated->photo);
     }
 
-    /* Авторизуємося під уже існуючим користувачем, змінуємо атрибут і перевіряємо успішність зміни */
+    /**
+     * Авторизуємося під уже існуючим користувачем, змінуємо атрибут і перевіряємо успішність зміни
+     */
     public function testLoginExistingUserWithUpdate() {
         $data = $this->getDataToPost();
         $data['surname'] .= '_updated';
@@ -47,7 +45,9 @@ class LoginGoogleTest extends BaseApiTest
         }
     }
 
-    /* Авторизуємося під неіснуючим користувачем. Система має нас зареєструвати */
+    /**
+     * Авторизуємося під неіснуючим користувачем. Система має нас зареєструвати
+     */
     public function testLoginNonExistingUser() {
         // видаляємо користувача з БД. Віднині $user у нас -- неіснуючий
         $this->user->delete();
@@ -84,9 +84,6 @@ class LoginGoogleTest extends BaseApiTest
         $this->post($this->url, $data, $this->headers)->assertStatus(422);
     }
 
-    /**
-     * @return array
-     */
     public function providerLoginForValidationFail() {
         return [
             ['id', 12, 25],

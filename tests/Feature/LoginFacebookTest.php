@@ -11,7 +11,9 @@ class LoginFacebookTest extends BaseApiTest
         $this->post($this->url, [], $this->headers)->assertStatus(422);
     }
 
-    /* Авторизуємося під уже існуючим користувачем */
+    /**
+     * Авторизуємося під уже існуючим користувачем
+     */
     public function testLoginExistingUser()
     {
         $response = $this->post($this->url, $this->getDataToPost(), $this->headers);
@@ -23,7 +25,9 @@ class LoginFacebookTest extends BaseApiTest
         $this->assertContains($userUpdated->id . '.jpg', $userUpdated->photo);
     }
 
-    /* Авторизуємося під уже існуючим користувачем, змінуємо атрибут і перевіряємо успішність зміни */
+    /**
+     * Авторизуємося під уже існуючим користувачем, змінуємо атрибут і перевіряємо успішність зміни
+     */
     public function testLoginExistingUserWithUpdate()
     {
         $data = $this->getDataToPost();
@@ -41,7 +45,9 @@ class LoginFacebookTest extends BaseApiTest
         }
     }
 
-    /* Авторизуємося під неіснуючим користувачем. Система має нас зареєструвати */
+    /**
+     * Авторизуємося під неіснуючим користувачем. Система має нас зареєструвати
+     */
     public function testLoginNonExistingUser()
     {
         // видаляємо користувача з БД. Віднині $user у нас -- неіснуючий
@@ -58,7 +64,9 @@ class LoginFacebookTest extends BaseApiTest
         $this->assertEquals(2, $user_inserted->usertype);
     }
 
-    /* Пробуємо авторизуватись по неіснуючому facebook_id */
+    /**
+     * Пробуємо авторизуватись по неіснуючому facebook_id
+     */
     public function testLoginWithInvalidFacebookId()
     {
         $data = $this->getDataToPost();
