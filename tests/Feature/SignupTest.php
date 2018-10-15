@@ -2,25 +2,14 @@
 
 namespace Tests\Feature;
 
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
-
-class SignupTest extends TestCase
+class SignupTest extends BaseApiTest
 {
-    use DatabaseTransactions;
+    public function setUp() {
+        parent::setUp();
 
-    /* Заголовки для HTTP-запитів */
-    private $headers = ['accept' => 'application/json'];
-
-    /* Дані про тестового користувача; мають бути такими, яких нема у БД */
-    private $user_data = [
-        'name' => 'slualexvas_test_name',
-        'email'     => 'slualexvas@gmail.com',
-        'password'  => 'test_password',
-    ];
-
-    /* URL для HTTP-запитів */
-    private $url = 'api/v1/signup';
+        $this->user->delete();
+        $this->url .= 'signup';
+    }
 
     /**
      * Реєстрація користувача
@@ -28,18 +17,14 @@ class SignupTest extends TestCase
     public function testSuccessSignup()
     {
         // Пробуємо авторизуватись. Авторизація має бути провальною, бо такий користувач ще не реєструвався
-        $login_url = 'api/v1/login';
-        $login_data = array_intersect_key($this->user_data, array_flip(['email', 'password']));
-        $response = $this->post($login_url, $login_data, $this->headers);
-        $response->assertStatus(401);
+        $this->login($this->user_data)->assertStatus(401);
 
         // Реєструємось
         $response = $this->post($this->url, $this->user_data, $this->headers);
         $response->assertStatus(201);
 
         // Знову пробуємо авторизуватись. Тепер авторизація має бути успішною
-        $response = $this->post($login_url, $login_data, $this->headers);
-        $response->assertStatus(200);
+        $this->login($this->user_data)->assertStatus(200);
     }
 
     /**
@@ -90,19 +75,20 @@ class SignupTest extends TestCase
      *
      * @dataProvider providerErrorValidation
      */
-    public function testErrorValidation($attr_name, $min_len, $max_len)
+    public function testErrorValidation($key, $min_len, $max_len)
     {
-        $user_data_local = $this->user_data;
+        $data = $this->user_data;
+
+        // Перевіряємо, що при замалій довжині атрибута отримаємо помилку
         if (!empty($min_len)) {
-            $user_data_local[$attr_name] = str_repeat('a', $min_len - 1);
-            $response = $this->post($this->url, $user_data_local, $this->headers);
-            $response->assertStatus(422);
+            $data[$key] = str_repeat('a', $min_len - 1);
+            $this->post($this->url, $data, $this->headers)->assertStatus(422);
         }
 
+        // Перевіряємо, що при завеликій довжині атрибута отримаємо помилку
         if (!empty($max_len)) {
-            $user_data_local[$attr_name] = str_repeat('a', $max_len + 1);
-            $response = $this->post($this->url, $user_data_local, $this->headers);
-            $response->assertStatus(422);
+            $data[$key] = str_repeat('a', $max_len + 1);
+            $this->post($this->url, $data, $this->headers)->assertStatus(422);
         }
     }
 

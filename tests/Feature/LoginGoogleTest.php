@@ -2,24 +2,10 @@
 
 namespace Tests\Feature;
 
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Toecyd\User;
 
-class LoginGoogleTest extends TestCase
+class LoginGoogleTest extends BaseApiTest
 {
-    use DatabaseTransactions;
-
-    /**
-     * @var array
-     */
-    private $test_users = [];
-
-    /**
-     * @var string
-     */
-    private $url = 'api/v1/login/google';
-
     /**
      * @var string
      */
@@ -30,66 +16,30 @@ class LoginGoogleTest extends TestCase
      */
     private $google_picture = 'https://lh3.googleusercontent.com/-LC0h1Ai3sXg/W6XiqkKewLI/AAAAAAAAAMQ/olvDX7mRLlwgDnzE9ARggY3dXaNu7Rh-ACJkCGAYYCw/w1024-h576-n-rw-no/my-photo.jpg';
 
-    /**
-     * @var array
-     */
-    private $headers = ['accept' => 'application/json'];
-
-    /**
-     *
-     */
     public function testLoginWithoutParams() {
-        $data = [];
-        $response = $this->post($this->url, $data, $this->headers);
-
-        $response->assertStatus(422);
+        $this->post($this->url, [], $this->headers)->assertStatus(422);
     }
 
-    /**
-     *
-     */
+    /* Авторизуємося під уже існуючим користувачем */
     public function testLoginExistingUser() {
-        $user = $this->test_users[0];
+        $response = $this->post($this->url, $this->getDataToPost(), $this->headers);
+        $this->assertToken($response);
 
-        $data = [
-            'id'      => $user->google_id,
-            'email'   => $user->email,
-            'name'    => $user->name,
-            'surname' => $user->surname,
-            'link'    => $this->google_link,
-            'picture' => $this->google_picture,
-        ];
-        $response = $this->post($this->url, $data, $this->headers);
-
-        $response->assertStatus(200);
-        $this->assertNotEmpty($response->decodeResponseJson()['access_token']);
-
-        $userUpdated = User::where('email', $user->email)->first();
+        $userUpdated = User::where('email', $this->user_data['email'])->first();
 
         $this->assertContains($userUpdated->id . '.jpg', $userUpdated->photo);
-        $this->assertNotEmpty($userUpdated->remember_token);
     }
 
-    /**
-     *
-     */
+    /* Авторизуємося під уже існуючим користувачем, змінуємо атрибут і перевіряємо успішність зміни */
     public function testLoginExistingUserWithUpdate() {
-        $user = $this->test_users[0];
+        $data = $this->getDataToPost();
+        $data['surname'] .= '_updated';
 
-        $data = [
-            'id'      => $user->google_id,
-            'email'   => $user->email,
-            'name'    => $user->name,
-            'surname' => $user->surname . '_updated',
-            'link'    => $this->google_link,
-            'picture' => $this->google_picture,
-        ];
         $response = $this->post($this->url, $data, $this->headers);
-
         $response->assertStatus(200);
-        $response->assertSee('access_token');
+        $this->assertToken($response);
 
-        $userUpdated = User::where('email', $user->email)->first();
+        $userUpdated = User::where('email', $this->user_data['email'])->first();
 
         $this->assertContains($userUpdated->id . '.jpg', $userUpdated->photo);
         foreach (['email', 'name', 'surname'] as $key) {
@@ -97,62 +47,41 @@ class LoginGoogleTest extends TestCase
         }
     }
 
-    /**
-     *
-     */
+    /* Авторизуємося під неіснуючим користувачем. Система має нас зареєструвати */
     public function testLoginNonExistingUser() {
-        $user = $this->test_users[0];
+        // видаляємо користувача з БД. Віднині $user у нас -- неіснуючий
+        $this->user->delete();
 
-        // удаляем пользователей из базы. Отныне $user у нас -- несуществующий
-        $this->deleteTestUsers();
-
-        $data = [
-            'id'      => $user->google_id,
-            'email'   => $user->email,
-            'name'    => $user->name,
-            'surname' => $user->surname,
-            'link'    => $this->google_link,
-            'picture' => $this->google_picture,
-        ];
-        $response = $this->post($this->url, $data, $this->headers);
+        $response = $this->post($this->url, $this->getDataToPost(), $this->headers);
 
         $response->assertStatus(201);
-        $this->assertNotEmpty($response->decodeResponseJson()['access_token']);
+        $this->assertToken($response);
 
-        $user_inserted = User::where('email', $user->email)->first();
+        $user_inserted = User::where('email', $this->user_data['email'])->first();
         $this->assertTrue(!empty($user_inserted));
         $this->assertContains($user_inserted->id . '.jpg', $user_inserted->photo);
         $this->assertEquals($user_inserted->usertype, 2);
     }
 
     /**
-     * @param $attr_name
+     * Перевіряємо, щоб система видавала помилку при завеликій або замалій довжині атрибутів
+     *
+     * @param $key
      * @param $min_len
      * @param $max_len
      *
      * @dataProvider providerLoginForValidationFail
      */
-    public function testLoginForValidationFail($attr_name, $min_len, $max_len) {
-        $user = $this->test_users[0];
+    public function testLoginForValidationFail($key, $min_len, $max_len) {
+        $data = $this->getDataToPost();
 
-        $data = [
-            'id'      => $user->google_id,
-            'email'   => $user->email,
-            'name'    => $user->name,
-            'surname' => $user->surname,
-            'link'    => $this->google_link,
-            'picture' => $this->google_picture,
-        ];
+        // Перевіряємо, що при замалій довжині атрибута отримаємо помилку
+        $data[$key] = str_repeat('1', $min_len - 1);
+        $this->post($this->url, $data, $this->headers)->assertStatus(422);
 
-        // Перевіряю, що при замалій довжині атрибута я отримаю помилку
-        $data[$attr_name] = str_repeat('1', $min_len - 1);
-        $response = $this->post($this->url, $data, $this->headers);
-        $response->assertStatus(422);
-
-        // Перевіряю, що при завеликій довжині атрибута я отримаю помилку
-        $data[$attr_name] = str_repeat('1', $max_len + 1);
-        $response = $this->post($this->url, $data, $this->headers);
-        $response->assertStatus(422);
+        // Перевіряємо, що при завеликій довжині атрибута отримаємо помилку
+        $data[$key] = str_repeat('1', $max_len + 1);
+        $this->post($this->url, $data, $this->headers)->assertStatus(422);
     }
 
     /**
@@ -166,33 +95,23 @@ class LoginGoogleTest extends TestCase
         ];
     }
 
-    /**
-     *
-     */
     public function setUp() {
+        $this->user_data['google_id'] = '111483939504700006800';
+
         parent::setUp();
-        $this->insertTestUsers();
+
+        $this->url .= 'login/google';
     }
 
-    /**
-     *
-     */
-    private function insertTestUsers() {
-        $this->test_users[] = factory(User::class)->create([
-            'name'      => 'slualexvas_test_name',
-            'surname'   => 'slualexvas_test_surname',
-            'google_id' => '111483939504700006800',
-            'email'     => 'slualexvas@gmail.com',
-            'password'  => bcrypt('test_password'),
-        ]);
-    }
-
-    /**
-     *
-     */
-    private function deleteTestUsers() {
-        foreach ($this->test_users as $user) {
-            $user->delete();
-        }
+    private function getDataToPost()
+    {
+        return [
+            'id'      => $this->user_data['google_id'],
+            'email'   => $this->user_data['email'],
+            'name'    => $this->user_data['name'],
+            'surname' => $this->user_data['surname'],
+            'link'    => $this->google_link,
+            'picture' => $this->google_picture,
+        ];
     }
 }

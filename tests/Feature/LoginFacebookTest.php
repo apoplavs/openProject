@@ -2,64 +2,38 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Support\Facades\Storage;
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Toecyd\User;
 
-class LoginFacebookTest extends TestCase
+class LoginFacebookTest extends BaseApiTest
 {
-    use DatabaseTransactions;
-
-    private $testUsers = [];
-    private $url = 'api/v1/login/facebook';
-    private $headers = ['accept' => 'application/json'];
-
     public function testLoginWithoutParams()
     {
-        $data = [];
-        $response = $this->post($this->url, $data, $this->headers);
-
-        $response->assertStatus(422);
+        $this->post($this->url, [], $this->headers)->assertStatus(422);
     }
 
+    /* Авторизуємося під уже існуючим користувачем */
     public function testLoginExistingUser()
     {
-        $user = $this->testUsers[0];
-
-        $data = [
-            'id' => $user->facebook_id,
-            'email' => $user->email,
-            'name' => $user->name,
-            'surname' => $user->surname,
-        ];
-        $response = $this->post($this->url, $data, $this->headers);
-
+        $response = $this->post($this->url, $this->getDataToPost(), $this->headers);
         $response->assertStatus(200);
-        $this->assertNotEmpty($response->decodeResponseJson()['access_token']);
+        $this->assertToken($response);
 
-        $userUpdated = User::where('email', $user->email)->first();
+        $userUpdated = User::where('email', $this->user_data['email'])->first();
 
         $this->assertContains($userUpdated->id . '.jpg', $userUpdated->photo);
-        $this->assertEquals($data['id'], $userUpdated->facebook_id);
     }
 
+    /* Авторизуємося під уже існуючим користувачем, змінуємо атрибут і перевіряємо успішність зміни */
     public function testLoginExistingUserWithUpdate()
     {
-        $user = $this->testUsers[0];
+        $data = $this->getDataToPost();
+        $data['surname'] .= '_updated';
 
-        $data = [
-            'id' => $user->facebook_id,
-            'email' => $user->email,
-            'name' => $user->name,
-            'surname' => $user->surname,
-        ];
         $response = $this->post($this->url, $data, $this->headers);
-
         $response->assertStatus(200);
-        $this->assertNotEmpty($response->decodeResponseJson()['access_token']);
+        $this->assertToken($response);
 
-        $userUpdated = User::where('email', $user->email)->first();
+        $userUpdated = User::where('email', $this->user_data['email'])->first();
 
         $this->assertContains($userUpdated->id . '.jpg', $userUpdated->photo);
         foreach (['email', 'name', 'surname'] as $key) {
@@ -67,72 +41,50 @@ class LoginFacebookTest extends TestCase
         }
     }
 
+    /* Авторизуємося під неіснуючим користувачем. Система має нас зареєструвати */
     public function testLoginNonExistingUser()
     {
-        $user = $this->testUsers[0];
+        // видаляємо користувача з БД. Віднині $user у нас -- неіснуючий
+        $this->user->delete();
 
-        // Видаляємо користувачів із бази. Відтепер user у нас nonExisting
-        $this->deleteTestUsers();
-
-        $data = [
-            'id' => $user->facebook_id,
-            'email' => $user->email,
-            'name' => $user->name,
-            'surname' => $user->surname,
-        ];
-        $response = $this->post($this->url, $data, $this->headers);
+        $response = $this->post($this->url, $this->getDataToPost(), $this->headers);
 
         $response->assertStatus(201);
-        $this->assertNotEmpty($response->decodeResponseJson()['access_token']);
+        $this->assertToken($response);
 
-        $userInserted = User::where('email', $user->email)->first();
-        $this->assertTrue(!empty($userInserted));
-        $this->assertContains($userInserted->id . '.jpg', $userInserted->photo);
-        $this->assertEquals(2, $userInserted->usertype);
+        $user_inserted = User::where('email', $this->user_data['email'])->first();
+        $this->assertTrue(!empty($user_inserted));
+        $this->assertContains($user_inserted->id . '.jpg', $user_inserted->photo);
+        $this->assertEquals(2, $user_inserted->usertype);
     }
 
+    /* Пробуємо авторизуватись по неіснуючому facebook_id */
     public function testLoginWithInvalidFacebookId()
     {
-        $user = $this->testUsers[0];
+        $data = $this->getDataToPost();
+        $data['id'] .= '12345';
 
-        $data = [
-            'id' => $user->facebook_id . '12345',
-            'email' => $user->email,
-            'name' => $user->name,
-            'surname' => $user->surname,
-        ];
-        $response = $this->post($this->url, $data, $this->headers);
-
-        $response->assertStatus(401);
+        $this->post($this->url, $data, $this->headers)->assertStatus(401);
     }
 
     /**
-     * @param $attrName
-     * @param $minLen
-     * @param $maxLen
+     * @param $key
+     * @param $min_len
+     * @param $max_len
      *
      * @dataProvider providerLoginForValidationFail
      */
-    public function testLoginForValidationFail($attrName, $minLen, $maxLen)
+    public function testLoginForValidationFail($key, $min_len, $max_len)
     {
-        $user = $this->testUsers[0];
+        $data = $this->getDataToPost();
 
-        $data = [
-            'id' => $user->facebook_id,
-            'email' => $user->email,
-            'name' => $user->name,
-            'surname' => $user->surname,
-        ];
+        // Перевіряємо, що при замалій довжині атрибута отримаємо помилку
+        $data[$key] = str_repeat('1', $min_len - 1);
+        $this->post($this->url, $data, $this->headers)->assertStatus(422);
 
-        // Перевіряю, що при замалій довжині атрибута я отримаю помилку
-        $data[$attrName] = str_repeat('1', $minLen - 1);
-        $response = $this->post($this->url, $data, $this->headers);
-        $response->assertStatus(422);
-
-        // Перевіряю, що при завеликій довжині атрибута я отримаю помилку
-        $data[$attrName] = str_repeat('1', $maxLen + 1);
-        $response = $this->post($this->url, $data, $this->headers);
-        $response->assertStatus(422);
+        // Перевіряємо, що при завеликій довжині атрибута отримаємо помилку
+        $data[$key] = str_repeat('1', $max_len + 1);
+        $this->post($this->url, $data, $this->headers)->assertStatus(422);
     }
 
     public function providerLoginForValidationFail()
@@ -146,25 +98,20 @@ class LoginFacebookTest extends TestCase
 
     public function setUp()
     {
+        $this->user_data['facebook_id'] = '100001887847445';
+
         parent::setUp();
-        $this->insertTestUsers();
+
+        $this->url .= 'login/facebook';
     }
 
-    private function insertTestUsers()
+    private function getDataToPost()
     {
-        $this->testUsers[] = factory(User::class)->create([
-            'name' => 'slualexvas_test_name',
-            'surname' => 'slualexvas_test_surname',
-            'facebook_id' => '100001887847445',
-            'email' => 'slualexvas@gmail.com',
-            'password' => bcrypt('test_password'),
-        ]);
-    }
-
-    private function deleteTestUsers()
-    {
-        foreach ($this->testUsers as $user) {
-            $user->delete();
-        }
+        return [
+            'id'      => $this->user_data['facebook_id'],
+            'email'   => $this->user_data['email'],
+            'name'    => $this->user_data['name'],
+            'surname' => $this->user_data['surname'],
+        ];
     }
 }

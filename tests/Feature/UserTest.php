@@ -2,37 +2,12 @@
 
 namespace Tests\Feature;
 
-use Toecyd\User;
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
-
-class UserTest extends TestCase
+class UserTest extends BaseApiTest
 {
-    use DatabaseTransactions;
-
-    /* Заголовки для HTTP-запитів */
-    private $headers = ['accept' => 'application/json'];
-
-    /* URL для HTTP-запитів */
-    private $url = 'api/v1/user';
-
-    /* Дані про тестового користувача; мають бути такими, яких нема у БД */
-    private $user_data = [
-        'name' => 'slualexvas_test_name',
-        'email'     => 'slualexvas@gmail.com',
-        'password'  => 'test_password',
-    ];
-
-    /* @var User */
-    private $user;
-
     public function setUp() {
         parent::setUp();
 
-        $local_user_data = $this->user_data;
-        $local_user_data['password'] = bcrypt($local_user_data['password']);
-        $this->user = new User($local_user_data);
-        $this->user->save();
+        $this->url .= 'user';
     }
 
     /**
@@ -40,20 +15,10 @@ class UserTest extends TestCase
      */
     public function testSuccess()
     {
-        // Авторизуємось
-        $data = [
-            'email' => $this->user_data['email'],
-            'password' => $this->user_data['password'],
-        ];
-        $response = $this->post('api/v1/login', $data, $this->headers);
-        $response->assertStatus(200);
-        $response_data = $response->decodeResponseJson();
-        $this->assertNotEmpty($response_data['token_type']);
-        $this->assertNotEmpty($response_data['access_token']);
-
+        // Авторизуємось і отримуємо токен
+        $headers_with_token = $this->headersWithToken($this->login($this->user_data));
         // Коли авторизовані, пробуємо отримати дані користувача
-        $headers = array_merge($this->headers, ['Authorization' => $response_data['token_type'] . ' ' . $response_data['access_token']]);
-        $response = $this->get($this->url, $headers);
+        $response = $this->get($this->url, $headers_with_token);
         $response->assertStatus(200);
 
         $response_data_user = $response->decodeResponseJson();
@@ -80,20 +45,12 @@ class UserTest extends TestCase
      */
     public function testErrorBadToken()
     {
-        // Авторизуємось
-        $data = [
-            'email' => $this->user_data['email'],
-            'password' => $this->user_data['password'],
-        ];
-        $response = $this->post('api/v1/login', $data, $this->headers);
-        $response->assertStatus(200);
-        $response_data = $response->decodeResponseJson();
-        $this->assertNotEmpty($response_data['token_type']);
-        $this->assertNotEmpty($response_data['access_token']);
+        // Авторизуємось і отримуємо токен
+        $headers_with_token = $this->headersWithToken($this->login($this->user_data));
+        $headers_with_token['Authorization'] .= '_wrong';
 
         // Коли авторизовані, пробуємо отримати дані користувача
-        $headers = array_merge($this->headers, ['Authorization' => $response_data['token_type'] . ' ' . $response_data['access_token'] . '_wrong']);
-        $response = $this->get($this->url, $headers);
+        $response = $this->get($this->url, $headers_with_token);
         $response->assertStatus(401);
     }
 }

@@ -2,42 +2,15 @@
 
 namespace Tests\Feature;
 
-use Toecyd\User;
 use Carbon\Carbon;
-use Tests\TestCase;
 use Toecyd\Http\Controllers\Api\V1\AuthController;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-class LoginTest extends TestCase
+class LoginTest extends BaseApiTest
 {
-    use DatabaseTransactions;
-
-    /* URL для HTTP-запитів */
-    private $url = 'api/v1/login';
-
-    /* Заголовки для HTTP-запитів */
-    private $headers = ['accept' => 'application/json'];
-
-    /* Дані про тестового користувача; мають бути такими, яких нема у БД */
-    private $user_data = [
-        'name' => 'slualexvas_test_name',
-        'email'     => 'slualexvas@gmail.com',
-        'password'  => 'test_password',
-    ];
-
-    /* @var User */
-    private $user;
-
-    /* Імена полів, які мають бути заповненими, коли ми отримуємо токен*/
-    private $token_keys = ['access_token', 'token_type', 'expires_at'];
-
     public function setUp() {
         parent::setUp();
 
-        $local_user_data = $this->user_data;
-        $local_user_data['password'] = bcrypt($local_user_data['password']);
-        $this->user = new User($local_user_data);
-        $this->user->save();
+        $this->url .= 'login';
     }
 
     /**
@@ -45,18 +18,8 @@ class LoginTest extends TestCase
      */
     public function testSuccessLogin()
     {
-        $data = [
-            'email' => $this->user_data['email'],
-            'password' => $this->user_data['password'],
-        ];
-
-        $response = $this->post($this->url, $data, $this->headers);
-        $response->assertStatus(200);
-
-        $response_data = $response->decodeResponseJson();
-        foreach ($this->token_keys as $key) {
-            $this->assertNotEmpty($response_data[$key]);
-        }
+        $response = $this->login($this->user_data);
+        $this->assertToken($response);
     }
 
     /**
@@ -68,27 +31,22 @@ class LoginTest extends TestCase
      */
     public function testRememberMe(int $remember_me, int $status, string $expires_at)
     {
-        $data = [
-            'email' => $this->user_data['email'],
-            'password' => $this->user_data['password'],
-        ];
+        $user_data = $this->user_data;
 
         if (!empty($remember_me)) {
-            $data['remember_me'] = $remember_me;
+            $user_data['remember_me'] = $remember_me;
         }
 
-        $response = $this->post($this->url, $data, $this->headers);
+        $response = $this->login($user_data);
         $response->assertStatus($status);
 
         if ($status == 200) {
-            $response_data = $response->decodeResponseJson();
-            foreach ($this->token_keys as $key) {
-                $this->assertNotEmpty($response_data[$key]);
-            }
+            $this->assertToken($response);
 
-            $etalon_date = date('Y-m-d', strtotime($expires_at));
-            $test_date = date('Y-m-d', strtotime($response_data['expires_at']));
-            $this->assertEquals($etalon_date, $test_date);
+            $response_data = $response->decodeResponseJson();
+
+            // $expires_at та $response_data['expires_at'] відрізняються на декілька секунд, тому їх не можна перевіряти на рівність
+            $this->assertTrue(abs(strtotime($expires_at) - strtotime($response_data['expires_at'])) < 60);
         }
     }
 
@@ -106,33 +64,23 @@ class LoginTest extends TestCase
     }
 
     /**
-     * Тест на авторизацію користувачем, email якого відсутній в базі
+     * Тест на авторизацію неіснуючим користувачем
      */
-    public function testWrongEmail()
+    public function testNonExistingUser()
     {
-        $data = [
-            'email' => $this->user_data['email'],
-            'password' => $this->user_data['password'],
-        ];
-
         // видаляємо користувача; відтепер він -- неіснуючий
         $this->user->delete();
 
-        $response = $this->post($this->url, $data, $this->headers);
-        $response->assertStatus(401);
+        $this->login($this->user_data)->assertStatus(401);
     }
 
     /**
-     * Тест на авторизацію неіснуючим користувачем
+     * Тест на авторизацію існуючим користувачем з невірним паролем
      */
     public function testWrongPassword()
     {
-        $data = [
-            'email' => $this->user_data['email'],
-            'password' => $this->user_data['password'] . 'wrong',
-        ];
-
-        $response = $this->post($this->url, $data, $this->headers);
-        $response->assertStatus(401);
+        $this->login(
+            array_replace($this->user_data, ['password' => $this->user_data['password'] . '_wrong'])
+        )->assertStatus(401);
     }
 }
