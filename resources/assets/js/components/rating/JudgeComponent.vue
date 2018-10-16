@@ -16,33 +16,33 @@
                     <div class="col-3 pl-0 additional-info">
                         <div>
                             <span v-if="isAuth">
-                                <span v-if="judge.is_bookmark" @click="changeBookmarkStatus(judge)">відстежується <i class="fa fa-bookmark" aria-hidden="true"></i></span>
-                                <span v-if="!judge.is_bookmark" @click="changeBookmarkStatus(judge)">відстежувати <i class="fa fa-bookmark-o" aria-hidden="true"></i></span>
+                                        <span v-if="judge.is_bookmark" @click="changeBookmarkStatus(judge)">відстежується <i class="fa fa-bookmark" aria-hidden="true"></i></span>
+                            <span v-if="!judge.is_bookmark" @click="changeBookmarkStatus(judge)">відстежувати <i class="fa fa-bookmark-o" aria-hidden="true"></i></span>
                             </span>
                             <i class="fa fa-line-chart float-right" aria-hidden="true"> {{ judge.rating }} </i>
                         </div>
                         <div>
                             <span v-if="judge.status === 1"> <!-- Cуддя на роботі  -->
-                                            <i class="fa fa-briefcase" aria-hidden="true"></i>
-                                             на роботі {{ judge.due_date_status ? '('+judge.due_date_status+')' : null }}
-                                        </span>
+                                <i class="fa fa-briefcase" aria-hidden="true"></i>
+                                    на роботі {{ judge.due_date_status ? '('+judge.due_date_status+')' : null }}
+                            </span>
                             <span v-if="judge.status === 2"> <!-- На лікарняному  -->
-                                            <i class="fa fa-medkit" aria-hidden="true"></i>
-                                             на лікарняному {{ judge.due_date_status ? '(до '+judge.due_date_status+')' : null }}
-                                        </span>
+                                <i class="fa fa-medkit" aria-hidden="true"></i>
+                                    на лікарняному {{ judge.due_date_status ? '(до '+judge.due_date_status+')' : null }}
+                            </span>
                             <span v-if="judge.status === 3"> <!-- У відпустці   -->
-                                            <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
-                                             у відпустці {{ judge.due_date_status ? '(до '+judge.due_date_status+')' : null }}
-                                        </span>
+                                <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
+                                    у відпустці {{ judge.due_date_status ? '(до '+judge.due_date_status+')' : null }}
+                            </span>
                             <span v-if="judge.status === 4"> <!-- Відсуній на робочому місці з інших причин  -->
-                                            <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
-                                             відсуній на робочому місці з інших причин {{ judge.due_date_status ? '(до '+judge.due_date_status+')' : null }}
-                                        </span>
+                                <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
+                                    відсуній на робочому місці з інших причин {{ judge.due_date_status ? '(до '+judge.due_date_status+')' : null }}
+                            </span>
                             <span v-if="judge.status === 5"> <!-- Припинено повноваження  -->
-                                            <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
-                                             припинено повноваження {{ judge.due_date_status ? '(до '+judge.due_date_status+')' : null }}
-                                        </span>
-                            <i v-if="isAuth" class="fa fa-pencil p-1" aria-hidden="true" @click="this.showModal = true"></i>
+                                <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
+                                    припинено повноваження {{ judge.due_date_status ? '(до '+judge.due_date_status+')' : null }}
+                            </span>
+                            <i v-if="isAuth" class="fa fa-pencil p-1" aria-hidden="true" @click="showModal"></i>
                         </div>
                     </div>
     
@@ -50,19 +50,19 @@
     
             </div>
         </div>
-        <judge-update-status v-if="showModal"></judge-update-status>
+        <modal v-show="isModalVisible" @close="closeModal" />
     </div>
-    <!-- </div> -->
 </template>
 
 <script>
-import JudgeUpdateStatus from './JudgeUpdateStatus.vue';
-
+    import JudgeUpdateStatus from './JudgeUpdateStatus.vue';
+    import Modal from '../shared/Modal.vue';
+    
     export default {
         name: "judge-component",
         data() {
             return {
-                showModal: false,
+                isModalVisible: false,
                 isAuth: localStorage.getItem('token'),
                 headers: {
                     "Content-Type": "application/json",
@@ -74,10 +74,7 @@ import JudgeUpdateStatus from './JudgeUpdateStatus.vue';
         props: ['judgesList'],
         methods: {
             changeBookmarkStatus(judge) {
-                // console.log(judge)
                 if (judge.is_bookmark === 0) {
-                    // console.log('bootmark = 0')
-                    // console.log(judge.id)
                     axios({
                             method: 'put',
                             url: `/api/v1/judges/${judge.id}/bookmark`,
@@ -88,16 +85,10 @@ import JudgeUpdateStatus from './JudgeUpdateStatus.vue';
                             }
                         })
                         .then(response => {
-                            // judgesList.forEach(element => {
-                            //     if (element.id === judge.id) {
-                            //         element.is_bookmark = 1;
-                            //     }                              
-                            // });
                             judge.is_bookmark = 1;
-                            // console.log('Response Bookmark',response);
                         })
                         .catch(error => {
-                            console.log(error);
+                            console.log('Bookmark', error);
                         });
                 } else {
                     axios({
@@ -117,10 +108,17 @@ import JudgeUpdateStatus from './JudgeUpdateStatus.vue';
                             console.log(error);
                         });
                 }
+            },
+            showModal() {
+                this.isModalVisible = true;
+            },
+            closeModal() {
+                this.isModalVisible = false;
             }
         },
         components: {
-            JudgeUpdateStatus
+            JudgeUpdateStatus,
+            Modal
         }
     }
 </script>

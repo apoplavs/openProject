@@ -27347,9 +27347,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+
+
 //
-
-
 
 
 
@@ -27367,13 +27367,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         expired: 0
       },
       autocomplete: [],
-      message: "",
+      // message: "",
       judgesList: {
         total: 0
-      },
-      headers: {
-        "Content-Type": "application/json",
-        "X-Requested-With": "XMLHttpRequest"
       },
       'buttonClasses': {
         'default': ['border-none', 'bg-grey-lightest'],
@@ -27383,27 +27379,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }
     };
   },
-  mounted: function mounted() {
-    // this.getJudgesList();
-  },
 
   methods: {
-    getAvtocompeteSearch: function getAvtocompeteSearch(surname) {
-      this.params.search = surname; // по кліку на суддю в параметр запусую його прізвище і визиваю getJudgesList();
-      getJudgesList();
-    },
-    liveSearch: function liveSearch() {
-      var _this = this;
-
-      // console.log(this.params.search);
-      console.log('Виклик автокомплит');
-      var regexp = new RegExp(/^[а-яії]+$/i);
+    validateInputSearch: function validateInputSearch() {
+      var regexp = new RegExp(/^['\u0404\u0406\u0407\u0410-\u0429\u042C\u042E-\u0449\u044C\u044E\u044F\u0454\u0456\u0457\u0490\u0491]+$/i);
       var str = __WEBPACK_IMPORTED_MODULE_2_lodash___default.a.trim(this.params.search);
       if (str.search(regexp) === -1 || str === '') {
+        if (str === '') {
+          this.params.search = null;
+        }
         this.autocomplete = [];
-        return;
-      } else {
-        // this.params.search === '' ? this.params.search = null : false;
+        return false;
+      }
+      return true;
+    },
+
+    liveSearch: __WEBPACK_IMPORTED_MODULE_2_lodash___default.a.debounce(function (event) {
+      var _this = this;
+
+      console.log('Виклик автокомплит');
+      if (this.validateInputSearch()) {
         axios.get('/api/v1/judges/autocomplete', {
           headers: {
             "Content-Type": "application/json",
@@ -27414,15 +27409,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           }
         }).then(function (response) {
           _this.autocomplete = response.data;
-          // console.log('Autocomplete', response.data);
         }).catch(function (error) {
-          // console.log(error);
+          console.log('Live search', error);
         });
       }
-    },
-
+    }, 1000),
     sortJudges: __WEBPACK_IMPORTED_MODULE_2_lodash___default.a.debounce(function (event) {
-      console.log(this.params.sort);
       this.getJudgesList();
     }, 10),
 
@@ -27435,7 +27427,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       console.log('getJudgesList()');
       this.autocomplete = []; // коли визиваємо цей метод liveSearch маємо закрити
-      this.params.search === '' ? this.params.search = null : false; // тупо треба переробити
+      if (this.validateInputSearch() === false) {
+        // !! = true
+        this.params.search = null;
+      }
       if (localStorage.getItem('token')) {
         console.log('have token');
         //this.params.page = page + 1;
@@ -27475,6 +27470,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.params.jurisdiction = [];
       this.params.expired = 0;
       this.params.search = null;
+      this.autocomplete = [];
+      this.getJudgesList(); // онуляємо всі фільтри і визиваємо функцію
     }
   },
   components: {
@@ -27583,6 +27580,8 @@ exports.push([module.i, "\n.judge-component[data-v-dab41e1e]:not(:last-child) {\
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__JudgeUpdateStatus_vue__ = __webpack_require__(79);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__JudgeUpdateStatus_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__JudgeUpdateStatus_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_Modal_vue__ = __webpack_require__(128);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_Modal_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__shared_Modal_vue__);
 //
 //
 //
@@ -27639,7 +27638,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
+
 
 
 
@@ -27647,7 +27646,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     name: "judge-component",
     data: function data() {
         return {
-            showModal: false,
+            isModalVisible: false,
             isAuth: localStorage.getItem('token'),
             headers: {
                 "Content-Type": "application/json",
@@ -27660,10 +27659,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     props: ['judgesList'],
     methods: {
         changeBookmarkStatus: function changeBookmarkStatus(judge) {
-            // console.log(judge)
             if (judge.is_bookmark === 0) {
-                // console.log('bootmark = 0')
-                // console.log(judge.id)
                 axios({
                     method: 'put',
                     url: '/api/v1/judges/' + judge.id + '/bookmark',
@@ -27673,15 +27669,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                         "Authorization": localStorage.getItem('token')
                     }
                 }).then(function (response) {
-                    // judgesList.forEach(element => {
-                    //     if (element.id === judge.id) {
-                    //         element.is_bookmark = 1;
-                    //     }                              
-                    // });
                     judge.is_bookmark = 1;
-                    // console.log('Response Bookmark',response);
                 }).catch(function (error) {
-                    console.log(error);
+                    console.log('Bookmark', error);
                 });
             } else {
                 axios({
@@ -27699,10 +27689,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     console.log(error);
                 });
             }
+        },
+        showModal: function showModal() {
+            this.isModalVisible = true;
+        },
+        closeModal: function closeModal() {
+            this.isModalVisible = false;
         }
     },
     components: {
-        JudgeUpdateStatus: __WEBPACK_IMPORTED_MODULE_0__JudgeUpdateStatus_vue___default.a
+        JudgeUpdateStatus: __WEBPACK_IMPORTED_MODULE_0__JudgeUpdateStatus_vue___default.a,
+        Modal: __WEBPACK_IMPORTED_MODULE_1__shared_Modal_vue___default.a
     }
 });
 
@@ -28155,13 +28152,13 @@ var render = function() {
                                 attrs: { "aria-hidden": "true" }
                               }),
                               _vm._v(
-                                "\n                                         на роботі " +
+                                "\n                                на роботі " +
                                   _vm._s(
                                     judge.due_date_status
                                       ? "(" + judge.due_date_status + ")"
                                       : null
                                   ) +
-                                  "\n                                    "
+                                  "\n                        "
                               )
                             ])
                           : _vm._e(),
@@ -28173,13 +28170,13 @@ var render = function() {
                                 attrs: { "aria-hidden": "true" }
                               }),
                               _vm._v(
-                                "\n                                         на лікарняному " +
+                                "\n                                на лікарняному " +
                                   _vm._s(
                                     judge.due_date_status
                                       ? "(до " + judge.due_date_status + ")"
                                       : null
                                   ) +
-                                  "\n                                    "
+                                  "\n                        "
                               )
                             ])
                           : _vm._e(),
@@ -28191,13 +28188,13 @@ var render = function() {
                                 attrs: { "aria-hidden": "true" }
                               }),
                               _vm._v(
-                                "\n                                         у відпустці " +
+                                "\n                                у відпустці " +
                                   _vm._s(
                                     judge.due_date_status
                                       ? "(до " + judge.due_date_status + ")"
                                       : null
                                   ) +
-                                  "\n                                    "
+                                  "\n                        "
                               )
                             ])
                           : _vm._e(),
@@ -28209,13 +28206,13 @@ var render = function() {
                                 attrs: { "aria-hidden": "true" }
                               }),
                               _vm._v(
-                                "\n                                         відсуній на робочому місці з інших причин " +
+                                "\n                                відсуній на робочому місці з інших причин " +
                                   _vm._s(
                                     judge.due_date_status
                                       ? "(до " + judge.due_date_status + ")"
                                       : null
                                   ) +
-                                  "\n                                    "
+                                  "\n                        "
                               )
                             ])
                           : _vm._e(),
@@ -28227,13 +28224,13 @@ var render = function() {
                                 attrs: { "aria-hidden": "true" }
                               }),
                               _vm._v(
-                                "\n                                         припинено повноваження " +
+                                "\n                                припинено повноваження " +
                                   _vm._s(
                                     judge.due_date_status
                                       ? "(до " + judge.due_date_status + ")"
                                       : null
                                   ) +
-                                  "\n                                    "
+                                  "\n                        "
                               )
                             ])
                           : _vm._e(),
@@ -28242,11 +28239,7 @@ var render = function() {
                           ? _c("i", {
                               staticClass: "fa fa-pencil p-1",
                               attrs: { "aria-hidden": "true" },
-                              on: {
-                                click: function($event) {
-                                  this.showModal = true
-                                }
-                              }
+                              on: { click: _vm.showModal }
                             })
                           : _vm._e()
                       ])
@@ -28258,7 +28251,17 @@ var render = function() {
           : _vm._e()
       ]),
       _vm._v(" "),
-      _vm.showModal ? _c("judge-update-status") : _vm._e()
+      _c("modal", {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.isModalVisible,
+            expression: "isModalVisible"
+          }
+        ],
+        on: { close: _vm.closeModal }
+      })
     ],
     1
   )
@@ -49235,9 +49238,10 @@ var render = function() {
               directives: [
                 {
                   name: "model",
-                  rawName: "v-model",
+                  rawName: "v-model.trim",
                   value: _vm.params.search,
-                  expression: "params.search"
+                  expression: "params.search",
+                  modifiers: { trim: true }
                 }
               ],
               staticClass: "form-control",
@@ -49251,7 +49255,10 @@ var render = function() {
                   if ($event.target.composing) {
                     return
                   }
-                  _vm.$set(_vm.params, "search", $event.target.value)
+                  _vm.$set(_vm.params, "search", $event.target.value.trim())
+                },
+                blur: function($event) {
+                  _vm.$forceUpdate()
                 }
               }
             }),
@@ -49261,18 +49268,11 @@ var render = function() {
                   "div",
                   { staticClass: "autocomplete-block-result" },
                   _vm._l(_vm.autocomplete, function(el, ind_1) {
-                    return _c("div", { key: ind_1 }, [
-                      _c(
-                        "a",
-                        {
-                          attrs: { href: "#" },
-                          on: {
-                            click: function($event) {
-                              _vm.getAvtocompeteSearch(el.surname)
-                            }
-                          }
-                        },
-                        [
+                    return _c(
+                      "div",
+                      { key: ind_1 },
+                      [
+                        _c("router-link", { attrs: { to: "/" } }, [
                           _vm._v(
                             "\n                " +
                               _vm._s(el.surname) +
@@ -49280,7 +49280,7 @@ var render = function() {
                               _vm._s(
                                 el.name.length === 1 ? el.name + "." : el.name
                               ) +
-                              " \n                " +
+                              " " +
                               _vm._s(
                                 el.patronymic.length === 1
                                   ? el.patronymic + "."
@@ -49288,11 +49288,12 @@ var render = function() {
                               ) +
                               "\n              "
                           )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c("hr")
-                    ])
+                        ]),
+                        _vm._v(" "),
+                        _c("hr")
+                      ],
+                      1
+                    )
                   })
                 )
               : _vm._e()
@@ -50666,6 +50667,179 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 120 */,
+/* 121 */,
+/* 122 */,
+/* 123 */,
+/* 124 */,
+/* 125 */,
+/* 126 */,
+/* 127 */,
+/* 128 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(129)
+}
+var normalizeComponent = __webpack_require__(2)
+/* script */
+var __vue_script__ = __webpack_require__(131)
+/* template */
+var __vue_template__ = __webpack_require__(132)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-442e7f0c"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/shared/Modal.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-442e7f0c", Component.options)
+  } else {
+    hotAPI.reload("data-v-442e7f0c", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 129 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(130);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(1)("37bb8334", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-442e7f0c\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Modal.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-442e7f0c\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Modal.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 130 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(0)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.modal-backdrop[data-v-442e7f0c] {\n  position: fixed;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  background-color: rgba(0, 0, 0, 0.3);\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.modal[data-v-442e7f0c] {\n  background: #FFFFFF;\n  -webkit-box-shadow: 2px 2px 20px 1px;\n          box-shadow: 2px 2px 20px 1px;\n  overflow-x: auto;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n}\n.modal-header[data-v-442e7f0c],\n.modal-footer[data-v-442e7f0c] {\n  padding: 15px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n}\n.modal-header[data-v-442e7f0c] {\n  border-bottom: 1px solid #eeeeee;\n  color: #4AAE9B;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n}\n.modal-footer[data-v-442e7f0c] {\n  border-top: 1px solid #eeeeee;\n  -webkit-box-pack: end;\n      -ms-flex-pack: end;\n          justify-content: flex-end;\n}\n.modal-body[data-v-442e7f0c] {\n  position: relative;\n  padding: 20px 10px;\n}\n.btn-close[data-v-442e7f0c] {\n  border: none;\n  font-size: 20px;\n  padding: 20px;\n  cursor: pointer;\n  font-weight: bold;\n  color: #4AAE9B;\n  background: transparent;\n}\n.btn-green[data-v-442e7f0c] {\n  color: white;\n  background: #4AAE9B;\n  border: 1px solid #4AAE9B;\n  border-radius: 2px;\n}\n.modal-fade-enter[data-v-442e7f0c],\n.modal-fade-leave-active[data-v-442e7f0c] {\n  opacity: 0;\n}\n.modal-fade-enter-active[data-v-442e7f0c],\n.modal-fade-leave-active[data-v-442e7f0c] {\n  -webkit-transition: opacity .5s ease;\n  transition: opacity .5s ease;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 131 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    name: "Modal",
+    methods: {
+        close: function close() {
+            this.$emit('close');
+        }
+    }
+});
+
+/***/ }),
+/* 132 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("script", { attrs: { type: "text/x-template", id: "modal" } }, [
+    _vm._v(
+      '\n    <transition name="modal-fade">\n        <div class="modal-backdrop">\n            <div class="modal" role="dialog" aria-labelledby="modalTitle" aria-describedby="modalDescription">\n                <header class="modal-header" id="modalTitle">\n                    <slot name="header">\n                        This is the default tile!\n    \n                        <button type="button" class="btn-close" @click="close" aria-label="Close modal">\n                                        x\n                                    </button>\n                    </slot>\n                </header>\n                <section class="modal-body" id="modalDescription">\n                    <slot name="body">\n                        I\'m the default body!\n                    </slot>\n                </section>\n                <footer class="modal-footer">\n                    <slot name="footer">\n                        I\'m the default footer!\n    \n                        <button type="button" class="btn-green" @click="close" aria-label="Close modal">\n                                        Close me!\n                                    </button>\n                    </slot>\n                </footer>\n            </div>\n        </div>\n    </transition>\n    '
+    )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-442e7f0c", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);
