@@ -14,35 +14,40 @@
                         </div>
                     </div>
                     <div class="col-3 pl-0 additional-info">
-                        <div>
-                            <span v-if="isAuth">
-                                        <span v-if="judge.is_bookmark" @click="changeBookmarkStatus(judge)">відстежується <i class="fa fa-bookmark" aria-hidden="true"></i></span>
-                            <span v-if="!judge.is_bookmark" @click="changeBookmarkStatus(judge)">відстежувати <i class="fa fa-bookmark-o" aria-hidden="true"></i></span>
-                            </span>
-                            <i class="fa fa-line-chart float-right" aria-hidden="true"> {{ judge.rating }} </i>
+                        <div class="d-flex pb-2">
+                            <div class="w-75">
+                                <span  v-if="isAuth">
+                                    <span v-if="judge.is_bookmark" @click="changeBookmarkStatus(judge)">відстежується <i class="fa fa-bookmark" aria-hidden="true"></i></span>
+                                    <span v-if="!judge.is_bookmark" @click="changeBookmarkStatus(judge)">відстежувати <i class="fa fa-bookmark-o" aria-hidden="true"></i></span>
+                                </span>
+                            </div>
+                            <div class="w-25"><i class="fa fa-line-chart float-right" aria-hidden="true"> {{ judge.rating }} </i></div>
                         </div>
-                        <div>
-                            <span v-if="judge.status === 1"> <!-- Cуддя на роботі  -->
-                                <i class="fa fa-briefcase" aria-hidden="true"></i>
-                                    на роботі {{ judge.due_date_status ? '('+judge.due_date_status+')' : null }}
-                            </span>
-                            <span v-if="judge.status === 2"> <!-- На лікарняному  -->
-                                <i class="fa fa-medkit" aria-hidden="true"></i>
-                                    на лікарняному {{ judge.due_date_status ? '(до '+judge.due_date_status+')' : null }}
-                            </span>
-                            <span v-if="judge.status === 3"> <!-- У відпустці   -->
-                                <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
-                                    у відпустці {{ judge.due_date_status ? '(до '+judge.due_date_status+')' : null }}
-                            </span>
-                            <span v-if="judge.status === 4"> <!-- Відсуній на робочому місці з інших причин  -->
-                                <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
-                                    відсуній на робочому місці з інших причин {{ judge.due_date_status ? '(до '+judge.due_date_status+')' : null }}
-                            </span>
-                            <span v-if="judge.status === 5"> <!-- Припинено повноваження  -->
-                                <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
-                                    припинено повноваження {{ judge.due_date_status ? '(до '+judge.due_date_status+')' : null }}
-                            </span>
-                            <i v-if="isAuth" class="fa fa-pencil p-1" aria-hidden="true" @click="showModal"></i>
+                        <div class="d-flex">
+                            <div class="w-75">
+                                <span v-if="judge.status === 1"> <!-- Cуддя на роботі  -->
+                                    <i class="fa fa-briefcase" aria-hidden="true"></i>
+                                        на роботі {{ judge.due_date_status ? '('+judge.due_date_status+')' : null }}
+                                </span>
+                                <span v-if="judge.status === 2"> <!-- На лікарняному  -->
+                                    <i class="fa fa-medkit" aria-hidden="true"></i>
+                                        на лікарняному {{ judge.due_date_status ? '(до '+judge.due_date_status+')' : null }}
+                                </span>
+                                <span v-if="judge.status === 3"> <!-- У відпустці   -->
+                                    <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
+                                        у відпустці {{ judge.due_date_status ? '(до '+judge.due_date_status+')' : null }}
+                                </span>
+                                <span v-if="judge.status === 4"> <!-- Відсуній на робочому місці з інших причин  -->
+                                    <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
+                                        відсуній на робочому місці з інших причин {{ judge.due_date_status ? '(до '+judge.due_date_status+')' : null }}
+                                </span>
+                                <span v-if="judge.status === 5"> <!-- Припинено повноваження  -->
+                                    <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
+                                        припинено повноваження {{ judge.due_date_status ? '(до '+judge.due_date_status+')' : null }}
+                                </span>
+                            </div>
+                            <div class="w-25"><i v-if="isAuth" class="fa fa-pencil p-1 float-right" aria-hidden="true" @click="showModal"></i></div>
+                            
                         </div>
                     </div>
     
@@ -50,7 +55,7 @@
     
             </div>
         </div>
-        <modal v-show="isModalVisible" @close="closeModal" />
+        <modal v-if="isModalVisible" @close="closeModal" />
     </div>
 </template>
 
@@ -62,7 +67,7 @@
         name: "judge-component",
         data() {
             return {
-                isModalVisible: false,
+                isModalVisible: true,
                 isAuth: localStorage.getItem('token'),
                 headers: {
                     "Content-Type": "application/json",
@@ -110,10 +115,13 @@
                 }
             },
             showModal() {
+                console.log('showModal');
+                
                 this.isModalVisible = true;
             },
             closeModal() {
                 this.isModalVisible = false;
+                console.log('closeModal');
             }
         },
         components: {
