@@ -4,7 +4,7 @@
       <div class="col-3 filters">
         <div class="card">
           <h4 class="card-header"><i class="fa fa-filter" aria-hidden="true"></i> Фільтри</h4>
-          <div class="card-body">  
+          <div class="card-body">
             <div class="row">
               <div class="col-12">
                 <h6>Інстанція</h6>
@@ -91,24 +91,23 @@
         </div>
         <!-- Card -->
         <!-- <div>Регіон-------- {{params.regions }}</div>
-        <div>інстанція--------- {{ params.instance }}</div>
-        <div>юрисдикція--------- {{ params.jurisdiction }}</div>
-        <div>пошук-------- {{ params.search}}</div>
-        <div>sort-------- {{ params.sort}}</div>
-        <div> expired-------- {{ params.expired}}</div> -->
+              <div>інстанція--------- {{ params.instance }}</div>
+              <div>юрисдикція--------- {{ params.jurisdiction }}</div>
+              <div>пошук-------- {{ params.search}}</div>
+              <div>sort-------- {{ params.sort}}</div>
+              <div> expired-------- {{ params.expired}}</div> -->
       </div>
   
       <!-- Main list -->
       <div class="col-9 list-data-container">
         <div class="row">
           <div class="col-10 autocomplete">
-            <input type="search" class="form-control" placeholder="Пошук..." v-model="params.search" @keyup="liveSearch()">
+            <input type="search" class="form-control" placeholder="Пошук..." v-model.trim="params.search" @keyup="liveSearch()">
             <div class="autocomplete-block-result" v-if="autocomplete.length">
               <div v-for="(el, ind_1) in autocomplete" :key="ind_1">
-                <a href="#" @click="getAvtocompeteSearch(el.surname)">
-                  {{ el.surname }} {{ (el.name.length === 1) ? el.name + '.' : el.name }} 
-                  {{ (el.patronymic.length === 1) ? el.patronymic + '.' : el.patronymic }}
-                </a>
+                <router-link to="/">
+                  {{ el.surname }} {{ (el.name.length === 1) ? el.name + '.' : el.name }} {{ (el.patronymic.length === 1) ? el.patronymic + '.' : el.patronymic }}
+                </router-link>
                 <hr>
               </div>
             </div>
@@ -123,11 +122,11 @@
             <div class="d-flex align-items-center">
               <span class="mr-2"> сортувати за: </span>
               <select class="form-control select-sort" name="sorting" v-model="params.sort" @change="sortJudges()">
-                          <option value="1" selected>прізвищем (А->Я) <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i></option>
-                          <option value="2">прізвищем (Я->А)</option>
-                          <option value="3">рейтингом (низький->високий)</option>
-                          <option value="4">рейтингом (високий->низький)</option>
-                        </select>
+                                <option value="1" selected>прізвищем (А->Я) <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i></option>
+                                <option value="2">прізвищем (Я->А)</option>
+                                <option value="3">рейтингом (низький->високий)</option>
+                                <option value="4">рейтингом (високий->низький)</option>
+                              </select>
             </div>
           </div>
           <div id="judges-list">
@@ -149,6 +148,7 @@
 
 <script>
   import JudgeComponent from './JudgeComponent.vue';
+  //
   import VueAdsPagination from 'vue-ads-pagination';
   import _ from 'lodash';
   
@@ -166,14 +166,10 @@
           expired: 0
         },
         autocomplete: [],
-        message: "",
+        // message: "",
         judgesList: {
           total: 0
-        },
-        headers: {
-          "Content-Type": "application/json",
-          "X-Requested-With": "XMLHttpRequest",
-        },
+        },  
         'buttonClasses': {
           'default': ['border-none', 'bg-grey-lightest'],
           'active': ['bg-active', 'border-none'],
@@ -182,45 +178,41 @@
         },
       }
     },
-    mounted() {
-      // this.getJudgesList();
-    },
     methods: {
-      getAvtocompeteSearch(surname) {
-        this.params.search = surname; // по кліку на суддю в параметр запусую його прізвище і визиваю getJudgesList();
-        getJudgesList();
-      },
-      liveSearch() {
-        // console.log(this.params.search);
-        console.log('Виклик автокомплит');
-        const regexp = new RegExp(/^[а-яії]+$/i);
+      validateInputSearch() {
+        const regexp = new RegExp(/^[а-щА-ЩЬьЮюЯяЇїІіЄєҐґ']+$/iu);
         let str = _.trim(this.params.search);
-        if (str.search(regexp) === -1 || str === ''){
+        if (str.search(regexp) === -1 || str === '') {
+          if (str === '') {
+            this.params.search = null;
+          }
           this.autocomplete = [];
-          return;
-        } else {
-        // this.params.search === '' ? this.params.search = null : false;
-        axios
-          .get('/api/v1/judges/autocomplete', {
-            headers: {
-              "Content-Type": "application/json",
-              "X-Requested-With": "XMLHttpRequest",
-            },
-            params: {
-              search: this.params.search
-            }
-          })
-          .then(response => {
-            this.autocomplete = response.data;
-            // console.log('Autocomplete', response.data);
-          })
-          .catch(error => {
-            // console.log(error);
-          });
+          return false;
         }
+        return true;
       },
+      liveSearch: _.debounce(function(event) {
+        console.log('Виклик автокомплит');
+        if (this.validateInputSearch()) {
+          axios
+            .get('/api/v1/judges/autocomplete', {
+              headers: {
+                "Content-Type": "application/json",
+                "X-Requested-With": "XMLHttpRequest",
+              },
+              params: {
+                search: this.params.search
+              }
+            })
+            .then(response => {
+              this.autocomplete = response.data;
+            })
+            .catch(error => {
+              console.log('Live search', error);
+            });
+        }
+      }, 1000),
       sortJudges: _.debounce(function(event) {
-        console.log(this.params.sort);
         this.getJudgesList();
       }, 10),
   
@@ -228,12 +220,13 @@
         this.params.page = page + 1;
         this.getJudgesList();
       },
-
-    
+  
       getJudgesList() {
         console.log('getJudgesList()');
-        this.autocomplete = [];   // коли визиваємо цей метод liveSearch маємо закрити
-        this.params.search === '' ? this.params.search = null : false; // тупо треба переробити
+        this.autocomplete = []; // коли визиваємо цей метод liveSearch маємо закрити
+        if (this.validateInputSearch() === false) { // !! = true
+          this.params.search = null;
+        }
         if (localStorage.getItem('token')) {
           console.log('have token')
           //this.params.page = page + 1;
@@ -250,8 +243,6 @@
               this.judgesList = response.data;
               window.scrollTo(0, 0);
               console.log('getJudges Response', this.judgesList);
-              
-             
             })
             .catch(error => {
               console.log('Каже що не авторизований пффф та Канеха');
@@ -281,12 +272,14 @@
         this.params.jurisdiction = [];
         this.params.expired = 0;
         this.params.search = null;
+        this.autocomplete = [];
+        this.getJudgesList(); // онуляємо всі фільтри і визиваємо функцію
       }
   
     },
     components: {
       JudgeComponent,
-      VueAdsPagination,
+      VueAdsPagination    
     }
   
   };
@@ -336,7 +329,6 @@
   
   
   /* Стилі для фільтрів */
-  
   
   // styles filters 
   .filters {
@@ -403,65 +395,51 @@
       position: sticky;
       bottom: 0;
     }
-      .fa-filter {
-    font-size: 21px;
-    color: #6291ba;
+    .fa-filter {
+      font-size: 21px;
+      color: #6291ba;
+    }
   }
-      
-
-  }
+  
   .list-data-container {
     .card {
       margin-top: 20px;
     }
     .pagination {
-    display: flex;
-    justify-content: center;
+      display: flex;
+      justify-content: center;
     }
-  
-  .select-sort {
-    width: 290px;
-  }
-
-
-  
-  
-  /* styles for autocomplete field  */
-  
-  .autocomplete {
-    /*the container must be positioned relative:*/
-    position: relative;
-    display: inline-block;
-  }
-  
-  .autocomplete-block-result {
-    position: absolute;
-    font-size: 0.9rem;
-    border: none;
-    z-index: 99;
-    top: 100%;
-    left: 16px;
-    right: 16px;
-    padding: 10px;
-    -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
-    border-radius: 4px;
-    border-top-left-radius: 0px;
-    border-top-right-radius: 0;
-    background-color: #f7f7f7;
+    .select-sort {
+      width: 290px;
+    }
+    /* styles for autocomplete field  */
+    .autocomplete {
+      /*the container must be positioned relative:*/
+      position: relative;
+      display: inline-block;
+    }
+    .autocomplete-block-result {
+      position: absolute;
+      font-size: 0.9rem;
+      border: none;
+      z-index: 99;
+      top: 100%;
+      left: 16px;
+      right: 16px;
+      padding: 10px;
+      -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+      border-radius: 4px;
+      border-top-left-radius: 0px;
+      border-top-right-radius: 0;
+      background-color: #f7f7f7;
+    }
   }
   
-
-  }
   
   /* styles for page elements */
-  
   
   // div.card-body.p-2 h5 a {
   //   color: #3d7ee5;
   // }
-  
-  
-
-  
 </style>
