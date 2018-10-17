@@ -27567,7 +27567,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n.judge-component[data-v-dab41e1e]:not(:last-child) {\n  border-bottom: 1px solid lightgray;\n}\n.additional-info[data-v-dab41e1e] {\n  font-size: .8rem;\n  color: grey;\n  /* styles for font awesome */\n}\n.additional-info .fa[data-v-dab41e1e] {\n    font-size: 1rem;\n}\n.additional-info .bookmark[data-v-dab41e1e],\n  .additional-info .fa-pencil[data-v-dab41e1e] {\n    cursor: pointer;\n}\n.additional-info .fa-bookmark-o[data-v-dab41e1e],\n  .additional-info .fa-bookmark[data-v-dab41e1e] {\n    color: #2b989b;\n}\n.additional-info .fa-briefcase[data-v-dab41e1e] {\n    color: green;\n}\n.additional-info .fa-line-chart[data-v-dab41e1e] {\n    color: #6291ba;\n}\n.additional-info .fa-medkit[data-v-dab41e1e] {\n    color: red;\n}\n.additional-info .fa-calendar-check-o[data-v-dab41e1e],\n  .additional-info .fa-calendar-minus-o[data-v-dab41e1e],\n  .additional-info .fa-calendar-times-o[data-v-dab41e1e] {\n    color: #2b989b;\n}\n.additional-info .fa-pencil[data-v-dab41e1e] {\n    color: #6c757d;\n    -webkit-transition-duration: 0.3s;\n    transition-duration: 0.3s;\n}\n.additional-info .fa-pencil[data-v-dab41e1e]:hover {\n    color: #6291ba;\n    -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 0.5), inset 0 0 1px rgba(0, 0, 0, 0.7);\n            box-shadow: 0 0 3px rgba(0, 0, 0, 0.5), inset 0 0 1px rgba(0, 0, 0, 0.7);\n}\n.main-info .avatar[data-v-dab41e1e] {\n  width: 120px;\n  height: 120px;\n}\n.main-info a[data-v-dab41e1e] {\n  color: #6291ba;\n}\n.main-info h5[data-v-dab41e1e] {\n  font-size: 1.2rem;\n}\n", ""]);
+exports.push([module.i, "\n.judge-component[data-v-dab41e1e]:not(:last-child) {\n  border-bottom: 1px solid lightgray;\n}\n.additional-info[data-v-dab41e1e] {\n  font-size: .8rem;\n  color: grey;\n  /* styles for font awesome */\n}\n.additional-info .fa[data-v-dab41e1e] {\n    font-size: 1rem;\n}\n.additional-info .bookmark[data-v-dab41e1e],\n  .additional-info .fa-pencil[data-v-dab41e1e] {\n    cursor: pointer;\n}\n.additional-info .fa-bookmark-o[data-v-dab41e1e],\n  .additional-info .fa-bookmark[data-v-dab41e1e] {\n    color: #2b989b;\n}\n.additional-info .fa-briefcase[data-v-dab41e1e] {\n    color: green;\n}\n.additional-info .fa-line-chart[data-v-dab41e1e] {\n    color: #6291ba;\n}\n.additional-info .fa-medkit[data-v-dab41e1e] {\n    color: red;\n}\n.additional-info .fa-calendar-check-o[data-v-dab41e1e],\n  .additional-info .fa-calendar-minus-o[data-v-dab41e1e],\n  .additional-info .fa-calendar-times-o[data-v-dab41e1e] {\n    color: #2b989b;\n}\n.additional-info .fa-pencil[data-v-dab41e1e] {\n    color: #6c757d;\n    -webkit-transition-duration: 0.3s;\n    transition-duration: 0.3s;\n}\n.additional-info .fa-pencil[data-v-dab41e1e]:hover {\n    color: #6291ba;\n    -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 0.5), inset 0 0 1px rgba(0, 0, 0, 0.7);\n            box-shadow: 0 0 3px rgba(0, 0, 0, 0.5), inset 0 0 1px rgba(0, 0, 0, 0.7);\n}\n.main-info .avatar[data-v-dab41e1e] {\n  width: 120px;\n  height: 120px;\n}\n.main-info a[data-v-dab41e1e] {\n  color: #6291ba;\n}\n.main-info .court_name[data-v-dab41e1e] {\n  font-size: 1rem;\n}\n", ""]);
 
 // exports
 
@@ -27578,10 +27578,8 @@ exports.push([module.i, "\n.judge-component[data-v-dab41e1e]:not(:last-child) {\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__JudgeUpdateStatus_vue__ = __webpack_require__(79);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__JudgeUpdateStatus_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__JudgeUpdateStatus_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_Modal_vue__ = __webpack_require__(84);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_Modal_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__shared_Modal_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__shared_Modal_vue__ = __webpack_require__(84);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__shared_Modal_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__shared_Modal_vue__);
 //
 //
 //
@@ -27643,7 +27641,33 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -27651,7 +27675,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     name: "judge-component",
     data: function data() {
         return {
-            isModalVisible: true,
+            isModalVisible: false,
+            changeStatusId: null,
+            status: {
+                set_status: 0,
+                due_date: 0
+            },
             isAuth: localStorage.getItem('token'),
             headers: {
                 "Content-Type": "application/json",
@@ -27695,345 +27724,49 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 });
             }
         },
-        showModal: function showModal() {
-            console.log('showModal');
-
+        showModal: function showModal(judgeId) {
+            this.changeStatusId = judgeId;
             this.isModalVisible = true;
+            console.log('showModal', this.isModalVisible);
         },
         closeModal: function closeModal() {
             this.isModalVisible = false;
             console.log('closeModal');
+        },
+        saveChanges: function saveChanges() {
+            var _this = this;
+
+            axios({
+                method: 'put',
+                url: '/judges/' + changeStatusId + '/update-status',
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-Requested-With": "XMLHttpRequest",
+                    "Authorization": localStorage.getItem('token')
+                },
+                params: {
+                    status: this.params.search
+                }
+            }).then(function (response) {
+                console.log('Save Status', response);
+
+                _this.isModalVisible = false;
+            }).catch(function (error) {
+                console.log('Bookmark', error);
+            });
         }
     },
     components: {
-        JudgeUpdateStatus: __WEBPACK_IMPORTED_MODULE_0__JudgeUpdateStatus_vue___default.a,
-        Modal: __WEBPACK_IMPORTED_MODULE_1__shared_Modal_vue___default.a
+        Modal: __WEBPACK_IMPORTED_MODULE_0__shared_Modal_vue___default.a
     }
 });
 
 /***/ }),
-/* 79 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__(80)
-}
-var normalizeComponent = __webpack_require__(2)
-/* script */
-var __vue_script__ = __webpack_require__(82)
-/* template */
-var __vue_template__ = __webpack_require__(83)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = injectStyle
-/* scopeId */
-var __vue_scopeId__ = "data-v-42cd3c52"
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/components/rating/JudgeUpdateStatus.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-42cd3c52", Component.options)
-  } else {
-    hotAPI.reload("data-v-42cd3c52", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 80 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(81);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(1)("1050807f", content, false, {});
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-42cd3c52\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./JudgeUpdateStatus.vue", function() {
-     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-42cd3c52\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./JudgeUpdateStatus.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 81 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(0)(false);
-// imports
-
-
-// module
-exports.push([module.i, "", ""]);
-
-// exports
-
-
-/***/ }),
-/* 82 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-        name: 'modal-satus-judge'
-        // data: () => {
-        //return {}
-        // }
-});
-
-/***/ }),
-/* 83 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass: "modal fade",
-        attrs: {
-          id: "changeJudgeStatus",
-          tabindex: "-1",
-          role: "dialog",
-          "aria-labelledby": "changeJudgeStatusLabel",
-          "aria-hidden": "true"
-        }
-      },
-      [
-        _c(
-          "div",
-          { staticClass: "modal-dialog", attrs: { role: "document" } },
-          [
-            _c("div", { staticClass: "modal-content" }, [
-              _c("div", { staticClass: "modal-header" }, [
-                _c(
-                  "h5",
-                  {
-                    staticClass: "modal-title",
-                    attrs: { id: "changeJudgeStatusLabel" }
-                  },
-                  [_vm._v("Оновити статус судді")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "close",
-                    attrs: {
-                      type: "button",
-                      "data-dismiss": "modal",
-                      "aria-label": "Close"
-                    }
-                  },
-                  [
-                    _c("span", { attrs: { "aria-hidden": "true" } }, [
-                      _vm._v("×")
-                    ])
-                  ]
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-body" }, [
-                _c("form", [
-                  _c("div", { staticClass: "form-group row mt-1" }, [
-                    _c(
-                      "label",
-                      {
-                        staticClass: "col-2 col-form-label",
-                        attrs: { for: "chooser-judge-status" }
-                      },
-                      [_vm._v("Статус")]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "select",
-                      {
-                        staticClass: "form-control col-8 ml-4",
-                        attrs: { id: "chooser-judge-status" }
-                      },
-                      [
-                        _c("option", { attrs: { value: "1" } }, [
-                          _vm._v("   на роботі")
-                        ]),
-                        _vm._v(" "),
-                        _c("option", { attrs: { value: "2" } }, [
-                          _vm._v("   на лікарняному")
-                        ]),
-                        _vm._v(" "),
-                        _c("option", { attrs: { value: "3" } }, [
-                          _vm._v("   у відпустці")
-                        ]),
-                        _vm._v(" "),
-                        _c("option", { attrs: { value: "4" } }, [
-                          _vm._v("   відсутній на робочому місці")
-                        ]),
-                        _vm._v(" "),
-                        _c("option", { attrs: { value: "5" } }, [
-                          _vm._v("   припиено повноваження")
-                        ])
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c("input", {
-                      attrs: {
-                        type: "hidden",
-                        id: "judge-for-new-status",
-                        value: "0"
-                      }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group row mt-1" }, [
-                    _c(
-                      "label",
-                      {
-                        staticClass: "col-6 col-form-label",
-                        attrs: { for: "status-end-date" }
-                      },
-                      [
-                        _vm._v("Дата завершення дії статусу "),
-                        _c("br"),
-                        _c("sup", { staticClass: "text-muted" }, [
-                          _vm._v("(якщо відома)")
-                        ])
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-5" }, [
-                      _c("input", {
-                        staticClass: "form-control",
-                        attrs: { type: "date", id: "status-end-date" }
-                      })
-                    ])
-                  ])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-footer" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-secondary",
-                    attrs: { type: "button", "data-dismiss": "modal" }
-                  },
-                  [_vm._v("Закрити")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-primary",
-                    attrs: {
-                      type: "button",
-                      "data-dismiss": "modal",
-                      onclick: "updateJudgeStatus()"
-                    }
-                  },
-                  [_vm._v("Змінити статус")]
-                )
-              ])
-            ])
-          ]
-        )
-      ]
-    )
-  }
-]
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-42cd3c52", module.exports)
-  }
-}
-
-/***/ }),
+/* 79 */,
+/* 80 */,
+/* 81 */,
+/* 82 */,
+/* 83 */,
 /* 84 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -28119,7 +27852,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n.modal-backdrop[data-v-442e7f0c] {\n  position: fixed;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  background-color: rgba(0, 0, 0, 0.3);\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.modal[data-v-442e7f0c] {\n  background: #FFFFFF;\n  -webkit-box-shadow: 2px 2px 20px 1px;\n          box-shadow: 2px 2px 20px 1px;\n  overflow-x: auto;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n}\n.modal-header[data-v-442e7f0c],\n.modal-footer[data-v-442e7f0c] {\n  padding: 15px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n}\n.modal-header[data-v-442e7f0c] {\n  border-bottom: 1px solid #eeeeee;\n  color: #4AAE9B;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n}\n.modal-footer[data-v-442e7f0c] {\n  border-top: 1px solid #eeeeee;\n  -webkit-box-pack: end;\n      -ms-flex-pack: end;\n          justify-content: flex-end;\n}\n.modal-body[data-v-442e7f0c] {\n  position: relative;\n  padding: 20px 10px;\n}\n.btn-close[data-v-442e7f0c] {\n  border: none;\n  font-size: 20px;\n  padding: 20px;\n  cursor: pointer;\n  font-weight: bold;\n  color: #4AAE9B;\n  background: transparent;\n}\n.btn-green[data-v-442e7f0c] {\n  color: white;\n  background: #4AAE9B;\n  border: 1px solid #4AAE9B;\n  border-radius: 2px;\n}\n.modal-fade-enter[data-v-442e7f0c],\n.modal-fade-leave-active[data-v-442e7f0c] {\n  opacity: 0;\n}\n.modal-fade-enter-active[data-v-442e7f0c],\n.modal-fade-leave-active[data-v-442e7f0c] {\n  -webkit-transition: opacity .5s ease;\n  transition: opacity .5s ease;\n}\n", ""]);
+exports.push([module.i, "\n.modal-backdrop[data-v-442e7f0c] {\n  position: fixed;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  background-color: rgba(0, 0, 0, 0.3);\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n}\n.modal[data-v-442e7f0c] {\n  max-width: 500px;\n  width: auto;\n  height: 400px;\n  position: relative;\n  border-radius: 4px;\n  margin-top: 100px;\n  background: #FFFFFF;\n  -webkit-box-shadow: 2px 2px 20px 1px;\n          box-shadow: 2px 2px 20px 1px;\n  overflow-x: auto;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n}\n.modal-header[data-v-442e7f0c],\n.modal-footer[data-v-442e7f0c] {\n  padding: 15px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n}\n.modal-header[data-v-442e7f0c] {\n  border-bottom: 1px solid #eeeeee;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.modal-footer[data-v-442e7f0c] {\n  border-top: 1px solid #eeeeee;\n  -webkit-box-pack: end;\n      -ms-flex-pack: end;\n          justify-content: flex-end;\n}\n.modal-body[data-v-442e7f0c] {\n  position: relative;\n  padding: 20px 10px;\n}\n.btn-close[data-v-442e7f0c] {\n  border: none;\n  font-size: 20px;\n  cursor: pointer;\n  font-weight: bold;\n  color: #4AAE9B;\n  background: transparent;\n}\n.btn-green[data-v-442e7f0c] {\n  color: white;\n  background: #4AAE9B;\n  border: 1px solid #4AAE9B;\n  border-radius: 4px;\n}\n.btn-grey[data-v-442e7f0c] {\n  color: white;\n  background: #6a6a6a;\n  border: 1px solid #6a6a6a;\n  border-radius: 4px;\n}\n.modal-fade-enter[data-v-442e7f0c],\n.modal-fade-leave-active[data-v-442e7f0c] {\n  opacity: 0;\n}\n.modal-fade-enter-active[data-v-442e7f0c],\n.modal-fade-leave-active[data-v-442e7f0c] {\n  -webkit-transition: opacity .5s ease;\n  transition: opacity .5s ease;\n}\n", ""]);
 
 // exports
 
@@ -28158,18 +27891,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "Modal",
     methods: {
         close: function close() {
             this.$emit('close');
+        },
+        save: function save() {
+            this.$emit('saveChanges');
         }
     }
 });
@@ -28182,10 +27912,84 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("script", { attrs: { type: "text/x-template", id: "modal" } }, [
-    _vm._v(
-      '\n    <transition name="modal-fade">\n        <div class="modal-backdrop">\n            <div class="modal" role="dialog" aria-labelledby="modalTitle" aria-describedby="modalDescription">\n                <header class="modal-header" id="modalTitle">\n                    <slot name="header">\n                        This is the default tile!\n    \n                        <button type="button" class="btn-close" @click="close" aria-label="Close modal">\n                                        x\n                                    </button>\n                    </slot>\n                </header>\n                <section class="modal-body" id="modalDescription">\n                    <slot name="body">\n                        I\'m the default body!\n                    </slot>\n                </section>\n                <footer class="modal-footer">\n                    <slot name="footer">\n                        I\'m the default footer!\n    \n                        <button type="button" class="btn-green" @click="close" aria-label="Close modal">\n                                        Close me!\n                                    </button>\n                    </slot>\n                </footer>\n            </div>\n        </div>\n    </transition>\n    '
-    )
+  return _c("transition", { attrs: { name: "modal-fade" } }, [
+    _c("div", { staticClass: "modal-backdrop" }, [
+      _c(
+        "div",
+        {
+          staticClass: "modal",
+          attrs: {
+            role: "dialog",
+            "aria-labelledby": "modalTitle",
+            "aria-describedby": "modalDescription"
+          }
+        },
+        [
+          _c(
+            "header",
+            { staticClass: "modal-header", attrs: { id: "modalTitle" } },
+            [
+              _vm._t("header"),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn-close",
+                  attrs: { type: "button", "aria-label": "Close modal" },
+                  on: { click: _vm.close }
+                },
+                [_vm._v("x")]
+              )
+            ],
+            2
+          ),
+          _vm._v(" "),
+          _c(
+            "section",
+            { staticClass: "modal-body", attrs: { id: "modalDescription" } },
+            [_vm._t("body")],
+            2
+          ),
+          _vm._v(" "),
+          _c(
+            "footer",
+            { staticClass: "modal-footer" },
+            [
+              _vm._t("footer", [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn-grey",
+                    attrs: { type: "button", "aria-label": "Close modal" },
+                    on: { click: _vm.close }
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Закрити\n                        "
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn-green",
+                    attrs: { type: "button", "aria-label": "Close modal" },
+                    on: { click: _vm.save }
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Змінити сатус\n                        "
+                    )
+                  ]
+                )
+              ])
+            ],
+            2
+          )
+        ]
+      )
+    ])
   ])
 }
 var staticRenderFns = []
@@ -28232,7 +28036,7 @@ var render = function() {
                       _vm._v(" "),
                       _c("div", [
                         _c(
-                          "h4",
+                          "h5",
                           [
                             _c("router-link", { attrs: { to: "/" } }, [
                               _vm._v(
@@ -28257,7 +28061,9 @@ var render = function() {
                           1
                         ),
                         _vm._v(" "),
-                        _c("h5", [_vm._v(_vm._s(judge.court_name))])
+                        _c("div", { staticClass: "court_name" }, [
+                          _vm._v(_vm._s(judge.court_name))
+                        ])
                       ])
                     ]),
                     _vm._v(" "),
@@ -28330,13 +28136,13 @@ var render = function() {
                                   attrs: { "aria-hidden": "true" }
                                 }),
                                 _vm._v(
-                                  "\n                                    на роботі " +
+                                  "\n                                            на роботі " +
                                     _vm._s(
                                       judge.due_date_status
                                         ? "(" + judge.due_date_status + ")"
                                         : null
                                     ) +
-                                    "\n                            "
+                                    "\n                                    "
                                 )
                               ])
                             : _vm._e(),
@@ -28348,13 +28154,13 @@ var render = function() {
                                   attrs: { "aria-hidden": "true" }
                                 }),
                                 _vm._v(
-                                  "\n                                    на лікарняному " +
+                                  "\n                                            на лікарняному " +
                                     _vm._s(
                                       judge.due_date_status
                                         ? "(до " + judge.due_date_status + ")"
                                         : null
                                     ) +
-                                    "\n                            "
+                                    "\n                                    "
                                 )
                               ])
                             : _vm._e(),
@@ -28366,13 +28172,13 @@ var render = function() {
                                   attrs: { "aria-hidden": "true" }
                                 }),
                                 _vm._v(
-                                  "\n                                    у відпустці " +
+                                  "\n                                            у відпустці " +
                                     _vm._s(
                                       judge.due_date_status
                                         ? "(до " + judge.due_date_status + ")"
                                         : null
                                     ) +
-                                    "\n                            "
+                                    "\n                                    "
                                 )
                               ])
                             : _vm._e(),
@@ -28384,13 +28190,13 @@ var render = function() {
                                   attrs: { "aria-hidden": "true" }
                                 }),
                                 _vm._v(
-                                  "\n                                    відсуній на робочому місці з інших причин " +
+                                  "\n                                            відсуній на робочому місці з інших причин " +
                                     _vm._s(
                                       judge.due_date_status
                                         ? "(до " + judge.due_date_status + ")"
                                         : null
                                     ) +
-                                    "\n                            "
+                                    "\n                                    "
                                 )
                               ])
                             : _vm._e(),
@@ -28402,13 +28208,13 @@ var render = function() {
                                   attrs: { "aria-hidden": "true" }
                                 }),
                                 _vm._v(
-                                  "\n                                    припинено повноваження " +
+                                  "\n                                            припинено повноваження " +
                                     _vm._s(
                                       judge.due_date_status
                                         ? "(до " + judge.due_date_status + ")"
                                         : null
                                     ) +
-                                    "\n                            "
+                                    "\n                                    "
                                 )
                               ])
                             : _vm._e()
@@ -28419,7 +28225,11 @@ var render = function() {
                             ? _c("i", {
                                 staticClass: "fa fa-pencil p-1 float-right",
                                 attrs: { "aria-hidden": "true" },
-                                on: { click: _vm.showModal }
+                                on: {
+                                  click: function($event) {
+                                    _vm.showModal(judge.id)
+                                  }
+                                }
                               })
                             : _vm._e()
                         ])
@@ -28432,9 +28242,149 @@ var render = function() {
           : _vm._e()
       ]),
       _vm._v(" "),
-      _vm.isModalVisible
-        ? _c("modal", { on: { close: _vm.closeModal } })
-        : _vm._e()
+      _c(
+        "modal",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.isModalVisible,
+              expression: "isModalVisible"
+            }
+          ],
+          on: { close: _vm.closeModal, save: _vm.saveChanges }
+        },
+        [
+          _c("h4", { attrs: { slot: "header" }, slot: "header" }, [
+            _vm._v("Оновити статус судді")
+          ]),
+          _vm._v(" "),
+          _c("div", { attrs: { slot: "body" }, slot: "body" }, [
+            _c("form", [
+              _c(
+                "div",
+                { staticClass: "form-group row mx-0 my-4" },
+                [
+                  _c(
+                    "lable",
+                    {
+                      staticClass: "col-4",
+                      attrs: { for: "chooser-judge-status" }
+                    },
+                    [_vm._v("Статус")]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-8" }, [
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.status.set_status,
+                            expression: "status.set_status"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { id: "chooser-judge-status" },
+                        on: {
+                          change: function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.$set(
+                              _vm.status,
+                              "set_status",
+                              $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            )
+                          }
+                        }
+                      },
+                      [
+                        _c("option", { attrs: { value: "1" } }, [
+                          _vm._v("на роботі")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "2" } }, [
+                          _vm._v("на лікарняному")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "3" } }, [
+                          _vm._v("у відпустці")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "4" } }, [
+                          _vm._v("відсутній на робочому місці")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "5" } }, [
+                          _vm._v("припиено повноваження")
+                        ])
+                      ]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    attrs: {
+                      type: "hidden",
+                      id: "judge-for-new-status",
+                      value: "0"
+                    }
+                  })
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group row mx-0 my-4" }, [
+                _c(
+                  "label",
+                  { staticClass: "col-7", attrs: { for: "status-end-date" } },
+                  [
+                    _vm._v("Дата завершення дії статусу "),
+                    _c("br"),
+                    _c("sup", { staticClass: "text-muted" }, [
+                      _vm._v("(якщо відома)")
+                    ])
+                  ]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-5" }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.status.due_date,
+                        expression: "status.due_date"
+                      }
+                    ],
+                    staticClass: " form-control",
+                    attrs: { type: "date", id: "status-end-date" },
+                    domProps: { value: _vm.status.due_date },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.status, "due_date", $event.target.value)
+                      }
+                    }
+                  })
+                ])
+              ])
+            ])
+          ])
+        ]
+      )
     ],
     1
   )

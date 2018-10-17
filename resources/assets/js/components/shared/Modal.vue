@@ -1,35 +1,29 @@
 <template>
-<script type="text/x-template" id="modal">
+<!-- <script type="text/x-template" id="modal"> -->
     <transition name="modal-fade">
         <div class="modal-backdrop">
             <div class="modal" role="dialog" aria-labelledby="modalTitle" aria-describedby="modalDescription">
                 <header class="modal-header" id="modalTitle">
-                    <slot name="header">
-                        This is the default tile!
-    
-                        <button type="button" class="btn-close" @click="close" aria-label="Close modal">
-                                        x
-                                    </button>
-                    </slot>
+                    <slot name="header"></slot>
+                    <button type="button" class="btn-close" @click="close" aria-label="Close modal">x</button>
                 </header>
                 <section class="modal-body" id="modalDescription">
-                    <slot name="body">
-                        I'm the default body!
-                    </slot>
+                    <slot name="body"></slot>
                 </section>
                 <footer class="modal-footer">
                     <slot name="footer">
-                        I'm the default footer!
-    
-                        <button type="button" class="btn-green" @click="close" aria-label="Close modal">
-                                        Close me!
-                                    </button>
+                        <button type="button" class="btn-grey" @click="close" aria-label="Close modal">
+                            Закрити
+                        </button> 
+                        <button type="button" class="btn-green" @click="save" aria-label="Close modal">
+                            Змінити сатус
+                        </button>
                     </slot>
                 </footer>
             </div>
         </div>
     </transition>
-    </script>
+    <!-- </script> -->
 </template>
 
 <script>
@@ -39,6 +33,9 @@
             close() {
                 this.$emit('close');
             },
+            save() {
+                this.$emit('saveChanges')
+            }
         },
     }
 </script>
@@ -53,10 +50,16 @@
         background-color: rgba(0, 0, 0, 0.3);
         display: flex;
         justify-content: center;
-        align-items: center;
+        // align-items: center;
     }
     
     .modal {
+        max-width: 500px;
+        width: auto;
+        height: 400px;
+        position: relative;
+        border-radius: 4px;
+        margin-top: 100px;
         background: #FFFFFF;
         box-shadow: 2px 2px 20px 1px;
         overflow-x: auto;
@@ -72,8 +75,8 @@
     
     .modal-header {
         border-bottom: 1px solid #eeeeee;
-        color: #4AAE9B;
         justify-content: space-between;
+        align-items: center;
     }
     
     .modal-footer {
@@ -89,7 +92,6 @@
     .btn-close {
         border: none;
         font-size: 20px;
-        padding: 20px;
         cursor: pointer;
         font-weight: bold;
         color: #4AAE9B;
@@ -100,7 +102,13 @@
         color: white;
         background: #4AAE9B;
         border: 1px solid #4AAE9B;
-        border-radius: 2px;
+        border-radius: 4px;
+    }
+    .btn-grey {
+        color: white;
+        background: #6a6a6a;
+        border: 1px solid #6a6a6a;
+        border-radius: 4px;
     }
     
     .modal-fade-enter,
