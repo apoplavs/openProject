@@ -5,8 +5,8 @@ import pickle
 import nltk
 import sys
 
-from validation import Validator
-from config import *
+from lib.validation import Validator
+from lib.config import *
 
 
 alias_category = {
@@ -34,18 +34,18 @@ alias_category = {
 }
 
 map_categories = {
-    7: {'pickle1': 'pickles/25_26.pickle',
-        'pickle2': 'pickles/25_26_27.pickle',
+    7: {'pickle1': '25_26.pickle',
+        'pickle2': '25_26_27.pickle',
         'part_text': 'operative',
         'categories': [25, 26],
         'other': 27},
-    8: {'pickle1': 'pickles/28_29.pickle',
-        'pickle2': 'pickles/28_29_30.pickle',
+    8: {'pickle1': '28_29.pickle',
+        'pickle2': '28_29_30.pickle',
         'part_text': 'operative',
         'categories': [28, 29],
         'other': 30},
-    9: {'pickle1': 'pickles/31_32.pickle',
-        'pickle2': 'pickles/31_32_33.pickle',
+    9: {'pickle1': '31_32.pickle',
+        'pickle2': '31_32_33.pickle',
         'part_text': 'operative',
         'categories': [31, 32],
         'other': 33}
@@ -53,14 +53,13 @@ map_categories = {
 }
 
 
-def getClassifier(file):
+def get_classifier(file):
     if file is None:
         return None
-    # try to load our classifier from pickle
     try:
-        open_file = open(f'{ROOT_PATH}/' + file, "rb")
+        open_file = open(f'{PICKLES_PATH}/' + file, "rb")
     except Exception:
-        print('Exception: file "' + file + '" not found')
+        print('Exception: file "' + f'{PICKLES_PATH}/' + file + '" not found')
         sys.exit(2)
     classifier = pickle.load(open_file)
     open_file.close()
@@ -135,8 +134,8 @@ def guess_category(text, anticipated_category):
     # отримуємо налаштування для даної категорії
     prop = map_categories[alias_category[anticipated_category]]
     # отримуємо класифікатори з pickle
-    classifier1 = getClassifier(prop['pickle1'])
-    classifier2 = getClassifier(prop['pickle2'])
+    classifier1 = get_classifier(prop['pickle1'])
+    classifier2 = get_classifier(prop['pickle2'])
 
     # ['full', 'operative', 'motive', 'introduction']
     validator = Validator(prop['part_text'])

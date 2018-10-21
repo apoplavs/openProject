@@ -1,10 +1,7 @@
-from judge import Judge
-from classifier import guess_category
-from config import *
-from db import (
-    read_from_db,
-    write_to_db
-)
+from analyze.judge import Judge
+from analyze.classifier import guess_category
+from lib.config import *
+from lib.db import DB
 
 
 class Section:
@@ -27,8 +24,8 @@ class Section:
         sql_query = (f"SELECT  DISTINCT cause_num FROM reg{self.judge.region} "
                      f"WHERE judge={self.judge.id} "
                      f"AND justice_kind={self.justice_kind}")
-
-        applications = read_from_db(sql_query, EDRSR)
+        edrsr = DB(db_name=EDRSR)
+        applications = edrsr.read(sql_query)
         return applications
 
     def _get_all_appeals(self, all_applications):
@@ -51,8 +48,8 @@ class Section:
                      f"WHERE court_code={self.judge.region + '90'} "
                      f"AND judgment_code IN ({j_codes}) "
                      f"AND cause_num IN ({all_applications})")
-
-        appeals = read_from_db(sql_query, EDRSR)
+        edrsr = DB(db_name=EDRSR)
+        appeals = edrsr.read(sql_query)
         return appeals
 
     def _get_appeal_documents(self, cause_num):
@@ -70,8 +67,8 @@ class Section:
                      f"AND cause_num='{cause_num}' "
                      f"AND judgment_code IN ({j_codes}) "
                      f"ORDER BY adjudication_date DESC")
-
-        documents = read_from_db(sql_query, EDRSR)
+        edrsr = DB(db_name=EDRSR)
+        documents = edrsr.read(sql_query)
         return documents
 
     def count(self):
@@ -86,8 +83,8 @@ class Section:
 
         sql_query = (f"REPLACE INTO `{self.judge_results_table}` ({keys}) "
                      f"VALUES ({','.join('%s' for i in range(len(values)))})")
-
-        write_to_db(sql_query, TOECYD,  values)
+        toecyd = DB(db_name=TOECYD)
+        toecyd.write(sql_query, values)
 
 
 class Civil(Section):
@@ -105,17 +102,26 @@ class Civil(Section):
         all_applications = self._get_all_applications()
         self.data_dict['amount'] = len(all_applications)
 
+        # якщо справ немає - повертаємось
+        if self.data_dict['amount'] == 0 :
+            return
+
         civil_in_appeal = self._get_all_appeals(all_applications)
         self.data_dict['was_appeal'] = len(civil_in_appeal)
         self.data_dict['approved_by_appeal'] = 0
         self.data_dict['not_approved_by_appeal'] = 0
 
-        if len(civil_in_appeal) < 30:
+        if len(civil_in_appeal) < 20:
             return
 
         for appeal in civil_in_appeal:
+            # отримуємо всі документи апеляції по справі
             documents = self._get_appeal_documents(appeal['cause_num'])
             for document in documents:
+                # якщо апеляція винесла рішення - точно не вистояло, переходимо до наступної справи
+                if document['judgment_code'] == 3 :
+                    self.data_dict['not_approved_by_appeal'] += 1
+                    break
                 doc_text = document['doc_text']
                 category = guess_category(
                     text=doc_text,
@@ -123,8 +129,10 @@ class Civil(Section):
                 )
                 if category == 28:
                     self.data_dict['approved_by_appeal'] += 1
+                    break
                 elif category == 29:
                     self.data_dict['not_approved_by_appeal'] += 1
+                    break
 
 
 class Criminal(Section):
@@ -141,17 +149,25 @@ class Criminal(Section):
         all_applications = self._get_all_applications()
         self.data_dict['amount'] = len(all_applications)
 
+        # якщо справ немає - повертаємось
+        if self.data_dict['amount'] == 0:
+            return
+
         civil_in_appeal = self._get_all_appeals(all_applications)
         self.data_dict['was_appeal'] = len(civil_in_appeal)
         self.data_dict['approved_by_appeal'] = 0
         self.data_dict['not_approved_by_appeal'] = 0
 
-        if len(civil_in_appeal) < 30:
+        if len(civil_in_appeal) < 20:
             return
 
         for appeal in civil_in_appeal:
             documents = self._get_appeal_documents(appeal['cause_num'])
             for document in documents:
+                # якщо апеляція винесла вирок - точно не вистояло, переходимо до наступної справи
+                if document['judgment_code'] == 1:
+                    self.data_dict['not_approved_by_appeal'] += 1
+                    break
                 doc_text = document['doc_text']
                 category = guess_category(
                     text=doc_text,
@@ -159,8 +175,10 @@ class Criminal(Section):
                 )
                 if category == 31:
                     self.data_dict['approved_by_appeal'] += 1
+                    break
                 elif category == 32:
                     self.data_dict['not_approved_by_appeal'] += 1
+                    break
 
 
 class Commercial(Section):
@@ -168,7 +186,8 @@ class Commercial(Section):
         super().__init__(
             judge=judge,
             justice_kind="3",
-            judge_results_table='judges_commercial_statistic'
+            judge_results_table='judges_commercial_statistic',
+            judgment_codes=[3, 5]
         )
 
     def count(self):
@@ -181,7 +200,8 @@ class Admin(Section):
         super().__init__(
             judge=judge,
             justice_kind="4",
-            judge_results_table='judges_admin_statistic'
+            judge_results_table='judges_admin_statistic',
+            judgment_codes=[3, 5]
         )
 
     def count(self):
@@ -203,17 +223,25 @@ class AdminOffence(Section):
         all_applications = self._get_all_applications()
         self.data_dict['amount'] = len(all_applications)
 
+        # якщо справ немає - повертаємось
+        if self.data_dict['amount'] == 0:
+            return
+
         civil_in_appeal = self._get_all_appeals(all_applications)
         self.data_dict['was_appeal'] = len(civil_in_appeal)
         self.data_dict['approved_by_appeal'] = 0
         self.data_dict['not_approved_by_appeal'] = 0
 
-        if len(civil_in_appeal) < 30:
+        if len(civil_in_appeal) < 20:
             return
 
         for appeal in civil_in_appeal:
             documents = self._get_appeal_documents(appeal['cause_num'])
             for document in documents:
+                # якщо апеляція винесла ухвалу - точно вистояло, переходимо до наступної справи
+                if document['judgment_code'] == 5:
+                    self.data_dict['approved_by_appeal'] += 1
+                    break
                 doc_text = document['doc_text']
                 category = guess_category(
                     text=doc_text,
@@ -221,8 +249,7 @@ class AdminOffence(Section):
                 )
                 if category == 25:
                     self.data_dict['approved_by_appeal'] += 1
+                    break
                 elif category == 26:
                     self.data_dict['not_approved_by_appeal'] += 1
-
-
-
+                    break

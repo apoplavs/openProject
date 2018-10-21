@@ -8,7 +8,7 @@ import pickle
 import nltk
 import sys
 import re
-from validation import Validator
+from lib.validation import Validator
 
 from nltk.tokenize import word_tokenize
 

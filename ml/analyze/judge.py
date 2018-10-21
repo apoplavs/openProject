@@ -1,5 +1,5 @@
-from db import read_from_db
-from config import *
+from lib.db import DB
+from lib.config import *
 
 
 class Judge:
@@ -11,7 +11,8 @@ class Judge:
 
     def _get_court_code(self):
         sql_query = f'SELECT court_code FROM judges WHERE id={self.id}'
-        res_court_code = read_from_db(sql_query, EDRSR)
+        edrsr = DB(db_name=EDRSR)
+        res_court_code = edrsr.read(sql_query)
 
         if not res_court_code:
             raise Exception(f'Judge with id: {self.id}'

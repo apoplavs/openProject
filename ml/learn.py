@@ -5,10 +5,10 @@ import pickle
 import nltk
 import sys
 
-from db import get_edrsr_connection
-from config import PICKLES_PATH
+from lib.db import get_edrsr_connection
+from lib.config import PICKLES_PATH
 
-from validation import Validator
+from lib.validation import Validator
 
 nltk.download('punkt')
 nltk.download('averaged_perceptron_tagger')
