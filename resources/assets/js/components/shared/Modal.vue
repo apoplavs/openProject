@@ -34,7 +34,7 @@
                 this.$emit('close');
             },
             save() {
-                this.$emit('saveChanges')
+                this.$emit('save');
             }
         },
     }
@@ -54,15 +54,14 @@
     }
     
     .modal {
-        max-width: 500px;
-        width: auto;
+        width: 500px;
         height: 400px;
         position: relative;
         border-radius: 4px;
         margin-top: 100px;
         background: #FFFFFF;
         box-shadow: 2px 2px 20px 1px;
-        overflow-x: auto;
+        overflow: visible;
         display: flex;
         flex-direction: column;
     }

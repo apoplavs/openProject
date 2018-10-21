@@ -17,7 +17,7 @@
                         <div class="d-flex pb-2">
                             <div class="w-75">
                                 <span v-if="isAuth">
-                                            <span v-if="judge.is_bookmark" @click="changeBookmarkStatus(judge)">відстежується <i class="fa fa-bookmark" aria-hidden="true"></i></span>
+                                        <span v-if="judge.is_bookmark" @click="changeBookmarkStatus(judge)">відстежується <i class="fa fa-bookmark" aria-hidden="true"></i></span>
                                 <span v-if="!judge.is_bookmark" @click="changeBookmarkStatus(judge)">відстежувати <i class="fa fa-bookmark-o" aria-hidden="true"></i></span>
                                 </span>
                             </div>
@@ -26,33 +26,30 @@
                         <div class="d-flex">
                             <div class="w-75">
                                 <span v-if="judge.status === 1"> <!-- Cуддя на роботі  -->
-                                            <i class="fa fa-briefcase" aria-hidden="true"></i>
-                                                на роботі {{ judge.due_date_status ? '('+judge.due_date_status+')' : null }}
-                                        </span>
+                                        <i class="fa fa-briefcase" aria-hidden="true"></i>
+                                            на роботі {{ judge.due_date_status ? '('+judge.due_date_status+')' : null }}
+                                    </span>
                                 <span v-if="judge.status === 2"> <!-- На лікарняному  -->
-                                            <i class="fa fa-medkit" aria-hidden="true"></i>
-                                                на лікарняному {{ judge.due_date_status ? '(до '+judge.due_date_status+')' : null }}
-                                        </span>
+                                        <i class="fa fa-medkit" aria-hidden="true"></i>
+                                            на лікарняному {{ judge.due_date_status ? '(до '+judge.due_date_status+')' : null }}
+                                    </span>
                                 <span v-if="judge.status === 3"> <!-- У відпустці   -->
-                                            <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
-                                                у відпустці {{ judge.due_date_status ? '(до '+judge.due_date_status+')' : null }}
-                                        </span>
+                                        <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
+                                            у відпустці {{ judge.due_date_status ? '(до '+judge.due_date_status+')' : null }}
+                                    </span>
                                 <span v-if="judge.status === 4"> <!-- Відсуній на робочому місці з інших причин  -->
-                                            <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
-                                                відсуній на робочому місці з інших причин {{ judge.due_date_status ? '(до '+judge.due_date_status+')' : null }}
-                                        </span>
+                                        <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
+                                            відсуній на робочому місці з інших причин {{ judge.due_date_status ? '(до '+judge.due_date_status+')' : null }}
+                                    </span>
                                 <span v-if="judge.status === 5"> <!-- Припинено повноваження  -->
-                                            <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
-                                                припинено повноваження {{ judge.due_date_status ? '(до '+judge.due_date_status+')' : null }}
-                                        </span>
+                                        <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
+                                            припинено повноваження {{ judge.due_date_status ? '(до '+judge.due_date_status+')' : null }}
+                                    </span>
                             </div>
-                            <div class="w-25"><i v-if="isAuth" class="fa fa-pencil p-1 float-right" aria-hidden="true" @click="showModal(judge.id)"></i></div>
-    
+                            <div class="w-25"><i v-if="isAuth" class="fa fa-pencil p-1 float-right" aria-hidden="true" @click="showModal(judge)"></i></div>
                         </div>
                     </div>
-    
                 </div>
-    
             </div>
         </div>
         <!-- MODAL change status темплейт передаємо через слоти -->
@@ -61,22 +58,26 @@
             <div slot="body">
                 <form>
                     <div class="form-group row mx-0 my-4">
-                        <lable for="chooser-judge-status" class="col-4">Статус</lable>
+                        <label for="chooser-judge-status" class="col-4">Статус</label>
                         <div class="col-8">
-                            <select class="form-control" id="chooser-judge-status" v-model="status.set_status">
+                            <select class="form-control" id="chooser-judge-status" v-model="judgeStatus.set_status" value="judgeStatus.set_status">
                                     <option value="1">на роботі</option>
                                     <option value="2">на лікарняному</option>
                                     <option value="3">у відпустці</option>
                                     <option value="4">відсутній на робочому місці</option>
-                                    <option value="5">припиено повноваження</option>
+                                    <option value="5">припинено повноваження</option>
                                 </select>
                         </div>
+                        <!-- <div>
+                            status={{judgeStatus.set_status}} date={{judgeStatus.due_date}}
+                        </div> -->
                         <input type="hidden" id="judge-for-new-status" value="0">
                     </div>
                     <div class="form-group row mx-0 my-4">
                         <label for="status-end-date" class="col-7">Дата завершення дії статусу <br><sup class="text-muted">(якщо відома)</sup></label>
                         <div class="col-5">
-                            <input v-model="status.due_date" class=" form-control" type="date" id="status-end-date">
+                            <datepicker v-model="judgeStatus.due_date" :value="judgeStatus.due_date" language="uk" :min="calendar.startDate | formatDate" :max="calendar.endDate | formatDate">
+                            </datepicker>
                         </div>
                     </div>
                 </form>
@@ -87,7 +88,9 @@
 </template>
 
 <script>
-    import Modal from '../shared/Modal.vue';
+    import Modal from "../shared/Modal.vue";
+    import Datepicker from "vue-date";
+    import _ from 'lodash';
     
     export default {
         name: "judge-component",
@@ -95,93 +98,122 @@
             return {
                 isModalVisible: false,
                 changeStatusId: null,
-                status: {
-                    set_status: 0,
-                    due_date: 0
+                judgeStatus: {
+                    set_status: null,
+                    due_date: null
                 },
-                isAuth: localStorage.getItem('token'),
+                calendar: {
+                    startDate: new Date(),
+                    endDate: new Date()
+                },
+                format: 'YYYY',
+                isAuth: localStorage.getItem("token"),
                 headers: {
                     "Content-Type": "application/json",
                     "X-Requested-With": "XMLHttpRequest",
-                    "Authorization": localStorage.getItem('token')
+                    Authorization: localStorage.getItem("token")
+                }
+            };
+        },
+        props: ["judgesList"],
+        filters: {
+            formatDate(date) {
+                // getMobth() чомусь рахує місяці з 0 date.getMonth() + 1 //костиль
+                if (date === '' || date === null) {
+                    return '';
+                } else {
+                    return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
                 }
             }
         },
-        props: ['judgesList'],
         methods: {
+            formattingDate(date) {
+                if (date === '' || date === null) {
+                    return '';
+                } else {
+                    let arr = _.split(date, '.');                    
+                    return `${arr[2]}-${arr[1]}-${arr[0]}`;
+                }
+            },
             changeBookmarkStatus(judge) {
                 if (judge.is_bookmark === 0) {
                     axios({
-                            method: 'put',
+                            method: "put",
                             url: `/api/v1/judges/${judge.id}/bookmark`,
                             headers: {
                                 "Content-Type": "application/json",
                                 "X-Requested-With": "XMLHttpRequest",
-                                "Authorization": localStorage.getItem('token')
+                                Authorization: localStorage.getItem("token")
                             }
                         })
                         .then(response => {
                             judge.is_bookmark = 1;
                         })
                         .catch(error => {
-                            console.log('Bookmark', error);
+                            console.log("Bookmark", error);
                         });
                 } else {
                     axios({
-                            method: 'delete',
+                            method: "delete",
                             url: `/api/v1/judges/${judge.id}/bookmark`,
                             headers: {
                                 "Content-Type": "application/json",
                                 "X-Requested-With": "XMLHttpRequest",
-                                "Authorization": localStorage.getItem('token')
+                                Authorization: localStorage.getItem("token")
                             }
                         })
                         .then(response => {
                             judge.is_bookmark = 0;
-                            // console.log(response);
                         })
                         .catch(error => {
-                            console.log(error);
+                            console.log('Bookmark', error);
                         });
                 }
             },
-            showModal(judgeId) {
-                this.changeStatusId = judgeId;
+            showModal(judge) {
+                this.changeStatusId = judge.id;
+                this.judgeStatus.set_status = judge.status;
+                this.judgeStatus.due_date = this.formattingDate(judge.due_date_status);
+    
+                this.calendar.startDate = new Date();
+                this.calendar.endDate = new Date(
+                    this.calendar.startDate.getFullYear(),
+                    this.calendar.startDate.getMonth() + 1,
+                    this.calendar.startDate.getDate()
+                );
                 this.isModalVisible = true;
-                console.log('showModal', this.isModalVisible);
             },
             closeModal() {
                 this.isModalVisible = false;
-                console.log('closeModal');
             },
             saveChanges() {
+                if (this.judgeStatus.set_status === "1" || this.judgeStatus.set_status === "5") {
+                    this.judgeStatus.due_date = null;
+                }
                 axios({
-                        method: 'put',
-                        url: `/judges/${changeStatusId}/update-status`,
+                        method: "put",
+                        url: `/api/v1/judges/${this.changeStatusId}/update-status`,
                         headers: {
                             "Content-Type": "application/json",
                             "X-Requested-With": "XMLHttpRequest",
-                            "Authorization": localStorage.getItem('token')
+                            Authorization: localStorage.getItem("token")
                         },
-                        params: {
-                            status: this.params.search
-                        }
+                        data: this.judgeStatus
                     })
                     .then(response => {
-                        console.log('Save Status', response);
-    
+                        
                         this.isModalVisible = false;
                     })
                     .catch(error => {
-                        console.log('Bookmark', error);
+                        console.log("Status", error);
                     });
-    
             }
         },
         components: {
-            Modal
+            Modal,
+            Datepicker,
         }
-    }
+    };
 </script>
 
 <style scoped lang="scss">
@@ -191,7 +223,7 @@
     }
     
     .additional-info {
-        font-size: .8rem;
+        font-size: 0.8rem;
         color: grey;
         .fa {
             font-size: 1rem;

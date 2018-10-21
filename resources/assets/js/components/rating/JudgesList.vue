@@ -229,7 +229,6 @@
         }
         if (localStorage.getItem('token')) {
           console.log('have token')
-          //this.params.page = page + 1;
           axios
             .get('/api/v1/judges/list', {
               headers: {

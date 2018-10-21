@@ -35,6 +35,7 @@
     "rxjs": "^6.3.2",
     "vee-validate": "^2.1.0-beta.7",
     "vue-ads-pagination": "^1.1.0",
+    "vue-date": "^1.1.10",
     "vue-router": "^3.0.1",
     "vue-rx": "^6.0.1",
     "vue-toasted": "^1.1.24",
