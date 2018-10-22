@@ -13,6 +13,7 @@ class Section:
         self.anticipated_category = anticipated_category
         self.judge_results_table = judge_results_table
         self.judgement_codes = judgment_codes
+        self.data_dict = {}
 
     def _get_all_applications(self):
         """
@@ -111,7 +112,7 @@ class Civil(Section):
         self.data_dict['approved_by_appeal'] = 0
         self.data_dict['not_approved_by_appeal'] = 0
 
-        if len(civil_in_appeal) < 20:
+        if len(civil_in_appeal) < 30:
             return
 
         for appeal in civil_in_appeal:
@@ -158,7 +159,7 @@ class Criminal(Section):
         self.data_dict['approved_by_appeal'] = 0
         self.data_dict['not_approved_by_appeal'] = 0
 
-        if len(civil_in_appeal) < 20:
+        if len(civil_in_appeal) < 30:
             return
 
         for appeal in civil_in_appeal:
@@ -232,7 +233,7 @@ class AdminOffence(Section):
         self.data_dict['approved_by_appeal'] = 0
         self.data_dict['not_approved_by_appeal'] = 0
 
-        if len(civil_in_appeal) < 20:
+        if len(civil_in_appeal) < 30:
             return
 
         for appeal in civil_in_appeal:

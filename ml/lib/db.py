@@ -32,6 +32,7 @@ class DB:
         self.connection.commit()
 
     def read(self, sql_query):
+        #print(sql_query)
         with self.connection.cursor() as cursor:
             cursor.execute(sql_query)
             result = cursor.fetchall()

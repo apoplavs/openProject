@@ -34,16 +34,49 @@ alias_category = {
 }
 
 map_categories = {
+    # адмінправопорушення типи кінцевих рішень
+    2: {'pickle1': '5_6.pickle',
+        'pickle2': '5_6_7.pickle',
+        'part_text': 'operative',
+        'categories': [5, 6],
+        'other': 7},
+    # цивільне своєчасність
+    3: {'pickle1': '8_9_10_11.pickle',
+        'pickle2': '8_9_10_11_12.pickle',
+        'part_text': 'operative',
+        'categories': [8, 9, 10, 11],
+        'other': 12},
+    # цивільне типи кінцевих рішень
+    4: {'pickle1': '13_14_15.pickle',
+        'pickle2': None,
+        'part_text': 'operative',
+        'categories': [13, 14, 15],
+        'other': None},
+    # кримінальне своєчасність
+    5: {'pickle1': '17_18_19_20.pickle',
+        'pickle2': '17_18_19_20_21.pickle',
+        'part_text': 'operative',
+        'categories': [17, 18, 19, 20],
+        'other': 21},
+    # кримінальне типи кінцевих рішень
+    6: {'pickle1': '22_23.pickle',
+        'pickle2': None,
+        'part_text': 'operative',
+        'categories': [22, 23],
+        'other': None},
+    # адмінправопорушення апеляція
     7: {'pickle1': '25_26.pickle',
         'pickle2': '25_26_27.pickle',
         'part_text': 'operative',
         'categories': [25, 26],
         'other': 27},
+    # цивільне апеляція
     8: {'pickle1': '28_29.pickle',
         'pickle2': '28_29_30.pickle',
         'part_text': 'operative',
         'categories': [28, 29],
         'other': 30},
+    # кримінальне апеляція
     9: {'pickle1': '31_32.pickle',
         'pickle2': '31_32_33.pickle',
         'part_text': 'operative',

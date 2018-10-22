@@ -19,7 +19,7 @@ if __name__ == '__main__':
     if len(arguments) == 0:
         print('USAGE: python analyze.py [judge id] [judge id]')
         sys.exit()
-    # перевіряємо щоб всі аргумнти були цифри
+    # перевіряємо щоб всі аргументи були цифри
     if any(not a.isdigit() for a in arguments):
         print('You should provide the valid judge id')
         sys.exit()
