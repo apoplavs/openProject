@@ -2,6 +2,7 @@
 
 namespace Toecyd\Console\Commands;
 
+use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Toecyd\Court;
@@ -63,12 +64,12 @@ class AutoAssignedCases extends Command
 
             $curl_time = number_format($this->time_statistics['after_curl'] - $this->time_statistics['start'], 3);
 
-            echo "Court {$court_code}: Curl time: {$curl_time} seconds. ";
+            echo "Court {$court_code}: Curl time: {$curl_time} seconds.";
 
             if (!empty($response) && !empty($response->iTotalDisplayRecords) && !empty($response->aaData)) {
                 $this->saveCurlResponse($court_code, $response);
             } else {
-                echo "Curl response is empty. ";
+                echo "Curl response is empty.";
             }
 
             $this->time_statistics['after_all'] = microtime(true);
@@ -76,15 +77,17 @@ class AutoAssignedCases extends Command
             echo "Total time: {$total_time} seconds\n";
         }
     }
-
-    /**
-     * Ініціалізує параметри $this->date_from та $this->date_to.
-     * Перевіряє $this->argument('date') на коректність
-     */
+	
+	
+	/**
+	 * Ініціалізує параметри $this->date_from та $this->date_to.
+	 * Перевіряє $this->argument('date') на коректність
+	 * @throws Exception
+	 */
     private function initDateParams() {
         $this->date_from = DateTime::createFromFormat($this->date_format, $this->argument('date'));
         if (empty($this->date_from)) {
-            throw new \Exception(
+            throw new Exception(
                 "Параметр date='{$this->argument('date')}' не відповідає формату '{$this->date_format}'"
             );
         }
@@ -93,7 +96,7 @@ class AutoAssignedCases extends Command
         $date_max = (new DateTime())->modify('-1 month');
 
         if ($this->date_from < $date_min || $this->date_from > $date_max) {
-            throw new \Exception(
+            throw new Exception(
                 "Параметр date='{$this->argument('date')}' вийшов за межі діапазона "
                 ."'{$date_min->format($this->date_format)} - {$date_max->format($this->date_format)}'"
             );
@@ -102,14 +105,16 @@ class AutoAssignedCases extends Command
         $this->date_to = clone $this->date_from;
         $this->date_to->modify('+1 month');
     }
-
-    /**
-     * Формує запит до державного реєстру судових справ, відправляє цей запит за допомогою cURL та отримує результат
-     *
-     * @param int $court_code
-     *
-     * @return object
-     */
+	
+	
+	/**
+	 * Формує запит до державного реєстру судових справ, відправляє цей запит за допомогою cURL та отримує результат
+	 *
+	 * @param int $court_code
+	 *
+	 * @return object
+	 * @throws Exception
+	 */
     private function getCurlResponse(int $court_code) {
         $curl_post_fields = "sEcho=1&iColumns=6&sColumns=&iDisplayStart=0&iDisplayLength=-1&mDataProp_0=0&mDataProp_1=1&mDataProp_2=2&mDataProp_3=3&mDataProp_4=4&mDataProp_5=5&sSearch=&bRegex=false&sSearch_0=&bRegex_0=false&bSearchable_0=false&sSearch_1=&bRegex_1=false&bSearchable_1=false&sSearch_2=&bRegex_2=false&bSearchable_2=true&sSearch_3=&bRegex_3=false&bSearchable_3=true&sSearch_4=&bRegex_4=false&bSearchable_4=false&sSearch_5=&bRegex_5=false&bSearchable_5=false&q_ver=arbitr&date={$this->date_from->format($this->date_format)}~{$this->date_to->format($this->date_format)}&sid={$court_code}&cspec=0&sSearch=";
 
@@ -139,11 +144,11 @@ class AutoAssignedCases extends Command
 
         $result = curl_exec($ch);
         if (curl_errno($ch)) {
-            throw new \Exception(curl_error($ch));
+            throw new Exception(curl_error($ch));
         }
         curl_close($ch);
 
-        return json_decode($result);;
+        return json_decode($result);
     }
 
     /**
@@ -213,44 +218,37 @@ class AutoAssignedCases extends Command
             ->get()
             ->toArray();
     }
-
-    /**
-     * Отримує id судді в БД, користуючись заздалегідь вибраними даними по існуючим суддям.
-     * Якщо суддя із вказаним ПІБ в БД відсутній -- записує ПІБ судді в БД
-     *
-     * @param int    $court_code
-     * @param string $judge_name_raw
-     *
-     * @return int
-     */
+	
+	
+	/**
+	 * Отримує id судді в БД, користуючись заздалегідь вибраними даними по існуючим суддям.
+	 * Якщо суддя із вказаним ПІБ в БД відсутній -- записує ПІБ судді в БД
+	 *
+	 * @param int    $court_code
+	 * @param string $judge_name_raw
+	 *
+	 * @return int
+	 * @throws Exception
+	 */
     private function getJudgeId($court_code, $judge_name_raw) {
         $judge_id = 0;
         $parsed = JudgeNameParsed::parseJudgeName($judge_name_raw);
         foreach ($this->existing_judges as $key => $row) {
-            if ($row->surname == $parsed->surname) {
-                if (($row->name == $parsed->name || mb_substr($row->name, 0, 1) == $parsed->name)
-                    && ($row->patronymic == $parsed->patronymic || mb_substr($row->patronymic, 0, 1) == $parsed->patronymic)) {
+            if ($row->surname == $parsed['surname'] &&
+				mb_substr($row->name, 0, 1) == mb_substr($parsed['name'], 0, 1) &&
+				mb_substr($row->patronymic, 0, 1) == mb_substr($parsed['patronymic'], 0, 1)) {
                     $judge_id = $row->id;
-                } elseif (mb_substr($parsed->name, 0, 1) == $row->name && mb_strlen($parsed->name) > 1
-                    && mb_substr($parsed->patronymic, 0, 1) == $row->patronymic && mb_strlen($parsed->patronymic) > 1) {
-                    // Випадок, коли у базі лежать лише ініціали судді, а прийшло повне ім'я.
-                    // Запам'ятовуємо judge_id, а також оновлюємо інфу в базі і в масивi $existing_judges
-                    $judge_id = $row->id;
-                    DB::table('judges')
-                        ->where('id', $judge_id)
-                        ->update(['name' => $parsed->name, 'patronymic' => $parsed->patronymic]);
-                    $this->existing_judges[$key]->name = $parsed->name;
-                    $this->existing_judges[$key]->patronymic = $parsed->patronymic;
-                }
             }
         }
+        // якщо суддю не знайдено - додаємо його
         if (empty($judge_id)) {
-            $inserted_data = array_merge(['court' => $court_code], (array)$parsed);
+            $inserted_data = array_merge(['court' => $court_code], $parsed);
             $judge_id = DB::table('judges')->insertGetId($inserted_data);
-            $this->existing_judges[] = (object)array_merge(['id' => $judge_id], $inserted_data);
+            $this->existing_judges[] = array_merge(['id' => $judge_id], $inserted_data);
         }
         return $judge_id;
     }
+    
 
     /**
      * Приводить дані по автопризначеній справі у такий вигляд, щоб їх можна було записати в БД.
@@ -275,7 +273,7 @@ class AutoAssignedCases extends Command
 
         try {
             $judge_id = $this->getJudgeId($court_code, $item_assoc['judge_name_raw']);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             echo "Справу не вдалося записати в базу ({$e->getMessage()})\n";
             return [];
         }
