@@ -1,63 +1,68 @@
 
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
-
-require('./bootstrap');
-
-window.Vue = require('vue');
+import Vue from 'vue';
 import VueRouter from 'vue-router';
- 
-window.Vue.use(VueRouter);
-
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
-
-Vue.component('example-component', require('./components/ExampleComponent.vue'));
-
-var Example = require('./components/ExampleComponent.vue')
-
-Vue.component(
-  'passport-clients',
-  require('./components/passport/Clients.vue')
-);
-
-var passportClients = require('./components/passport/Clients.vue');
-
-Vue.component(
-  'passport-authorized-clients',
-  require('./components/passport/AuthorizedClients.vue')
-);
-
-var passportAuthorizedClients = require('./components/passport/Clients.vue');
-
-Vue.component(
-  'passport-personal-access-tokens',
-  require('./components/passport/PersonalAccessTokens.vue')
-);
+// import Datepicker from 'vuejs-datepicker';
+import axios from 'axios';
+import VeeValidate, { Validator } from 'vee-validate';
+import uk from 'vee-validate/dist/locale/uk';
+import Toasted from 'vue-toasted';
+import Vuex from 'vuex';
 
 
-const routes = [
- // {
- //    path: '/',
- //    components: {
- //        examplecomponent: example-component
- //    }  
- // },
- //{path: '/passport-clients', component: passport-clients, name: 'passport-clients'},
- {path: '/', component: Example},
- {path: '/passport-clients', component: passportClients},
- {path: '/passport-authorized-clients', component: passportAuthorizedClients}
-]
- 
-const router = new VueRouter({ routes })
+
+Vue.use(VeeValidate);
+Vue.use(VueRouter);
+Vue.use(Toasted);
+Vue.use(Vuex);
+
+Validator.localize('uk', uk);
+window.axios = axios;
+
+
+import AppComponent from './components/AppComponent.vue';
+import HomeComponent from './components/main/HomeComponent.vue';
+import Login from './components/auth/Login.vue';
+import Registration from './components/auth/Registration.vue';
+import JudgesList from './components/rating/JudgesList.vue';
+import UserProfile from './components/user/UserProfile.vue';
+
+const router = new VueRouter({
+    mode: 'history',
+    base: __dirname,
+    routes: [
+        {
+            path: '/',
+            component: HomeComponent,
+            name: 'home-component'
+        },
+        {
+            path: '/login',
+            component: Login,
+            name: 'login'
+        },
+        {
+            path: '/registration',
+            component: Registration,
+            name: 'registration'
+        },
+        {
+            path: '/user-profile',
+            component: UserProfile,
+            name: 'user-profile'
+        },
+        {
+            path: '/judges-list',
+            component: JudgesList,
+            name: 'judges-list'
+        },
+    ]
+});
+
+
 
 const app = new Vue({
     el: '#app',
-    router: router
+    render: h => h(AppComponent),
+    router
+        
 });
