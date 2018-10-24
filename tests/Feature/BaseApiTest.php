@@ -35,7 +35,7 @@ class BaseApiTest extends TestCase
     protected $user;
 
     /* URL для HTTP-запитів */
-    protected $url = 'api/v1/';
+    protected $url = '/api/v1/';
 
     public function setUp() {
         parent::setUp();
