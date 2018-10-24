@@ -1,8 +1,28 @@
 // Fonts
-@import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
+// @import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
 
 // Variables
-@import "variables";
+@import "_variables";
 
-// Bootstrap
-@import "~bootstrap/scss/bootstrap";
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&subset=cyrillic');
+body {
+  background-color: $body-bg;
+  height: 100vh;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  color: $main;
+  // text-shadow: 4px 4px 4px #aaa;
+  
+}
+button, 
+button:active, 
+button:focus {
+    outline: none;
+}
+
+.btn-primary {
+  color: #ffff;
+  background-color: $primary;
+  border-color: $primary;
+}
