@@ -14,7 +14,7 @@ class BaseApiTest extends TestCase
     /**
      * Заголовки для HTTP-запитів
      */
-    protected $headers = ['accept' => 'application/json'];
+    protected $headers = ['accept' => 'application/json', 'X-Requested-With' => 'XMLHttpRequest'];
 
     /**
      * Імена полів, які мають бути заповненими, коли ми отримуємо токен
