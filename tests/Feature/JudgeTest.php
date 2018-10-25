@@ -34,8 +34,13 @@ class JudgeTest extends TestCase
         $name_parsed_test = JudgeNameParsed::parseJudgeName($nameRaw);
         $this->assertEquals($nameParsedEtalon, $name_parsed_test);
     }
-
-    public function judgeNamesProvider()
+	
+	
+	/**
+	 * тесткейси для JudgeNameParsed::parseJudgeName
+	 * @return array
+	 */
+	public function judgeNamesProvider()
     {
     	$valid_name1 = ['surname'=>'Українка', 'name'=>'Лариса', 'patronymic'=>'Петрівна'];
 		$valid_name2 = ['surname'=>'Українка', 'name'=>'Л', 'patronymic'=>'П'];

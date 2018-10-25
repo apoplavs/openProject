@@ -5,6 +5,7 @@ namespace Toecyd\Console\Commands;
 use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
+use stdClass;
 use Toecyd\Court;
 use Toecyd\JudgeNameParsed;
 use DateTime;
@@ -70,6 +71,7 @@ class AutoAssignedCases extends Command
                 $this->saveCurlResponse($court_code, $response);
             } else {
                 echo "Curl response is empty.";
+                file_put_contents('empty_responses.txt', $court_code."\n", FILE_APPEND);
             }
 
             $this->time_statistics['after_all'] = microtime(true);
@@ -215,8 +217,7 @@ class AutoAssignedCases extends Command
         return DB::table('judges')
             ->select('id', 'name', 'surname', 'patronymic')
             ->where('court', '=', $court_code)
-            ->get()
-            ->toArray();
+            ->get();
     }
 	
 	
@@ -230,21 +231,49 @@ class AutoAssignedCases extends Command
 	 * @return int
 	 * @throws Exception
 	 */
-    private function getJudgeId($court_code, $judge_name_raw) {
+    private function getJudgeId(int $court_code, string $judge_name_raw) : int {
         $judge_id = 0;
         $parsed = JudgeNameParsed::parseJudgeName($judge_name_raw);
         foreach ($this->existing_judges as $key => $row) {
-            if ($row->surname == $parsed['surname'] &&
-				mb_substr($row->name, 0, 1) == mb_substr($parsed['name'], 0, 1) &&
-				mb_substr($row->patronymic, 0, 1) == mb_substr($parsed['patronymic'], 0, 1)) {
-                    $judge_id = $row->id;
-            }
+        	try {
+				if ($row->surname == $parsed['surname'] &&
+					mb_substr($row->name, 0, 1) == mb_substr($parsed['name'], 0, 1) &&
+					mb_substr($row->patronymic, 0, 1) == mb_substr($parsed['patronymic'], 0, 1)) {
+					$judge_id = $row->id;
+					break;
+				}
+    
+			} catch (Exception $e) {
+				echo "\nСправу не вдалося записати в базу ({$e->getMessage()})\n";
+				var_dump($row);
+				var_dump($parsed);
+        		var_dump($row->surname);
+				var_dump($row->name);
+				var_dump($row->patronymic);
+				var_dump($row->id);
+				var_dump($parsed['surname']);
+				var_dump($parsed['name']);
+				var_dump($parsed['patronymic']);
+//				print_r($judge_name_raw);
+//				var_dump($parsed);
+				dd($judge_id);
+			}
+        
         }
         // якщо суддю не знайдено - додаємо його
-        if (empty($judge_id)) {
-            $inserted_data = array_merge(['court' => $court_code], $parsed);
-            $judge_id = DB::table('judges')->insertGetId($inserted_data);
-            $this->existing_judges[] = array_merge(['id' => $judge_id], $inserted_data);
+        if (empty($judge_id) /*&& mb_strlen($parsed['name']) > 2*/) {
+        	$new_judge = new stdClass();
+			$new_judge->surname = $parsed['surname'];
+			$new_judge->name = $parsed['name'];
+			$new_judge->patronymic = $parsed['patronymic'];
+			$new_judge->court = $court_code;
+			
+            $judge_id = DB::table('judges')->insertGetId(['surname'=>$parsed['surname'],
+				'name'=>$parsed['name'],
+				'patronymic'=>$parsed['patronymic'],
+				'court'=>$court_code]);
+			$new_judge->id = $judge_id;
+            $this->existing_judges[] = $new_judge;
         }
         return $judge_id;
     }
@@ -267,16 +296,27 @@ class AutoAssignedCases extends Command
             'date_composition'  => date('Y-m-d', strtotime($item[5])),
         ];
 
-        if (isset($this->existing_cases[$item_assoc['number']][$item_assoc['date_registration']])) {
+        if (isset($this->existing_cases[$item_assoc['number']][$item_assoc['date_registration']])
+			|| mb_strlen($item_assoc['judge_name_raw']) < 5) {
             return [];
         }
+	
+		$judge_id = $this->getJudgeId($court_code, $item_assoc['judge_name_raw']);
+		if ($judge_id == 0) {
+			return [];
+		}
 
-        try {
-            $judge_id = $this->getJudgeId($court_code, $item_assoc['judge_name_raw']);
-        } catch (Exception $e) {
-            echo "Справу не вдалося записати в базу ({$e->getMessage()})\n";
-            return [];
-        }
+//        try {
+//            $judge_id = $this->getJudgeId($court_code, $item_assoc['judge_name_raw']);
+//            if ($judge_id == 0) {
+//				return [];
+//			}
+//        } catch (Exception $e) {
+//            echo "Справу не вдалося записати в базу ({$e->getMessage()})\n";
+//            if (isset($judge_id))
+//            	print_r($judge_id);
+//            return [];
+//        }
 
         return [
             'court'             => $court_code,
