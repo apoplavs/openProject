@@ -81,7 +81,7 @@
                   <button type="reset" @click="resetFilters()" class="btn btn-outline-info">Скинути</button>
                 </div>
                 <div class="col-6">
-                  <button type="button" @click="getJudgesList()" class="btn btn-primary">Показати</button>
+                  <button type="button" @click="setFilters()" class="btn btn-primary">Показати</button>
                 </div>
               </div>
             </div>
@@ -113,7 +113,7 @@
             </div>
           </div>
           <div class="col-2 pl-0">
-            <button type="button" class="btn btn-block btn btn-primary" @click="getJudgesList()"><i class="fa fa-search" aria-hidden="true"></i> знайти</button>
+            <button type="button" class="btn btn-block btn btn-primary" @click="setFilters()"><i class="fa fa-search" aria-hidden="true"></i> знайти</button>
           </div>
         </div>
         <div class="card card-outline-secondary ">
@@ -135,7 +135,7 @@
           </div>
         </div>
         <div class="pagination mb-5">
-          <vue-ads-pagination @page-change="pageChange" :total-items="judgesList.total" :max-visible-pages="5" :button-classes="buttonClasses" :loading="false">
+          <vue-ads-pagination @page-change="pageChange()"  :page="current_page" :total-items="judgesList.total" :max-visible-pages="5" :button-classes="buttonClasses" :loading="false">
           </vue-ads-pagination>
         </div>
       </div>
@@ -156,8 +156,9 @@
     name: "judges-list",
     data() {
       return {
+        current_page: 0,
         params: {
-          page: 1,
+          page: 0,
           regions: [],
           jurisdiction: [],
           instance: [],
@@ -220,8 +221,13 @@
         this.params.page = page + 1;
         this.getJudgesList();
       },
+      setFilters() {
+        location.reload(); // щоб обновити пагінацію на 1 ст по-іншому змінити current_page ніяк
+        this.getJudgesList();
+      },
   
       getJudgesList() {
+        
         console.log('getJudgesList()');
         this.autocomplete = []; // коли визиваємо цей метод liveSearch маємо закрити
         if (this.validateInputSearch() === false) { // !! = true
@@ -229,6 +235,7 @@
         }
         if (localStorage.getItem('token')) {
           console.log('have token')
+          
           axios
             .get('/api/v1/judges/list', {
               headers: {
@@ -240,6 +247,7 @@
             })
             .then(response => {
               this.judgesList = response.data;
+              // this.current_page = 0;
               window.scrollTo(0, 0);
               console.log('getJudges Response', this.judgesList);
             })
