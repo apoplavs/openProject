@@ -42159,7 +42159,7 @@ exports = module.exports = __webpack_require__(0)(false);
 exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&subset=cyrillic);", ""]);
 
 // module
-exports.push([module.i, "\nbody {\n  background-color: #fafafa;\n  height: 100vh;\n  font-family: 'Roboto', sans-serif;\n  font-weight: 400;\n  font-style: normal;\n  color: #112F41;\n}\n.btn-primary {\n  color: #ffff;\n  background-color: #4c88bd;\n  border-color: #4c88bd;\n}\nbutton {\n  cursor: pointer;\n  border: none;\n}\nbutton:active, button:hover, button:focus {\n    outline: none;\n    background-color: #e1e1e1;\n}\n.card {\n  border: none;\n  -webkit-box-shadow: 0 2px 43px -4px rgba(0, 0, 0, 0.19);\n  box-shadow: 0 2px 43px -4px rgba(0, 0, 0, 0.19);\n}\n.card-header {\n  background-color: #2b989b;\n  color: #ffffff;\n}\n", ""]);
+exports.push([module.i, "\nbody {\n  background-color: #fafafa;\n  height: 100vh;\n  font-family: 'Roboto', sans-serif;\n  font-weight: 400;\n  font-style: normal;\n  color: #112F41;\n}\n.btn-primary {\n  color: #ffff;\n  background-color: #2C5F9C;\n}\n.btn-primary:hover {\n    background-color: #3777c4;\n}\nbutton {\n  cursor: pointer;\n  border: none;\n}\nbutton:active, button:hover, button:focus {\n    outline: none;\n    background-color: #e1e1e1;\n}\n.card {\n  border: none;\n  -webkit-box-shadow: 0 2px 43px -4px rgba(0, 0, 0, 0.19);\n  box-shadow: 0 2px 43px -4px rgba(0, 0, 0, 0.19);\n}\n.card-header {\n  background-color: #2b989b;\n  color: #ffffff;\n}\n", ""]);
 
 // exports
 
@@ -44652,7 +44652,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n.judge-component[data-v-dab41e1e]:not(:last-child) {\n  border-bottom: 1px solid lightgray;\n}\n.additional-info[data-v-dab41e1e] {\n  font-size: 0.8rem;\n  color: grey;\n  /* styles for font awesome */\n}\n.additional-info .fa[data-v-dab41e1e] {\n    font-size: 1rem;\n}\n.additional-info .bookmark[data-v-dab41e1e],\n  .additional-info .fa-pencil[data-v-dab41e1e] {\n    cursor: pointer;\n}\n.additional-info .fa-bookmark-o[data-v-dab41e1e],\n  .additional-info .fa-bookmark[data-v-dab41e1e] {\n    color: #2b989b;\n}\n.additional-info .fa-briefcase[data-v-dab41e1e] {\n    color: green;\n}\n.additional-info .fa-line-chart[data-v-dab41e1e] {\n    color: #6291ba;\n}\n.additional-info .fa-medkit[data-v-dab41e1e] {\n    color: red;\n}\n.additional-info .fa-calendar-check-o[data-v-dab41e1e],\n  .additional-info .fa-calendar-minus-o[data-v-dab41e1e],\n  .additional-info .fa-calendar-times-o[data-v-dab41e1e] {\n    color: #2b989b;\n}\n.additional-info .fa-pencil[data-v-dab41e1e] {\n    color: #6c757d;\n    -webkit-transition-duration: 0.3s;\n    transition-duration: 0.3s;\n}\n.additional-info .fa-pencil[data-v-dab41e1e]:hover {\n    color: #6291ba;\n    -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 0.5), inset 0 0 1px rgba(0, 0, 0, 0.7);\n            box-shadow: 0 0 3px rgba(0, 0, 0, 0.5), inset 0 0 1px rgba(0, 0, 0, 0.7);\n}\n.main-info .avatar[data-v-dab41e1e] {\n  width: 120px;\n  height: 120px;\n}\n.main-info a[data-v-dab41e1e] {\n  color: #6291ba;\n}\n.main-info .court_name[data-v-dab41e1e] {\n  font-size: 1rem;\n}\n", ""]);
+exports.push([module.i, "\n.judge-component[data-v-dab41e1e]:not(:last-child) {\n  border-bottom: 1px solid lightgray;\n}\n.additional-info[data-v-dab41e1e] {\n  font-size: 0.8rem;\n  color: grey;\n  /* styles for font awesome */\n}\n.additional-info .fa[data-v-dab41e1e] {\n    font-size: 1rem;\n}\n.additional-info .bookmark[data-v-dab41e1e],\n  .additional-info .fa-pencil[data-v-dab41e1e] {\n    cursor: pointer;\n}\n.additional-info .fa-bookmark-o[data-v-dab41e1e],\n  .additional-info .fa-bookmark[data-v-dab41e1e] {\n    color: #ef6733;\n}\n.additional-info .fa-briefcase[data-v-dab41e1e] {\n    color: #2ab27b;\n}\n.additional-info .fa-line-chart[data-v-dab41e1e] {\n    color: #2b989b;\n}\n.additional-info .fa-medkit[data-v-dab41e1e] {\n    color: #ef6733;\n}\n.additional-info .fa-calendar-check-o[data-v-dab41e1e],\n  .additional-info .fa-calendar-minus-o[data-v-dab41e1e],\n  .additional-info .fa-calendar-times-o[data-v-dab41e1e] {\n    color: #2b989b;\n}\n.additional-info .fa-pencil[data-v-dab41e1e] {\n    color: #6c757d;\n    -webkit-transition-duration: 0.3s;\n    transition-duration: 0.3s;\n}\n.additional-info .fa-pencil[data-v-dab41e1e]:hover {\n    color: #6291ba;\n    -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 0.5), inset 0 0 1px rgba(0, 0, 0, 0.7);\n            box-shadow: 0 0 3px rgba(0, 0, 0, 0.5), inset 0 0 1px rgba(0, 0, 0, 0.7);\n}\n.main-info .avatar[data-v-dab41e1e] {\n  width: 120px;\n  height: 120px;\n}\n.main-info a[data-v-dab41e1e] {\n  color: #6291ba;\n}\n.main-info .court_name[data-v-dab41e1e] {\n  font-size: 1rem;\n}\n", ""]);
 
 // exports
 
@@ -44669,6 +44669,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_date___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vue_date__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_lodash__);
+//
+//
+//
 //
 //
 //
@@ -45219,61 +45222,59 @@ var render = function() {
                     _c("div", { staticClass: "col-3 pl-0 additional-info" }, [
                       _c("div", { staticClass: "d-flex pb-2" }, [
                         _c("div", { staticClass: "w-75" }, [
-                          _vm.isAuth
-                            ? _c("span", [
-                                judge.is_bookmark
-                                  ? _c(
-                                      "span",
-                                      {
-                                        on: {
-                                          click: function($event) {
-                                            _vm.changeBookmarkStatus(judge)
-                                          }
-                                        }
-                                      },
-                                      [
-                                        _vm._v("відстежується "),
-                                        _c("i", {
-                                          staticClass: "fa fa-bookmark",
-                                          attrs: { "aria-hidden": "true" }
-                                        })
-                                      ]
-                                    )
-                                  : _vm._e(),
-                                _vm._v(" "),
-                                !judge.is_bookmark
-                                  ? _c(
-                                      "span",
-                                      {
-                                        on: {
-                                          click: function($event) {
-                                            _vm.changeBookmarkStatus(judge)
-                                          }
-                                        }
-                                      },
-                                      [
-                                        _vm._v("відстежувати "),
-                                        _c("i", {
-                                          staticClass: "fa fa-bookmark-o",
-                                          attrs: { "aria-hidden": "true" }
-                                        })
-                                      ]
-                                    )
-                                  : _vm._e()
-                              ])
-                            : _vm._e()
+                          _c("span", { staticClass: "float-left" }, [
+                            _c(
+                              "i",
+                              {
+                                staticClass: "fa fa-line-chart float-right",
+                                attrs: { "aria-hidden": "true" }
+                              },
+                              [_vm._v(" " + _vm._s(judge.rating) + " ")]
+                            )
+                          ])
                         ]),
                         _vm._v(" "),
-                        _c("div", { staticClass: "w-25" }, [
-                          _c(
-                            "i",
-                            {
-                              staticClass: "fa fa-line-chart float-right",
-                              attrs: { "aria-hidden": "true" }
-                            },
-                            [_vm._v(" " + _vm._s(judge.rating) + " ")]
-                          )
-                        ])
+                        _vm.isAuth
+                          ? _c("div", { staticClass: "w-25" }, [
+                              judge.is_bookmark
+                                ? _c(
+                                    "span",
+                                    {
+                                      on: {
+                                        click: function($event) {
+                                          _vm.changeBookmarkStatus(judge)
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _c("i", {
+                                        staticClass: "fa fa-bookmark",
+                                        attrs: { "aria-hidden": "true" }
+                                      })
+                                    ]
+                                  )
+                                : _vm._e(),
+                              _vm._v(" "),
+                              !judge.is_bookmark
+                                ? _c(
+                                    "span",
+                                    {
+                                      on: {
+                                        click: function($event) {
+                                          _vm.changeBookmarkStatus(judge)
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _c("i", {
+                                        staticClass: "fa fa-bookmark-o",
+                                        attrs: { "aria-hidden": "true" }
+                                      })
+                                    ]
+                                  )
+                                : _vm._e()
+                            ])
+                          : _vm._e()
                       ]),
                       _vm._v(" "),
                       _c("div", { staticClass: "d-flex" }, [

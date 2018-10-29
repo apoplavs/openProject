@@ -17,8 +17,10 @@ body {
 
 .btn-primary {
   color: #ffff;
-  background-color: $primary;
-  border-color: $primary;
+  background-color: $color-5;
+  &:hover{
+    background-color: lighten($color-5, 10)
+  }
 }
 
 button {

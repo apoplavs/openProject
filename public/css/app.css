@@ -9,8 +9,11 @@
 
 .btn-primary {
   color: #ffff;
-  background-color: #6291ba;
-  border-color: #6291ba;
+  background-color: #2C5F9C;
+}
+
+.btn-primary:hover {
+  background-color: #3777c4;
 }
 
 button {
@@ -32,7 +35,7 @@ button:focus {
 }
 
 .card-header {
-  background-color: #279598;
+  background-color: #2b989b;
   color: #ffffff;
 }
 

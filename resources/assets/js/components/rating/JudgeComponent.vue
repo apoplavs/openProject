@@ -16,12 +16,15 @@
                     <div class="col-3 pl-0 additional-info">
                         <div class="d-flex pb-2">
                             <div class="w-75">
-                                <span v-if="isAuth">
-                                        <span v-if="judge.is_bookmark" @click="changeBookmarkStatus(judge)">відстежується <i class="fa fa-bookmark" aria-hidden="true"></i></span>
-                                <span v-if="!judge.is_bookmark" @click="changeBookmarkStatus(judge)">відстежувати <i class="fa fa-bookmark-o" aria-hidden="true"></i></span>
+                                <span class="float-left">
+                                    <i class="fa fa-line-chart float-right" aria-hidden="true"> {{ judge.rating }} </i>
                                 </span>
                             </div>
-                            <div class="w-25"><i class="fa fa-line-chart float-right" aria-hidden="true"> {{ judge.rating }} </i></div>
+                            <div class="w-25"  v-if="isAuth">
+                                <span v-if="judge.is_bookmark" @click="changeBookmarkStatus(judge)"><i class="fa fa-bookmark" aria-hidden="true"></i></span>
+                                <span v-if="!judge.is_bookmark" @click="changeBookmarkStatus(judge)"><i class="fa fa-bookmark-o" aria-hidden="true"></i></span>
+                            </div>
+                                
                         </div>
                         <div class="d-flex">
                             <div class="w-75">
@@ -237,16 +240,16 @@
         /* styles for font awesome */
         .fa-bookmark-o,
         .fa-bookmark {
-            color: #2b989b;
+            color: $danger;
         }
         .fa-briefcase {
-            color: green;
+            color: $success;
         }
         .fa-line-chart {
-            color: #6291ba;
+            color: $main-color;
         }
         .fa-medkit {
-            color: red;
+            color: $danger;
         }
         .fa-calendar-check-o,
         .fa-calendar-minus-o,
