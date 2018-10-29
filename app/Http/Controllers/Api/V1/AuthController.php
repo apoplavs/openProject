@@ -26,6 +26,7 @@ use Toecyd\User;
  */
 class AuthController extends Controller
 {
+    const TIMEZONE = 'Europe/Kiev';
     /**
      * Реєстрація
      * @SWG\Post(
@@ -226,23 +227,23 @@ class AuthController extends Controller
 
         // визначаємо тривалість дії токена на основі запиту користувача
         if (!$request->remember_me) {
-            $token->expires_at = Carbon::now('Europe/Kiev')->addDay();
+            $token->expires_at = Carbon::now(self::TIMEZONE)->addDay();
         } elseif ($request->remember_me == 1) {
-            $token->expires_at = Carbon::now('Europe/Kiev')->addWeeks(2);
+            $token->expires_at = Carbon::now(self::TIMEZONE)->addWeeks(2);
         } elseif ($request->remember_me == 2) {
-            $token->expires_at = Carbon::now('Europe/Kiev')->addMonths(6);
+            $token->expires_at = Carbon::now(self::TIMEZONE)->addMonths(6);
         } elseif ($request->remember_me == 3) {
             // генерація long time expires токена
             $token_result = $request->user()->createToken('LTE Token');
             $token = $token_result->token;
-            $token->expires_at = Carbon::now('Europe/Kiev')->addYears(5);
+            $token->expires_at = Carbon::now(self::TIMEZONE)->addYears(5);
             // анулюємо інші довготривалі токени
             DB::table('oauth_access_tokens')
                 ->where('user_id', '=', $request->user()->id)
                 ->where('name', '=', 'LTE Token')
                 ->update(['revoked' => 1]);
         } else {
-            $token->expires_at = Carbon::now('Europe/Kiev')->addDay();
+            $token->expires_at = Carbon::now(self::TIMEZONE)->addDay();
         }
         // зберігаємо токен в БД
         $token->save();
