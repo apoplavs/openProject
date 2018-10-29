@@ -14,42 +14,43 @@
                         </div>
                     </div>
                     <div class="col-3 pl-0 additional-info">
-                        <div class="d-flex pb-2">
+                        <div class="v-center pb-3">
                             <div class="w-75">
                                 <span class="float-left">
                                     <i class="fa fa-line-chart float-right" aria-hidden="true"> {{ judge.rating }} </i>
                                 </span>
                             </div>
-                            <div class="w-25"  v-if="isAuth">
+                            <div class="w-25 bookmark">
                                 <span v-if="judge.is_bookmark" @click="changeBookmarkStatus(judge)"><i class="fa fa-bookmark" aria-hidden="true"></i></span>
                                 <span v-if="!judge.is_bookmark" @click="changeBookmarkStatus(judge)"><i class="fa fa-bookmark-o" aria-hidden="true"></i></span>
                             </div>
                                 
                         </div>
-                        <div class="d-flex">
+                        <div class="v-align-center">
                             <div class="w-75">
                                 <span v-if="judge.status === 1"> <!-- Cуддя на роботі  -->
-                                        <i class="fa fa-briefcase" aria-hidden="true"></i>
-                                            на роботі {{ judge.due_date_status ? '('+judge.due_date_status+')' : null }}
-                                    </span>
+                                    <i class="fa fa-briefcase" aria-hidden="true"></i>на роботі 
+                                    {{ judge.due_date_status ? '('+judge.due_date_status+')' : null }}
+                                </span>
                                 <span v-if="judge.status === 2"> <!-- На лікарняному  -->
-                                        <i class="fa fa-medkit" aria-hidden="true"></i>
-                                            на лікарняному {{ judge.due_date_status ? '(до '+judge.due_date_status+')' : null }}
+                                        <i class="fa fa-medkit" aria-hidden="true"></i>на лікарняному 
+                                        {{ judge.due_date_status ? '(до '+judge.due_date_status+')' : null }}
                                     </span>
                                 <span v-if="judge.status === 3"> <!-- У відпустці   -->
-                                        <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
-                                            у відпустці {{ judge.due_date_status ? '(до '+judge.due_date_status+')' : null }}
+                                       <i class="fas fa-umbrella-beach"></i>у відпустці 
+                                        {{ judge.due_date_status ? '(до '+judge.due_date_status+')' : null }}
                                     </span>
-                                <span v-if="judge.status === 4"> <!-- Відсуній на робочому місці з інших причин  -->
-                                        <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
-                                            відсуній на робочому місці з інших причин {{ judge.due_date_status ? '(до '+judge.due_date_status+')' : null }}
+                                <span v-if="judge.status === 4"> <!-- Відсуній на робочому місці з інших причин  --> 
+                                         <i class="fa fa-calendar-minus-o" aria-hidden="true"></i>
+                                        відсутній на робочому місці з інших причин 
+                                        {{ judge.due_date_status ? '(до '+judge.due_date_status+')' : null }}
                                     </span>
                                 <span v-if="judge.status === 5"> <!-- Припинено повноваження  -->
-                                        <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
-                                            припинено повноваження {{ judge.due_date_status ? '(до '+judge.due_date_status+')' : null }}
+                                         <i class="fa fa-calendar-times-o" aria-hidden="true"></i>припинено повноваження 
+                                        {{ judge.due_date_status ? '(до '+judge.due_date_status+')' : null }}
                                     </span>
                             </div>
-                            <div class="w-25"><i v-if="isAuth" class="fa fa-pencil p-1 float-right" aria-hidden="true" @click="showModal(judge)"></i></div>
+                            <div class="w-25"><i class="fa fa-pencil p-1 float-right" aria-hidden="true" @click="showModal(judge)"></i></div>
                         </div>
                     </div>
                 </div>
@@ -139,6 +140,9 @@
                 }
             },
             changeBookmarkStatus(judge) {
+                if (!this.isAuth) {
+                    this.$router.push("/login");
+                }
                 if (judge.is_bookmark === 0) {
                     axios({
                             method: "put",
@@ -174,6 +178,9 @@
                 }
             },
             showModal(judge) {
+                if (!this.isAuth) {
+                    this.$router.push("/login");
+                }
                 this.changeStatusId = judge.id;
                 this.judgeStatus.set_status = judge.status;
                 this.judgeStatus.due_date = this.formattingDate(judge.due_date_status);
@@ -223,6 +230,7 @@
 
 <style scoped lang="scss">
     @import "../../../sass/_variables.scss";
+    @import "../../../sass/_mixins.scss";
     .judge-component:not(:last-child) {
         border-bottom: 1px solid lightgray;
     }
@@ -230,10 +238,15 @@
     .additional-info {
         font-size: 0.8rem;
         color: grey;
-        .fa {
-            font-size: 1rem;
+        .fa, .fas {
+            font-size: 1.1rem;
+            margin-right: 5px;
         }
-        .bookmark,
+        .bookmark > span {
+            float: right;
+            padding-right: 7px;
+        }
+        .bookmark > span,
         .fa-pencil {
             cursor: pointer;
         }
@@ -251,21 +264,23 @@
         .fa-medkit {
             color: $danger;
         }
-        .fa-calendar-check-o,
-        .fa-calendar-minus-o,
+        .fa-calendar-minus-o{
+            color: $text-color;
+        }
+        .fa-umbrella-beach {
+            color: $warning;
+        }
         .fa-calendar-times-o {
-            color: #2b989b;
+            color: red;
         }
         .fa-pencil {
-            color: #6c757d;
-            -webkit-transition-duration: 0.3s;
-            -o-transition-duration: 0.3s;
-            -moz-transition-duration: 0.3s;
-            transition-duration: 0.3s;
+            color: $color-5;
         }
-        .fa-pencil:hover {
-            color: #6291ba;
-            box-shadow: 0 0 3px rgba(0, 0, 0, 0.5), inset 0 0 1px rgba(0, 0, 0, 0.7);
+        .v-center {
+            @include alignElement($alignItems: start);
+        }
+        .v-align-center {
+            @include alignElement($alignItems: center);
         }
     }
     

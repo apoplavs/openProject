@@ -85,17 +85,8 @@
                 </div>
               </div>
             </div>
-            <!-- apply-filters -->
-            <!-- </form> -->
           </div>
         </div>
-        <!-- Card -->
-        <!-- <div>Регіон-------- {{params.regions }}</div>
-                <div>інстанція--------- {{ params.instance }}</div>
-                <div>юрисдикція--------- {{ params.jurisdiction }}</div>
-                <div>пошук-------- {{ params.search}}</div>
-                <div>sort-------- {{ params.sort}}</div>
-                <div> expired-------- {{ params.expired}}</div> -->
       </div>
   
       <!-- Main list -->
@@ -104,16 +95,15 @@
           <div class="col-10 autocomplete">
             <input type="search" class="form-control" placeholder="Пошук..." v-model.trim="params.search" @keyup="liveSearch()">
             <div class="autocomplete-block-result" v-if="autocomplete.length">
-              <div v-for="(el, ind_1) in autocomplete" :key="ind_1">
+              <div class="autocomplete-block-result_element" v-for="(el, ind_1) in autocomplete" :key="ind_1">
                 <router-link to="/">
                   {{ el.surname }} {{ (el.name.length === 1) ? el.name + '.' : el.name }} {{ (el.patronymic.length === 1) ? el.patronymic + '.' : el.patronymic }}
                 </router-link>
-                <hr>
               </div>
             </div>
           </div>
           <div class="col-2 pl-0">
-            <button type="button" class="btn btn-block btn btn-primary" @click="setFilters()"><i class="fa fa-search" aria-hidden="true"></i> знайти</button>
+            <button type="button" class="btn btn-confirm w-100" @click="setFilters()"><i class="fa fa-search" aria-hidden="true"></i> знайти</button>
           </div>
         </div>
         <div class="card card-outline-secondary ">
@@ -136,7 +126,7 @@
   
         </div>
         <div class="pagination mb-5">
-          <vue-ads-pagination @page-change="pageChange" :total-items="judgesList.total" :max-visible-pages="5" :button-classes="buttonClasses" :loading="false">
+          <vue-ads-pagination  ref="pagins" @page-change="pageChange" :total-items="judgesList.total" :max-visible-pages="5" :button-classes="buttonClasses" :loading="false">
           </vue-ads-pagination>
         </div>
       </div>
@@ -167,7 +157,6 @@
           expired: 0
         },
         autocomplete: [],
-        // message: "",
         judgesList: {
           total: 0
         },
@@ -219,19 +208,15 @@
   
       pageChange(page) {
         this.params.page = page + 1;
-        console.log('PAGE', page);
-        console.log('PARAMS PAGE', this.params.page);
-  
-  
         this.getJudgesList();
       },
       setFilters() {
-        // location.reload(); // щоб обновити пагінацію на 1 ст по-іншому змінити current_page ніяк
+        this.$refs.pagins.currentPage = 0;
+        this.params.page = 1; 
         this.getJudgesList();
       },
   
       getJudgesList() {
-  
         console.log('getJudgesList()', this.params);
         this.autocomplete = []; // коли визиваємо цей метод liveSearch маємо закрити
         if (this.validateInputSearch() === false) { // !! = true
@@ -239,7 +224,6 @@
         }
         if (localStorage.getItem('token')) {
           console.log('have token')
-  
           axios
             .get('/api/v1/judges/list', {
               headers: {
@@ -285,7 +269,6 @@
         this.autocomplete = [];
         this.getJudgesList(); // онуляємо всі фільтри і визиваємо функцію
       }
-  
     },
     components: {
       JudgeComponent,

@@ -113,6 +113,12 @@
       border-top-left-radius: 0;
       border-top-right-radius: 0;
       background-color: #ffffff;
+      .autocomplete-block-result_element {
+        padding: 10px 0 10px 0;
+        &:not(:last-child){
+          border-bottom: 1px solid rgba(0,0,0,.1);
+        }
+      }
     }
   }
 
