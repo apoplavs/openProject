@@ -11,7 +11,7 @@
     margin-top: 58px;
     font-size: 0.9em;
     h6 {
-      color: #4c88bd;
+      color: $primary;
     }
     /* Customize the label (the container) */
     ul label {
@@ -60,14 +60,14 @@
       top: 5px;
       width: 5px;
       height: 10px;
-      border: solid white;
+      border: solid #ffffff;
       border-width: 0 3px 3px 0;
       -webkit-transform: rotate(45deg);
       -ms-transform: rotate(45deg);
       transform: rotate(45deg);
     }
     .apply-filters {
-      background-color: white;
+      background-color: #ffffff;
       position: sticky;
       bottom: 0;
     }
@@ -108,11 +108,12 @@
       left: 16px;
       right: 16px;
       padding: 10px;
-      -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
-      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+      @include boxShadow($shadow-autocomplete);
       border-radius: 4px;
       border-top-left-radius: 0;
       border-top-right-radius: 0;
       background-color: #ffffff;
     }
   }
+
+

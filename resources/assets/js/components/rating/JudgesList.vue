@@ -91,11 +91,11 @@
         </div>
         <!-- Card -->
         <!-- <div>Регіон-------- {{params.regions }}</div>
-              <div>інстанція--------- {{ params.instance }}</div>
-              <div>юрисдикція--------- {{ params.jurisdiction }}</div>
-              <div>пошук-------- {{ params.search}}</div>
-              <div>sort-------- {{ params.sort}}</div>
-              <div> expired-------- {{ params.expired}}</div> -->
+                <div>інстанція--------- {{ params.instance }}</div>
+                <div>юрисдикція--------- {{ params.jurisdiction }}</div>
+                <div>пошук-------- {{ params.search}}</div>
+                <div>sort-------- {{ params.sort}}</div>
+                <div> expired-------- {{ params.expired}}</div> -->
       </div>
   
       <!-- Main list -->
@@ -122,21 +122,21 @@
             <div class="d-flex align-items-center">
               <span class="mr-2"> сортувати за: </span>
               <select class="form-control select-sort" name="sorting" v-model="params.sort" @change="sortJudges()">
-                                <option value="1" selected>прізвищем (А->Я) <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i></option>
-                                <option value="2">прізвищем (Я->А)</option>
-                                <option value="3">рейтингом (низький->високий)</option>
-                                <option value="4">рейтингом (високий->низький)</option>
-                              </select>
+                                  <option value="1" selected>прізвищем (А->Я) <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i></option>
+                                  <option value="2">прізвищем (Я->А)</option>
+                                  <option value="3">рейтингом (низький->високий)</option>
+                                  <option value="4">рейтингом (високий->низький)</option>
+                                </select>
             </div>
           </div>
           <div id="judges-list">
             <!--judges-judges-list-->
             <judge-component :judgesList="judgesList.data"></judge-component>
           </div>
-          
+  
         </div>
         <div class="pagination mb-5">
-          <vue-ads-pagination @page-change="pageChange"   :total-items="judgesList.total" :max-visible-pages="5" :button-classes="buttonClasses" :loading="false">
+          <vue-ads-pagination @page-change="pageChange" :total-items="judgesList.total" :max-visible-pages="5" :button-classes="buttonClasses" :loading="false">
           </vue-ads-pagination>
         </div>
       </div>
@@ -170,7 +170,7 @@
         // message: "",
         judgesList: {
           total: 0
-        },  
+        },
         'buttonClasses': {
           'default': ['border-none', 'bg-grey-lightest'],
           'active': ['bg-active', 'border-none'],
@@ -219,19 +219,19 @@
   
       pageChange(page) {
         this.params.page = page + 1;
-        console.log('PAGE',page);
+        console.log('PAGE', page);
         console.log('PARAMS PAGE', this.params.page);
-        
-        
+  
+  
         this.getJudgesList();
       },
       setFilters() {
-        location.reload(); // щоб обновити пагінацію на 1 ст по-іншому змінити current_page ніяк
+        // location.reload(); // щоб обновити пагінацію на 1 ст по-іншому змінити current_page ніяк
         this.getJudgesList();
       },
   
       getJudgesList() {
-        
+  
         console.log('getJudgesList()', this.params);
         this.autocomplete = []; // коли визиваємо цей метод liveSearch маємо закрити
         if (this.validateInputSearch() === false) { // !! = true
@@ -239,7 +239,7 @@
         }
         if (localStorage.getItem('token')) {
           console.log('have token')
-          
+  
           axios
             .get('/api/v1/judges/list', {
               headers: {
@@ -289,30 +289,38 @@
     },
     components: {
       JudgeComponent,
-      VueAdsPagination    
+      VueAdsPagination
     }
   
   };
 </script>
-<style>
 
-.bg-active {
-  background-color: #2b989b;
-}
-div.pr-2.leading-loose {
-  display: none !important;
-}
-.disabled {
-  color: grey;
-}
-.dots {
-  background-color: transparent;
-  border: none !important;
-}
+<style lang="scss">
+  .pagination {
+    .bg-active {
+      background-color: #2b989b;
+      border-color: #2b989b;
+    }
+    button{
+      &:active,
+      &:focus{
+        background-color: #2b989b;
+        border-color: #2b989b;
+      }
+    }
+    div.pr-2.leading-loose {
+      display: none !important;
+    }
+    .disabled {
+      color: grey;
+    }
+    .dots {
+      background-color: transparent;
+      border: none !important;
+    }
+  }
 </style>
 
 <style lang="scss" scoped>
- @import "../../../sass/judges_coutrs_list.scss";
-
-  
+  @import "../../../sass/judges_coutrs_list.scss";
 </style>
