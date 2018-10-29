@@ -3,22 +3,16 @@
 
 // Variables
 @import "_variables";
-
+@import "mixins";
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&subset=cyrillic');
+
 body {
   background-color: $body-bg;
   height: 100vh;
   font-family: 'Roboto', sans-serif;
   font-weight: 400;
   font-style: normal;
-  color: $main;
-  // text-shadow: 4px 4px 4px #aaa;
-  
-}
-button, 
-button:active, 
-button:focus {
-    outline: none;
+  color: $color-1;  
 }
 
 .btn-primary {
@@ -26,3 +20,28 @@ button:focus {
   background-color: $primary;
   border-color: $primary;
 }
+
+button {
+  cursor: pointer;
+  border: none;
+  &:active,
+  &:hover,
+  &:focus {
+    outline: none;
+    background-color: darken($body-bg, 10%);
+  }
+}
+
+
+
+// Customize card 
+.card {
+  border: none;
+  @include boxShadow($shadow-light);
+}
+.card-header {
+  background-color: $main-color;
+  color: #ffffff;
+}
+// --------------
+

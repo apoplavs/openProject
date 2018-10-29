@@ -77,7 +77,7 @@
             <div class="apply-filters" id="apply-filters">
               <hr>
               <div class="row">
-                <div class="col-6 pl-1">
+                <div class="col-6">
                   <button type="reset" @click="resetFilters()" class="btn btn-outline-info">Скинути</button>
                 </div>
                 <div class="col-6">
@@ -133,9 +133,10 @@
             <!--judges-judges-list-->
             <judge-component :judgesList="judgesList.data"></judge-component>
           </div>
+          
         </div>
         <div class="pagination mb-5">
-          <vue-ads-pagination @page-change="pageChange()"  :page="current_page" :total-items="judgesList.total" :max-visible-pages="5" :button-classes="buttonClasses" :loading="false">
+          <vue-ads-pagination @page-change="pageChange"   :total-items="judgesList.total" :max-visible-pages="5" :button-classes="buttonClasses" :loading="false">
           </vue-ads-pagination>
         </div>
       </div>
@@ -156,7 +157,6 @@
     name: "judges-list",
     data() {
       return {
-        current_page: 0,
         params: {
           page: 0,
           regions: [],
@@ -219,6 +219,10 @@
   
       pageChange(page) {
         this.params.page = page + 1;
+        console.log('PAGE',page);
+        console.log('PARAMS PAGE', this.params.page);
+        
+        
         this.getJudgesList();
       },
       setFilters() {
@@ -228,7 +232,7 @@
   
       getJudgesList() {
         
-        console.log('getJudgesList()');
+        console.log('getJudgesList()', this.params);
         this.autocomplete = []; // коли визиваємо цей метод liveSearch маємо закрити
         if (this.validateInputSearch() === false) { // !! = true
           this.params.search = null;
@@ -247,7 +251,6 @@
             })
             .then(response => {
               this.judgesList = response.data;
-              // this.current_page = 0;
               window.scrollTo(0, 0);
               console.log('getJudges Response', this.judgesList);
             })
@@ -291,162 +294,25 @@
   
   };
 </script>
-
 <style>
-  @import "../../../sass/_variables.scss";
-  
-  /* styles for pagination must be not scoped */
-  
-  button {
-    cursor: pointer;
-  }
-  
-  .bg-active {
-    background-color: #2b989b;
-  }
-  
-  .button:active {
-    outline: none;
-  }
-  
-  .button:focus {
-    outline: none;
-  }
-  
-  div.pr-2.leading-loose {
-    display: none !important;
-  }
-  
-  .disabled {
-    color: grey;
-  }
-  
-  .dots {
-    background-color: transparent;
-    border: none !important;
-  }
+
+.bg-active {
+  background-color: #2b989b;
+}
+div.pr-2.leading-loose {
+  display: none !important;
+}
+.disabled {
+  color: grey;
+}
+.dots {
+  background-color: transparent;
+  border: none !important;
+}
 </style>
 
+<style lang="scss" scoped>
+ @import "../../../sass/judges_coutrs_list.scss";
 
-<style scoped lang="scss">
-  @import "../../../sass/_variables.scss";
-  .min-width {
-    min-width: 1200px !important;
-  }
   
-  
-  /* Стилі для фільтрів */
-  
-  // styles filters 
-  .filters {
-    margin-top: 58px;
-    font-size: 0.9em;
-    h6 {
-      color: #4c88bd;
-    }
-    /* Customize the label (the container) */
-    ul label {
-      display: block;
-      position: relative;
-      padding-left: 35px;
-      margin-bottom: 10px;
-      cursor: pointer;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
-    }
-    /* Hide the browser's default checkbox */
-    ul input {
-      position: absolute;
-      opacity: 0;
-      cursor: pointer;
-    }
-    /* Create a custom checkbox */
-    .checkmark {
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: 21px;
-      width: 21px;
-      background-color: #eee;
-    }
-    /* When the checkbox is checked, add a blue background */
-    ul label input:checked~.checkmark {
-      background-color: #2b989b;
-    }
-    /* Create the checkmark/indicator (hidden when not checked) */
-    .checkmark:after {
-      content: "";
-      position: absolute;
-      display: none;
-    }
-    /* Show the checkmark when checked */
-    ul label input:checked~.checkmark:after {
-      display: block;
-    }
-    /* Style the checkmark/indicator */
-    ul label .checkmark:after {
-      left: 9px;
-      top: 5px;
-      width: 5px;
-      height: 10px;
-      border: solid white;
-      border-width: 0 3px 3px 0;
-      -webkit-transform: rotate(45deg);
-      -ms-transform: rotate(45deg);
-      transform: rotate(45deg);
-    }
-    .apply-filters {
-      background-color: white;
-      position: sticky;
-      bottom: 0;
-    }
-    .fa-filter {
-      font-size: 21px;
-      color: #6291ba;
-    }
-  }
-  
-  .list-data-container {
-    .card {
-      margin-top: 20px;
-    }
-    .pagination {
-      display: flex;
-      justify-content: center;
-    }
-    .select-sort {
-      width: 290px;
-    }
-    /* styles for autocomplete field  */
-    .autocomplete {
-      /*the container must be positioned relative:*/
-      position: relative;
-      display: inline-block;
-    }
-    .autocomplete-block-result {
-      position: absolute;
-      font-size: 0.9rem;
-      border: none;
-      z-index: 99;
-      top: 100%;
-      left: 16px;
-      right: 16px;
-      padding: 10px;
-      -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
-      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
-      border-radius: 4px;
-      border-top-left-radius: 0px;
-      border-top-right-radius: 0;
-      background-color: #f7f7f7;
-    }
-  }
-  
-  
-  /* styles for page elements */
-  
-  // div.card-body.p-2 h5 a {
-  //   color: #3d7ee5;
-  // }
 </style>

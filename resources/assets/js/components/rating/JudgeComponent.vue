@@ -3,7 +3,7 @@
         <div class="card-body px-4 py-2">
             <div v-if="!this.judgesList || this.judgesList.length == 0">За заданими параметрами нічого не знайдено</div>
             <div v-if="this.judgesList && this.judgesList.length > 0">
-                <div class="judge-component row py-3 " v-for="(judge, index) of this.judgesList" :key="index">
+                <div class="judge-component row py-3 mx-1" v-for="(judge, index) of this.judgesList" :key="index">
                     <div class="col-9 d-flex pl-0 main-info">
                         <div class="mr-3"><img class="avatar" :src="judge.photo" alt="фото" /></div>
                         <div>
@@ -190,6 +190,8 @@
                 if (this.judgeStatus.set_status === "1" || this.judgeStatus.set_status === "5") {
                     this.judgeStatus.due_date = null;
                 }
+                console.log("STATUS", this.judgeStatus);
+                
                 axios({
                         method: "put",
                         url: `/api/v1/judges/${this.changeStatusId}/update-status`,
