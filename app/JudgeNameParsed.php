@@ -7,37 +7,8 @@ use Exception;
 /**
  * Представляє собою розпарсене ПІБ судді.
  */
-class JudgeNameParsed
-{
-    public $surname;
-    public $name;
-    public $patronymic;
-
-    /**
-     * @param string $surname    -- прізвище
-     * @param string $name       -- ім'я
-     * @param string $patronymic -- по-батькові
-     */
-    public function __construct($surname, $name, $patronymic) {
-        $this->surname = $surname;
-        $this->name = $name;
-        $this->patronymic = $patronymic;
-    }
-
-    /**
-     * Форматує рядок таким чином, щоб у ньому була перша буква велика, а всі інші букви малі
-     * Використовується для придання єдиного вигляду ПІБ суддів (щоб Іванова та ІВАНОВА не розглядались як різні)
-     *
-     * @param string $str
-     *
-     * @return string
-     */
-    private function format(string $str): string {
-        return mb_strtoupper(mb_substr($str, 0, 1)) . mb_strtolower(mb_substr($str, 1));
-    }
-	
-	
-	/**
+class JudgeNameParsed {
+ 	/**
 	 * Парсить ПІБ судді
 	 * повертає його у вигляді масиву
 	 * @param string $judge_name_raw
@@ -60,6 +31,7 @@ class JudgeNameParsed
 		
 		$separated = self::separatePIBJudge($judge_name_raw);
 		if (empty($separated)) {
+			return NULL;
 			throw new Exception("Не вдалось розпарсити ім'я судді: '{$judge_name_raw}'");
 		}
 		$separated['surname'] = self::validateRegister($separated['surname']);
@@ -117,7 +89,5 @@ class JudgeNameParsed
 		}
 		return ($name);
 	}
-	
-	
 	
 }

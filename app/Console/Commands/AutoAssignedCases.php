@@ -49,12 +49,14 @@ class AutoAssignedCases extends Command
 
     /* @var array */
     private $existing_judges = [];
-
-    /**
-     * Завантажує дані по автопризначеним справам з державного реєстру судових справ та зберігає їх в БД
-     *
-     * @return void
-     */
+	
+	
+	/**
+	 * Завантажує дані по автопризначеним справам з державного реєстру судових справ та зберігає їх в БД
+	 *
+	 * @return void
+	 * @throws Exception
+	 */
     public function handle() {
         $this->initDateParams();
 
@@ -71,7 +73,7 @@ class AutoAssignedCases extends Command
                 $this->saveCurlResponse($court_code, $response);
             } else {
                 echo "Curl response is empty.";
-                file_put_contents('empty_responses.txt', $court_code."\n", FILE_APPEND);
+                //file_put_contents('empty_responses.txt', $court_code."\n", FILE_APPEND);
             }
 
             $this->time_statistics['after_all'] = microtime(true);
@@ -105,7 +107,8 @@ class AutoAssignedCases extends Command
         }
 
         $this->date_to = clone $this->date_from;
-        $this->date_to->modify('+1 month');
+		$this->date_to->modify('+ 1 year');
+//        $this->date_to->modify('+1 month');
     }
 	
 	
@@ -166,19 +169,28 @@ class AutoAssignedCases extends Command
         $this->existing_judges = $this->getExistingJudges($court_code);
 
         $cases_to_insert = [];
+        $inserted = 0;
 
         foreach ($response->aaData as $item) {
             $case_to_insert = $this->getCaseToInsert($court_code, $item);
             if (!empty($case_to_insert)) {
                 $cases_to_insert[] = $case_to_insert;
             }
+            // якщо записів багато - запсуємо частинами
+            if (count($cases_to_insert) > 5000) {
+            	Db::table('auto_assigned_cases')->insert($cases_to_insert);
+            	$inserted += count($cases_to_insert);
+            	$cases_to_insert = [];
+            }
         }
-
-        Db::table('auto_assigned_cases')->insert($cases_to_insert);
+        if (!empty($cases_to_insert)) {
+        	Db::table('auto_assigned_cases')->insert($cases_to_insert);
+        	$inserted += count($cases_to_insert);
+        }
 
         echo "Total cases: "
             . (!empty($response->aaData) ? count($response->aaData) : 0) . ". Inserted cases: "
-            . (!empty($cases_to_insert) ? count($cases_to_insert) : 0) . ". ";
+            .  $inserted . ". ";
     }
 
     /**
@@ -234,60 +246,50 @@ class AutoAssignedCases extends Command
     private function getJudgeId(int $court_code, string $judge_name_raw) : int {
         $judge_id = 0;
         $parsed = JudgeNameParsed::parseJudgeName($judge_name_raw);
+        if (!$parsed) {
+        	return 0;
+        }
         foreach ($this->existing_judges as $key => $row) {
-        	try {
-				if ($row->surname == $parsed['surname'] &&
-					mb_substr($row->name, 0, 1) == mb_substr($parsed['name'], 0, 1) &&
-					mb_substr($row->patronymic, 0, 1) == mb_substr($parsed['patronymic'], 0, 1)) {
-					$judge_id = $row->id;
-					break;
+			if ($row->surname == $parsed['surname'] &&
+				mb_substr($row->name, 0, 1) == mb_substr($parsed['name'], 0, 1) &&
+				mb_substr($row->patronymic, 0, 1) == mb_substr($parsed['patronymic'], 0, 1)) {
+				$judge_id = $row->id;
+				// Випадок, коли у базі лежать лише ініціали судді, а прийшло повне ім'я.
+				if (mb_strlen($row->name) < mb_strlen($parsed['name'])) {
+					DB::table('judges')->where('id', $row->id)
+						->update(['name' => $parsed['name'], 'patronymic' => $parsed['patronymic']]);
+					$this->existing_judges[$key]->name = $parsed['name'];
+					$this->existing_judges[$key]->patronymic = $parsed['patronymic'];
 				}
-    
-			} catch (Exception $e) {
-				echo "\nСправу не вдалося записати в базу ({$e->getMessage()})\n";
-				var_dump($row);
-				var_dump($parsed);
-        		var_dump($row->surname);
-				var_dump($row->name);
-				var_dump($row->patronymic);
-				var_dump($row->id);
-				var_dump($parsed['surname']);
-				var_dump($parsed['name']);
-				var_dump($parsed['patronymic']);
-//				print_r($judge_name_raw);
-//				var_dump($parsed);
-				dd($judge_id);
+				break;
 			}
-        
         }
         // якщо суддю не знайдено - додаємо його
-        if (empty($judge_id) /*&& mb_strlen($parsed['name']) > 2*/) {
+        if ($judge_id == 0 && mb_strlen($parsed['name']) > 2) {
         	$new_judge = new stdClass();
 			$new_judge->surname = $parsed['surname'];
 			$new_judge->name = $parsed['name'];
 			$new_judge->patronymic = $parsed['patronymic'];
 			$new_judge->court = $court_code;
-			
             $judge_id = DB::table('judges')->insertGetId(['surname'=>$parsed['surname'],
-				'name'=>$parsed['name'],
-				'patronymic'=>$parsed['patronymic'],
-				'court'=>$court_code]);
+				'name'=>$parsed['name'], 'patronymic'=>$parsed['patronymic'], 'court'=>$court_code]);
 			$new_judge->id = $judge_id;
             $this->existing_judges[] = $new_judge;
         }
         return $judge_id;
     }
-    
-
-    /**
-     * Приводить дані по автопризначеній справі у такий вигляд, щоб їх можна було записати в БД.
-     * Форматує дати, знаходить id судді за його прізвищем, і тд.
-     *
-     * @param int   $court_code
-     * @param array $item
-     *
-     * @return array
-     */
+	
+	
+	/**
+	 * Приводить дані по автопризначеній справі у такий вигляд, щоб їх можна було записати в БД.
+	 * Форматує дати, знаходить id судді за його прізвищем, і тд.
+	 *
+	 * @param int   $court_code
+	 * @param array $item
+	 *
+	 * @return array
+	 * @throws Exception
+	 */
     private function getCaseToInsert($court_code, $item) {
         $item_assoc = [
             'number'            => $item[0],
@@ -295,28 +297,16 @@ class AutoAssignedCases extends Command
             'judge_name_raw'    => $item[2],
             'date_composition'  => date('Y-m-d', strtotime($item[5])),
         ];
-
+		// якщо справа існує - не записуємо її
         if (isset($this->existing_cases[$item_assoc['number']][$item_assoc['date_registration']])
 			|| mb_strlen($item_assoc['judge_name_raw']) < 5) {
             return [];
         }
-	
+		// парсимо ПІБ судді, якщо не вдається - пропускаємо
 		$judge_id = $this->getJudgeId($court_code, $item_assoc['judge_name_raw']);
 		if ($judge_id == 0) {
 			return [];
 		}
-
-//        try {
-//            $judge_id = $this->getJudgeId($court_code, $item_assoc['judge_name_raw']);
-//            if ($judge_id == 0) {
-//				return [];
-//			}
-//        } catch (Exception $e) {
-//            echo "Справу не вдалося записати в базу ({$e->getMessage()})\n";
-//            if (isset($judge_id))
-//            	print_r($judge_id);
-//            return [];
-//        }
 
         return [
             'court'             => $court_code,
