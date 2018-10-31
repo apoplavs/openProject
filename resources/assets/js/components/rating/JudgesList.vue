@@ -69,8 +69,9 @@
             <div class="row">
               <div class="col-lg-12">
                 <ul class="list-unstyled mb-0">
-                  <li><label><input type="checkbox" value="1" name="expired" v-model="params.expired"><span class="checkmark"></span>Закінчилися повноваження</label></li>
+                  <li><label><input type="checkbox" value="1" v-model="params.expired"><span class="checkmark"></span>Закінчилися повноваження</label></li>
                 </ul>
+                epired: {{ typeof(this.params.expired)}} {{  this.params.expired }}
               </div>
             </div>
   
@@ -154,7 +155,7 @@
           instance: [],
           search: null,
           sort: 1,
-          expired: 0
+          expired: true
         },
         autocomplete: [],
         judgesList: {
@@ -213,15 +214,19 @@
       setFilters() {
         this.$refs.pagins.currentPage = 0;
         this.params.page = 1; 
+        console.log('PARAMS ЗНАЙТИ', this.params);
+        
         this.getJudgesList();
       },
   
       getJudgesList() {
-        console.log('getJudgesList()', this.params);
+       
         this.autocomplete = []; // коли визиваємо цей метод liveSearch маємо закрити
+        this.params.expired = (this.params.expired === true || this.params.expired === 1) ? 1 : 0;
         if (this.validateInputSearch() === false) { // !! = true
           this.params.search = null;
         }
+         console.log('getJudgesList-------PARAMS', this.params);
         if (localStorage.getItem('token')) {
           console.log('have token')
           axios
@@ -264,7 +269,7 @@
         this.params.regions = [];
         this.params.instance = [];
         this.params.jurisdiction = [];
-        this.params.expired = 0;
+        this.params.expired = true;
         this.params.search = null;
         this.autocomplete = [];
         this.getJudgesList(); // онуляємо всі фільтри і визиваємо функцію
