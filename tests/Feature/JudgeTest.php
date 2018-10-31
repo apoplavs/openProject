@@ -2,7 +2,6 @@
 
 namespace Tests\Feature;
 
-use Exception;
 use Toecyd\JudgeNameParsed;
 use Tests\TestCase;
 
@@ -19,9 +18,8 @@ class JudgeTest extends TestCase
 	 */
 	public function testParseIncorrectJudgeName()
     {
-        $this->expectException(Exception::class);
-        JudgeNameParsed::parseJudgeName('');
-		JudgeNameParsed::parseJudgeName('Україн');
+        $this->assertEmpty(JudgeNameParsed::parseJudgeName(''));
+        $this->assertEmpty(JudgeNameParsed::parseJudgeName('Україн'));
     }
 	
 	
