@@ -154,7 +154,7 @@
           instance: [],
           search: null,
           sort: 1,
-          expired: 0
+          expired: 1
         },
         autocomplete: [],
         judgesList: {
@@ -219,6 +219,7 @@
       getJudgesList() {
         console.log('getJudgesList()', this.params);
         this.autocomplete = []; // коли визиваємо цей метод liveSearch маємо закрити
+        this.params.expired = (this.params.expired === true || this.params.expired === 1) ? 1 : 0; 
         if (this.validateInputSearch() === false) { // !! = true
           this.params.search = null;
         }
@@ -253,6 +254,8 @@
             })
             .then(response => {
               this.judgesList = response.data;
+              window.scrollTo(0, 0);
+              console.log('getJudges Response', this.judgesList);
             })
             .catch(error => {
               console.log(error);
@@ -264,7 +267,7 @@
         this.params.regions = [];
         this.params.instance = [];
         this.params.jurisdiction = [];
-        this.params.expired = 0;
+        this.params.expired = 1;
         this.params.search = null;
         this.autocomplete = [];
         this.getJudgesList(); // онуляємо всі фільтри і визиваємо функцію
@@ -274,7 +277,6 @@
       JudgeComponent,
       VueAdsPagination
     }
-  
   };
 </script>
 

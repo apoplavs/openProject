@@ -65,12 +65,12 @@
                         <label for="chooser-judge-status" class="col-4">Статус</label>
                         <div class="col-8">
                             <select class="form-control" id="chooser-judge-status" v-model="judgeStatus.set_status" value="judgeStatus.set_status">
-                                    <option value="1">на роботі</option>
-                                    <option value="2">на лікарняному</option>
-                                    <option value="3">у відпустці</option>
-                                    <option value="4">відсутній на робочому місці</option>
-                                    <option value="5">припинено повноваження</option>
-                                </select>
+                                <option value="1">на роботі</option>
+                                <option value="2">на лікарняному</option>
+                                <option value="3">у відпустці</option>
+                                <option value="4">відсутній на робочому місці</option>
+                                <option value="5">припинено повноваження</option>
+                            </select>
                         </div>
                         <!-- <div>
                             status={{judgeStatus.set_status}} date={{judgeStatus.due_date}}
