@@ -215,7 +215,6 @@
         this.$refs.pagins.currentPage = 0;
         this.params.page = 1; 
         console.log('PARAMS ЗНАЙТИ', this.params);
-        
         this.getJudgesList();
       },
   
@@ -223,6 +222,8 @@
        
         this.autocomplete = []; // коли визиваємо цей метод liveSearch маємо закрити
         this.params.expired = (this.params.expired === true || this.params.expired === 1) ? 1 : 0;
+        console.log("expired", this.params.expired);
+        
         if (this.validateInputSearch() === false) { // !! = true
           this.params.search = null;
         }
@@ -258,6 +259,8 @@
             })
             .then(response => {
               this.judgesList = response.data;
+              window.scrollTo(0, 0);
+              console.log('getJudges Response', this.judgesList);
             })
             .catch(error => {
               console.log(error);
