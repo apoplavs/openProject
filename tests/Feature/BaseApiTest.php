@@ -25,7 +25,7 @@ class BaseApiTest extends TestCase
      * Дані про тестового користувача; мають бути такими, яких нема у БД
      */
     protected $user_data = [
-        'name' => 'slualexvas_test_name',
+        'name'      => 'slualexvas_test_name',
         'surname'   => 'slualexvas_test_surname',
         'email'     => 'slualexvas@gmail.com',
         'password'  => 'test_password',

@@ -296,7 +296,8 @@ class JudgesController extends Controller
 			'jurisdictions' => 'array',
 			'jurisdictions.*' => 'numeric|min:1|max:3',
 			'search' => 'string|alpha|min:1|max:20',
-			'sort' => 'numeric|min:1|max:4'
+			'sort' => 'numeric|min:1|max:4',
+			'page' => 'int|min:0',
 		]);
 
 		// приведення фільтрів до коректного вигляду
@@ -568,7 +569,8 @@ class JudgesController extends Controller
 			'jurisdictions' => 'array',
 			'jurisdictions.*' => 'numeric|min:1|max:3',
 			'search' => 'string|alpha|min:1|max:20',
-			'sort' => 'numeric|min:1|max:4'
+			'sort' => 'numeric|min:1|max:4',
+			'page' => 'int|min:0',
 		]);
 		// приведення фільтрів до коректного вигляду
 		$filters = $this->getFilters();
