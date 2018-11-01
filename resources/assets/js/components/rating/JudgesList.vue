@@ -94,6 +94,7 @@
       <div class="col-9 list-data-container">
         <div class="row">
           <div class="col-10 autocomplete">
+              <b-input placeholder="Search..."></b-input>
             <input type="search" class="form-control" placeholder="Пошук..." v-model.trim="params.search" @keyup="liveSearch()">
             <div class="autocomplete-block-result" v-if="autocomplete.length">
               <div class="autocomplete-block-result_element" v-for="(el, ind_1) in autocomplete" :key="ind_1">

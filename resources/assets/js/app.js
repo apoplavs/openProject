@@ -7,9 +7,10 @@ import VeeValidate, { Validator } from 'vee-validate';
 import uk from 'vee-validate/dist/locale/uk';
 import Toasted from 'vue-toasted';
 import Vuex from 'vuex';
+import Buefy from "buefy"
+// import 'buefy/lib/buefy.css'
 
-
-
+Vue.use(Buefy)
 Vue.use(VeeValidate);
 Vue.use(VueRouter);
 Vue.use(Toasted);
