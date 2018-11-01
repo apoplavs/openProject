@@ -7,8 +7,8 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use stdClass;
 use Toecyd\Court;
-use Toecyd\JudgeNameParsed;
 use DateTime;
+use Toecyd\JudgeNameParsed;
 
 /**
  * Class AutoAssignedCases
@@ -155,15 +155,17 @@ class AutoAssignedCases extends Command
 
         return json_decode($result);
     }
-
-    /**
-     * Зберігає масив судових справ у базу даних
-     *
-     * @param int    $court_code
-     * @param object $response
-     *
-     * @return void
-     */
+	
+	
+	/**
+	 * Зберігає масив судових справ у базу даних
+	 *
+	 * @param int    $court_code
+	 * @param object $response
+	 *
+	 * @return void
+	 * @throws Exception
+	 */
     private function saveCurlResponse($court_code, $response) {
         $this->existing_cases = $this->getExistingCases($court_code, $response->aaData);
         $this->existing_judges = $this->getExistingJudges($court_code);
