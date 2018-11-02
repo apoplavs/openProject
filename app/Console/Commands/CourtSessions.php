@@ -5,7 +5,7 @@ namespace Toecyd\Console\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Toecyd\Court;
-use Toecyd\JudgeNameParsed;
+use Toecyd\lib\JudgeNameParsed;
 use DateTime;
 
 /**
@@ -47,12 +47,14 @@ class CourtSessions extends Command
     public function __construct() {
         parent::__construct();
     }
-
-    /**
-     * Execute the console command.
-     *
-     * @return mixed
-     */
+	
+	
+	/**
+	 * Execute the console command.
+	 *
+	 * @return mixed
+	 * @throws \Exception
+	 */
     public function handle() {
         foreach (Court::getCourtCodes() as $court_code) {
             $this->time_statistics['start'] = microtime(true);
@@ -74,15 +76,17 @@ class CourtSessions extends Command
             echo "Total time: {$total_time} seconds\n";
         }
     }
-
-    /**
-     * Формує запит до державного реєстру судових справ, відправляє цей запит за допомогою cURL та отримує результат
-     *
-     * @param int $court_code
-     *
-     * @return object
-     */
-    private function getCurlResponse(int $court_code) {
+	
+	
+	/**
+	 * Формує запит до державного реєстру судових справ, відправляє цей запит за допомогою cURL та отримує результат
+	 *
+	 * @param int $court_code
+	 *
+	 * @return array
+	 * @throws \Exception
+	 */
+    private function getCurlResponse(int $court_code) : array {
         $curl_post_fields = "q_court_id={$court_code}";
 
         $ch = curl_init();
@@ -115,7 +119,7 @@ class CourtSessions extends Command
         }
         curl_close($ch);
 
-        return json_decode($result);;
+        return json_decode($result);
     }
 
     /**

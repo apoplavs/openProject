@@ -21,13 +21,11 @@ class Judge extends Model
         'name',
         'patronymic',
         'photo',
-        'facebook',
-        'chesnosud',
         'status',
+		'updated_status',
+		'due_date_status',
         'phone',
         'rating',
-        'likes',
-        'unlikes',
     ];
 
     public static function getJudgesListGuestFields() {
@@ -47,6 +45,7 @@ class Judge extends Model
     public static function getSortVariants()
     {
         return [
+        	0 => ['judges.id', 'ASC'],
             1 => ['judges.surname', 'ASC'],
             2 => ['judges.surname', 'DESC'],
             3 => ['judges.rating', 'ASC'],
@@ -107,7 +106,6 @@ class Judge extends Model
                 return $query->where('judges.surname', 'LIKE', $search . '%');
             })
             ->orderBy($sort_variant[0], $sort_variant[1])
-            ->orderBy('judges.id', 'ASC')
             ->paginate(self::JUDGES_PER_PAGE));
     }
 
@@ -153,7 +151,6 @@ class Judge extends Model
                 return $query->where('judges.surname', 'LIKE', $search . '%');
             })
             ->orderBy($sort_variant[0], $sort_variant[1])
-            ->orderBy('judges.id', 'ASC')
             ->paginate(self::JUDGES_PER_PAGE));
     }
 

@@ -5,10 +5,9 @@ namespace Toecyd\Console\Commands;
 use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
-use stdClass;
 use Toecyd\Court;
 use DateTime;
-use Toecyd\JudgeNameParsed;
+use Toecyd\lib\JudgeNameParsed;
 
 /**
  * Class AutoAssignedCases
@@ -61,6 +60,9 @@ class AutoAssignedCases extends Command
         $this->initDateParams();
 
         foreach (Court::getCourtCodes() as $court_code) {
+            if ($court_code < 437) {
+                continue;
+            }
             $this->time_statistics['start'] = microtime(true);
             $response = $this->getCurlResponse($court_code);
             $this->time_statistics['after_curl'] = microtime(true);
@@ -108,7 +110,7 @@ class AutoAssignedCases extends Command
 
         $this->date_to = clone $this->date_from;
 		$this->date_to->modify('+ 1 year');
-//        $this->date_to->modify('+1 month');
+        $this->date_to->modify('+1 month');
     }
 	
 	
@@ -267,17 +269,17 @@ class AutoAssignedCases extends Command
 			}
         }
         // якщо суддю не знайдено - додаємо його
-        if ($judge_id == 0 && mb_strlen($parsed['name']) > 2) {
-        	$new_judge = new stdClass();
-			$new_judge->surname = $parsed['surname'];
-			$new_judge->name = $parsed['name'];
-			$new_judge->patronymic = $parsed['patronymic'];
-			$new_judge->court = $court_code;
-            $judge_id = DB::table('judges')->insertGetId(['surname'=>$parsed['surname'],
-				'name'=>$parsed['name'], 'patronymic'=>$parsed['patronymic'], 'court'=>$court_code]);
-			$new_judge->id = $judge_id;
-            $this->existing_judges[] = $new_judge;
-        }
+//        if ($judge_id == 0 && mb_strlen($parsed['name']) > 2) {
+//        	$new_judge = new stdClass();
+//			$new_judge->surname = $parsed['surname'];
+//			$new_judge->name = $parsed['name'];
+//			$new_judge->patronymic = $parsed['patronymic'];
+//			$new_judge->court = $court_code;
+//            $judge_id = DB::table('judges')->insertGetId(['surname'=>$parsed['surname'],
+//				'name'=>$parsed['name'], 'patronymic'=>$parsed['patronymic'], 'court'=>$court_code]);
+//			$new_judge->id = $judge_id;
+//            $this->existing_judges[] = $new_judge;
+//        }
         return $judge_id;
     }
 	

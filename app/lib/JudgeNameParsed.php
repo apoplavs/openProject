@@ -1,6 +1,6 @@
 <?php
 
-namespace Toecyd;
+namespace Toecyd\lib;
 
 use Exception;
 
