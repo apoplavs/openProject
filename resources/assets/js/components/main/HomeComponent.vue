@@ -21,20 +21,20 @@
     }
 </script>
 
-<style scoped>
+<style lang='scss' scoped>
   @import "../../../sass/_variables.scss";
 
     /* styles for welcome page */
     
     #welcome-page {
-       height: 100vh;
-    width: 100%;
-    background-color: #4686a08f;
-    background-attachment: fixed, fixed, fixed;
-    background-image: linear-gradient(to bottom, rgb(48, 129, 207) 0%, rgb(130, 219, 133) 100%);
-    /* background-position: top left, center center, center center;
-    background-size: auto, cover, cover; */
-    overflow: hidden;
+        height: 100vh;
+        width: 100%;
+        background-color: #4686a08f;
+        background-attachment: fixed, fixed, fixed;
+        background-image: linear-gradient(to bottom, rgb(48, 129, 207) 0%, rgb(130, 219, 133) 100%);
+        /* background-position: top left, center center, center center;
+        background-size: auto, cover, cover; */
+        overflow: hidden;
     }
     
     #title-label {
@@ -55,10 +55,7 @@
         animation-name: title2;
         animation-duration: 1s;
     }
-    
-    
-    /* Анімація для welcome.blade.php титульного надпису */
-    
+        
     @keyframes title1 {
         0% {
             color: rgba(255, 255, 255, 0.1);

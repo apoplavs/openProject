@@ -63,17 +63,7 @@
                 </ul>
               </div>
             </div>
-  
-            <hr>
-  
-            <div class="row">
-              <div class="col-lg-12">
-                <ul class="list-unstyled mb-0">
-                  <li><label><input type="checkbox" value="1" name="expired" v-model="params.expired"><span class="checkmark"></span>Закінчилися повноваження</label></li>
-                </ul>
-              </div>
-            </div>
-  
+
             <div class="apply-filters" id="apply-filters">
               <hr>
               <div class="row">
@@ -111,22 +101,23 @@
             <h4 class="d-flex align-items-center">Список суддів</h4>
             <div class="d-flex align-items-center">
               <span class="mr-2"> сортувати за: </span>
-              <select class="form-control select-sort" name="sorting" v-model="params.sort" @change="sortJudges()">
+              <select class="form-control select-sort" name="sorting" v-model="params.sort" @change="sortList()">
                                   <option value="1" selected>прізвищем (А->Я) <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i></option>
                                   <option value="2">прізвищем (Я->А)</option>
                                   <option value="3">рейтингом (низький->високий)</option>
                                   <option value="4">рейтингом (високий->низький)</option>
-                                </select>
+                                </select> 
             </div>
           </div>
-          <div id="judges-list">
-            <!--judges-judges-list-->
-            <judge-component :judgesList="judgesList.data"></judge-component>
+          <div id="courts-list">
+            <!--court-list-->
+            <spinner v-if="!loadData" />
+            <court-component v-if="loadData" :courtList="court.data" />
           </div>
   
         </div>
         <div class="pagination mb-5">
-          <vue-ads-pagination  ref="pagins" @page-change="pageChange" :total-items="judgesList.total" :max-visible-pages="5" :button-classes="buttonClasses" :loading="false">
+          <vue-ads-pagination  ref="pagins" @page-change="pageChange" :total-items="courtList.total" :max-visible-pages="5" :button-classes="buttonClasses" :loading="false">
           </vue-ads-pagination>
         </div>
       </div>
@@ -138,15 +129,16 @@
 </template>
 
 <script>
-  import JudgeComponent from './JudgeComponent.vue';
-  //
+  import CourtComponent from './CourtComponent.vue';
+  import Spinner from '../../shared/Spinner.vue';
   import VueAdsPagination from 'vue-ads-pagination';
   import _ from 'lodash';
   
   export default {
-    name: "judges-list",
+    name: "CourtsList",
     data() {
       return {
+        loadData: false,
         params: {
           page: 0,
           regions: [],
@@ -154,10 +146,9 @@
           instance: [],
           search: null,
           sort: 1,
-          expired: 1
         },
         autocomplete: [],
-        judgesList: {
+        courtList: {
           total: 0
         },
         'buttonClasses': {
@@ -182,10 +173,9 @@
         return true;
       },
       liveSearch: _.debounce(function(event) {
-        console.log('Виклик автокомплит');
         if (this.validateInputSearch()) {
           axios
-            .get('/api/v1/judges/autocomplete', {
+            .get('/api/v1/courts/autocomplete', {
               headers: {
                 "Content-Type": "application/json",
                 "X-Requested-With": "XMLHttpRequest",
@@ -202,31 +192,35 @@
             });
         }
       }, 1000),
-      sortJudges: _.debounce(function(event) {
-        this.getJudgesList();
+      sortList: _.debounce(function(event) {
+        window.scrollTo(0, 0);
+        this.getCourtsList();
       }, 10),
   
       pageChange(page) {
+        window.scrollTo(0, 0);
+        this.loadData = false;
         this.params.page = page + 1;
-        this.getJudgesList();
+        this.getCourtsList();
       },
       setFilters() {
+        window.scrollTo(0, 0);
         this.$refs.pagins.currentPage = 0;
         this.params.page = 1; 
-        this.getJudgesList();
+        console.log('PARAMS ЗНАЙТИ', this.params);
+        this.getCourtsList();
       },
   
-      getJudgesList() {
-        console.log('getJudgesList()', this.params);
+      getCourtsList() {    
         this.autocomplete = []; // коли визиваємо цей метод liveSearch маємо закрити
-        this.params.expired = (this.params.expired === true || this.params.expired === 1) ? 1 : 0; 
         if (this.validateInputSearch() === false) { // !! = true
           this.params.search = null;
         }
+         console.log('get-Courts-List-------PARAMS', this.params);
         if (localStorage.getItem('token')) {
           console.log('have token')
           axios
-            .get('/api/v1/judges/list', {
+            .get('/api/v1/courts/list', {
               headers: {
                 "Content-Type": "application/json",
                 "X-Requested-With": "XMLHttpRequest",
@@ -235,9 +229,9 @@
               params: this.params
             })
             .then(response => {
-              this.judgesList = response.data;
-              window.scrollTo(0, 0);
-              console.log('getJudges Response', this.judgesList);
+              this.courtsList = response.data;
+              this.loadData = true;  
+              console.log('getCourts Response', this.courtsList);
             })
             .catch(error => {
               console.log('Каже що не авторизований пффф та Канеха');
@@ -245,7 +239,7 @@
         } else {
           console.log('no token')
           axios
-            .get("/api/v1/guest/judges/list", {
+            .get("/api/v1/guest/courts/list", {
               headers: {
                 "Content-Type": "application/json",
                 "X-Requested-With": "XMLHttpRequest",
@@ -253,9 +247,9 @@
               params: this.params
             })
             .then(response => {
-              this.judgesList = response.data;
-              window.scrollTo(0, 0);
-              console.log('getJudges Response', this.judgesList);
+              this.courtsList = response.data;
+              this.loadData = true;
+              console.log('getCourts Response', this.courtsList);
             })
             .catch(error => {
               console.log(error);
@@ -267,16 +261,17 @@
         this.params.regions = [];
         this.params.instance = [];
         this.params.jurisdiction = [];
-        this.params.expired = 1;
         this.params.search = null;
         this.autocomplete = [];
-        this.getJudgesList(); // онуляємо всі фільтри і визиваємо функцію
+        this.getCourtsList(); // онуляємо всі фільтри і визиваємо функцію
       }
     },
     components: {
-      JudgeComponent,
-      VueAdsPagination
+      CourtComponent,
+      VueAdsPagination,
+      Spinner
     }
+  
   };
 </script>
 
@@ -298,6 +293,7 @@
     }
     .disabled {
       color: grey;
+      cursor: no-drop;
     }
     .dots {
       background-color: transparent;
@@ -307,5 +303,5 @@
 </style>
 
 <style lang="scss" scoped>
-  @import "../../../sass/judges_coutrs_list.scss";
+  @import "../../../../sass/judges_coutrs_list.scss";
 </style>

@@ -8,7 +8,8 @@ import uk from 'vee-validate/dist/locale/uk';
 import Toasted from 'vue-toasted';
 import Vuex from 'vuex';
 
-
+import AppComponent from './components/AppComponent.vue';
+import router from './scripts/router';
 
 Vue.use(VeeValidate);
 Vue.use(VueRouter);
@@ -19,50 +20,8 @@ Validator.localize('uk', uk);
 window.axios = axios;
 
 
-import AppComponent from './components/AppComponent.vue';
-import HomeComponent from './components/main/HomeComponent.vue';
-import Login from './components/auth/Login.vue';
-import Registration from './components/auth/Registration.vue';
-import JudgesList from './components/rating/JudgesList.vue';
-import UserProfile from './components/user/UserProfile.vue';
-
-const router = new VueRouter({
-    mode: 'history',
-    base: __dirname,
-    routes: [
-        {
-            path: '/',
-            component: HomeComponent,
-            name: 'home-component'
-        },
-        {
-            path: '/login',
-            component: Login,
-            name: 'login'
-        },
-        {
-            path: '/registration',
-            component: Registration,
-            name: 'registration'
-        },
-        {
-            path: '/user-profile',
-            component: UserProfile,
-            name: 'user-profile'
-        },
-        {
-            path: '/judges-list',
-            component: JudgesList,
-            name: 'judges-list'
-        },
-    ]
-});
-
-
-
-const app = new Vue({
+new Vue({
     el: '#app',
     render: h => h(AppComponent),
-    router
-        
+    router       
 });
