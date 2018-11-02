@@ -4,9 +4,10 @@ namespace Toecyd\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
+use stdClass;
 use Toecyd\Court;
-use Toecyd\JudgeNameParsed;
-use DateTime;
+use Toecyd\Judge;
+use Toecyd\lib\JudgeNameParsed;
 
 /**
  * Class CourtSessions
@@ -47,12 +48,13 @@ class CourtSessions extends Command
     public function __construct() {
         parent::__construct();
     }
-
-    /**
-     * Execute the console command.
-     *
-     * @return mixed
-     */
+	
+	
+	/**
+	 * Execute the console command.
+	 *
+	 * @throws \Exception
+	 */
     public function handle() {
         foreach (Court::getCourtCodes() as $court_code) {
             $this->time_statistics['start'] = microtime(true);
@@ -74,14 +76,15 @@ class CourtSessions extends Command
             echo "Total time: {$total_time} seconds\n";
         }
     }
-
-    /**
-     * Формує запит до державного реєстру судових справ, відправляє цей запит за допомогою cURL та отримує результат
-     *
-     * @param int $court_code
-     *
-     * @return object
-     */
+	
+	
+	/**
+	 * Формує запит до державного реєстру судових справ, відправляє цей запит за допомогою cURL та отримує результат
+	 *
+	 * @param int $court_code
+	 * @return array
+	 * @throws \Exception
+	 */
     private function getCurlResponse(int $court_code) {
         $curl_post_fields = "q_court_id={$court_code}";
 
@@ -115,7 +118,7 @@ class CourtSessions extends Command
         }
         curl_close($ch);
 
-        return json_decode($result);;
+        return json_decode($result);
     }
 
     /**
@@ -128,19 +131,18 @@ class CourtSessions extends Command
      */
     private function saveCurlResponse(int $court_code, array $response) {
         $this->existing_sessions = $this->getExistingSessions($court_code);
-        $this->existing_judges = $this->getExistingJudges($court_code);
+        $this->existing_judges = Judge::getExistingJudges($court_code);
 
         $sessions_to_insert = [];
 
         foreach ($response as $item) {
-            $session_to_insert = $this->getSessionsToInsert($court_code, $item);
+            $session_to_insert = $this->getSessionToInsert($court_code, $item);
             if (!empty($session_to_insert)) {
                 $sessions_to_insert[] = $session_to_insert;
             }
         }
-
-//        var_dump($sessions_to_insert);
-        Db::table('court_sessions')->insert($sessions_to_insert);
+        
+		Db::table('court_sessions')->insert($sessions_to_insert);
 
         echo "Total sessions: "
             . (!empty($response) ? count($response) : 0) . ". Inserted sessions: "
@@ -171,20 +173,6 @@ class CourtSessions extends Command
         return $result;
     }
 
-    /**
-     * Отримує з БД дані по вже існуючим суддям
-     *
-     * @param int $court_code
-     *
-     * @return array
-     */
-    private function getExistingJudges($court_code) {
-        return DB::table('judges')
-            ->select('id', 'name', 'surname', 'patronymic')
-            ->where('court', '=', $court_code)
-            ->get()
-            ->toArray();
-    }
 
     /**
      * @param int       $court_code
@@ -192,7 +180,7 @@ class CourtSessions extends Command
      *
      * @return array
      */
-    private function getSessionsToInsert(int $court_code, \stdClass $item) {
+    private function getSessionToInsert(int $court_code, \stdClass $item) {
         $item->date = date('Y-m-d H:i:s', strtotime($item->date));
         if (isset($this->existing_sessions[$item->number][$item->date])) {
             return [];
@@ -232,58 +220,73 @@ class CourtSessions extends Command
     private function getJudgeIds(int $court_code, string $judge_names_string) {
         $judge_names_arr = explode(',', $judge_names_string);
         $judge_names_arr = array_map('trim', $judge_names_arr);
+	
+		$result = ['judge2' => null, 'judge3' => null];
 
-        $judge_names_count = count($judge_names_arr);
-        if (!in_array($judge_names_count, [1, 2, 3])) {
-            throw new \Exception("Кількість суддів: {$judge_names_count}. Треба, щоб було 1 або 3");
-        }
+        if (array_key_exists(0, $judge_names_arr)) {
+			$result['judge1'] = $this->getJudgeId($court_code, $judge_names_arr[0]);
+		}
+		if (array_key_exists(1, $judge_names_arr)) {
+			$result['judge2'] = $this->getJudgeId($court_code, $judge_names_arr[1]);
+		}
+		if (array_key_exists(2, $judge_names_arr)) {
+			$result['judge3'] = $this->getJudgeId($court_code, $judge_names_arr[2]);
+		}
 
-        $result = ['judge2' => null, 'judge3' => null];
-        foreach ($judge_names_arr as $i => $judge_name_raw) {
-            $result['judge' . ($i + 1)] = $this->getJudgeId($court_code, $judge_name_raw);
-        }
+		if (is_null($result['judge1']) || $result['judge1'] == 0) {
+			throw new \Exception("Не вдалося розпарсити ПІБ суддів: '{$judge_names_string}'");
+		}
         return $result;
     }
-
-    /**
-     * Отримує id судді в БД, користуючись заздалегідь вибраними даними по існуючим суддям.
-     * Якщо суддя із вказаним ПІБ в БД відсутній -- записує ПІБ судді в БД
-     *
-     * @param int    $court_code
-     * @param string $judge_name_raw
-     *
-     * @return int
-     */
-    private function getJudgeId($court_code, $judge_name_raw) {
-        $judge_id = 0;
-        $parsed = JudgeNameParsed::parseJudgeName($judge_name_raw);
-        foreach ($this->existing_judges as $key => $row) {
-            if ($row->surname == $parsed->surname) {
-                if (($row->name == $parsed->name || mb_substr($row->name, 0, 1) == $parsed->name)
-                    && ($row->patronymic == $parsed->patronymic || mb_substr($row->patronymic, 0, 1) == $parsed->patronymic)) {
-                    $judge_id = $row->id;
-                } elseif (mb_substr($parsed->name, 0, 1) == $row->name && mb_strlen($parsed->name) > 1
-                    && mb_substr($parsed->patronymic, 0, 1) == $row->patronymic && mb_strlen($parsed->patronymic) > 1) {
-                    // Випадок, коли у базі лежать лише ініціали судді, а прийшло повне ім'я.
-                    // Запам'ятовуємо judge_id, а також оновлюємо інфу в базі і в масивi $existing_judges
-                    $judge_id = $row->id;
-                    DB::table('judges')
-                        ->where('id', $judge_id)
-                        ->update(['name' => $parsed->name, 'patronymic' => $parsed->patronymic]);
-                    $this->existing_judges[$key]->name = $parsed->name;
-                    $this->existing_judges[$key]->patronymic = $parsed->patronymic;
-                }
-            }
+	
+	
+	/**
+	 * Отримує id судді в БД, користуючись заздалегідь вибраними даними по існуючим суддям.
+	 * Якщо суддя із вказаним ПІБ в БД відсутній -- записує ПІБ судді в БД
+	 *
+	 * @param int    $court_code
+	 * @param string $judge_name_raw
+	 * @return int
+	 * @throws \Exception
+	 */
+	private function getJudgeId(int $court_code, string $judge_name_raw) {
+		$judge_id = 0;
+		$parsed = JudgeNameParsed::parseJudgeName($judge_name_raw);
+		if (!$parsed) {
+			return NULL;
+		}
+		foreach ($this->existing_judges as $key => $row) {
+			if ($row->surname == $parsed['surname'] &&
+				mb_substr($row->name, 0, 1) == mb_substr($parsed['name'], 0, 1) &&
+				mb_substr($row->patronymic, 0, 1) == mb_substr($parsed['patronymic'], 0, 1)) {
+				$judge_id = $row->id;
+				// Випадок, коли у базі лежать лише ініціали судді, а прийшло повне ім'я.
+				if (mb_strlen($row->name) < mb_strlen($parsed['name'])) {
+					DB::table('judges')->where('id', $row->id)
+						->update(['name' => $parsed['name'], 'patronymic' => $parsed['patronymic']]);
+					$this->existing_judges[$key]->name = $parsed['name'];
+					$this->existing_judges[$key]->patronymic = $parsed['patronymic'];
+				}
+				break;
+			}
+		}
+		// якщо суддю не знайдено - додаємо його
+        if ($judge_id == 0) {
+        	$new_judge = new stdClass();
+			$new_judge->surname = $parsed['surname'];
+			$new_judge->name = $parsed['name'];
+			$new_judge->patronymic = $parsed['patronymic'];
+			$new_judge->court = $court_code;
+            $judge_id = DB::table('judges')->insertGetId(['surname'=>$parsed['surname'],
+				'name'=>$parsed['name'], 'patronymic'=>$parsed['patronymic'], 'court'=>$court_code]);
+			$new_judge->id = $judge_id;
+            $this->existing_judges[] = $new_judge;
         }
-        if (empty($judge_id)) {
-            $inserted_data = array_merge(['court' => $court_code], (array)$parsed);
-            $judge_id = DB::table('judges')->insertGetId($inserted_data);
-            $this->existing_judges[] = (object)array_merge(['id' => $judge_id], $inserted_data);
-        }
-        return $judge_id;
-    }
-
-    /**
+		return $judge_id;
+	}
+	
+	
+	/**
      * @param string $forma
      *
      * @return int

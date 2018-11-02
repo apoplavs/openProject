@@ -6,6 +6,11 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Модель для зв`язку з таблицею courts
+ * Class Court
+ * @package Toecyd
+ */
 class Court extends Model
 {
 	public $timestamps = false;
@@ -22,7 +27,7 @@ class Court extends Model
 	public static function getCourtCodes()
     {
         return (static::select('court_code')
-            ->whereNotIn('region_code', [1, 5, 12]) //відкидаємо АР Крим, Донецьку, Луганську області
+            ->whereNotIn('region_code', [1, 5, 12, 27]) //відкидаємо АР Крим, Донецьку, Луганську області
             ->where('court_code', '<', 2800) // відкидаємо спеціалізовані суди
             ->pluck('court_code'));
     }

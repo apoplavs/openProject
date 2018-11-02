@@ -296,7 +296,8 @@ class JudgesController extends Controller
 			'jurisdictions' => 'array',
 			'jurisdictions.*' => 'numeric|min:1|max:3',
 			'search' => 'string|alpha|min:1|max:20',
-			'sort' => 'numeric|min:1|max:4'
+			'sort' => 'numeric|min:1|max:4',
+			'page' => 'int|min:0',
 		]);
 
 		// приведення фільтрів до коректного вигляду
@@ -568,7 +569,8 @@ class JudgesController extends Controller
 			'jurisdictions' => 'array',
 			'jurisdictions.*' => 'numeric|min:1|max:3',
 			'search' => 'string|alpha|min:1|max:20',
-			'sort' => 'numeric|min:1|max:4'
+			'sort' => 'numeric|min:1|max:4',
+			'page' => 'int|min:0',
 		]);
 		// приведення фільтрів до коректного вигляду
 		$filters = $this->getFilters();
@@ -1410,7 +1412,7 @@ class JudgesController extends Controller
 		$regions = Input::has('regions') ? Input::get('regions') : [];
 		$instances = Input::has('instances') ? Input::get('instances') : [];
 		$jurisdictions = Input::has('jurisdictions') ? Input::get('jurisdictions') : [];
-		$sort_order = Input::has('sort') ? intval(Input::get('sort')) : 1;
+		$sort_order = Input::has('sort') ? intval(Input::get('sort')) : 0;
 		$search = Input::has('search') ? trim(Input::get('search')) : '';
 		$powers_expired = (Input::has('expired') && Input::get('expired')) ? true : false;
 		
