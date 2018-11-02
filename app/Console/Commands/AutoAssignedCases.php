@@ -7,6 +7,7 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Toecyd\Court;
 use DateTime;
+use Toecyd\Judge;
 use Toecyd\lib\JudgeNameParsed;
 
 /**
@@ -60,9 +61,9 @@ class AutoAssignedCases extends Command
         $this->initDateParams();
 
         foreach (Court::getCourtCodes() as $court_code) {
-            if ($court_code < 437) {
-                continue;
-            }
+//            if ($court_code < 437) {
+//                continue;
+//            }
             $this->time_statistics['start'] = microtime(true);
             $response = $this->getCurlResponse($court_code);
             $this->time_statistics['after_curl'] = microtime(true);
@@ -110,7 +111,7 @@ class AutoAssignedCases extends Command
 
         $this->date_to = clone $this->date_from;
 		$this->date_to->modify('+ 1 year');
-        $this->date_to->modify('+1 month');
+//        $this->date_to->modify('+1 month');
     }
 	
 	
@@ -170,7 +171,7 @@ class AutoAssignedCases extends Command
 	 */
     private function saveCurlResponse($court_code, $response) {
         $this->existing_cases = $this->getExistingCases($court_code, $response->aaData);
-        $this->existing_judges = $this->getExistingJudges($court_code);
+        $this->existing_judges = Judge::getExistingJudges($court_code);
 
         $cases_to_insert = [];
         $inserted = 0;
@@ -220,20 +221,6 @@ class AutoAssignedCases extends Command
         }
 
         return $result;
-    }
-
-    /**
-     * Отримує з БД дані по вже існуючим суддям
-     *
-     * @param int $court_code
-     *
-     * @return array
-     */
-    private function getExistingJudges($court_code) {
-        return DB::table('judges')
-            ->select('id', 'name', 'surname', 'patronymic')
-            ->where('court', '=', $court_code)
-            ->get();
     }
 	
 	
@@ -290,7 +277,6 @@ class AutoAssignedCases extends Command
 	 *
 	 * @param int   $court_code
 	 * @param array $item
-	 *
 	 * @return array
 	 * @throws Exception
 	 */

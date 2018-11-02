@@ -2,8 +2,8 @@
 
 namespace Tests\Feature;
 
-use Toecyd\JudgeNameParsed;
 use Tests\TestCase;
+use Toecyd\lib\JudgeNameParsed;
 
 /**
  * Тест для пасингу ПІБ судді

@@ -32,7 +32,7 @@ class JudgeNameParsed {
 		$separated = self::separatePIBJudge($judge_name_raw);
 		if (empty($separated)) {
 			return NULL;
-			throw new Exception("Не вдалось розпарсити ім'я судді: '{$judge_name_raw}'");
+			//throw new Exception("Не вдалось розпарсити ім'я судді: '{$judge_name_raw}'");
 		}
 		$separated['surname'] = self::validateRegister($separated['surname']);
 		$separated['name'] = self::validateRegister($separated['name']);
