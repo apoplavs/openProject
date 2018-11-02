@@ -92,7 +92,7 @@
 </template>
 
 <script>
-    import Modal from "../shared/Modal.vue";
+    import Modal from "../../shared/Modal.vue";
     import Datepicker from "vue-date";
     import _ from 'lodash';
     
@@ -229,8 +229,8 @@
 </script>
 
 <style scoped lang="scss">
-    @import "../../../sass/_variables.scss";
-    @import "../../../sass/_mixins.scss";
+    @import "../../../../sass/_variables.scss";
+    @import "../../../../sass/_mixins.scss";
     .judge-component:not(:last-child) {
         border-bottom: 1px solid lightgray;
     }
