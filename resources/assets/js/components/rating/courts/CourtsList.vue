@@ -63,39 +63,20 @@
                 </ul>
               </div>
             </div>
-  
-            <hr>
-  
-            <div class="row">
-              <div class="col-lg-12">
-                <ul class="list-unstyled mb-0">
-                  <li><label><input type="checkbox" value="1" name="expired" v-model="params.expired"><span class="checkmark"></span>Закінчилися повноваження</label></li>
-                </ul>
-              </div>
-            </div>
-  
+
             <div class="apply-filters" id="apply-filters">
               <hr>
               <div class="row">
-                <div class="col-6 pl-1">
+                <div class="col-6">
                   <button type="reset" @click="resetFilters()" class="btn btn-outline-info">Скинути</button>
                 </div>
                 <div class="col-6">
-                  <button type="button" @click="getJudgesList()" class="btn btn-primary">Показати</button>
+                  <button type="button" @click="setFilters()" class="btn btn-primary">Показати</button>
                 </div>
               </div>
             </div>
-            <!-- apply-filters -->
-            <!-- </form> -->
           </div>
         </div>
-        <!-- Card -->
-        <!-- <div>Регіон-------- {{params.regions }}</div>
-              <div>інстанція--------- {{ params.instance }}</div>
-              <div>юрисдикція--------- {{ params.jurisdiction }}</div>
-              <div>пошук-------- {{ params.search}}</div>
-              <div>sort-------- {{ params.sort}}</div>
-              <div> expired-------- {{ params.expired}}</div> -->
       </div>
   
       <!-- Main list -->
@@ -104,16 +85,15 @@
           <div class="col-10 autocomplete">
             <input type="search" class="form-control" placeholder="Пошук..." v-model.trim="params.search" @keyup="liveSearch()">
             <div class="autocomplete-block-result" v-if="autocomplete.length">
-              <div v-for="(el, ind_1) in autocomplete" :key="ind_1">
+              <div class="autocomplete-block-result_element" v-for="(el, ind_1) in autocomplete" :key="ind_1">
                 <router-link to="/">
                   {{ el.surname }} {{ (el.name.length === 1) ? el.name + '.' : el.name }} {{ (el.patronymic.length === 1) ? el.patronymic + '.' : el.patronymic }}
                 </router-link>
-                <hr>
               </div>
             </div>
           </div>
           <div class="col-2 pl-0">
-            <button type="button" class="btn btn-block btn btn-primary" @click="getJudgesList()"><i class="fa fa-search" aria-hidden="true"></i> знайти</button>
+            <button type="button" class="btn btn-confirm w-100" @click="setFilters()"><i class="fa fa-search" aria-hidden="true"></i> знайти</button>
           </div>
         </div>
         <div class="card card-outline-secondary ">
@@ -121,21 +101,23 @@
             <h4 class="d-flex align-items-center">Список суддів</h4>
             <div class="d-flex align-items-center">
               <span class="mr-2"> сортувати за: </span>
-              <select class="form-control select-sort" name="sorting" v-model="params.sort" @change="sortJudges()">
-                                <option value="1" selected>прізвищем (А->Я) <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i></option>
-                                <option value="2">прізвищем (Я->А)</option>
-                                <option value="3">рейтингом (низький->високий)</option>
-                                <option value="4">рейтингом (високий->низький)</option>
-                              </select>
+              <select class="form-control select-sort" name="sorting" v-model="params.sort" @change="sortList()">
+                                  <option value="1" selected>прізвищем (А->Я) <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i></option>
+                                  <option value="2">прізвищем (Я->А)</option>
+                                  <option value="3">рейтингом (низький->високий)</option>
+                                  <option value="4">рейтингом (високий->низький)</option>
+                                </select> 
             </div>
           </div>
-          <div id="judges-list">
-            <!--judges-judges-list-->
-            <judge-component :judgesList="judgesList.data"></judge-component>
+          <div id="courts-list">
+            <!--court-list-->
+            <spinner v-if="!loadData" />
+            <court-component v-if="loadData" :courtList="court.data" />
           </div>
+  
         </div>
         <div class="pagination mb-5">
-          <vue-ads-pagination @page-change="pageChange" :total-items="judgesList.total" :max-visible-pages="5" :button-classes="buttonClasses" :loading="false">
+          <vue-ads-pagination  ref="pagins" @page-change="pageChange" :total-items="courtList.total" :max-visible-pages="5" :button-classes="buttonClasses" :loading="false">
           </vue-ads-pagination>
         </div>
       </div>
@@ -147,29 +129,28 @@
 </template>
 
 <script>
-  import JudgeComponent from './JudgeComponent.vue';
-  //
+  import CourtComponent from './CourtComponent.vue';
+  import Spinner from '../../shared/Spinner.vue';
   import VueAdsPagination from 'vue-ads-pagination';
   import _ from 'lodash';
   
   export default {
-    name: "judges-list",
+    name: "CourtsList",
     data() {
       return {
+        loadData: false,
         params: {
-          page: 1,
+          page: 0,
           regions: [],
           jurisdiction: [],
           instance: [],
           search: null,
           sort: 1,
-          expired: 0
         },
         autocomplete: [],
-        // message: "",
-        judgesList: {
+        courtList: {
           total: 0
-        },  
+        },
         'buttonClasses': {
           'default': ['border-none', 'bg-grey-lightest'],
           'active': ['bg-active', 'border-none'],
@@ -192,10 +173,9 @@
         return true;
       },
       liveSearch: _.debounce(function(event) {
-        console.log('Виклик автокомплит');
         if (this.validateInputSearch()) {
           axios
-            .get('/api/v1/judges/autocomplete', {
+            .get('/api/v1/courts/autocomplete', {
               headers: {
                 "Content-Type": "application/json",
                 "X-Requested-With": "XMLHttpRequest",
@@ -212,25 +192,35 @@
             });
         }
       }, 1000),
-      sortJudges: _.debounce(function(event) {
-        this.getJudgesList();
+      sortList: _.debounce(function(event) {
+        window.scrollTo(0, 0);
+        this.getCourtsList();
       }, 10),
   
       pageChange(page) {
+        window.scrollTo(0, 0);
+        this.loadData = false;
         this.params.page = page + 1;
-        this.getJudgesList();
+        this.getCourtsList();
+      },
+      setFilters() {
+        window.scrollTo(0, 0);
+        this.$refs.pagins.currentPage = 0;
+        this.params.page = 1; 
+        console.log('PARAMS ЗНАЙТИ', this.params);
+        this.getCourtsList();
       },
   
-      getJudgesList() {
-        console.log('getJudgesList()');
+      getCourtsList() {    
         this.autocomplete = []; // коли визиваємо цей метод liveSearch маємо закрити
         if (this.validateInputSearch() === false) { // !! = true
           this.params.search = null;
         }
+         console.log('get-Courts-List-------PARAMS', this.params);
         if (localStorage.getItem('token')) {
           console.log('have token')
           axios
-            .get('/api/v1/judges/list', {
+            .get('/api/v1/courts/list', {
               headers: {
                 "Content-Type": "application/json",
                 "X-Requested-With": "XMLHttpRequest",
@@ -239,9 +229,9 @@
               params: this.params
             })
             .then(response => {
-              this.judgesList = response.data;
-              window.scrollTo(0, 0);
-              console.log('getJudges Response', this.judgesList);
+              this.courtsList = response.data;
+              this.loadData = true;  
+              console.log('getCourts Response', this.courtsList);
             })
             .catch(error => {
               console.log('Каже що не авторизований пффф та Канеха');
@@ -249,7 +239,7 @@
         } else {
           console.log('no token')
           axios
-            .get("/api/v1/guest/judges/list", {
+            .get("/api/v1/guest/courts/list", {
               headers: {
                 "Content-Type": "application/json",
                 "X-Requested-With": "XMLHttpRequest",
@@ -257,7 +247,9 @@
               params: this.params
             })
             .then(response => {
-              this.judgesList = response.data;
+              this.courtsList = response.data;
+              this.loadData = true;
+              console.log('getCourts Response', this.courtsList);
             })
             .catch(error => {
               console.log(error);
@@ -269,176 +261,47 @@
         this.params.regions = [];
         this.params.instance = [];
         this.params.jurisdiction = [];
-        this.params.expired = 0;
         this.params.search = null;
         this.autocomplete = [];
-        this.getJudgesList(); // онуляємо всі фільтри і визиваємо функцію
+        this.getCourtsList(); // онуляємо всі фільтри і визиваємо функцію
       }
-  
     },
     components: {
-      JudgeComponent,
-      VueAdsPagination    
+      CourtComponent,
+      VueAdsPagination,
+      Spinner
     }
   
   };
 </script>
 
-<style>
-  @import "../../../sass/_variables.scss";
-  
-  /* styles for pagination must be not scoped */
-  
-  button {
-    cursor: pointer;
-  }
-  
-  .bg-active {
-    background-color: #2b989b;
-  }
-  
-  .button:active {
-    outline: none;
-  }
-  
-  .button:focus {
-    outline: none;
-  }
-  
-  div.pr-2.leading-loose {
-    display: none !important;
-  }
-  
-  .disabled {
-    color: grey;
-  }
-  
-  .dots {
-    background-color: transparent;
-    border: none !important;
+<style lang="scss">
+  .pagination {
+    .bg-active {
+      background-color: #2b989b;
+      border-color: #2b989b;
+    }
+    button{
+      &:active,
+      &:focus{
+        background-color: #2b989b;
+        border-color: #2b989b;
+      }
+    }
+    div.pr-2.leading-loose {
+      display: none !important;
+    }
+    .disabled {
+      color: grey;
+      cursor: no-drop;
+    }
+    .dots {
+      background-color: transparent;
+      border: none !important;
+    }
   }
 </style>
 
-
-<style scoped lang="scss">
-  @import "../../../sass/_variables.scss";
-  .min-width {
-    min-width: 1200px !important;
-  }
-  
-  
-  /* Стилі для фільтрів */
-  
-  // styles filters 
-  .filters {
-    margin-top: 58px;
-    font-size: 0.9em;
-    h6 {
-      color: #4c88bd;
-    }
-    /* Customize the label (the container) */
-    ul label {
-      display: block;
-      position: relative;
-      padding-left: 35px;
-      margin-bottom: 10px;
-      cursor: pointer;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
-    }
-    /* Hide the browser's default checkbox */
-    ul input {
-      position: absolute;
-      opacity: 0;
-      cursor: pointer;
-    }
-    /* Create a custom checkbox */
-    .checkmark {
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: 21px;
-      width: 21px;
-      background-color: #eee;
-    }
-    /* When the checkbox is checked, add a blue background */
-    ul label input:checked~.checkmark {
-      background-color: #2b989b;
-    }
-    /* Create the checkmark/indicator (hidden when not checked) */
-    .checkmark:after {
-      content: "";
-      position: absolute;
-      display: none;
-    }
-    /* Show the checkmark when checked */
-    ul label input:checked~.checkmark:after {
-      display: block;
-    }
-    /* Style the checkmark/indicator */
-    ul label .checkmark:after {
-      left: 9px;
-      top: 5px;
-      width: 5px;
-      height: 10px;
-      border: solid white;
-      border-width: 0 3px 3px 0;
-      -webkit-transform: rotate(45deg);
-      -ms-transform: rotate(45deg);
-      transform: rotate(45deg);
-    }
-    .apply-filters {
-      background-color: white;
-      position: sticky;
-      bottom: 0;
-    }
-    .fa-filter {
-      font-size: 21px;
-      color: #6291ba;
-    }
-  }
-  
-  .list-data-container {
-    .card {
-      margin-top: 20px;
-    }
-    .pagination {
-      display: flex;
-      justify-content: center;
-    }
-    .select-sort {
-      width: 290px;
-    }
-    /* styles for autocomplete field  */
-    .autocomplete {
-      /*the container must be positioned relative:*/
-      position: relative;
-      display: inline-block;
-    }
-    .autocomplete-block-result {
-      position: absolute;
-      font-size: 0.9rem;
-      border: none;
-      z-index: 99;
-      top: 100%;
-      left: 16px;
-      right: 16px;
-      padding: 10px;
-      -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
-      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
-      border-radius: 4px;
-      border-top-left-radius: 0px;
-      border-top-right-radius: 0;
-      background-color: #f7f7f7;
-    }
-  }
-  
-  
-  /* styles for page elements */
-  
-  // div.card-body.p-2 h5 a {
-  //   color: #3d7ee5;
-  // }
+<style lang="scss" scoped>
+  @import "../../../../sass/judges_coutrs_list.scss";
 </style>

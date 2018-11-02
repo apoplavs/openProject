@@ -30,6 +30,7 @@
     "test": "tests"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.4.2",
     "ajv": "^6.5.2",
     "passport-facebook": "^2.1.1",
     "rxjs": "^6.3.2",
@@ -38,6 +39,7 @@
     "vue-date": "^1.1.10",
     "vue-router": "^3.0.1",
     "vue-rx": "^6.0.1",
+    "vue-spinner": "^1.0.3",
     "vue-toasted": "^1.1.24",
     "vue-toastr": "^2.0.14",
     "vuex": "^3.0.1"

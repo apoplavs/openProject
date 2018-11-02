@@ -18,8 +18,8 @@
                         <router-link to="/judges-list">
                             <a class="dropdown-item">Судді</a>
                         </router-link>
-                        <router-link to="#">
-                            <a class="dropdown-item disabled">Суди<small>( <i class="fa fa-code" aria-hidden="true"></i> в розробці)</small></a>
+                        <router-link to="/courts-list">
+                            <a class="dropdown-item disabled">Суди</a>
                         </router-link>
                     </div>
                 </li>

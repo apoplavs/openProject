@@ -1,0 +1,10 @@
+@mixin alignElement($flexDirection: row, $justifyContent: flex-start, $alignItems: center){
+    display: flex;
+    flex-direction: $flexDirection;
+    justify-content: $justifyContent;
+    align-items: $alignItems;
+}
+@mixin boxShadow($shadow) {
+    -webkit-box-shadow: $shadow;
+    box-shadow: $shadow;
+}
