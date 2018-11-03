@@ -65,7 +65,7 @@ class JudgesListGuestTest extends BaseApiTest
      *
      * @return Builder
      */
-    public function getJudgesQuery(bool $powers_expired = false, array $orderBy = ['judges.surname', 'ASC']) : Builder
+    public function getJudgesQuery(bool $powers_expired = false, array $orderBy = ['judges.id', 'ASC']) : Builder
     {
         return Judge::select($this->getFieldstoSelect())
             // якщо не переданий аргумент щоб показувати суддів в яких закінчились повноваження - значить упускємо їх при вибірці
@@ -73,8 +73,7 @@ class JudgesListGuestTest extends BaseApiTest
                 return $query->where('judges.status', '!=', 5);
             })
             ->join('courts', 'judges.court', '=', 'courts.court_code')
-            ->orderBy($orderBy[0], $orderBy[1])
-            ->orderBy('judges.id', 'ASC');
+            ->orderBy($orderBy[0], $orderBy[1]);
     }
 
     /**
