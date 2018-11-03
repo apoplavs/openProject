@@ -195,7 +195,7 @@ class AuthController extends Controller
         ]);
 
         $credentials = request(['email', 'password']);
-        $user_check = User::checkUser($request->email);
+        $user_check = User::checkUser($credentials);
         // якщо в користувача неправильний пароль, або є інші причини чому він не може ввійти
         if (!Auth::attempt($credentials) || $user_check !== true) {
             return response()->json([
