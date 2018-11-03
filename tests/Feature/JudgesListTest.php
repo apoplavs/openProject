@@ -19,9 +19,9 @@ class JudgesListTest extends JudgesListGuestTest
         return Judge::getJudgesListFields($this->user->id);
     }
 
-    public function getJudgesQuery(bool $powers_expired = false, array $orderBy = ['judges.id', 'ASC']) : Builder
+    public function getJudgesQuery(bool $powers_expired = false, array $order_by = ['judges.surname', 'ASC']) : Builder
     {
-        return parent::getJudgesQuery($powers_expired, $orderBy)
+        return parent::getJudgesQuery($powers_expired, $order_by)
             ->leftJoin('user_bookmark_judges', function ($join){
                 $join->on('judges.id', '=', 'user_bookmark_judges.judge');
                 $join->on('user_bookmark_judges.user', '=', DB::raw($this->user->id));

@@ -45,8 +45,10 @@ class LoginTest extends BaseApiTest
 
             $response_data = $response->decodeResponseJson();
 
-            // $expires_at та $response_data['expires_at'] відрізняються на декілька секунд, тому їх не можна перевіряти на рівність
-            $this->assertTrue(abs(strtotime($expires_at) - strtotime($response_data['expires_at'])) < 60);
+            // $expires_at обчислюється як дата запуску всього набору тестів
+            // тому оцінку різниці між $expires_at та $response_data['expires_at'] треба ставити більшою,
+            // ніж тривалість виконання всього набору тестів
+            $this->assertTrue(abs(strtotime($expires_at) - strtotime($response_data['expires_at'])) < 3600);
         }
     }
 

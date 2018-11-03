@@ -1412,7 +1412,7 @@ class JudgesController extends Controller
 		$regions = Input::has('regions') ? Input::get('regions') : [];
 		$instances = Input::has('instances') ? Input::get('instances') : [];
 		$jurisdictions = Input::has('jurisdictions') ? Input::get('jurisdictions') : [];
-		$sort_order = Input::has('sort') ? intval(Input::get('sort')) : 0;
+		$sort_order = Input::has('sort') ? intval(Input::get('sort')) : 1;
 		$search = Input::has('search') ? trim(Input::get('search')) : '';
 		$powers_expired = (Input::has('expired') && Input::get('expired')) ? true : false;
 		
