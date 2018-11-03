@@ -3,6 +3,7 @@
 namespace Toecyd;
 
 use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\Facades\Storage;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -59,5 +60,9 @@ class User extends Authenticatable
 		}
 		return true;
 	}
-    
+
+	public static function getPhotoStorage()
+    {
+        return Storage::disk('public');
+    }
 }
