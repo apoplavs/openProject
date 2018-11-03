@@ -235,4 +235,24 @@ class Judge extends Model
 			->get();
 	}
 	
+	
+	public static function getJudgesListGuestFields() {
+		        return ['judges.id',
+			                'courts.name AS court_name',
+			                'judges.surname',
+			                'judges.name',
+			                'judges.patronymic',
+			                'judges.photo',
+			                'judges.status',
+			                DB::raw('DATE_FORMAT(judges.updated_status, "%d.%m.%Y") AS updated_status'),
+			                DB::raw('DATE_FORMAT(judges.due_date_status, "%d.%m.%Y") AS due_date_status'),
+			                'judges.rating'
+			        ];
+    }
+	
+	public static function getJudgesListFields($user_id) {
+		       return array_merge(self::getJudgesListGuestFields(),
+           [DB::raw("(CASE WHEN user_bookmark_judges.user = {$user_id} THEN 1 ELSE 0 END) AS is_bookmark")]);
+    }
+	
 }
