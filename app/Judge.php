@@ -239,21 +239,23 @@ class Judge extends Model
 	
 	
 	public static function getJudgesListGuestFields() {
-		        return ['judges.id',
-			                'courts.name AS court_name',
-			                'judges.surname',
-			                'judges.name',
-			                'judges.patronymic',
-			                'judges.photo',
-			                'judges.status',
-			                DB::raw('DATE_FORMAT(judges.updated_status, "%d.%m.%Y") AS updated_status'),
-			                DB::raw('DATE_FORMAT(judges.due_date_status, "%d.%m.%Y") AS due_date_status'),
-			                'judges.rating'
-			        ];
+        return [
+            'judges.id',
+            'courts.name AS court_name',
+            'judges.surname',
+            'judges.name',
+            'judges.patronymic',
+            'judges.photo',
+            'judges.status',
+            DB::raw('DATE_FORMAT(judges.updated_status, "%d.%m.%Y") AS updated_status'),
+            DB::raw('DATE_FORMAT(judges.due_date_status, "%d.%m.%Y") AS due_date_status'),
+            'judges.rating'
+        ];
     }
 	
 	public static function getJudgesListFields($user_id) {
-        return ['judges.id',
+        return [
+            'judges.id',
             'courts.name AS court_name',
             'judges.surname',
             'judges.name',

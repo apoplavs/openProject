@@ -3,6 +3,8 @@
 namespace Toecyd;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class UserBookmarkCourt
@@ -70,7 +72,32 @@ class UserBookmarkCourt extends Model
 	 * @return mixed
 	 */
 	public static function getBookmarkCourts() {
-		
-		//
+        return (DB::table('courts')->select(self::getBookmarkFields())
+            ->leftJoin('instances', 'courts.instance_code', '=', 'instances.instance_code')
+            ->leftJoin('regions', 'courts.region_code', '=', 'regions.region_code')
+            ->leftJoin('jurisdictions', 'courts.jurisdiction', '=', 'jurisdictions.id')
+            ->leftJoin('judges', 'courts.head_judge', '=', 'judges.id')
+            ->join('user_bookmark_courts', 'user_bookmark_courts.court', '=', 'courts.court_code')
+            ->where('user_bookmark_courts.user', '=', Auth::user()->id)
+            ->get()
+        );
 	}
+
+    /**
+     * Отримати всі поля, які треба вибрати
+     * в закладках користувача
+     * @return array
+     */
+    public static function getBookmarkFields() {
+        return [
+            'courts.court_code',
+            'courts.name AS court_name',
+            DB::raw('instances.name AS instance'),
+            DB::raw('regions.name AS region'),
+            DB::raw('jurisdictions.title AS jurisdiction'),
+            'courts.address',
+            DB::raw('CONCAT(judges.surname, " ", judges.name, " ", judges.patronymic) AS head_judge'),
+            'courts.rating',
+        ];
+    }
 }

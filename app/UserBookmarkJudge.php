@@ -51,13 +51,10 @@ class UserBookmarkJudge extends Model
 	 */
 	public static function getBookmarkJudges() {
 
-		return (DB::table('judges')->select('judges.id', 'courts.name AS court_name', 'judges.surname', 'judges.name',
-			'judges.patronymic', 'judges.photo', 'judges.status',
-			DB::raw('DATE_FORMAT(judges.updated_status, "%d.%m.%Y") AS updated_status'),
-			DB::raw('DATE_FORMAT(judges.due_date_status, "%d.%m.%Y") AS due_date_status'),
-			'judges.rating')
+		return (DB::table('judges')->select(self::getBookmarkFields())
 			->join('courts', 'judges.court', '=', 'courts.court_code')
-			->join('user_bookmark_judges', 'user_bookmark_judges.user', '=', Auth::user()->id)
+			->join('user_bookmark_judges', 'user_bookmark_judges.judge', '=', 'judges.id')
+            ->where('user_bookmark_judges.user', '=', Auth::user()->id)
 			->get());
 	}
 	
@@ -78,4 +75,24 @@ class UserBookmarkJudge extends Model
 		}
 		return (true);
 	}
+
+    /**
+     * Отримати всі поля, які треба вибрати
+     * в закладках користувача
+     * @return array
+     */
+    public static function getBookmarkFields() {
+        return [
+            'judges.id',
+            'courts.name AS court_name',
+            'judges.surname',
+            'judges.name',
+            'judges.patronymic',
+            'judges.photo',
+            'judges.status',
+            DB::raw('DATE_FORMAT(judges.updated_status, "%d.%m.%Y") AS updated_status'),
+            DB::raw('DATE_FORMAT(judges.due_date_status, "%d.%m.%Y") AS due_date_status'),
+            'judges.rating'
+        ];
+    }
 }
