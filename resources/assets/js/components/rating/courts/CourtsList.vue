@@ -85,9 +85,9 @@
           <div class="col-10 autocomplete">
             <input type="search" class="form-control" placeholder="Пошук..." v-model.trim="params.search" @keyup="liveSearch()">
             <div class="autocomplete-block-result" v-if="autocomplete.length">
-              <div class="autocomplete-block-result_element" v-for="(el, ind_1) in autocomplete" :key="ind_1">
+              <div class="autocomplete-block-result_element" v-for="(el, ind_2) in autocomplete" :key="ind_2">
                 <router-link to="/">
-                  {{ el.surname }} {{ (el.name.length === 1) ? el.name + '.' : el.name }} {{ (el.patronymic.length === 1) ? el.patronymic + '.' : el.patronymic }}
+                  {{ el.name }} 
                 </router-link>
               </div>
             </div>
@@ -96,14 +96,14 @@
             <button type="button" class="btn btn-confirm w-100" @click="setFilters()"><i class="fa fa-search" aria-hidden="true"></i> знайти</button>
           </div>
         </div>
-        <div class="card card-outline-secondary ">
+        <div class="card courts-card">
           <div class="card-header d-flex justify-content-between">
-            <h4 class="d-flex align-items-center">Список суддів</h4>
+            <h4 class="d-flex align-items-center">Список судів</h4>
             <div class="d-flex align-items-center">
               <span class="mr-2"> сортувати за: </span>
               <select class="form-control select-sort" name="sorting" v-model="params.sort" @change="sortList()">
-                                  <option value="1" selected>прізвищем (А->Я) <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i></option>
-                                  <option value="2">прізвищем (Я->А)</option>
+                                  <option value="1" >назвою (А->Я) <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i></option>
+                                  <option value="2">назвою (Я->А)</option>
                                   <option value="3">рейтингом (низький->високий)</option>
                                   <option value="4">рейтингом (високий->низький)</option>
                                 </select> 
@@ -112,12 +112,12 @@
           <div id="courts-list">
             <!--court-list-->
             <spinner v-if="!loadData" />
-            <court-component v-if="loadData" :courtList="court.data" />
+            <court-component v-if="loadData" :courtsList="courtsList.data" />
           </div>
   
         </div>
         <div class="pagination mb-5">
-          <vue-ads-pagination  ref="pagins" @page-change="pageChange" :total-items="courtList.total" :max-visible-pages="5" :button-classes="buttonClasses" :loading="false">
+          <vue-ads-pagination  ref="pagins" @page-change="pageChange" :total-items="courtsList.total" :max-visible-pages="5" :button-classes="buttonClasses" :loading="false">
           </vue-ads-pagination>
         </div>
       </div>
@@ -148,7 +148,7 @@
           sort: 1,
         },
         autocomplete: [],
-        courtList: {
+        courtsList: {
           total: 0
         },
         'buttonClasses': {
@@ -304,4 +304,8 @@
 
 <style lang="scss" scoped>
   @import "../../../../sass/judges_coutrs_list.scss";
+  .courts-card {
+    background: none !important;
+    box-shadow: none;
+  }
 </style>

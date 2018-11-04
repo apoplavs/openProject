@@ -290,7 +290,7 @@
             height: 120px;
         }
         a {
-            color: #6291ba;
+            color: $primary;
         }
         .court_name {
             font-size: 1rem;

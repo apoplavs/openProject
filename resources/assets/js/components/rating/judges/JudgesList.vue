@@ -113,11 +113,11 @@
             <div class="d-flex align-items-center">
               <span class="mr-2"> сортувати за: </span>
               <select class="form-control select-sort" name="sorting" v-model="params.sort" @change="sortList()">
-                                  <option value="1" selected>прізвищем (А->Я) <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i></option>
-                                  <option value="2">прізвищем (Я->А)</option>
-                                  <option value="3">рейтингом (низький->високий)</option>
-                                  <option value="4">рейтингом (високий->низький)</option>
-                                </select> 
+                  <option value="1" selected>прізвищем (А->Я) <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i></option>
+                  <option value="2">прізвищем (Я->А)</option>
+                  <option value="3">рейтингом (низький->високий)</option>
+                  <option value="4">рейтингом (високий->низький)</option>
+                </select> 
             </div>
           </div>
           <div id="judges-list">
@@ -206,17 +206,19 @@
         }
       }, 1000),
       sortList: _.debounce(function(event) {
+        this.loadData = false;
         window.scrollTo(0, 0);
         this.getJudgesList();
       }, 10),
   
       pageChange(page) {
-        window.scrollTo(0, 0);
         this.loadData = false;
+        window.scrollTo(0, 0);
         this.params.page = page + 1;
         this.getJudgesList();
       },
       setFilters() {
+        this.loadData = false;
         window.scrollTo(0, 0);
         this.$refs.pagins.currentPage = 0;
         this.params.page = 1; 
@@ -272,6 +274,7 @@
         }
       },
       resetFilters() {
+        this.loadData = false;
         this.params.regions = [];
         this.params.instance = [];
         this.params.jurisdiction = [];

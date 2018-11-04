@@ -193,7 +193,7 @@
             border-color: red;
         }
          input:not([type="checkbox"]) {
-            @include boxShadow($shadow-light);
+            @include boxShadow($shadow-input);
             border: none;
         }
         .card-header {
