@@ -72,9 +72,6 @@
                                 <option value="5">припинено повноваження</option>
                             </select>
                         </div>
-                        <!-- <div>
-                            status={{judgeStatus.set_status}} date={{judgeStatus.due_date}}
-                        </div> -->
                         <input type="hidden" id="judge-for-new-status" value="0">
                     </div>
                     <div class="form-group row mx-0 my-4">
@@ -201,7 +198,6 @@
                     this.judgeStatus.due_date = null;
                 }
                 console.log("STATUS", this.judgeStatus);
-                
                 axios({
                         method: "put",
                         url: `/api/v1/judges/${this.changeStatusId}/update-status`,

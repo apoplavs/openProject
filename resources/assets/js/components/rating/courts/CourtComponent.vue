@@ -5,8 +5,8 @@
             <div v-if="this.courtsList && this.courtsList.length > 0">
                 <div class="court-component row mb-3" v-for="(court, ind_1) of this.courtsList" :key="ind_1">
                     <div class="col-2 court-component_left">
-                        <i class="fas fa-warehouse"></i>
-                        {{court.court_code}}
+                        <i class="fa fa-university" aria-hidden="true"></i>
+                        <b>{{court.court_code}}</b>
                     </div>
                     <div class="col-10 court-component_right py-3">
                         <router-link to="/"><div class="court-name">{{court.court_name}}</div></router-link>    
@@ -99,12 +99,15 @@
     @import "../../../../sass/_mixins.scss";
 
     .court-component {
-       
-        // @include boxShadow($shadow-header);
         .court-component_left {
             background-color: $body-bg;
             @include boxShadow($shadow-header);
             @include alignElement(column);
+            .fa-university {
+                color: $primary;
+                font-size: 1.8rem;
+                margin-bottom: 10px;
+            }
         }
         .court-component_right {
             @include boxShadow($shadow-header);
@@ -140,14 +143,5 @@
                 }
             }
         }
-
-
-        // delete
-        .fa-warehouse {
-            color: $primary;
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-        }
-    }
-    
+    }  
 </style>

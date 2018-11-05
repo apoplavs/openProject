@@ -9,9 +9,9 @@
               <div class="col-12">
                 <h6>Інстанція</h6>
                 <ul class="list-unstyled mb-0">
-                  <li><label><input type="checkbox" value="3" name="instance" v-model="params.instance"><span class="checkmark"></span> Перша</label></li>
-                  <li><label><input type="checkbox" value="2" name="instance" v-model="params.instance"><span class="checkmark"></span> Апеляційна</label></li>
-                  <li><label><input type="checkbox" value="1" name="instance" v-model="params.instance"><span class="checkmark"></span> Касаційна</label></li>
+                  <li><label><input type="checkbox" value="3" name="instances" v-model="params.instances"><span class="checkmark"></span> Перша</label></li>
+                  <li><label><input type="checkbox" value="2" name="instances" v-model="params.instances"><span class="checkmark"></span> Апеляційна</label></li>
+                  <li><label><input type="checkbox" value="1" name="instances" v-model="params.instances"><span class="checkmark"></span> Касаційна</label></li>
                 </ul>
               </div>
             </div>
@@ -22,9 +22,9 @@
               <div class="col-lg-12">
                 <h6>Юрисдикція</h6>
                 <ul class="list-unstyled mb-0">
-                  <li><label><input type="checkbox" value="3" name="jurisdiction" v-model="params.jurisdiction"><span class="checkmark"></span> Господарська</label></li>
-                  <li><label><input type="checkbox" value="2" name="jurisdiction" v-model="params.jurisdiction"><span class="checkmark"></span> Адміністративна</label></li>
-                  <li><label><input type="checkbox" value="1" name="jurisdiction" v-model="params.jurisdiction"><span class="checkmark"></span> Загальна</label></li>
+                  <li><label><input type="checkbox" value="3" name="jurisdictions" v-model="params.jurisdictions"><span class="checkmark"></span> Господарська</label></li>
+                  <li><label><input type="checkbox" value="2" name="jurisdictions" v-model="params.jurisdictions"><span class="checkmark"></span> Адміністративна</label></li>
+                  <li><label><input type="checkbox" value="1" name="jurisdictions" v-model="params.jurisdictions"><span class="checkmark"></span> Загальна</label></li>
                 </ul>
               </div>
             </div>
@@ -71,7 +71,6 @@
                 <ul class="list-unstyled mb-0">
                   <li><label><input type="checkbox" value="1" v-model="params.expired"><span class="checkmark"></span>Закінчилися повноваження</label></li>
                 </ul>
-                epired: {{ typeof(this.params.expired)}} {{  this.params.expired }}
               </div>
             </div>
   
@@ -154,8 +153,8 @@
         params: {
           page: 0,
           regions: [],
-          jurisdiction: [],
-          instance: [],
+          jurisdictions: [],
+          instances: [],
           search: null,
           sort: 1,
           expired: 1
@@ -274,13 +273,15 @@
         }
       },
       resetFilters() {
-        this.loadData = false;
         this.params.regions = [];
-        this.params.instance = [];
-        this.params.jurisdiction = [];
+        this.params.instances = [];
+        this.params.jurisdictions = [];
         this.params.expired = 1;
         this.params.search = null;
         this.autocomplete = [];
+        this.loadData = false;
+        this.loadData = false;
+        window.scrollTo(0, 0);
         this.getJudgesList(); // онуляємо всі фільтри і визиваємо функцію
       }
     },
@@ -293,23 +294,25 @@
 </script>
 
 <style lang="scss">
+  @import "../../../../sass/_variables.scss";
   .pagination {
     .bg-active {
-      background-color: #2b989b;
-      border-color: #2b989b;
+      background-color: $main-color;
+      border-color: $main-color;
     }
     button{
       &:active,
       &:focus{
-        background-color: #2b989b;
-        border-color: #2b989b;
+        background-color: $main-color;
+        border-color: $main-color;
       }
     }
     div.pr-2.leading-loose {
       display: none !important;
     }
     .disabled {
-      color: grey;
+      color: $input-placeholder-color;
+      cursor: no-drop;
     }
     .dots {
       background-color: transparent;
