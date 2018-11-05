@@ -14,7 +14,10 @@ class BaseApiTest extends TestCase
     /**
      * Заголовки для HTTP-запитів
      */
-    protected $headers = ['accept' => 'application/json', 'X-Requested-With' => 'XMLHttpRequest'];
+    protected $headers = [
+        'accept' => 'application/json',
+        'X-Requested-With' => 'XMLHttpRequest',
+    ];
 
     /**
      * Дані про тестового користувача; мають бути такими, яких нема у БД
