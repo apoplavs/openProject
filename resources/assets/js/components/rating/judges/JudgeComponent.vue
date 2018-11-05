@@ -65,16 +65,13 @@
                         <label for="chooser-judge-status" class="col-4">Статус</label>
                         <div class="col-8">
                             <select class="form-control" id="chooser-judge-status" v-model="judgeStatus.set_status" value="judgeStatus.set_status">
-                                    <option value="1">на роботі</option>
-                                    <option value="2">на лікарняному</option>
-                                    <option value="3">у відпустці</option>
-                                    <option value="4">відсутній на робочому місці</option>
-                                    <option value="5">припинено повноваження</option>
-                                </select>
+                                <option value="1">на роботі</option>
+                                <option value="2">на лікарняному</option>
+                                <option value="3">у відпустці</option>
+                                <option value="4">відсутній на робочому місці</option>
+                                <option value="5">припинено повноваження</option>
+                            </select>
                         </div>
-                        <!-- <div>
-                            status={{judgeStatus.set_status}} date={{judgeStatus.due_date}}
-                        </div> -->
                         <input type="hidden" id="judge-for-new-status" value="0">
                     </div>
                     <div class="form-group row mx-0 my-4">
@@ -201,7 +198,6 @@
                     this.judgeStatus.due_date = null;
                 }
                 console.log("STATUS", this.judgeStatus);
-                
                 axios({
                         method: "put",
                         url: `/api/v1/judges/${this.changeStatusId}/update-status`,
@@ -290,7 +286,7 @@
             height: 120px;
         }
         a {
-            color: #6291ba;
+            color: $primary;
         }
         .court_name {
             font-size: 1rem;

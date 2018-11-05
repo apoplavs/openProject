@@ -9,9 +9,9 @@
               <div class="col-12">
                 <h6>Інстанція</h6>
                 <ul class="list-unstyled mb-0">
-                  <li><label><input type="checkbox" value="3" name="instance" v-model="params.instance"><span class="checkmark"></span> Перша</label></li>
-                  <li><label><input type="checkbox" value="2" name="instance" v-model="params.instance"><span class="checkmark"></span> Апеляційна</label></li>
-                  <li><label><input type="checkbox" value="1" name="instance" v-model="params.instance"><span class="checkmark"></span> Касаційна</label></li>
+                  <li><label><input type="checkbox" value="3" name="instances" v-model="params.instances"><span class="checkmark"></span> Перша</label></li>
+                  <li><label><input type="checkbox" value="2" name="instances" v-model="params.instances"><span class="checkmark"></span> Апеляційна</label></li>
+                  <li><label><input type="checkbox" value="1" name="instances" v-model="params.instances"><span class="checkmark"></span> Касаційна</label></li>
                 </ul>
               </div>
             </div>
@@ -22,9 +22,9 @@
               <div class="col-lg-12">
                 <h6>Юрисдикція</h6>
                 <ul class="list-unstyled mb-0">
-                  <li><label><input type="checkbox" value="3" name="jurisdiction" v-model="params.jurisdiction"><span class="checkmark"></span> Господарська</label></li>
-                  <li><label><input type="checkbox" value="2" name="jurisdiction" v-model="params.jurisdiction"><span class="checkmark"></span> Адміністративна</label></li>
-                  <li><label><input type="checkbox" value="1" name="jurisdiction" v-model="params.jurisdiction"><span class="checkmark"></span> Загальна</label></li>
+                  <li><label><input type="checkbox" value="3" name="jurisdictions" v-model="params.jurisdictions"><span class="checkmark"></span> Господарська</label></li>
+                  <li><label><input type="checkbox" value="2" name="jurisdictions" v-model="params.jurisdictions"><span class="checkmark"></span> Адміністративна</label></li>
+                  <li><label><input type="checkbox" value="1" name="jurisdictions" v-model="params.jurisdictions"><span class="checkmark"></span> Загальна</label></li>
                 </ul>
               </div>
             </div>
@@ -85,9 +85,9 @@
           <div class="col-10 autocomplete">
             <input type="search" class="form-control" placeholder="Пошук..." v-model.trim="params.search" @keyup="liveSearch()">
             <div class="autocomplete-block-result" v-if="autocomplete.length">
-              <div class="autocomplete-block-result_element" v-for="(el, ind_1) in autocomplete" :key="ind_1">
+              <div class="autocomplete-block-result_element" v-for="(el, ind_2) in autocomplete" :key="ind_2">
                 <router-link to="/">
-                  {{ el.surname }} {{ (el.name.length === 1) ? el.name + '.' : el.name }} {{ (el.patronymic.length === 1) ? el.patronymic + '.' : el.patronymic }}
+                  {{ el.name }} 
                 </router-link>
               </div>
             </div>
@@ -96,28 +96,28 @@
             <button type="button" class="btn btn-confirm w-100" @click="setFilters()"><i class="fa fa-search" aria-hidden="true"></i> знайти</button>
           </div>
         </div>
-        <div class="card card-outline-secondary ">
+        <div class="card courts-card">
           <div class="card-header d-flex justify-content-between">
-            <h4 class="d-flex align-items-center">Список суддів</h4>
+            <h4 class="d-flex align-items-center">Список судів</h4>
             <div class="d-flex align-items-center">
               <span class="mr-2"> сортувати за: </span>
               <select class="form-control select-sort" name="sorting" v-model="params.sort" @change="sortList()">
-                                  <option value="1" selected>прізвищем (А->Я) <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i></option>
-                                  <option value="2">прізвищем (Я->А)</option>
-                                  <option value="3">рейтингом (низький->високий)</option>
-                                  <option value="4">рейтингом (високий->низький)</option>
-                                </select> 
+                  <option value="1" >назвою (А->Я) <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i></option>
+                  <option value="2">назвою (Я->А)</option>
+                  <option value="3">рейтингом (низький->високий)</option>
+                  <option value="4">рейтингом (високий->низький)</option>
+                </select> 
             </div>
           </div>
           <div id="courts-list">
             <!--court-list-->
             <spinner v-if="!loadData" />
-            <court-component v-if="loadData" :courtList="court.data" />
+            <court-component v-if="loadData" :courtsList="courtsList.data" />
           </div>
   
         </div>
         <div class="pagination mb-5">
-          <vue-ads-pagination  ref="pagins" @page-change="pageChange" :total-items="courtList.total" :max-visible-pages="5" :button-classes="buttonClasses" :loading="false">
+          <vue-ads-pagination ref="pagins" @page-change="pageChange" :total-items="courtsList.total" :max-visible-pages="5" :button-classes="buttonClasses" :loading="false">
           </vue-ads-pagination>
         </div>
       </div>
@@ -142,13 +142,13 @@
         params: {
           page: 0,
           regions: [],
-          jurisdiction: [],
-          instance: [],
+          jurisdictions: [],
+          instances: [],
           search: null,
           sort: 1,
         },
         autocomplete: [],
-        courtList: {
+        courtsList: {
           total: 0
         },
         'buttonClasses': {
@@ -193,21 +193,22 @@
         }
       }, 1000),
       sortList: _.debounce(function(event) {
+        this.loadData = false;
         window.scrollTo(0, 0);
         this.getCourtsList();
       }, 10),
   
       pageChange(page) {
-        window.scrollTo(0, 0);
         this.loadData = false;
+        window.scrollTo(0, 0);
         this.params.page = page + 1;
         this.getCourtsList();
       },
       setFilters() {
+        this.loadData = false;
         window.scrollTo(0, 0);
         this.$refs.pagins.currentPage = 0;
         this.params.page = 1; 
-        console.log('PARAMS ЗНАЙТИ', this.params);
         this.getCourtsList();
       },
   
@@ -259,10 +260,12 @@
       },
       resetFilters() {
         this.params.regions = [];
-        this.params.instance = [];
-        this.params.jurisdiction = [];
+        this.params.instances = [];
+        this.params.jurisdictions = [];
         this.params.search = null;
         this.autocomplete = [];
+        this.loadData = false;
+        window.scrollTo(0, 0);
         this.getCourtsList(); // онуляємо всі фільтри і визиваємо функцію
       }
     },
@@ -276,23 +279,24 @@
 </script>
 
 <style lang="scss">
+  @import "../../../../sass/_variables.scss";
   .pagination {
     .bg-active {
-      background-color: #2b989b;
-      border-color: #2b989b;
+      background-color: $main-color;
+      border-color: $main-color;
     }
     button{
       &:active,
       &:focus{
-        background-color: #2b989b;
-        border-color: #2b989b;
+        background-color: $main-color;
+        border-color: $main-color;
       }
     }
     div.pr-2.leading-loose {
       display: none !important;
     }
     .disabled {
-      color: grey;
+      color: $input-placeholder-color;
       cursor: no-drop;
     }
     .dots {
@@ -304,4 +308,8 @@
 
 <style lang="scss" scoped>
   @import "../../../../sass/judges_coutrs_list.scss";
+  .courts-card {
+    background: none !important;
+    box-shadow: none;
+  }
 </style>

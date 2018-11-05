@@ -34,10 +34,10 @@ $color-6: #00b1b3;
 // box-shadow
 $shadow-btn: 0px 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12);
 $shadow-light: 0 2px 43px -4px rgba(0,0,0,.19);
-$hadow-header: 0px 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14);
-$shadow-input: inset -1px 0px 7px 2px rgba(10,10,10,.1);
+$shadow-header: 0px 3px 9px -1px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14);
+$shadow-input: inset 0 0 3px 0 rgba(0, 0, 0, 0.22);
 $shadow-3D-effect: 0 3rem 3rem -1rem rgba(10,10,10,.2);
-$shadow-autocomplete: inset 0 1px 2px rgba(10,10,10,.1);
+$shadow-autocomplete: $shadow-3D-effect;
 // Typography
 $font-family-sans-serif: "Raleway", sans-serif;
 $font-size-base: 14px; // 14px

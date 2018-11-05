@@ -9,9 +9,9 @@
               <div class="col-12">
                 <h6>Інстанція</h6>
                 <ul class="list-unstyled mb-0">
-                  <li><label><input type="checkbox" value="3" name="instance" v-model="params.instance"><span class="checkmark"></span> Перша</label></li>
-                  <li><label><input type="checkbox" value="2" name="instance" v-model="params.instance"><span class="checkmark"></span> Апеляційна</label></li>
-                  <li><label><input type="checkbox" value="1" name="instance" v-model="params.instance"><span class="checkmark"></span> Касаційна</label></li>
+                  <li><label><input type="checkbox" value="3" name="instances" v-model="params.instances"><span class="checkmark"></span> Перша</label></li>
+                  <li><label><input type="checkbox" value="2" name="instances" v-model="params.instances"><span class="checkmark"></span> Апеляційна</label></li>
+                  <li><label><input type="checkbox" value="1" name="instances" v-model="params.instances"><span class="checkmark"></span> Касаційна</label></li>
                 </ul>
               </div>
             </div>
@@ -22,9 +22,9 @@
               <div class="col-lg-12">
                 <h6>Юрисдикція</h6>
                 <ul class="list-unstyled mb-0">
-                  <li><label><input type="checkbox" value="3" name="jurisdiction" v-model="params.jurisdiction"><span class="checkmark"></span> Господарська</label></li>
-                  <li><label><input type="checkbox" value="2" name="jurisdiction" v-model="params.jurisdiction"><span class="checkmark"></span> Адміністративна</label></li>
-                  <li><label><input type="checkbox" value="1" name="jurisdiction" v-model="params.jurisdiction"><span class="checkmark"></span> Загальна</label></li>
+                  <li><label><input type="checkbox" value="3" name="jurisdictions" v-model="params.jurisdictions"><span class="checkmark"></span> Господарська</label></li>
+                  <li><label><input type="checkbox" value="2" name="jurisdictions" v-model="params.jurisdictions"><span class="checkmark"></span> Адміністративна</label></li>
+                  <li><label><input type="checkbox" value="1" name="jurisdictions" v-model="params.jurisdictions"><span class="checkmark"></span> Загальна</label></li>
                 </ul>
               </div>
             </div>
@@ -71,7 +71,6 @@
                 <ul class="list-unstyled mb-0">
                   <li><label><input type="checkbox" value="1" v-model="params.expired"><span class="checkmark"></span>Закінчилися повноваження</label></li>
                 </ul>
-                epired: {{ typeof(this.params.expired)}} {{  this.params.expired }}
               </div>
             </div>
   
@@ -113,11 +112,11 @@
             <div class="d-flex align-items-center">
               <span class="mr-2"> сортувати за: </span>
               <select class="form-control select-sort" name="sorting" v-model="params.sort" @change="sortList()">
-                                  <option value="1" selected>прізвищем (А->Я) <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i></option>
-                                  <option value="2">прізвищем (Я->А)</option>
-                                  <option value="3">рейтингом (низький->високий)</option>
-                                  <option value="4">рейтингом (високий->низький)</option>
-                                </select> 
+                  <option value="1" selected>прізвищем (А->Я) <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i></option>
+                  <option value="2">прізвищем (Я->А)</option>
+                  <option value="3">рейтингом (низький->високий)</option>
+                  <option value="4">рейтингом (високий->низький)</option>
+                </select> 
             </div>
           </div>
           <div id="judges-list">
@@ -154,11 +153,11 @@
         params: {
           page: 0,
           regions: [],
-          jurisdiction: [],
-          instance: [],
+          jurisdictions: [],
+          instances: [],
           search: null,
           sort: 1,
-          expired: true
+          expired: 1
         },
         autocomplete: [],
         judgesList: {
@@ -206,17 +205,19 @@
         }
       }, 1000),
       sortList: _.debounce(function(event) {
+        this.loadData = false;
         window.scrollTo(0, 0);
         this.getJudgesList();
       }, 10),
   
       pageChange(page) {
-        window.scrollTo(0, 0);
         this.loadData = false;
+        window.scrollTo(0, 0);
         this.params.page = page + 1;
         this.getJudgesList();
       },
       setFilters() {
+        this.loadData = false;
         window.scrollTo(0, 0);
         this.$refs.pagins.currentPage = 0;
         this.params.page = 1; 
@@ -226,9 +227,7 @@
   
       getJudgesList() {    
         this.autocomplete = []; // коли визиваємо цей метод liveSearch маємо закрити
-        this.params.expired = (this.params.expired === true || this.params.expired === 1) ? 1 : 0;
-        console.log("expired", this.params.expired);
-        
+        this.params.expired = (this.params.expired === true || this.params.expired === 1) ? 1 : 0; 
         if (this.validateInputSearch() === false) { // !! = true
           this.params.search = null;
         }
@@ -275,11 +274,14 @@
       },
       resetFilters() {
         this.params.regions = [];
-        this.params.instance = [];
-        this.params.jurisdiction = [];
-        this.params.expired = true;
+        this.params.instances = [];
+        this.params.jurisdictions = [];
+        this.params.expired = 1;
         this.params.search = null;
         this.autocomplete = [];
+        this.loadData = false;
+        this.loadData = false;
+        window.scrollTo(0, 0);
         this.getJudgesList(); // онуляємо всі фільтри і визиваємо функцію
       }
     },
@@ -288,28 +290,29 @@
       VueAdsPagination,
       Spinner
     }
-  
   };
 </script>
 
 <style lang="scss">
+  @import "../../../../sass/_variables.scss";
   .pagination {
     .bg-active {
-      background-color: #2b989b;
-      border-color: #2b989b;
+      background-color: $main-color;
+      border-color: $main-color;
     }
     button{
       &:active,
       &:focus{
-        background-color: #2b989b;
-        border-color: #2b989b;
+        background-color: $main-color;
+        border-color: $main-color;
       }
     }
     div.pr-2.leading-loose {
       display: none !important;
     }
     .disabled {
-      color: grey;
+      color: $input-placeholder-color;
+      cursor: no-drop;
     }
     .dots {
       background-color: transparent;

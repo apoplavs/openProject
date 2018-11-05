@@ -92,7 +92,7 @@
 
                     <div class="form-group">
                         <div class="text-center">
-                            <button type="submit" class="btn btn-my-primary" id="register-btn">
+                            <button type="submit" class="btn btn-primary" id="register-btn">
                                 Зареєструватись
                             </button>
                         </div>
@@ -173,13 +173,14 @@
 
 <style lang="scss" scoped>
   @import "../../../sass/_variables.scss";
+  @import "../../../sass/_mixins.scss";
 
     .card {
         width: 100%;
         max-width: 450px;
 
         input[aria-invalid="true"] {
-            border-color: red;
+            border: 1px solid red;   
         }
         i.fa-warning, span.is-danger,
         #back-error {
@@ -188,26 +189,15 @@
         #back-error {
             display: none;
         }
-        .card-header {
-            font-size: 1.5em;
-            color: #408080 !important;
-            font-weight: 700;
-        }
-        .btn-my-primary {
-            background-color: #408080;
-            border-color: #408080;
-            border-bottom: 3px solid #2d5656;
-            color: #ffffff;
-        }
-        button:hover,
-        button:active {
-            opacity: .8;
-        }
-        .footer-link {
-            font-weight: 300;
-        }
         .error > input {
             border-color: red;
+        }
+         input:not([type="checkbox"]) {
+            @include boxShadow($shadow-input);
+            border: none;
+        }
+        .card-header {
+            font-size: 1.3rem;
         }
     }
 
