@@ -45082,7 +45082,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n.card[data-v-dca5370e] {\n  width: 100%;\n  max-width: 450px;\n}\n.card input[aria-invalid=\"true\"][data-v-dca5370e] {\n    border: 1px solid red;\n}\n.card i.fa-warning[data-v-dca5370e],\n  .card span.is-danger[data-v-dca5370e],\n  .card #back-error[data-v-dca5370e] {\n    color: red;\n}\n.card #back-error[data-v-dca5370e] {\n    display: none;\n}\n.card input[data-v-dca5370e]:not([type=\"checkbox\"]) {\n    -webkit-box-shadow: inset -1px 0px 7px 2px rgba(10, 10, 10, 0.1);\n    box-shadow: inset -1px 0px 7px 2px rgba(10, 10, 10, 0.1);\n    border: none;\n}\n.card .card-header[data-v-dca5370e] {\n    font-size: 1.3rem;\n}\n", ""]);
+exports.push([module.i, "\n.card[data-v-dca5370e] {\n  width: 100%;\n  max-width: 450px;\n}\n.card input[aria-invalid=\"true\"][data-v-dca5370e] {\n    border: 1px solid red;\n}\n.card i.fa-warning[data-v-dca5370e],\n  .card span.is-danger[data-v-dca5370e],\n  .card #back-error[data-v-dca5370e] {\n    color: red;\n}\n.card #back-error[data-v-dca5370e] {\n    display: none;\n}\n.card input[data-v-dca5370e]:not([type=\"checkbox\"]) {\n    -webkit-box-shadow: inset 0 0 3px 0 rgba(0, 0, 0, 0.22);\n    box-shadow: inset 0 0 3px 0 rgba(0, 0, 0, 0.22);\n    border: none;\n}\n.card .card-header[data-v-dca5370e] {\n    font-size: 1.3rem;\n}\n", ""]);
 
 // exports
 
@@ -45633,7 +45633,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n.card[data-v-7a32b0d9] {\n  width: 100%;\n  max-width: 450px;\n}\n.card input[aria-invalid=\"true\"][data-v-7a32b0d9] {\n    border: 1px solid red;\n}\n.card i.fa-warning[data-v-7a32b0d9], .card span.is-danger[data-v-7a32b0d9],\n  .card #back-error[data-v-7a32b0d9] {\n    color: red;\n}\n.card #back-error[data-v-7a32b0d9] {\n    display: none;\n}\n.card .error > input[data-v-7a32b0d9] {\n    border-color: red;\n}\n.card input[data-v-7a32b0d9]:not([type=\"checkbox\"]) {\n    -webkit-box-shadow: inset -1px 0px 7px 2px rgba(10, 10, 10, 0.1);\n    box-shadow: inset -1px 0px 7px 2px rgba(10, 10, 10, 0.1);\n    border: none;\n}\n.card .card-header[data-v-7a32b0d9] {\n    font-size: 1.3rem;\n}\n", ""]);
+exports.push([module.i, "\n.card[data-v-7a32b0d9] {\n  width: 100%;\n  max-width: 450px;\n}\n.card input[aria-invalid=\"true\"][data-v-7a32b0d9] {\n    border: 1px solid red;\n}\n.card i.fa-warning[data-v-7a32b0d9], .card span.is-danger[data-v-7a32b0d9],\n  .card #back-error[data-v-7a32b0d9] {\n    color: red;\n}\n.card #back-error[data-v-7a32b0d9] {\n    display: none;\n}\n.card .error > input[data-v-7a32b0d9] {\n    border-color: red;\n}\n.card input[data-v-7a32b0d9]:not([type=\"checkbox\"]) {\n    -webkit-box-shadow: inset 0 0 3px 0 rgba(0, 0, 0, 0.22);\n    box-shadow: inset 0 0 3px 0 rgba(0, 0, 0, 0.22);\n    border: none;\n}\n.card .card-header[data-v-7a32b0d9] {\n    font-size: 1.3rem;\n}\n", ""]);
 
 // exports
 
@@ -46289,7 +46289,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n.pagination .bg-active {\n  background-color: #2b989b;\n  border-color: #2b989b;\n}\n.pagination button:active, .pagination button:focus {\n  background-color: #2b989b;\n  border-color: #2b989b;\n}\n.pagination div.pr-2.leading-loose {\n  display: none !important;\n}\n.pagination .disabled {\n  color: grey;\n}\n.pagination .dots {\n  background-color: transparent;\n  border: none !important;\n}\n", ""]);
+exports.push([module.i, "\n.pagination .bg-active {\n  background-color: #2b989b;\n  border-color: #2b989b;\n}\n.pagination button:active, .pagination button:focus {\n  background-color: #2b989b;\n  border-color: #2b989b;\n}\n.pagination div.pr-2.leading-loose {\n  display: none !important;\n}\n.pagination .disabled {\n  color: #739696;\n  cursor: no-drop;\n}\n.pagination .dots {\n  background-color: transparent;\n  border: none !important;\n}\n", ""]);
 
 // exports
 
@@ -46489,7 +46489,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 
 
@@ -46504,8 +46503,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       params: {
         page: 0,
         regions: [],
-        jurisdiction: [],
-        instance: [],
+        jurisdictions: [],
+        instances: [],
         search: null,
         sort: 1,
         expired: 1
@@ -46621,13 +46620,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }
     },
     resetFilters: function resetFilters() {
-      this.loadData = false;
       this.params.regions = [];
-      this.params.instance = [];
-      this.params.jurisdiction = [];
+      this.params.instances = [];
+      this.params.jurisdictions = [];
       this.params.expired = 1;
       this.params.search = null;
       this.autocomplete = [];
+      this.loadData = false;
+      this.loadData = false;
+      window.scrollTo(0, 0);
       this.getJudgesList(); // онуляємо всі фільтри і визиваємо функцію
     }
   },
@@ -46831,9 +46832,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
 
 
 
@@ -46939,7 +46937,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 this.judgeStatus.due_date = null;
             }
             console.log("STATUS", this.judgeStatus);
-
             axios({
                 method: "put",
                 url: "/api/v1/judges/" + this.changeStatusId + "/update-status",
@@ -47957,23 +47954,23 @@ var render = function() {
                           {
                             name: "model",
                             rawName: "v-model",
-                            value: _vm.params.instance,
-                            expression: "params.instance"
+                            value: _vm.params.instances,
+                            expression: "params.instances"
                           }
                         ],
                         attrs: {
                           type: "checkbox",
                           value: "3",
-                          name: "instance"
+                          name: "instances"
                         },
                         domProps: {
-                          checked: Array.isArray(_vm.params.instance)
-                            ? _vm._i(_vm.params.instance, "3") > -1
-                            : _vm.params.instance
+                          checked: Array.isArray(_vm.params.instances)
+                            ? _vm._i(_vm.params.instances, "3") > -1
+                            : _vm.params.instances
                         },
                         on: {
                           change: function($event) {
-                            var $$a = _vm.params.instance,
+                            var $$a = _vm.params.instances,
                               $$el = $event.target,
                               $$c = $$el.checked ? true : false
                             if (Array.isArray($$a)) {
@@ -47983,19 +47980,19 @@ var render = function() {
                                 $$i < 0 &&
                                   _vm.$set(
                                     _vm.params,
-                                    "instance",
+                                    "instances",
                                     $$a.concat([$$v])
                                   )
                               } else {
                                 $$i > -1 &&
                                   _vm.$set(
                                     _vm.params,
-                                    "instance",
+                                    "instances",
                                     $$a.slice(0, $$i).concat($$a.slice($$i + 1))
                                   )
                               }
                             } else {
-                              _vm.$set(_vm.params, "instance", $$c)
+                              _vm.$set(_vm.params, "instances", $$c)
                             }
                           }
                         }
@@ -48012,23 +48009,23 @@ var render = function() {
                           {
                             name: "model",
                             rawName: "v-model",
-                            value: _vm.params.instance,
-                            expression: "params.instance"
+                            value: _vm.params.instances,
+                            expression: "params.instances"
                           }
                         ],
                         attrs: {
                           type: "checkbox",
                           value: "2",
-                          name: "instance"
+                          name: "instances"
                         },
                         domProps: {
-                          checked: Array.isArray(_vm.params.instance)
-                            ? _vm._i(_vm.params.instance, "2") > -1
-                            : _vm.params.instance
+                          checked: Array.isArray(_vm.params.instances)
+                            ? _vm._i(_vm.params.instances, "2") > -1
+                            : _vm.params.instances
                         },
                         on: {
                           change: function($event) {
-                            var $$a = _vm.params.instance,
+                            var $$a = _vm.params.instances,
                               $$el = $event.target,
                               $$c = $$el.checked ? true : false
                             if (Array.isArray($$a)) {
@@ -48038,19 +48035,19 @@ var render = function() {
                                 $$i < 0 &&
                                   _vm.$set(
                                     _vm.params,
-                                    "instance",
+                                    "instances",
                                     $$a.concat([$$v])
                                   )
                               } else {
                                 $$i > -1 &&
                                   _vm.$set(
                                     _vm.params,
-                                    "instance",
+                                    "instances",
                                     $$a.slice(0, $$i).concat($$a.slice($$i + 1))
                                   )
                               }
                             } else {
-                              _vm.$set(_vm.params, "instance", $$c)
+                              _vm.$set(_vm.params, "instances", $$c)
                             }
                           }
                         }
@@ -48067,23 +48064,23 @@ var render = function() {
                           {
                             name: "model",
                             rawName: "v-model",
-                            value: _vm.params.instance,
-                            expression: "params.instance"
+                            value: _vm.params.instances,
+                            expression: "params.instances"
                           }
                         ],
                         attrs: {
                           type: "checkbox",
                           value: "1",
-                          name: "instance"
+                          name: "instances"
                         },
                         domProps: {
-                          checked: Array.isArray(_vm.params.instance)
-                            ? _vm._i(_vm.params.instance, "1") > -1
-                            : _vm.params.instance
+                          checked: Array.isArray(_vm.params.instances)
+                            ? _vm._i(_vm.params.instances, "1") > -1
+                            : _vm.params.instances
                         },
                         on: {
                           change: function($event) {
-                            var $$a = _vm.params.instance,
+                            var $$a = _vm.params.instances,
                               $$el = $event.target,
                               $$c = $$el.checked ? true : false
                             if (Array.isArray($$a)) {
@@ -48093,19 +48090,19 @@ var render = function() {
                                 $$i < 0 &&
                                   _vm.$set(
                                     _vm.params,
-                                    "instance",
+                                    "instances",
                                     $$a.concat([$$v])
                                   )
                               } else {
                                 $$i > -1 &&
                                   _vm.$set(
                                     _vm.params,
-                                    "instance",
+                                    "instances",
                                     $$a.slice(0, $$i).concat($$a.slice($$i + 1))
                                   )
                               }
                             } else {
-                              _vm.$set(_vm.params, "instance", $$c)
+                              _vm.$set(_vm.params, "instances", $$c)
                             }
                           }
                         }
@@ -48132,23 +48129,23 @@ var render = function() {
                           {
                             name: "model",
                             rawName: "v-model",
-                            value: _vm.params.jurisdiction,
-                            expression: "params.jurisdiction"
+                            value: _vm.params.jurisdictions,
+                            expression: "params.jurisdictions"
                           }
                         ],
                         attrs: {
                           type: "checkbox",
                           value: "3",
-                          name: "jurisdiction"
+                          name: "jurisdictions"
                         },
                         domProps: {
-                          checked: Array.isArray(_vm.params.jurisdiction)
-                            ? _vm._i(_vm.params.jurisdiction, "3") > -1
-                            : _vm.params.jurisdiction
+                          checked: Array.isArray(_vm.params.jurisdictions)
+                            ? _vm._i(_vm.params.jurisdictions, "3") > -1
+                            : _vm.params.jurisdictions
                         },
                         on: {
                           change: function($event) {
-                            var $$a = _vm.params.jurisdiction,
+                            var $$a = _vm.params.jurisdictions,
                               $$el = $event.target,
                               $$c = $$el.checked ? true : false
                             if (Array.isArray($$a)) {
@@ -48158,19 +48155,19 @@ var render = function() {
                                 $$i < 0 &&
                                   _vm.$set(
                                     _vm.params,
-                                    "jurisdiction",
+                                    "jurisdictions",
                                     $$a.concat([$$v])
                                   )
                               } else {
                                 $$i > -1 &&
                                   _vm.$set(
                                     _vm.params,
-                                    "jurisdiction",
+                                    "jurisdictions",
                                     $$a.slice(0, $$i).concat($$a.slice($$i + 1))
                                   )
                               }
                             } else {
-                              _vm.$set(_vm.params, "jurisdiction", $$c)
+                              _vm.$set(_vm.params, "jurisdictions", $$c)
                             }
                           }
                         }
@@ -48187,23 +48184,23 @@ var render = function() {
                           {
                             name: "model",
                             rawName: "v-model",
-                            value: _vm.params.jurisdiction,
-                            expression: "params.jurisdiction"
+                            value: _vm.params.jurisdictions,
+                            expression: "params.jurisdictions"
                           }
                         ],
                         attrs: {
                           type: "checkbox",
                           value: "2",
-                          name: "jurisdiction"
+                          name: "jurisdictions"
                         },
                         domProps: {
-                          checked: Array.isArray(_vm.params.jurisdiction)
-                            ? _vm._i(_vm.params.jurisdiction, "2") > -1
-                            : _vm.params.jurisdiction
+                          checked: Array.isArray(_vm.params.jurisdictions)
+                            ? _vm._i(_vm.params.jurisdictions, "2") > -1
+                            : _vm.params.jurisdictions
                         },
                         on: {
                           change: function($event) {
-                            var $$a = _vm.params.jurisdiction,
+                            var $$a = _vm.params.jurisdictions,
                               $$el = $event.target,
                               $$c = $$el.checked ? true : false
                             if (Array.isArray($$a)) {
@@ -48213,19 +48210,19 @@ var render = function() {
                                 $$i < 0 &&
                                   _vm.$set(
                                     _vm.params,
-                                    "jurisdiction",
+                                    "jurisdictions",
                                     $$a.concat([$$v])
                                   )
                               } else {
                                 $$i > -1 &&
                                   _vm.$set(
                                     _vm.params,
-                                    "jurisdiction",
+                                    "jurisdictions",
                                     $$a.slice(0, $$i).concat($$a.slice($$i + 1))
                                   )
                               }
                             } else {
-                              _vm.$set(_vm.params, "jurisdiction", $$c)
+                              _vm.$set(_vm.params, "jurisdictions", $$c)
                             }
                           }
                         }
@@ -48242,23 +48239,23 @@ var render = function() {
                           {
                             name: "model",
                             rawName: "v-model",
-                            value: _vm.params.jurisdiction,
-                            expression: "params.jurisdiction"
+                            value: _vm.params.jurisdictions,
+                            expression: "params.jurisdictions"
                           }
                         ],
                         attrs: {
                           type: "checkbox",
                           value: "1",
-                          name: "jurisdiction"
+                          name: "jurisdictions"
                         },
                         domProps: {
-                          checked: Array.isArray(_vm.params.jurisdiction)
-                            ? _vm._i(_vm.params.jurisdiction, "1") > -1
-                            : _vm.params.jurisdiction
+                          checked: Array.isArray(_vm.params.jurisdictions)
+                            ? _vm._i(_vm.params.jurisdictions, "1") > -1
+                            : _vm.params.jurisdictions
                         },
                         on: {
                           change: function($event) {
-                            var $$a = _vm.params.jurisdiction,
+                            var $$a = _vm.params.jurisdictions,
                               $$el = $event.target,
                               $$c = $$el.checked ? true : false
                             if (Array.isArray($$a)) {
@@ -48268,19 +48265,19 @@ var render = function() {
                                 $$i < 0 &&
                                   _vm.$set(
                                     _vm.params,
-                                    "jurisdiction",
+                                    "jurisdictions",
                                     $$a.concat([$$v])
                                   )
                               } else {
                                 $$i > -1 &&
                                   _vm.$set(
                                     _vm.params,
-                                    "jurisdiction",
+                                    "jurisdictions",
                                     $$a.slice(0, $$i).concat($$a.slice($$i + 1))
                                   )
                               }
                             } else {
-                              _vm.$set(_vm.params, "jurisdiction", $$c)
+                              _vm.$set(_vm.params, "jurisdictions", $$c)
                             }
                           }
                         }
@@ -49701,14 +49698,7 @@ var render = function() {
                       _vm._v("Закінчилися повноваження")
                     ])
                   ])
-                ]),
-                _vm._v(
-                  "\n              epired: " +
-                    _vm._s(typeof this.params.expired) +
-                    " " +
-                    _vm._s(this.params.expired) +
-                    "\n            "
-                )
+                ])
               ])
             ]),
             _vm._v(" "),
@@ -50080,7 +50070,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n.pagination .bg-active {\n  background-color: #2b989b;\n  border-color: #2b989b;\n}\n.pagination button:active, .pagination button:focus {\n  background-color: #2b989b;\n  border-color: #2b989b;\n}\n.pagination div.pr-2.leading-loose {\n  display: none !important;\n}\n.pagination .disabled {\n  color: grey;\n  cursor: no-drop;\n}\n.pagination .dots {\n  background-color: transparent;\n  border: none !important;\n}\n", ""]);
+exports.push([module.i, "\n.pagination .bg-active {\n  background-color: #2b989b;\n  border-color: #2b989b;\n}\n.pagination button:active, .pagination button:focus {\n  background-color: #2b989b;\n  border-color: #2b989b;\n}\n.pagination div.pr-2.leading-loose {\n  display: none !important;\n}\n.pagination .disabled {\n  color: #739696;\n  cursor: no-drop;\n}\n.pagination .dots {\n  background-color: transparent;\n  border: none !important;\n}\n", ""]);
 
 // exports
 
@@ -50283,8 +50273,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       params: {
         page: 0,
         regions: [],
-        jurisdiction: [],
-        instance: [],
+        jurisdictions: [],
+        instances: [],
         search: null,
         sort: 1
       },
@@ -50335,21 +50325,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }
     }, 1000),
     sortList: __WEBPACK_IMPORTED_MODULE_3_lodash___default.a.debounce(function (event) {
+      this.loadData = false;
       window.scrollTo(0, 0);
       this.getCourtsList();
     }, 10),
 
     pageChange: function pageChange(page) {
-      window.scrollTo(0, 0);
       this.loadData = false;
+      window.scrollTo(0, 0);
       this.params.page = page + 1;
       this.getCourtsList();
     },
     setFilters: function setFilters() {
+      this.loadData = false;
       window.scrollTo(0, 0);
       this.$refs.pagins.currentPage = 0;
       this.params.page = 1;
-      console.log('PARAMS ЗНАЙТИ', this.params);
       this.getCourtsList();
     },
     getCourtsList: function getCourtsList() {
@@ -50397,10 +50388,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     resetFilters: function resetFilters() {
       this.params.regions = [];
-      this.params.instance = [];
-      this.params.jurisdiction = [];
+      this.params.instances = [];
+      this.params.jurisdictions = [];
       this.params.search = null;
       this.autocomplete = [];
+      this.loadData = false;
+      window.scrollTo(0, 0);
       this.getCourtsList(); // онуляємо всі фільтри і визиваємо функцію
     }
   },
@@ -50498,7 +50491,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n.court-component .court-component_left[data-v-53dd519e] {\n  background-color: #fafafa;\n  -webkit-box-shadow: 0px 3px 9px -1px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14);\n  box-shadow: 0px 3px 9px -1px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14);\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.court-component .court-component_right[data-v-53dd519e] {\n  -webkit-box-shadow: 0px 3px 9px -1px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14);\n  box-shadow: 0px 3px 9px -1px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14);\n  background-color: #ffffff;\n}\n.court-component .court-component_right .court-name[data-v-53dd519e] {\n    color: #4c88bd;\n    font-size: 1.3rem;\n}\n.court-component .court-component_right .court-name[data-v-53dd519e]:hover {\n      color: #4c88bd;\n      text-decoration: underline;\n}\n.court-component .court-component_right .part-1[data-v-53dd519e],\n  .court-component .court-component_right .part-2[data-v-53dd519e] {\n    line-height: 1.3rem;\n    font-size: .9rem;\n}\n.court-component .court-component_right .part-1 span[data-v-53dd519e],\n    .court-component .court-component_right .part-2 span[data-v-53dd519e] {\n      color: #304040;\n      font-weight: 700;\n}\n.court-component .court-component_right .part-1 > div[data-v-53dd519e]:last-child,\n  .court-component .court-component_right .part-2 > div[data-v-53dd519e]:first-child {\n    color: #4c88bd;\n}\n.court-component .court-component_right .part-3[data-v-53dd519e] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: row;\n            flex-direction: row;\n    -webkit-box-pack: justify;\n        -ms-flex-pack: justify;\n            justify-content: space-between;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n}\n.court-component .court-component_right .part-3 .raiting[data-v-53dd519e] {\n      color: #2b989b;\n}\n.court-component .court-component_right .part-3 .bookmark[data-v-53dd519e] {\n      color: orange;\n}\n.court-component .fa-warehouse[data-v-53dd519e] {\n  color: #4c88bd;\n  font-size: 1.2rem;\n  margin-bottom: 10px;\n}\n", ""]);
+exports.push([module.i, "\n.court-component .court-component_left[data-v-53dd519e] {\n  background-color: #fafafa;\n  -webkit-box-shadow: 0px 3px 9px -1px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14);\n  box-shadow: 0px 3px 9px -1px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14);\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.court-component .court-component_left .fa-university[data-v-53dd519e] {\n    color: #4c88bd;\n    font-size: 1.8rem;\n    margin-bottom: 10px;\n}\n.court-component .court-component_right[data-v-53dd519e] {\n  -webkit-box-shadow: 0px 3px 9px -1px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14);\n  box-shadow: 0px 3px 9px -1px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14);\n  background-color: #ffffff;\n}\n.court-component .court-component_right .court-name[data-v-53dd519e] {\n    color: #4c88bd;\n    font-size: 1.3rem;\n}\n.court-component .court-component_right .court-name[data-v-53dd519e]:hover {\n      color: #4c88bd;\n      text-decoration: underline;\n}\n.court-component .court-component_right .part-1[data-v-53dd519e],\n  .court-component .court-component_right .part-2[data-v-53dd519e] {\n    line-height: 1.3rem;\n    font-size: .9rem;\n}\n.court-component .court-component_right .part-1 span[data-v-53dd519e],\n    .court-component .court-component_right .part-2 span[data-v-53dd519e] {\n      color: #304040;\n      font-weight: 700;\n}\n.court-component .court-component_right .part-1 > div[data-v-53dd519e]:last-child,\n  .court-component .court-component_right .part-2 > div[data-v-53dd519e]:first-child {\n    color: #4c88bd;\n}\n.court-component .court-component_right .part-3[data-v-53dd519e] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: row;\n            flex-direction: row;\n    -webkit-box-pack: justify;\n        -ms-flex-pack: justify;\n            justify-content: space-between;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n}\n.court-component .court-component_right .part-3 .raiting[data-v-53dd519e] {\n      color: #2b989b;\n}\n.court-component .court-component_right .part-3 .bookmark[data-v-53dd519e] {\n      color: orange;\n}\n", ""]);
 
 // exports
 
@@ -50622,12 +50615,12 @@ var render = function() {
                 { key: ind_1, staticClass: "court-component row mb-3" },
                 [
                   _c("div", { staticClass: "col-2 court-component_left" }, [
-                    _c("i", { staticClass: "fas fa-warehouse" }),
-                    _vm._v(
-                      "\n                    " +
-                        _vm._s(court.court_code) +
-                        "\n                "
-                    )
+                    _c("i", {
+                      staticClass: "fa fa-university",
+                      attrs: { "aria-hidden": "true" }
+                    }),
+                    _vm._v(" "),
+                    _c("b", [_vm._v(_vm._s(court.court_code))])
                   ]),
                   _vm._v(" "),
                   _c(
@@ -50774,23 +50767,23 @@ var render = function() {
                           {
                             name: "model",
                             rawName: "v-model",
-                            value: _vm.params.instance,
-                            expression: "params.instance"
+                            value: _vm.params.instances,
+                            expression: "params.instances"
                           }
                         ],
                         attrs: {
                           type: "checkbox",
                           value: "3",
-                          name: "instance"
+                          name: "instances"
                         },
                         domProps: {
-                          checked: Array.isArray(_vm.params.instance)
-                            ? _vm._i(_vm.params.instance, "3") > -1
-                            : _vm.params.instance
+                          checked: Array.isArray(_vm.params.instances)
+                            ? _vm._i(_vm.params.instances, "3") > -1
+                            : _vm.params.instances
                         },
                         on: {
                           change: function($event) {
-                            var $$a = _vm.params.instance,
+                            var $$a = _vm.params.instances,
                               $$el = $event.target,
                               $$c = $$el.checked ? true : false
                             if (Array.isArray($$a)) {
@@ -50800,19 +50793,19 @@ var render = function() {
                                 $$i < 0 &&
                                   _vm.$set(
                                     _vm.params,
-                                    "instance",
+                                    "instances",
                                     $$a.concat([$$v])
                                   )
                               } else {
                                 $$i > -1 &&
                                   _vm.$set(
                                     _vm.params,
-                                    "instance",
+                                    "instances",
                                     $$a.slice(0, $$i).concat($$a.slice($$i + 1))
                                   )
                               }
                             } else {
-                              _vm.$set(_vm.params, "instance", $$c)
+                              _vm.$set(_vm.params, "instances", $$c)
                             }
                           }
                         }
@@ -50829,23 +50822,23 @@ var render = function() {
                           {
                             name: "model",
                             rawName: "v-model",
-                            value: _vm.params.instance,
-                            expression: "params.instance"
+                            value: _vm.params.instances,
+                            expression: "params.instances"
                           }
                         ],
                         attrs: {
                           type: "checkbox",
                           value: "2",
-                          name: "instance"
+                          name: "instances"
                         },
                         domProps: {
-                          checked: Array.isArray(_vm.params.instance)
-                            ? _vm._i(_vm.params.instance, "2") > -1
-                            : _vm.params.instance
+                          checked: Array.isArray(_vm.params.instances)
+                            ? _vm._i(_vm.params.instances, "2") > -1
+                            : _vm.params.instances
                         },
                         on: {
                           change: function($event) {
-                            var $$a = _vm.params.instance,
+                            var $$a = _vm.params.instances,
                               $$el = $event.target,
                               $$c = $$el.checked ? true : false
                             if (Array.isArray($$a)) {
@@ -50855,19 +50848,19 @@ var render = function() {
                                 $$i < 0 &&
                                   _vm.$set(
                                     _vm.params,
-                                    "instance",
+                                    "instances",
                                     $$a.concat([$$v])
                                   )
                               } else {
                                 $$i > -1 &&
                                   _vm.$set(
                                     _vm.params,
-                                    "instance",
+                                    "instances",
                                     $$a.slice(0, $$i).concat($$a.slice($$i + 1))
                                   )
                               }
                             } else {
-                              _vm.$set(_vm.params, "instance", $$c)
+                              _vm.$set(_vm.params, "instances", $$c)
                             }
                           }
                         }
@@ -50884,23 +50877,23 @@ var render = function() {
                           {
                             name: "model",
                             rawName: "v-model",
-                            value: _vm.params.instance,
-                            expression: "params.instance"
+                            value: _vm.params.instances,
+                            expression: "params.instances"
                           }
                         ],
                         attrs: {
                           type: "checkbox",
                           value: "1",
-                          name: "instance"
+                          name: "instances"
                         },
                         domProps: {
-                          checked: Array.isArray(_vm.params.instance)
-                            ? _vm._i(_vm.params.instance, "1") > -1
-                            : _vm.params.instance
+                          checked: Array.isArray(_vm.params.instances)
+                            ? _vm._i(_vm.params.instances, "1") > -1
+                            : _vm.params.instances
                         },
                         on: {
                           change: function($event) {
-                            var $$a = _vm.params.instance,
+                            var $$a = _vm.params.instances,
                               $$el = $event.target,
                               $$c = $$el.checked ? true : false
                             if (Array.isArray($$a)) {
@@ -50910,19 +50903,19 @@ var render = function() {
                                 $$i < 0 &&
                                   _vm.$set(
                                     _vm.params,
-                                    "instance",
+                                    "instances",
                                     $$a.concat([$$v])
                                   )
                               } else {
                                 $$i > -1 &&
                                   _vm.$set(
                                     _vm.params,
-                                    "instance",
+                                    "instances",
                                     $$a.slice(0, $$i).concat($$a.slice($$i + 1))
                                   )
                               }
                             } else {
-                              _vm.$set(_vm.params, "instance", $$c)
+                              _vm.$set(_vm.params, "instances", $$c)
                             }
                           }
                         }
@@ -50949,23 +50942,23 @@ var render = function() {
                           {
                             name: "model",
                             rawName: "v-model",
-                            value: _vm.params.jurisdiction,
-                            expression: "params.jurisdiction"
+                            value: _vm.params.jurisdictions,
+                            expression: "params.jurisdictions"
                           }
                         ],
                         attrs: {
                           type: "checkbox",
                           value: "3",
-                          name: "jurisdiction"
+                          name: "jurisdictions"
                         },
                         domProps: {
-                          checked: Array.isArray(_vm.params.jurisdiction)
-                            ? _vm._i(_vm.params.jurisdiction, "3") > -1
-                            : _vm.params.jurisdiction
+                          checked: Array.isArray(_vm.params.jurisdictions)
+                            ? _vm._i(_vm.params.jurisdictions, "3") > -1
+                            : _vm.params.jurisdictions
                         },
                         on: {
                           change: function($event) {
-                            var $$a = _vm.params.jurisdiction,
+                            var $$a = _vm.params.jurisdictions,
                               $$el = $event.target,
                               $$c = $$el.checked ? true : false
                             if (Array.isArray($$a)) {
@@ -50975,19 +50968,19 @@ var render = function() {
                                 $$i < 0 &&
                                   _vm.$set(
                                     _vm.params,
-                                    "jurisdiction",
+                                    "jurisdictions",
                                     $$a.concat([$$v])
                                   )
                               } else {
                                 $$i > -1 &&
                                   _vm.$set(
                                     _vm.params,
-                                    "jurisdiction",
+                                    "jurisdictions",
                                     $$a.slice(0, $$i).concat($$a.slice($$i + 1))
                                   )
                               }
                             } else {
-                              _vm.$set(_vm.params, "jurisdiction", $$c)
+                              _vm.$set(_vm.params, "jurisdictions", $$c)
                             }
                           }
                         }
@@ -51004,23 +50997,23 @@ var render = function() {
                           {
                             name: "model",
                             rawName: "v-model",
-                            value: _vm.params.jurisdiction,
-                            expression: "params.jurisdiction"
+                            value: _vm.params.jurisdictions,
+                            expression: "params.jurisdictions"
                           }
                         ],
                         attrs: {
                           type: "checkbox",
                           value: "2",
-                          name: "jurisdiction"
+                          name: "jurisdictions"
                         },
                         domProps: {
-                          checked: Array.isArray(_vm.params.jurisdiction)
-                            ? _vm._i(_vm.params.jurisdiction, "2") > -1
-                            : _vm.params.jurisdiction
+                          checked: Array.isArray(_vm.params.jurisdictions)
+                            ? _vm._i(_vm.params.jurisdictions, "2") > -1
+                            : _vm.params.jurisdictions
                         },
                         on: {
                           change: function($event) {
-                            var $$a = _vm.params.jurisdiction,
+                            var $$a = _vm.params.jurisdictions,
                               $$el = $event.target,
                               $$c = $$el.checked ? true : false
                             if (Array.isArray($$a)) {
@@ -51030,19 +51023,19 @@ var render = function() {
                                 $$i < 0 &&
                                   _vm.$set(
                                     _vm.params,
-                                    "jurisdiction",
+                                    "jurisdictions",
                                     $$a.concat([$$v])
                                   )
                               } else {
                                 $$i > -1 &&
                                   _vm.$set(
                                     _vm.params,
-                                    "jurisdiction",
+                                    "jurisdictions",
                                     $$a.slice(0, $$i).concat($$a.slice($$i + 1))
                                   )
                               }
                             } else {
-                              _vm.$set(_vm.params, "jurisdiction", $$c)
+                              _vm.$set(_vm.params, "jurisdictions", $$c)
                             }
                           }
                         }
@@ -51059,23 +51052,23 @@ var render = function() {
                           {
                             name: "model",
                             rawName: "v-model",
-                            value: _vm.params.jurisdiction,
-                            expression: "params.jurisdiction"
+                            value: _vm.params.jurisdictions,
+                            expression: "params.jurisdictions"
                           }
                         ],
                         attrs: {
                           type: "checkbox",
                           value: "1",
-                          name: "jurisdiction"
+                          name: "jurisdictions"
                         },
                         domProps: {
-                          checked: Array.isArray(_vm.params.jurisdiction)
-                            ? _vm._i(_vm.params.jurisdiction, "1") > -1
-                            : _vm.params.jurisdiction
+                          checked: Array.isArray(_vm.params.jurisdictions)
+                            ? _vm._i(_vm.params.jurisdictions, "1") > -1
+                            : _vm.params.jurisdictions
                         },
                         on: {
                           change: function($event) {
-                            var $$a = _vm.params.jurisdiction,
+                            var $$a = _vm.params.jurisdictions,
                               $$el = $event.target,
                               $$c = $$el.checked ? true : false
                             if (Array.isArray($$a)) {
@@ -51085,19 +51078,19 @@ var render = function() {
                                 $$i < 0 &&
                                   _vm.$set(
                                     _vm.params,
-                                    "jurisdiction",
+                                    "jurisdictions",
                                     $$a.concat([$$v])
                                   )
                               } else {
                                 $$i > -1 &&
                                   _vm.$set(
                                     _vm.params,
-                                    "jurisdiction",
+                                    "jurisdictions",
                                     $$a.slice(0, $$i).concat($$a.slice($$i + 1))
                                   )
                               }
                             } else {
-                              _vm.$set(_vm.params, "jurisdiction", $$c)
+                              _vm.$set(_vm.params, "jurisdictions", $$c)
                             }
                           }
                         }
