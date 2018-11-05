@@ -2,12 +2,12 @@
 
 namespace Toecyd;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\Facades\Storage;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-
-use Swagger\Annotations as SWG;
 
 /**
  * Class User
@@ -40,24 +40,27 @@ class User extends Authenticatable
 	/**
 	 * перевірка користувача
 	 * повернення повідомлення про помилку || true
-	 * @param $email
+	 * @param array $credentials
 	 * @return bool
 	 */
-	public static function checkUser($email) {
+	public static function checkUser(array $credentials) {
 
-		$user = static::where('email', '=', $email)
+		$user = static::where('email', '=', $credentials['email'])
 			->first();
 		
 		if (empty($user) || $user->usertype == 4) {
 			return Lang::get('passwords.user'); // користувача не існує
 		} else if ($user->usertype == 7) { //todo пізніше виправити на 1 // не підтверджений email
 			return Lang::get('auth.unconfirmed');
-		} else if (!is_null($user->google_id)) {
+		} else if (!is_null($user->google_id) && !Auth::validate($credentials)) {
 			return Lang::get('auth.via_google');
-		} else if (!is_null($user->facebook_id)) {
+		} else if (!is_null($user->facebook_id) && !Auth::validate($credentials)) {
 			return Lang::get('auth.via_facebook');
 		}
 		return true;
 	}
-    
+
+	public static function getPhotoStorage() {
+        return Storage::disk('public');
+    }
 }

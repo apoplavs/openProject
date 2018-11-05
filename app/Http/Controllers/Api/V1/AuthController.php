@@ -1,18 +1,9 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: apoplavs
- * Date: 01.08.18
- * Time: 17:04
- */
-
 namespace Toecyd\Http\Controllers\Api\V1;
-
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Lang;
 use Toecyd\Http\Controllers\Controller;
@@ -204,7 +195,7 @@ class AuthController extends Controller
         ]);
 
         $credentials = request(['email', 'password']);
-        $user_check = User::checkUser($request->email);
+        $user_check = User::checkUser($credentials);
         // якщо в користувача неправильний пароль, або є інші причини чому він не може ввійти
         if (!Auth::attempt($credentials) || $user_check !== true) {
             return response()->json([
@@ -639,6 +630,8 @@ class AuthController extends Controller
      * @return bool
      */
     private function savePhoto(string $photo_url, User $user): bool {
+        $storage = User::getPhotoStorage();
+
         $file_extension = pathinfo($photo_url, PATHINFO_EXTENSION);
         if (empty($file_extension)) {
             $file_extension = 'jpg';
@@ -650,11 +643,11 @@ class AuthController extends Controller
 
         $local_photo_url = "img/users/{$user->id}.{$file_extension}";
         $photo_contents = @file_get_contents($photo_url);
-        if (!$photo_contents || !Storage::put($local_photo_url, file_get_contents($photo_url))) {
+        if (!$photo_contents || !$storage->put($local_photo_url, file_get_contents($photo_url))) {
             return false;
         }
 
-        if (!Storage::exists($local_photo_url) || Storage::size($local_photo_url) == 0) {
+        if (!$storage->exists($local_photo_url) || $storage->size($local_photo_url) == 0) {
             return false;
         }
 
@@ -684,7 +677,6 @@ class AuthController extends Controller
             $user->save();
             $already_exists = false;
         }
-        $user->password = bcrypt($request->id);
         $user->surname = $request->surname;
         $user->usertype = 2;
 

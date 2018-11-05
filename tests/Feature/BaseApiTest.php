@@ -14,18 +14,16 @@ class BaseApiTest extends TestCase
     /**
      * Заголовки для HTTP-запитів
      */
-    protected $headers = ['accept' => 'application/json', 'X-Requested-With' => 'XMLHttpRequest'];
-
-    /**
-     * Імена полів, які мають бути заповненими, коли ми отримуємо токен
-     */
-    protected $token_keys = ['access_token', 'token_type', 'expires_at'];
+    protected $headers = [
+        'accept' => 'application/json',
+        'X-Requested-With' => 'XMLHttpRequest',
+    ];
 
     /**
      * Дані про тестового користувача; мають бути такими, яких нема у БД
      */
     protected $user_data = [
-        'name' => 'slualexvas_test_name',
+        'name'      => 'slualexvas_test_name',
         'surname'   => 'slualexvas_test_surname',
         'email'     => 'slualexvas@gmail.com',
         'password'  => 'test_password',
@@ -35,7 +33,7 @@ class BaseApiTest extends TestCase
     protected $user;
 
     /* URL для HTTP-запитів */
-    protected $url = 'api/v1/';
+    protected $url = '/api/v1/';
 
     public function setUp() {
         parent::setUp();
@@ -88,7 +86,7 @@ class BaseApiTest extends TestCase
     protected function assertToken($response)
     {
         $response_data = $response->decodeResponseJson();
-        foreach ($this->token_keys as $key) {
+        foreach (['access_token', 'token_type', 'expires_at'] as $key) {
             $this->assertNotEmpty($response_data[$key]);
         }
     }

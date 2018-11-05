@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use Illuminate\Support\Facades\Storage;
 use Toecyd\User;
 
 class LoginFacebookTest extends BaseApiTest
@@ -16,13 +17,17 @@ class LoginFacebookTest extends BaseApiTest
      */
     public function testLoginExistingUser()
     {
+        $old_password = $this->user->getAuthPassword();
+
         $response = $this->post($this->url, $this->getDataToPost(), $this->headers);
         $response->assertStatus(200);
         $this->assertToken($response);
 
         $userUpdated = User::where('email', $this->user_data['email'])->first();
+        $this->assertPhoto($userUpdated);
 
-        $this->assertContains($userUpdated->id . '.jpg', $userUpdated->photo);
+        // перевіряємо, що пароль не був перезаписаний при авторизації через Facebook
+        $this->assertEquals($old_password, $this->user->getAuthPassword());
     }
 
     /**
@@ -39,10 +44,12 @@ class LoginFacebookTest extends BaseApiTest
 
         $userUpdated = User::where('email', $this->user_data['email'])->first();
 
-        $this->assertContains($userUpdated->id . '.jpg', $userUpdated->photo);
         foreach (['email', 'name', 'surname'] as $key) {
             $this->assertEquals($userUpdated->$key, $data[$key]);
         }
+
+        $this->assertPhoto($userUpdated);
+
     }
 
     /**
@@ -60,8 +67,11 @@ class LoginFacebookTest extends BaseApiTest
 
         $user_inserted = User::where('email', $this->user_data['email'])->first();
         $this->assertTrue(!empty($user_inserted));
-        $this->assertContains($user_inserted->id . '.jpg', $user_inserted->photo);
         $this->assertEquals(2, $user_inserted->usertype);
+
+        $this->assertPhoto($user_inserted);
+        // Для видалення фото після виконання тесту
+        $this->user = $user_inserted;
     }
 
     /**
@@ -113,6 +123,15 @@ class LoginFacebookTest extends BaseApiTest
         $this->url .= 'login/facebook';
     }
 
+    public function tearDown()
+    {
+        $this->user->refresh();
+        if (!empty($this->user->photo)) {
+            User::getPhotoStorage()->delete($this->user->photo);
+        }
+        parent::tearDown();
+    }
+
     private function getDataToPost()
     {
         return [
@@ -121,5 +140,11 @@ class LoginFacebookTest extends BaseApiTest
             'name'    => $this->user_data['name'],
             'surname' => $this->user_data['surname'],
         ];
+    }
+
+    private function assertPhoto($user)
+    {
+        $this->assertContains($user->id . '.jpg', $user->photo);
+        $this->assertTrue(User::getPhotoStorage()->exists($user->photo));
     }
 }
