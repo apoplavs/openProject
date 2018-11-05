@@ -195,7 +195,7 @@ class AuthController extends Controller
         ]);
 
         $credentials = request(['email', 'password']);
-        $user_check = User::checkUser($request->email);
+        $user_check = User::checkUser($credentials);
         // якщо в користувача неправильний пароль, або є інші причини чому він не може ввійти
         if (!Auth::attempt($credentials) || $user_check !== true) {
             return response()->json([
@@ -630,7 +630,7 @@ class AuthController extends Controller
      * @return bool
      */
     private function savePhoto(string $photo_url, User $user): bool {
-        $storage_disk = Storage::disk('public');
+        $storage = User::getPhotoStorage();
 
         $file_extension = pathinfo($photo_url, PATHINFO_EXTENSION);
         if (empty($file_extension)) {
@@ -643,11 +643,11 @@ class AuthController extends Controller
 
         $local_photo_url = "img/users/{$user->id}.{$file_extension}";
         $photo_contents = @file_get_contents($photo_url);
-        if (!$photo_contents || !$storage_disk->put($local_photo_url, file_get_contents($photo_url))) {
+        if (!$photo_contents || !$storage->put($local_photo_url, file_get_contents($photo_url))) {
             return false;
         }
 
-        if (!$storage_disk->exists($local_photo_url) || $storage_disk->size($local_photo_url) == 0) {
+        if (!$storage->exists($local_photo_url) || $storage->size($local_photo_url) == 0) {
             return false;
         }
 
@@ -677,7 +677,6 @@ class AuthController extends Controller
             $user->save();
             $already_exists = false;
         }
-        $user->password = bcrypt($request->id);
         $user->surname = $request->surname;
         $user->usertype = 2;
 

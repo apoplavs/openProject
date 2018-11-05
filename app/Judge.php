@@ -65,12 +65,10 @@ class Judge extends Model
         // отримання способу сортування
         $sort_variant = (self::getSortVariants())[$sort_order];
 
-        return (static::select('judges.id',	'courts.name AS court_name', 'judges.surname',
-			'judges.name', 'judges.patronymic', 'judges.photo',	'judges.status',
-			DB::raw('DATE_FORMAT(judges.updated_status, "%d.%m.%Y") AS updated_status'),
-			DB::raw('DATE_FORMAT(judges.due_date_status, "%d.%m.%Y") AS due_date_status'),
-			DB::raw("(CASE WHEN user_bookmark_judges.user = {$user_id} THEN 1 ELSE 0 END) AS is_bookmark"),
-			'judges.rating')
+        // другий orderBy для випадку, коли є декілька суддів, що мають однаковий порядок сортування
+        $sort_variant_2 = (self::getSortVariants())[0];
+
+        return (static::select(self::getJudgesListFields($user_id))
             ->join('courts', 'judges.court', '=', 'courts.court_code')
             ->leftJoin('user_bookmark_judges', function ($join) use ($user_id) {
                 $join->on('judges.id', '=', 'user_bookmark_judges.judge');
@@ -97,6 +95,7 @@ class Judge extends Model
                 return $query->where('judges.surname', 'LIKE', $search . '%');
             })
             ->orderBy($sort_variant[0], $sort_variant[1])
+            ->orderBy($sort_variant_2[0], $sort_variant_2[1])
             ->paginate(self::JUDGES_PER_PAGE));
     }
 
@@ -119,11 +118,13 @@ class Judge extends Model
         // отримання способу сортування
         $sort_variant = (self::getSortVariants())[$sort_order];
 
-        return (static::select('judges.id',	'courts.name AS court_name', 'judges.surname',
-			'judges.name', 'judges.patronymic', 'judges.photo',	'judges.status',
-			DB::raw('DATE_FORMAT(judges.updated_status, "%d.%m.%Y") AS updated_status'),
-			DB::raw('DATE_FORMAT(judges.due_date_status, "%d.%m.%Y") AS due_date_status'),
-			'judges.rating')
+        // отримання способу сортування
+        $sort_variant = (self::getSortVariants())[$sort_order];
+
+        // другий orderBy для випадку, коли є декілька суддів, що мають однаковий порядок сортування
+        $sort_variant_2 = (self::getSortVariants())[0];
+
+        return (static::select(self::getJudgesListGuestFields())
             ->join('courts', 'judges.court', '=', 'courts.court_code')
             // фільтрція за регіоном
             ->when(!empty($regions), function ($query) use ($regions) {
@@ -146,6 +147,7 @@ class Judge extends Model
                 return $query->where('judges.surname', 'LIKE', $search . '%');
             })
             ->orderBy($sort_variant[0], $sort_variant[1])
+            ->orderBy($sort_variant_2[0], $sort_variant_2[1])
             ->paginate(self::JUDGES_PER_PAGE));
     }
 
@@ -235,4 +237,35 @@ class Judge extends Model
 			->get();
 	}
 	
+	
+	public static function getJudgesListGuestFields() {
+        return [
+            'judges.id',
+            'courts.name AS court_name',
+            'judges.surname',
+            'judges.name',
+            'judges.patronymic',
+            'judges.photo',
+            'judges.status',
+            DB::raw('DATE_FORMAT(judges.updated_status, "%d.%m.%Y") AS updated_status'),
+            DB::raw('DATE_FORMAT(judges.due_date_status, "%d.%m.%Y") AS due_date_status'),
+            'judges.rating'
+        ];
+    }
+	
+	public static function getJudgesListFields($user_id) {
+        return [
+            'judges.id',
+            'courts.name AS court_name',
+            'judges.surname',
+            'judges.name',
+            'judges.patronymic',
+            'judges.photo',
+            'judges.status',
+            DB::raw('DATE_FORMAT(judges.updated_status, "%d.%m.%Y") AS updated_status'),
+            DB::raw('DATE_FORMAT(judges.due_date_status, "%d.%m.%Y") AS due_date_status'),
+            'judges.rating',
+            DB::raw("(CASE WHEN user_bookmark_judges.user = {$user_id} THEN 1 ELSE 0 END) AS is_bookmark")
+        ];
+    }
 }
