@@ -43,7 +43,7 @@ class UserBookmarksTest extends BaseApiTest
         $headers_with_token = $this->headersWithToken($this->login($this->user_data));
 
         //додаємо інформацію по закладкам в БД (судді)
-        $judges_etalon_data = DB::table('judges')->select(UserBookmarkJudge::getBookmarkFields())
+        $judges_etalon_data = call_user_func_array(['Toecyd\Judge', 'select'], UserBookmarkJudge::getBookmarkFields())
             ->join('courts', 'judges.court', '=', 'courts.court_code')
             ->limit(2)
             ->get()
@@ -55,19 +55,19 @@ class UserBookmarksTest extends BaseApiTest
                 'judge' => $row->id,
             ]);
 
-            $judges_etalon_data[$key] = (array)$row;
+            $judges_etalon_data[$key] = $row->toArray();
         }
 
         //додаємо інформацію по закладкам в БД (суди)
-        $courts_etalon_data = DB::table('courts')->select(UserBookmarkCourt::getBookmarkFields())
+        $courts_etalon_data = (call_user_func_array(['Toecyd\Court', 'select'], UserBookmarkCourt::getBookmarkFields())
             ->leftJoin('instances', 'courts.instance_code', '=', 'instances.instance_code')
             ->leftJoin('regions', 'courts.region_code', '=', 'regions.region_code')
             ->leftJoin('jurisdictions', 'courts.jurisdiction', '=', 'jurisdictions.id')
             ->leftJoin('judges', 'courts.head_judge', '=', 'judges.id')
-            ->join('user_bookmark_courts', 'user_bookmark_courts.court', '=', 'courts.court_code')
             ->limit(2)
             ->get()
-            ->all();
+            ->all()
+        );
 
         foreach ($courts_etalon_data as $key => $row) {
             DB::table('user_bookmark_courts')->insert([
@@ -75,7 +75,7 @@ class UserBookmarksTest extends BaseApiTest
                 'court' => $row->court_code,
             ]);
 
-            $courts_etalon_data[$key] = (array)$row;
+            $courts_etalon_data[$key] = $row->toArray();
         }
 
         // отримуємо закладки

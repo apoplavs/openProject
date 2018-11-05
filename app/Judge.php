@@ -68,35 +68,37 @@ class Judge extends Model
         // другий orderBy для випадку, коли є декілька суддів, що мають однаковий порядок сортування
         $sort_variant_2 = (self::getSortVariants())[0];
 
-        return (static::select(self::getJudgesListFields($user_id))
-            ->join('courts', 'judges.court', '=', 'courts.court_code')
-            ->leftJoin('user_bookmark_judges', function ($join) use ($user_id) {
-                $join->on('judges.id', '=', 'user_bookmark_judges.judge');
-                $join->on('user_bookmark_judges.user', '=', DB::raw($user_id));
-            })
-            // фільтрція за регіоном
-            ->when(!empty($regions), function ($query) use ($regions) {
-                return $query->whereIn('courts.region_code', $regions);
-            })
-            // фільтрція за інстанцією
-            ->when(!empty($instances), function ($query) use ($instances) {
-                return $query->whereIn('courts.instance_code', $instances);
-            })
-            // фільтрція за юрисдикцією
-            ->when(!empty($jurisdictions), function ($query) use ($jurisdictions) {
-                return $query->whereIn('courts.jurisdiction', $jurisdictions);
-            })
-            // якщо не переданий аргумент щоб показувати суддів в яких закінчились повноваження - значить упускємо їх при вибірці
-            ->when($powers_expired == false, function ($query) {
-                return $query->where('judges.status', '!=', 5);
-            })
-            // якщо застосовано пошук
-            ->when(!empty($search), function ($query) use ($search) {
-                return $query->where('judges.surname', 'LIKE', $search . '%');
-            })
-            ->orderBy($sort_variant[0], $sort_variant[1])
-            ->orderBy($sort_variant_2[0], $sort_variant_2[1])
-            ->paginate(self::JUDGES_PER_PAGE));
+        return (
+            call_user_func_array(['static', 'select'], self::getJudgesListFields($user_id))
+                ->join('courts', 'judges.court', '=', 'courts.court_code')
+                ->leftJoin('user_bookmark_judges', function ($join) use ($user_id) {
+                    $join->on('judges.id', '=', 'user_bookmark_judges.judge');
+                    $join->on('user_bookmark_judges.user', '=', DB::raw($user_id));
+                })
+                // фільтрція за регіоном
+                ->when(!empty($regions), function ($query) use ($regions) {
+                    return $query->whereIn('courts.region_code', $regions);
+                })
+                // фільтрція за інстанцією
+                ->when(!empty($instances), function ($query) use ($instances) {
+                    return $query->whereIn('courts.instance_code', $instances);
+                })
+                // фільтрція за юрисдикцією
+                ->when(!empty($jurisdictions), function ($query) use ($jurisdictions) {
+                    return $query->whereIn('courts.jurisdiction', $jurisdictions);
+                })
+                // якщо не переданий аргумент щоб показувати суддів в яких закінчились повноваження - значить упускємо їх при вибірці
+                ->when($powers_expired == false, function ($query) {
+                    return $query->where('judges.status', '!=', 5);
+                })
+                // якщо застосовано пошук
+                ->when(!empty($search), function ($query) use ($search) {
+                    return $query->where('judges.surname', 'LIKE', $search . '%');
+                })
+                ->orderBy($sort_variant[0], $sort_variant[1])
+                ->orderBy($sort_variant_2[0], $sort_variant_2[1])
+                ->paginate(self::JUDGES_PER_PAGE)
+        );
     }
 
     /**
@@ -124,31 +126,33 @@ class Judge extends Model
         // другий orderBy для випадку, коли є декілька суддів, що мають однаковий порядок сортування
         $sort_variant_2 = (self::getSortVariants())[0];
 
-        return (static::select(self::getJudgesListGuestFields())
-            ->join('courts', 'judges.court', '=', 'courts.court_code')
-            // фільтрція за регіоном
-            ->when(!empty($regions), function ($query) use ($regions) {
-                return $query->whereIn('courts.region_code', $regions);
-            })
-            // фільтрція за інстанцією
-            ->when(!empty($instances), function ($query) use ($instances) {
-                return $query->whereIn('courts.instance_code', $instances);
-            })
-            // фільтрція за юрисдикцією
-            ->when(!empty($jurisdictions), function ($query) use ($jurisdictions) {
-                return $query->whereIn('courts.jurisdiction', $jurisdictions);
-            })
-            // якщо не переданий аргумент щоб показувати суддів в яких закінчились повноваження - значить упускємо їх при вибірці
-            ->when($powers_expired == false, function ($query) {
-                return $query->where('judges.status', '!=', 5);
-            })
-            // якщо застосовано пошук
-            ->when(!empty($search), function ($query) use ($search) {
-                return $query->where('judges.surname', 'LIKE', $search . '%');
-            })
-            ->orderBy($sort_variant[0], $sort_variant[1])
-            ->orderBy($sort_variant_2[0], $sort_variant_2[1])
-            ->paginate(self::JUDGES_PER_PAGE));
+        return (
+            call_user_func_array(['static', 'select'], self::getJudgesListGuestFields())
+                ->join('courts', 'judges.court', '=', 'courts.court_code')
+                // фільтрція за регіоном
+                ->when(!empty($regions), function ($query) use ($regions) {
+                    return $query->whereIn('courts.region_code', $regions);
+                })
+                // фільтрція за інстанцією
+                ->when(!empty($instances), function ($query) use ($instances) {
+                    return $query->whereIn('courts.instance_code', $instances);
+                })
+                // фільтрція за юрисдикцією
+                ->when(!empty($jurisdictions), function ($query) use ($jurisdictions) {
+                    return $query->whereIn('courts.jurisdiction', $jurisdictions);
+                })
+                // якщо не переданий аргумент щоб показувати суддів в яких закінчились повноваження - значить упускємо їх при вибірці
+                ->when($powers_expired == false, function ($query) {
+                    return $query->where('judges.status', '!=', 5);
+                })
+                // якщо застосовано пошук
+                ->when(!empty($search), function ($query) use ($search) {
+                    return $query->where('judges.surname', 'LIKE', $search . '%');
+                })
+                ->orderBy($sort_variant[0], $sort_variant[1])
+                ->orderBy($sort_variant_2[0], $sort_variant_2[1])
+                ->paginate(self::JUDGES_PER_PAGE)
+        );
     }
 
 
