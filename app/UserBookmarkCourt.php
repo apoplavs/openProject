@@ -81,6 +81,8 @@ class UserBookmarkCourt extends Model
                 ->join('user_bookmark_courts', 'user_bookmark_courts.court', '=', 'courts.court_code')
                 ->where('user_bookmark_courts.user', '=', Auth::user()->id)
                 ->get()
+                ->unique(function ($item){return $item->toArray();}) // залишаємо в колекції лише унікальні елементи
+                ->values() // перенумеровуємо елементи колекції (після unique вони занумеровані не підряд)
         );
 	}
 

@@ -56,6 +56,8 @@ class UserBookmarkJudge extends Model
                 ->join('user_bookmark_judges', 'user_bookmark_judges.judge', '=', 'judges.id')
                 ->where('user_bookmark_judges.user', '=', Auth::user()->id)
                 ->get()
+                ->unique(function ($item){return $item->toArray();}) // залишаємо в колекції лише унікальні елементи
+                ->values() // перенумеровуємо елементи колекції (після unique вони занумеровані не підряд)
         );
 	}
 	

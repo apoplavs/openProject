@@ -42,40 +42,16 @@ class UserBookmarksTest extends BaseApiTest
         // Авторизуємось
         $headers_with_token = $this->headersWithToken($this->login($this->user_data));
 
+        $etalon_data = $this->getEtalonData();
+
         //додаємо інформацію по закладкам в БД (судді)
-        $judges_etalon_data = call_user_func_array(['Toecyd\Judge', 'select'], UserBookmarkJudge::getBookmarkFields())
-            ->join('courts', 'judges.court', '=', 'courts.court_code')
-            ->limit(2)
-            ->get()
-            ->all();
-
-        foreach ($judges_etalon_data as $key => $row) {
-            DB::table('user_bookmark_judges')->insert([
-                'user'  => $this->user->id,
-                'judge' => $row->id,
-            ]);
-
-            $judges_etalon_data[$key] = $row->toArray();
+        foreach ($etalon_data['judges'] as $row) {
+            UserBookmarkJudge::createBookmark($this->user->id, $row['id']);
         }
 
         //додаємо інформацію по закладкам в БД (суди)
-        $courts_etalon_data = (call_user_func_array(['Toecyd\Court', 'select'], UserBookmarkCourt::getBookmarkFields())
-            ->leftJoin('instances', 'courts.instance_code', '=', 'instances.instance_code')
-            ->leftJoin('regions', 'courts.region_code', '=', 'regions.region_code')
-            ->leftJoin('jurisdictions', 'courts.jurisdiction', '=', 'jurisdictions.id')
-            ->leftJoin('judges', 'courts.head_judge', '=', 'judges.id')
-            ->limit(2)
-            ->get()
-            ->all()
-        );
-
-        foreach ($courts_etalon_data as $key => $row) {
-            DB::table('user_bookmark_courts')->insert([
-                'user'  => $this->user->id,
-                'court' => $row->court_code,
-            ]);
-
-            $courts_etalon_data[$key] = $row->toArray();
+        foreach ($etalon_data['courts'] as $key => $row) {
+            UserBookmarkCourt::createBookmark($this->user->id, $row['court_code']);
         }
 
         // отримуємо закладки
@@ -83,7 +59,64 @@ class UserBookmarksTest extends BaseApiTest
         $response->assertStatus(200);
 
         $response_data = $response->decodeResponseJson();
-        $this->assertEquals($judges_etalon_data, $response_data['judges']);
-        $this->assertEquals($courts_etalon_data, $response_data['courts']);
+        $this->assertEquals($etalon_data, $response_data);
+    }
+
+    /**
+     * Додаємо інформацію, що дублюється, а потім перевіряємо, що з БД інформація дістається без дублів
+     */
+    public function testBookmarksDoubles()
+    {
+        // Авторизуємось
+        $headers_with_token = $this->headersWithToken($this->login($this->user_data));
+
+        $etalon_data = $this->getEtalonData();
+
+        //додаємо інформацію по закладкам в БД (судді)
+        foreach ($etalon_data['judges'] as $row) {
+            UserBookmarkJudge::createBookmark($this->user->id, $row['id']);
+            UserBookmarkJudge::createBookmark($this->user->id, $row['id']); // дубль
+        }
+
+        //додаємо інформацію по закладкам в БД (суди)
+        foreach ($etalon_data['courts'] as $key => $row) {
+            UserBookmarkCourt::createBookmark($this->user->id, $row['court_code']);
+            UserBookmarkCourt::createBookmark($this->user->id, $row['court_code']); // дубль
+        }
+
+        // отримуємо закладки
+        $response = $this->get($this->url, $headers_with_token);
+        $response->assertStatus(200);
+
+        $response_data = $response->decodeResponseJson();
+        $this->assertEquals($etalon_data, $response_data);
+    }
+
+    private function getEtalonData()
+    {
+        $limit = 2;
+
+        $result = [
+            'judges' => call_user_func_array(['Toecyd\Judge', 'select'], UserBookmarkJudge::getBookmarkFields())
+                ->join('courts', 'judges.court', '=', 'courts.court_code')
+                ->limit($limit)
+                ->get()
+                ->all(),
+            'courts' => call_user_func_array(['Toecyd\Court', 'select'], UserBookmarkCourt::getBookmarkFields())
+                ->leftJoin('instances', 'courts.instance_code', '=', 'instances.instance_code')
+                ->leftJoin('regions', 'courts.region_code', '=', 'regions.region_code')
+                ->leftJoin('jurisdictions', 'courts.jurisdiction', '=', 'jurisdictions.id')
+                ->leftJoin('judges', 'courts.head_judge', '=', 'judges.id')
+                ->limit($limit)
+                ->get()
+                ->all(),
+        ];
+
+        // Застосовуємо toArray() до кожного рядка даних з результату
+        foreach ($result as $key => $rows) {
+            $result[$key] = array_map(function ($row) {return $row->toArray();}, $rows);
+        }
+
+        return $result;
     }
 }
