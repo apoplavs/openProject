@@ -249,6 +249,9 @@
               console.log('getJudges Response', this.judgesList);
             })
             .catch(error => {
+               if (error.response.status === 401) {
+                  this.$router.push('/login');
+              }
               console.log('Каже що не авторизований пффф та Канеха');
             });
         } else {

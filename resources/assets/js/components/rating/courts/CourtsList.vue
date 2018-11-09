@@ -235,6 +235,9 @@
               console.log('getCourts Response', this.courtsList);
             })
             .catch(error => {
+              if (error.response.status === 401) {
+                  this.$router.push('/login');
+              }
               console.log('Каже що не авторизований пффф та Канеха');
             });
         } else {

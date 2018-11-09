@@ -67,7 +67,10 @@
                             court.is_bookmark = 1;
                         })
                         .catch(error => {
-                            console.log("Bookmark", error);
+                            if (error.response.status === 401) {
+                                this.$router.push('/login');
+                            }
+                        console.log("Bookmark", error);
                         });
                 } else {
                     axios({
@@ -83,6 +86,9 @@
                             court.is_bookmark = 0;
                         })
                         .catch(error => {
+                            if (error.response.status === 401) {
+                                this.$router.push('/login');
+                            }
                             console.log('Bookmark', error);
                         });
                 }

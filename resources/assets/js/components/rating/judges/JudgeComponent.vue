@@ -137,10 +137,14 @@
                 }
             },
             changeBookmarkStatus(judge) {
+                console.log(this.isAuth);
+                
                 if (!this.isAuth) {
                     this.$router.push("/login");
                 }
                 if (judge.is_bookmark === 0) {
+                    
+                    
                     axios({
                             method: "put",
                             url: `/api/v1/judges/${judge.id}/bookmark`,
@@ -154,6 +158,9 @@
                             judge.is_bookmark = 1;
                         })
                         .catch(error => {
+                            if (error.response.status === 401) {
+                                this.$router.push('/login');
+                            }
                             console.log("Bookmark", error);
                         });
                 } else {
@@ -170,7 +177,10 @@
                             judge.is_bookmark = 0;
                         })
                         .catch(error => {
-                            console.log('Bookmark', error);
+                            if (error.response.status === 401) {
+                            this.$router.push('/login');
+                        }
+                            console.log('Bookmark', error.response);
                         });
                 }
             },
@@ -209,10 +219,12 @@
                         data: this.judgeStatus
                     })
                     .then(response => {
-                        
                         this.isModalVisible = false;
                     })
                     .catch(error => {
+                        if (error.response.status === 401) {
+                            this.$router.push('/login');
+                        }
                         console.log("Status", error);
                     });
             }
