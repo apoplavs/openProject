@@ -9,7 +9,7 @@
                         <b>{{court.court_code}}</b>
                     </div>
                     <div class="col-10 court-component_right py-3">
-                        <router-link to="/"><div class="court-name">{{court.court_name}}</div></router-link>    
+                        <router-link :to="`/court-profile/${court.court_code}`"><div class="court-name">{{court.court_name}}</div></router-link>    
                         <div class="part-1 mt-3">
                             <div><span>Голова суду: </span>{{court.head_judge ? court.head_judge : 'невідомо'}}</div>
                             <div><span>Інстанція суду: </span>{{court.instance ? court.instance : 'невідомо'}}</div>

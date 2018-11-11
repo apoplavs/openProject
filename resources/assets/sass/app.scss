@@ -3,7 +3,7 @@
 
 // Variables
 @import "_variables";
-@import "mixins";
+@import "_mixins";
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&subset=cyrillic');
 
 body {
@@ -47,9 +47,6 @@ input::-moz-focus-inner {
   }
 }
 
-.btn-reject {
-}
-
 button {
   cursor: pointer;
   border-color: transparent;
@@ -71,8 +68,10 @@ button {
   @include boxShadow($shadow-light);
 }
 .card-header {
+  @include alignElement($alignItems: center, $justifyContent: space-between);
   background-color: $main-color;
   color: #ffffff;
+  font-size: 1.5rem;
 }
 // --------------
 

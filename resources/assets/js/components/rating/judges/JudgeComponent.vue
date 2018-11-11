@@ -8,7 +8,7 @@
                         <div class="mr-3"><img class="avatar" :src="judge.photo" alt="фото" /></div>
                         <div>
                             <h5>
-                                <router-link to="/"> {{ judge.surname }} {{ (judge.name.length != 1) ? judge.name : judge.name + '.' }} {{ judge.patronymic.length != 1 ? judge.patronymic : judge.patronymic + '.' }} </router-link>
+                                <router-link :to="`/judge-profile/${judge.id}`"> {{ judge.surname }} {{ (judge.name.length != 1) ? judge.name : judge.name + '.' }} {{ judge.patronymic.length != 1 ? judge.patronymic : judge.patronymic + '.' }} </router-link>
                             </h5>
                             <div class="court_name">{{ judge.court_name }}</div>
                         </div>
@@ -109,11 +109,6 @@
                 },
                 format: 'YYYY',
                 isAuth: localStorage.getItem("token"),
-                headers: {
-                    "Content-Type": "application/json",
-                    "X-Requested-With": "XMLHttpRequest",
-                    Authorization: localStorage.getItem("token")
-                }
             };
         },
         props: ["judgesList"],

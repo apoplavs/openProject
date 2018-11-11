@@ -3,7 +3,12 @@
     <div class="row min-width">
       <div class="col-3 filters">
         <div class="card">
-          <h4 class="card-header"><i class="fa fa-filter" aria-hidden="true"></i> Фільтри</h4>
+          <div class="card-header">
+            <div>
+              <i class="fa fa-filter" aria-hidden="true"></i>
+              <span> Фільтри</span>
+            </div>
+          </div>
           <div class="card-body">
             <div class="row">
               <div class="col-12">
@@ -63,7 +68,7 @@
                 </ul>
               </div>
             </div>
-
+  
             <div class="apply-filters" id="apply-filters">
               <hr>
               <div class="row">
@@ -86,8 +91,8 @@
             <input type="search" class="form-control" placeholder="Пошук..." v-model.trim="params.search" @keyup="liveSearch()">
             <div class="autocomplete-block-result" v-if="autocomplete.length">
               <div class="autocomplete-block-result_element" v-for="(el, ind_2) in autocomplete" :key="ind_2">
-                <router-link to="/">
-                  {{ el.name }} 
+                <router-link :to="`/court-profile/${el.court_code}`">
+                  {{ el.name }}
                 </router-link>
               </div>
             </div>
@@ -97,16 +102,16 @@
           </div>
         </div>
         <div class="card courts-card">
-          <div class="card-header d-flex justify-content-between">
-            <h4 class="d-flex align-items-center">Список судів</h4>
+          <div class="card-header">
+            <span>Список судів</span>
             <div class="d-flex align-items-center">
               <span class="mr-2"> сортувати за: </span>
               <select class="form-control select-sort" name="sorting" v-model="params.sort" @change="sortList()">
-                  <option value="1" >назвою (А->Я) <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i></option>
-                  <option value="2">назвою (Я->А)</option>
-                  <option value="3">рейтингом (низький->високий)</option>
-                  <option value="4">рейтингом (високий->низький)</option>
-                </select> 
+                    <option value="1" >назвою (А->Я) <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i></option>
+                    <option value="2">назвою (Я->А)</option>
+                    <option value="3">рейтингом (низький->високий)</option>
+                    <option value="4">рейтингом (високий->низький)</option>
+                  </select>
             </div>
           </div>
           <div id="courts-list">
@@ -208,16 +213,16 @@
         this.loadData = false;
         window.scrollTo(0, 0);
         this.$refs.pagins.currentPage = 0;
-        this.params.page = 1; 
+        this.params.page = 1;
         this.getCourtsList();
       },
   
-      getCourtsList() {    
+      getCourtsList() {
         this.autocomplete = []; // коли визиваємо цей метод liveSearch маємо закрити
         if (this.validateInputSearch() === false) { // !! = true
           this.params.search = null;
         }
-         console.log('get-Courts-List-------PARAMS', this.params);
+        console.log('get-Courts-List-------PARAMS', this.params);
         if (localStorage.getItem('token')) {
           console.log('have token')
           axios
@@ -231,12 +236,12 @@
             })
             .then(response => {
               this.courtsList = response.data;
-              this.loadData = true;  
+              this.loadData = true;
               console.log('getCourts Response', this.courtsList);
             })
             .catch(error => {
               if (error.response.status === 401) {
-                  this.$router.push('/login');
+                this.$router.push('/login');
               }
               console.log('Каже що не авторизований пффф та Канеха');
             });
@@ -288,9 +293,9 @@
       background-color: $main-color;
       border-color: $main-color;
     }
-    button{
+    button {
       &:active,
-      &:focus{
+      &:focus {
         background-color: $main-color;
         border-color: $main-color;
       }
