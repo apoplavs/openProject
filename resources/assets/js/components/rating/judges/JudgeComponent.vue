@@ -8,13 +8,13 @@
                         <div class="mr-3"><img class="avatar" :src="judge.photo" alt="фото" /></div>
                         <div>
                             <h5>
-                                <router-link :to="`/judge-profile/${judge.id}`"> {{ judge.surname }} {{ (judge.name.length != 1) ? judge.name : judge.name + '.' }} {{ judge.patronymic.length != 1 ? judge.patronymic : judge.patronymic + '.' }} </router-link>
+                                <router-link :to="`/judges/${judge.id}`"> {{ judge.surname }} {{ (judge.name.length != 1) ? judge.name : judge.name + '.' }} {{ judge.patronymic.length != 1 ? judge.patronymic : judge.patronymic + '.' }} </router-link>
                             </h5>
                             <div class="court_name">{{ judge.court_name }}</div>
                         </div>
                     </div>
                     <div class="col-3 pl-0 additional-info">
-                        <div class="v-center pb-3">
+                        <div class="align-center pb-3">
                             <div class="w-75">
                                 <span class="float-left">
                                     <i class="fa fa-line-chart float-right" aria-hidden="true"> {{ judge.rating }} </i>
@@ -23,34 +23,33 @@
                             <div class="w-25 bookmark">
                                 <span v-if="judge.is_bookmark" @click="changeBookmarkStatus(judge)"><i class="fa fa-bookmark" aria-hidden="true"></i></span>
                                 <span v-if="!judge.is_bookmark" @click="changeBookmarkStatus(judge)"><i class="fa fa-bookmark-o" aria-hidden="true"></i></span>
-                            </div>
-                                
+                            </div>                               
                         </div>
-                        <div class="v-align-center">
+                        <div class="align-center">
                             <div class="w-75">
                                 <span v-if="judge.status === 1"> <!-- Cуддя на роботі  -->
-                                    <i class="fa fa-briefcase" aria-hidden="true"></i>на роботі 
+                                    <i class="fa fa-briefcase" aria-hidden="true"></i> на роботі 
                                     {{ judge.due_date_status ? '('+judge.due_date_status+')' : null }}
                                 </span>
                                 <span v-if="judge.status === 2"> <!-- На лікарняному  -->
-                                        <i class="fa fa-medkit" aria-hidden="true"></i>на лікарняному 
-                                        {{ judge.due_date_status ? '(до '+judge.due_date_status+')' : null }}
-                                    </span>
+                                    <i class="fa fa-medkit" aria-hidden="true"></i> на лікарняному 
+                                    {{ judge.due_date_status ? '(до '+judge.due_date_status+')' : null }}
+                                </span>
                                 <span v-if="judge.status === 3"> <!-- У відпустці   -->
-                                       <i class="fas fa-umbrella-beach"></i>у відпустці 
-                                        {{ judge.due_date_status ? '(до '+judge.due_date_status+')' : null }}
-                                    </span>
+                                    <i class="fas fa-umbrella-beach"></i> у відпустці 
+                                    {{ judge.due_date_status ? '(до '+judge.due_date_status+')' : null }}
+                                </span>
                                 <span v-if="judge.status === 4"> <!-- Відсуній на робочому місці з інших причин  --> 
-                                         <i class="fa fa-calendar-minus-o" aria-hidden="true"></i>
-                                        відсутній на робочому місці з інших причин 
-                                        {{ judge.due_date_status ? '(до '+judge.due_date_status+')' : null }}
-                                    </span>
+                                    <i class="fa fa-calendar-minus-o" aria-hidden="true"></i>
+                                    відсутній на робочому місці з інших причин 
+                                    {{ judge.due_date_status ? '(до '+judge.due_date_status+')' : null }}
+                                </span>
                                 <span v-if="judge.status === 5"> <!-- Припинено повноваження  -->
-                                         <i class="fa fa-calendar-times-o" aria-hidden="true"></i>припинено повноваження 
-                                        {{ judge.due_date_status ? '(до '+judge.due_date_status+')' : null }}
-                                    </span>
+                                    <i class="fa fa-calendar-times-o" aria-hidden="true"></i> припинено повноваження 
+                                    {{ judge.due_date_status ? '(до '+judge.due_date_status+')' : null }}
+                                </span>
                             </div>
-                            <div class="w-25"><i class="fa fa-pencil p-1 float-right" aria-hidden="true" @click="showModal(judge)"></i></div>
+                            <div class="w-25"><i class="fas fa-edit p-1 float-right" aria-hidden="true" @click="showModal(judge)"></i></div>
                         </div>
                     </div>
                 </div>
@@ -95,6 +94,7 @@
     
     export default {
         name: "judge-component",
+        props: ["judgesList"],
         data() {
             return {
                 isModalVisible: false,
@@ -111,7 +111,11 @@
                 isAuth: localStorage.getItem("token"),
             };
         },
-        props: ["judgesList"],
+        // computed: {
+        //     dueDate: function() {
+        //         return judge.due_date_status ? `до (${judge.due_date_status})` : null;
+        //     }
+        // }, 
         filters: {
             formatDate(date) {
                 // getMobth() чомусь рахує місяці з 0 date.getMonth() + 1 //костиль
@@ -132,15 +136,12 @@
                 }
             },
             changeBookmarkStatus(judge) {
-                console.log(this.isAuth);
-                
+                console.log(this.isAuth); 
                 if (!this.isAuth) {
                     this.$router.push("/login");
                 }
                 if (judge.is_bookmark === 0) {
-                    
-                    
-                    axios({
+                        axios({
                             method: "put",
                             url: `/api/v1/judges/${judge.id}/bookmark`,
                             headers: {
@@ -186,7 +187,7 @@
                 this.changeStatusId = judge.id;
                 this.judgeStatus.set_status = judge.status;
                 this.judgeStatus.due_date = this.formattingDate(judge.due_date_status);
-    
+
                 this.calendar.startDate = new Date();
                 this.calendar.endDate = new Date(
                     this.calendar.startDate.getFullYear(),
@@ -214,6 +215,9 @@
                         data: this.judgeStatus
                     })
                     .then(response => {
+                        this.judgesList.forEach(e => { 
+                            e.id === this.changeStatusId ? e.status = this.judgeStatus.set_status : null;
+                        })
                         this.isModalVisible = false;
                     })
                     .catch(error => {
@@ -254,36 +258,8 @@
             cursor: pointer;
         }
         /* styles for font awesome */
-        .fa-bookmark-o,
-        .fa-bookmark {
-            color: $danger;
-        }
-        .fa-briefcase {
-            color: $success;
-        }
-        .fa-line-chart {
-            color: $main-color;
-        }
-        .fa-medkit {
-            color: $danger;
-        }
-        .fa-calendar-minus-o{
-            color: $text-color;
-        }
-        .fa-umbrella-beach {
-            color: $warning;
-        }
-        .fa-calendar-times-o {
-            color: red;
-        }
-        .fa-pencil {
-            color: $color-5;
-        }
-        .v-center {
+        .align-center {
             @include alignElement($alignItems: start);
-        }
-        .v-align-center {
-            @include alignElement($alignItems: center);
         }
     }
     

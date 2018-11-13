@@ -3,13 +3,13 @@
         <spinner v-if="!loadData" />
         <div v-if="loadData" class="container">
             <div class="judge-info">
-                <div class="card mt-2">
+                <div class="card">
                     <div class="card-body d-flex">
-                        <div class="photo w-25 p-3">
+                        <div class="photo w-25">
                             <!-- img -->
                         </div>
-                        <div class="w-75 p-3">
-                            <div class="main-info">
+                        <div class="w-75 px-3">
+                            <div class="main-info pb-2">
                                 <h2>Бандура Анна Петрівна</h2>
                                 <div class="d-flex">
                                     <i class="fa fa-university" aria-hidden="true"></i>
@@ -28,47 +28,48 @@
                                     <span>infobox@google.com</span>
                                 </div>
                                 <div class="detail-info">
-                                <i class="fas fa-link"></i>
+                                    <i class="fas fa-link"></i>
                                     <a target="_blank" href="google.com">www.google.com</a>
-                                </div>      
+                                </div>
                             </div>
                             <div class="status-info">
-                                <div class="status">
-                                    <span v-if="status === 1"> <!-- Cуддя на роботі  -->
-                                        <i class="fa fa-briefcase" aria-hidden="true"></i>на роботі 
-                                        <!-- {{ judge.due_date_status ? '('+judge.due_date_status+')' : null }} -->
-                                    </span>
-                                    <span v-if="status === 2"> <!-- На лікарняному  -->
-                                        <i class="fa fa-medkit" aria-hidden="true"></i>на лікарняному 
-                                        <!-- {{ judge.due_date_status ? '(до '+judge.due_date_status+')' : null }} -->
-                                    </span>
-                                    <span v-if="status === 3"> <!-- У відпустці   -->
-                                        <i class="fas fa-umbrella-beach"></i>у відпустці 
-                                        <!-- {{ judge.due_date_status ? '(до '+judge.due_date_status+')' : null }} -->
-                                    </span>
-                                    <span v-if="status === 4"> <!-- Відсуній на робочому місці з інших причин  --> 
-                                            <i class="fa fa-calendar-minus-o" aria-hidden="true"></i>
-                                        відсутній на робочому місці з інших причин 
-                                        <!-- {{ judge.due_date_status ? '(до '+judge.due_date_status+')' : null }} -->
-                                    </span>
-                                    <span v-if="status === 5"> <!-- Припинено повноваження  -->
-                                            <i class="fa fa-calendar-times-o" aria-hidden="true"></i>припинено повноваження 
-                                        <!-- {{ judge.due_date_status ? '(до '+judge.due_date_status+')' : null }} -->
-                                    </span>
+                                <div class="status my-2">
+                                    <div class="w-50 d-flex align-items-center">
+                                        <span v-if="params.status === 1"> <!-- Cуддя на роботі  -->
+                                                <i class="fa fa-briefcase" aria-hidden="true"></i> на роботі 
+                                                <!-- {{ judge.due_date_status ? '('+judge.due_date_status+')' : null }} -->
+                                            </span>
+                                        <span v-if="params.status === 2"> <!-- На лікарняному  -->
+                                                <i class="fa fa-medkit" aria-hidden="true"></i> на лікарняному 
+                                                <!-- {{ judge.due_date_status ? '(до '+judge.due_date_status+')' : null }} -->
+                                            </span>
+                                        <span v-if="params.status === 3"> <!-- У відпустці   -->
+                                                <i class="fas fa-umbrella-beach"></i> у відпустці 
+                                                <!-- {{ judge.due_date_status ? '(до '+judge.due_date_status+')' : null }} -->
+                                            </span>
+                                        <span v-if="params.status === 4"> <!-- Відсуній на робочому місці з інших причин  --> 
+                                                    <i class="fa fa-calendar-minus-o" aria-hidden="true"></i> 
+                                                відсутній на робочому місці з інших причин 
+                                                <!-- {{ judge.due_date_status ? '(до '+judge.due_date_status+')' : null }} -->
+                                            </span>
+                                        <span v-if="params.status === 5"> <!-- Припинено повноваження  -->
+                                                    <i class="fa fa-calendar-times-o" aria-hidden="true"></i> припинено повноваження 
+                                                <!-- {{ judge.due_date_status ? '(до '+judge.due_date_status+')' : null }} -->
+                                            </span>
+                                        <span><i class="fas fa-edit float-right pl-3" aria-hidden="true" @click="showModal()"></i></span>
+                                    </div>
+                                    <div class="bookmark w-50">
+                                        <span v-if="params.is_bookmark" @click="changeBookmarkStatus()"><i class="fa fa-bookmark" aria-hidden="true"></i></span>
+                                        <span v-if="!params.is_bookmark" @click="changeBookmarkStatus()"><i class="fa fa-bookmark-o" aria-hidden="true"></i></span>
+                                    </div>
                                 </div>
                                 <div class="rating">
-                                    <span>
-                                        <i class="fas fa-thumbs-up"></i>25
-                                    </span>
-                                    <span>
-                                        <i class="fa fa-line-chart" aria-hidden="true"> 12%</i>
-                                    </span>
-                                    <span>
-                                        <i class="fas fa-thumbs-down"></i>2
-                                    </span>
+                                    <span class="like"><i class="fas fa-thumbs-up"></i> 25</span>
+                                    <span class="line-chart"><i class="fa fa-line-chart" aria-hidden="true"> 12%</i></span>
+                                    <span class="dislike"><i class="fas fa-thumbs-down"></i> 2</span>
                                 </div>
                             </div>
-                        </div>              
+                        </div>
                     </div>
                 </div>
             </div>
@@ -110,10 +111,8 @@
                 <div class="card w-50 mt-2 mr-1">
                     <div class="card-header">
                         <span>Статистика розгрянутих справ</span>
-    
                     </div>
                     <div class="card-body">
-    
                     </div>
                 </div>
                 <div class="card w-50 mt-2 ml-1">
@@ -128,7 +127,7 @@
                             </div>
                         </div>
                         <div class="mt-2">
-                            <label for="">Своєчасність</label>                           
+                            <label for="">Своєчасність</label>
                             <div class="progress">
                                 <div class="progress-bar bg-success" role="progressbar" style="width: 75%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
@@ -173,27 +172,113 @@
                 </div>
             </div>
         </div>
+        <!-- modal -->
+         <modal v-show="isModalVisible" @close="closeModal" @save="saveChanges">
+            <h4 slot="header">Оновити статус судді</h4>
+            <div slot="body">
+                <form>
+                    <div class="form-group row mx-0 my-4">
+                        <label for="chooser-judge-status" class="col-4">Статус</label>
+                        <div class="col-8">
+                            <select class="form-control" id="chooser-judge-status" >
+                                <option value="1">на роботі</option>
+                                <option value="2">на лікарняному</option>
+                                <option value="3">у відпустці</option>
+                                <option value="4">відсутній на робочому місці</option>
+                                <option value="5">припинено повноваження</option>
+                            </select>
+                        </div>
+                        <input type="hidden" id="judge-for-new-status" value="0">
+                    </div>
+                    <div class="form-group row mx-0 my-4">
+                        <label for="status-end-date" class="col-7">Дата завершення дії статусу <br><sup class="text-muted">(якщо відома)</sup></label>
+                        <div class="col-5">
+                            <!-- <datepicker v-model="judgeStatus.due_date" :value="judgeStatus.due_date" language="uk" :min="calendar.startDate | formatDate" :max="calendar.endDate | formatDate"> -->
+                            <!-- </datepicker> -->
+                        </div>
+                    </div>
+                </form>
+            </div>
+    
+        </modal>
     </div>
 </template>
 
 <script>
-  import Spinner from '../../shared/Spinner.vue';
-
+    import Spinner from "../../shared/Spinner.vue";
+    
     export default {
         name: "JudgeProfile",
         data() {
             return {
-                status: 1,
+                isAuth: localStorage.getItem("token"),
+                
                 loadData: true,
                 params: {
-                    search: ''
+                    status: 1,
+                    is_bookmark: 1,
+                    search: ""
                 }
-            }
+            };
+        },
+        methods: {
+            formattingDate(date) {
+                if (date === '' || date === null) {
+                    return '';
+                } else {
+                    let arr = _.split(date, '.');                    
+                    return `${arr[2]}-${arr[1]}-${arr[0]}`;
+                }
+            },
+             changeBookmarkStatus() {
+                if (!this.isAuth) {
+                    this.$router.push("/login");
+                }
+                if (this.params.is_bookmark === 0) {
+                    axios({
+                        method: "put",
+                        url: `/api/v1/judges/${this.$route.params.id}/bookmark`,
+                        headers: {
+                            "Content-Type": "application/json",
+                            "X-Requested-With": "XMLHttpRequest",
+                            Authorization: localStorage.getItem("token")
+                        }
+                    })
+                    .then(response => {
+                        this.params.is_bookmark = 1;
+                    })
+                    .catch(error => {
+                        if (error.response.status === 401) {
+                            this.$router.push('/login');
+                        }
+                        console.log("Bookmark", error);
+                    });
+                } else {
+                    axios({
+                        method: "delete",
+                        url: `/api/v1/judges/${this.$route.params.id}/bookmark`,
+                        headers: {
+                            "Content-Type": "application/json",
+                            "X-Requested-With": "XMLHttpRequest",
+                            Authorization: localStorage.getItem("token")
+                        }
+                    })
+                    .then(response => {
+                        this.params.is_bookmark = 0;
+                    })
+                    .catch(error => {
+                        if (error.response.status === 401) {
+                        this.$router.push('/login');
+                    }
+                        console.log('Bookmark', error.response);
+                    });
+                }
+            },
         },
         components: {
             Spinner
         }
-    }
+    };
 </script>
 
 <style scoped lang="scss">
@@ -222,12 +307,27 @@
         .status-info {
             .rating {
                 @include alignElement($justifyContent: space-between);
+                .like {
+                    color: green;
+                }
+                .dislike {
+                    color: red;
+                }
+            }
+            .status {
+                @include alignElement($alignItems: start);
+            }
+            .bookmark {
+                > span {
+                    width: 20px;
+                    float: right;
+                }
             }
         }
         .court-sessions {
             width: 100%;
             height: auto;
-            font-size: .9rem;
+            font-size: 0.9rem;
             .fa-star {
                 color: $main-color;
             }

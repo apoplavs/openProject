@@ -75,3 +75,34 @@ button {
 }
 // --------------
 
+i[class^="fa-bookmark"],
+i.fa-edit{
+  cursor: pointer;
+}
+.fa-bookmark-o,
+.fa-bookmark {
+    color: $danger;
+}
+.fa-briefcase {
+    color: $success;
+}
+.fa-line-chart {
+    color: $main-color;
+}
+.fa-medkit {
+    color: $danger;
+}
+.fa-calendar-minus-o{
+    color: $text-color;
+}
+.fa-umbrella-beach {
+    color: $warning;
+}
+.fa-calendar-times-o {
+    color: red;
+}
+.fa-edit {
+    color: $color-5;
+}
+      
+  

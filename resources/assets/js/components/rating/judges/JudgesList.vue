@@ -127,7 +127,6 @@
           <div>
             <!--judges-judges-list-->
             <spinner v-if="!loadData" />
-            <!-- <moon-loader :loading="!loadData" :color="color" :size="size"></moon-loader> -->
             <judge-component v-if="loadData" :judgesList="judgesList.data" />
           </div>
   

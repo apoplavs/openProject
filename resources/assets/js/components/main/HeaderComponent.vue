@@ -15,10 +15,10 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="First" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Рейтинг</a>
                     <div class="dropdown-menu" aria-labelledby="First">
-                        <router-link to="/judges-list"  active-class="active">
+                        <router-link to="/judges"  active-class="active">
                             <a class="dropdown-item">Судді</a>
                         </router-link>
-                        <router-link to="/courts-list" active-class="active">
+                        <router-link to="/courts" active-class="active">
                             <a class="dropdown-item">Суди</a>
                         </router-link>
                     </div>

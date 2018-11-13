@@ -38,22 +38,22 @@ export default new Router({
             name: 'user-profile'
         },
         {
-            path: '/judges-list',
+            path: '/judges',
             component: JudgesList,
             name: 'judges-list'
         },
         {
-            path: '/judge-profile/:id',
+            path: '/judges/:id',
             component: JudgeProfile,
             name: 'judge-profile'
         },
         {
-            path: '/courts-list',
+            path: '/courts',
             component: CourtsList,
             name: 'courts-list',
         },
         {
-            path: '/court-profile/:id',
+            path: '/courts/:id',
             component: CourtProfile,
             name: 'court-profile'
         },
