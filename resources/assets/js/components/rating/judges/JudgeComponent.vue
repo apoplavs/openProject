@@ -202,7 +202,7 @@
                 if (this.judgeStatus.set_status === "1" || this.judgeStatus.set_status === "5") {
                     this.judgeStatus.due_date = null;
                 }
-                console.log("STATUS", this.judgeStatus);
+                // console.log("STATUS", this.judgeStatus);
                 axios({
                         method: "put",
                         url: `/api/v1/judges/${this.changeStatusId}/update-status`,
@@ -214,6 +214,7 @@
                         data: this.judgeStatus
                     })
                     .then(response => {
+                        this.changeStatus();
                         this.isModalVisible = false;
                     })
                     .catch(error => {
@@ -222,6 +223,14 @@
                         }
                         console.log("Status", error);
                     });
+            },
+             changeStatus(){ 
+                 console.log('emit')
+                 
+                this.$emit('status', {
+                    id: this.changeStatusId,
+                    status: this.judgeStatus
+                })
             }
         },
         components: {

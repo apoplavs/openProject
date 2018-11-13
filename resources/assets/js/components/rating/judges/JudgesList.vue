@@ -128,7 +128,7 @@
             <!--judges-judges-list-->
             <spinner v-if="!loadData" />
             <!-- <moon-loader :loading="!loadData" :color="color" :size="size"></moon-loader> -->
-            <judge-component v-if="loadData" :judgesList="judgesList.data" />
+            <judge-component v-if="loadData" :judgesList="judgesList.data"  @status="changeStatus()"/>
           </div>
   
         </div>
@@ -236,9 +236,7 @@
         if (this.validateInputSearch() === false) { // !! = true
           this.params.search = null;
         }
-         console.log('getJudgesList-------PARAMS', this.params);
         if (localStorage.getItem('token')) {
-          console.log('have token')
           axios
             .get('/api/v1/judges/list', {
               headers: {
@@ -291,6 +289,14 @@
         this.loadData = false;
         window.scrollTo(0, 0);
         this.getJudgesList(); // онуляємо всі фільтри і визиваємо функцію
+      },
+      changeStatus(data){
+        console.log('status', data);
+        
+        this.judgesList.map(e => {
+          console.log('EEeeeee', e);
+          
+        })
       }
     },
     components: {
