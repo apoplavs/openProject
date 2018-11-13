@@ -93,10 +93,7 @@
                         });
                 }
             },
-           
         },
-        components: {
-        }
     };
 </script>
 
