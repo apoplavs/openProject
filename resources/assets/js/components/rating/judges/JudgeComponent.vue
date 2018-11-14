@@ -215,7 +215,10 @@
                         data: this.judgeStatus
                     })
                     .then(response => {
-                        this.changeStatus();
+                            this.$emit('status', {
+                                    id: this.changeStatusId,
+                                    status: this.judgeStatus
+                                })
                         this.isModalVisible = false;
                     })
                     .catch(error => {
@@ -225,14 +228,7 @@
                         console.log("Status", error);
                     });
             },
-             changeStatus(){ 
-                 console.log('emit')
-                 
-                this.$emit('status', {
-                    id: this.changeStatusId,
-                    status: this.judgeStatus
-                })
-            }
+                
         },
         components: {
             Modal,
