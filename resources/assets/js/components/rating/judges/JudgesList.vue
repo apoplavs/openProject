@@ -1,4 +1,4 @@
-<template>
+зрз<template>
   <div class="container mt-5">
     <div class="row min-width">
       <div class="col-3 filters">
@@ -128,7 +128,7 @@
             <!--judges-judges-list-->
             <spinner v-if="!loadData" />
             <!-- <moon-loader :loading="!loadData" :color="color" :size="size"></moon-loader> -->
-            <judge-component v-if="loadData" :judgesList="judgesList.data"  @status="changeStatus()"/>
+            <judge-component v-if="loadData" :judgesList="judgesList.data"  @status="changeStatus"/>
           </div>
   
         </div>
@@ -290,13 +290,19 @@
         window.scrollTo(0, 0);
         this.getJudgesList(); // онуляємо всі фільтри і визиваємо функцію
       },
-      changeStatus(data){
-        console.log('status', data);
-        
-        this.judgesList.map(e => {
-          console.log('EEeeeee', e);
-          
-        })
+      changeStatus: function(data){
+        this.judgesList.data.forEach(element => {
+           console.log(element.id );
+              console.log(data.id);
+            if (element.id === data.id){
+             
+              
+              
+              element.status = data.status.set_status;
+              element.due_date_status = data.status.due_date;
+            }          
+        });
+        console.log('status data', this.judgesList); 
       }
     },
     components: {
