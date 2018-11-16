@@ -1,31 +1,39 @@
-import pymysql.cursors
+import pymysql
+import logging
+
 from lib.config import *
-
-edrsr_connection = pymysql.connect(host=DB_EDRSR['host'],
-                                   user=DB_EDRSR['user'],
-                                   password=DB_EDRSR['pass'],
-                                   db=DB_EDRSR['dbname'],
-                                   charset=DB_EDRSR['charset'],
-                                   cursorclass=pymysql.cursors.DictCursor)
-
-toecyd_connection = pymysql.connect(host=DB_TOECYD['host'],
-                                    user=DB_TOECYD['user'],
-                                    password=DB_TOECYD['pass'],
-                                    db=DB_TOECYD['dbname'],
-                                    charset=DB_TOECYD['charset'],
-                                    cursorclass=pymysql.cursors.DictCursor)
 
 
 class DB:
+    try:
+        edrsr_connection = pymysql.connect(host=DB_EDRSR['host'],
+                                           user=DB_EDRSR['user'],
+                                           password=DB_EDRSR['pass'],
+                                           db=DB_EDRSR['dbname'],
+                                           charset=DB_EDRSR['charset'],
+                                           cursorclass=pymysql.cursors.DictCursor)
+    except Exception:
+        logging.error(f'{EDRSR} Connection was not established')
+
+    try:
+        toecyd_connection = pymysql.connect(host=DB_TOECYD['host'],
+                                            user=DB_TOECYD['user'],
+                                            password=DB_TOECYD['pass'],
+                                            db=DB_TOECYD['dbname'],
+                                            charset=DB_TOECYD['charset'],
+                                            cursorclass=pymysql.cursors.DictCursor)
+    except Exception:
+        logging.error(f'{TOECYD} Connection was not established')
+
     def __init__(self, db_name):
 
         if db_name not in (EDRSR, TOECYD):
             raise Exception('Please provide valid db_name')
 
         if db_name == EDRSR:
-            self.connection = edrsr_connection
+            self.connection = self.edrsr_connection
         elif db_name == TOECYD:
-            self.connection = toecyd_connection
+            self.connection = self.toecyd_connection
 
     def write(self, sql_query, values):
 

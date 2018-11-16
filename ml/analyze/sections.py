@@ -7,7 +7,8 @@ from lib.db import DB
 class Section:
     data_dict = {}
 
-    def __init__(self, judge: Judge, justice_kind, judge_results_table, judgment_codes=None, anticipated_category=None):
+    def __init__(self, judge: Judge, justice_kind, judge_results_table,
+                 judgment_codes=None, anticipated_category=None):
         self.judge = judge
         self.justice_kind = justice_kind
         self.anticipated_category = anticipated_category
@@ -15,21 +16,22 @@ class Section:
         self.judgement_codes = judgment_codes
         self.data_dict = {}
 
-    def _get_all_applications(self):
+    def _get_all_applications(self)  -> list:
         """
         All applications examined by judge
 
         :return:
         """
 
-        sql_query = (f"SELECT  DISTINCT cause_num FROM reg{self.judge.region} "
+        sql_query = (f"SELECT  DISTINCT cause_num, adjudication_date FROM reg{self.judge.region} "
                      f"WHERE judge={self.judge.id} "
-                     f"AND justice_kind={self.justice_kind}")
+                     f"AND justice_kind={self.justice_kind} "
+                     f"ORDER BY adjudication_date ASC")
         edrsr = DB(db_name=EDRSR)
         applications = edrsr.read(sql_query)
         return applications
 
-    def _get_all_appeals(self, all_applications):
+    def _get_all_appeals(self, all_applications)  -> list:
         """
         All appeals of judge
 
@@ -53,14 +55,14 @@ class Section:
         appeals = edrsr.read(sql_query)
         return appeals
 
-    def _get_appeal_documents(self, cause_num):
+    def _get_appeal_documents(self, cause_num)  -> list:
         """
         All documents related to the appeal
         :param cause_num
         :return:
         """
         j_codes = ', '.join(
-            str(code)  for code in self.judgement_codes
+            str(code) for code in self.judgement_codes
         )
 
         sql_query = (f"SELECT * FROM reg{self.judge.region} "
@@ -71,6 +73,14 @@ class Section:
         edrsr = DB(db_name=EDRSR)
         documents = edrsr.read(sql_query)
         return documents
+
+    def _get_application_documents(self, cause_num) -> list:
+        """
+        All documents related to the application
+
+        :param cause_num:
+        :return:
+        """
 
     def count(self):
         raise NotImplementedError
@@ -99,12 +109,42 @@ class Civil(Section):
             judgment_codes=[3, 5]
         )
 
+    def analyze_in_time(self):
+        all_application = self._get_all_applications()
+        for application in all_application:
+            app_documents = self._get_application_documents(
+                application['cause_num']
+            )
+            for document in app_documents:
+                date_dict = {}
+                doc_text = document['doc_text']
+                category = guess_category(
+                    text=doc_text,
+                    anticipated_category=self.anticipated_category
+                )
+                if category == 8:
+                    date_dict['start_adj_date'] = document['adjudication_date']
+                if category == 11:
+                    date_dict['end_adj_date'] = document['adjudication_date']
+                    if 'start_adj_date' in date_dict:
+                        interval = date_dict['end_adj_date'] - date_dict['start_adj_date']
+                        if interval.days <= 45:
+                            self.judge.increase_cases_on_time()
+                        elif interval.days > 45:
+                            self.judge.decrease_cases_on_time()
+
+
+
+
+        print('')
+
+
     def count(self):
         all_applications = self._get_all_applications()
         self.data_dict['amount'] = len(all_applications)
 
         # якщо справ немає - повертаємось
-        if self.data_dict['amount'] == 0 :
+        if self.data_dict['amount'] == 0:
             return
 
         civil_in_appeal = self._get_all_appeals(all_applications)

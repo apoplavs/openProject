@@ -7,21 +7,21 @@ TOECYD = 'test_toecyd'
 
 DB_EDRSR = {
                'type': 'mysql',
-               'host': '127.0.0.1',
-               'dbname': 'edrsr',
+               'host': 'develop-toecyd.ckbu3cst0zhm.eu-central-1.rds.amazonaws.com',
+               'dbname': 'ml_toecyd',
                'charset': 'utf8',
-               'user': 'root',
-               'pass': '1',
+               'user': 'develop',
+               'pass': 'openproject',
                'port': '3306'
            }
 
 DB_TOECYD = {
                'type': 'mysql',
-               'host': '127.0.0.1',
-               'dbname': 'test_toecyd',
+               'host': 'develop-toecyd.ckbu3cst0zhm.eu-central-1.rds.amazonaws.com',
+               'dbname': 'develop_toecyd',
                'charset': 'utf8',
-               'user': 'root',
-               'pass': '1',
+               'user': 'develop',
+               'pass': 'openproject',
                'port': '3306'
            }
 
