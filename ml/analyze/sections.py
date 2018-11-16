@@ -3,6 +3,7 @@ from analyze.classifier import guess_category
 from lib.config import *
 from lib.db import DB
 
+CIVIL = 'civil'
 
 class Section:
     data_dict = {}
@@ -129,15 +130,9 @@ class Civil(Section):
                     if 'start_adj_date' in date_dict:
                         interval = date_dict['end_adj_date'] - date_dict['start_adj_date']
                         if interval.days <= 45:
-                            self.judge.increase_cases_on_time()
+                            self.judge.increase_cases_on_time(CIVIL)
                         elif interval.days > 45:
-                            self.judge.decrease_cases_on_time()
-
-
-
-
-        print('')
-
+                            self.judge.decrease_cases_on_time(CIVIL)
 
     def count(self):
         all_applications = self._get_all_applications()
