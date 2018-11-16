@@ -197,18 +197,31 @@ class Judge extends Model
     public static function getJudgeData($judge_id) {
         // отримання id користувача
         $user_id = Auth::check() ? Auth::user()->id : 0;
-        return (static::select('judges.id', 'judges.surname', 'judges.name',
-            'courts.name AS court_name', 'courts.address AS court_address',
-            'courts.phone AS court_phone', 'courts.email AS court_email', 'courts.site AS court_site',
-            'judges.patronymic', 'judges.photo', 'judges.status',
-            DB::raw('(SELECT COUNT(*) FROM users_likes_judges WHERE users_likes_judges.judge=judges.id) AS likes'),
-            DB::raw('(SELECT COUNT(*) FROM users_unlikes_judges WHERE users_unlikes_judges.judge=judges.id) AS unlikes'),
+        return (static::select('judges.id', 'judges.surname', 'judges.name', 'judges.patronymic', 
+            'judges.photo', 'judges.status',
             DB::raw('DATE_FORMAT(judges.updated_status, "%d.%m.%Y") AS updated_status'),
-            DB::raw('DATE_FORMAT(judges.due_date_status, "%d.%m.%Y") AS due_date_status'), 'judges.rating',
+            DB::raw('DATE_FORMAT(judges.due_date_status, "%d.%m.%Y") AS due_date_status'),
+            'judges.rating', 'previous_work',
+            'courts.name AS court_name', 'judges.address AS court_address',
+            'courts.phone AS court_phone', 'courts.email AS court_email', 'courts.site AS court_site',
+            DB::raw('(SELECT COUNT(id) FROM users_likes_judges WHERE users_likes_judges.judge=judges.id) AS likes'),
+            DB::raw('(SELECT COUNT(id) FROM users_unlikes_judges WHERE users_unlikes_judges.judge=judges.id) AS unlikes'),
+            DB::raw('(CASE WHEN users_likes_judges.user = ' . $user_id . ' THEN 1 ELSE 0 END) AS is_liked'),
+            DB::raw('(CASE WHEN users_unlikes_judges.user = ' . $user_id . ' THEN 1 ELSE 0 END) AS is_unliked'),
             DB::raw('(CASE WHEN user_bookmark_judges.user = ' . $user_id . ' THEN 1 ELSE 0 END) AS is_bookmark'))
             ->join('courts', 'judges.court', '=', 'courts.court_code')
+            ->leftJoin('users_likes_judges', 'judges.id', '=', 'users_likes_judges.judge')
+            ->leftJoin('users_unlikes_judges', 'judges.id', '=', 'users_unlikes_judges.judge')
             ->leftJoin('user_bookmark_judges', 'judges.id', '=', 'user_bookmark_judges.judge')
             ->where('judges.id', '=', $judge_id)
+            ->first());
+    }
+
+
+    public static function getPreviousWork($id) {
+        return (static::select('judges.id', 'courts.name AS court_name', 'previous_work')
+            ->join('courts', 'judges.court', '=', 'courts.court_code')
+            ->where('judges.id', '=', $id)
             ->first());
     }
 

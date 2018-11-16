@@ -24,7 +24,6 @@ class CreateCourtSessionsTable extends Migration
             $table->string('number')->nullable()->comment('номер справи');
             $table->text('involved')->nullable()->comment('сторони по справі');
             $table->string('description')->nullable()->comment('суть справи');
-            $table->text('add_address')->nullable()->comment('адреса суду');
 
             $table->foreign('court')->references('court_code')->on('courts');
             $table->foreign('judge1')->references('id')->on('judges');

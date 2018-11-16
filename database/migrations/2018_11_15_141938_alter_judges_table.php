@@ -13,13 +13,14 @@ class AlterJudgesTable extends Migration
      */
     public function up()
     {
-		if (Schema::hasTable('judges') && !Schema::hasColumn('judges', 'due_date_status')) {
+		if (Schema::hasTable('judges') && !Schema::hasColumn('judges', 'address')) {
 			Schema::table('judges', function (Blueprint $table) {
-				$table->date('due_date_status')->nullable()->after('updated_status');
+				$table->string('address')->nullable()->comment('адреса суду в якому працює даний суддя');
 			});
 		}
     }
 
+    
     /**
      * Reverse the migrations.
      *
@@ -28,7 +29,7 @@ class AlterJudgesTable extends Migration
     public function down()
     {
 		Schema::table('judges', function (Blueprint $table) {
-			$table->dropColumn('due_date_status');
+			$table->dropColumn('address');
 		});
     }
 }
