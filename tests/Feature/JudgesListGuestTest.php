@@ -69,14 +69,17 @@ class JudgesListGuestTest extends BaseApiTest
     {
         $order_by_2 = (Judge::getSortVariants())[0];
 
-        return Judge::select($this->getFieldstoSelect())
-            // якщо не переданий аргумент щоб показувати суддів в яких закінчились повноваження - значить упускємо їх при вибірці
-            ->when(!$powers_expired, function (Builder $query) {
-                return $query->where('judges.status', '!=', 5);
-            })
-            ->join('courts', 'judges.court', '=', 'courts.court_code')
-            ->orderBy($order_by[0], $order_by[1])
-            ->orderBy($order_by_2[0], $order_by_2[1]);
+        return (
+            call_user_func_array(['Toecyd\Judge', 'select'], $this->getFieldstoSelect())
+                // якщо не переданий аргумент щоб показувати суддів в яких закінчились повноваження - значить упускємо їх при вибірці
+                ->when(!$powers_expired, function (Builder $query) {
+                    return $query->where('judges.status', '!=', 5);
+                })
+                ->join('courts', 'judges.court', '=', 'courts.court_code')
+                ->orderBy($order_by[0], $order_by[1])
+                ->orderBy($order_by_2[0], $order_by_2[1])
+        );
+
     }
 
     /**

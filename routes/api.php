@@ -60,7 +60,7 @@ Route::group(['prefix' => 'v1/', 'namespace' => 'Api\V1',], function () {
 		// список суддів з застосованими фільтрами (Рейтинг->судді)
 		Route::get('judges/list', 'JudgesController@index');
 		// сторінка судді з інформацією про нього
-		//Route::get('judges/{id}', 'JudgesController@show')->middleware('checkId:judge');
+		Route::get('judges/{id}', 'JudgesController@show')->middleware('checkId:judge');
 		
 		// додати суддю в закладки
 		Route::put('judges/{id}/bookmark', 'JudgesController@addJudgeBookmark')->middleware('checkId:judge');

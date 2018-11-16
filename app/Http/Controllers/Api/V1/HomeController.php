@@ -250,19 +250,28 @@ class HomeController extends Controller
      *         response=200,
      *         description="ОК",
      *        @SWG\Schema(
-     *          @SWG\Property(property="courts", type="json", description="Список судових установ, що знаходяться в закладках у користувача"),
+     *          @SWG\Property(
+     *              property="courts",
+     *              description="Список судових установ, що знаходяться в закладках у користувача",
+     *              type="array",
      *              @SWG\Items(
-     *     	            @SWG\Property(property="court_code", type="string", description="Код суду"),
-     *     	            @SWG\Property(property="court_name", type="string", description="Назва суду"),
+     *                  type="object",
+     *                  @SWG\Property(property="court_code", type="string", description="Код суду"),
+     *                  @SWG\Property(property="court_name", type="string", description="Назва суду"),
      *     	            @SWG\Property(property="instance", type="string", description="Інстанція суду [Перша, Апеляційна, Касаційна]"),
      *     	            @SWG\Property(property="region", type="string", description="Регіон суду"),
      *     	            @SWG\Property(property="jurisdiction", type="string", description="Юрисдикція суду [Загальна, Адміністративна, Господарська]"),
      *     	            @SWG\Property(property="address", type="string", description="Адреса суду"),
      *     	            @SWG\Property(property="head_judge", type="string", description="ПІБ головуючого судді  || null якщо невідомо"),
      *     	            @SWG\Property(property="rating", type="integer", description="Місце в рейтингу серед усіх судових установ"),
-     *              ),
-     *         @SWG\Property(property="judges", type="json", description="Список судових установ, що знаходяться в закладках у користувача"),
+     *              )
+     *          ),
+     *         @SWG\Property(
+     *              property="judges",
+     *              type="array",
+     *              description="Список суддів, що знаходяться в закладках у користувача",
      *              @SWG\Items(
+     *                  type="object",
      *     	            @SWG\Property(property="id", type="string", description="id судді"),
      *     	            @SWG\Property(property="court_name", type="string", description="Назва суду, в якому даний суддя працює"),
      *     	            @SWG\Property(property="surname", type="string", description="Прізвище судді"),
@@ -279,6 +288,7 @@ class HomeController extends Controller
      *     	            @SWG\Property(property="due_date_status", type="string", description="Дата дії статусу (до якого часу даний статус буде діяти)"),
      *     	            @SWG\Property(property="rating", type="integer", description="Місце в рейтингу серед усіх суддів"),
      *              ),
+     *            ),
      *          ),
      *           examples={"application/json":
      *     	         {
@@ -289,7 +299,7 @@ class HomeController extends Controller
      *                          "surname":"Хитрук",
      *                          "name":"Володимир",
      *                          "patronymic":"Миколайович",
-     *                          "photo":"\/img\/judges\/no_photo.jpg",
+     *                          "photo":"/img/judges/no_photo.jpg",
      *                          "status":1,
      *                          "updated_status":"23.05.2018",
      *                          "due_date_status":null,
@@ -301,7 +311,7 @@ class HomeController extends Controller
      *                          "surname":"Переверзєв",
      *                          "name":"Сергій",
      *                          "patronymic":"Володимирович",
-     *                          "photo":"\/img\/judges\/no_photo.jpg",
+     *                          "photo":"/img/judges/no_photo.jpg",
      *                          "status":1,
      *                          "updated_status":"03.10.2018",
      *                          "due_date_status":null,

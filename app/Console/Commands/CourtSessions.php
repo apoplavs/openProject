@@ -200,8 +200,7 @@ class CourtSessions extends Command
             'forma'       => $forma_id,
             'number'      => $item->number,
             'involved'    => $item->involved,
-            'description' => mb_substr($item->description, 0, 255),
-            'add_address' => $item->add_address,
+            'description' => mb_substr($item->description, 0, 255)
         ];
 
         return array_merge($result, $judge_ids);
