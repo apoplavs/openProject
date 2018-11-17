@@ -36,7 +36,7 @@ Route::group(['prefix' => 'v1/', 'namespace' => 'Api\V1',], function () {
 	// список суддів з застосованими фільтрами (Рейтинг->судді) для незареєстрованого користуача
 	Route::get('guest/judges/list', 'JudgesController@indexGuest');
 	// сторінка судді з інформацією про нього
-	//Route::get('guest/judges/{id}', 'JudgesController@show')->middleware('checkId:judge');
+	Route::get('guest/judges/{id}', 'JudgesController@showGuest')->middleware('checkId:judge');
 	// швидкий пошук за прізвищем судді, для поля автодоповнення
 	Route::get('judges/autocomplete', 'JudgesController@autocomplete');
 	
@@ -90,6 +90,12 @@ Route::group(['prefix' => 'v1/', 'namespace' => 'Api\V1',], function () {
 		// видалити суд з закладок
 		Route::delete('courts/{id}/bookmark', 'CourtsController@delCourtBookmark')->middleware('checkId:court');
 		
+		/**
+		 * Cудові засідання
+		 */
+		// Додати судове засідання в закладки
+		Route::put('court-sessions/{id}/bookmark', 'CourtSessionController@addSessionBookmark')->middleware('checkId:session');
+		
 		
 		
 		/**
@@ -99,6 +105,7 @@ Route::group(['prefix' => 'v1/', 'namespace' => 'Api\V1',], function () {
 		Route::get('user/history', 'HomeController@indexHistory');
 		// Закладки користувача
 		Route::get('user/bookmarks', 'HomeController@indexBookmarks');
+		
 		
 	});
 	
