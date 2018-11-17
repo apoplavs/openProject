@@ -216,9 +216,35 @@ class Judge extends Model
             ->where('judges.id', '=', $judge_id)
             ->first());
     }
-
-
-    public static function getPreviousWork($id) {
+	
+	/**
+	 * отримати дані по одному судді для незареєстрованого користувача
+	 *
+	 * @param $judge_id
+	 */
+	public static function getJudgeDataGuest($judge_id) {
+		return (static::select('judges.id', 'judges.surname', 'judges.name', 'judges.patronymic',
+			'judges.photo', 'judges.status',
+			DB::raw('DATE_FORMAT(judges.updated_status, "%d.%m.%Y") AS updated_status'),
+			DB::raw('DATE_FORMAT(judges.due_date_status, "%d.%m.%Y") AS due_date_status'),
+			'judges.rating', 'previous_work',
+			'courts.name AS court_name', 'judges.address AS court_address',
+			'courts.phone AS court_phone', 'courts.email AS court_email', 'courts.site AS court_site',
+			DB::raw('(SELECT COUNT(id) FROM users_likes_judges WHERE users_likes_judges.judge=judges.id) AS likes'),
+			DB::raw('(SELECT COUNT(id) FROM users_unlikes_judges WHERE users_unlikes_judges.judge=judges.id) AS unlikes'))
+			->join('courts', 'judges.court', '=', 'courts.court_code')
+			->where('judges.id', '=', $judge_id)
+			->first());
+	}
+	
+	
+	/**
+	 * отримати назву суду в якому суддя працював раніше
+	 * в БД `judges`.`previous_work` --> `judges`.`court` --> `courts`.`name`
+	 * @param $id
+	 * @return mixed
+	 */
+	public static function getPreviousWork($id) {
         return (static::select('judges.id', 'courts.name AS court_name', 'previous_work')
             ->join('courts', 'judges.court', '=', 'courts.court_code')
             ->where('judges.id', '=', $id)
