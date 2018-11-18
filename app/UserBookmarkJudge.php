@@ -50,12 +50,15 @@ class UserBookmarkJudge extends Model
 	 * @return mixed
 	 */
 	public static function getBookmarkJudges() {
-
-		return (DB::table('judges')->select(self::getBookmarkFields())
-			->join('courts', 'judges.court', '=', 'courts.court_code')
-			->join('user_bookmark_judges', 'user_bookmark_judges.judge', '=', 'judges.id')
-            ->where('user_bookmark_judges.user', '=', Auth::user()->id)
-			->get());
+		return (
+		    call_user_func_array(['Toecyd\Judge', 'select'], self::getBookmarkFields())
+                ->join('courts', 'judges.court', '=', 'courts.court_code')
+                ->join('user_bookmark_judges', 'user_bookmark_judges.judge', '=', 'judges.id')
+                ->where('user_bookmark_judges.user', '=', Auth::user()->id)
+                ->get()
+                ->unique(function ($item){return $item->toArray();}) // залишаємо в колекції лише унікальні елементи
+                ->values() // перенумеровуємо елементи колекції (після unique вони занумеровані не підряд)
+        );
 	}
 	
 	

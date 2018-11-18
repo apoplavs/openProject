@@ -72,14 +72,17 @@ class UserBookmarkCourt extends Model
 	 * @return mixed
 	 */
 	public static function getBookmarkCourts() {
-        return (DB::table('courts')->select(self::getBookmarkFields())
-            ->leftJoin('instances', 'courts.instance_code', '=', 'instances.instance_code')
-            ->leftJoin('regions', 'courts.region_code', '=', 'regions.region_code')
-            ->leftJoin('jurisdictions', 'courts.jurisdiction', '=', 'jurisdictions.id')
-            ->leftJoin('judges', 'courts.head_judge', '=', 'judges.id')
-            ->join('user_bookmark_courts', 'user_bookmark_courts.court', '=', 'courts.court_code')
-            ->where('user_bookmark_courts.user', '=', Auth::user()->id)
-            ->get()
+        return (
+            call_user_func_array(['Toecyd\Court', 'select'], self::getBookmarkFields())
+                ->leftJoin('instances', 'courts.instance_code', '=', 'instances.instance_code')
+                ->leftJoin('regions', 'courts.region_code', '=', 'regions.region_code')
+                ->leftJoin('jurisdictions', 'courts.jurisdiction', '=', 'jurisdictions.id')
+                ->leftJoin('judges', 'courts.head_judge', '=', 'judges.id')
+                ->join('user_bookmark_courts', 'user_bookmark_courts.court', '=', 'courts.court_code')
+                ->where('user_bookmark_courts.user', '=', Auth::user()->id)
+                ->get()
+                ->unique(function ($item){return $item->toArray();}) // залишаємо в колекції лише унікальні елементи
+                ->values() // перенумеровуємо елементи колекції (після unique вони занумеровані не підряд)
         );
 	}
 
