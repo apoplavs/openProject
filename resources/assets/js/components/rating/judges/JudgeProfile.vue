@@ -148,8 +148,14 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-6"></div>
-                            <div class="col-6"></div>
+                            <div class="col-6">
+                                <doughnut-chart :percent="37" visibleValue="true" foregroundColor="#8fdb42" width="120" height="120" />
+                                <span>Справ розглянуто своєчасно</span>
+                            </div>
+                            <div class="col-6">
+                                <doughnut-chart :percent="65" visibleValue="true" foregroundColor="#cebd4b" width="120" height="120"/>
+                                <span>Рішень вистояли у вищих інстанціях</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -163,9 +169,15 @@
                                 <GChart type="ColumnChart" :data="columnChartData" :options="columnChartOptions"/>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-6"></div>
-                            <div class="col-6"></div>
+                         <div class="row">
+                            <div class="col-6">
+                                <doughnut-chart :percent="37" visibleValue="true" foregroundColor="#8fdb42" width="120" height="120" />
+                                <span>Справ розглянуто своєчасно</span>
+                            </div>
+                            <div class="col-6">
+                                <doughnut-chart :percent="65" visibleValue="true" foregroundColor="#cebd4b" width="120" height="120"/>
+                                <span>Рішень вистояли у вищих інстанціях</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -182,8 +194,14 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-6"></div>
-                            <div class="col-6"></div>
+                            <div class="col-6">
+                                <doughnut-chart :percent="37" visibleValue="true" foregroundColor="#8fdb42" width="120" height="120" />
+                                <span>Справ розглянуто своєчасно</span>
+                            </div>
+                            <div class="col-6">
+                                <doughnut-chart :percent="65" visibleValue="true" foregroundColor="#cebd4b" width="120" height="120"/>
+                                <span>Рішень вистояли у вищих інстанціях</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -234,6 +252,8 @@
     import {
         GChart
     } from "vue-google-charts";
+    import DoughnutChart from 'vue-doughnut-chart'
+
     
     export default {
         name: "JudgeProfile",
@@ -329,7 +349,8 @@
         },
         components: {
             Spinner,
-            GChart
+            GChart,
+            DoughnutChart
         }
     };
 </script>
