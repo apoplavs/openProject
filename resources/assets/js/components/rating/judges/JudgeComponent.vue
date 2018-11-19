@@ -219,7 +219,7 @@
                             
                             if(e.id === this.changeStatusId){
                                 e.due_date_status = this.judgeStatus.due_date;
-                                e.status = this.judgeStatus.set_status;
+                                e.status = Number(this.judgeStatus.set_status);
                             } 
                             console.log('e',e); 
                         })              
