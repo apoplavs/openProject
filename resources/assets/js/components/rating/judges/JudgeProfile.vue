@@ -36,26 +36,26 @@
                                 <div class="status my-2">
                                     <div class="w-50 d-flex align-items-center">
                                         <span v-if="params.status === 1"> <!-- Cуддя на роботі  -->
-                                                <i class="fa fa-briefcase" aria-hidden="true"></i> на роботі 
-                                                <!-- {{ judge.due_date_status ? '('+judge.due_date_status+')' : null }} -->
-                                            </span>
+                                                        <i class="fa fa-briefcase" aria-hidden="true"></i> на роботі 
+                                                        <!-- {{ judge.due_date_status ? '('+judge.due_date_status+')' : null }} -->
+                                                    </span>
                                         <span v-if="params.status === 2"> <!-- На лікарняному  -->
-                                                <i class="fa fa-medkit" aria-hidden="true"></i> на лікарняному 
-                                                <!-- {{ judge.due_date_status ? '(до '+judge.due_date_status+')' : null }} -->
-                                            </span>
+                                                        <i class="fa fa-medkit" aria-hidden="true"></i> на лікарняному 
+                                                        <!-- {{ judge.due_date_status ? '(до '+judge.due_date_status+')' : null }} -->
+                                                    </span>
                                         <span v-if="params.status === 3"> <!-- У відпустці   -->
-                                                <i class="fas fa-umbrella-beach"></i> у відпустці 
-                                                <!-- {{ judge.due_date_status ? '(до '+judge.due_date_status+')' : null }} -->
-                                            </span>
+                                                        <i class="fas fa-umbrella-beach"></i> у відпустці 
+                                                        <!-- {{ judge.due_date_status ? '(до '+judge.due_date_status+')' : null }} -->
+                                                    </span>
                                         <span v-if="params.status === 4"> <!-- Відсуній на робочому місці з інших причин  --> 
-                                                    <i class="fa fa-calendar-minus-o" aria-hidden="true"></i> 
-                                                відсутній на робочому місці з інших причин 
-                                                <!-- {{ judge.due_date_status ? '(до '+judge.due_date_status+')' : null }} -->
-                                            </span>
+                                                            <i class="fa fa-calendar-minus-o" aria-hidden="true"></i> 
+                                                        відсутній на робочому місці з інших причин 
+                                                        <!-- {{ judge.due_date_status ? '(до '+judge.due_date_status+')' : null }} -->
+                                                    </span>
                                         <span v-if="params.status === 5"> <!-- Припинено повноваження  -->
-                                                    <i class="fa fa-calendar-times-o" aria-hidden="true"></i> припинено повноваження 
-                                                <!-- {{ judge.due_date_status ? '(до '+judge.due_date_status+')' : null }} -->
-                                            </span>
+                                                            <i class="fa fa-calendar-times-o" aria-hidden="true"></i> припинено повноваження 
+                                                        <!-- {{ judge.due_date_status ? '(до '+judge.due_date_status+')' : null }} -->
+                                                    </span>
                                         <span><i class="fas fa-edit float-right pl-3" aria-hidden="true" @click="showModal()"></i></span>
                                     </div>
                                     <div class="bookmark w-50">
@@ -113,6 +113,7 @@
                         <span>Статистика розгрянутих справ</span>
                     </div>
                     <div class="card-body">
+                        <GChart type="PieChart" :data="pieChartData" :options="pieChartOptions"/>
                     </div>
                 </div>
                 <div class="card w-50 mt-2 ml-1">
@@ -141,7 +142,15 @@
                         Цивільне судочинство
                     </div>
                     <div class="card-body">
-    
+                        <div class="row">
+                            <div class="col">
+                                <GChart type="ColumnChart" :data="columnChartData" :options="columnChartOptions"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6"></div>
+                            <div class="col-6"></div>
+                        </div>
                     </div>
                 </div>
                 <div class="card w-50 mt-2 ml-1">
@@ -149,7 +158,15 @@
                         Кримінальне судочинство
                     </div>
                     <div class="card-body">
-    
+                         <div class="row">
+                            <div class="col">
+                                <GChart type="ColumnChart" :data="columnChartData" :options="columnChartOptions"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6"></div>
+                            <div class="col-6"></div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -159,7 +176,15 @@
                         <span>Судочинство в порядку КУпАП</span>
                     </div>
                     <div class="card-body">
-    
+                        <div class="row">
+                            <div class="col">
+                                <GChart type="ColumnChart" :data="columnChartData" :options="columnChartOptions"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6"></div>
+                            <div class="col-6"></div>
+                        </div>
                     </div>
                 </div>
                 <div class="card w-50 mt-2 ml-1">
@@ -167,26 +192,26 @@
                         Адміністративне судочинство
                     </div>
                     <div class="card-body">
-    
+                        В розробці...
                     </div>
                 </div>
             </div>
         </div>
         <!-- modal -->
-         <modal v-show="isModalVisible" @close="closeModal" @save="saveChanges">
+        <modal v-show="isModalVisible" @close="closeModal" @save="saveChanges">
             <h4 slot="header">Оновити статус судді</h4>
             <div slot="body">
                 <form>
                     <div class="form-group row mx-0 my-4">
                         <label for="chooser-judge-status" class="col-4">Статус</label>
                         <div class="col-8">
-                            <select class="form-control" id="chooser-judge-status" >
-                                <option value="1">на роботі</option>
-                                <option value="2">на лікарняному</option>
-                                <option value="3">у відпустці</option>
-                                <option value="4">відсутній на робочому місці</option>
-                                <option value="5">припинено повноваження</option>
-                            </select>
+                            <select class="form-control" id="chooser-judge-status">
+                                        <option value="1">на роботі</option>
+                                        <option value="2">на лікарняному</option>
+                                        <option value="3">у відпустці</option>
+                                        <option value="4">відсутній на робочому місці</option>
+                                        <option value="5">припинено повноваження</option>
+                                    </select>
                         </div>
                         <input type="hidden" id="judge-for-new-status" value="0">
                     </div>
@@ -206,77 +231,105 @@
 
 <script>
     import Spinner from "../../shared/Spinner.vue";
+    import {
+        GChart
+    } from "vue-google-charts";
     
     export default {
         name: "JudgeProfile",
         data() {
             return {
                 isAuth: localStorage.getItem("token"),
-                
                 loadData: true,
                 params: {
                     status: 1,
                     is_bookmark: 1,
                     search: ""
-                }
+                },
+                // Array will be automatically processed with visualization.arrayToDataTable function
+                pieChartData: [
+                  ['Task', 'Hours per Day'],
+                    ['Work',     11],
+                    ['Eat',      2],
+                    ['Commute',  2],
+                    ['Watch TV', 2],
+                    ['Sleep',    7]
+                ],
+                pieChartOptions: {
+                    is3D: true,
+                    width: 400,
+                    height: 300,
+                    legend: {position: 'left', alignment: 'start', },
+                },
+                columnChartData: [
+                     ['Element', 'Density', { role: 'style' }, { role: 'annotation' }],
+                    ['Copper', 8.94, '#b87333', '400'],            // RGB value
+                    ['Silver', 10.49, 'silver', '500'],            // English color name
+                    ['Gold', 19.30, 'gold', '200'],
+                    ['Platinum', 21.45, 'color: #e5e4e2', '800' ],
+                ],
+                columnChartOptions:{
+                     legend: { position: "none" },
+                },
             };
         },
         methods: {
             formattingDate(date) {
-                if (date === '' || date === null) {
-                    return '';
+                if (date === "" || date === null) {
+                    return "";
                 } else {
-                    let arr = _.split(date, '.');                    
+                    let arr = _.split(date, ".");
                     return `${arr[2]}-${arr[1]}-${arr[0]}`;
                 }
             },
-             changeBookmarkStatus() {
+            changeBookmarkStatus() {
                 if (!this.isAuth) {
                     this.$router.push("/login");
                 }
                 if (this.params.is_bookmark === 0) {
                     axios({
-                        method: "put",
-                        url: `/api/v1/judges/${this.$route.params.id}/bookmark`,
-                        headers: {
-                            "Content-Type": "application/json",
-                            "X-Requested-With": "XMLHttpRequest",
-                            Authorization: localStorage.getItem("token")
-                        }
-                    })
-                    .then(response => {
-                        this.params.is_bookmark = 1;
-                    })
-                    .catch(error => {
-                        if (error.response.status === 401) {
-                            this.$router.push('/login');
-                        }
-                        console.log("Bookmark", error);
-                    });
+                            method: "put",
+                            url: `/api/v1/judges/${this.$route.params.id}/bookmark`,
+                            headers: {
+                                "Content-Type": "application/json",
+                                "X-Requested-With": "XMLHttpRequest",
+                                Authorization: localStorage.getItem("token")
+                            }
+                        })
+                        .then(response => {
+                            this.params.is_bookmark = 1;
+                        })
+                        .catch(error => {
+                            if (error.response.status === 401) {
+                                this.$router.push("/login");
+                            }
+                            console.log("Bookmark", error);
+                        });
                 } else {
                     axios({
-                        method: "delete",
-                        url: `/api/v1/judges/${this.$route.params.id}/bookmark`,
-                        headers: {
-                            "Content-Type": "application/json",
-                            "X-Requested-With": "XMLHttpRequest",
-                            Authorization: localStorage.getItem("token")
-                        }
-                    })
-                    .then(response => {
-                        this.params.is_bookmark = 0;
-                    })
-                    .catch(error => {
-                        if (error.response.status === 401) {
-                        this.$router.push('/login');
-                    }
-                        console.log('Bookmark', error.response);
-                    });
+                            method: "delete",
+                            url: `/api/v1/judges/${this.$route.params.id}/bookmark`,
+                            headers: {
+                                "Content-Type": "application/json",
+                                "X-Requested-With": "XMLHttpRequest",
+                                Authorization: localStorage.getItem("token")
+                            }
+                        })
+                        .then(response => {
+                            this.params.is_bookmark = 0;
+                        })
+                        .catch(error => {
+                            if (error.response.status === 401) {
+                                this.$router.push("/login");
+                            }
+                            console.log("Bookmark", error.response);
+                        });
                 }
-            },
+            }
         },
         components: {
-            Spinner
+            Spinner,
+            GChart
         }
     };
 </script>
@@ -318,7 +371,7 @@
                 @include alignElement($alignItems: start);
             }
             .bookmark {
-                > span {
+                >span {
                     width: 20px;
                     float: right;
                 }
