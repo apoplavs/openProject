@@ -101,7 +101,7 @@
             <input type="search" class="form-control" placeholder="Пошук..." v-model.trim="params.search" @keyup="liveSearch()">
             <div class="autocomplete-block-result" v-if="autocomplete.length">
               <div class="autocomplete-block-result_element" v-for="(el, ind_1) in autocomplete" :key="ind_1">
-                <router-link :to="`/judge-profile/${el.id}`">
+                <router-link :to="`/judges/${el.id}`">
                   {{ el.surname }} {{ (el.name.length === 1) ? el.name + '.' : el.name }} {{ (el.patronymic.length === 1) ? el.patronymic + '.' : el.patronymic }}
                 </router-link>
               </div>
