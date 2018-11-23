@@ -62,7 +62,59 @@ button:focus {
 }
 
 .card-header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   background-color: #2b989b;
   color: #ffffff;
+  font-size: 1.5rem;
+}
+
+i[class^="fa-bookmark"],
+i.fa-edit {
+  cursor: pointer;
+}
+
+.fa-bookmark-o,
+.fa-bookmark {
+  color: #ef6733;
+}
+
+.fa-briefcase {
+  color: #2ab27b;
+}
+
+.fa-line-chart {
+  color: #2b989b;
+}
+
+.fa-medkit {
+  color: #ef6733;
+}
+
+.fa-calendar-minus-o {
+  color: #304040;
+}
+
+.fa-umbrella-beach {
+  color: orange;
+}
+
+.fa-calendar-times-o {
+  color: red;
+}
+
+.fa-edit {
+  color: #2C5F9C;
 }
 

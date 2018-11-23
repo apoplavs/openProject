@@ -9,7 +9,7 @@
                         <b>{{court.court_code}}</b>
                     </div>
                     <div class="col-10 court-component_right py-3">
-                        <router-link to="/"><div class="court-name">{{court.court_name}}</div></router-link>    
+                        <router-link :to="`/courts/${court.court_code}`"><div class="court-name">{{court.court_name}}</div></router-link>    
                         <div class="part-1 mt-3">
                             <div><span>Голова суду: </span>{{court.head_judge ? court.head_judge : 'невідомо'}}</div>
                             <div><span>Інстанція суду: </span>{{court.instance ? court.instance : 'невідомо'}}</div>
@@ -67,7 +67,10 @@
                             court.is_bookmark = 1;
                         })
                         .catch(error => {
-                            console.log("Bookmark", error);
+                            if (error.response.status === 401) {
+                                this.$router.push('/login');
+                            }
+                        console.log("Bookmark", error);
                         });
                 } else {
                     axios({
@@ -83,14 +86,14 @@
                             court.is_bookmark = 0;
                         })
                         .catch(error => {
+                            if (error.response.status === 401) {
+                                this.$router.push('/login');
+                            }
                             console.log('Bookmark', error);
                         });
                 }
             },
-           
         },
-        components: {
-        }
     };
 </script>
 

@@ -1,15 +1,424 @@
 <template>
+    <div class="judge-profile my-5">
+        <spinner v-if="!loadData" />
+        <div v-if="loadData" class="container">
+            <div class="judge-info">
+                <div class="card">
+                    <div class="card-body d-flex">
+                        <div class="photo w-25">
+                            <!-- img -->
+                        </div>
+                        <div class="w-75 px-3">
+                            <div class="main-info pb-2">
+                                <h2>Бандура Анна Петрівна</h2>
+                                <div class="d-flex">
+                                    <i class="fa fa-university" aria-hidden="true"></i>
+                                    <h3 class="court-name">Mлинівський районний суд Житомирської області</h3>
+                                </div>
+                                <div class="detail-info">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>вул Степана Бандери, 7 буд 302, 321222</span>
+                                </div>
+                                <div class="detail-info">
+                                    <i class="fas fa-phone"></i>
+                                    <span>(03132) 432 32 43</span>
+                                </div>
+                                <div class="detail-info">
+                                    <i class="far fa-envelope"></i>
+                                    <span>infobox@google.com</span>
+                                </div>
+                                <div class="detail-info">
+                                    <i class="fas fa-link"></i>
+                                    <a target="_blank" href="google.com">www.google.com</a>
+                                </div>
+                            </div>
+                            <div class="status-info">
+                                <div class="status my-2">
+                                    <div class="w-50 d-flex align-items-center">
+                                        <span v-if="params.status === 1"> <!-- Cуддя на роботі  -->
+                                                        <i class="fa fa-briefcase" aria-hidden="true"></i> на роботі 
+                                                        <!-- {{ judge.due_date_status ? '('+judge.due_date_status+')' : null }} -->
+                                                    </span>
+                                        <span v-if="params.status === 2"> <!-- На лікарняному  -->
+                                                        <i class="fa fa-medkit" aria-hidden="true"></i> на лікарняному 
+                                                        <!-- {{ judge.due_date_status ? '(до '+judge.due_date_status+')' : null }} -->
+                                                    </span>
+                                        <span v-if="params.status === 3"> <!-- У відпустці   -->
+                                                        <i class="fas fa-umbrella-beach"></i> у відпустці 
+                                                        <!-- {{ judge.due_date_status ? '(до '+judge.due_date_status+')' : null }} -->
+                                                    </span>
+                                        <span v-if="params.status === 4"> <!-- Відсуній на робочому місці з інших причин  --> 
+                                                            <i class="fa fa-calendar-minus-o" aria-hidden="true"></i> 
+                                                        відсутній на робочому місці з інших причин 
+                                                        <!-- {{ judge.due_date_status ? '(до '+judge.due_date_status+')' : null }} -->
+                                                    </span>
+                                        <span v-if="params.status === 5"> <!-- Припинено повноваження  -->
+                                                            <i class="fa fa-calendar-times-o" aria-hidden="true"></i> припинено повноваження 
+                                                        <!-- {{ judge.due_date_status ? '(до '+judge.due_date_status+')' : null }} -->
+                                                    </span>
+                                        <span><i class="fas fa-edit float-right pl-3" aria-hidden="true" @click="showModal()"></i></span>
+                                    </div>
+                                    <div class="bookmark w-50">
+                                        <span v-if="params.is_bookmark" @click="changeBookmarkStatus()"><i class="fa fa-bookmark" aria-hidden="true"></i></span>
+                                        <span v-if="!params.is_bookmark" @click="changeBookmarkStatus()"><i class="fa fa-bookmark-o" aria-hidden="true"></i></span>
+                                    </div>
+                                </div>
+                                <div class="rating">
+                                    <span class="like"><i class="fas fa-thumbs-up"></i> 25</span>
+                                    <span class="line-chart"><i class="fa fa-line-chart" aria-hidden="true"> 12%</i></span>
+                                    <span class="dislike"><i class="fas fa-thumbs-down"></i> 2</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="card mt-2">
+                    <div class="card-header d-flex justify-content-between">
+                        <span>Найближчі судові засідання</span>
+                        <input type="search" class="form-control" placeholder="Пошук..." v-model.trim="params.search" @keyup="liveSearch()">
+                    </div>
+                    <div class="card-body">
+                        <div class="court-sessions">
+                            <div class="container-component">
+                                <div class="row header text-muted">
+                                    <div class="col-2 pl-0">Дата розгляду</div>
+                                    <div class="col-2">Номер справи</div>
+                                    <div class="col-4">Сторони у справі</div>
+                                    <div class="col-3">Суть справи</div>
+                                    <div class="col-1 pr-0"></div>
+                                </div>
+                                <div class="row" v-for="(e, i_el) in [1,2,3,4,5]" :key="i_el">
+                                    <div class="col-2 pl-0">
+                                        <div>25.09.2018</div>
+                                        <div>14:15</div>
+                                    </div>
+                                    <div class="col-2">923/623.10</div>
+                                    <div class="col-4">Позивач: Головня Максим Феодосієвич, відповідач: Публічне Акціонерне Товариство Херсонський Суднобудівний завод</div>
+                                    <div class="col-3">Стягнення заборгованості </div>
+                                    <div class="col-1 pr-0">
+                                        <i v-if="i_el === 2" class="fas fa-star"></i>
+                                        <i v-else class="far fa-star"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex">
+                <div class="card w-50 mt-2 mr-1">
+                    <div class="card-header">
+                        <span>Статистика розгрянутих справ</span>
+                    </div>
+                    <div class="card-body">
+                        <GChart type="PieChart" :data="pieChartData" :options="pieChartOptions"/>
+                    </div>
+                </div>
+                <div class="card w-50 mt-2 ml-1">
+                    <div class="card-header">
+                        Загальна ефективність
+                    </div>
+                    <div class="card-body">
+                        <div>
+                            <label for="">Компетентність</label>
+                            <div class="progress">
+                                <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                        <div class="mt-2">
+                            <label for="">Своєчасність</label>
+                            <div class="progress">
+                                <div class="progress-bar bg-success" role="progressbar" style="width: 75%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex">
+                <div class="card w-50 mt-2 mr-1">
+                    <div class="card-header">
+                        Цивільне судочинство
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col">
+                                <GChart type="ColumnChart" :data="columnChartData" :options="columnChartOptions"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <doughnut-chart :percent="37" visibleValue="true" foregroundColor="#8fdb42" width="120" height="120" />
+                                <span>Справ розглянуто своєчасно</span>
+                            </div>
+                            <div class="col-6">
+                                <doughnut-chart :percent="65" visibleValue="true" foregroundColor="#cebd4b" width="120" height="120"/>
+                                <span>Рішень вистояли у вищих інстанціях</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card w-50 mt-2 ml-1">
+                    <div class="card-header">
+                        Кримінальне судочинство
+                    </div>
+                    <div class="card-body">
+                         <div class="row">
+                            <div class="col">
+                                <GChart type="ColumnChart" :data="columnChartData" :options="columnChartOptions"/>
+                            </div>
+                        </div>
+                         <div class="row">
+                            <div class="col-6">
+                                <doughnut-chart :percent="37" visibleValue="true" foregroundColor="#8fdb42" width="120" height="120" />
+                                <span>Справ розглянуто своєчасно</span>
+                            </div>
+                            <div class="col-6">
+                                <doughnut-chart :percent="65" visibleValue="true" foregroundColor="#cebd4b" width="120" height="120"/>
+                                <span>Рішень вистояли у вищих інстанціях</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex">
+                <div class="card w-50 mt-2 mr-1">
+                    <div class="card-header">
+                        <span>Судочинство в порядку КУпАП</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col">
+                                <GChart type="ColumnChart" :data="columnChartData" :options="columnChartOptions"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <doughnut-chart :percent="37" visibleValue="true" foregroundColor="#8fdb42" width="120" height="120" />
+                                <span>Справ розглянуто своєчасно</span>
+                            </div>
+                            <div class="col-6">
+                                <doughnut-chart :percent="65" visibleValue="true" foregroundColor="#cebd4b" width="120" height="120"/>
+                                <span>Рішень вистояли у вищих інстанціях</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card w-50 mt-2 ml-1">
+                    <div class="card-header">
+                        Адміністративне судочинство
+                    </div>
+                    <div class="card-body">
+                        В розробці...
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- modal -->
+        <modal v-show="isModalVisible" @close="closeModal" @save="saveChanges">
+            <h4 slot="header">Оновити статус судді</h4>
+            <div slot="body">
+                <form>
+                    <div class="form-group row mx-0 my-4">
+                        <label for="chooser-judge-status" class="col-4">Статус</label>
+                        <div class="col-8">
+                            <select class="form-control" id="chooser-judge-status">
+                                        <option value="1">на роботі</option>
+                                        <option value="2">на лікарняному</option>
+                                        <option value="3">у відпустці</option>
+                                        <option value="4">відсутній на робочому місці</option>
+                                        <option value="5">припинено повноваження</option>
+                                    </select>
+                        </div>
+                        <input type="hidden" id="judge-for-new-status" value="0">
+                    </div>
+                    <div class="form-group row mx-0 my-4">
+                        <label for="status-end-date" class="col-7">Дата завершення дії статусу <br><sup class="text-muted">(якщо відома)</sup></label>
+                        <div class="col-5">
+                            <!-- <datepicker v-model="judgeStatus.due_date" :value="judgeStatus.due_date" language="uk" :min="calendar.startDate | formatDate" :max="calendar.endDate | formatDate"> -->
+                            <!-- </datepicker> -->
+                        </div>
+                    </div>
+                </form>
+            </div>
     
+        </modal>
+    </div>
 </template>
 
 <script>
+    import Spinner from "../../shared/Spinner.vue";
+    import {
+        GChart
+    } from "vue-google-charts";
+    import DoughnutChart from 'vue-doughnut-chart'
+
+    
     export default {
-        name: "JudgeProfile"
-    }
+        name: "JudgeProfile",
+        data() {
+            return {
+                isAuth: localStorage.getItem("token"),
+                loadData: true,
+                params: {
+                    status: 1,
+                    is_bookmark: 1,
+                    search: ""
+                },
+                // Array will be automatically processed with visualization.arrayToDataTable function
+                pieChartData: [
+                  ['Task', 'Hours per Day'],
+                    ['Work',     11],
+                    ['Eat',      2],
+                    ['Commute',  2],
+                    ['Watch TV', 2],
+                    ['Sleep',    7]
+                ],
+                pieChartOptions: {
+                    is3D: true,
+                    width: 400,
+                    height: 300,
+                    legend: {position: 'left', alignment: 'start', },
+                },
+                columnChartData: [
+                     ['Element', 'Density', { role: 'style' }, { role: 'annotation' }],
+                    ['Copper', 8.94, '#b87333', '400'],            // RGB value
+                    ['Silver', 10.49, 'silver', '500'],            // English color name
+                    ['Gold', 19.30, 'gold', '200'],
+                    ['Platinum', 21.45, 'color: #e5e4e2', '800' ],
+                ],
+                columnChartOptions:{
+                     legend: { position: "none" },
+                },
+            };
+        },
+        methods: {
+            formattingDate(date) {
+                if (date === "" || date === null) {
+                    return "";
+                } else {
+                    let arr = _.split(date, ".");
+                    return `${arr[2]}-${arr[1]}-${arr[0]}`;
+                }
+            },
+            changeBookmarkStatus() {
+                if (!this.isAuth) {
+                    this.$router.push("/login");
+                }
+                if (this.params.is_bookmark === 0) {
+                    axios({
+                            method: "put",
+                            url: `/api/v1/judges/${this.$route.params.id}/bookmark`,
+                            headers: {
+                                "Content-Type": "application/json",
+                                "X-Requested-With": "XMLHttpRequest",
+                                Authorization: localStorage.getItem("token")
+                            }
+                        })
+                        .then(response => {
+                            this.params.is_bookmark = 1;
+                        })
+                        .catch(error => {
+                            if (error.response.status === 401) {
+                                this.$router.push("/login");
+                            }
+                            console.log("Bookmark", error);
+                        });
+                } else {
+                    axios({
+                            method: "delete",
+                            url: `/api/v1/judges/${this.$route.params.id}/bookmark`,
+                            headers: {
+                                "Content-Type": "application/json",
+                                "X-Requested-With": "XMLHttpRequest",
+                                Authorization: localStorage.getItem("token")
+                            }
+                        })
+                        .then(response => {
+                            this.params.is_bookmark = 0;
+                        })
+                        .catch(error => {
+                            if (error.response.status === 401) {
+                                this.$router.push("/login");
+                            }
+                            console.log("Bookmark", error.response);
+                        });
+                }
+            }
+        },
+        components: {
+            Spinner,
+            GChart,
+            DoughnutChart
+        }
+    };
 </script>
 
-<style scoped>
-  @import "../../../../sass/_variables.scss";
-
-
+<style scoped lang="scss">
+    @import "../../../../sass/_variables.scss";
+    @import "../../../../sass/_mixins.scss";
+    .judge-profile {
+        .main-info {
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            .fa-university {
+                color: $primary;
+                font-size: 1.7rem;
+                margin-right: 5px;
+            }
+            .court-name {
+                color: $text-muted;
+                font-weight: 300;
+            }
+            .detail-info {
+                @include alignElement($justifyContent: start);
+                color: $text-muted;
+                i[class^="fa"] {
+                    width: 25px;
+                }
+            }
+        }
+        .status-info {
+            .rating {
+                @include alignElement($justifyContent: space-between);
+                .like {
+                    color: green;
+                }
+                .dislike {
+                    color: red;
+                }
+            }
+            .status {
+                @include alignElement($alignItems: start);
+            }
+            .bookmark {
+                >span {
+                    width: 20px;
+                    float: right;
+                }
+            }
+        }
+        .court-sessions {
+            width: 100%;
+            height: auto;
+            font-size: 0.9rem;
+            .fa-star {
+                color: $main-color;
+            }
+            .container-component {
+                padding: 20px;
+                background-color: #ffffff;
+            }
+            .row {
+                margin: 0;
+                padding: 15px 0;
+                &:not(:last-child) {
+                    border-bottom: 1px solid lightgrey;
+                }
+            }
+        }
+        input[type="search"] {
+            width: 200px;
+        }
+    }
 </style>

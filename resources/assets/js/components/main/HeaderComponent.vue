@@ -15,19 +15,19 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="First" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Рейтинг</a>
                     <div class="dropdown-menu" aria-labelledby="First">
-                        <router-link to="/judges-list">
+                        <router-link to="/judges"  active-class="active">
                             <a class="dropdown-item">Судді</a>
                         </router-link>
-                        <router-link to="/courts-list">
-                            <a class="dropdown-item disabled">Суди</a>
+                        <router-link to="/courts" active-class="active">
+                            <a class="dropdown-item">Суди</a>
                         </router-link>
                     </div>
                 </li>
-                <router-link to="/about" tag="li" class="nav-item" active-class="active">
-                    <a class="nav-link  disabled">Про нас</a>
+                <router-link to="/about" tag="li" class="nav-item" active-class="active" disabled>
+                    <a class="nav-link">Про нас</a>
                 </router-link>
-                <router-link to="/contacts" tag="li" class="nav-item" active-class="active">
-                    <a class="nav-link  disabled">Контакти</a>
+                <router-link to="/contacts" tag="li" class="nav-item" active-class="active" disabled>
+                    <a class="nav-link">Контакти</a>
                 </router-link>
                 <!-- left  -->
                 <div class="d-lg-flex ml-lg-5">
@@ -80,8 +80,7 @@
     
             }
         },
-        methods: {
-            
+        methods: {  
             logout() {
                 axios
                     .get("/api/v1/logout", {
@@ -98,6 +97,10 @@
                         this.$router.push('/login')
                     })
                     .catch(error => {
+                        if (error.response.status === 401) {
+                            localStorage.clear();
+                            this.$router.push('/login');
+                        }
                         console.log(error);
                     });
     

@@ -23,7 +23,8 @@ $color-2: #435b71;
 $color-3: #0C4E4F;
 // $color-4: orange;
 $color-5: #2C5F9C;
-$color-6: #00b1b3;
+$color-6: hsl(181, 100%, 35%);
+$text-muted: lighten($text-color, 20%);
 
 // btn 
 

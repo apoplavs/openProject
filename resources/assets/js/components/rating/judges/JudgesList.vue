@@ -1,9 +1,14 @@
-<template>
+зрз<template>
   <div class="container mt-5">
     <div class="row min-width">
       <div class="col-3 filters">
         <div class="card">
-          <h4 class="card-header"><i class="fa fa-filter" aria-hidden="true"></i> Фільтри</h4>
+          <div class="card-header">
+            <div>
+               <i class="fa fa-filter" aria-hidden="true"></i> 
+              <span>Фільтри</span>
+            </div>
+          </div>
           <div class="card-body">
             <div class="row">
               <div class="col-12">
@@ -96,7 +101,7 @@
             <input type="search" class="form-control" placeholder="Пошук..." v-model.trim="params.search" @keyup="liveSearch()">
             <div class="autocomplete-block-result" v-if="autocomplete.length">
               <div class="autocomplete-block-result_element" v-for="(el, ind_1) in autocomplete" :key="ind_1">
-                <router-link to="/">
+                <router-link :to="`/judges/${el.id}`">
                   {{ el.surname }} {{ (el.name.length === 1) ? el.name + '.' : el.name }} {{ (el.patronymic.length === 1) ? el.patronymic + '.' : el.patronymic }}
                 </router-link>
               </div>
@@ -106,9 +111,9 @@
             <button type="button" class="btn btn-confirm w-100" @click="setFilters()"><i class="fa fa-search" aria-hidden="true"></i> знайти</button>
           </div>
         </div>
-        <div class="card card-outline-secondary ">
+        <div class="card">
           <div class="card-header d-flex justify-content-between">
-            <h4 class="d-flex align-items-center">Список суддів</h4>
+            <span>Список суддів</span>
             <div class="d-flex align-items-center">
               <span class="mr-2"> сортувати за: </span>
               <select class="form-control select-sort" name="sorting" v-model="params.sort" @change="sortList()">
@@ -119,11 +124,11 @@
                 </select> 
             </div>
           </div>
-          <div id="judges-list">
+          <div>
             <!--judges-judges-list-->
             <spinner v-if="!loadData" />
             <!-- <moon-loader :loading="!loadData" :color="color" :size="size"></moon-loader> -->
-            <judge-component v-if="loadData" :judgesList="judgesList.data" />
+            <judge-component v-if="loadData" :judgesList="judgesList.data"  @status="changeStatus"/>
           </div>
   
         </div>
@@ -231,9 +236,7 @@
         if (this.validateInputSearch() === false) { // !! = true
           this.params.search = null;
         }
-         console.log('getJudgesList-------PARAMS', this.params);
         if (localStorage.getItem('token')) {
-          console.log('have token')
           axios
             .get('/api/v1/judges/list', {
               headers: {
@@ -249,6 +252,9 @@
               console.log('getJudges Response', this.judgesList);
             })
             .catch(error => {
+               if (error.response.status === 401) {
+                  this.$router.push('/login');
+              }
               console.log('Каже що не авторизований пффф та Канеха');
             });
         } else {
@@ -283,6 +289,20 @@
         this.loadData = false;
         window.scrollTo(0, 0);
         this.getJudgesList(); // онуляємо всі фільтри і визиваємо функцію
+      },
+      changeStatus: function(data){
+        this.judgesList.data.forEach(element => {
+           console.log(element.id );
+              console.log(data.id);
+            if (element.id === data.id){
+             
+              
+              
+              element.status = data.status.set_status;
+              element.due_date_status = data.status.due_date;
+            }          
+        });
+        console.log('status data', this.judgesList); 
       }
     },
     components: {

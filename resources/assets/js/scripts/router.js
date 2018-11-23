@@ -7,6 +7,8 @@ import HomeComponent from '../components/main/HomeComponent.vue';
 import Login from '../components/auth/Login.vue';
 import Registration from '../components/auth/Registration.vue';
 import JudgesList from '../components/rating/judges/JudgesList.vue';
+import JudgeProfile from '../components/rating/judges/JudgeProfile.vue';
+
 import CourtsList from '../components/rating/courts/CourtsList.vue';
 import CourtProfile from '../components/rating/courts/CourtProfile.vue';
 import UserProfile from '../components/user/UserProfile.vue';
@@ -36,20 +38,24 @@ export default new Router({
             name: 'user-profile'
         },
         {
-            path: '/judges-list',
+            path: '/judges',
             component: JudgesList,
             name: 'judges-list'
         },
         {
-            path: '/courts-list',
+            path: '/judges/:id',
+            component: JudgeProfile,
+            name: 'judge-profile'
+        },
+        {
+            path: '/courts',
             component: CourtsList,
             name: 'courts-list',
-            child: {
-                path: '/court-profile',
-                component: CourtProfile,
-                name: 'court-profile'
-            },
-            
+        },
+        {
+            path: '/courts/:id',
+            component: CourtProfile,
+            name: 'court-profile'
         },
     ]
 });
