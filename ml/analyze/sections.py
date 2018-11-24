@@ -104,6 +104,8 @@ class Civil(Section):
         all_application = self._get_all_applications()
         on_time = 0
         not_on_time = 0
+        self.data_dict['cases_on_time'] = 0
+        self.data_dict['cases_not_on_time'] = 0
         for application in all_application:
             app_documents = self._get_documents(
                 application['cause_num']
@@ -111,10 +113,12 @@ class Civil(Section):
             for document in app_documents:
                 date_dict = {}
                 doc_text = document['doc_text']
-                category = guess_category(
-                    text=doc_text,
-                    anticipated_category=self.anticipated_category
-                )
+                # category = guess_category(
+                #     text=doc_text,
+                #     anticipated_category=self.anticipated_category
+                # )
+                import random
+                category = [8,11][random.randrange(2)]
                 if category == 8:
                     date_dict['start_adj_date'] = document['adjudication_date']
                 if category == 11:
@@ -122,11 +126,9 @@ class Civil(Section):
                     if 'start_adj_date' in date_dict:
                         interval = date_dict['end_adj_date'] - date_dict['start_adj_date']
                         if interval.days <= 45:
-                            on_time += 1
+                            self.data_dict['cases_on_time'] += 1
                         else:
-                            not_on_time += 1
-
-        self.judge.write_cases_time_statistic(self.judge_results_table, on_time, not_on_time)
+                            self.data_dict['cases_not_on_time'] += 1
 
     def count(self):
         all_applications = self._get_all_applications()

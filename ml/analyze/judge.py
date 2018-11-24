@@ -23,9 +23,3 @@ class Judge:
     def _count_region(self):
         # get the region from court_code
         return self.court_code[:len(self.court_code)-2]
-
-    def write_cases_time_statistic(self, judge_table, cases_on_time, cases_not_on_time):
-        sql_query = f"INSERT INTO {judge_table} (cases_on_time, cases_not_on_time) " \
-                    f"VALUES (%s, %s,)"
-        toecyd = DB(db_name=TOECYD)
-        toecyd.write(sql_query, [cases_on_time, cases_not_on_time])
