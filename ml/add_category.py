@@ -1,7 +1,5 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-# coding=utf8
-import json
 import pymysql.cursors
 import os
 import pickle
@@ -9,33 +7,35 @@ import nltk
 import sys
 import re
 from lib.validation import Validator
-
+from lib.config import *
 from nltk.tokenize import word_tokenize
 
 # nltk.download('punkt')
 # nltk.download('averaged_perceptron_tagger')
 
-config = json.loads(open('config.json', 'r').read())
-
 
 def get_connection():
-    connection = pymysql.connect(host=config['db_datasets']['host'],
-                                 user=config['db_datasets']['user'],
-                                 password=config['db_datasets']['pass'],
-                                 db=config['db_datasets']['dbname'],
-                                 charset=config['db_datasets']['charset'],
+    connection = pymysql.connect(host=DB_DATASETS['host'],
+                                 user=DB_DATASETS['user'],
+                                 password=DB_DATASETS['pass'],
+                                 db=DB_DATASETS['dbname'],
+                                 charset=DB_DATASETS['charset'],
                                  cursorclass=pymysql.cursors.DictCursor)
 
     return connection
 
 
 def getQuery(category):
-    if category == 25 or category == 26:
-        query = "SELECT `doc_id`, `doc_text` FROM `src_documents` WHERE `justice_kind`=5 AND `instance_code`=2 AND `doc_id` NOT IN (SELECT `doc_id` FROM `ml_datasets` WHERE `category` IN (25, 26, 27))"  # адмінправопорушення (апеляція)
-    elif category == 28 or category == 29:
-        query = "SELECT `doc_id`, `doc_text` FROM `src_documents` WHERE `justice_kind`=1 AND `judgment_code`=5 AND  `instance_code`=2 AND `doc_id` NOT IN (SELECT `doc_id` FROM `ml_datasets` WHERE `category` IN (28, 29, 30))"  # цивільне (апеляція)
-    elif category == 31 or category == 32:
-        query = "SELECT `doc_id`, `doc_text` FROM `src_documents` WHERE `justice_kind`=2 AND `judgment_code`=5 AND `instance_code`=2 AND `doc_id` NOT IN (SELECT `doc_id` FROM `ml_datasets` WHERE `category` IN (31, 32, 33))"  # кримінальне (апеляція)
+    if category == 5 or category == 6 or category == 7:
+        query = "SELECT `doc_id`, `doc_text` FROM `src_documents` WHERE `justice_kind`=5 AND `judgment_code`=2 AND `instance_code`=3 AND `doc_id` NOT IN (SELECT `doc_id` FROM `ml_datasets` WHERE `category` IN (5, 6, 7))"  # адмінправопорушення 2
+    elif category > 7 and category < 13:
+        query = "SELECT `doc_id`, `doc_text` FROM `src_documents` WHERE `justice_kind`=1 AND `judgment_code`=5 AND  `instance_code`=3 AND `doc_id` NOT IN (SELECT `doc_id` FROM `ml_datasets` WHERE `category` IN (8, 9, 10, 11, 12))"  # цивільне 1
+    elif category == 13 or category == 14 or category == 15:
+        query = "SELECT `doc_id`, `doc_text` FROM `src_documents` WHERE `justice_kind`=1 AND `judgment_code`=3 AND `instance_code`=3 AND `doc_id` NOT IN (SELECT `doc_id` FROM `ml_datasets` WHERE `category` IN (13, 14, 15, 16))"  # цивільне 2
+    elif category > 16 and category < 22:
+        query = "SELECT `doc_id`, `doc_text` FROM `src_documents` WHERE `justice_kind`=2 AND `judgment_code`=5 AND `instance_code`=3 AND `doc_id` NOT IN (SELECT `doc_id` FROM `ml_datasets` WHERE `category` IN (17, 18, 19, 20, 21))"  # кримінальне 1
+    elif category == 22 or category == 23:
+        query = "SELECT `doc_id`, `doc_text` FROM `src_documents` WHERE `justice_kind`=2 AND `judgment_code`=1 AND `instance_code`=3 AND `doc_id` NOT IN (SELECT `doc_id` FROM `ml_datasets` WHERE `category` IN (22, 23, 24))"  # кримінальне 2
     else:
         print('category not implemented')
         sys.exit()
@@ -139,8 +139,8 @@ if __name__ == '__main__':
     for title in clean_data:
         category = sentiment(title['doc_text'])
         if (not category == 0) and category == 29:
-            # pass
-            putDocument(connection, title['doc_id'], category)
+            pass
+            #putDocument(connection, title['doc_id'], category)
     connection.commit()
     connection.close()
     # print(str(title['doc_id'])+'   category = ' + str(category))

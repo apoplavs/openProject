@@ -4,10 +4,9 @@ import os
 import pickle
 import nltk
 import sys
+import pymysql.cursors
 
-from lib.db import get_edrsr_connection
-from lib.config import PICKLES_PATH
-
+from lib.config import *
 from lib.validation import Validator
 
 nltk.download('punkt')
@@ -15,10 +14,15 @@ nltk.download('averaged_perceptron_tagger')
 
 
 def get_data(categories):
-    connection = get_edrsr_connection()
+    connection = pymysql.connect(host=DB_DATASETS['host'],
+                                 user=DB_DATASETS['user'],
+                                 password=DB_DATASETS['pass'],
+                                 db=DB_DATASETS['dbname'],
+                                 charset=DB_DATASETS['charset'],
+                                 cursorclass=pymysql.cursors.DictCursor)
 
     with connection.cursor() as cursor:
-        sql = "SELECT `category`, `doc_text` FROM `ml_datasets` WHERE category IN {}".format(
+        sql = "SELECT `ml_datasets`.`category`, `src_documents`.`doc_text` FROM `ml_datasets` INNER  JOIN `src_documents` ON `ml_datasets`.`doc_id`=`src_documents`.`doc_id` WHERE category IN {}".format(
             str(tuple(categories))
         )
         cursor.execute(sql)
