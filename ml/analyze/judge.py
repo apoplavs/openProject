@@ -23,9 +23,3 @@ class Judge:
     def _count_region(self):
         # get the region from court_code
         return self.court_code[:len(self.court_code)-2]
-
-    def decrease_cases_on_time(self, section_type):
-        pass
-
-    def increase_cases_on_time(self, section_type):
-        pass

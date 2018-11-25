@@ -31,21 +31,21 @@ if __name__ == '__main__':
 
         civil = Civil(judge=judge)
         civil.analyze_in_time()
-        civil.count()
+        # civil.count()
         civil.save()
 
-        criminal = Criminal(judge=judge)
-        criminal.count()
-        criminal.save()
-
-        comm = Commercial(judge=judge)
-        comm.count()
-        comm.save()
-
-        admin = Admin(judge=judge)
-        admin.count()
-        admin.save()
-
-        admin_offence = AdminOffence(judge=judge)
-        admin_offence.count()
-        admin_offence.save()
+        # criminal = Criminal(judge=judge)
+        # criminal.count()
+        # criminal.save()
+        #
+        # comm = Commercial(judge=judge)
+        # comm.count()
+        # comm.save()
+        #
+        # admin = Admin(judge=judge)
+        # admin.count()
+        # admin.save()
+        #
+        # admin_offence = AdminOffence(judge=judge)
+        # admin_offence.count()
+        # admin_offence.save()
