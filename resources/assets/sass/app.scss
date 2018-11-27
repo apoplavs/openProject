@@ -12,7 +12,8 @@ body {
   font-family: 'Roboto', sans-serif;
   font-weight: 400;
   font-style: normal;
-  color: $color-1;  
+  color: $color-1;
+  background-image: linear-gradient(to bottom, #3081cf 0%, #82db85 100%);
 }
 
 button::-moz-focus-inner,

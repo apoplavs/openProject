@@ -1,6 +1,7 @@
 <template>
-<div class="container">
+<div class="">
     <nav class="navbar  sticky-top navbar-expand-lg navbar-light bg-light">
+        <div class="container">
         <a class="navbar-brand" href="#"><img src="../../../images/logo.png" width="40" alt="logo" />ТОЕсуд</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#NavbarMenu" aria-controls="NavbarMenu" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -60,6 +61,7 @@
                 </div>
             </ul>
         </div>
+        </div>
     </nav>
     </div>
 </template>
@@ -71,12 +73,17 @@
             return {
                 name: localStorage.getItem('name'),
                 email: localStorage.getItem('email'),
-                isAuth: localStorage.getItem('token'),
+                // isAuth: localStorage.getItem('token'),
+            }
+        },
+        computed: {
+            isAuth() {
+                return localStorage.getItem('token');
             }
         },
         watch: {
             userData: function() {
-                this.isAuth = localStorage.getItem('token');
+                // this.isAuth = localStorage.getItem('token');
                 this.name = localStorage.getItem('name');
                 this.email = localStorage.getItem('email')
     

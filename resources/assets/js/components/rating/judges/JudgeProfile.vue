@@ -6,11 +6,11 @@
                 <div class="card">
                     <div class="card-body d-flex">
                         <div class="photo w-25">
-                            <img :src="judge.data.photo" alt="" class="w-100">
+                            <img :src="judge.data.photo" alt="avatar" class="w-100">
                         </div>
                         <div class="w-75 px-3">
                             <div class="main-info pb-2">
-                                <h3>{{judge.data.name + ' ' + judge.data.surname + ' ' + judge.data.patronymic}}</h3>
+                                <h3>{{ judge.data.name + ' ' + judge.data.surname + ' ' + judge.data.patronymic }}</h3>
                                 <div class="d-flex">
                                     <i class="fa fa-university" aria-hidden="true"></i>
                                     <h5 class="court-name"> {{ judge.data.court_name }}</h5>
@@ -63,9 +63,9 @@
                                     </div>
                                 </div>
                                 <div class="rating">
-                                    <span class="like"><i class="fas fa-thumbs-up"></i> {{ judge.data.is_liked }}</span>
+                                    <span class="like" @click="changeLikes"><i class="fas fa-thumbs-up"></i> {{ judge.data.likes }}</span>
                                     <span class="line-chart"><i class="fa fa-line-chart" aria-hidden="true"> {{ judge.data.rating + '%' }}</i></span>
-                                    <span class="dislike"><i class="fas fa-thumbs-down"></i> {{ judge.data.is_liked }}</span>
+                                    <span class="dislike" @click="changeUnlikes"><i class="fas fa-thumbs-down"></i> {{ judge.data.unlikes }}</span>
                                 </div>
                             </div>
                         </div>
@@ -78,14 +78,14 @@
                         <span>Найближчі судові засідання</span>
                         <input type="search" class="form-control" placeholder="Пошук..." v-model.trim="search">
                     </div>
-                    <div class="card-body">
+                    <div class="card-body court-sessions-container">
                         <div class="court-sessions">
-                            <div v-if="judge.court_sessions.length > 0" class="container-component">
+                            <div v-if="filterSessions.length > 0" class="container-component">
                                 <div class="row header text-muted">
                                     <div class="col-1 pl-0">Дата розгляду</div>
                                     <div class="col-1">Номер справи</div>
-                                    <div class="col-3">Судді</div>
-                                    <div class="col-1">Форма</div>
+                                    <div class="col-2">Судді</div>
+                                    <div class="col-2">Форма</div>
                                     <div class="col-3">Сторони у справі</div>
                                     <div class="col-2">Суть справи</div>
                                     <div class="col-1 pr-0"></div>
@@ -95,8 +95,8 @@
                                         <div>{{ session.date }}</div>
                                     </div>
                                     <div class="col-1 ">{{ session.number }}</div>
-                                    <div class="col-3">{{ session.judges }}</div>
-                                    <div class="col-1">{{ session.forma }}</div>
+                                    <div class="col-2">{{ session.judges }}</div>
+                                    <div class="col-2">{{ session.forma }}</div>
                                     <div class="col-3">{{ session.involved }}</div>
                                     <div class="col-2">{{ session.description }}</div>
                                     <div class="col-1 pr-0 text-center">
@@ -105,7 +105,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div v-else class="container-component"> <h5>Нічого не знайдено...</h5></div>
+                            <div v-else class="container-component"> <p>Нічого не знайдено...</p></div>
                         </div>
                     </div>
                 </div>
@@ -226,6 +226,7 @@
     import GChart from "vue-google-charts";
     import DoughnutChart from 'vue-doughnut-chart'
     import _ from 'lodash';
+    import http_auth from '../../../scripts/http-service.js'
     
     export default {
         name: "JudgeProfile",
@@ -293,26 +294,28 @@
         beforeMount() {
             if (!this.isAuth) {
                 this.$router.push("/login");
+            } else {
+                axios
+                    .get(`/api/v1/judges/${this.$route.params.id}`, {
+                        headers: {
+                            "Content-Type": "application/json",
+                            "X-Requested-With": "XMLHttpRequest",
+                            "Authorization": localStorage.getItem('token')
+                        },
+                    })
+                    .then(response => {
+                        this.judge = response.data;
+                        this.loadData = true;
+                        console.log('judgeProfile Response', this.judge);
+                    })
+                    .catch(error => {
+                        if (error.response.status === 401) {
+                            this.$router.push('/login');
+                        }
+                        console.log('error');
+                    });
+
             }
-            axios
-                .get(`/api/v1/judges/${this.$route.params.id}`, {
-                    headers: {
-                        "Content-Type": "application/json",
-                        "X-Requested-With": "XMLHttpRequest",
-                        "Authorization": localStorage.getItem('token')
-                    },
-                })
-                .then(response => {
-                    this.judge = response.data;
-                    this.loadData = true;
-                    console.log('judgeProfile Response', this.judge);
-                })
-                .catch(error => {
-                    if (error.response.status === 401) {
-                        this.$router.push('/login');
-                    }
-                    console.log('error');
-                });
     
         },
         methods: {
@@ -358,6 +361,104 @@
                             }
                             console.log("Bookmark", error.response);
                         });
+                }
+            },
+            changeLikes() {
+                if (!this.isAuth) {
+                    this.$router.push("/login");
+                }
+                if (this.judge.data.is_liked) {
+                    // dell like
+                    axios({
+                        method: "delete",
+                        url: `/api/v1/judges/${this.$route.params.id}/like`,
+                        headers: {
+                            "Content-Type": "application/json",
+                            "X-Requested-With": "XMLHttpRequest",
+                            Authorization: localStorage.getItem("token")
+                        }
+                    })
+                    .then(response => {
+                        this.judge.data.likes -= 1;
+                        this.judge.data.is_liked = 0;
+                    })
+                    .catch(error => {
+                        if (error.response.status === 401) {
+                            this.$router.push("/login");
+                        }
+                        console.log("set Likes", error);
+                    });
+                } else {
+                    // set like
+                   axios({
+                        method: "put",
+                        url: `/api/v1/judges/${this.$route.params.id}/like`,
+                        headers: {
+                            "Content-Type": "application/json",
+                            "X-Requested-With": "XMLHttpRequest",
+                            Authorization: localStorage.getItem("token")
+                        }
+                    })
+                    .then(response => {
+                         this.judge.data.likes += 1;
+                        this.judge.data.is_liked = 1;
+                    })
+                    .catch(error => {
+                        if (error.response.status === 401) {
+                            this.$router.push("/login");
+                        }
+                        console.log("set Likes", error);
+                    });
+                    
+                }
+
+            },
+            changeUnlikes() {
+                if (!this.isAuth) {
+                    this.$router.push("/login");
+                }
+                if (this.judge.data.is_unliked) {
+                    // dell unlike
+                    axios({
+                        method: "delete",
+                        url: `/api/v1/judges/${this.$route.params.id}/unlike`,
+                        headers: {
+                            "Content-Type": "application/json",
+                            "X-Requested-With": "XMLHttpRequest",
+                            Authorization: localStorage.getItem("token")
+                        }
+                    })
+                    .then(response => {
+                        this.judge.data.unlikes -= 1;
+                        this.judge.data.is_unliked = 0;
+                    })
+                    .catch(error => {
+                        if (error.response.status === 401) {
+                            this.$router.push("/login");
+                        }
+                        console.log("set Likes", error);
+                    });
+                } else {
+                    // set unlike
+                   axios({
+                        method: "put",
+                        url: `/api/v1/judges/${this.$route.params.id}/unlike`,
+                        headers: {
+                            "Content-Type": "application/json",
+                            "X-Requested-With": "XMLHttpRequest",
+                            Authorization: localStorage.getItem("token")
+                        }
+                    })
+                    .then(response => {
+                        this.judge.data.unlikes += 1;
+                        this.judge.data.is_unliked = 1;
+                    })
+                    .catch(error => {
+                        if (error.response.status === 401) {
+                            this.$router.push("/login");
+                        }
+                        console.log("set Likes", error);
+                    });         
                 }
             }
         },
@@ -413,26 +514,39 @@
                 }
             }
         }
-        .court-sessions {
-            width: 100%;
-            height: auto;
-            font-size: 0.8rem;
-            .fa-star {
-                color: $main-color;
-            }
-            .container-component {
-                background-color: #ffffff;
-            }
-            .row {
-                margin: 0;
-                padding: 15px 0;
-                &:not(:last-child) {
-                    border-bottom: 1px solid lightgrey;
+        .court-sessions-container{
+            max-height: 600px;
+            overflow-y: auto;
+
+            .court-sessions {
+                width: 100%;
+                height: auto;
+                font-size: 0.7rem;
+                .fa-star {
+                    color: $main-color;
+                }
+                .container-component {
+                    background-color: #ffffff;
+                }
+                .header {
+                    align-items: center;
+                    font-weight: 700;
+                }
+                .row {
+                    margin: 0;
+                    padding: 15px 0;
+                    &:not(:last-child) {
+                        border-bottom: 1px solid lightgrey;
+                    }
+                    div[class^="col"] {
+                        padding-right: 0;
+                    }
                 }
             }
+          
         }
-        input[type="search"] {
-            width: 200px;
-        }
+          input[type="search"] {
+                width: 200px;
+            }
     }
 </style>
