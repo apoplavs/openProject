@@ -6,28 +6,28 @@
                 <div class="card">
                     <div class="card-body d-flex">
                         <div class="photo w-25">
-                            <img :src="judge.data.photo" alt="" class="w-100 h-100">
+                            <img :src="judge.data.photo" alt="" class="w-100">
                         </div>
                         <div class="w-75 px-3">
                             <div class="main-info pb-2">
-                                <h2>{{judge.data.name + ' ' + judge.data.surname + ' ' + judge.data.patronymic}}</h2>
+                                <h3>{{judge.data.name + ' ' + judge.data.surname + ' ' + judge.data.patronymic}}</h3>
                                 <div class="d-flex">
                                     <i class="fa fa-university" aria-hidden="true"></i>
-                                    <h3 class="court-name"> {{ judge.data.court_name }}</h3>
+                                    <h5 class="court-name"> {{ judge.data.court_name }}</h5>
                                 </div>
-                                <div class="detail-info" v-if="judge.data.court_address">
+                                <div class="detail-info mt-2" v-if="judge.data.court_address">
                                     <i class="fas fa-map-marker-alt"></i>
                                     <span>{{ judge.data.court_address }}</span>
                                 </div>
-                                <div class="detail-info" v-if="judge.data.court_phone">
+                                <div class="detail-info mt-1" v-if="judge.data.court_phone">
                                     <i class="fas fa-phone"></i>
                                     <span>{{ judge.data.court_phone }}</span>
                                 </div>
-                                <div class="detail-info" v-if="judge.data.court_email">
+                                <div class="detail-info mt-1" v-if="judge.data.court_email">
                                     <i class="far fa-envelope"></i>
                                     <span>{{ judge.data.court_email }}</span>
                                 </div>
-                                <div class="detail-info" v-if="judge.data.court_site">
+                                <div class="detail-info mt-1" v-if="judge.data.court_site">
                                     <i class="fas fa-link"></i>
                                     <a target="_blank" :href="judge.data.court_site">{{ judge.data.court_site }}</a>
                                 </div>
@@ -76,7 +76,7 @@
                 <div class="card mt-2">
                     <div class="card-header d-flex justify-content-between">
                         <span>Найближчі судові засідання</span>
-                        <input type="search" class="form-control" placeholder="Пошук..." v-model.trim="params.search" @keyup="liveSearch()">
+                        <input type="search" class="form-control" placeholder="Пошук..." v-model.trim="search">
                     </div>
                     <div class="card-body">
                         <div class="court-sessions">
@@ -84,22 +84,22 @@
                                 <div class="row header text-muted">
                                     <div class="col-1 pl-0">Дата розгляду</div>
                                     <div class="col-1">Номер справи</div>
-                                    <div class="col-2">Судді</div>
+                                    <div class="col-3">Судді</div>
                                     <div class="col-1">Форма</div>
-                                    <div class="col-4">Сторони у справі</div>
+                                    <div class="col-3">Сторони у справі</div>
                                     <div class="col-2">Суть справи</div>
                                     <div class="col-1 pr-0"></div>
                                 </div>
-                                <div class="row" v-for="(session, i_el) in judge.court_sessions" :key="i_el">
+                                <div class="row" v-for="(session, i_el) in filterSessions" :key="i_el">
                                     <div class="col-1 pl-0">
-                                        <div>{{ session.data }}</div>
+                                        <div>{{ session.date }}</div>
                                     </div>
-                                    <div class="col-1">{{ session.number }}</div>
-                                    <div class="col-2">{{ session.judges }}</div>
+                                    <div class="col-1 ">{{ session.number }}</div>
+                                    <div class="col-3">{{ session.judges }}</div>
                                     <div class="col-1">{{ session.forma }}</div>
-                                    <div class="col-4">{{ session.involved }}</div>
+                                    <div class="col-3">{{ session.involved }}</div>
                                     <div class="col-2">{{ session.description }}</div>
-                                    <div class="col-1 pr-0">
+                                    <div class="col-1 pr-0 text-center">
                                         <i v-if="session.is_bookmark" class="fas fa-star"></i>
                                         <i v-else class="far fa-star"></i>
                                     </div>
@@ -234,10 +234,9 @@
                 isAuth: localStorage.getItem("token"),
                 loadData: false,
                 judge: {},
+                search: '',
                 params: {
                     status: 1,
-                    is_bookmark: 1,
-                    search: ""
                 },
                 // Array will be automatically processed with visualization.arrayToDataTable function
                 pieChartData: [
@@ -279,16 +278,18 @@
     
             };
         },
-        // filter: {
-        //     liveSearch: (array, str) => {
-        //         return _.filter(array, (row) =>{                   
-        //             return Object.keys(row).forEach((key) => {
-        //                 return row[key].search('(' + str + ')','i') === -1 ? false : true;
-        //             })
-
-        //         })
-        //     }
-        // },
+        computed: {
+            filterSessions(){
+                //  живий пошук = фільтер
+                    return  _.filter(this.judge.court_sessions, (el) => {                                    
+                      let arr = _.filter( Object.keys(el), (key) => {  
+                        let regEx = new RegExp(`(${this.search})`, 'i');                 
+                           return (regEx.test(el[key]) || this.search.length == 0) 
+                    })
+                    return (arr.length > 0) ? true : false                  
+                })
+            }
+        },
         beforeMount() {
             if (!this.isAuth) {
                 this.$router.push("/login");
@@ -376,7 +377,7 @@
             border-bottom: 1px solid rgba(0, 0, 0, 0.1);
             .fa-university {
                 color: $primary;
-                font-size: 1.7rem;
+                font-size: 1.3rem;
                 margin-right: 5px;
             }
             .court-name {
@@ -384,10 +385,11 @@
                 font-weight: 300;
             }
             .detail-info {
-                @include alignElement($justifyContent: start);
+                @include alignElement($justifyContent: start, $alignItems: start);
                 color: $text-muted;
                 i[class^="fa"] {
-                    width: 25px;
+                    margin-right: 10px;
+                    padding-top: 5px;
                 }
             }
         }
@@ -414,12 +416,11 @@
         .court-sessions {
             width: 100%;
             height: auto;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             .fa-star {
                 color: $main-color;
             }
             .container-component {
-                padding: 20px;
                 background-color: #ffffff;
             }
             .row {
