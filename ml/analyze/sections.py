@@ -54,7 +54,7 @@ class Section:
         appeals = edrsr.read(sql_query)
         return appeals
 
-    def _get_documents(self, cause_num)  -> list:
+    def _get_appeal_documents(self, cause_num) -> list:
         """
         All documents related to the appeal
         :param cause_num
@@ -66,6 +66,25 @@ class Section:
 
         sql_query = (f"SELECT * FROM reg{self.judge.region} "
                      f"WHERE court_code={self.judge.region + '90'} "
+                     f"AND cause_num='{cause_num}' "
+                     f"AND judgment_code IN ({j_codes}) "
+                     f"ORDER BY adjudication_date DESC")
+        edrsr = DB(db_name=EDRSR)
+        documents = edrsr.read(sql_query)
+        return documents
+
+    def _get_application_documents(self, cause_num) -> list:
+        """
+        All documents related to the applications
+        :param cause_num
+        :return:
+        """
+        j_codes = ', '.join(
+            str(code) for code in self.judgement_codes
+        )
+
+        sql_query = (f"SELECT * FROM reg{self.judge.region} "
+                     f"WHERE court_code={self.judge.court_code} "
                      f"AND cause_num='{cause_num}' "
                      f"AND judgment_code IN ({j_codes}) "
                      f"ORDER BY adjudication_date DESC")
@@ -107,11 +126,11 @@ class Civil(Section):
         self.data_dict['cases_on_time'] = 0
         self.data_dict['cases_not_on_time'] = 0
         for application in all_application:
-            app_documents = self._get_documents(
+            app_documents = self._get_application_documents(
                 application['cause_num']
             )
+            date_dict = {}
             for document in app_documents:
-                date_dict = {}
                 doc_text = document['doc_text']
                 # category = guess_category(
                 #     text=doc_text,
@@ -124,7 +143,7 @@ class Civil(Section):
                 if category == 11:
                     date_dict['end_adj_date'] = document['adjudication_date']
                     if 'start_adj_date' in date_dict:
-                        interval = date_dict['end_adj_date'] - date_dict['start_adj_date']
+                        interval = date_dict['start_adj_date'] - date_dict['end_adj_date']
                         if interval.days <= 45:
                             self.data_dict['cases_on_time'] += 1
                         else:
@@ -148,7 +167,7 @@ class Civil(Section):
 
         for appeal in civil_in_appeal:
             # отримуємо всі документи апеляції по справі
-            documents = self._get_documents(appeal['cause_num'])
+            documents = self._get_appeal_documents(appeal['cause_num'])
             for document in documents:
                 # якщо апеляція винесла рішення - точно не вистояло, переходимо до наступної справи
                 if document['judgment_code'] == 3 :
@@ -194,7 +213,7 @@ class Criminal(Section):
             return
 
         for appeal in civil_in_appeal:
-            documents = self._get_documents(appeal['cause_num'])
+            documents = self._get_appeal_documents(appeal['cause_num'])
             for document in documents:
                 # якщо апеляція винесла вирок - точно не вистояло, переходимо до наступної справи
                 if document['judgment_code'] == 1:
@@ -268,7 +287,7 @@ class AdminOffence(Section):
             return
 
         for appeal in civil_in_appeal:
-            documents = self._get_documents(appeal['cause_num'])
+            documents = self._get_appeal_documents(appeal['cause_num'])
             for document in documents:
                 # якщо апеляція винесла ухвалу - точно вистояло, переходимо до наступної справи
                 if document['judgment_code'] == 5:
