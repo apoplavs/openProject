@@ -1,5 +1,5 @@
 <template>
-    <div class="judge-profile my-5">
+    <div class="judge-profile content-wrapper">
         <spinner v-if="!loadData" />
         <div v-if="loadData" class="container">
             <div class="judge-info">
@@ -474,6 +474,7 @@
     @import "../../../../sass/_variables.scss";
     @import "../../../../sass/_mixins.scss";
     .judge-profile {
+        padding-bottom: 50px;
         .main-info {
             border-bottom: 1px solid rgba(0, 0, 0, 0.1);
             .fa-university {

@@ -1,6 +1,6 @@
 <template>
-  <div class="container mt-5">
-    <div class="row min-width">
+  <div class="container content-wrapper">
+    <div class="row max-width">
       <div class="col-3 filters">
         <div class="card">
           <div class="card-header">

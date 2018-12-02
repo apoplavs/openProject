@@ -8,12 +8,12 @@
 
 body {
   background-color: $body-bg;
-  height: 100vh;
+  // height: 100vh;
   font-family: 'Roboto', sans-serif;
   font-weight: 400;
   font-style: normal;
   color: $color-1;
-  background-image: linear-gradient(to bottom, #3081cf 0%, #82db85 100%);
+  background-image: linear-gradient(to bottom, #3081cf, #82db85);
 }
 
 button::-moz-focus-inner,
@@ -105,5 +105,14 @@ i.fa-edit{
 .fa-edit {
     color: $color-5;
 }
-      
+ 
+// -------------
+.max-width {
+  min-width: 1140px !important;
+}
+.content-wrapper {
+  height: 100vh;
+  overflow-y: auto;
+  padding-top: 8rem;
+}
   

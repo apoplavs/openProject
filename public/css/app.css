@@ -1,12 +1,11 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&subset=cyrillic);body {
   background-color: #fafafa;
-  height: 100vh;
   font-family: 'Roboto', sans-serif;
   font-weight: 400;
   font-style: normal;
   color: #112F41;
   background-image: -webkit-gradient(linear, left top, left bottom, from(#3081cf), to(#82db85));
-  background-image: linear-gradient(to bottom, #3081cf 0%, #82db85 100%);
+  background-image: linear-gradient(to bottom, #3081cf, #82db85);
 }
 
 button::-moz-focus-inner,
@@ -118,5 +117,15 @@ i.fa-edit {
 
 .fa-edit {
   color: #2C5F9C;
+}
+
+.max-width {
+  min-width: 1140px !important;
+}
+
+.content-wrapper {
+  height: 100vh;
+  overflow-y: auto;
+  padding-top: 8rem;
 }
 

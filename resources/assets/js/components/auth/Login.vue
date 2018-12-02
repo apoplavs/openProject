@@ -1,5 +1,6 @@
 <template>
-    <div class="container mt-5 d-flex justify-content-center">
+<div class="content-wrapper">
+    <div class="container d-flex justify-content-center ">
         <!--<vue-toasted ref="toasted"></vue-toasted>-->
         <div class="card">
             <div class="card-header text-center">
@@ -58,6 +59,7 @@
                 </div>
             </div>
         </div>    
+    </div>
     </div>
 </template>
 

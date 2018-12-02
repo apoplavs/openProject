@@ -1,6 +1,6 @@
 <template>
 <div class="">
-    <nav class="navbar  sticky-top navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
         <a class="navbar-brand" href="#"><img src="../../../images/logo.png" width="40" alt="logo" />ТОЕсуд</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#NavbarMenu" aria-controls="NavbarMenu" aria-expanded="false" aria-label="Toggle navigation">
@@ -121,11 +121,14 @@
 
 <style scoped lang="scss">
   @import "../../../sass/_variables.scss";
-
-    // .navbar-light {
-    //     box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.2), 0 4px 15px 0 rgba(0, 0, 0, 0.19);
-    // }
-    
+    .navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+    }
+        
     ul li a:hover {
         color: #2b989b !important;
         cursor: pointer;
