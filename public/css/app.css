@@ -5,6 +5,8 @@
   font-weight: 400;
   font-style: normal;
   color: #112F41;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#3081cf), to(#82db85));
+  background-image: linear-gradient(to bottom, #3081cf 0%, #82db85 100%);
 }
 
 button::-moz-focus-inner,

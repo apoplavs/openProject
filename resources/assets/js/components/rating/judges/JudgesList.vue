@@ -1,4 +1,4 @@
-зрз<template>
+<template>
   <div class="container mt-5">
     <div class="row min-width">
       <div class="col-3 filters">
