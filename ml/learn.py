@@ -7,6 +7,7 @@ import sys
 import pymysql.cursors
 
 from lib.config import *
+from nltk.tokenize import word_tokenize
 from lib.validation import Validator
 
 nltk.download('punkt')
@@ -22,7 +23,7 @@ def get_data(categories):
                                  cursorclass=pymysql.cursors.DictCursor)
 
     with connection.cursor() as cursor:
-        sql = "SELECT `ml_datasets`.`category`, `src_documents`.`doc_text` FROM `ml_datasets` INNER  JOIN `src_documents` ON `ml_datasets`.`doc_id`=`src_documents`.`doc_id` WHERE category IN {}".format(
+        sql = "SELECT `ml_datasets`.`category`, `ml_datasets`.`doc_text` FROM `ml_datasets` WHERE `ml_datasets`.`category` IN {}".format(
             str(tuple(categories))
         )
         cursor.execute(sql)
@@ -46,7 +47,7 @@ def train(clean_data, flag = False):
         pos = nltk.pos_tag(words)
         for w in words:
             # w = ( "Word", 'RR')
-            # all training sentences
+            # > 8 оскільки це словосполучення
             if len(w) > 8 :
                 all_words.append(w)
 
@@ -54,7 +55,7 @@ def train(clean_data, flag = False):
     all_words = nltk.FreqDist(all_words)
     word_features = [w for (w, c) in all_words.most_common(500)]
     if flag == '-w':
-        print(all_words.most_common(100))
+        print(all_words.most_common(300))
         sys.exit()
 
     def find_features(document):
@@ -71,9 +72,9 @@ def train(clean_data, flag = False):
         training_set = featuresets[:int(len(featuresets) / 2)]
         testing_set = featuresets[int(len(featuresets) / 2):]
 
-        classifier = nltk.NaiveBayesClassifier.train(training_set)
+        classifier = nltk.NaiveBayesClassifier.train(featuresets)
 
-        print("Original Naive Bayes Algo accuracy percent:", (nltk.classify.accuracy(classifier, testing_set)) * 100)
+        print("Original Naive Bayes Algo accuracy percent:", (nltk.classify.accuracy(classifier, featuresets)) * 100)
         sys.exit()
 
     classifier = nltk.NaiveBayesClassifier.train(featuresets)
@@ -120,7 +121,7 @@ if __name__ == '__main__':
     if any(not c.isdigit() for c in input_categories):
         print('All arguments should be digits')
         sys.exit()
-    elif len(input_categories) > 4 or len(input_categories) < 2:
+    elif len(input_categories) > 5 or len(input_categories) < 2:
         print('Wrong number of categories')
         sys.exit()
 
