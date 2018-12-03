@@ -129,3 +129,8 @@ i.fa-edit {
   padding-top: 8rem;
 }
 
+::-webkit-scrollbar {
+  width: 0px;
+  background-color: #ffffff;
+}
+
