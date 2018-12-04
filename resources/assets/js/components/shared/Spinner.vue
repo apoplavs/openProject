@@ -1,7 +1,6 @@
 <template>
   <div class="spinner">
-    <moon-loader :color="color" :size="size"/>
-    
+    <moon-loader :color="color" :size="size"/> 
   </div>
 </template>
 

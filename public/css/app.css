@@ -117,11 +117,8 @@ i.fa-edit {
   color: #2C5F9C;
 }
 
-.max-width {
-  min-width: 1140px !important;
-}
-
 .content-wrapper {
+  min-width: 1140px;
   height: 100vh;
   overflow-y: auto;
   padding-top: 5rem;

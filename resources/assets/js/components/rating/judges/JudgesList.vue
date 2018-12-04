@@ -1,11 +1,11 @@
 <template>
-  <div class="container content-wrapper {">
+  <div class="container content-wrapper">
     <div class="row min-width">
       <div class="col-3 filters">
         <div class="card">
           <div class="card-header">
             <div>
-               <i class="fa fa-filter" aria-hidden="true"></i> 
+              <i class="fa fa-filter" aria-hidden="true"></i> 
               <span>Фільтри</span>
             </div>
           </div>
@@ -226,7 +226,6 @@
         window.scrollTo(0, 0);
         this.$refs.pagins.currentPage = 0;
         this.params.page = 1; 
-        console.log('PARAMS ЗНАЙТИ', this.params);
         this.getJudgesList();
       },
   
@@ -292,13 +291,10 @@
       },
       changeStatus: function(data){
         this.judgesList.data.forEach(element => {
-           console.log(element.id );
-              console.log(data.id);
-            if (element.id === data.id){
-              
-              element.status = data.status.set_status;
-              element.due_date_status = data.status.due_date;
-            }          
+          if (element.id === data.id){ 
+            element.status = data.status.set_status;
+            element.due_date_status = data.status.due_date;
+          }          
         });
         console.log('status data', this.judgesList); 
       }

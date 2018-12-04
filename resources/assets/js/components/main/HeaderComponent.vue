@@ -73,7 +73,6 @@
             return {
                 name: localStorage.getItem('name'),
                 email: localStorage.getItem('email'),
-                // isAuth: localStorage.getItem('token'),
             }
         },
         computed: {
@@ -100,8 +99,6 @@
                         },
                     })
                     .then(response => {
-                        console.log(response);
-                        console.log('logout');
                         localStorage.clear();
                         this.$router.push('/login')
                     })
@@ -112,8 +109,6 @@
                         }
                         console.log(error);
                     });
-    
-    
             }
         }
     };

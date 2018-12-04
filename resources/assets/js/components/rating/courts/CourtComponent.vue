@@ -37,9 +37,11 @@
 <script>    
     export default {
         name: "CourtComponent",
+        props: {
+            courtsList: Array
+        },
         data() {
             return {
-                isAuth: localStorage.getItem("token"),
                 headers: {
                     "Content-Type": "application/json",
                     "X-Requested-With": "XMLHttpRequest",
@@ -47,7 +49,11 @@
                 }
             };
         },
-        props: ["courtsList"],
+        computed: {
+            isAuth() {
+                return localStorage.getItem("token");
+            }
+        },  
         methods: {
             changeBookmarkStatus(court) {
                 if (!this.isAuth) {
