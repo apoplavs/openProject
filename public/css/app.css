@@ -4,8 +4,6 @@
   font-weight: 400;
   font-style: normal;
   color: #112F41;
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#3081cf), to(#82db85));
-  background-image: linear-gradient(to bottom, #3081cf, #82db85);
 }
 
 button::-moz-focus-inner,
@@ -126,7 +124,8 @@ i.fa-edit {
 .content-wrapper {
   height: 100vh;
   overflow-y: auto;
-  padding-top: 8rem;
+  padding-top: 5rem;
+  padding-bottom: 5rem;
 }
 
 ::-webkit-scrollbar {

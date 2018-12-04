@@ -295,8 +295,6 @@
            console.log(element.id );
               console.log(data.id);
             if (element.id === data.id){
-             
-              
               
               element.status = data.status.set_status;
               element.due_date_status = data.status.due_date;
