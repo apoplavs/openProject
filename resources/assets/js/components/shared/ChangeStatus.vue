@@ -16,6 +16,7 @@
                         </select>
                     </div>
                 </div>
+                <pre>{{judgeStatus.due_date}}</pre>
                 <div class="form-group row mx-0 my-4">
                     <label for="status-end-date" class="col-7">Дата завершення дії статусу <br><sup class="text-muted">(якщо відома)</sup></label>
                     <div class="col-5">
@@ -69,17 +70,21 @@
             this.calendar.startDate = new Date();
             this.calendar.endDate = new Date(
                 this.calendar.startDate.getFullYear(),
-                this.calendar.startDate.getMonth() + 1,
+                this.calendar.startDate.getMonth() + 1, //end date limit 1 month
                 this.calendar.startDate.getDate()
             );
         },
          methods: {
-             formattingDate(date) {
+            formattingDate(date) {
                 if (date === '' || date === null) {
                     return '';
                 } else {
                     let arr = _.split(date, '.');
-                    return `${arr[2]}-${arr[1]}-${arr[0]}`;
+                    if (arr.length > 1) {
+                        return `${arr[2]}-${arr[1]}-${arr[0]}`;
+                    } else {
+                        return arr[0];
+                    } 
                 }
             },
             closeModal() {
@@ -100,8 +105,8 @@
                         data: this.judgeStatus
                     })
                     .then(response => {
-                        // this.judge.status = this.judgeStatus.set_status;
-                        // this.judge.due_date_status = this.judgeStatus.due_date;
+                        this.judgeData.status = this.judgeStatus.set_status;
+                        this.judgeData.due_date_status = this.judgeStatus.due_date;
                         this.$emit('closeModal');
                     })
                     .catch(error => {

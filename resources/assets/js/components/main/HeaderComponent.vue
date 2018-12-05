@@ -69,7 +69,7 @@
 <script>
     export default {
         name: "header-component",
-        data: () => {
+        data() {
             return {
                 name: localStorage.getItem('name'),
                 email: localStorage.getItem('email'),
@@ -82,10 +82,8 @@
         },
         watch: {
             userData: function() {
-                // this.isAuth = localStorage.getItem('token');
                 this.name = localStorage.getItem('name');
                 this.email = localStorage.getItem('email')
-    
             }
         },
         methods: {  

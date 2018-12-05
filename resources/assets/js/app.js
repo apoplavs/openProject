@@ -1,7 +1,6 @@
 
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-// import Datepicker from 'vuejs-datepicker';
 import axios from 'axios';
 import VeeValidate, { Validator } from 'vee-validate';
 import uk from 'vee-validate/dist/locale/uk';
@@ -18,7 +17,6 @@ Vue.use(Vuex);
 
 Validator.localize('uk', uk);
 window.axios = axios;
-
 
 new Vue({
     el: '#app',

@@ -35,9 +35,8 @@
                             <div class="status-info">
                                 <div class="status my-2">
                                     <div class="w-50 d-flex align-items-center">
-                                        
+                                        <!-- status -->
                                         <status-component :judgeData="judge.data" />
-
                                         <span><i class="fas fa-edit float-right pl-3" aria-hidden="true" @click="showModal = true"></i></span>
                                     </div>
                                     <div class="bookmark w-50">
@@ -124,7 +123,7 @@
                     </div>
                 </div>
             </div>
-            <!-- <div class="d-flex">
+            <div class="d-flex">
                 <div class="card w-50 mt-2 mr-1">
                     <div class="card-header">
                         Цивільне судочинство
@@ -132,7 +131,7 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col">
-                                <GChart type="ColumnChart" :data="columnChartData" :options="columnChartOptions" />
+                                <!-- <GChart type="ColumnChart" :data="columnChartData" :options="columnChartOptions" /> -->
                             </div>
                         </div>
                         <div class="row">
@@ -154,7 +153,7 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col">
-                                <GChart type="ColumnChart" :data="columnChartData" :options="columnChartOptions" />
+                                <!-- <GChart type="ColumnChart" :data="columnChartData" :options="columnChartOptions" /> -->
                             </div>
                         </div>
                         <div class="row">
@@ -169,8 +168,8 @@
                         </div>
                     </div>
                 </div>
-            </div> -->
-            <!-- <div class="d-flex">
+            </div> 
+             <div class="d-flex">
                 <div class="card w-50 mt-2 mr-1">
                     <div class="card-header">
                         <span>Судочинство в порядку КУпАП</span>
@@ -178,7 +177,7 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col">
-                                <GChart type="ColumnChart" :data="columnChartData" :options="columnChartOptions" />
+                                <!-- <GChart type="ColumnChart" :data="columnChartData" :options="columnChartOptions" /> -->
                             </div>
                         </div>
                         <div class="row">
@@ -192,19 +191,19 @@
                             </div>
                         </div>
                     </div>
-                </div> -->
-                <!-- <div class="card w-50 mt-2 ml-1">
+                </div>
+                <div class="card w-50 mt-2 ml-1">
                     <div class="card-header">
                         Адміністративне судочинство
                     </div>
                     <div class="card-body">
                         В розробці...
                     </div>
-                </div> -->
-            <!-- </div> -->
+                </div>
+             </div>
         </div>
-        
-        <change-status v-if="showModal" :judgeData="judge.data" @closeModal="showModal = false" />
+        <!-- modal change status -->
+        <change-status v-if="showModal" :judgeData="judge.data" @closeModal="showModal = !showModal"  />
     </div>
 </template>
 
@@ -213,7 +212,6 @@
     import DoughnutChart from 'vue-doughnut-chart'
     import _ from 'lodash';
 
-    import http_auth from '../../../scripts/http-service.js'
     import StatusComponent from "../../shared/StatusComponent.vue";
     import ChangeStatus from "../../shared/ChangeStatus.vue";
     import Spinner from "../../shared/Spinner.vue";
@@ -306,8 +304,8 @@
                     .then(response => {
                         this.judge = response.data;
                         this.loadData = true;
-                        console.log('judgeProfile Response', this.judge);
-                        console.log('judge-data', this.judge.data);
+                        console.log(this.judge);
+                        
                     })
                     .catch(error => {
                         if (error.response.status === 401) {
@@ -315,9 +313,7 @@
                         }
                         console.log('error');
                     });
-    
             }
-    
         },
         methods: {
             changeBookmarkStatus() {

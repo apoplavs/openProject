@@ -1,6 +1,5 @@
 <template>
-    <div class="user-profile content-wrapper">
-    
+    <div class="user-profile content-wrapper">  
         <div class="w-100">
             <div class="">
                 <ul class="nav nav-tabs" role="tablist">
@@ -54,22 +53,21 @@
     
     
     export default {
-        name: "user-profile",
-        data() {
-            return {
-                user: {}
-            }
-        },
-    
-        beforeMount() {
-           
-        },
+        name: "UserProfile",
         components: {
             CourtSessions,
             CourtPractice,
             Establishments,
             ViewsHistory,
             Templates
+        },
+        data() {
+            return {
+                user: {}
+            }
+        },
+        beforeMount() {
+           
         },
     }
 </script>

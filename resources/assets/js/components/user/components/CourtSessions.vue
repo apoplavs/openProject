@@ -82,6 +82,7 @@
 </script>
 
 <style scoped lang="scss">
+
 .courtSessions {
     width: 100%;
     height: auto;

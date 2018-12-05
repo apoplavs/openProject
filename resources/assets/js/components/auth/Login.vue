@@ -65,8 +65,8 @@
 
 <script>
     export default {
-        name: "login",
-        data: () => {
+        name: "Login",
+        data() {
             return {
                 user: {
                     email: "",

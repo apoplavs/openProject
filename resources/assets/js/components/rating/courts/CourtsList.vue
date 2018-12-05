@@ -228,7 +228,6 @@
         if (this.validateInputSearch() === false) { // !! = true
           this.params.search = null;
         }
-        console.log('get-Courts-List-------PARAMS', this.params);
         if (localStorage.getItem('token')) {
           console.log('have token')
           axios

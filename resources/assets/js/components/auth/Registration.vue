@@ -107,8 +107,8 @@
 
 <script>
     export default {
-        name: "registration",
-        data: () => {
+        name: "Registration",
+        data() {
             return {
                 user: {
                     name: '',
@@ -170,7 +170,7 @@
                 });
             }
         }
-    }
+    };
 </script>
 
 <style lang="scss" scoped>
