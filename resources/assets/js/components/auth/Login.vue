@@ -1,5 +1,6 @@
 <template>
-    <div class="container mt-5 d-flex justify-content-center">
+<div class="content-wrapper">
+    <div class="container d-flex justify-content-center ">
         <!--<vue-toasted ref="toasted"></vue-toasted>-->
         <div class="card">
             <div class="card-header text-center">
@@ -11,22 +12,17 @@
                 </div>
                 <form @submit.prevent="validateBeforeSubmit">
                     <div class="form-group">
-                        <label for="email" class="form-control-label">
-                                                        E-Mail
-                                                    </label>
+                        <label for="email" class="form-control-label">E-Mail</label>
                         <p class="control has-icon has-icon-right">
                             <input id="email" type="email" class="form-control" name="email" v-model="user.email" v-validate="'required|email'" :class="{'input': true, 'is-danger': errors.has('email') }">
                             <small>
-                                                            <i v-show="errors.has('email')" class="fa fa-warning"></i>
-                                                            <span v-show="errors.has('email')"
-                                                                  class="help is-danger">{{ errors.first('email') }}</span>
-                                                        </small>
+                                <i v-show="errors.has('email')" class="fa fa-warning"></i>
+                                <span v-show="errors.has('email')" class="help is-danger">{{ errors.first('email') }}</span>
+                            </small>
                         </p>
                     </div>
                     <div class="form-group">
-                        <label for="password" class="form-control-label">
-                                                        Пароль
-                                                    </label>
+                        <label for="password" class="form-control-label">Пароль</label>
                         <p class="control has-icon has-icon-right">
                             <input id="password" type="password" class="form-control" name="password" v-model="user.password" v-validate="'required|min:6|max:32'">
                             <small><i v-show="errors.has('password')" class="fa fa-warning"></i>
@@ -48,7 +44,7 @@
                     </div>
                     <div class="form-group mt-3">
                         <div class="d-flex justify-content-between">
-                            <button type="submit" class="btn btn-my-primary" id="submit-btn">
+                            <button type="submit" class="btn btn-primary" id="submit-btn">
                                 Увійти
                             </button>
                             <div class="footer-link d-flex align-items-center">
@@ -58,15 +54,12 @@
                             </div>
                         </div>
                     </div>
-    
-    
                 </form>
                 <div class="fb-login-button" data-max-rows="1" data-size="medium" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false" @click="checkLoginState()">
                 </div>
-    
             </div>
-        </div>
-    
+        </div>    
+    </div>
     </div>
 </template>
 
@@ -109,6 +102,7 @@
                 const _this = this;
                 this.$validator.validateAll().then(result => {
                     if (result) {
+                        this.user.remember_me = this.user.remember_me === true || this.user.remember_me === 1 ? 1 : 0; //конвертую чекбокс в 1 або 0 по дефолку true/false
                         axios
                             .post("/api/v1/login", _this.user, {
                                 headers: {
@@ -160,12 +154,13 @@
 
 <style lang="scss" scoped>
   @import "../../../sass/_variables.scss";
+  @import "../../../sass/_mixins.scss";
 
     .card {
         width: 100%;
         max-width: 450px;
         input[aria-invalid="true"] {
-            border-color: red;
+            border: 1px solid red;
         }
         i.fa-warning,
         span.is-danger,
@@ -175,23 +170,12 @@
         #back-error {
             display: none;
         }
+        input:not([type="checkbox"]) {
+            @include boxShadow($shadow-input);
+            border: none;
+        }
         .card-header {
-            font-size: 1.5em;
-            color: #408080 !important;
-            font-weight: 700;
-        }
-        .btn-my-primary {
-            background-color: #408080;
-            border-color: #408080;
-            border-bottom: 3px solid #2d5656;
-            color: #ffffff;
-        }
-        button:hover,
-        button:active {
-            opacity: 0.8;
-        }
-        .footer-link {
-            font-weight: 300;
+            font-size: 1.3rem;
         }
     }
 </style>

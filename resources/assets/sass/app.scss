@@ -3,26 +3,118 @@
 
 // Variables
 @import "_variables";
-
+@import "_mixins";
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&subset=cyrillic');
+
 body {
   background-color: $body-bg;
-  height: 100vh;
+  // height: 100vh;
   font-family: 'Roboto', sans-serif;
   font-weight: 400;
   font-style: normal;
-  color: $main;
-  // text-shadow: 4px 4px 4px #aaa;
-  
+  color: $color-1;
+  // background-image: linear-gradient(to bottom, #3081cf, #82db85);
 }
-button, 
-button:active, 
-button:focus {
-    outline: none;
+
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+  border: 0;
+  padding: 0;
 }
 
 .btn-primary {
   color: #ffff;
   background-color: $primary;
   border-color: $primary;
+  @include boxShadow($shadow-btn);
+  &:hover{
+    background-color: lighten($primary, 5%);
+    border-color: lighten($primary, 5%);
+  }
+}
+
+.btn-confirm {
+  color: $main-color;
+  background-color: #ffffff;
+  border-color: $main-color;
+  &:active {
+    color: $main-color;
+    background-color: #ffffff;
+    border-color: $main-color;
+  }
+  &:hover{
+    background-color: $main-color;
+    color: #ffffff;
+  }
+}
+
+button {
+  cursor: pointer;
+  border-color: transparent;
+  &:active,
+  &:hover,
+  &:focus {
+    outline: none;
+    background-color: darken($body-bg, 10%);
+  }
+}
+
+// Customize card 
+.card {
+  border: none;
+  @include boxShadow($shadow-light);
+}
+.card-header {
+  @include alignElement($alignItems: center, $justifyContent: space-between);
+  background-color: $main-color;
+  color: #ffffff;
+  font-size: 1.5rem;
+}
+// --------------
+
+i[class^="fa-bookmark"],
+i.fa-edit{
+  cursor: pointer;
+}
+.fa-bookmark-o,
+.fa-bookmark {
+    color: $danger;
+}
+.fa-briefcase {
+    color: $success;
+}
+.fa-line-chart {
+    color: $main-color;
+}
+.fa-medkit {
+    color: $danger;
+}
+.fa-calendar-minus-o{
+    color: $text-color;
+}
+.fa-umbrella-beach {
+    color: $warning;
+}
+.fa-calendar-times-o {
+    color: red;
+}
+.fa-edit {
+    color: $color-5;
+}
+ 
+// -------------
+// .max-width {
+//   min-width: 1140px !important;
+// }
+.content-wrapper {
+  min-width: 1140px;
+  height: 100vh;
+  overflow-y: auto;
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+
+::-webkit-scrollbar {
+  width: 0px;
+  background-color: #ffffff;
 }

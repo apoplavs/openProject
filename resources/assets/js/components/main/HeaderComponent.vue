@@ -1,5 +1,7 @@
 <template>
+<div class="">
     <nav class="navbar  sticky-top navbar-expand-lg navbar-light bg-light">
+        <div class="container">
         <a class="navbar-brand" href="#"><img src="../../../images/logo.png" width="40" alt="logo" />ТОЕсуд</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#NavbarMenu" aria-controls="NavbarMenu" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -15,19 +17,19 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="First" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Рейтинг</a>
                     <div class="dropdown-menu" aria-labelledby="First">
-                        <router-link to="/judges-list">
+                        <router-link to="/judges"  active-class="active">
                             <a class="dropdown-item">Судді</a>
                         </router-link>
-                        <router-link to="#">
-                            <a class="dropdown-item disabled">Суди<small>( <i class="fa fa-code" aria-hidden="true"></i> в розробці)</small></a>
+                        <router-link to="/courts" active-class="active">
+                            <a class="dropdown-item">Суди</a>
                         </router-link>
                     </div>
                 </li>
-                <router-link to="/about" tag="li" class="nav-item" active-class="active">
-                    <a class="nav-link  disabled">Про нас</a>
+                <router-link to="/about" tag="li" class="nav-item" active-class="active" disabled>
+                    <a class="nav-link">Про нас</a>
                 </router-link>
-                <router-link to="/contacts" tag="li" class="nav-item" active-class="active">
-                    <a class="nav-link  disabled">Контакти</a>
+                <router-link to="/contacts" tag="li" class="nav-item" active-class="active" disabled>
+                    <a class="nav-link">Контакти</a>
                 </router-link>
                 <!-- left  -->
                 <div class="d-lg-flex ml-lg-5">
@@ -59,7 +61,9 @@
                 </div>
             </ul>
         </div>
+        </div>
     </nav>
+    </div>
 </template>
 
 <script>
@@ -69,19 +73,22 @@
             return {
                 name: localStorage.getItem('name'),
                 email: localStorage.getItem('email'),
-                isAuth: localStorage.getItem('token'),
+            }
+        },
+        computed: {
+            isAuth() {
+                return localStorage.getItem('token');
             }
         },
         watch: {
             userData: function() {
-                this.isAuth = localStorage.getItem('token');
+                // this.isAuth = localStorage.getItem('token');
                 this.name = localStorage.getItem('name');
                 this.email = localStorage.getItem('email')
     
             }
         },
-        methods: {
-            
+        methods: {  
             logout() {
                 axios
                     .get("/api/v1/logout", {
@@ -92,16 +99,16 @@
                         },
                     })
                     .then(response => {
-                        console.log(response);
-                        console.log('logout');
                         localStorage.clear();
                         this.$router.push('/login')
                     })
                     .catch(error => {
+                        if (error.response.status === 401) {
+                            localStorage.clear();
+                            this.$router.push('/login');
+                        }
                         console.log(error);
                     });
-    
-    
             }
         }
     };
@@ -110,6 +117,11 @@
 <style scoped lang="scss">
   @import "../../../sass/_variables.scss";
 
+.active {
+    > a.nav-link{
+   color:  #2b989b!important;
+    }
+}
     .navbar-light {
         box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.2), 0 4px 15px 0 rgba(0, 0, 0, 0.19);
     }

@@ -1,21 +1,132 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&subset=cyrillic);body {
-  background-color: #eceaea;
-  height: 100vh;
+  background-color: #fafafa;
   font-family: 'Roboto', sans-serif;
   font-weight: 400;
   font-style: normal;
-  color: #304040;
+  color: #112F41;
 }
 
-button,
-button:active,
-button:focus {
-  outline: none;
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+  border: 0;
+  padding: 0;
 }
 
 .btn-primary {
   color: #ffff;
-  background-color: #6291ba;
-  border-color: #6291ba;
+  background-color: #4c88bd;
+  border-color: #4c88bd;
+  -webkit-box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+}
+
+.btn-primary:hover {
+  background-color: #5f94c4;
+  border-color: #5f94c4;
+}
+
+.btn-confirm {
+  color: #2b989b;
+  background-color: #ffffff;
+  border-color: #2b989b;
+}
+
+.btn-confirm:active {
+  color: #2b989b;
+  background-color: #ffffff;
+  border-color: #2b989b;
+}
+
+.btn-confirm:hover {
+  background-color: #2b989b;
+  color: #ffffff;
+}
+
+button {
+  cursor: pointer;
+  border-color: transparent;
+}
+
+button:active,
+button:hover,
+button:focus {
+  outline: none;
+  background-color: #e1e0e0;
+}
+
+.card {
+  border: none;
+  -webkit-box-shadow: 0 2px 43px -4px rgba(0, 0, 0, 0.19);
+  box-shadow: 0 2px 43px -4px rgba(0, 0, 0, 0.19);
+}
+
+.card-header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: #2b989b;
+  color: #ffffff;
+  font-size: 1.5rem;
+}
+
+i[class^="fa-bookmark"],
+i.fa-edit {
+  cursor: pointer;
+}
+
+.fa-bookmark-o,
+.fa-bookmark {
+  color: #ef6733;
+}
+
+.fa-briefcase {
+  color: #2ab27b;
+}
+
+.fa-line-chart {
+  color: #2b989b;
+}
+
+.fa-medkit {
+  color: #ef6733;
+}
+
+.fa-calendar-minus-o {
+  color: #304040;
+}
+
+.fa-umbrella-beach {
+  color: orange;
+}
+
+.fa-calendar-times-o {
+  color: red;
+}
+
+.fa-edit {
+  color: #2C5F9C;
+}
+
+.content-wrapper {
+  min-width: 1140px;
+  height: 100vh;
+  overflow-y: auto;
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+
+::-webkit-scrollbar {
+  width: 0px;
+  background-color: #ffffff;
 }
 

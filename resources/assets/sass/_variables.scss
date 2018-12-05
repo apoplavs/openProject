@@ -1,26 +1,49 @@
 
 // Body
-$body-bg: #eceaea;;
+$body-bg: #fafafa;;
 
 // Borders
 $laravel-border-color: darken($body-bg, 10%);
 $list-group-border-color: $laravel-border-color;
-
 $card-border-color: $laravel-border-color;
 
 // Brands
-$main: #304040;
-$primary: #6291ba;
+$text-color: #304040;
+$primary: #4c88bd;
 $info: #8eb4cb;
 $success: #2ab27b;
-$warning: #cbb956;
-$danger: #bf5329;
+$warning: orange;
+$danger: #ef6733;
 
+
+//Color range 
+$main-color: #2b989b;
+$color-1: #112F41;
+$color-2: #435b71;
+$color-3: #0C4E4F;
+// $color-4: orange;
+$color-5: #2C5F9C;
+$color-6: hsl(181, 100%, 35%);
+$text-muted: lighten($text-color, 20%);
+
+// btn 
+
+
+// fa icons
+
+
+// box-shadow
+$shadow-btn: 0px 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12);
+$shadow-light: 0 2px 43px -4px rgba(0,0,0,.19);
+$shadow-header: 0px 3px 9px -1px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14);
+$shadow-input: inset 0 0 3px 0 rgba(0, 0, 0, 0.22);
+$shadow-3D-effect: 0 3rem 3rem -1rem rgba(10,10,10,.2);
+$shadow-autocomplete: $shadow-3D-effect;
 // Typography
 $font-family-sans-serif: "Raleway", sans-serif;
-$font-size-base: .875rem; // 14px
+$font-size-base: 14px; // 14px
 $line-height-base: 1.6;
-$text-color: #636b6f;
+// $text-color: #636b6f;
 
 // Inputs
 $input-border-color: lighten($text-color, 40%);
