@@ -73,7 +73,6 @@
             return {
                 name: localStorage.getItem('name'),
                 email: localStorage.getItem('email'),
-                // isAuth: localStorage.getItem('token'),
             }
         },
         computed: {
@@ -100,8 +99,6 @@
                         },
                     })
                     .then(response => {
-                        console.log(response);
-                        console.log('logout');
                         localStorage.clear();
                         this.$router.push('/login')
                     })
@@ -112,8 +109,6 @@
                         }
                         console.log(error);
                     });
-    
-    
             }
         }
     };
@@ -122,9 +117,14 @@
 <style scoped lang="scss">
   @import "../../../sass/_variables.scss";
 
-    // .navbar-light {
-    //     box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.2), 0 4px 15px 0 rgba(0, 0, 0, 0.19);
-    // }
+.active {
+    > a.nav-link{
+   color:  #2b989b!important;
+    }
+}
+    .navbar-light {
+        box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.2), 0 4px 15px 0 rgba(0, 0, 0, 0.19);
+    }
     
     ul li a:hover {
         color: #2b989b !important;

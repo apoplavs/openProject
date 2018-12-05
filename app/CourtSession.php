@@ -43,22 +43,7 @@ class CourtSession extends Model
 		// отримання id користувача
 		$user_id = Auth::check() ? Auth::user()->id : 0;
 		return(static::select('court_sessions.id', 'court_sessions.date', 'court_sessions.number',
-			 DB::raw('(CASE WHEN court_sessions.judge2 IS NULL THEN '.
-			'(SELECT CONCAT(judges.surname, " ", judges.name, " ", judges.patronymic) FROM judges WHERE judges.id=court_sessions.judge1) '.
-			
-			'WHEN court_sessions.judge2 IS NOT NULL AND court_sessions.judge3 IS NULL THEN '.
-			'CONCAT("головуючий суддя: ", '.
-			'(SELECT CONCAT(judges.surname, " ", judges.name, " ", judges.patronymic) FROM judges WHERE judges.id=court_sessions.judge1), '.
-			'(SELECT CONCAT("; ", judges.surname, " ", judges.name, " ", judges.patronymic) FROM judges WHERE judges.id=court_sessions.judge2)) '.
-
-			'ELSE CONCAT("головуючий суддя: ", '.
-			'(SELECT CONCAT(judges.surname, " ", judges.name, " ", judges.patronymic) FROM judges WHERE judges.id=court_sessions.judge1), '.
-			'"; учасник колегії: ", '.
-			'(SELECT CONCAT(judges.surname, " ", judges.name, " ", judges.patronymic) FROM judges WHERE judges.id=court_sessions.judge2), '.
-			'"; учасник колегії: ", '.
-			'(SELECT CONCAT(judges.surname, " ", judges.name, " ", judges.patronymic) FROM judges WHERE judges.id=court_sessions.judge3)) END) '.
-			
-			'AS judges'),
+			 DB::raw(' get_judges_by_id(judge1, judge2, judge3) AS judges'),
 			DB::raw('justice_kinds.name AS forma'),
 			 'court_sessions.involved', 'court_sessions.description',
 			DB::raw("(CASE WHEN user_bookmark_sessions.user = {$user_id} THEN 1 ELSE 0 END) AS is_bookmark"))
@@ -88,22 +73,7 @@ class CourtSession extends Model
 	 */
 	public static function getSessionByJudgeGuest($judge) {
 		return(static::select('court_sessions.date', 'court_sessions.number',
-			DB::raw('(CASE WHEN court_sessions.judge2 IS NULL THEN '.
-				'(SELECT CONCAT(judges.surname, " ", judges.name, " ", judges.patronymic) FROM judges WHERE judges.id=court_sessions.judge1) '.
-				
-				'WHEN court_sessions.judge2 IS NOT NULL AND court_sessions.judge3 IS NULL THEN '.
-				'CONCAT("головуючий суддя: ", '.
-				'(SELECT CONCAT(judges.surname, " ", judges.name, " ", judges.patronymic) FROM judges WHERE judges.id=court_sessions.judge1), '.
-				'(SELECT CONCAT("; ", judges.surname, " ", judges.name, " ", judges.patronymic) FROM judges WHERE judges.id=court_sessions.judge2)) '.
-				
-				'ELSE CONCAT("головуючий суддя: ", '.
-				'(SELECT CONCAT(judges.surname, " ", judges.name, " ", judges.patronymic) FROM judges WHERE judges.id=court_sessions.judge1), '.
-				'"; учасник колегії: ", '.
-				'(SELECT CONCAT(judges.surname, " ", judges.name, " ", judges.patronymic) FROM judges WHERE judges.id=court_sessions.judge2), '.
-				'"; учасник колегії: ", '.
-				'(SELECT CONCAT(judges.surname, " ", judges.name, " ", judges.patronymic) FROM judges WHERE judges.id=court_sessions.judge3)) END) '.
-				
-				'AS judges'),
+			DB::raw('CALL get_judges_by_id(judge1, judge2, judge3) AS judges'),
 			DB::raw('justice_kinds.name AS forma'),
 			'court_sessions.involved', 'court_sessions.description')
 			->join('justice_kinds', 'justice_kinds.justice_kind', '=', 'court_sessions.forma')

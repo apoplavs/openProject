@@ -1,5 +1,4 @@
 <template>
-<!-- <script type="text/x-template" id="modal"> -->
     <transition name="modal-fade">
         <div class="modal-backdrop">
             <div class="modal" role="dialog" aria-labelledby="modalTitle" aria-describedby="modalDescription">
@@ -23,7 +22,6 @@
             </div>
         </div>
     </transition>
-    <!-- </script> -->
 </template>
 
 <script>

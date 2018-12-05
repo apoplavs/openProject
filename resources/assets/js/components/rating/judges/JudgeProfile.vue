@@ -1,7 +1,7 @@
 <template>
-    <div class="judge-profile my-5">
+    <div class="judge-profile">
         <spinner v-if="!loadData" />
-        <div v-if="loadData" class="container">
+        <div v-if="loadData" class="container content-wrapper">
             <div class="judge-info">
                 <div class="card">
                     <div class="card-body d-flex">
@@ -35,27 +35,10 @@
                             <div class="status-info">
                                 <div class="status my-2">
                                     <div class="w-50 d-flex align-items-center">
-                                        <span v-if="judge.data.status === 1"> <!-- Cуддя на роботі  -->
-                                            <i class="fa fa-briefcase" aria-hidden="true"></i> на роботі 
-                                            {{ judge.data.due_date_status ? '('+judge.data.due_date_status+')' : null }}
-                                        </span>
-                                        <span v-if="judge.data.status === 2"> <!-- На лікарняному  -->
-                                            <i class="fa fa-medkit" aria-hidden="true"></i> на лікарняному 
-                                            {{ judge.data.due_date_status ? '(до '+judge.data.due_date_status+')' : null }}
-                                        </span>
-                                        <span v-if="judge.data.status === 3"> <!-- У відпустці   -->
-                                            <i class="fas fa-umbrella-beach"></i> у відпустці 
-                                            {{ judge.data.due_date_status ? '(до '+judge.data.due_date_status+')' : null }}
-                                        </span>
-                                        <span v-if="judge.data.status === 4"> <!-- Відсуній на робочому місці з інших причин  --> 
-                                            <i class="fa fa-calendar-minus-o" aria-hidden="true"></i> відсутній на робочому місці з інших причин 
-                                            {{ judge.data.due_date_status ? '(до '+judge.data.due_date_status+')' : null }}
-                                        </span>
-                                        <span v-if="judge.data.status === 5"> <!-- Припинено повноваження  -->
-                                            <i class="fa fa-calendar-times-o" aria-hidden="true"></i> припинено повноваження 
-                                            {{ judge.data.due_date_status ? '(до '+judge.data.due_date_status+')' : null }}
-                                        </span>
-                                        <span><i class="fas fa-edit float-right pl-3" aria-hidden="true" @click="showModal()"></i></span>
+                                        
+                                        <status-component :judgeData="judge.data" />
+
+                                        <span><i class="fas fa-edit float-right pl-3" aria-hidden="true" @click="showModal = true"></i></span>
                                     </div>
                                     <div class="bookmark w-50">
                                         <span v-if="judge.data.is_bookmark" @click="changeBookmarkStatus()"><i class="fa fa-bookmark" aria-hidden="true"></i></span>
@@ -105,7 +88,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <div v-else class="container-component"> <p>Нічого не знайдено...</p></div>
+                            <div v-else class="container-component">
+                                <p>Нічого не знайдено...</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -116,7 +101,7 @@
                         <span>Статистика розгрянутих справ</span>
                     </div>
                     <div class="card-body">
-                        <GChart type="PieChart" :data="pieChartData" :options="pieChartOptions" />
+                        <!-- <GChart type="PieChart" :data="pieChartData" :options="pieChartOptions" /> -->
                     </div>
                 </div>
                 <div class="card w-50 mt-2 ml-1">
@@ -139,7 +124,7 @@
                     </div>
                 </div>
             </div>
-            <div class="d-flex">
+            <!-- <div class="d-flex">
                 <div class="card w-50 mt-2 mr-1">
                     <div class="card-header">
                         Цивільне судочинство
@@ -184,8 +169,8 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="d-flex">
+            </div> -->
+            <!-- <div class="d-flex">
                 <div class="card w-50 mt-2 mr-1">
                     <div class="card-header">
                         <span>Судочинство в порядку КУпАП</span>
@@ -207,32 +192,44 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="card w-50 mt-2 ml-1">
+                </div> -->
+                <!-- <div class="card w-50 mt-2 ml-1">
                     <div class="card-header">
                         Адміністративне судочинство
                     </div>
                     <div class="card-body">
                         В розробці...
                     </div>
-                </div>
-            </div>
+                </div> -->
+            <!-- </div> -->
         </div>
+        
+        <change-status v-if="showModal" :judgeData="judge.data" @closeModal="showModal = false" />
     </div>
 </template>
 
 <script>
-    import Spinner from "../../shared/Spinner.vue";
     import GChart from "vue-google-charts";
     import DoughnutChart from 'vue-doughnut-chart'
     import _ from 'lodash';
+
     import http_auth from '../../../scripts/http-service.js'
+    import StatusComponent from "../../shared/StatusComponent.vue";
+    import ChangeStatus from "../../shared/ChangeStatus.vue";
+    import Spinner from "../../shared/Spinner.vue";
     
     export default {
         name: "JudgeProfile",
+        components: {
+            Spinner,
+            GChart,
+            DoughnutChart,
+            StatusComponent,
+            ChangeStatus
+        },
         data() {
             return {
-                isAuth: localStorage.getItem("token"),
+                showModal: false,
                 loadData: false,
                 judge: {},
                 search: '',
@@ -280,15 +277,18 @@
             };
         },
         computed: {
-            filterSessions(){
+            filterSessions() {
                 //  живий пошук = фільтер
-                    return  _.filter(this.judge.court_sessions, (el) => {                                    
-                      let arr = _.filter( Object.keys(el), (key) => {  
-                        let regEx = new RegExp(`(${this.search})`, 'i');                 
-                           return (regEx.test(el[key]) || this.search.length == 0) 
+                return _.filter(this.judge.court_sessions, (el) => {
+                    let arr = _.filter(Object.keys(el), (key) => {
+                        let regEx = new RegExp(`(${this.search})`, 'i');
+                        return (regEx.test(el[key]) || this.search.length == 0)
                     })
-                    return (arr.length > 0) ? true : false                  
+                    return (arr.length > 0) ? true : false
                 })
+            },
+            isAuth() {
+                return localStorage.getItem("token");
             }
         },
         beforeMount() {
@@ -307,6 +307,7 @@
                         this.judge = response.data;
                         this.loadData = true;
                         console.log('judgeProfile Response', this.judge);
+                        console.log('judge-data', this.judge.data);
                     })
                     .catch(error => {
                         if (error.response.status === 401) {
@@ -314,7 +315,7 @@
                         }
                         console.log('error');
                     });
-
+    
             }
     
         },
@@ -325,42 +326,42 @@
                 }
                 if (this.judge.data.is_bookmark === 0) {
                     axios({
-                            method: "put",
-                            url: `/api/v1/judges/${this.$route.params.id}/bookmark`,
-                            headers: {
-                                "Content-Type": "application/json",
-                                "X-Requested-With": "XMLHttpRequest",
-                                Authorization: localStorage.getItem("token")
-                            }
-                        })
-                        .then(response => {
-                            this.judge.data.is_bookmark = 1;
-                        })
-                        .catch(error => {
-                            if (error.response.status === 401) {
-                                this.$router.push("/login");
-                            }
-                            console.log("Bookmark", error);
-                        });
+                        method: "put",
+                        url: `/api/v1/judges/${this.$route.params.id}/bookmark`,
+                        headers: {
+                            "Content-Type": "application/json",
+                            "X-Requested-With": "XMLHttpRequest",
+                            Authorization: localStorage.getItem("token")
+                        }
+                    })
+                    .then(response => {
+                        this.judge.data.is_bookmark = 1;
+                    })
+                    .catch(error => {
+                        if (error.response.status === 401) {
+                            this.$router.push("/login");
+                        }
+                        console.log("Bookmark", error);
+                    });
                 } else {
                     axios({
-                            method: "delete",
-                            url: `/api/v1/judges/${this.$route.params.id}/bookmark`,
-                            headers: {
-                                "Content-Type": "application/json",
-                                "X-Requested-With": "XMLHttpRequest",
-                                Authorization: localStorage.getItem("token")
-                            }
-                        })
-                        .then(response => {
-                            this.judge.data.is_bookmark = 0;
-                        })
-                        .catch(error => {
-                            if (error.response.status === 401) {
-                                this.$router.push("/login");
-                            }
-                            console.log("Bookmark", error.response);
-                        });
+                        method: "delete",
+                        url: `/api/v1/judges/${this.$route.params.id}/bookmark`,
+                        headers: {
+                            "Content-Type": "application/json",
+                            "X-Requested-With": "XMLHttpRequest",
+                            Authorization: localStorage.getItem("token")
+                        }
+                    })
+                    .then(response => {
+                        this.judge.data.is_bookmark = 0;
+                    })
+                    .catch(error => {
+                        if (error.response.status === 401) {
+                            this.$router.push("/login");
+                        }
+                        console.log("Bookmark", error.response);
+                    });
                 }
             },
             changeLikes() {
@@ -370,48 +371,48 @@
                 if (this.judge.data.is_liked) {
                     // dell like
                     axios({
-                        method: "delete",
-                        url: `/api/v1/judges/${this.$route.params.id}/like`,
-                        headers: {
-                            "Content-Type": "application/json",
-                            "X-Requested-With": "XMLHttpRequest",
-                            Authorization: localStorage.getItem("token")
-                        }
-                    })
-                    .then(response => {
-                        this.judge.data.likes -= 1;
-                        this.judge.data.is_liked = 0;
-                    })
-                    .catch(error => {
-                        if (error.response.status === 401) {
-                            this.$router.push("/login");
-                        }
-                        console.log("set Likes", error);
-                    });
+                            method: "delete",
+                            url: `/api/v1/judges/${this.$route.params.id}/like`,
+                            headers: {
+                                "Content-Type": "application/json",
+                                "X-Requested-With": "XMLHttpRequest",
+                                Authorization: localStorage.getItem("token")
+                            }
+                        })
+                        .then(response => {
+                            this.judge.data.likes -= 1;
+                            this.judge.data.is_liked = 0;
+                        })
+                        .catch(error => {
+                            if (error.response.status === 401) {
+                                this.$router.push("/login");
+                            }
+                            console.log("set Likes", error);
+                        });
                 } else {
                     // set like
-                   axios({
-                        method: "put",
-                        url: `/api/v1/judges/${this.$route.params.id}/like`,
-                        headers: {
-                            "Content-Type": "application/json",
-                            "X-Requested-With": "XMLHttpRequest",
-                            Authorization: localStorage.getItem("token")
-                        }
-                    })
-                    .then(response => {
-                         this.judge.data.likes += 1;
-                        this.judge.data.is_liked = 1;
-                    })
-                    .catch(error => {
-                        if (error.response.status === 401) {
-                            this.$router.push("/login");
-                        }
-                        console.log("set Likes", error);
-                    });
-                    
+                    axios({
+                            method: "put",
+                            url: `/api/v1/judges/${this.$route.params.id}/like`,
+                            headers: {
+                                "Content-Type": "application/json",
+                                "X-Requested-With": "XMLHttpRequest",
+                                Authorization: localStorage.getItem("token")
+                            }
+                        })
+                        .then(response => {
+                            this.judge.data.likes += 1;
+                            this.judge.data.is_liked = 1;
+                        })
+                        .catch(error => {
+                            if (error.response.status === 401) {
+                                this.$router.push("/login");
+                            }
+                            console.log("set Likes", error);
+                        });
+    
                 }
-
+    
             },
             changeUnlikes() {
                 if (!this.isAuth) {
@@ -420,52 +421,47 @@
                 if (this.judge.data.is_unliked) {
                     // dell unlike
                     axios({
-                        method: "delete",
-                        url: `/api/v1/judges/${this.$route.params.id}/unlike`,
-                        headers: {
-                            "Content-Type": "application/json",
-                            "X-Requested-With": "XMLHttpRequest",
-                            Authorization: localStorage.getItem("token")
-                        }
-                    })
-                    .then(response => {
-                        this.judge.data.unlikes -= 1;
-                        this.judge.data.is_unliked = 0;
-                    })
-                    .catch(error => {
-                        if (error.response.status === 401) {
-                            this.$router.push("/login");
-                        }
-                        console.log("set Likes", error);
-                    });
+                            method: "delete",
+                            url: `/api/v1/judges/${this.$route.params.id}/unlike`,
+                            headers: {
+                                "Content-Type": "application/json",
+                                "X-Requested-With": "XMLHttpRequest",
+                                Authorization: localStorage.getItem("token")
+                            }
+                        })
+                        .then(response => {
+                            this.judge.data.unlikes -= 1;
+                            this.judge.data.is_unliked = 0;
+                        })
+                        .catch(error => {
+                            if (error.response.status === 401) {
+                                this.$router.push("/login");
+                            }
+                            console.log("set Likes", error);
+                        });
                 } else {
                     // set unlike
-                   axios({
-                        method: "put",
-                        url: `/api/v1/judges/${this.$route.params.id}/unlike`,
-                        headers: {
-                            "Content-Type": "application/json",
-                            "X-Requested-With": "XMLHttpRequest",
-                            Authorization: localStorage.getItem("token")
-                        }
-                    })
-                    .then(response => {
-                        this.judge.data.unlikes += 1;
-                        this.judge.data.is_unliked = 1;
-                    })
-                    .catch(error => {
-                        if (error.response.status === 401) {
-                            this.$router.push("/login");
-                        }
-                        console.log("set Likes", error);
-                    });         
+                    axios({
+                            method: "put",
+                            url: `/api/v1/judges/${this.$route.params.id}/unlike`,
+                            headers: {
+                                "Content-Type": "application/json",
+                                "X-Requested-With": "XMLHttpRequest",
+                                Authorization: localStorage.getItem("token")
+                            }
+                        })
+                        .then(response => {
+                            this.judge.data.unlikes += 1;
+                            this.judge.data.is_unliked = 1;
+                        })
+                        .catch(error => {
+                            if (error.response.status === 401) {
+                                this.$router.push("/login");
+                            }
+                            console.log("set Likes", error);
+                        });
                 }
             }
-        },
-        components: {
-            Spinner,
-            GChart,
-            DoughnutChart
         }
     };
 </script>
@@ -514,10 +510,9 @@
                 }
             }
         }
-        .court-sessions-container{
+        .court-sessions-container {
             max-height: 600px;
             overflow-y: auto;
-
             .court-sessions {
                 width: 100%;
                 height: auto;
@@ -543,10 +538,9 @@
                     }
                 }
             }
-          
         }
-          input[type="search"] {
-                width: 200px;
-            }
+        input[type="search"] {
+            width: 200px;
+        }
     }
 </style>

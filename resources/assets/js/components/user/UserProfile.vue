@@ -1,5 +1,5 @@
 <template>
-    <div class="user-profile">
+    <div class="user-profile content-wrapper">
     
         <div class="w-100">
             <div class="">

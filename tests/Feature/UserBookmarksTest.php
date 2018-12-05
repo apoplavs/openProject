@@ -12,94 +12,77 @@ use Toecyd\UserBookmarkJudge;
 
 class UserBookmarksTest extends BaseApiTest
 {
+    const LIMIT = 2;
+
+    const IDENT_TO_FIELD = [
+        'judges' => 'id',
+        'courts' => 'court_code',
+    ];
+
     public function setUp()
     {
         parent::setUp();
 
         $this->url .= 'user/bookmarks';
-
     }
 
-    /**
-     * Пробуємо отримати порожній список закладок у щойно створеного користувача.
-     */
-    public function testEmptyBookmarks()
+    public function assertBookmarksEquals($etalon_data, $headers_with_token)
     {
-        $response = $this->get($this->url, $this->headersWithToken($this->login($this->user_data)));
-
-        $response->assertStatus(200);
-
-        $response_data = $response->decodeResponseJson();
-        $this->assertEquals([], $response_data['judges']);
-        $this->assertEquals([], $response_data['courts']);
-    }
-
-    /**
-     * Додаємо користувачу закладки, а потім перевіряємо, що вони додались
-     */
-    public function testNonEmptyBookmarks()
-    {
-        // Авторизуємось
-        $headers_with_token = $this->headersWithToken($this->login($this->user_data));
-
-        $etalon_data = $this->getEtalonData();
-
-        //додаємо інформацію по закладкам в БД (судді)
-        foreach ($etalon_data['judges'] as $row) {
-            UserBookmarkJudge::createBookmark($this->user->id, $row['id']);
-        }
-
-        //додаємо інформацію по закладкам в БД (суди)
-        foreach ($etalon_data['courts'] as $key => $row) {
-            UserBookmarkCourt::createBookmark($this->user->id, $row['court_code']);
-        }
-
-        // отримуємо закладки
         $response = $this->get($this->url, $headers_with_token);
         $response->assertStatus(200);
-
-        $response_data = $response->decodeResponseJson();
-        $this->assertEquals($etalon_data, $response_data);
+        $this->assertEquals($etalon_data, $response->decodeResponseJson());
     }
 
-    /**
-     * Додаємо інформацію, що дублюється, а потім перевіряємо, що з БД інформація дістається без дублів
-     */
-    public function testBookmarksDoubles()
+    public function putBookmarks($etalon_data, $headers_with_token, $etalonStatus = 201)
     {
-        // Авторизуємось
+        foreach ($etalon_data as $ident => $rows) {
+            foreach ($rows as $row) {
+                $this->put("api/v1/{$ident}/{$row[self::IDENT_TO_FIELD[$ident]]}/bookmark", [], $headers_with_token)
+                    ->assertStatus($etalonStatus);
+            }
+        }
+    }
+
+    public function deleteBookmarks($etalon_data, $headers_with_token)
+    {
+        foreach ($etalon_data as $ident => $rows) {
+            foreach ($rows as $row) {
+                $this
+                    ->delete("api/v1/{$ident}/{$row[self::IDENT_TO_FIELD[$ident]]}/bookmark", [], $headers_with_token)
+                    ->assertStatus(204);
+            }
+        }
+    }
+
+    public function testAll()
+    {
+        $etalon_data = $this->getEtalonData();
+        $etalon_data_empty = array_map(function() {return [];}, $etalon_data);
         $headers_with_token = $this->headersWithToken($this->login($this->user_data));
 
-        $etalon_data = $this->getEtalonData();
+        // Перевіряємо, що зразу ж після додавання користувача його закладки порожні
+        $this->assertBookmarksEquals($etalon_data_empty, $headers_with_token);
 
-        //додаємо інформацію по закладкам в БД (судді)
-        foreach ($etalon_data['judges'] as $row) {
-            UserBookmarkJudge::createBookmark($this->user->id, $row['id']);
-            UserBookmarkJudge::createBookmark($this->user->id, $row['id']); // дубль
-        }
+        // Перевіряємо, що закладки успішно додаються
+        $this->putBookmarks($etalon_data, $headers_with_token);
+        $this->assertBookmarksEquals($etalon_data, $headers_with_token);
 
-        //додаємо інформацію по закладкам в БД (суди)
-        foreach ($etalon_data['courts'] as $key => $row) {
-            UserBookmarkCourt::createBookmark($this->user->id, $row['court_code']);
-            UserBookmarkCourt::createBookmark($this->user->id, $row['court_code']); // дубль
-        }
+        // Перевіряємо, що закладки успішно видаляються
+        $this->deleteBookmarks($etalon_data, $headers_with_token);
+        $this->assertBookmarksEquals($etalon_data_empty, $headers_with_token);
 
-        // отримуємо закладки
-        $response = $this->get($this->url, $headers_with_token);
-        $response->assertStatus(200);
-
-        $response_data = $response->decodeResponseJson();
-        $this->assertEquals($etalon_data, $response_data);
+        // Перевіряємо, що закладки не дублюються
+        $this->putBookmarks($etalon_data, $headers_with_token, 201);
+        $this->putBookmarks($etalon_data, $headers_with_token, 422); // дубль
+        $this->assertBookmarksEquals($etalon_data, $headers_with_token);
     }
 
     private function getEtalonData()
     {
-        $limit = 2;
-
         $result = [
             'judges' => call_user_func_array(['Toecyd\Judge', 'select'], UserBookmarkJudge::getBookmarkFields())
                 ->join('courts', 'judges.court', '=', 'courts.court_code')
-                ->limit($limit)
+                ->limit(self::LIMIT)
                 ->get()
                 ->all(),
             'courts' => call_user_func_array(['Toecyd\Court', 'select'], UserBookmarkCourt::getBookmarkFields())
@@ -107,7 +90,7 @@ class UserBookmarksTest extends BaseApiTest
                 ->leftJoin('regions', 'courts.region_code', '=', 'regions.region_code')
                 ->leftJoin('jurisdictions', 'courts.jurisdiction', '=', 'jurisdictions.id')
                 ->leftJoin('judges', 'courts.head_judge', '=', 'judges.id')
-                ->limit($limit)
+                ->limit(self::LIMIT)
                 ->get()
                 ->all(),
         ];
