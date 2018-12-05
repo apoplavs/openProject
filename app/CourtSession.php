@@ -25,7 +25,7 @@ class CourtSession extends Model
 	
 	/**
 	 * Отримує судові засідання для сторінки профайлу судді
-	 * CASE в даному запиті:
+	 * логіка роботи функції в даному запиті:
 	 * 1. якщо суддя один тобто judge2 IS NULL AND judge3 IS NULL
 	 * 		то отримати ПІБ цього судді
 	 * 2. якщо суддів 2 тобто judge2 IS NOT NULL AND judge3 IS NULL
@@ -35,7 +35,6 @@ class CourtSession extends Model
 	 * 			"головуючий суддя: " + ПІБ судді1 +
 	 * 			"; учасник колегії: " + ПІБ судді2 +
 	 * 			"; учасник колегії: " + ПІБ судді3
-	 * todo в подальшому потрібно буде зробити SQL функцію для даної операції
 	 *
 	 * @param $judge
 	 */
@@ -57,23 +56,12 @@ class CourtSession extends Model
 	
 	/**
 	 * Отримує судові засідання для сторінки профайлу судді
-	 * CASE в даному запиті:
-	 * 1. якщо суддя один тобто judge2 IS NULL AND judge3 IS NULL
-	 * 		то отримати ПІБ цього судді
-	 * 2. якщо суддів 2 тобто judge2 IS NOT NULL AND judge3 IS NULL
-	 * 		то "головуючий суддя: " + ПІБ судді1 + ПІБ судді2
-	 * 3. якщо суддів 3 тобто ELSE
-	 *        то отримати ПІБ всіх суддів і скласти рядки з відповідними вставками
-	 * 			"головуючий суддя: " + ПІБ судді1 +
-	 * 			"; учасник колегії: " + ПІБ судді2 +
-	 * 			"; учасник колегії: " + ПІБ судді3
-	 * todo в подальшому потрібно буде зробити SQL функцію для даної операції
 	 *
 	 * @param $judge
 	 */
 	public static function getSessionByJudgeGuest($judge) {
 		return(static::select('court_sessions.date', 'court_sessions.number',
-			DB::raw('CALL get_judges_by_id(judge1, judge2, judge3) AS judges'),
+			DB::raw(' get_judges_by_id(judge1, judge2, judge3) AS judges'),
 			DB::raw('justice_kinds.name AS forma'),
 			'court_sessions.involved', 'court_sessions.description')
 			->join('justice_kinds', 'justice_kinds.justice_kind', '=', 'court_sessions.forma')
