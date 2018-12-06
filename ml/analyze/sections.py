@@ -15,7 +15,7 @@ class Section:
         self.judgement_codes = judgment_codes
         self.data_dict = {}
 
-    def _get_all_applications(self)  -> list:
+    def _get_all_applications(self) -> list:
         """
         All applications examined by judge
 
@@ -121,26 +121,30 @@ class Civil(Section):
 
     def analyze_in_time(self):
         all_application = self._get_all_applications()
-        on_time = 0
-        not_on_time = 0
         self.data_dict['cases_on_time'] = 0
         self.data_dict['cases_not_on_time'] = 0
+        print(f'Number of applications:{len(all_application)}')
         for application in all_application:
             app_documents = self._get_application_documents(
                 application['cause_num']
             )
             date_dict = {}
+            pause_time = None
+            pause_days = 0
             for document in app_documents:
                 doc_text = document['doc_text']
-                # category = guess_category(
-                #     text=doc_text,
-                #     anticipated_category=self.anticipated_category
-                # )
-                import random
-                category = [8,11][random.randrange(2)]
+                category = guess_category(
+                    text=doc_text,
+                    anticipated_category=8
+                )
                 if category == 8:
                     date_dict['start_adj_date'] = document['adjudication_date']
-                if category == 11:
+                elif category == 9:
+                    pause_time = document['adjudication_date']
+                elif category == 10:
+                    resume_time = document['adjudication_date']
+                    pause_days += (pause_time - resume_time).days
+                elif category == 11:
                     date_dict['end_adj_date'] = document['adjudication_date']
                     if 'start_adj_date' in date_dict:
                         interval = date_dict['start_adj_date'] - date_dict['end_adj_date']
@@ -148,6 +152,8 @@ class Civil(Section):
                             self.data_dict['cases_on_time'] += 1
                         else:
                             self.data_dict['cases_not_on_time'] += 1
+        print(f"Days on time:{self.data_dict['cases_on_time']}")
+        print(f"Days not on time:{self.data_dict['cases_not_on_time']}")
 
     def count(self):
         all_applications = self._get_all_applications()

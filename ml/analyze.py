@@ -24,7 +24,7 @@ if __name__ == '__main__':
     #     print('You should provide the valid judge id')
     #     sys.exit()
 
-    arguments = ['1211', '194']
+    arguments = ['1831']
     for judge_id in arguments:
 
         judge = Judge(judge_id=judge_id)

@@ -5,8 +5,8 @@ import pickle
 import nltk
 import sys
 
-from lib.db import get_edrsr_connection
-from lib.config import PICKLES_PATH
+from lib.db import DB
+from lib.config import *
 
 from lib.validation import Validator
 
@@ -15,14 +15,13 @@ nltk.download('averaged_perceptron_tagger')
 
 
 def get_data(categories):
-    connection = get_edrsr_connection()
+    connection = DB(db_name=EDRSR)
 
-    with connection.cursor() as cursor:
-        sql = "SELECT `category`, `doc_text` FROM `ml_datasets` WHERE category IN {}".format(
-            str(tuple(categories))
-        )
-        cursor.execute(sql)
-        data = cursor.fetchall()
+
+    sql = "SELECT `category`, `doc_text` FROM `ml_datasets` WHERE category IN {}".format(
+        str(tuple(categories))
+    )
+    data = connection.read(sql)
 
     # list of your documents (each document is a string)
     return data
@@ -116,7 +115,7 @@ if __name__ == '__main__':
     if any(not c.isdigit() for c in input_categories):
         print('All arguments should be digits')
         sys.exit()
-    elif len(input_categories) > 4 or len(input_categories) < 2:
+    elif len(input_categories) > 5 or len(input_categories) < 2:
         print('Wrong number of categories')
         sys.exit()
 
