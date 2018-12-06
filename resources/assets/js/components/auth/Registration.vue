@@ -98,6 +98,17 @@
                             </button>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <div class="text-center">
+                            <fb-signin-button
+                                    :params="fbSignInParams"
+                                    @success="onSignInSuccess"
+                                    @error="onSignInError">
+                                Sign in with Facebook
+                            </fb-signin-button>
+                        </div>
+                    </div>
+
                 </form>
             </div>
         </div>
@@ -106,6 +117,22 @@
 </template>
 
 <script>
+	window.fbAsyncInit = function() {
+		FB.init({
+			appId      : '297048331072736',
+			cookie     : true,  // enable cookies to allow the server to access the session
+			xfbml      : true,  // parse social plugins on this page
+			version    : 'v2.8' // use graph api version 2.8
+		});
+	};
+	(function(d, s, id) {
+		var js, fjs = d.getElementsByTagName(s)[0];
+		if (d.getElementById(id)) return;
+		js = d.createElement(s); js.id = id;
+		js.src = "//connect.facebook.net/en_US/sdk.js";
+		fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));
+
     export default {
         name: "Registration",
         data() {
@@ -115,7 +142,11 @@
                     email: '',
                     password: '',
                     repassword: ''
-                }
+                },
+				fbSignInParams: {
+					scope: 'email,public_profile',
+					return_scopes: true
+				}
             }
         },
         methods: {
@@ -168,9 +199,41 @@
                         })
                     }
                 });
-            }
+            },
+			onSignInSuccess (response) {
+				FB.api('/me', 'GET', {fields: 'id,email,first_name,last_name'}, user_data => {
+					user_data.name = user_data.first_name;
+					user_data.surname = user_data.last_name;
+
+					console.log(`Good to see you`);
+					console.log(user_data);
+				});
+
+				axios.post('/api/v1/login/facebook', user_data, {
+					headers: {
+						'Content-Type': 'application/json',
+						'X-Requested-With': 'XMLHttpRequest'
+					}
+				}).then(response => {
+					console.log(response);
+					if (response) {
+						this.$toasted.success('Вітаємо! Вам на пошту відпрвавлений лист з підтвердженням реєстрації!', {
+							theme: "primary",
+							position: "top-center",
+							duration: 5000
+						})
+					}
+				}).catch(error => {
+					console.log(error);
+				});
+
+
+			},
+			onSignInError (error) {
+				console.log('OH NOES', error)
+			}
         }
-    };
+    }
 </script>
 
 <style lang="scss" scoped>
@@ -202,5 +265,13 @@
             font-size: 1.3rem;
         }
     }
+  .fb-signin-button {
+      /* This is where you control how the button looks. Be creative! */
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 3px;
+      background-color: #4267b2;
+      color: #fff;
+  }
 
 </style>
