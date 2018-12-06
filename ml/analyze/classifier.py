@@ -2,6 +2,8 @@
 # -*- coding: utf-8 -*-
 
 import pickle
+import re
+
 import nltk
 import sys
 
@@ -10,22 +12,18 @@ from lib.config import *
 
 
 alias_category = {
-    1: 1, 22: 6,
-    2: 1, 23: 6,
-    3: 1, 24: 6,
-    4: 1, 25: 7,
-    5: 2, 26: 7,
-    6: 2, 27: 7,
-    7: 2, 28: 8,
-    8: 3, 29: 8,
-    9: 3, 30: 8,
-    10: 3, 31: 9,
-    11: 3, 32: 9,
-    12: 3, 33: 9,
-    13: 4,
-    14: 4,
-    15: 4,
-    16: 4,
+    5: 2, 22: 6,
+    6: 2, 23: 6,
+    7: 2, 24: 6,
+    8: 3, 25: 7,
+    9: 3, 26: 7,
+    10: 3, 27: 7,
+    11: 3, 28: 8,
+    12: 3, 29: 8,
+    13: 4, 30: 8,
+    14: 4, 31: 9,
+    15: 4, 32: 9,
+    16: 4, 33: 9,
     17: 5,
     18: 5,
     19: 5,
@@ -39,51 +37,156 @@ map_categories = {
         'pickle2': '5_6_7.pickle',
         'part_text': 'operative',
         'categories': [5, 6],
-        'other': 7},
+        'other': 7,
+        'regexp': None},
     # цивільне своєчасність
     3: {'pickle1': '8_9_10_11.pickle',
         'pickle2': '8_9_10_11_12.pickle',
         'part_text': 'operative',
         'categories': [8, 9, 10, 11],
-        'other': 12},
+        'other': 12,
+        'regexp':  {
+            8: [re.compile(r".*призначити підготовче судове засідання.+", re.M | re.U | re.S | re.I),
+                 re.compile(r".*призначити.{1,20}судовий розгляд.+", re.M | re.U | re.S | re.I),
+                 re.compile(r".*відкрити.{1,20}провадження.+", re.M | re.U | re.S | re.I)
+                 ],
+            9: [re.compile(r".*провадження (по|у).+справ\w зупинити.+", re.M | re.U | re.S | re.I),
+                 re.compile(r".*зупинити провадження.{2,20}справі.+", re.M | re.U | re.S | re.I),
+                 re.compile(r".*провадження.{2,10}справі.+зупинити.+", re.M | re.U | re.S | re.I)
+                 ],
+            10: [re.compile(r".*відновити провадження.{2,20}справі.+", re.M | re.U | re.S | re.I),
+                 re.compile(r".*провадження.{2,10}справі.+відновити.+", re.M | re.U | re.S | re.I)
+                 ],
+            11: [re.compile(r".*позов.+залишити без розгляду.+", re.M | re.U | re.S | re.I),
+                 re.compile(r".*залишити позов.+без розгляду.+", re.M | re.U | re.S | re.I),
+                 re.compile(r".*заяв.+залишити без розгляду.+", re.M | re.U | re.S | re.I),
+                 re.compile(r".*залишити заяв.+без розгляду.+", re.M | re.U | re.S | re.I),
+                 re.compile(r".*залишити без розгляду.{1,20}заяв.+", re.M | re.U | re.S | re.I),
+                 re.compile(r".*провадження.+закрити.+[ув] зв’?язку і?з.+", re.M | re.U | re.S | re.I),
+                 re.compile(r".*визнати.+мирову угоду.+", re.M | re.U | re.S | re.I)
+                 ]
+            }
+        },
     # цивільне типи кінцевих рішень
     4: {'pickle1': '13_14_15.pickle',
         'pickle2': None,
         'part_text': 'operative',
         'categories': [13, 14, 15],
-        'other': None},
+        'other': None,
+        'regexp': {
+            13: [re.compile(r".*задовольнити позов\s[^ч][^а][^с][^т][^к][^о][^в].+", re.M | re.U | re.S | re.I),
+                 re.compile(r".*позов.+задовольнити\s[^ч][^а][^с][^т][^к][^о][^в].+", re.M | re.U | re.S | re.I),
+                 re.compile(r".*позов.+задоволити\s[^ч][^а][^с][^т][^к][^о][^в].+", re.M | re.U | re.S | re.I),
+                 re.compile(r".*позов.+задовільнити\s[^ч][^а][^с][^т][^к][^о][^в].+", re.M | re.U | re.S | re.I),
+                 re.compile(r".*заяв.+ задовольнити\s[^ч][^а][^с][^т][^к][^о][^в].+", re.M | re.U | re.S | re.I),
+                 re.compile(r".*заяв.+ задоволити\s[^ч][^а][^с][^т][^к][^о][^в].+", re.M | re.U | re.S | re.I),
+                 re.compile(r".*заяв.+ задовільнити\s[^ч][^а][^с][^т][^к][^о][^в].+", re.M | re.U | re.S | re.I),
+                 re.compile(r".*розірвати шлюб.+", re.M | re.U | re.S | re.I),
+                 re.compile(r".*шлюб.+розірвати.+", re.M | re.U | re.S | re.I)
+                 ],
+            14: [re.compile(r".*задовольнити частково.+", re.M | re.U | re.S | re.I),
+                 re.compile(r".*задоволити частково.+", re.M | re.U | re.S | re.I),
+                 re.compile(r".*задовільнити частково.+", re.M | re.U | re.S | re.I),
+                 re.compile(r".*решт.{2,5}позовних вимог.{0,3}відмовити.+", re.M | re.U | re.S | re.I),
+                 re.compile(r".*інших позовних вимог.{0,3}відмовити.+", re.M | re.U | re.S | re.I)
+                 ],
+            15: [re.compile(r".*задоволенні.+позов.+відмовити.+", re.M | re.U | re.S | re.I),
+                 re.compile(r".*позов.+відмовити.+", re.M | re.U | re.S | re.I),
+                 re.compile(r".*відмовити.+задоволенні.+позов.+", re.M | re.U | re.S | re.I),
+                 re.compile(r".*відмовити.+повному обсязі.+", re.M | re.U | re.S | re.I)
+                 ]
+            }
+        },
     # кримінальне своєчасність
     5: {'pickle1': '17_18_19_20.pickle',
         'pickle2': '17_18_19_20_21.pickle',
         'part_text': 'operative',
         'categories': [17, 18, 19, 20],
-        'other': 21},
+        'other': 21,
+        'regexp': {
+            17: [re.compile(r".*призначити підготовче судове засідання.+", re.M | re.U | re.S | re.I),
+                 re.compile(r".*призначити.{1,20}судовий розгляд.+", re.M | re.U | re.S | re.I),
+                 re.compile(r".*відкрити.{1,20}провадження.+", re.M | re.U | re.S | re.I)
+                 ],
+            18: [re.compile(r".*провадження (по|у).+справ\w зупинити.+", re.M | re.U | re.S | re.I),
+                 re.compile(r".*(кримінальне|судове) провадження.+зупинити.+", re.M | re.U | re.S | re.I),
+                 re.compile(r".*зупинити (кримінальне|судове) провадження.+", re.M | re.U | re.S | re.I),
+                 re.compile(r".*провадження [ув] кримінальному провадженні зупинити.+", re.M | re.U | re.S | re.I)
+                 ],
+            19: [re.compile(r".*поновити.+(судове|кримінальне).+провадження.+", re.M | re.U | re.S | re.I),
+                 re.compile(r".*відновити.+(судове|кримінальне).+провадження.+", re.M | re.U | re.S | re.I),
+                 re.compile(r".*поновити.+розгляд кримінального провадження.+", re.M | re.U | re.S | re.I),
+                 re.compile(r".*відновити.+розгляд кримінального провадження.+", re.M | re.U | re.S | re.I),
+                 re.compile(r".*(судове|кримінальне).+провадження.+поновити.+", re.M | re.U | re.S | re.I),
+                 re.compile(r".*(судове|кримінальне).+провадження.+відновити.+", re.M | re.U | re.S | re.I)
+                 ],
+            20: [re.compile(r".*провадження.+закрити.+[ув] зв’?язку і?з.+", re.M | re.U | re.S | re.I),
+                 re.compile(r".*застосувати.+примусові заходи.{5,20}характеру.+", re.M | re.U | re.S | re.I),
+                 re.compile(r".*кримінальне провадження.+закрити.+", re.M | re.U | re.S | re.I),
+                 re.compile(r".*закрити кримінальне провадження.+", re.M | re.U | re.S | re.I),
+                 re.compile(r".*звільнити від.+відповідальності.+провадження.+закрити.+", re.M | re.U | re.S | re.I),
+                 ]
+            }
+        },
     # кримінальне типи кінцевих рішень
     6: {'pickle1': '22_23.pickle',
         'pickle2': None,
         'part_text': 'operative',
         'categories': [22, 23],
-        'other': None},
+        'other': None,
+        'regexp': {
+            22: [re.compile(r".*визнати.+винуват(им|ою).+призначити.+", re.M | re.U | re.S | re.I),
+                 re.compile(r".*визнати.+винн(им|ою).+призначити.+", re.M | re.U | re.S | re.I),
+                 re.compile(r".*затвердити.+угоду про визнання винуватості.+", re.M | re.U | re.S | re.I),
+                 re.compile(r".*угоду про визнання винуватості.+затвердити.+", re.M | re.U | re.S | re.I),
+                 re.compile(r".*затвердити.+угоду про примирення.+", re.M | re.U | re.S | re.I),
+                 re.compile(r".*угоду про примирення.+затвердити.+", re.M | re.U | re.S | re.I)
+                 ],
+            23: [re.compile(r".*визнати.{1,50}не ?винуват(им|ою) .+", re.M | re.U | re.S | re.I),
+                 re.compile(r".*визнати.{1,50}не ?винн(им|ою) .+", re.M | re.U | re.S | re.I),
+                 re.compile(r".*виправдати .+ [ув] зв’?язку.+", re.M | re.U | re.S | re.I),
+                 ]
+            }
+        },
     # адмінправопорушення апеляція
     7: {'pickle1': '25_26.pickle',
         'pickle2': '25_26_27.pickle',
         'part_text': 'operative',
         'categories': [25, 26],
-        'other': 27},
+        'other': 27,
+        'regexp': None},
     # цивільне апеляція
     8: {'pickle1': '28_29.pickle',
         'pickle2': '28_29_30.pickle',
         'part_text': 'operative',
         'categories': [28, 29],
-        'other': 30},
+        'other': 30,
+        'regexp': None},
     # кримінальне апеляція
     9: {'pickle1': '31_32.pickle',
         'pickle2': '31_32_33.pickle',
         'part_text': 'operative',
         'categories': [31, 32],
-        'other': 33}
+        'other': 33,
+        'regexp': None}
 
 }
+
+def guess_by_regexp(regexp, text):
+
+    # якщо регулярних виразів немає для цієї категорії
+    if regexp == None :
+        return 0
+
+    # видалення знаків пунктуації щоб не заважали
+    text = re.sub(r"[\.,\n] ?", " ", text)
+
+    # проходження по регулярках, і пошук відповідностей
+    for key, value in regexp.items() :
+        for r in value :
+            if re.match(r, text) is not None:
+                return key
+    return 0
 
 
 def get_classifier(file):
@@ -166,12 +269,20 @@ def guess_category(text, anticipated_category):
         return 0
     # отримуємо налаштування для даної категорії
     prop = map_categories[alias_category[anticipated_category]]
+
+    # ['full', 'operative', 'motive', 'introduction']
+    validator = Validator(prop['part_text'])
+
+    # пробуємо визначити категорію за регулярками
+    category = guess_by_regexp(regexp=prop['regexp'], text=validator.cut_part(text))
+
+    if category != 0:
+        return category
+
     # отримуємо класифікатори з pickle
     classifier1 = get_classifier(prop['pickle1'])
     classifier2 = get_classifier(prop['pickle2'])
 
-    # ['full', 'operative', 'motive', 'introduction']
-    validator = Validator(prop['part_text'])
     clean_text = validator.validate_text(text)
 
     # якщо немає other просто визначаємо категорію

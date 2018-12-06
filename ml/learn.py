@@ -7,7 +7,6 @@ import sys
 
 from lib.db import DB
 from lib.config import *
-
 from lib.validation import Validator
 
 nltk.download('punkt')
@@ -18,7 +17,7 @@ def get_data(categories):
     connection = DB(db_name=EDRSR)
 
 
-    sql = "SELECT `category`, `doc_text` FROM `ml_datasets` WHERE category IN {}".format(
+    sql = "SELECT `ml_datasets`.`category`, `ml_datasets`.`doc_text` FROM `ml_datasets` WHERE `ml_datasets`.`category` IN {}".format(
         str(tuple(categories))
     )
     data = connection.read(sql)
@@ -41,7 +40,7 @@ def train(clean_data, flag = False):
         pos = nltk.pos_tag(words)
         for w in words:
             # w = ( "Word", 'RR')
-            # all training sentences
+            # > 8 оскільки це словосполучення
             if len(w) > 8 :
                 all_words.append(w)
 
@@ -49,7 +48,7 @@ def train(clean_data, flag = False):
     all_words = nltk.FreqDist(all_words)
     word_features = [w for (w, c) in all_words.most_common(500)]
     if flag == '-w':
-        print(all_words.most_common(100))
+        print(all_words.most_common(300))
         sys.exit()
 
     def find_features(document):
@@ -66,9 +65,9 @@ def train(clean_data, flag = False):
         training_set = featuresets[:int(len(featuresets) / 2)]
         testing_set = featuresets[int(len(featuresets) / 2):]
 
-        classifier = nltk.NaiveBayesClassifier.train(training_set)
+        classifier = nltk.NaiveBayesClassifier.train(featuresets)
 
-        print("Original Naive Bayes Algo accuracy percent:", (nltk.classify.accuracy(classifier, testing_set)) * 100)
+        print("Original Naive Bayes Algo accuracy percent:", (nltk.classify.accuracy(classifier, featuresets)) * 100)
         sys.exit()
 
     classifier = nltk.NaiveBayesClassifier.train(featuresets)
