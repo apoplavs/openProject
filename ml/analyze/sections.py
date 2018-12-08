@@ -128,7 +128,7 @@ class Civil(Section):
             app_documents = self._get_application_documents(
                 application['cause_num']
             )
-            date_dict = {}
+            date_dict = {'start_adj_date' : None}
             pause_time = None
             pause_days = 0
             for document in app_documents:
@@ -137,14 +137,18 @@ class Civil(Section):
                     text=doc_text,
                     anticipated_category=8
                 )
-                if category == 8:
+                # якщо зустрівся документ про початок спрви, і раніше початку не було
+                if category == 8 and date_dict['start_adj_date'] != None:
                     date_dict['start_adj_date'] = document['adjudication_date']
                 elif category == 9:
                     pause_time = document['adjudication_date']
-                elif category == 10:
+                # якщо зустрівся документ про відновлення справи, і перед тим був документ про зупинення
+                elif category == 10 and  pause_time :
                     resume_time = document['adjudication_date']
-                    pause_days =  pause_days + (pause_time - resume_time).days
-                elif category == 11:
+                    pause_days += (pause_time - resume_time).days
+
+                # якщо зустрілась ухвала про закінчення, або кінцеве рішення по справі
+                elif category == 11 or document['judgment_code'] == 3:
                     date_dict['end_adj_date'] = document['adjudication_date']
                     if 'start_adj_date' in date_dict:
                         interval = date_dict['start_adj_date'] - date_dict['end_adj_date']
@@ -152,6 +156,9 @@ class Civil(Section):
                             self.data_dict['cases_on_time'] += 1
                         else:
                             self.data_dict['cases_not_on_time'] += 1
+                    else:
+                        #todo значення для date_dict['start_adj_date'] потрібно взяти з auto_assigned_cases
+                        pass
         print(f"Days on time:{self.data_dict['cases_on_time']}")
         print(f"Days not on time:{self.data_dict['cases_not_on_time']}")
 
