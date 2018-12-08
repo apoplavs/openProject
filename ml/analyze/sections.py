@@ -87,7 +87,7 @@ class Section:
                      f"WHERE court_code={self.judge.court_code} "
                      f"AND cause_num='{cause_num}' "
                      f"AND judgment_code IN ({j_codes}) "
-                     f"ORDER BY adjudication_date DESC")
+                     f"ORDER BY adjudication_date ASC")
         edrsr = DB(db_name=EDRSR)
         documents = edrsr.read(sql_query)
         return documents
@@ -133,17 +133,21 @@ class Civil(Section):
             pause_days = 0
             for document in app_documents:
                 doc_text = document['doc_text']
-                category = guess_category(
-                    text=doc_text,
-                    anticipated_category=8
-                )
+                if document['judgment_code'] == 3:
+                    category = 11
+                else:
+                    category = guess_category(
+                        text=doc_text,
+                        anticipated_category=8
+                    )
                 if category == 8:
                     date_dict['start_adj_date'] = document['adjudication_date']
                 elif category == 9:
                     pause_time = document['adjudication_date']
                 elif category == 10:
                     resume_time = document['adjudication_date']
-                    pause_days += (pause_time - resume_time).days
+                    if pause_time and resume_time:
+                        pause_days += (pause_time - resume_time).days
                 elif category == 11:
                     date_dict['end_adj_date'] = document['adjudication_date']
                     if 'start_adj_date' in date_dict:
