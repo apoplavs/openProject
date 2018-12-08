@@ -20,3 +20,5 @@ yarn-error.log
 /ml/config.json
 /ml/lib/config.py
 /ml/.idea
+/analyze/__pycache__
+/lib/__pycache__
