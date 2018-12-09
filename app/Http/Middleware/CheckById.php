@@ -5,6 +5,7 @@ namespace Toecyd\Http\Middleware;
 use Closure;
 use Exception;
 use Toecyd\Court;
+use Toecyd\CourtSession;
 use Toecyd\Judge;
 
 /**
@@ -35,6 +36,8 @@ class CheckById
 				return $this->checkJudgeById($request, $next);
 			case 'court':
 				return $this->checkCourtById($request, $next);
+			case 'session':
+				return $this->checkSessionById($request, $next);
 		}
 		// якщо передана невалідна назва об'єкту
 		throw new Exception("Unknown guard: " . $guard);
@@ -67,6 +70,21 @@ class CheckById
 		if (!Court::checkCourtById($this->id)) {
 			return response()->json([
 				'message' => 'Неіснуючий код суду!'
+			], 422);
+		}
+		
+		return $next($request);
+	}
+	
+	/**
+	 * Перевіряє, чи існує в БД судове засідання з таким id
+	 * @return mixed
+	 */
+	private function checkSessionById($request, Closure $next) {
+		
+		if (!CourtSession::checkSessionById($this->id)) {
+			return response()->json([
+				'message' => 'Неіснуючий id судового засідання!'
 			], 422);
 		}
 		

@@ -696,6 +696,7 @@ class JudgesController extends Controller
      *              description="Список судових засідань даного судді розташований в хронологічному порядку",
      *              @SWG\Items(
      *                  type="object",
+	 *     				@SWG\Property(property="id", type="integer", description="Id засідання"),
      *                  @SWG\Property(property="date", type="string", description="Час та дата розгляду"),
      *                  @SWG\Property(property="number", type="string", description="Номер справи"),
      *                  @SWG\Property(property="judges", type="string", description="Склад суду"),
@@ -734,6 +735,7 @@ class JudgesController extends Controller
 	 *							},
 	 *     						"court_sessions": {
 	 *								{
+	 *     							"id": 12457,
 	 *								"date": "2018-11-18 12:30:00",
 	 *								"number": "752/12199/18",
 	 *								"judges": "головуючий суддя: Воробйов Андрій Володимирович; учасник колегії: Ходько В М; учасник колегії: Наполов Микола Іванович",
@@ -743,6 +745,7 @@ class JudgesController extends Controller
 	 *								"is_bookmark": 0
 	 *								},
 	 *								{
+	 *     							"id": 42527,
 	 *								"date": "2018-11-19 14:00:00",
 	 *								"number": "752/20790/18",
 	 *								"judges": "Наполов Микола Іванович",
@@ -794,6 +797,185 @@ class JudgesController extends Controller
             'court_sessions' => $court_sessions,
         ]);
     }
+	
+	
+	/**
+	 *
+	 * @SWG\Get(
+	 *     path="/guest/judges/{id}",
+	 *     summary="Дані про певного суддю для незареєстрованого користувача",
+	 *     description="Даний маршрут працює так же як /judges/{id}, за винятком того, що не вимагає авторизації користувача і не повертає даних що стосуються користувача",
+	 *     operationId="guest-judges-id",
+	 *     produces={"application/json"},
+	 *     tags={"Судді"},
+	 *     @SWG\Parameter(
+	 *      ref="#/parameters/Content-Type",
+	 *     ),
+	 *     @SWG\Parameter(
+	 *      ref="#/parameters/X-Requested-With",
+	 *     ),
+	 *    @SWG\Parameter(
+	 *     name="id",
+	 *     in="path",
+	 *     required=true,
+	 *     description="Id судді, про якого потрібно отримати дані",
+	 *     type="integer",
+	 *     collectionFormat="multi",
+	 *     uniqueItems=true,
+	 *     minimum=1,
+	 *     maximum=15000,
+	 *     allowEmptyValue=false
+	 *     ),
+	 *
+	 *     @SWG\Response(
+	 *         response=200,
+	 *         description="ОК",
+	 *         @SWG\Schema(
+	 *          @SWG\Property(
+	 *              property="data",
+	 *              description="Ідентифікаційні дані про поточного суддю",
+	 *              type="array",
+	 *              @SWG\Items(
+	 *                  type="object",
+	 *                  @SWG\Property(property="id", type="integer", description="id судді"),
+	 *                  @SWG\Property(property="surname", type="string", description="Прізвище судді"),
+	 *                  @SWG\Property(property="name", type="string", description="Ім'я судді"),
+	 *                  @SWG\Property(property="patronymic", type="string", description="По батькові судді"),
+	 *                  @SWG\Property(property="photo", type="string", description="URL фото судді"),
+	 *                  @SWG\Property(property="status", type="integer", description="Id поточного статусу судді
+	 *                      1 - суддя на роботі
+	 *                      2 - На лікарняному
+	 *                      3 - У відпустці
+	 *                      4 - Відсуній на робочому місці з інших причин
+	 *                      5 - Припинено повноваження"),
+	 *                  @SWG\Property(property="updated_status", type="string", description="Дата останнього оновлення статусу"),
+	 *                  @SWG\Property(property="due_date_status", type="string", description="Дата дії статусу (до якого часу даний статус буде діяти)"),
+	 *                  @SWG\Property(property="rating", type="integer", description="Місце в рейтингу серед усіх суддів"),
+	 *                  @SWG\Property(property="court_name", type="string", description="Назва суду, в якому даний суддя працює"),
+	 *                  @SWG\Property(property="court_address", type="string", description="Адреса суду в якому працює судя на дний момент"),
+	 *                  @SWG\Property(property="court_phone", type="string", description="Телефон суду"),
+	 *                  @SWG\Property(property="court_email", type="string", description="email суду"),
+	 *                  @SWG\Property(property="court_site", type="string", description="Посилання на сайт суду"),
+	 *                  @SWG\Property(property="likes", type="integer", description="Загальна кількість лайків усіх користувачів для даного судді"),
+	 *              )
+	 *          ),
+	 *
+	 *         @SWG\Property(
+	 *              property="previous_works",
+	 *              type="array",
+	 *              description="Список попередніх місць роботи розташований в хронологічному порядку, (якщо суддя раніше працював в інших судах), або пустий масив",
+	 *              @SWG\Items(
+	 *                  type="object",
+	 *                  @SWG\Property(property="court_name", type="string", description="Назва суду, в якому даний суддя працював раніше"),
+	 *                  ),
+	 *              ),
+	 *
+	 *         @SWG\Property(
+	 *              property="court_sessions",
+	 *              type="array",
+	 *              description="Список судових засідань даного судді розташований в хронологічному порядку",
+	 *              @SWG\Items(
+	 *                  type="object",
+	 *                  @SWG\Property(property="date", type="string", description="Час та дата розгляду"),
+	 *                  @SWG\Property(property="number", type="string", description="Номер справи"),
+	 *                  @SWG\Property(property="judges", type="string", description="Склад суду"),
+	 *     				@SWG\Property(property="fоrma", type="string", description="Форма судочинства [Цивільне, Кримінальне ...]"),
+	 *                  @SWG\Property(property="involved", type="string", description="Сторони у справі"),
+	 *                  @SWG\Property(property="description", type="string", description="Суть справи"),
+	 *              ),
+	 *            ),
+	 *          ),
+	 *         examples={"application/json":
+	 *              {
+	 *                  "data": {
+	 *							"id": 12054,
+	 *							"surname": "Наполов",
+	 *							"name": "Микола",
+	 *							"patronymic": "Іванович",
+	 *							"photo": "/img/judges/no_photo.jpg",
+	 *							"status": 1,
+	 *							"updated_status": "15.11.2018",
+	 *							"due_date_status": null,
+	 *							"rating": 0,
+	 *							"court_name": "Ніжинський міськрайонний суд Чернігівської області",
+	 *							"court_address": "16600, м. Ніжин, вул. Шевченка, 57 а",
+	 *							"court_phone": "(04631) 7-55-29",
+	 *							"court_email": "inbox@ng.cn.court.gov.ua",
+	 *							"court_site": "https://ng.cn.court.gov.ua",
+	 *							"likes": 427,
+	 *							"unlikes": 20
+	 *							},
+	 *							"previous_works": {
+	 *								"Новгород-Сіверський районний суд Чернігівської області"
+	 *							},
+	 *     						"court_sessions": {
+	 *								{
+	 *								"date": "2018-11-18 12:30:00",
+	 *								"number": "752/12199/18",
+	 *								"judges": "головуючий суддя: Воробйов Андрій Володимирович; учасник колегії: Ходько В М; учасник колегії: Наполов Микола Іванович",
+	 *								"forma": "Кримінальне",
+	 *								"involved": "",
+	 *								"description": ""
+	 *								},
+	 *								{
+	 *								"date": "2018-11-19 14:00:00",
+	 *								"number": "752/20790/18",
+	 *								"judges": "Наполов Микола Іванович",
+	 *								"forma": "Цивільне",
+	 *								"involved": "Позивач: АТ КБ БАНК, відповідач: Шевченко Іван Іваноич",
+	 *								"description": "про стягнення заборгованості"
+	 *								},
+	 *     						}
+	 *              	}
+	 *	 		}
+	 *     ),
+	 *     @SWG\Response(
+	 *         response=422,
+	 *         description="Передані не валідні дані, у відповіді буде зазначена причина",
+	 *         examples={"application/json":
+	 *              {
+	 *                  "message": "Неіснуючий id судді!"
+	 *              }
+	 *          }
+	 *     ),
+	 *
+	 *     @SWG\Response(
+	 *         response=405,
+	 *         description="Метод, з яким виконувався запит, не дозволено використовувати для заданого ресурсу; наприклад, запит був здійснений за методом POST, хоча очікується GET.",
+	 *     )
+	 * )
+	 */
+	public function showGuest($id) {
+		$data = Judge::getJudgeDataGuest($id);
+		$previous_works = [];
+		$last_work = $data['previous_work'];
+		
+		while ($last_work) {
+			$pw = Judge::getPreviousWork($last_work);
+			$previous_works[] = $pw['court_name'];
+			$last_work = $pw['previous_work'];
+		}
+		$court_sessions = CourtSession::getSessionByJudgeGuest($id);
+		
+		return response()->json([
+			'data' => $data,
+			'previous_works' => $previous_works,
+			'court_sessions' => $court_sessions,
+		]);
+	}
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     /**
      * Show the form for editing the specified resource.
