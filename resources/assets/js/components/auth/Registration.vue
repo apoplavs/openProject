@@ -98,6 +98,7 @@
                             </button>
                         </div>
                     </div>
+                    <login-facebook/>
                 </form>
             </div>
         </div>
@@ -106,8 +107,13 @@
 </template>
 
 <script>
-    export default {
-        name: "Registration",
+    import LoginFacebook from "../shared/LoginFacebook.vue";
+
+	export default {
+		components: {
+			LoginFacebook
+        },
+		name: "Registration",
         data() {
             return {
                 user: {
@@ -115,7 +121,7 @@
                     email: '',
                     password: '',
                     repassword: ''
-                }
+                },
             }
         },
         methods: {
@@ -170,7 +176,7 @@
                 });
             }
         }
-    };
+    }
 </script>
 
 <style lang="scss" scoped>

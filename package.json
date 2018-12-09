@@ -38,6 +38,7 @@
     "vue-ads-pagination": "^1.1.0",
     "vue-date": "^1.1.10",
     "vue-doughnut-chart": "0.0.5",
+    "vue-facebook-signin-button": "^1.0.1",
     "vue-google-charts": "^0.3.2",
     "vue-google-signin-button": "^1.0.2",
     "vue-router": "^3.0.1",
