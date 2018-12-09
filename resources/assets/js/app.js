@@ -6,7 +6,6 @@ import VeeValidate, { Validator } from 'vee-validate';
 import uk from 'vee-validate/dist/locale/uk';
 import Toasted from 'vue-toasted';
 import Vuex from 'vuex';
-import FBSignInButton from 'vue-facebook-signin-button';
 
 
 import AppComponent from './components/AppComponent.vue';
@@ -16,7 +15,6 @@ Vue.use(VeeValidate);
 Vue.use(VueRouter);
 Vue.use(Toasted);
 Vue.use(Vuex);
-Vue.use(FBSignInButton);
 
 Validator.localize('uk', uk);
 window.axios = axios;
