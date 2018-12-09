@@ -16,7 +16,6 @@
                         </select>
                     </div>
                 </div>
-                <pre>{{judgeStatus.due_date}}</pre>
                 <div class="form-group row mx-0 my-4">
                     <label for="status-end-date" class="col-7">Дата завершення дії статусу <br><sup class="text-muted">(якщо відома)</sup></label>
                     <div class="col-5">
@@ -63,7 +62,10 @@
                 }
             }
         },
-        created() {            
+        created() {
+            if (!this.isAuth) {
+                this.$router.push('/login');
+            }       
             this.judgeStatus.set_status = this.judgeData.status;
             this.judgeStatus.due_date = this.formattingDate(this.judgeData.due_date_status);
 

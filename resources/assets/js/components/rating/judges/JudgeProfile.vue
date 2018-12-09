@@ -10,7 +10,7 @@
                         </div>
                         <div class="w-75 px-3">
                             <div class="main-info pb-2">
-                                <h3>{{ judge.data.name + ' ' + judge.data.surname + ' ' + judge.data.patronymic }}</h3>
+                                <h3>{{ judge.data.surname + ' ' + judge.data.name + ' ' + judge.data.patronymic }}</h3>
                                 <div class="d-flex">
                                     <i class="fa fa-university" aria-hidden="true"></i>
                                     <h5 class="court-name"> {{ judge.data.court_name }}</h5>
@@ -18,6 +18,10 @@
                                 <div class="detail-info mt-2" v-if="judge.data.court_address">
                                     <i class="fas fa-map-marker-alt"></i>
                                     <span>{{ judge.data.court_address }}</span>
+                                </div>
+                                <!-- previous works -->
+                                <div class="detail-info" v-for="(prevWork, ind_1) in judge.previous_works" :key="ind_1 + 'H'" v-if="ind_1 < 3">
+                                    <span>{{ prevWork }}</span>
                                 </div>
                                 <div class="detail-info mt-1" v-if="judge.data.court_phone">
                                     <i class="fas fa-phone"></i>
@@ -35,7 +39,7 @@
                             <div class="status-info">
                                 <div class="status my-2">
                                     <div class="w-50 d-flex align-items-center">
-                                        <!-- status -->
+                                        <!-- status component-->
                                         <status-component :judgeData="judge.data" />
                                         <span><i class="fas fa-edit float-right pl-3" aria-hidden="true" @click="showModal = true"></i></span>
                                     </div>
@@ -202,13 +206,14 @@
                 </div>
              </div>
         </div>
+        <GChart tupe="PieChart"/>
         <!-- modal change status -->
         <change-status v-if="showModal" :judgeData="judge.data" @closeModal="showModal = !showModal"  />
     </div>
 </template>
 
 <script>
-    import GChart from "vue-google-charts";
+    import { GChart } from "vue-google-charts";
     import DoughnutChart from 'vue-doughnut-chart'
     import _ from 'lodash';
 
@@ -290,9 +295,7 @@
             }
         },
         beforeMount() {
-            if (!this.isAuth) {
-                this.$router.push("/login");
-            } else {
+            if (this.isAuth) { 
                 axios
                     .get(`/api/v1/judges/${this.$route.params.id}`, {
                         headers: {
@@ -303,8 +306,25 @@
                     })
                     .then(response => {
                         this.judge = response.data;
+                        this.loadData = true;                        
+                    })
+                    .catch(error => {
+                        if (error.response.status === 401) {
+                            this.$router.push('/login');
+                        }
+                        console.log('error');
+                    });
+            } else {
+                axios
+                    .get(`/api/v1/guest/judges/${this.$route.params.id}`, {
+                        headers: {
+                            "Content-Type": "application/json",
+                            "X-Requested-With": "XMLHttpRequest",
+                        },
+                    })
+                    .then(response => {
+                        this.judge = response.data;
                         this.loadData = true;
-                        console.log(this.judge);
                         
                     })
                     .catch(error => {
@@ -313,6 +333,7 @@
                         }
                         console.log('error');
                     });
+
             }
         },
         methods: {
@@ -364,6 +385,9 @@
                 if (!this.isAuth) {
                     this.$router.push("/login");
                 }
+                if (this.judge.data.is_unliked) {
+                    this.changeUnlikes();
+                }
                 if (this.judge.data.is_liked) {
                     // dell like
                     axios({
@@ -413,6 +437,9 @@
             changeUnlikes() {
                 if (!this.isAuth) {
                     this.$router.push("/login");
+                }
+                if (this.judge.data.is_liked) {
+                    this.changeLikes();
                 }
                 if (this.judge.data.is_unliked) {
                     // dell unlike

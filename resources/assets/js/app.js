@@ -9,6 +9,11 @@ import Vuex from 'vuex';
 
 import AppComponent from './components/AppComponent.vue';
 import router from './scripts/router';
+import GSignInButton from 'vue-google-signin-button';
+Vue.use(GSignInButton);
+// import VueGoogleCharts from 'vue-google-charts'
+ 
+// Vue.use(VueGoogleCharts)
 
 Vue.use(VeeValidate);
 Vue.use(VueRouter);
