@@ -107,7 +107,7 @@
 </template>
 
 <script>
-    import LoginFacebook from "../shared/LoginFacebook.vue";
+    import LoginFacebook from "../shared/FacebookSignInButton.vue";
 
 	export default {
 		components: {

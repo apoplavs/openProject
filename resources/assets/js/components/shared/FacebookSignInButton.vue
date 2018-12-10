@@ -44,13 +44,33 @@
 
 		},
 		methods: {
+			getUserData(callback) {
+				axios
+					.get('/api/v1/user', {
+						headers: {
+							"Content-Type": "application/json",
+							"X-Requested-With": "XMLHttpRequest",
+							"Authorization": localStorage.getItem('token')
+						}
+
+					})
+					.then(response => {
+						let name = response.data.name;
+						let email = response.data.email;
+						localStorage.setItem("name", name);
+						localStorage.setItem("email", email);
+						console.log('Response', response);
+						callback();
+					})
+					.catch(error => {
+						console.log('ERR ', error);
+					});
+			},
 			onSignInSuccess (response) {
+				const _this = this;
 				FB.api('/me', 'GET', {fields: 'id,email,first_name,last_name'}, user_data => {
 					user_data.name = user_data.first_name;
 					user_data.surname = user_data.last_name;
-
-					console.log(`Good to see you`);
-					console.log(user_data);
 
 					axios.post('/api/v1/login/facebook', user_data, {
 						headers: {
@@ -72,14 +92,14 @@
 									this.$toasted.error(error.response.data.message, {
 										theme: "primary",
 										position: "top-right",
-										duration: 5000
+										duration: 15000
 									});
 								}
 							} else {
-								this.$toasted.error("Щось пішло не так :( Спробуйте ввійти через google", {
+								this.$toasted.error("Щось пішло не так :(  Спробуйте ввійти через google", {
 									theme: "primary",
 									position: "top-right",
-									duration: 5000
+									duration: 15000
 								});
 								alert(error);
 							}
@@ -87,7 +107,7 @@
 				});
 			},
 			onSignInError (error) {
-				this.$toasted.error('Щось пішло не так :( Спробуйте ввійти іншим способом', {
+				this.$toasted.error('Щось пішло не так :(  Спробуйте ввійти іншим способом', {
 					theme: "primary",
 					position: "top-right",
 					duration : 10000
@@ -108,6 +128,7 @@
 		border-radius: 3px;
 		background-color: #4267b2;
 		color: #fff;
+		cursor: pointer;
 	}
 
 </style>

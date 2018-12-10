@@ -54,18 +54,21 @@
                             </div>
                         </div>
                     </div>
-                    <g-signin-button/>
+                    <!--<g-signin-button/>-->
                 </form>
-                <div class="fb-login-button" data-max-rows="1" data-size="medium" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false" @click="checkLoginState()">
-                </div>
+                <login-facebook/>
             </div>
-        </div>    
+        </div>
     </div>
     </div>
 </template>
 
 <script>
+	import LoginFacebook from "../shared/FacebookSignInButton.vue";
     export default {
+		components: {
+			LoginFacebook
+		},
         name: "Login",
         data() {
             return {

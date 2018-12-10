@@ -86,7 +86,7 @@
                 this.email = localStorage.getItem('email')
             }
         },
-        methods: {  
+        methods: {
             logout() {
                 axios
                     .get("/api/v1/logout", {
