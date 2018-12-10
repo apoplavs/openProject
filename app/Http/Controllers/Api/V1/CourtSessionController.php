@@ -2,8 +2,9 @@
 
 namespace Toecyd\Http\Controllers\Api\V1;
 
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Toecyd\Http\Controllers\Controller;
+use Toecyd\UserBookmarkSession;
 
 /**
  * Class CourtSessionController
@@ -11,7 +12,156 @@ use Toecyd\Http\Controllers\Controller;
  */
 class CourtSessionController extends Controller
 {
-	public function addSessionBookmark($id) {
-	
-	}
+    /**
+     * @SWG\Put(
+     *     path="/court-sessions/{id}/bookmark",
+     *     summary="Додати судове засідання в закладки",
+     *     description="Додати судове засідання, в закладки поточного користувача",
+     *     operationId="courtSessions-addBookmark",
+     *     produces={"application/json"},
+     *     tags={"Судові засідання"},
+     *     security={
+     *     {"passport": {}},
+     *      },
+     *     @SWG\Parameter(
+     *      ref="#/parameters/Content-Type",
+     *     ),
+     *     @SWG\Parameter(
+     *      ref="#/parameters/X-Requested-With",
+     *     ),
+     *
+     *    @SWG\Parameter(
+     *     name="id",
+     *     in="path",
+     *     required=true,
+     *     description="Id судового засідання, якого потрібно додати в закладки поточного користувача",
+     *     type="integer",
+     *     collectionFormat="multi",
+     *     uniqueItems=true,
+     *     minimum=1,
+     *     maximum=15000,
+     *     allowEmptyValue=false
+     *     ),
+     *
+     *     @SWG\Response(
+     *         response=201,
+     *         description="Закладка упішно створена",
+     *         examples={"application/json":
+     *              {
+     *                  "message": "Закладка успішно створена"
+     *              }
+     *          }
+     *     ),
+     *
+     *     @SWG\Response(
+     *         response=401,
+     *         description="Необхідна аутентифікація користувача",
+     *         examples={"application/json":
+     *              {
+     *                  "message": "Unauthenticated",
+     *              }
+     *          }
+     *     ),
+     *
+     *     @SWG\Response(
+     *         response=405,
+     *         description="Метод, з яким виконувався запит, не дозволено використовувати для заданого ресурсу; наприклад, запит був здійснений за методом POST, хоча очікується PUT.",
+     *     ),
+     *
+     *     @SWG\Response(
+     *         response=422,
+     *         description="Передані не валідні дані, неіснуючий id, або дана закладка вже існує",
+     *         examples={"application/json":
+     *              {
+     *                  "message": "Неіснуючий id",
+     *              }
+     *          }
+     *     ),
+     * )
+     */
+	public function addSessionBookmark($court_session_id) {
+	    $user_id = Auth::user()->id;
+        $court_session_id = intval($court_session_id);
+
+        if (UserBookmarkSession::checkBookmark($user_id, $court_session_id)) {
+            return response()->json(['message' => 'Закладка вже існує'], 422);
+        }
+
+        UserBookmarkSession::createBookmark($user_id, $court_session_id);
+        return response()->json(['message' => 'Закладка успішно створена'], 201);
+    }
+
+    /**
+     * @SWG\Delete(
+     *     path="/court-sessions/{id}/bookmark",
+     *     summary="Видалити судове засідання з закладок",
+     *     description="Видалити судове засідання, з закладок поточного користувача",
+     *     operationId="courtSessions-delBookmark",
+     *     produces={"application/json"},
+     *     tags={"Судові засідання"},
+     *     security={
+     *     {"passport": {}},
+     *      },
+     *     @SWG\Parameter(
+     *      ref="#/parameters/Content-Type",
+     *     ),
+     *     @SWG\Parameter(
+     *      ref="#/parameters/X-Requested-With",
+     *     ),
+     *
+     *    @SWG\Parameter(
+     *     name="id",
+     *     in="path",
+     *     required=true,
+     *     description="Id судового засідання, якого потрібно видалити з закладок поточного користувача",
+     *     type="integer",
+     *     collectionFormat="multi",
+     *     uniqueItems=true,
+     *     minimum=1,
+     *     maximum=15000,
+     *     allowEmptyValue=false
+     *     ),
+     *
+     *     @SWG\Response(
+     *         response=204,
+     *         description="Закладка упішно видалена"
+     *     ),
+     *
+     *     @SWG\Response(
+     *         response=401,
+     *         description="Необхідна аутентифікація користувача",
+     *         examples={"application/json":
+     *              {
+     *                  "message": "Unauthenticated",
+     *              }
+     *          }
+     *     ),
+     *
+     *     @SWG\Response(
+     *         response=405,
+     *         description="Метод, з яким виконувався запит, не дозволено використовувати для заданого ресурсу; наприклад, запит був здійснений за методом POST, хоча очікується DELETE.",
+     *     ),
+     *
+     *     @SWG\Response(
+     *         response=422,
+     *         description="Передані не валідні дані, неіснуючий id, або даної закладки не існує",
+     *         examples={"application/json":
+     *              {
+     *                  "message": "Закладки не існує",
+     *              }
+     *          }
+     *     ),
+     * )
+     */
+    public function deleteSessionBookmark($court_session_id) {
+	    $user_id = Auth::user()->id;
+	    $court_session_id = intval($court_session_id);
+
+        if (!UserBookmarkSession::checkBookmark($user_id, $court_session_id)) {
+            return response()->json(['message' => 'Закладки не існує'], 422);
+        }
+
+        UserBookmarkSession::deleteBookmark($user_id, $court_session_id);
+        return response()->json([], 204);
+    }
 }

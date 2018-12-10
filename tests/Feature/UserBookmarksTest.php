@@ -9,14 +9,16 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Foundation\Testing\TestResponse;
 use Toecyd\UserBookmarkCourt;
 use Toecyd\UserBookmarkJudge;
+use Toecyd\UserBookmarkSession;
 
 class UserBookmarksTest extends BaseApiTest
 {
     const LIMIT = 2;
 
     const IDENT_TO_FIELD = [
-        'judges' => 'id',
-        'courts' => 'court_code',
+        'judges'         => 'id',
+        'courts'         => 'court_code',
+        'court-sessions' => 'id',
     ];
 
     public function setUp()
@@ -38,7 +40,7 @@ class UserBookmarksTest extends BaseApiTest
         foreach ($etalon_data as $ident => $rows) {
             foreach ($rows as $row) {
                 $this->put("api/v1/{$ident}/{$row[self::IDENT_TO_FIELD[$ident]]}/bookmark", [], $headers_with_token)
-                    ->assertStatus($etalonStatus);
+                     ->assertStatus($etalonStatus);
             }
         }
     }
@@ -57,7 +59,9 @@ class UserBookmarksTest extends BaseApiTest
     public function testAll()
     {
         $etalon_data = $this->getEtalonData();
-        $etalon_data_empty = array_map(function() {return [];}, $etalon_data);
+        $etalon_data_empty = array_map(function () {
+            return [];
+        }, $etalon_data);
         $headers_with_token = $this->headersWithToken($this->login($this->user_data));
 
         // Перевіряємо, що зразу ж після додавання користувача його закладки порожні
@@ -93,11 +97,18 @@ class UserBookmarksTest extends BaseApiTest
                 ->limit(self::LIMIT)
                 ->get()
                 ->all(),
+            'court-sessions' => call_user_func_array(['Toecyd\CourtSession', 'select'], UserBookmarkSession::getBookmarkFields())
+                ->join('courts', 'court_sessions.court', '=', 'courts.court_code')
+                ->limit(self::LIMIT)
+                ->get()
+                ->all(),
         ];
 
         // Застосовуємо toArray() до кожного рядка даних з результату
         foreach ($result as $key => $rows) {
-            $result[$key] = array_map(function ($row) {return $row->toArray();}, $rows);
+            $result[$key] = array_map(function ($row) {
+                return $row->toArray();
+            }, $rows);
         }
 
         return $result;

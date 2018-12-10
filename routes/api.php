@@ -95,7 +95,8 @@ Route::group(['prefix' => 'v1/', 'namespace' => 'Api\V1',], function () {
 		 */
 		// Додати судове засідання в закладки
 		Route::put('court-sessions/{id}/bookmark', 'CourtSessionController@addSessionBookmark')->middleware('checkId:session');
-		
+        // Видалити судове засідання з закладок
+        Route::delete('court-sessions/{id}/bookmark', 'CourtSessionController@deleteSessionBookmark')->middleware('checkId:session');
 		
 		
 		/**
