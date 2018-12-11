@@ -1,8 +1,8 @@
 <template>
-    <div class="user-profile content-wrapper">  
+    <div class="user-profile">  
         <div class="w-100">
             <div class="">
-                <ul class="nav nav-tabs" role="tablist">
+                <ul class="nav nav-tabs w-1140" role="tablist" >
                     <li class="nav-item">
                         <a class="nav-link active" href="#CourtSessions" role="tab" data-toggle="tab">Судові засідання</a>
                     </li>
@@ -22,7 +22,7 @@
             </div>
             <div class="d-flex justify-content-center">
                 <!-- Tab panes -->
-                <div class="tab-content w-1140">
+                <div class="tab-content container w-1140">
                     <div role="tabpanel" class="tab-pane  active" id="CourtSessions">
                         <court-sessions/>
                     </div>
@@ -73,14 +73,15 @@
 </script>
 
 <style scoped lang="scss">
-    // @import "_variables";
+    @import "../../../sass/_variables.scss";
+    // @import "../../../sass/_mixins.scss";
     .user-profile {
         display: flex;
         justify-content: center;
     }
     
     .w-1140 {
-        width: 1140px !important;
+        min-width: 1140px !important;
     }
     
     .nav.nav-tabs {
@@ -98,18 +99,24 @@
     
     .nav-tabs .nav-item.show .nav-link,
     .nav-tabs .nav-link.active {
-        color: #636b6f; //$text-color;
-        background-color: #eceaea; // $body-bg;
-        border: 2px solid #408080; // $logo-color;
-        border-bottom: none;
+        color: $text-color; //$text-color;
+        background-color: $body-bg; // $body-bg;
+        border: 0;
+        padding: 15px;
+        border-radius: 0;
+        border-top: 2px solid $main-color;
     }
     
     .nav-tabs .nav-item.show .nav-link,
     .nav-tabs .nav-link:not(.active) {
-        color: #636b6f; //$text-color;
-        background-color: inherit;
-        border: 2px solid #eceaea; // $body-bg;
-        border-bottom: none;
+        color: $text-muted;
+        background-color: #ffffff;
+        border: 0;
+        border-radius: 0;
+        padding: 15px;
+        &:hover {
+             background-color: $body-bg;
+        }
     }
 </style>
 
