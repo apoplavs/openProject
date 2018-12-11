@@ -11,7 +11,8 @@
             <!-- NAVIGATION -->
             <ul class="navbar-nav">
                 <!-- right -->
-                <router-link exact to="/" tag="li" class="nav-item" active-class="active">
+                <!-- <router-link :to="'/'" :class="{'router-link-active': $route.fullPath === '/'}" >На головну</router-link> -->
+                <router-link to="/" tag="li" class="nav-item" :class="{'router-link-active': $route.fullPath === ''}">
                     <a class="nav-link">На головну</a>
                 </router-link>
                 <li class="nav-item dropdown">
@@ -40,7 +41,7 @@
                         <a class="nav-link">Реєстрація</a>
                     </router-link>
                     <li class="nav-item dropdown" v-if="isAuth">
-                        <a class="nav-link dropdown-toggle" href="#" id="Second" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle user-name" href="#" id="Second" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     {{ name }}
                                 </a>
                         <div class="dropdown-menu" aria-labelledby="Second">
@@ -80,12 +81,7 @@
                 return localStorage.getItem('token');
             }
         },
-        watch: {
-            userData: function() {
-                this.name = localStorage.getItem('name');
-                this.email = localStorage.getItem('email')
-            }
-        },
+    
         methods: {
             logout() {
                 axios
@@ -98,6 +94,7 @@
                     })
                     .then(response => {
                         localStorage.clear();
+                        window.location.reload();
                         this.$router.push('/login')
                     })
                     .catch(error => {
@@ -117,7 +114,7 @@
 
 .active {
     > a.nav-link{
-   color:  #2b989b!important;
+   color:  $main-color !important;
     }
 }
     .navbar-light {
@@ -125,12 +122,16 @@
     }
     
     ul li a:hover {
-        color: #2b989b !important;
+        color: $main-color !important;
         cursor: pointer;
     }
     
     ul li a i {
         font-size: 1.1em;
+    }
+
+    .user-name {
+        border-color: 1px solid $main-color;
     }
     
     @media (min-width: 992px) {

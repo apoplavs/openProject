@@ -116,11 +116,12 @@
                             })
                             .then(response => {
                                 if (response) {
-                                    let token =
-                                        response.data.token_type + " " + response.data.access_token;
+                                    let token = response.data.token_type + " " + response.data.access_token;
                                     localStorage.setItem("token", token);
+                                    window.location.reload();
                                     _this.getUserData( () => {
-                                        _this.$router.push("/user-profile");
+                                        _this.$router.push("/user-profile"); 
+                                                                   
                                     });
                                 }
                             })
@@ -152,6 +153,10 @@
                 });
             },
            
+        },
+        beforeRouteLeave (to, from , next) {
+            location.reload()
+            next()
         }
     };
 </script>
