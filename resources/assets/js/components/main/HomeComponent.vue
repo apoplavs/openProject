@@ -13,11 +13,7 @@
 
 <script>
     export default {
-        name: 'home-component',
-    
-        mounted() {
-            console.log('Component mounted.')
-        }
+        name: 'HomeComponent'
     }
 </script>
 

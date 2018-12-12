@@ -12,15 +12,18 @@ export default {
   components: {
     MoonLoader
   },
-  data: () => ({
-    color: '#2b989b',
-    size: '70px'
-  }),
+  data() {
+    return {
+      color: '#2b989b',
+      size: '70px'
+    }
+  },
 };
 </script>
 <style scoped lang="scss">
     @import "../../../sass/_variables.scss";
     @import "../../../sass/_mixins.scss";
+
     .spinner {
         min-height: 400px;
         width: 100%;

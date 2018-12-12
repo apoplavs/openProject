@@ -1,6 +1,5 @@
 <template>
-    <div class="courtPractice">
-       
+    <div class="courtPractice">      
     </div>
 </template>
 

@@ -54,19 +54,23 @@
                             </div>
                         </div>
                     </div>
+                    <!--<g-signin-button/>-->
                 </form>
-                <div class="fb-login-button" data-max-rows="1" data-size="medium" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false" @click="checkLoginState()">
-                </div>
+                <login-facebook/>
             </div>
-        </div>    
+        </div>
     </div>
     </div>
 </template>
 
 <script>
+	import LoginFacebook from "../shared/FacebookSignInButton.vue";
     export default {
-        name: "login",
-        data: () => {
+		components: {
+			LoginFacebook
+		},
+        name: "Login",
+        data() {
             return {
                 user: {
                     email: "",
@@ -112,11 +116,12 @@
                             })
                             .then(response => {
                                 if (response) {
-                                    let token =
-                                        response.data.token_type + " " + response.data.access_token;
+                                    let token = response.data.token_type + " " + response.data.access_token;
                                     localStorage.setItem("token", token);
+                                    window.location.reload();
                                     _this.getUserData( () => {
-                                        _this.$router.push("/user-profile");
+                                        _this.$router.push("/user-profile"); 
+                                                                   
                                     });
                                 }
                             })
@@ -148,6 +153,10 @@
                 });
             },
            
+        },
+        beforeRouteLeave (to, from , next) {
+            location.reload()
+            next()
         }
     };
 </script>

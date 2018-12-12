@@ -145,13 +145,19 @@
 </template>
 
 <script>
-  import JudgeComponent from './JudgeComponent.vue';
-  import Spinner from '../../shared/Spinner.vue';
   import VueAdsPagination from 'vue-ads-pagination';
   import _ from 'lodash';
   
+  import JudgeComponent from './JudgeComponent.vue';
+  import Spinner from '../../shared/Spinner.vue';
+  
   export default {
     name: "judges-list",
+    components: {
+      JudgeComponent,
+      VueAdsPagination,
+      Spinner
+    },
     data() {
       return {
         loadData: false,
@@ -299,11 +305,6 @@
         console.log('status data', this.judgesList); 
       }
     },
-    components: {
-      JudgeComponent,
-      VueAdsPagination,
-      Spinner
-    }
   };
 </script>
 
