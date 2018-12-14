@@ -2,6 +2,7 @@
 
 namespace Toecyd;
 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
@@ -103,4 +104,30 @@ class UserBookmarkSession extends Model
             ->values() // перенумеровуємо елементи колекції (після unique вони занумеровані не підряд)
         );
     }
+	
+	
+	/**
+	 * отримати всі закладки для всіх користувачів
+	 * на судові засідання які вже пройшли тобто <= current_day
+	 *
+	 */
+	public static function getPastSession() {
+    	return (static::select('user_bookmark_sessions.id', 'court_sessions.number')
+			->join('court_sessions', 'court_sessions.id', '=', 'user_bookmark_sessions.court_session')
+			->where('court_sessions.date', '<', Carbon::now('Europe/Kiev'))
+			->get()
+		);
+	}
+	
+	
+	/**
+	 * Оновити закладку користувача
+	 * встановити id майбутнього судового засідання
+	 * @param $new_session
+	 */
+	public static function updateUserBookmark($bookmard_id, $new_session) {
+		static::where('user_bookmark_sessions.id', '=', $bookmard_id)
+			->update(['user_bookmark_sessions.court_session' => $new_session]);
+		
+	}
 }

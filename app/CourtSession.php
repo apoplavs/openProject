@@ -2,6 +2,7 @@
 
 namespace Toecyd;
 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
@@ -13,7 +14,14 @@ use Illuminate\Database\Eloquent\Model;
  */
 class CourtSession extends Model
 {
-    public static function getCourtSessionId($courtCode, $date, $number) {
+	
+	/**
+	 * @param $courtCode
+	 * @param $date
+	 * @param $number
+	 * @return mixed
+	 */
+	public static function getCourtSessionId($courtCode, $date, $number) {
         return DB::table('court_sessions')
             ->select('id')
             ->where('court', '=', $courtCode)
@@ -98,4 +106,17 @@ class CourtSession extends Model
 		// 
 		
     }
+	
+	
+	/**
+	 * отримати найближче майбутнє судове засідання за номером справи
+	 * якщо воно існує
+	 */
+	public static function getFutureSession($number) {
+		$future_session = static::select('court_sessions.id')
+			->where('court_sessions.date', '>', Carbon::now('Europe/Kiev'))
+			->where('court_sessions.number', '=', $number)
+			->first();
+		return ($future_session);
+	}
 }
