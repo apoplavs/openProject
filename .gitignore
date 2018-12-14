@@ -18,3 +18,4 @@ yarn-error.log
 /ml/nltk_packages
 /ml/pickles
 /ml/.idea
+/ml/lib/config.py
