@@ -98,6 +98,7 @@
                             </button>
                         </div>
                     </div>
+                    <login-facebook/>
                 </form>
             </div>
         </div>
@@ -106,16 +107,21 @@
 </template>
 
 <script>
-    export default {
-        name: "registration",
-        data: () => {
+    import LoginFacebook from "../shared/FacebookSignInButton.vue";
+
+	export default {
+		components: {
+			LoginFacebook
+        },
+		name: "Registration",
+        data() {
             return {
                 user: {
                     name: '',
                     email: '',
                     password: '',
                     repassword: ''
-                }
+                },
             }
         },
         methods: {

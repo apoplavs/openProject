@@ -1,7 +1,4 @@
-// Fonts
-// @import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
 
-// Variables
 @import "_variables";
 @import "_mixins";
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&subset=cyrillic');
@@ -59,7 +56,8 @@ button {
   }
 }
 
-// Customize card 
+//- Customize card -//
+
 .card {
   border: none;
   @include boxShadow($shadow-light);
@@ -70,7 +68,8 @@ button {
   color: #ffffff;
   font-size: 1.5rem;
 }
-// --------------
+
+// -------------- //
 
 i[class^="fa-bookmark"],
 i.fa-edit{
@@ -101,11 +100,9 @@ i.fa-edit{
 .fa-edit {
     color: $color-5;
 }
- 
-// -------------
-// .max-width {
-//   min-width: 1140px !important;
-// }
+
+// ------------- //
+
 .content-wrapper {
   min-width: 1140px;
   height: 100vh;

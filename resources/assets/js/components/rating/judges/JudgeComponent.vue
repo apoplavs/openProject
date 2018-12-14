@@ -5,8 +5,7 @@
             <div v-if="this.judgesList && this.judgesList.length > 0">
                 <div class="judge-component row py-3 mx-1" v-for="(judge, index) of this.judgesList" :key="index">
                     <div class="col-9 d-flex pl-0 main-info">
-                        <div class="mr-3">
-                            <img class="avatar" :src="judge.photo" alt="фото" /></div>
+                        <div class="mr-3"><img class="avatar" :src="judge.photo" alt="фото" /></div>
                         <div>
                             <h5>
                                 <router-link :to="`/judges/${judge.id}`"> {{ judge.surname }} {{ (judge.name.length != 1) ? judge.name : judge.name + '.' }} {{ judge.patronymic.length != 1 ? judge.patronymic : judge.patronymic + '.' }} </router-link>
@@ -18,8 +17,8 @@
                         <div class="align-center pb-3">
                             <div class="w-75">
                                 <span class="float-left">
-                                        <i class="fa fa-line-chart float-right" aria-hidden="true"> {{ judge.rating }} </i>
-                                    </span>
+                                    <i class="fa fa-line-chart float-right" aria-hidden="true"> {{ judge.rating }} </i>
+                                </span>
                             </div>
                             <div class="w-25 bookmark">
                                 <span v-if="judge.is_bookmark" @click="changeBookmarkStatus(judge)"><i class="fa fa-bookmark" aria-hidden="true"></i></span>
@@ -29,8 +28,7 @@
                         <div class="align-center">
                             <div class="w-75">
                                 <!-- status-component -->
-                                <status-component :judgeData="judge" />
-                                
+                                <status-component :judgeData="judge" />         
                             </div>
                             <div class="w-25"><i class="fas fa-edit p-1 float-right" aria-hidden="true" @click="showModal(judge)"></i></div>
                         </div>
@@ -38,67 +36,31 @@
                 </div>
             </div>
         </div>
-        <!-- MODAL change status темплейт передаємо через слоти -->
-        <modal v-show="isModalVisible" @close="closeModal" @save="saveChanges">
-            <h4 slot="header">Оновити статус судді</h4>
-            <div slot="body">
-                <form>
-                    <div class="form-group row mx-0 my-4">
-                        <label for="chooser-judge-status" class="col-4">Статус</label>
-                        <div class="col-8">
-                            <select class="form-control" id="chooser-judge-status" v-model="judgeStatus.set_status" value="judgeStatus.set_status">
-                                <option value="1">на роботі</option>
-                                <option value="2">на лікарняному</option>
-                                <option value="3">у відпустці</option>
-                                <option value="4">відсутній на робочому місці</option>
-                                <option value="5">припинено повноваження</option>
-                            </select>
-                        </div>
-                        <input type="hidden" id="judge-for-new-status" value="0">
-                    </div>
-                    <div class="form-group row mx-0 my-4">
-                        <label for="status-end-date" class="col-7">Дата завершення дії статусу <br><sup class="text-muted">(якщо відома)</sup></label>
-                        <div class="col-5">
-                            <datepicker v-model="judgeStatus.due_date" :value="judgeStatus.due_date" language="uk" :min="calendar.startDate | formatDate" :max="calendar.endDate | formatDate">
-                            </datepicker>
-                        </div>
-                    </div>
-                </form>
-            </div>
-    
-        </modal>
+        <!-- modal change status -->
+        <change-status v-if="isModalVisible" :judgeData="currentJudge" @closeModal="isModalVisible = !isModalVisible"  />
     </div>
 </template>
 
 <script>
-    import Datepicker from "vue-date";
     import _ from 'lodash';
-    
-    import Modal from "../../shared/Modal.vue";
+
     import StatusComponent from "../../shared/StatusComponent.vue";
+    import ChangeStatus from "../../shared/ChangeStatus.vue";
+
     
     export default {
-        name: "judge-component",
+        name: "JudgeComponent",
         props: {
             judgesList: Array
         },
         components: {
-            Modal,
-            Datepicker,
-            StatusComponent
+            StatusComponent,
+            ChangeStatus
         },
         data() {
             return {
                 isModalVisible: false,
-                changeStatusId: null,
-                judgeStatus: {
-                    set_status: null,
-                    due_date: null
-                },
-                calendar: {
-                    startDate: new Date(),
-                    endDate: new Date()
-                }, 
+                currentJudge: {},
             };
         },
         computed:{
@@ -173,53 +135,9 @@
                 if (!this.isAuth) {
                     this.$router.push("/login");
                 }
-                this.changeStatusId = judge.id;
-                this.judgeStatus.set_status = judge.status;
-                this.judgeStatus.due_date = this.formattingDate(judge.due_date_status);
-    
-                this.calendar.startDate = new Date();
-                this.calendar.endDate = new Date(
-                    this.calendar.startDate.getFullYear(),
-                    this.calendar.startDate.getMonth() + 1,
-                    this.calendar.startDate.getDate()
-                );
+                this.currentJudge = judge;
                 this.isModalVisible = true;
             },
-            closeModal() {
-                this.isModalVisible = false;
-            },
-            saveChanges() {
-                if (this.judgeStatus.set_status === "1" || this.judgeStatus.set_status === "5") {
-                    this.judgeStatus.due_date = null;
-                }
-                // console.log("STATUS", this.judgeStatus);
-                axios({
-                        method: "put",
-                        url: `/api/v1/judges/${this.changeStatusId}/update-status`,
-                        headers: {
-                            "Content-Type": "application/json",
-                            "X-Requested-With": "XMLHttpRequest",
-                            Authorization: localStorage.getItem("token")
-                        },
-                        data: this.judgeStatus
-                    })
-                    .then(response => {
-                        this.judgesList.map(e => {
-                            if (e.id === this.changeStatusId) {
-                                e.due_date_status = this.judgeStatus.due_date;
-                                e.status = Number(this.judgeStatus.set_status);
-                            }
-                        })
-                        this.isModalVisible = false;
-                    })
-                    .catch(error => {
-                        if (error.response.status === 401) {
-                            this.$router.push('/login');
-                        }
-                        console.log("Status", error);
-                    });
-            },
-    
         }
     };
 </script>

@@ -82,6 +82,7 @@
 </script>
 
 <style scoped lang="scss">
+@import "../../../../sass/_variables.scss";
 .courtSessions {
     width: 100%;
     height: auto;
@@ -103,7 +104,7 @@
         margin: 0;
         padding: 15px 0;
         &:not(:last-child){
-            border-bottom: 1px solid lightgrey;
+            border-bottom: 1px solid $text-muted;
         }
     }
 }
