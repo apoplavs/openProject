@@ -20,7 +20,7 @@ class UserBookmarkSession extends Model
      * @var array
      */
     protected $fillable = [
-        'user', 'court_session',
+        'user', 'court_session', 'note'
     ];
 
 
@@ -125,9 +125,35 @@ class UserBookmarkSession extends Model
 	 * встановити id майбутнього судового засідання
 	 * @param $new_session
 	 */
-	public static function updateUserBookmark($bookmard_id, $new_session) {
-		static::where('user_bookmark_sessions.id', '=', $bookmard_id)
+	public static function updateUserBookmark(int $bookmark_id, int $new_session) {
+		static::where('user_bookmark_sessions.id', '=', $bookmark_id)
 			->update(['user_bookmark_sessions.court_session' => $new_session]);
 		
+	}
+	
+	/**
+	 * записує або оновлює примітку до закладки
+	 * @param $bookmark_id
+	 * @param $note
+	 */
+	public static function writeNoteForBookmark(int $bookmark_id, string $note)
+	{
+		static::where('user_bookmark_sessions.id', '=', $bookmark_id)
+			->update(['user_bookmark_sessions.note' => $note]);
+	}
+	
+	
+	/**
+	 * перевірити чи існує закладка на судове засідання з даним id
+	 *
+	 * @param $id
+	 * @return boolean
+	 */
+	public static function checkSessionBookmarkById($id) {
+		$bookmark = static::select('user_bookmark_sessions.id')
+			->where('user_bookmark_sessions.id', '=', $id)
+			->first();
+		
+		return !empty($bookmark);
 	}
 }
