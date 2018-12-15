@@ -30,6 +30,25 @@ class Section:
         applications = edrsr.read(sql_query)
         return applications
 
+    def _get_application_documents(self) -> list:
+        """
+        All documents related to the applications
+        :param cause_num
+        :return:
+        """
+        j_codes = ', '.join(
+            str(code) for code in self.judgement_codes
+        )
+        sql_query = (f"SELECT * FROM reg{self.judge.region} "
+                     f"WHERE judge={self.judge.id} "
+                     f"AND court_code={self.judge.court_code} "
+                     f"AND justice_kind={self.justice_kind} "
+                     f"AND judgment_code IN ({j_codes}) "
+                     )
+        edrsr = DB(db_name=EDRSR)
+        documents = edrsr.read(sql_query)
+        return documents
+
     def _get_all_appeals(self, all_applications)  -> list:
         """
         All appeals of judge
@@ -73,7 +92,7 @@ class Section:
         documents = edrsr.read(sql_query)
         return documents
 
-    def _get_application_documents(self, cause_num) -> list:
+    def _get_application_documents_old(self, cause_num) -> list:
         """
         All documents related to the applications
         :param cause_num
@@ -108,6 +127,21 @@ class Section:
         toecyd.write(sql_query, values)
 
 
+def prepare_applications(applications):
+    final_dict = {}
+    for app in applications:
+        cause_num = app['cause_num']
+        if cause_num not in final_dict:
+            final_dict[cause_num] = []
+
+        final_dict[cause_num].append(app)
+
+    for final_app_k in final_dict:
+        final_dict[final_app_k].sort(key=lambda r: r['adjudication_date'])
+
+    return final_dict
+
+
 class Civil(Section):
 
     def __init__(self, judge):
@@ -120,14 +154,18 @@ class Civil(Section):
         )
 
     def analyze_in_time(self):
-        all_application = self._get_all_applications()
+        all_applications = self._get_application_documents()
+        all_applications = prepare_applications(all_applications)
+
         self.data_dict['cases_on_time'] = 0
         self.data_dict['cases_not_on_time'] = 0
-        print(f'Number of applications:{len(all_application)}')
-        for application in all_application:
-            app_documents = self._get_application_documents(
-                application['cause_num']
-            )
+
+        # autoassigned_cases = self._get_autoasigned_cases(list(all_applications))
+
+        from datetime import datetime
+        start_time = datetime.now()
+        print(f'Number of applications:{len(all_applications)}')
+        for app_k, app_documents in all_applications.items():
             date_dict = {'start_adj_date' : None}
             pause_time = None
             pause_days = 0
@@ -137,17 +175,20 @@ class Civil(Section):
                     text=doc_text,
                     anticipated_category=8
                 )
-                # якщо зустрівся документ про початок спрви, і раніше ніякого документу про початк не було
+                # якщо зустрівся документ про початок спрви, і раніше ніякого
+                # документу про початк не було
                 if category == 8 and date_dict['start_adj_date'] == None:
                     date_dict['start_adj_date'] = document['adjudication_date']
                 elif category == 9:
                     pause_time = document['adjudication_date']
-                # якщо зустрівся документ про відновлення справи, і перед тим був документ про зупинення
-                elif category == 10 and  pause_time :
+                # якщо зустрівся документ про відновлення справи, і перед тим
+                # був документ про зупинення
+                elif category == 10 and pause_time:
                     resume_time = document['adjudication_date']
                     pause_days += (resume_time - pause_time).days
 
-                # якщо зустрілась ухвала про закінчення, або кінцеве рішення по справі
+                # якщо зустрілась ухвала про закінчення, або кінцеве рішення
+                # по справі
                 elif category == 11 or document['judgment_code'] == 3:
                     date_dict['end_adj_date'] = document['adjudication_date']
                     if date_dict['start_adj_date'] != None:
@@ -163,6 +204,7 @@ class Civil(Section):
                     break
         print(f"Days on time:{self.data_dict['cases_on_time']}")
         print(f"Days not on time:{self.data_dict['cases_not_on_time']}")
+        print(f"Time :{datetime.now() - start_time}")
 
     def count(self):
         all_applications = self._get_all_applications()

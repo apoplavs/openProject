@@ -202,8 +202,10 @@ def get_classifier(file):
     return classifier
 
 
+sent_detector = nltk.data.load('tokenizers/punkt/english.pickle')
+
+
 def find_features(document):
-    sent_detector = nltk.data.load('tokenizers/punkt/english.pickle')
     tokenized_words = sent_detector.tokenize(document)
     features = {}
     for w in tokenized_words:
@@ -257,6 +259,10 @@ def find_category(prob1, prob2, other):
             category = k
     return category
 
+all_pickles = {
+    '8_9_10_11.pickle': get_classifier('8_9_10_11.pickle'),
+    '8_9_10_11_12.pickle': get_classifier('8_9_10_11_12.pickle')
+}
 
 def guess_category(text, anticipated_category):
     """
@@ -280,8 +286,8 @@ def guess_category(text, anticipated_category):
         return category
 
     # отримуємо класифікатори з pickle
-    classifier1 = get_classifier(prop['pickle1'])
-    classifier2 = get_classifier(prop['pickle2'])
+    classifier1 = all_pickles[prop['pickle1']]
+    classifier2 = all_pickles[prop['pickle2']]
 
     clean_text = validator.validate_text(text)
 
