@@ -31,8 +31,125 @@ class Court extends Model
             ->where('court_code', '<', 2800) // відкидаємо спеціалізовані суди
             ->pluck('court_code'));
     }
-	
-	
+
+    public static function getCourtById(int $id)
+    {
+        $result = call_user_func_array(['static', 'select'], self::getCourtFields())
+            ->join('instances', 'instances.instance_code', '=', 'courts.instance_code')
+            ->join('regions', 'regions.region_code', '=', 'courts.region_code')
+            ->join('jurisdictions', 'jurisdictions.id', '=', 'courts.jurisdiction')
+            ->leftJoin('user_bookmark_courts', function ($join) {
+                $join->on('courts.court_code', '=', 'user_bookmark_courts.court');
+                $join->on('user_bookmark_courts.user', '=',  DB::raw(Auth::user()->id));
+            })
+            ->where('court_code', '=', $id)
+            ->first();
+
+        $result['address'] = DB::table('judges')->select('address')
+                               ->where('court', '=', $id)
+                               ->pluck('address')
+                               ->unique() // залишаємо в колекції лише унікальні елементи
+                               ->values(); // перенумеровуємо елементи колекції (після unique вони занумеровані не підряд)
+
+        $result['judges'] = DB::table('judges')
+                              ->select('surname', 'name', 'patronymic', 'status', 'updated_status', 'due_date_status', 'rating',
+                                       DB::raw('(user_bookmark_judges.id IS NOT NULL) AS is_bookmark'))
+                              ->leftJoin('user_bookmark_judges', function ($join) {
+                                  $join->on('judges.id', '=', 'user_bookmark_judges.judge');
+                                  $join->on('user_bookmark_judges.user', '=',  DB::raw(Auth::user()->id));
+                              })
+                              ->where('court', '=', $id)
+                              ->orderBy('rating', 'DESC')
+                              ->get()
+                              ->toArray();
+
+        $result['court_sessions'] = DB::table('court_sessions')
+                                      ->select('date',
+                                               DB::raw('get_judges_by_id(judge1, judge2, judge3) AS judges'),
+                                               DB::raw('justice_kinds.name AS forma'),
+                                               'number', 'involved', 'description',
+                                               DB::raw('(user_bookmark_sessions.id IS NOT NULL) AS is_bookmark'))
+                                      ->join('justice_kinds', 'justice_kinds.justice_kind', '=', 'court_sessions.forma')
+                                      ->leftJoin('user_bookmark_sessions', function ($join) {
+                                          $join->on('court_sessions.id', '=', 'user_bookmark_sessions.court_session');
+                                          $join->on(DB::raw(Auth::user()->id), '=', 'user_bookmark_sessions.user');
+                                      })
+                                      ->where('court', '=', $id)
+                                      ->orderBy('date', 'ASC')
+                                      ->get()
+                                      ->toArray();
+
+        return $result;
+    }
+
+    public static function getCourtByIdGuest(int $id)
+    {
+        $result = call_user_func_array(['static', 'select'], self::getCourtGuestFields())
+                     ->join('instances', 'instances.instance_code', '=', 'courts.instance_code')
+                     ->join('regions', 'regions.region_code', '=', 'courts.region_code')
+                     ->join('jurisdictions', 'jurisdictions.id', '=', 'courts.jurisdiction')
+                     ->where('court_code', '=', $id)
+                     ->first();
+
+        $result['address'] = DB::table('judges')->select('address')
+            ->where('court', '=', $id)
+            ->pluck('address')
+            ->unique() // залишаємо в колекції лише унікальні елементи
+            ->values(); // перенумеровуємо елементи колекції (після unique вони занумеровані не підряд)
+
+        $result['judges'] = DB::table('judges')
+            ->select('surname', 'name', 'patronymic', 'status', 'updated_status', 'due_date_status', 'rating')
+            ->where('court', '=', $id)
+            ->orderBy('rating', 'DESC')
+            ->get()
+            ->toArray();
+
+        $result['court_sessions'] = DB::table('court_sessions')
+            ->select('date',
+                    DB::raw(' get_judges_by_id(judge1, judge2, judge3) AS judges'),
+                    DB::raw('justice_kinds.name AS forma'),
+                    'number', 'involved', 'description')
+            ->join('justice_kinds', 'justice_kinds.justice_kind', '=', 'court_sessions.forma')
+            ->where('court', '=', $id)
+            ->orderBy('date', 'ASC')
+            ->get()
+            ->toArray();
+
+        return $result;
+    }
+
+    public static function getCourtGuestFields()
+    {
+        return [
+            'courts.court_code',
+            'courts.name',
+            'courts.phone',
+            'courts.email',
+            'courts.site',
+            'courts.rating',
+            'instances.name AS instance',
+            'regions.name AS region',
+            'jurisdictions.title AS jurisdiction',
+            DB::raw('get_one_judge_by_id(courts.head_judge) AS head_judge'),
+        ];
+    }
+
+    public static function getCourtFields()
+    {
+        return [
+            'courts.court_code',
+            'courts.name',
+            'courts.phone',
+            'courts.email',
+            'courts.site',
+            'courts.rating',
+            'instances.name AS instance',
+            'regions.name AS region',
+            'jurisdictions.title AS jurisdiction',
+            DB::raw('get_one_judge_by_id(courts.head_judge) AS head_judge'),
+            DB::raw('(user_bookmark_courts.id IS NOT NULL) AS is_bookmark'),
+        ];
+    }
 	
 	/**
 	 * отримати список суддів, враховуючи фільтри, які були задані
