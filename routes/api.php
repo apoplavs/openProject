@@ -98,7 +98,7 @@ Route::group(['prefix' => 'v1/', 'namespace' => 'Api\V1',], function () {
         // Видалити судове засідання з закладок
         Route::delete('court-sessions/{id}/bookmark', 'CourtSessionController@deleteSessionBookmark')->middleware('checkId:session');
 		// Додати примітку до закладки на судове засідання
-		Route::post('court-sessions/bookmark/{id}/note', 'CourtSessionController@addNote')->middleware('checkId:session-bookmark')->middleware('checkId:court');
+		Route::post('court-sessions/bookmark/{id}/note', 'CourtSessionController@addNote')->middleware('checkId:session-bookmark')->middleware('checkAccess:session-bookmark');
 		
 		
 		/**

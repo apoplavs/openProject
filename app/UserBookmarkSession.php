@@ -156,4 +156,21 @@ class UserBookmarkSession extends Model
 		
 		return !empty($bookmark);
 	}
+	
+	
+	/**
+	 * перевірити чи існує закладка на судове засідання з даним id
+	 *
+	 * @param $id
+	 * @param $user_id
+	 * @return boolean
+	 */
+	public static function checkAccessToBookmark($id, $user_id) {
+		$bookmark = static::select('user_bookmark_sessions.id')
+			->where('user_bookmark_sessions.id', '=', $id)
+			->where('user_bookmark_sessions.user', '=', $user_id)
+			->first();
+		
+		return !empty($bookmark);
+	}
 }
