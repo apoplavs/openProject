@@ -85,9 +85,9 @@
                                     <div class="col-2">{{ session.forma }}</div>
                                     <div class="col-3">{{ session.involved }}</div>
                                     <div class="col-2">{{ session.description }}</div>
-                                    <div class="col-1 pr-0 text-center">
-                                        <i v-if="session.is_bookmark" class="fas fa-star"></i>
-                                        <i v-else class="far fa-star"></i>
+                                    <div class="col-1 pr-0 text-center" v-if="isAuth">
+                                        <i v-if="session.is_bookmark" class="fas fa-star" @click="delBookmarkCourtSession()"></i>
+                                        <i v-else class="far fa-star" @click="addBookmarkCourtSession()"></i>
                                     </div>
                                 </div>
                             </div>
@@ -290,10 +290,10 @@
                     return (arr.length > 0) ? true : false
                 })
             },
-            isAuth() {
+            isAuth: () => {
                 return localStorage.getItem("token");
             }
-        },
+        },  
         beforeMount() {
             if (this.isAuth) { 
                 axios
@@ -484,6 +484,53 @@
                             console.log("set Likes", error);
                         });
                 }
+            },
+            delBookmarkCourtSession() {
+                if (!this.isAuth) {
+                    this.$router.push("/login");
+                }
+                if (this.judge.data.is_bookmark === 0) {
+                    axios({
+                        method: "put",
+                        url: `/api/v1/judges/${this.$route.params.id}/bookmark`,
+                        headers: {
+                            "Content-Type": "application/json",
+                            "X-Requested-With": "XMLHttpRequest",
+                            Authorization: localStorage.getItem("token")
+                        }
+                    })
+                    .then(response => {
+                        this.judge.data.is_bookmark = 1;
+                    })
+                    .catch(error => {
+                        if (error.response.status === 401) {
+                            this.$router.push("/login");
+                        }
+                        console.log("Bookmark", error);
+                    });
+                } else {
+                    axios({
+                        method: "delete",
+                        url: `/api/v1/judges/${this.$route.params.id}/bookmark`,
+                        headers: {
+                            "Content-Type": "application/json",
+                            "X-Requested-With": "XMLHttpRequest",
+                            Authorization: localStorage.getItem("token")
+                        }
+                    })
+                    .then(response => {
+                        this.judge.data.is_bookmark = 0;
+                    })
+                    .catch(error => {
+                        if (error.response.status === 401) {
+                            this.$router.push("/login");
+                        }
+                        console.log("Bookmark", error.response);
+                    });
+                }
+            },
+            addBookmarkCourtSession() {
+                 
             }
         }
     };
