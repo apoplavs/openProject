@@ -563,12 +563,9 @@ class AuthController extends Controller
      *        @SWG\Schema(ref="#/definitions/User"),
      *           examples={"application/json":
      *              {
-     *                    "id": 4,
      *                    "name": "Іван",
      *                    "surname": null,
      *                    "phone": null,
-     *                    "town": null,
-     *                    "region": null,
      *                    "email": "example@mail.com",
      *                    "photo": null,
      *                    "usertype": 2,

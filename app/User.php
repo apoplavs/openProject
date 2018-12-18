@@ -33,7 +33,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token'
+        'id', 'password', 'remember_token'
     ];
 	
 	
@@ -63,4 +63,19 @@ class User extends Authenticatable
 	public static function getPhotoStorage() {
         return Storage::disk('public');
     }
+	
+	
+	/**
+	 * отримує всі налаштування поточного користувача
+	 * @return mixed
+	 */
+	public static function getSettings() {
+		return static::select('users.name', 'users.surname', 'users.phone', 'users.phone',
+			'users.email', 'users.photo', 'user_settings.email_notification_1', 'user_settings.email_notification_2',
+			'user_settings.email_notification_3', 'user_settings.email_notification_4',
+			'user_settings.email_notification_5', 'user_settings.email_notification_6')
+			->join('user_settings', 'user_settings.user', '=', 'users.id')
+			->where('users.id', '=', Auth::user()->id)
+			->get();
+	}
 }
