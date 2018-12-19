@@ -1,6 +1,6 @@
 <template>
     <div class="courtSessions">
-        <div class="d-flex justify-content-between infoCard">
+        <!-- <div class="d-flex justify-content-between infoCard">
             <p>Призначено до розгляду</p>
             <p>Актуально на 22.09.2018</p>
         </div>
@@ -71,13 +71,100 @@
                 <div class="col-2">Стягнення заборгованості </div>
                 <div class="col-2 pr-0">Підготувати документи</div>
             </div>
+        </div> -->
+        <div class="card mt-2">
+            <div class="card-header d-flex justify-content-between">
+                <span>Найближчі судові засідання</span>
+                <input type="search" class="form-control" placeholder="Пошук..." v-model.trim="search">
+            </div>
+            <div class="card-body court-sessions-container">
+                <div class="court-sessions">
+                    <div v-if="filterSessions.length > 0" class="container-component">
+                        <div class="row header text-muted">
+                            <div class="col-1 pl-0">Дата розгляду</div>
+                            <div class="col-1">Номер справи</div>
+                            <div class="col-2">Судді</div>
+                            <div class="col-2">Форма</div>
+                            <div class="col-3">Сторони у справі</div>
+                            <div class="col-2">Суть справи</div>
+                            <div class="col-1 pr-0"></div>
+                        </div>
+                        <div class="row" v-for="(session, i_el) in filterSessions" :key="i_el">
+                            <div class="col-1 pl-0">
+                                <div>{{ session.date }}</div>
+                            </div>
+                            <div class="col-1 ">{{ session.number }}</div>
+                            <div class="col-2">{{ session.judges }}</div>
+                            <div class="col-2">{{ session.forma }}</div>
+                            <div class="col-3">{{ session.involved }}</div>
+                            <div class="col-2">{{ session.description }}</div>
+                            <div class="col-1 pr-0 text-center" v-if="isAuth">
+                                <i v-if="session.is_bookmark" class="fas fa-star" @click="delBookmarkCourtSession(session)"></i>
+                                <i v-else class="far fa-star" @click="addBookmarkCourtSession(session)"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div v-else class="container-component">
+                        <p>Нічого не знайдено...</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
     export default {
-        name: "CourtSessions"
+        name: "CourtSessions",
+        data() {
+            return {
+                filterSessions: null
+            }
+        },
+        beforeMount() {
+            if (this.isAuth) { 
+                axios
+                    .get(`/api/v1/judges/${this.$route.params.id}`, {
+                        headers: {
+                            "Content-Type": "application/json",
+                            "X-Requested-With": "XMLHttpRequest",
+                            "Authorization": localStorage.getItem('token')
+                        },
+                    })
+                    .then(response => {
+                        this.judge = response.data;
+                        this.loadData = true;   
+                        console.log('JUdge PROFILE', this.judge);
+                                             
+                    })
+                    .catch(error => {
+                        if (error.response.status === 401) {
+                            this.$router.push('/login');
+                        }
+                        console.log('error');
+                    });
+            } else {
+                axios
+                    .get(`/api/v1/guest/judges/${this.$route.params.id}`, {
+                        headers: {
+                            "Content-Type": "application/json",
+                            "X-Requested-With": "XMLHttpRequest",
+                        },
+                    })
+                    .then(response => {
+                        this.judge = response.data;
+                        this.loadData = true;
+                        
+                    })
+                    .catch(error => {
+                        if (error.response.status === 401) {
+                            this.$router.push('/login');
+                        }
+                        console.log('error');
+                    });
+
+            }
+        }
     }
 </script>
 

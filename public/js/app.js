@@ -50673,7 +50673,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n.judge-profile .main-info[data-v-7cdb9c0a] {\n  border-bottom: 1px solid rgba(0, 0, 0, 0.1);\n}\n.judge-profile .main-info .fa-university[data-v-7cdb9c0a] {\n    color: #4c88bd;\n    font-size: 1.3rem;\n    margin-right: 5px;\n}\n.judge-profile .main-info .court-name[data-v-7cdb9c0a] {\n    color: #5c7a7a;\n    font-weight: 300;\n}\n.judge-profile .main-info .detail-info[data-v-7cdb9c0a] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: row;\n            flex-direction: row;\n    -webkit-box-pack: start;\n        -ms-flex-pack: start;\n            justify-content: start;\n    -webkit-box-align: start;\n        -ms-flex-align: start;\n            align-items: start;\n    color: #5c7a7a;\n}\n.judge-profile .main-info .detail-info i[class^=\"fa\"][data-v-7cdb9c0a] {\n      margin-right: 10px;\n      padding-top: 5px;\n}\n.judge-profile .status-info .rating[data-v-7cdb9c0a] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.judge-profile .status-info .rating .like[data-v-7cdb9c0a] {\n    color: green;\n}\n.judge-profile .status-info .rating .dislike[data-v-7cdb9c0a] {\n    color: red;\n}\n.judge-profile .status-info .status[data-v-7cdb9c0a] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: start;\n      -ms-flex-align: start;\n          align-items: start;\n}\n.judge-profile .status-info .bookmark > span[data-v-7cdb9c0a] {\n  width: 20px;\n  float: right;\n}\n.judge-profile .court-sessions-container[data-v-7cdb9c0a] {\n  max-height: 600px;\n  overflow-y: auto;\n}\n.judge-profile .court-sessions-container .court-sessions[data-v-7cdb9c0a] {\n    width: 100%;\n    height: auto;\n    font-size: 0.7rem;\n}\n.judge-profile .court-sessions-container .court-sessions .fa-star[data-v-7cdb9c0a] {\n      color: #2b989b;\n}\n.judge-profile .court-sessions-container .court-sessions .container-component[data-v-7cdb9c0a] {\n      background-color: #ffffff;\n}\n.judge-profile .court-sessions-container .court-sessions .header[data-v-7cdb9c0a] {\n      -webkit-box-align: center;\n          -ms-flex-align: center;\n              align-items: center;\n      font-weight: 700;\n}\n.judge-profile .court-sessions-container .court-sessions .row[data-v-7cdb9c0a] {\n      margin: 0;\n      padding: 15px 0;\n}\n.judge-profile .court-sessions-container .court-sessions .row[data-v-7cdb9c0a]:not(:last-child) {\n        border-bottom: 1px solid lightgrey;\n}\n.judge-profile .court-sessions-container .court-sessions .row div[class^=\"col\"][data-v-7cdb9c0a] {\n        padding-right: 0;\n}\n.judge-profile input[type=\"search\"][data-v-7cdb9c0a] {\n  width: 200px;\n}\n", ""]);
+exports.push([module.i, "\n.judge-profile .main-info[data-v-7cdb9c0a] {\n  border-bottom: 1px solid rgba(0, 0, 0, 0.1);\n}\n.judge-profile .main-info .fa-university[data-v-7cdb9c0a] {\n    color: #4c88bd;\n    font-size: 1.3rem;\n    margin-right: 5px;\n}\n.judge-profile .main-info .court-name[data-v-7cdb9c0a] {\n    color: #5c7a7a;\n    font-weight: 300;\n}\n.judge-profile .main-info .detail-info[data-v-7cdb9c0a] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: row;\n            flex-direction: row;\n    -webkit-box-pack: start;\n        -ms-flex-pack: start;\n            justify-content: start;\n    -webkit-box-align: start;\n        -ms-flex-align: start;\n            align-items: start;\n    color: #5c7a7a;\n}\n.judge-profile .main-info .detail-info i[class^=\"fa\"][data-v-7cdb9c0a] {\n      margin-right: 10px;\n      padding-top: 5px;\n}\n.judge-profile .status-info .rating[data-v-7cdb9c0a] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.judge-profile .status-info .rating .like[data-v-7cdb9c0a] {\n    color: green;\n}\n.judge-profile .status-info .rating .dislike[data-v-7cdb9c0a] {\n    color: red;\n}\n.judge-profile .status-info .status[data-v-7cdb9c0a] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: start;\n      -ms-flex-align: start;\n          align-items: start;\n}\n.judge-profile .status-info .bookmark > span[data-v-7cdb9c0a] {\n  width: 20px;\n  float: right;\n}\n.judge-profile .court-sessions-container[data-v-7cdb9c0a] {\n  max-height: 600px;\n  overflow-y: auto;\n}\n.judge-profile .court-sessions-container .court-sessions[data-v-7cdb9c0a] {\n    width: 100%;\n    height: auto;\n    font-size: 0.7rem;\n}\n.judge-profile .court-sessions-container .court-sessions .fa-star[data-v-7cdb9c0a] {\n      color: #2b989b;\n      cursor: pointer;\n      font-size: 20px;\n}\n.judge-profile .court-sessions-container .court-sessions .container-component[data-v-7cdb9c0a] {\n      background-color: #ffffff;\n}\n.judge-profile .court-sessions-container .court-sessions .header[data-v-7cdb9c0a] {\n      -webkit-box-align: center;\n          -ms-flex-align: center;\n              align-items: center;\n      font-weight: 700;\n}\n.judge-profile .court-sessions-container .court-sessions .row[data-v-7cdb9c0a] {\n      margin: 0;\n      padding: 15px 0;\n}\n.judge-profile .court-sessions-container .court-sessions .row[data-v-7cdb9c0a]:not(:last-child) {\n        border-bottom: 1px solid lightgrey;\n}\n.judge-profile .court-sessions-container .court-sessions .row div[class^=\"col\"][data-v-7cdb9c0a] {\n        padding-right: 0;\n}\n.judge-profile input[type=\"search\"][data-v-7cdb9c0a] {\n  width: 200px;\n}\n", ""]);
 
 // exports
 
@@ -50979,6 +50979,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 return arr.length > 0 ? true : false;
             });
         },
+
         isAuth: function isAuth() {
             return localStorage.getItem("token");
         }
@@ -50996,6 +50997,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }).then(function (response) {
                 _this2.judge = response.data;
                 _this2.loadData = true;
+                console.log('JUdge PROFILE', _this2.judge);
             }).catch(function (error) {
                 if (error.response.status === 401) {
                     _this2.$router.push('/login');
@@ -51158,6 +51160,52 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                         _this5.$router.push("/login");
                     }
                     console.log("set Likes", error);
+                });
+            }
+        },
+        delBookmarkCourtSession: function delBookmarkCourtSession(session) {
+            var _this6 = this;
+
+            if (!this.isAuth) {
+                this.$router.push("/login");
+            } else {
+                axios({
+                    method: "delete",
+                    url: '/api/v1/court-sessions/' + session.id + '/bookmark',
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-Requested-With": "XMLHttpRequest",
+                        Authorization: localStorage.getItem("token")
+                    }
+                }).then(function (response) {
+                    session.is_bookmark = 0;
+                }).catch(function (error) {
+                    if (error.response.status === 401) {
+                        _this6.$router.push("/login");
+                    }
+                });
+            }
+        },
+        addBookmarkCourtSession: function addBookmarkCourtSession(session) {
+            var _this7 = this;
+
+            if (!this.isAuth) {
+                this.$router.push("/login");
+            } else {
+                axios({
+                    method: "put",
+                    url: '/api/v1/court-sessions/' + session.id + '/bookmark',
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-Requested-With": "XMLHttpRequest",
+                        Authorization: localStorage.getItem("token")
+                    }
+                }).then(function (response) {
+                    session.is_bookmark = 1;
+                }).catch(function (error) {
+                    if (error.response.status === 401) {
+                        _this7.$router.push("/login");
+                    }
                 });
             }
         }
@@ -51492,19 +51540,38 @@ var render = function() {
                                       _vm._v(_vm._s(session.description))
                                     ]),
                                     _vm._v(" "),
-                                    _c(
-                                      "div",
-                                      { staticClass: "col-1 pr-0 text-center" },
-                                      [
-                                        session.is_bookmark
-                                          ? _c("i", {
-                                              staticClass: "fas fa-star"
-                                            })
-                                          : _c("i", {
-                                              staticClass: "far fa-star"
-                                            })
-                                      ]
-                                    )
+                                    _vm.isAuth
+                                      ? _c(
+                                          "div",
+                                          {
+                                            staticClass:
+                                              "col-1 pr-0 text-center"
+                                          },
+                                          [
+                                            session.is_bookmark
+                                              ? _c("i", {
+                                                  staticClass: "fas fa-star",
+                                                  on: {
+                                                    click: function($event) {
+                                                      _vm.delBookmarkCourtSession(
+                                                        session
+                                                      )
+                                                    }
+                                                  }
+                                                })
+                                              : _c("i", {
+                                                  staticClass: "far fa-star",
+                                                  on: {
+                                                    click: function($event) {
+                                                      _vm.addBookmarkCourtSession(
+                                                        session
+                                                      )
+                                                    }
+                                                  }
+                                                })
+                                          ]
+                                        )
+                                      : _vm._e()
                                   ]
                                 )
                               })
@@ -55098,9 +55165,89 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    name: "CourtSessions"
+    name: "CourtSessions",
+    data: function data() {
+        return {
+            filterSessions: null
+        };
+    },
+    beforeMount: function beforeMount() {
+        var _this = this;
+
+        if (this.isAuth) {
+            axios.get("/api/v1/judges/" + this.$route.params.id, {
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-Requested-With": "XMLHttpRequest",
+                    "Authorization": localStorage.getItem('token')
+                }
+            }).then(function (response) {
+                _this.judge = response.data;
+                _this.loadData = true;
+                console.log('JUdge PROFILE', _this.judge);
+            }).catch(function (error) {
+                if (error.response.status === 401) {
+                    _this.$router.push('/login');
+                }
+                console.log('error');
+            });
+        } else {
+            axios.get("/api/v1/guest/judges/" + this.$route.params.id, {
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-Requested-With": "XMLHttpRequest"
+                }
+            }).then(function (response) {
+                _this.judge = response.data;
+                _this.loadData = true;
+            }).catch(function (error) {
+                if (error.response.status === 401) {
+                    _this.$router.push('/login');
+                }
+                console.log('error');
+            });
+        }
+    }
 });
 
 /***/ }),
@@ -55111,155 +55258,126 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "courtSessions" }, [
+    _c("div", { staticClass: "card mt-2" }, [
+      _c("div", { staticClass: "card-header d-flex justify-content-between" }, [
+        _c("span", [_vm._v("Найближчі судові засідання")]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model.trim",
+              value: _vm.search,
+              expression: "search",
+              modifiers: { trim: true }
+            }
+          ],
+          staticClass: "form-control",
+          attrs: { type: "search", placeholder: "Пошук..." },
+          domProps: { value: _vm.search },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.search = $event.target.value.trim()
+            },
+            blur: function($event) {
+              _vm.$forceUpdate()
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-body court-sessions-container" }, [
+        _c("div", { staticClass: "court-sessions" }, [
+          _vm.filterSessions.length > 0
+            ? _c(
+                "div",
+                { staticClass: "container-component" },
+                [
+                  _vm._m(0),
+                  _vm._v(" "),
+                  _vm._l(_vm.filterSessions, function(session, i_el) {
+                    return _c("div", { key: i_el, staticClass: "row" }, [
+                      _c("div", { staticClass: "col-1 pl-0" }, [
+                        _c("div", [_vm._v(_vm._s(session.date))])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-1 " }, [
+                        _vm._v(_vm._s(session.number))
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-2" }, [
+                        _vm._v(_vm._s(session.judges))
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-2" }, [
+                        _vm._v(_vm._s(session.forma))
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-3" }, [
+                        _vm._v(_vm._s(session.involved))
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-2" }, [
+                        _vm._v(_vm._s(session.description))
+                      ]),
+                      _vm._v(" "),
+                      _vm.isAuth
+                        ? _c("div", { staticClass: "col-1 pr-0 text-center" }, [
+                            session.is_bookmark
+                              ? _c("i", {
+                                  staticClass: "fas fa-star",
+                                  on: {
+                                    click: function($event) {
+                                      _vm.delBookmarkCourtSession(session)
+                                    }
+                                  }
+                                })
+                              : _c("i", {
+                                  staticClass: "far fa-star",
+                                  on: {
+                                    click: function($event) {
+                                      _vm.addBookmarkCourtSession(session)
+                                    }
+                                  }
+                                })
+                          ])
+                        : _vm._e()
+                    ])
+                  })
+                ],
+                2
+              )
+            : _c("div", { staticClass: "container-component" }, [
+                _c("p", [_vm._v("Нічого не знайдено...")])
+              ])
+        ])
+      ])
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "courtSessions" }, [
-      _c("div", { staticClass: "d-flex justify-content-between infoCard" }, [
-        _c("p", [_vm._v("Призначено до розгляду")]),
-        _vm._v(" "),
-        _c("p", [_vm._v("Актуально на 22.09.2018")])
-      ]),
+    return _c("div", { staticClass: "row header text-muted" }, [
+      _c("div", { staticClass: "col-1 pl-0" }, [_vm._v("Дата розгляду")]),
       _vm._v(" "),
-      _c("div", { staticClass: "container-component" }, [
-        _c("div", { staticClass: "row header text-muted" }, [
-          _c("div", { staticClass: "col-1 pl-0" }, [_vm._v("Дата розгляду")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-1" }, [_vm._v("Номер справи")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-2" }, [_vm._v("Назва та склад суду")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-4" }, [_vm._v("Сторони у справі")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-2" }, [_vm._v("Суть справи")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-2 pr-0" }, [_vm._v("Примітки")])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-1 pl-0" }, [
-            _c("div", [_vm._v("25.09.2018")]),
-            _vm._v(" "),
-            _c("div", [_vm._v("14:15")])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-1" }, [_vm._v("923/623.10")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-2" }, [
-            _c("div", [_vm._v("Господарський суд Херсонської області")]),
-            _vm._v(" "),
-            _c("div", [_vm._v("Немченко Л.M.")])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-4" }, [
-            _vm._v(
-              "Позивач: Головня Максим Феодосієвич, відповідач: Публічне Акціонерне Товариство Херсонський Суднобудівний завод"
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-2" }, [
-            _vm._v("Стягнення заборгованості ")
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-2 pr-0" }, [
-            _vm._v("Підготувати документи")
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-1 pl-0" }, [
-            _c("div", [_vm._v("25.09.2018")]),
-            _vm._v(" "),
-            _c("div", [_vm._v("14:15")])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-1" }, [_vm._v("923/623.10")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-2" }, [
-            _c("div", [_vm._v("Господарський суд Херсонської області")]),
-            _vm._v(" "),
-            _c("div", [_vm._v("Немченко Л.M.")])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-4" }, [
-            _vm._v(
-              "Позивач: Головня Максим Феодосієвич, відповідач: Публічне Акціонерне Товариство Херсонський Суднобудівний завод"
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-2" }, [
-            _vm._v("Стягнення заборгованості ")
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-2 pr-0" }, [
-            _vm._v("Підготувати документи")
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-1 pl-0" }, [
-            _c("div", [_vm._v("25.09.2018")]),
-            _vm._v(" "),
-            _c("div", [_vm._v("14:15")])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-1" }, [_vm._v("923/623.10")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-2" }, [
-            _c("div", [_vm._v("Господарський суд Херсонської області")]),
-            _vm._v(" "),
-            _c("div", [_vm._v("Немченко Л.M.")])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-4" }, [
-            _vm._v(
-              "Позивач: Головня Максим Феодосієвич, відповідач: Публічне Акціонерне Товариство Херсонський Суднобудівний завод"
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-2" }, [
-            _vm._v("Стягнення заборгованості ")
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-2 pr-0" }, [
-            _vm._v("Підготувати документи")
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-1 pl-0" }, [
-            _c("div", [_vm._v("25.09.2018")]),
-            _vm._v(" "),
-            _c("div", [_vm._v("14:15")])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-1" }, [_vm._v("923/623.10")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-2" }, [
-            _c("div", [_vm._v("Господарський суд Херсонської області")]),
-            _vm._v(" "),
-            _c("div", [_vm._v("Немченко Л.M.")])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-4" }, [
-            _vm._v(
-              "Позивач: Головня Максим Феодосієвич, відповідач: Публічне Акціонерне Товариство Херсонський Суднобудівний завод,\n                 Позивач: Головня Максим Феодосієвич, відповідач: Публічне Акціонерне Товариство Херсонський Суднобудівний завод"
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-2" }, [
-            _vm._v("Стягнення заборгованості ")
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-2 pr-0" }, [
-            _vm._v("Підготувати документи")
-          ])
-        ])
-      ])
+      _c("div", { staticClass: "col-1" }, [_vm._v("Номер справи")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-2" }, [_vm._v("Судді")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-2" }, [_vm._v("Форма")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-3" }, [_vm._v("Сторони у справі")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-2" }, [_vm._v("Суть справи")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-1 pr-0" })
     ])
   }
 ]
