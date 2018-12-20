@@ -313,4 +313,18 @@ class Judge extends Model
             DB::raw("(CASE WHEN user_bookmark_judges.user = {$user_id} THEN 1 ELSE 0 END) AS is_bookmark")
         ];
     }
+	
+	
+	/**
+	 * Отримує з БД повне ПІБ за id
+	 *
+	 * @param int $judge_id
+	 * @return
+	 */
+	public static function getFullNameById($judge_id) {
+		return (DB::table('judges')
+			->select(DB::raw(" get_one_judge_by_id({$judge_id}) AS full_name "))
+			->where('id', '=', $judge_id)
+			->first());
+	}
 }

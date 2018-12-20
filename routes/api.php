@@ -108,10 +108,18 @@ Route::group(['prefix' => 'v1/', 'namespace' => 'Api\V1',], function () {
 		Route::get('user/history', 'HomeController@indexHistory');
 		// Закладки користувача
 		Route::get('user/bookmarks', 'HomeController@indexBookmarks');
+		
+		/**
+		 * Налаштування користувача
+		 */
 		// Отримати налаштування користувача
-		Route::get('user/settings', 'HomeController@indexSettings');
+		Route::get('user/settings', 'UserSettingsController@indexSettings');
 		// Змінити пароль користувача
-		Route::post('user/settings/password', 'HomeController@changePassword');
+		Route::post('user/settings/password', 'UserSettingsController@changePassword');
+		// Змінити дані користувача
+		Route::post('user/settings/user-data', 'UserSettingsController@changeUserData');
+		// Змінити налаштування повідомлень користувача
+		Route::post('user/settings/notification', 'UserSettingsController@changeNotifications');
 		
 		
 	});

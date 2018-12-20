@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Toecyd\CourtSession;
 use Toecyd\Http\Controllers\Controller;
+use Toecyd\Jobs\SendNotification1;
 use Toecyd\Judge;
 use Toecyd\JudgesStatistic;
 use Toecyd\UserBookmarkJudge;
@@ -1393,6 +1394,8 @@ class JudgesController extends Controller
         if ($new_status == 1 || $new_status == 5) {
             $due_date = NULL;
         }
+        $old_status = Judge::find($id)->status;
+        SendNotification1::dispatch($id, $old_status, $new_status)->delay(now()->addMinute());
         // оновлення статусу судді
         Judge::setNewStatus($id, $new_status, $due_date);
         
