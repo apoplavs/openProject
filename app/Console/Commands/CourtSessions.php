@@ -181,6 +181,9 @@ class CourtSessions extends Command
      * @return array
      */
     private function getSessionToInsert(int $court_code, \stdClass $item) {
+		// очищуємо номер справи від всіх пробільних символів
+		$item->number = preg_replace('/\s+/u', "", $item->number);
+		
         $item->date = date('Y-m-d H:i:s', strtotime($item->date));
         if (isset($this->existing_sessions[$item->number][$item->date])) {
             return [];
