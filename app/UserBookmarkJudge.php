@@ -106,7 +106,6 @@ class UserBookmarkJudge extends Model
 	/**
 	 * отримати всіх отримувачів email для Notification1
 	 * про зміну статусу судді користувачам, які його відстежують
-	 * @param $user_id
 	 * @param $judge_id
 	 */
 	public static function getRecipientsN1($judge_id) {

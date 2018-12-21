@@ -122,9 +122,6 @@ class Judge extends Model
         // отримання способу сортування
         $sort_variant = (self::getSortVariants())[$sort_order];
 
-        // отримання способу сортування
-        $sort_variant = (self::getSortVariants())[$sort_order];
-
         // другий orderBy для випадку, коли є декілька суддів, що мають однаковий порядок сортування
         $sort_variant_2 = (self::getSortVariants())[0];
 

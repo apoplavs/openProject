@@ -552,7 +552,6 @@
                         "type": "integer",
                         "allowEmptyValue": false,
                         "collectionFormat": "multi",
-                        "maximum": 15000,
                         "minimum": 1,
                         "uniqueItems": true
                     }

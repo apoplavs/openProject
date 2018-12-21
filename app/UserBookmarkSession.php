@@ -173,4 +173,31 @@ class UserBookmarkSession extends Model
 		
 		return !empty($bookmark);
 	}
+	
+	/**
+	 * отримати всіх отримувачів email для Notification3
+	 * про зміну статусу судді всім користувачам, які відстежують
+	 * судові засідання з участю даного судді
+	 * @param $judge_id
+	 */
+	public static function getRecipientsN3($judge_id) {
+		return (static::select(
+			DB::raw(' DISTINCT `users`.`email`'),
+			'users.name', 'court_sessions.number',
+			DB::raw('DATE_FORMAT(`court_sessions`.`date`, "%d.%m.%Y") AS date_session'),
+			DB::raw('DATE_FORMAT(`court_sessions`.`date`, "%H:%i") AS time_session'),
+			DB::raw('`courts`.`name` AS court_name'))
+			->join('user_settings', 'user_settings.user', '=', 'user_bookmark_sessions.user')
+			->join('users', 'users.id', '=', 'user_bookmark_sessions.user')
+			->join('court_sessions', 'court_sessions.id', '=', 'user_bookmark_sessions.court_session')
+			->join('courts', 'courts.court_code', '=', 'court_sessions.court')
+			->where('user_settings.email_notification_3', '=', 1)
+			->whereRaw(" DATE(`court_sessions`.`date`) >= CURDATE() ")
+			->where(function ($query) use($judge_id) {
+				$query->where('court_sessions.judge1', '=', $judge_id)
+					->orWhere('court_sessions.judge2', '=', $judge_id)
+					->orWhere('court_sessions.judge3', '=', $judge_id);
+			})
+			->get());
+	}
 }

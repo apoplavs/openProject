@@ -40,7 +40,6 @@ class CourtSessionController extends Controller
      *     collectionFormat="multi",
      *     uniqueItems=true,
      *     minimum=1,
-     *     maximum=15000,
      *     allowEmptyValue=false
      *     ),
      *
@@ -250,9 +249,6 @@ class CourtSessionController extends Controller
 		$request->validate([
 			'note'    => 'required|string|max:255'
 		]);
-		
-		// todo зробити перевірку прав користувача додавати замітку до даної закладки
-		$user_id = Auth::user()->id;
 		
 		$bookmark_id = intval($bookmark_id);
 		
