@@ -112,8 +112,11 @@ class UserBookmarkSession extends Model
 	 *
 	 */
 	public static function getPastSession() {
-    	return (static::select('user_bookmark_sessions.id', 'court_sessions.number')
+    	return (static::select('user_bookmark_sessions.id', 'user_bookmark_sessions.note',
+			'users.name', 'users.email', 'user_settings.email_notification_2', 'court_sessions.number')
 			->join('court_sessions', 'court_sessions.id', '=', 'user_bookmark_sessions.court_session')
+			->join('users', 'users.id', '=', 'user_bookmark_sessions.user')
+			->join('user_settings', 'user_settings.user', '=', 'user_bookmark_sessions.user')
 			->where('court_sessions.date', '<', Carbon::now('Europe/Kiev'))
 			->get()
 		);

@@ -3,7 +3,9 @@
 namespace Toecyd\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Mail;
 use Toecyd\CourtSession;
+use Toecyd\Mail\NotificationMail;
 use Toecyd\UserBookmarkSession;
 
 /**
@@ -42,9 +44,9 @@ class UsersBookmarks extends Command
      */
     public function handle() {
     	// перевірка всіх закладок на засідання з датою < current_time всіх користувачів
-        $past_session = UserBookmarkSession::getPastSession();
+        $user_past_session = UserBookmarkSession::getPastSession();
         
-        foreach($past_session as $key => $session) {
+        foreach($user_past_session as $key => $session) {
         	// перевіряємо чи є майбутні засідання по цій справі
         	$future_session = CourtSession::getFutureSession($session['number']);
         	// якщо немає - пропускаємо
@@ -53,6 +55,18 @@ class UsersBookmarks extends Command
 			}
 			// якщо є оновлюємо закладку встановлюючи новий id засідання
 			UserBookmarkSession::updateUserBookmark($session['id'], $future_session['id']);
+			
+			// якщо в користувача в налаштуваннях дозволено відправляти email
+			if ($session['email_notification_2']) {
+				Mail::to($session['email'])
+					->send(new NotificationMail(2, 'Нове судове засідання', [
+						'name'  => $session['name'],
+						'number'  => $session['number'],
+						'note'  => $session['note'],
+						'date_session'  => $future_session->date_session,
+						'time_session'  => $future_session->time_session
+					]));
+			}
 		}
     }
 }
