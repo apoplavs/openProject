@@ -58,5 +58,6 @@ class Kernel extends HttpKernel
         'guest' => \Toecyd\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
 		'checkId' => \Toecyd\Http\Middleware\CheckById::class,
+		'checkAccess' => \Toecyd\Http\Middleware\CheckAccess::class,
     ];
 }

@@ -4,7 +4,6 @@ namespace Toecyd\Http\Controllers\Api\V1;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Lang;
 use Toecyd\Http\Controllers\Controller;
 use Carbon\Carbon;
@@ -268,7 +267,6 @@ class AuthController extends Controller
      *          @SWG\Property(property="name", type="string", example="NameOfUser", description="Ім'я Користувача (повинно складатися від 3 до 255 символів)"),
      *          @SWG\Property(property="surname", type="string", example="SurameOfUser", description="Прізвище Користувача (повинно складатися від 3 до 255 символів)"),
      *          @SWG\Property(property="email", type="string", example="example@gmail.com", description="Email Користувача (існуючий, валідний, унікальний в системі)"),
-     *          @SWG\Property(property="link", type="string", example="https://plus.google.com/111483939504700006800", description="Посилання на Google аккаунт користувача (валідний URL)"),
      *          @SWG\Property(property="picture", type="string", example="https://lh3.googleusercontent.com/-LC0h1Ai3sXg/W6XiqkKewLI/AAAAAAAAAMQ/olvDX7mRLlwgDnzE9ARggY3dXaNu7Rh-ACJkCGAYYCw/w1024-h576-n-rw-no/my-photo.jpg", description="Посилання на google-аватарку користувача")
      *       )
      *     ),
@@ -328,7 +326,6 @@ class AuthController extends Controller
      * @param  [string] email
      * @param  [string] name
      * @param  [string] surname
-     * @param  [string] link
      * @param  [string] picture
      *
      * @return [string] access_token
@@ -343,9 +340,10 @@ class AuthController extends Controller
             'email'   => 'required|string|email',
             'name'    => 'required|string|min:3|max:255',
             'surname' => 'required|string|min:3|max:255',
-            'link'    => 'required|string',
             'picture' => 'required|string',
         ]);
+
+        $request->link = 'https://plus.google.com/'.$request->id;
 
         $user = $this->getUserForGFLogin($request, 'google', $already_exists);
 
@@ -564,12 +562,9 @@ class AuthController extends Controller
      *        @SWG\Schema(ref="#/definitions/User"),
      *           examples={"application/json":
      *              {
-     *                    "id": 4,
      *                    "name": "Іван",
      *                    "surname": null,
      *                    "phone": null,
-     *                    "town": null,
-     *                    "region": null,
      *                    "email": "example@mail.com",
      *                    "photo": null,
      *                    "usertype": 2,

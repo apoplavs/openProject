@@ -54,9 +54,8 @@ ____________________________________________________________
  *
  * 		@SWG\Definition(
  *     		definition="User",
- * 			required={"id", "name", "email", "usertype", "created_at"},
+ * 			required={"name", "email", "usertype", "created_at"},
  *          description="Кожного користувача в системі можна представити як окремий об'єкт із набором властивостей",
- *     		@SWG\Property(property="id", type="integer", example="1542", description="id користувача"),
  *     		@SWG\Property(property="name", type="string", example="Іван", description="Ім'я"),
  *     		@SWG\Property(property="surname", type="string", example="Коваленко", description="Прізвище"),
  *     		@SWG\Property(property="phone", type="string", example="0971234567", description="номер телефону"),

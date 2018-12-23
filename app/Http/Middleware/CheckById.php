@@ -7,6 +7,7 @@ use Exception;
 use Toecyd\Court;
 use Toecyd\CourtSession;
 use Toecyd\Judge;
+use Toecyd\UserBookmarkSession;
 
 /**
  * Перевіряє чи існує в БД об'єкт із заданим id
@@ -38,6 +39,8 @@ class CheckById
 				return $this->checkCourtById($request, $next);
 			case 'session':
 				return $this->checkSessionById($request, $next);
+			case 'session-bookmark':
+				return $this->checkSessionBookmarkById($request, $next);
 		}
 		// якщо передана невалідна назва об'єкту
 		throw new Exception("Unknown guard: " . $guard);
@@ -85,6 +88,21 @@ class CheckById
 		if (!CourtSession::checkSessionById($this->id)) {
 			return response()->json([
 				'message' => 'Неіснуючий id судового засідання!'
+			], 422);
+		}
+		
+		return $next($request);
+	}
+	
+	/**
+	 * Перевіряє, чи існує в БД закладка на судове засідання з таким id
+	 * @return mixed
+	 */
+	private function checkSessionBookmarkById($request, Closure $next) {
+		
+		if (!UserBookmarkSession::checkSessionBookmarkById($this->id)) {
+			return response()->json([
+				'message' => 'Неіснуючий id закладки на судове засідання!'
 			], 422);
 		}
 		

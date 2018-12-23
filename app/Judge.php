@@ -122,9 +122,6 @@ class Judge extends Model
         // отримання способу сортування
         $sort_variant = (self::getSortVariants())[$sort_order];
 
-        // отримання способу сортування
-        $sort_variant = (self::getSortVariants())[$sort_order];
-
         // другий orderBy для випадку, коли є декілька суддів, що мають однаковий порядок сортування
         $sort_variant_2 = (self::getSortVariants())[0];
 
@@ -313,4 +310,18 @@ class Judge extends Model
             DB::raw("(CASE WHEN user_bookmark_judges.user = {$user_id} THEN 1 ELSE 0 END) AS is_bookmark")
         ];
     }
+	
+	
+	/**
+	 * Отримує з БД повне ПІБ за id
+	 *
+	 * @param int $judge_id
+	 * @return
+	 */
+	public static function getFullNameById($judge_id) {
+		return (DB::table('judges')
+			->select(DB::raw(" get_one_judge_by_id({$judge_id}) AS full_name "))
+			->where('id', '=', $judge_id)
+			->first());
+	}
 }
