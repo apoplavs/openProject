@@ -8,9 +8,24 @@
 </template>
 
 <script>
+import Vue from 'vue';
+import GSignInButton from 'vue-google-signin-button';
+import LoginVue from '../auth/Login.vue';
+Vue.use(GSignInButton);
+
+
+
 export default {
+  name: "login-google",
   data () {
     return {
+      // user: {
+      //   id: '',
+      //   name: '',
+      //   surname: '',
+      //   email: '',
+      //   picture: ''
+      // },
       /**
        * The Auth2 parameters, as seen on
        * https://developers.google.com/identity/sign-in/web/reference#gapiauth2initparams.
@@ -21,20 +36,82 @@ export default {
       }
     }
   },
-computed:{
-    isAuth() {
-        return localStorage.getItem("token");
-    }
-},
   methods: {
+    getUserData(callback) {
+				axios
+					.get('/api/v1/user', {
+						headers: {
+							"Content-Type": "application/json",
+							"X-Requested-With": "XMLHttpRequest",
+							"Authorization": localStorage.getItem('token')
+						}
+
+					})
+					.then(response => {
+						let user = {
+                name: response.data.name,
+                email: response.data.email
+            }                      
+              localStorage.setItem('user', JSON.stringify(user));     
+              this.$store.commit('auth_success', response.data.email);
+						callback();
+					})
+					.catch(error => {
+						console.log('ERR ', error);
+					});
+			},
     onSignInSuccess (googleUser) {
       // `googleUser` is the GoogleUser object that represents the just-signed-in user.
       // See https://developers.google.com/identity/sign-in/web/reference#users
-      const profile = googleUser.getBasicProfile() // etc etc
-    },
+      const profile = googleUser.getBasicProfile()
+      const user = {
+        id: profile.getId(),
+        name: profile.getGivenName(),
+        surname: profile.getFamilyName(),
+        email: profile.getEmail(),
+        picture: profile.getImageUrl()
+      }      
+   
+    axios.post('/api/v1/login/google', user, {
+						headers: {
+							'Content-Type': 'application/json',
+							'X-Requested-With': 'XMLHttpRequest'
+						}
+					}).then(response => {
+						if (response) {
+							let token =
+								response.data.token_type + " " + response.data.access_token;
+              localStorage.setItem("token", token);
+              console.log('ya idu dodmkuuuu')
+							this.getUserData( () => {
+								this.$router.push("/user-profile");
+							});
+						}
+					}).catch(error => {
+							if (error.response && error.response) {
+								if (error.response.data && error.response.data.message) {
+									this.$toasted.error(error.response.data.message, {
+										theme: "primary",
+										position: "top-right",
+										duration: 15000
+									});
+								}
+							} else {
+								this.$toasted.error("Щось пішло не так :(  Спробуйте ввійти через google", {
+									theme: "primary",
+									position: "top-right",
+									duration: 15000
+								});
+								alert(error);
+							}
+          });
+         },
     onSignInError (error) {
-      // `error` contains any error occurred.
-      console.log('OH NOES', error)
+      this.$toasted.error('Щось пішло не так :(  Спробуйте ввійти іншим способом', {
+					theme: "primary",
+					position: "top-right",
+					duration : 10000
+				})
     }
   }
 }

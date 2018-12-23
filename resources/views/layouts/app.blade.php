@@ -40,6 +40,8 @@
 	<div id="app">
 		<router-view></router-view>
 	</div>
+	<script src="https://apis.google.com/js/platform.js" async defer></script>
+	<script src="https://apis.google.com/js/api:client.js"></script>
 	<!-- Scripts -->
 	<script src="{{ asset('js/app.js', env('HTTPS', NULL)) }}"></script>
 	

@@ -57,6 +57,7 @@
                     <!--<g-signin-button/>-->
                 </form>
                 <login-facebook/>
+                <login-google/>
             </div>
         </div>
     </div>
@@ -65,11 +66,12 @@
 
 <script>
     import LoginFacebook from "../shared/FacebookSignInButton.vue";
-    import { bus } from '../../app.js';
+    import LoginGoogle from "../shared/GoogleSignInButton.vue";
 
     export default {
 		components: {
-			LoginFacebook
+            LoginFacebook,
+            LoginGoogle
 		},
         name: "Login",
         data() {
@@ -98,11 +100,8 @@
                             name: response.data.name,
                             email: response.data.email
                         }
-
-                        let userStringified = JSON.stringify(user);
-                        console.log('userStringified', userStringified);
-                        
-                        localStorage.setItem('user', userStringified);     
+                       
+                        localStorage.setItem('user', JSON.stringify(user));     
                         this.$store.commit('auth_success', response.data.email);
                         callback();
                     })

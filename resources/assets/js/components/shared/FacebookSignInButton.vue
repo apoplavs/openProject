@@ -55,11 +55,12 @@
 
 					})
 					.then(response => {
-						let name = response.data.name;
-						let email = response.data.email;
-						localStorage.setItem("name", name);
-						localStorage.setItem("email", email);
-						console.log('Response', response);
+						let user = {
+                            name: response.data.name,
+                            email: response.data.email
+                        }                      
+                        localStorage.setItem('user', JSON.stringify(user));     
+                        this.$store.commit('auth_success', response.data.email);
 						callback();
 					})
 					.catch(error => {
