@@ -79,8 +79,9 @@
             </div>
             <div class="card-body court-sessions-container">
                 <div class="court-sessions">
-                    <div v-if="filterSessions.length > 0" class="container-component">
+                    <div v-if="true" class="container-component">
                         <div class="row header text-muted">
+                            
                             <div class="col-1 pl-0">Дата розгляду</div>
                             <div class="col-1">Номер справи</div>
                             <div class="col-2">Судді</div>
@@ -89,17 +90,19 @@
                             <div class="col-2">Суть справи</div>
                             <div class="col-1 pr-0"></div>
                         </div>
-                        <div class="row" v-for="(session, i_el) in filterSessions" :key="i_el">
+                        <div class="row">
                             <div class="col-1 pl-0">
-                                <div>{{ session.date }}</div>
+                                <div>25.09.2018</div>
                             </div>
-                            <div class="col-1 ">{{ session.number }}</div>
-                            <div class="col-2">{{ session.judges }}</div>
-                            <div class="col-2">{{ session.forma }}</div>
-                            <div class="col-3">{{ session.involved }}</div>
-                            <div class="col-2">{{ session.description }}</div>
-                            <div class="col-1 pr-0 text-center" v-if="isAuth">
-                                <i v-if="session.is_bookmark" class="fas fa-star" @click="delBookmarkCourtSession(session)"></i>
+                            <div class="col-1 ">923/623.10</div>
+                            <div class="col-2">Господарський суд Херсонської області Немченко Л.M.</div>
+                            <div class="col-2">Aміністративна</div>
+                            <div class="col-3">Позивач: Головня Максим Феодосієвич, відповідач: Публічне Акціонерне Товариство Херсонський Суднобудівний завод,
+                     Позивач: Головня Максим Феодосієвич, відповідач: Публічне Акціонерне Товариство Херсонський Суднобудівний завод</div>
+                            <div class="col-2">Позивач: Головня Максим Феодосієвич, відповідач: Публічне Акціонерне Товариство Херсонський Суднобудівний завод,
+                     Позивач: Головня Максим Феодосієвич</div>
+                            <div class="col-1 pr-0 text-center" v-if="$store.getters.isAuth">
+                                <i v-if="true" class="fas fa-star" @click="delBookmarkCourtSession(session)"></i>
                                 <i v-else class="far fa-star" @click="addBookmarkCourtSession(session)"></i>
                             </div>
                         </div>
@@ -118,53 +121,54 @@
         name: "CourtSessions",
         data() {
             return {
-                filterSessions: null
+                filterSessions: null,
+                search: ''
             }
         },
-        beforeMount() {
-            if (this.isAuth) { 
-                axios
-                    .get(`/api/v1/judges/${this.$route.params.id}`, {
-                        headers: {
-                            "Content-Type": "application/json",
-                            "X-Requested-With": "XMLHttpRequest",
-                            "Authorization": localStorage.getItem('token')
-                        },
-                    })
-                    .then(response => {
-                        this.judge = response.data;
-                        this.loadData = true;   
-                        console.log('JUdge PROFILE', this.judge);
+        // beforeMount() {
+        //     if (this.isAuth) { 
+        //         axios
+        //             .get(`/api/v1/judges/${this.$route.params.id}`, {
+        //                 headers: {
+        //                     "Content-Type": "application/json",
+        //                     "X-Requested-With": "XMLHttpRequest",
+        //                     "Authorization": localStorage.getItem('token')
+        //                 },
+        //             })
+        //             .then(response => {
+        //                 this.judge = response.data;
+        //                 this.loadData = true;   
+        //                 console.log('JUdge PROFILE', this.judge);
                                              
-                    })
-                    .catch(error => {
-                        if (error.response.status === 401) {
-                            this.$router.push('/login');
-                        }
-                        console.log('error');
-                    });
-            } else {
-                axios
-                    .get(`/api/v1/guest/judges/${this.$route.params.id}`, {
-                        headers: {
-                            "Content-Type": "application/json",
-                            "X-Requested-With": "XMLHttpRequest",
-                        },
-                    })
-                    .then(response => {
-                        this.judge = response.data;
-                        this.loadData = true;
+        //             })
+        //             .catch(error => {
+        //                 if (error.response.status === 401) {
+        //                     this.$router.push('/login');
+        //                 }
+        //                 console.log('error');
+        //             });
+        //     } else {
+        //         axios
+        //             .get(`/api/v1/guest/judges/${this.$route.params.id}`, {
+        //                 headers: {
+        //                     "Content-Type": "application/json",
+        //                     "X-Requested-With": "XMLHttpRequest",
+        //                 },
+        //             })
+        //             .then(response => {
+        //                 this.judge = response.data;
+        //                 this.loadData = true;
                         
-                    })
-                    .catch(error => {
-                        if (error.response.status === 401) {
-                            this.$router.push('/login');
-                        }
-                        console.log('error');
-                    });
+        //             })
+        //             .catch(error => {
+        //                 if (error.response.status === 401) {
+        //                     this.$router.push('/login');
+        //                 }
+        //                 console.log('error');
+        //             });
 
-            }
-        }
+        //     }
+        // }
     }
 </script>
 
@@ -180,6 +184,9 @@
         > p:first-child {
             font-size: 1.1rem;
         }
+    }
+    input[type="search"] {
+        width: 200px;
     }
     
     .container-component {

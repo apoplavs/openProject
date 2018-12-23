@@ -64,7 +64,9 @@
 </template>
 
 <script>
-	import LoginFacebook from "../shared/FacebookSignInButton.vue";
+    import LoginFacebook from "../shared/FacebookSignInButton.vue";
+    import { bus } from '../../app.js';
+
     export default {
 		components: {
 			LoginFacebook
@@ -73,6 +75,7 @@
         data() {
             return {
                 user: {
+                    isAuth: false,
                     email: "",
                     password: "",
                     remember_me: 1
@@ -91,11 +94,16 @@
     
                     })
                     .then(response => {
-                        let name = response.data.name;
-                        let email = response.data.email;
-                        localStorage.setItem("name", name);
-                        localStorage.setItem("email", email);
-                        console.log('Response', response);
+                        let user = {
+                            name: response.data.name,
+                            email: response.data.email
+                        }
+
+                        let userStringified = JSON.stringify(user);
+                        console.log('userStringified', userStringified);
+                        
+                        localStorage.setItem('user', userStringified);     
+                        this.$store.commit('auth_success', response.data.email);
                         callback();
                     })
                     .catch(error => {
@@ -103,12 +111,11 @@
                     });
             },
             validateBeforeSubmit() {
-                const _this = this;
                 this.$validator.validateAll().then(result => {
                     if (result) {
                         this.user.remember_me = this.user.remember_me === true || this.user.remember_me === 1 ? 1 : 0; //конвертую чекбокс в 1 або 0 по дефолку true/false
                         axios
-                            .post("/api/v1/login", _this.user, {
+                            .post("/api/v1/login", this.user, {
                                 headers: {
                                     "Content-Type": "application/json",
                                     "X-Requested-With": "XMLHttpRequest"
@@ -117,11 +124,9 @@
                             .then(response => {
                                 if (response) {
                                     let token = response.data.token_type + " " + response.data.access_token;
-                                    localStorage.setItem("token", token);
-                                    window.location.reload();
-                                    _this.getUserData( () => {
-                                        _this.$router.push("/user-profile"); 
-                                                                   
+                                    localStorage.setItem("token", token);  
+                                    this.getUserData( () => {
+                                        this.$router.push("/user-profile");                             
                                     });
                                 }
                             })
@@ -154,10 +159,10 @@
             },
            
         },
-        beforeRouteLeave (to, from , next) {
-            location.reload()
-            next()
-        }
+        // beforeRouteLeave (to, from , next) {
+        //     location.reload()
+        //     next()
+        // }
     };
 </script>
 
