@@ -1157,7 +1157,10 @@ class Validator():
     def validate_list(self, list):
 
         for i in range(len(list)):
-            list[i]['doc_text'] = self.validate_text(list[i]['doc_text'])
+                try:
+                        list[i]['doc_text'] = self.validate_text(list[i]['doc_text'])
+                except:
+                        list[i]['doc_text'] = ''
 
         return list
 

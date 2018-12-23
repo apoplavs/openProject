@@ -261,7 +261,9 @@ def find_category(prob1, prob2, other):
 
 all_pickles = {
     '8_9_10_11.pickle': get_classifier('8_9_10_11.pickle'),
-    '8_9_10_11_12.pickle': get_classifier('8_9_10_11_12.pickle')
+    '8_9_10_11_12.pickle': get_classifier('8_9_10_11_12.pickle'),
+    '17_18_19_20.pickle': get_classifier('17_18_19_20.pickle'),
+    '17_18_19_20_21.pickle': get_classifier('17_18_19_20_21.pickle')
 }
 
 def guess_category(text, anticipated_category):

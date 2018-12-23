@@ -14,6 +14,7 @@ class Section:
         self.judge_results_table = judge_results_table
         self.judgement_codes = judgment_codes
         self.data_dict = {}
+        self.numbers_data = {}
 
     def _get_all_applications(self) -> list:
         """
@@ -62,7 +63,7 @@ class Section:
             "'" + num['cause_num'] + "'" for num in all_applications
         )
         j_codes = ', '.join(
-            str(code)  for code in self.judgement_codes
+            str(code) for code in self.judgement_codes
         )
 
         sql_query = (f"SELECT DISTINCT cause_num FROM reg{self.judge.region} "
@@ -92,24 +93,85 @@ class Section:
         documents = edrsr.read(sql_query)
         return documents
 
-    def _get_application_documents_old(self, cause_num) -> list:
-        """
-        All documents related to the applications
-        :param cause_num
-        :return:
-        """
-        j_codes = ', '.join(
-            str(code) for code in self.judgement_codes
-        )
+    def _get_autoasigned_cases(self, cause_nums):
 
-        sql_query = (f"SELECT * FROM reg{self.judge.region} "
-                     f"WHERE court_code={self.judge.court_code} "
-                     f"AND cause_num='{cause_num}' "
-                     f"AND judgment_code IN ({j_codes}) "
-                     f"ORDER BY adjudication_date ASC")
-        edrsr = DB(db_name=EDRSR)
-        documents = edrsr.read(sql_query)
-        return documents
+        sql_query = (f"SELECT * FROM auto_assigned_cases "
+                     f"WHERE court = {self.judge.court_code} "
+                     f"AND judge = {self.judge.id} "
+                     # f"AND number IN ({all_applications})"
+                     )
+
+        toecyd = DB(db_name=TOECYD)
+        autoasigned_cases = toecyd.read(sql_query)
+        return autoasigned_cases
+
+    def analyze_in_time(self):
+        if isinstance(self, Civil) or isinstance(self, Criminal):
+            self._analyze_in_time_detailed()
+        elif isinstance(self, AdminOffence):
+            self._analyze_in_time_small()
+
+    def _analyze_in_time_small(self):
+        pass
+
+    def _analyze_in_time_detailed(self):
+        all_applications = self._get_application_documents()
+        all_applications = _prepare_applications(all_applications)
+
+        self.data_dict['cases_on_time'] = 0
+        self.data_dict['cases_not_on_time'] = 0
+
+        autoassigned_cases = self._get_autoasigned_cases(list(all_applications))
+        autoassigned_cases = _prepare_autoassigned_cases(autoassigned_cases)
+
+        from datetime import date
+        from datetime import datetime
+        start_time = datetime.now()
+        print(f'Number of applications:{len(all_applications)}')
+        for app_k, app_documents in all_applications.items():
+            date_dict = {'start_adj_date' : None}
+            pause_time = None
+            pause_days = 0
+            for document in app_documents:
+                doc_text = document['doc_text']
+                category = guess_category(
+                    text=doc_text,
+                    anticipated_category=self.numbers_data['start_document']
+                )
+                # якщо зустрівся документ про початок спрви, і раніше ніякого
+                # документу про початк не було
+                if self.numbers_data.get('start_document') and (
+                        category == self.numbers_data['start_document']
+                        and date_dict['start_adj_date'] is None):
+                    date_dict['start_adj_date'] = document['adjudication_date']
+                elif category == self.numbers_data['pause_document']:
+                    pause_time = document['adjudication_date']
+                # якщо зустрівся документ про відновлення справи, і перед тим
+                # був документ про зупинення
+                elif (category == self.numbers_data['stop_document']
+                      and pause_time):
+                    resume_time = document['adjudication_date']
+                    pause_days += (resume_time - pause_time).days
+
+                # якщо зустрілась ухвала про закінчення, або кінцеве рішення
+                # по справі
+                elif (category == self.numbers_data['end_document']
+                      or document['judgment_code'] == 3):
+                    date_dict['end_adj_date'] = document['adjudication_date']
+                    if date_dict['start_adj_date'] is None:
+                        date_dict['start_adj_date'] = autoassigned_cases.get(
+                            document['cause_num'])
+                    if isinstance(date_dict['start_adj_date'], date):
+                        interval = (date_dict['end_adj_date'] -
+                                    date_dict['start_adj_date']).days - pause_days
+                        if interval <= self.numbers_data['interval']:
+                            self.data_dict['cases_on_time'] += 1
+                        else:
+                            self.data_dict['cases_not_on_time'] += 1
+                    break
+        print(f"Days on time:{self.data_dict['cases_on_time']}")
+        print(f"Days not on time:{self.data_dict['cases_not_on_time']}")
+        print(f"Time :{datetime.now() - start_time}")
 
     def count(self):
         raise NotImplementedError
@@ -127,7 +189,7 @@ class Section:
         toecyd.write(sql_query, values)
 
 
-def prepare_applications(applications):
+def _prepare_applications(applications):
     final_dict = {}
     for app in applications:
         cause_num = app['cause_num']
@@ -142,6 +204,15 @@ def prepare_applications(applications):
     return final_dict
 
 
+def _prepare_autoassigned_cases(autoassigned_cases):
+    final_dict = {}
+
+    for app in autoassigned_cases:
+        final_dict[app['number']] = app['date_composition']
+
+    return final_dict
+
+
 class Civil(Section):
 
     def __init__(self, judge):
@@ -152,59 +223,13 @@ class Civil(Section):
             judge_results_table='judges_civil_statistic',
             judgment_codes=[3, 5]
         )
-
-    def analyze_in_time(self):
-        all_applications = self._get_application_documents()
-        all_applications = prepare_applications(all_applications)
-
-        self.data_dict['cases_on_time'] = 0
-        self.data_dict['cases_not_on_time'] = 0
-
-        # autoassigned_cases = self._get_autoasigned_cases(list(all_applications))
-
-        from datetime import datetime
-        start_time = datetime.now()
-        print(f'Number of applications:{len(all_applications)}')
-        for app_k, app_documents in all_applications.items():
-            date_dict = {'start_adj_date' : None}
-            pause_time = None
-            pause_days = 0
-            for document in app_documents:
-                doc_text = document['doc_text']
-                category = guess_category(
-                    text=doc_text,
-                    anticipated_category=8
-                )
-                # якщо зустрівся документ про початок спрви, і раніше ніякого
-                # документу про початк не було
-                if category == 8 and date_dict['start_adj_date'] == None:
-                    date_dict['start_adj_date'] = document['adjudication_date']
-                elif category == 9:
-                    pause_time = document['adjudication_date']
-                # якщо зустрівся документ про відновлення справи, і перед тим
-                # був документ про зупинення
-                elif category == 10 and pause_time:
-                    resume_time = document['adjudication_date']
-                    pause_days += (resume_time - pause_time).days
-
-                # якщо зустрілась ухвала про закінчення, або кінцеве рішення
-                # по справі
-                elif category == 11 or document['judgment_code'] == 3:
-                    date_dict['end_adj_date'] = document['adjudication_date']
-                    if date_dict['start_adj_date'] != None:
-                        interval = (date_dict['end_adj_date'] - date_dict['start_adj_date']).days - pause_days
-                        if interval <= 75:
-                            self.data_dict['cases_on_time'] += 1
-                        else:
-                            self.data_dict['cases_not_on_time'] += 1
-                    else:
-                        #todo якщо date_dict['start_adj_date'] не було серед документів
-                        # то значення для date_dict['start_adj_date'] потрібно взяти з auto_assigned_cases
-                        pass
-                    break
-        print(f"Days on time:{self.data_dict['cases_on_time']}")
-        print(f"Days not on time:{self.data_dict['cases_not_on_time']}")
-        print(f"Time :{datetime.now() - start_time}")
+        self.numbers_data = {
+            'start_document': 8,
+            'pause_document': 9,
+            'stop_document': 10,
+            'end_document': 11,
+            'interval': 75
+        }
 
     def count(self):
         all_applications = self._get_all_applications()
@@ -227,7 +252,7 @@ class Civil(Section):
             documents = self._get_appeal_documents(appeal['cause_num'])
             for document in documents:
                 # якщо апеляція винесла рішення - точно не вистояло, переходимо до наступної справи
-                if document['judgment_code'] == 3 :
+                if document['judgment_code'] == 3:
                     self.data_dict['not_approved_by_appeal'] += 1
                     break
                 doc_text = document['doc_text']
@@ -252,6 +277,13 @@ class Criminal(Section):
             judge_results_table='judges_criminal_statistic',
             judgment_codes=[5, 1]
         )
+        self.numbers_data = {
+            'start_document': 17,
+            'pause_document': 18,
+            'stop_document': 19,
+            'end_document': 20,
+            'interval': 183
+        }
 
     def count(self):
         all_applications = self._get_all_applications()
@@ -272,7 +304,8 @@ class Criminal(Section):
         for appeal in civil_in_appeal:
             documents = self._get_appeal_documents(appeal['cause_num'])
             for document in documents:
-                # якщо апеляція винесла вирок - точно не вистояло, переходимо до наступної справи
+                # якщо апеляція винесла вирок - точно не вистояло,
+                # переходимо до наступної справи
                 if document['judgment_code'] == 1:
                     self.data_dict['not_approved_by_appeal'] += 1
                     break
