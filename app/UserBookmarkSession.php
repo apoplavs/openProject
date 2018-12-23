@@ -37,6 +37,7 @@ class UserBookmarkSession extends Model
             DB::raw('get_judges_by_id(court_sessions.judge1, court_sessions.judge2, court_sessions.judge3) AS judges'),
             'courts.court_code',
             'courts.name',
+            DB::raw('justice_kinds.name AS forma'),
             'court_sessions.number',
             'court_sessions.involved',
             'court_sessions.description',
@@ -96,6 +97,7 @@ class UserBookmarkSession extends Model
         call_user_func_array(['Toecyd\CourtSession', 'select'], self::getBookmarkFields())
             ->join('user_bookmark_sessions', 'court_sessions.id', '=', 'user_bookmark_sessions.court_session')
             ->join('courts', 'court_sessions.court', '=', 'courts.court_code')
+            ->join('justice_kinds', 'court_sessions.forma', '=', 'justice_kinds.justice_kind')
             ->where('user_bookmark_sessions.user', '=', Auth::user()->id)
             ->get()
             ->unique(function ($item) {

@@ -93,6 +93,8 @@ Route::group(['prefix' => 'v1/', 'namespace' => 'Api\V1',], function () {
 		/**
 		 * Cудові засідання
 		 */
+		// Отримати судові засідання, які знаходяться в заладках користувача
+		Route::get('court-sessions/bookmarks', 'CourtSessionController@index');
 		// Додати судове засідання в закладки
 		Route::put('court-sessions/{id}/bookmark', 'CourtSessionController@addSessionBookmark')->middleware('checkId:session');
         // Видалити судове засідання з закладок
