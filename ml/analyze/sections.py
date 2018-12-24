@@ -2,6 +2,8 @@ from analyze.judge import Judge
 from analyze.classifier import guess_category
 from lib.config import *
 from lib.db import DB
+from datetime import date
+
 
 class Section:
     data_dict = {}
@@ -31,7 +33,7 @@ class Section:
         applications = edrsr.read(sql_query)
         return applications
 
-    def _get_application_documents(self) -> list:
+    def _get_application_documents(self, prepare_func=None):
         """
         All documents related to the applications
         :param cause_num
@@ -48,6 +50,9 @@ class Section:
                      )
         edrsr = DB(db_name=EDRSR)
         documents = edrsr.read(sql_query)
+
+        if prepare_func:
+            return prepare_func(documents)
         return documents
 
     def _get_all_appeals(self, all_applications)  -> list:
@@ -93,44 +98,68 @@ class Section:
         documents = edrsr.read(sql_query)
         return documents
 
-    def _get_autoasigned_cases(self, cause_nums):
-
+    def _get_autoasigned_cases(self, cause_nums, prepare_func=None):
+        all_applications = ', '.join(
+            "'" + num + "'" for num in cause_nums
+        )
         sql_query = (f"SELECT * FROM auto_assigned_cases "
                      f"WHERE court = {self.judge.court_code} "
                      f"AND judge = {self.judge.id} "
-                     # f"AND number IN ({all_applications})"
+                     f"AND number IN ({all_applications})"
                      )
 
         toecyd = DB(db_name=TOECYD)
         autoasigned_cases = toecyd.read(sql_query)
+
+        if prepare_func:
+            return prepare_func(autoasigned_cases)
         return autoasigned_cases
 
     def analyze_in_time(self):
-        if isinstance(self, Civil) or isinstance(self, Criminal):
-            self._analyze_in_time_detailed()
-        elif isinstance(self, AdminOffence):
-            self._analyze_in_time_small()
-
-    def _analyze_in_time_small(self):
-        pass
-
-    def _analyze_in_time_detailed(self):
-        all_applications = self._get_application_documents()
-        all_applications = _prepare_applications(all_applications)
+        from datetime import datetime
+        start_time = datetime.now()
 
         self.data_dict['cases_on_time'] = 0
         self.data_dict['cases_not_on_time'] = 0
 
-        autoassigned_cases = self._get_autoasigned_cases(list(all_applications))
-        autoassigned_cases = _prepare_autoassigned_cases(autoassigned_cases)
+        all_applications = self._get_application_documents(_prepare_applications)
 
-        from datetime import date
-        from datetime import datetime
-        start_time = datetime.now()
-        print(f'Number of applications:{len(all_applications)}')
+        autoassigned_cases = self._get_autoasigned_cases(
+            list(all_applications),
+            _prepare_autoassigned_cases)
+
+        if isinstance(self, Civil) or isinstance(self, Criminal):
+            self._analyze_in_time_detailed(all_applications, autoassigned_cases)
+        elif isinstance(self, AdminOffence):
+            self._analyze_in_time_small(all_applications, autoassigned_cases)
+
+        print(f"Days on time:{self.data_dict['cases_on_time']}")
+        print(f"Days not on time:{self.data_dict['cases_not_on_time']}")
+        print(f"Time :{datetime.now() - start_time}")
+
+    def _analyze_in_time_small(self, all_applications, autoassigned_cases):
+
         for app_k, app_documents in all_applications.items():
-            date_dict = {'start_adj_date' : None}
-            pause_time = None
+            date_dict = {}
+            pause_days = 0
+            for document in app_documents:
+
+                date_dict['start_adj_date'] = autoassigned_cases.get(
+                    document['cause_num'])
+
+                if document['judgment_code'] == self.numbers_data.get(
+                        'stop_judgment_code'):
+
+                    date_dict['end_adj_date'] = document[
+                        'adjudication_date']
+
+                    self._count_days_on_time(date_dict, pause_days)
+                    break
+
+    def _analyze_in_time_detailed(self, all_applications, autoassigned_cases):
+
+        for app_k, app_documents in all_applications.items():
+            date_dict = {}
             pause_days = 0
             for document in app_documents:
                 doc_text = document['doc_text']
@@ -142,36 +171,43 @@ class Section:
                 # документу про початк не було
                 if self.numbers_data.get('start_document') and (
                         category == self.numbers_data['start_document']
-                        and date_dict['start_adj_date'] is None):
+                        and not date_dict.get('start_adj_date')):
                     date_dict['start_adj_date'] = document['adjudication_date']
                 elif category == self.numbers_data['pause_document']:
                     pause_time = document['adjudication_date']
                 # якщо зустрівся документ про відновлення справи, і перед тим
                 # був документ про зупинення
-                elif (category == self.numbers_data['stop_document']
-                      and pause_time):
-                    resume_time = document['adjudication_date']
-                    pause_days += (resume_time - pause_time).days
+                    if (category == self.numbers_data['stop_document']
+                            and pause_time):
+                        resume_time = document['adjudication_date']
+                        pause_days += (resume_time - pause_time).days
 
                 # якщо зустрілась ухвала про закінчення, або кінцеве рішення
                 # по справі
                 elif (category == self.numbers_data['end_document']
-                      or document['judgment_code'] == 3):
+                      or document['judgment_code'] ==
+                      self.numbers_data['stop_judgment_code']):
                     date_dict['end_adj_date'] = document['adjudication_date']
-                    if date_dict['start_adj_date'] is None:
+
+                    # if we dont have start date - get it from
+                    # autoassigned_cases table
+                    if not date_dict.get('start_adj_date'):
                         date_dict['start_adj_date'] = autoassigned_cases.get(
                             document['cause_num'])
-                    if isinstance(date_dict['start_adj_date'], date):
-                        interval = (date_dict['end_adj_date'] -
-                                    date_dict['start_adj_date']).days - pause_days
-                        if interval <= self.numbers_data['interval']:
-                            self.data_dict['cases_on_time'] += 1
-                        else:
-                            self.data_dict['cases_not_on_time'] += 1
+
+                    self._count_days_on_time(date_dict, pause_days)
                     break
-        print(f"Days on time:{self.data_dict['cases_on_time']}")
-        print(f"Days not on time:{self.data_dict['cases_not_on_time']}")
-        print(f"Time :{datetime.now() - start_time}")
+
+    def _count_days_on_time(self, date_dict, pause_days):
+        if isinstance(date_dict['start_adj_date'], date):
+            interval = (date_dict['end_adj_date'] -
+                        date_dict['start_adj_date']
+                        ).days - pause_days
+
+            if interval <= self.numbers_data['interval']:
+                self.data_dict['cases_on_time'] += 1
+            else:
+                self.data_dict['cases_not_on_time'] += 1
 
     def count(self):
         raise NotImplementedError
@@ -201,6 +237,7 @@ def _prepare_applications(applications):
     for final_app_k in final_dict:
         final_dict[final_app_k].sort(key=lambda r: r['adjudication_date'])
 
+    print(f'Number of applications:{len(final_dict)}')
     return final_dict
 
 
@@ -228,7 +265,8 @@ class Civil(Section):
             'pause_document': 9,
             'stop_document': 10,
             'end_document': 11,
-            'interval': 75
+            'interval': 75,
+            'stop_judgment_code': 3
         }
 
     def count(self):
@@ -282,7 +320,8 @@ class Criminal(Section):
             'pause_document': 18,
             'stop_document': 19,
             'end_document': 20,
-            'interval': 183
+            'interval': 183,
+            'stop_judgment_code': 5
         }
 
     def count(self):
@@ -359,6 +398,10 @@ class AdminOffence(Section):
             anticipated_category=25,
             judgment_codes=[5, 2]
         )
+        self.numbers_data = {
+            'interval': 15,
+            'stop_judgment_code': 2
+        }
 
     def count(self):
         all_applications = self._get_all_applications()

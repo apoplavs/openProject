@@ -24,28 +24,25 @@ if __name__ == '__main__':
     #     print('You should provide the valid judge id')
     #     sys.exit()
 
-    arguments = ['1831']
+    arguments = ['1830', '1831']
     for judge_id in arguments:
 
         judge = Judge(judge_id=judge_id)
 
+        print('\nCivil')
         civil = Civil(judge=judge)
         civil.analyze_in_time()
         # civil.count()
         civil.save()
 
-        # criminal = Criminal(judge=judge)
+        print('\nCriminal')
+        criminal = Criminal(judge=judge)
+        criminal.analyze_in_time()
         # criminal.count()
-        # criminal.save()
-        #
-        # comm = Commercial(judge=judge)
-        # comm.count()
-        # comm.save()
-        #
-        # admin = Admin(judge=judge)
-        # admin.count()
-        # admin.save()
-        #
-        # admin_offence = AdminOffence(judge=judge)
-        # admin_offence.count()
-        # admin_offence.save()
+        criminal.save()
+
+        print('\nAdminoffence')
+        admin_offence = AdminOffence(judge=judge)
+        admin_offence.analyze_in_time()
+        # criminal.count()
+        admin_offence.save()
