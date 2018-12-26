@@ -98,7 +98,10 @@
                             </button>
                         </div>
                     </div>
-                    <login-facebook/>
+                    <div class="form-group">
+                        <login-google/>
+                        <login-facebook/>
+                    </div>
                 </form>
             </div>
         </div>
@@ -108,12 +111,14 @@
 
 <script>
     import LoginFacebook from "../shared/FacebookSignInButton.vue";
+    import LoginGoogle from "../shared/GoogleSignInButton.vue";
 
-	export default {
+    export default {
+        name: "Registration",
 		components: {
-			LoginFacebook
-        },
-		name: "Registration",
+            LoginFacebook,
+            LoginGoogle
+		}, 	
         data() {
             return {
                 user: {

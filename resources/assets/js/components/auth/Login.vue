@@ -54,10 +54,11 @@
                             </div>
                         </div>
                     </div>
-                    <!--<g-signin-button/>-->
-                </form>
-                <login-facebook/>
-                <login-google/>
+                    <div class="form-group">
+                        <login-google/>
+                        <login-facebook/>
+                    </div>    
+                </form>              
             </div>
         </div>
     </div>
@@ -69,11 +70,11 @@
     import LoginGoogle from "../shared/GoogleSignInButton.vue";
 
     export default {
+        name: "Login",
 		components: {
             LoginFacebook,
             LoginGoogle
-		},
-        name: "Login",
+		}, 
         data() {
             return {
                 user: {
