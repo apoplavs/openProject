@@ -12,7 +12,8 @@
 	<title>{{ config('app.name', 'ТОЕсуд') }}</title>
 
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">	
-	
+	<!-- <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&amp;subset=cyrillic" rel="stylesheet"> -->
+
 	<!-- Styles -->
 	<!-- <link href="{{ asset('css/plugins/bootstrap.min.css', env('HTTPS', NULL)) }}" rel="stylesheet"> -->
 	<link href="{{ asset('css/plugins/font-awesome/css/font-awesome.min.css', env('HTTPS', NULL)) }}" rel="stylesheet">

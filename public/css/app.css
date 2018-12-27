@@ -120,7 +120,6 @@ i.fa-edit {
 .content-wrapper {
   min-width: 1140px;
   height: 100vh;
-  overflow-y: auto;
   padding-top: 5rem;
   padding-bottom: 5rem;
 }
