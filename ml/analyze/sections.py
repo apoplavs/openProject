@@ -126,9 +126,13 @@ class Section:
                 self.data_dict['cases_on_time'] += 1
             else:
                 self.data_dict['cases_not_on_time'] += 1
+
+            if interval < 1:
+                interval = 1
             # рахуємо середню тривалість розгляду справи
             self.data_dict['average_duration'] += interval
             self.data_dict['average_duration'] = int(self.data_dict['average_duration'] / (self.data_dict['cases_on_time'] + self.data_dict['cases_not_on_time']))
+            
 
 
     def count_appeal(self):
@@ -147,9 +151,12 @@ class Section:
         toecyd.write(sql_query, values)
 
         print(f"Number of applications:{self.data_dict['amount']}")
-        print(f"Cases on time:{self.data_dict['cases_on_time']}")
-        print(f"Cases not on time:{self.data_dict['cases_not_on_time']}")
-        print(f"Cases average duration:{self.data_dict['average_duration']}")
+        if 'cases_on_time' in self.data_dict.keys():
+            print(f"Cases on time:{self.data_dict['cases_on_time']}")
+        if 'cases_not_on_time' in self.data_dict.keys():    
+            print(f"Cases not on time:{self.data_dict['cases_not_on_time']}")
+        if 'average_duration' in self.data_dict.keys():
+            print(f"Cases average duration:{self.data_dict['average_duration']}")
 
         if 'positive_judgment' in self.data_dict.keys():
             print(f"Positive judgment:{self.data_dict['positive_judgment']}")

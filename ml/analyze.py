@@ -50,3 +50,13 @@ if __name__ == '__main__':
         admin_offence.count_appeal()
         admin_offence.analyze_in_time()
         admin_offence.save()
+
+        print('\nAdmin')
+        admin = Admin(judge=judge)
+        admin.count_appeal()
+        admin.save()
+
+        print('\nCommercial')
+        commercial = Commercial(judge=judge)
+        commercial.count_appeal()
+        commercial.save()
