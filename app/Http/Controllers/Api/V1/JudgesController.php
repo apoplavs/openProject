@@ -1872,6 +1872,7 @@ class JudgesController extends Controller
 			$all_approved += $adminoffence_statistic['cases_on_time'];
 			$count_judgements++;
 		}
+		
 		$common_statistic['timeliness'] = intval($all_approved / $count_judgements);
 		
 		return $common_statistic;
