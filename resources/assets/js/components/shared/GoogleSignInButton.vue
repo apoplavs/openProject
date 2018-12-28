@@ -3,7 +3,7 @@
     :params="googleSignInParams"
     @success="onSignInSuccess"
     @error="onSignInError">
-    <img src="../../../images/google.png" width="40" alt="logo" />  &nbsp; Вхід через Google
+    <img src="../../../images/google.png" width="30" alt="logo" />  &nbsp; Вхід через Google
   </g-signin-button>
 </template>
 

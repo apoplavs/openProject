@@ -98,10 +98,12 @@
                             </button>
                         </div>
                     </div>
-                    <div class="form-group">
+                   <hr>
+                    <div class="form-group socials">
                         <login-google/>
+                        <span class="px-3">або</span>
                         <login-facebook/>
-                    </div>
+                    </div>  
                 </form>
             </div>
         </div>
@@ -211,6 +213,10 @@
         }
         .card-header {
             font-size: 1.3rem;
+        }
+        .socials {
+            @include alignElement();
+            margin-top: 1.5rem;
         }
     }
 

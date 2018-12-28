@@ -3,7 +3,7 @@
 			:params="fbSignInParams"
 			@success="onSignInSuccess"
 			@error="onSignInError">
-			<img width="40" src="../../../images/facebook.png"/>
+			<img width="30" src="../../../images/facebook.png"/>
 	</fb-signin-button>
 </template>
 
