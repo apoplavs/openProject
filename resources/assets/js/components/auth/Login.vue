@@ -172,6 +172,9 @@
         input[aria-invalid="true"] {
             border: 1px solid red;
         }
+        .card-header {
+            
+        }
         i.fa-warning,
         span.is-danger,
         #back-error {
