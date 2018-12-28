@@ -124,5 +124,6 @@ export default {
   border-radius: 3px;
   background-color: #3c82f7;
   color: #fff;
+  cursor: pointer;
 }
 </style>
