@@ -115,10 +115,18 @@ class Section:
 
 
     def _count_days_on_time(self, date_dict, pause_days):
+
         if isinstance(date_dict['start_adj_date'], date):
             interval = (date_dict['end_adj_date'] -
                         date_dict['start_adj_date']
                         ).days - pause_days
+            if interval < 0:
+                interval *= -1
+            elif interval == 0:
+                interval = 1    
+
+            # print(f"start_time = {date_dict['start_adj_date']}| end_date = {date_dict['end_adj_date']}| pause_days = {pause_days}| interval = {interval}")
+
             # рахуємо середню тривалість розгляду справи
             self.data_dict['average_duration'] *= (self.data_dict['cases_on_time'] + self.data_dict['cases_not_on_time'])
 
@@ -128,13 +136,16 @@ class Section:
                 self.data_dict['cases_not_on_time'] += 1
             # рахуємо середню тривалість розгляду справи
             self.data_dict['average_duration'] += interval
-            self.data_dict['average_duration'] = int(self.data_dict['average_duration'] / (self.data_dict['cases_on_time'] + self.data_dict['cases_not_on_time']))
+            self.data_dict['average_duration'] = self.data_dict['average_duration'] / (self.data_dict['cases_on_time'] + self.data_dict['cases_not_on_time'])
+            # print(self.data_dict['average_duration'])
 
 
     def count_appeal(self):
         raise NotImplementedError
 
     def save(self):
+
+        self.data_dict['average_duration'] = int(round(self.data_dict['average_duration']))
 
         self.data_dict['judge'] = self.judge.id
         keys = ','.join(["`" + k + "`" for k in self.data_dict])
