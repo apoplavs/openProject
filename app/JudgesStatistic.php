@@ -53,19 +53,26 @@ class JudgesStatistic extends Model
 		$result = [];
 		$result['amount'] = $statistic->amount;
 		
+		$type_judgments = $statistic->positive_judgment + $statistic->negative_judgment;
+		// якщо достатньо справ для рахування типів рішень
+		if ($type_judgments > 10) {
+			$result['positive_judgment'] = intval(round (($statistic->positive_judgment / $type_judgments) * 100));
+			$result['negative_judgment'] = intval(round (($statistic->negative_judgment / $type_judgments) * 100));
+		}
+		
 		$has_cases = $statistic->cases_on_time + $statistic->cases_not_on_time;
 		// якщо достатньо справ, щоб порахувти статистику
 		if ($has_cases > 10) {
-			$result['cases_on_time'] = intval(($statistic->cases_on_time / $has_cases) * 100);
-			$result['cases_not_on_time'] = intval(($statistic->cases_not_on_time / $has_cases) * 100);
+			$result['cases_on_time'] = intval(round (($statistic->cases_on_time / $has_cases) * 100));
+			$result['cases_not_on_time'] = intval(round (($statistic->cases_not_on_time / $has_cases) * 100));
 		}
 		
 		$result['average_duration'] = $statistic->average_duration;
 		
 		$has_result_in_appeal = $statistic->approved_by_appeal + $statistic->not_approved_by_appeal;
 		if ($has_result_in_appeal > 10) {
-			$result['approved_by_appeal'] = intval(($statistic->approved_by_appeal / $has_result_in_appeal) * 100);
-			$result['not_approved_by_appeal'] = intval(($statistic->not_approved_by_appeal / $has_result_in_appeal) * 100);
+			$result['approved_by_appeal'] = intval(round (($statistic->approved_by_appeal / $has_result_in_appeal) * 100));
+			$result['not_approved_by_appeal'] = intval(round (($statistic->not_approved_by_appeal / $has_result_in_appeal) * 100));
 		}
 		
 		return ($result);
@@ -86,18 +93,26 @@ class JudgesStatistic extends Model
 		$result = [];
 		$result['amount'] = $statistic->amount;
 		
+		$type_judgments = $statistic->positive_judgment + $statistic->negative_judgment;
+		// якщо достатньо справ для рахування типів рішень
+		if ($type_judgments > 10) {
+			$result['positive_judgment'] = intval(round (($statistic->positive_judgment / $type_judgments) * 100));
+			$result['negative_judgment'] = intval(round (($statistic->negative_judgment / $type_judgments) * 100));
+		}
+		
 		$has_cases = $statistic->cases_on_time + $statistic->cases_not_on_time;
 		// якщо достатньо справ, щоб порахувти статистику
 		if ($has_cases > 10) {
-			$result['cases_on_time'] = intval(($statistic->cases_on_time / $has_cases) * 100);
-			$result['cases_not_on_time'] = intval(($statistic->cases_not_on_time / $has_cases) * 100);
+			$result['cases_on_time'] = intval(round (($statistic->cases_on_time / $has_cases) * 100));
+			$result['cases_not_on_time'] = intval(round (($statistic->cases_not_on_time / $has_cases) * 100));
 		}
+		
 		$result['average_duration'] = $statistic->average_duration;
 		
 		$has_result_in_appeal = $statistic->approved_by_appeal + $statistic->not_approved_by_appeal;
 		if ($has_result_in_appeal > 10) {
-			$result['approved_by_appeal'] = intval(($statistic->approved_by_appeal / $has_result_in_appeal) * 100);
-			$result['not_approved_by_appeal'] = intval(($statistic->not_approved_by_appeal / $has_result_in_appeal) * 100);
+			$result['approved_by_appeal'] = intval(round (($statistic->approved_by_appeal / $has_result_in_appeal) * 100));
+			$result['not_approved_by_appeal'] = intval(round (($statistic->not_approved_by_appeal / $has_result_in_appeal) * 100));
 		}
 		return ($result);
 	}
@@ -117,21 +132,28 @@ class JudgesStatistic extends Model
 		$result = [];
 		$result['amount'] = $statistic->amount;
 		
+		$type_judgments = $statistic->positive_judgment + $statistic->negative_judgment;
+		// якщо достатньо справ для рахування типів рішень
+		if ($type_judgments > 10) {
+			$result['positive_judgment'] = intval(round (($statistic->positive_judgment / $type_judgments) * 100));
+			$result['negative_judgment'] = intval(round (($statistic->negative_judgment / $type_judgments) * 100));
+		}
+		
 		$has_cases = $statistic->cases_on_time + $statistic->cases_not_on_time;
 		
 		// якщо достатньо справ, щоб порахувти статистику
 		if ($has_cases > 10) {
-			$result['cases_on_time'] = intval(($statistic->cases_on_time / $has_cases) * 100);
-			$result['cases_not_on_time'] = intval(($statistic->cases_not_on_time / $has_cases) * 100);
+			$result['cases_on_time'] = intval(round (($statistic->cases_on_time / $has_cases) * 100));
+			$result['cases_not_on_time'] = intval(round (($statistic->cases_not_on_time / $has_cases) * 100));
 		}
 		
 		$result['average_duration'] = $statistic->average_duration;
 		
-		// якщо буди справи в апелції
+		// якщо були справи в апелції
 		$has_result_in_appeal = $statistic->approved_by_appeal + $statistic->not_approved_by_appeal;
 		if ($has_result_in_appeal > 10) {
-			$result['approved_by_appeal'] = intval(($statistic->approved_by_appeal / $has_result_in_appeal) * 100);
-			$result['not_approved_by_appeal'] = intval(($statistic->not_approved_by_appeal / $has_result_in_appeal) * 100);
+			$result['approved_by_appeal'] = intval(round (($statistic->approved_by_appeal / $has_result_in_appeal) * 100));
+			$result['not_approved_by_appeal'] = intval(round (($statistic->not_approved_by_appeal / $has_result_in_appeal) * 100));
 		}
 		
 		return ($result);
