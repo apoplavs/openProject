@@ -43,7 +43,6 @@
 
 <script>
     import _ from 'lodash';
-
     import StatusComponent from "../../shared/StatusComponent.vue";
     import ChangeStatus from "../../shared/ChangeStatus.vue";
 
@@ -70,7 +69,7 @@
         },
         filters: {
             formatDate(date) {
-                // getMobth() чомусь рахує місяці з 0 date.getMonth() + 1 //костиль
+                // getMobth() чомусь рахує місяці з 0 date.getMonth() + 1 //
                 if (date === '' || date === null) {
                     return '';
                 } else {

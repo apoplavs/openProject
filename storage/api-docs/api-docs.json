@@ -248,6 +248,11 @@
                                     "type": "string",
                                     "example": "example@gmail.com"
                                 },
+                                "link": {
+                                    "description": "\u041f\u043e\u0441\u0438\u043b\u0430\u043d\u043d\u044f \u043d\u0430 Google \u0430\u043a\u043a\u0430\u0443\u043d\u0442 \u043a\u043e\u0440\u0438\u0441\u0442\u0443\u0432\u0430\u0447\u0430 (\u0432\u0430\u043b\u0456\u0434\u043d\u0438\u0439 URL)",
+                                    "type": "string",
+                                    "example": "https://plus.google.com/111483939504700006800"
+                                },
                                 "picture": {
                                     "description": "\u041f\u043e\u0441\u0438\u043b\u0430\u043d\u043d\u044f \u043d\u0430 google-\u0430\u0432\u0430\u0442\u0430\u0440\u043a\u0443 \u043a\u043e\u0440\u0438\u0441\u0442\u0443\u0432\u0430\u0447\u0430",
                                     "type": "string",

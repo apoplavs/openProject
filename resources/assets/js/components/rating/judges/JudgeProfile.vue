@@ -85,9 +85,9 @@
                                     <div class="col-2">{{ session.forma }}</div>
                                     <div class="col-3">{{ session.involved }}</div>
                                     <div class="col-2">{{ session.description }}</div>
-                                    <div class="col-1 pr-0 text-center">
-                                        <i v-if="session.is_bookmark" class="fas fa-star"></i>
-                                        <i v-else class="far fa-star"></i>
+                                    <div class="col-1 pr-0 text-center" v-if="isAuth">
+                                        <i v-if="session.is_bookmark" class="fas fa-star" @click="delBookmarkCourtSession(session)"></i>
+                                        <i v-else class="far fa-star" @click="addBookmarkCourtSession(session)"></i>
                                     </div>
                                 </div>
                             </div>
@@ -290,10 +290,10 @@
                     return (arr.length > 0) ? true : false
                 })
             },
-            isAuth() {
+            isAuth: () => {
                 return localStorage.getItem("token");
             }
-        },
+        },  
         beforeMount() {
             if (this.isAuth) { 
                 axios
@@ -306,7 +306,9 @@
                     })
                     .then(response => {
                         this.judge = response.data;
-                        this.loadData = true;                        
+                        this.loadData = true;   
+                        console.log('JUdge PROFILE', this.judge);
+                                             
                     })
                     .catch(error => {
                         if (error.response.status === 401) {
@@ -484,6 +486,52 @@
                             console.log("set Likes", error);
                         });
                 }
+            },
+            delBookmarkCourtSession(session) {
+                if (!this.isAuth) {
+                    this.$router.push("/login");
+                } else {
+                    axios({
+                        method: "delete",
+                        url: `/api/v1/court-sessions/${session.id}/bookmark`,
+                        headers: {
+                            "Content-Type": "application/json",
+                            "X-Requested-With": "XMLHttpRequest",
+                            Authorization: localStorage.getItem("token")
+                        }
+                    })
+                    .then(response => {
+                        session.is_bookmark = 0;
+                    })
+                    .catch(error => {
+                        if (error.response.status === 401) {
+                            this.$router.push("/login");
+                        }
+                    });
+                }
+            },
+            addBookmarkCourtSession(session) {
+                 if (!this.isAuth) {
+                    this.$router.push("/login");
+                } else {
+                    axios({
+                        method: "put",
+                        url: `/api/v1/court-sessions/${session.id}/bookmark`,
+                        headers: {
+                            "Content-Type": "application/json",
+                            "X-Requested-With": "XMLHttpRequest",
+                            Authorization: localStorage.getItem("token")
+                        }
+                    })
+                    .then(response => {
+                        session.is_bookmark = 1;
+                    })
+                    .catch(error => {
+                        if (error.response.status === 401) {
+                            this.$router.push("/login");
+                        }
+                    });
+                }
             }
         }
     };
@@ -542,6 +590,8 @@
                 font-size: 0.7rem;
                 .fa-star {
                     color: $main-color;
+                    cursor: pointer;
+                    font-size: 20px;
                 }
                 .container-component {
                     background-color: #ffffff;

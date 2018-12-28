@@ -11,11 +11,9 @@ import Vuex from 'vuex';
 import AppComponent from './components/AppComponent.vue';
 import router from './scripts/router';
 import GSignInButton from 'vue-google-signin-button';
-Vue.use(GSignInButton);
-// import VueGoogleCharts from 'vue-google-charts'
- 
-// Vue.use(VueGoogleCharts)
+import store from './store/store';
 
+Vue.use(GSignInButton);
 Vue.use(VeeValidate);
 Vue.use(VueRouter);
 Vue.use(Toasted);
@@ -24,8 +22,10 @@ Vue.use(Vuex);
 Validator.localize('uk', uk);
 window.axios = axios;
 
+
 new Vue({
     el: '#app',
     render: h => h(AppComponent),
-    router       
+    router,
+    store   
 });

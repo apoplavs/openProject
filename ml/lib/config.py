@@ -8,7 +8,7 @@ TOECYD = 'test_toecyd'
 DB_EDRSR = {
                'type': 'mysql',
                'host': '127.0.0.1',
-               'dbname': 'edrsr',
+               'dbname': 'edrsr1',
                'charset': 'utf8',
                'user': 'root',
                'pass': '1',

@@ -24,19 +24,29 @@
                 <!-- Tab panes -->
                 <div class="tab-content container w-1140">
                     <div role="tabpanel" class="tab-pane  active" id="CourtSessions">
-                        <court-sessions/>
+                        <keep-alive>
+                            <court-sessions/>
+                        </keep-alive>
                     </div>
                     <div role="tabpanel" class="tab-pane" id="CourtPractice">
-                        <court-practice/>
+                        <keep-alive>
+                            <court-practice/>
+                        </keep-alive>
                     </div>
                     <div role="tabpanel" class="tab-pane" id="Establishments">
-                        <establishments />
+                        <keep-alive>
+                            <establishments />
+                        </keep-alive>
                     </div>
                     <div role="tabpanel" class="tab-pane" id="ViewsHistory">
-                        <views-history />
+                        <keep-alive>
+                            <views-history />
+                        </keep-alive>
                     </div>
                     <div role="tabpanel" class="tab-pane" id="Templates">
-                        <templates />
+                        <keep-alive>
+                            <templates />
+                        </keep-alive>
                     </div>
                 </div>
             </div>

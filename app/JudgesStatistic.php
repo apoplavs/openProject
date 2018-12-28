@@ -3,7 +3,6 @@
 namespace Toecyd;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
 
 /**
  * Отримання суддівської статистики
@@ -16,11 +15,12 @@ class JudgesStatistic extends Model
 	
 	
 	/**
-	 * отримує з БД і повертає загальну статистику по судді
+	 * отримує з БД і повертає статистику по судді
 	 * id якого передано в параметрах
 	 * використовується на сторінці судді
 	 * @param $judge
 	 */
+
 	public static function getCommonStatistic($judge) {
 		$amount = DB::table('judges_adminoffence_statistic')
 			->select(DB::raw('judges_adminoffence_statistic.amount AS adminoffence_amount '),
@@ -173,6 +173,12 @@ class JudgesStatistic extends Model
 		$result = [];
 		$result['amount'] = $statistic->amount;
 		return ($result);
+	}
+
+	public static function getStatistic($judge) {
+		return (static::select('civil_amount', 'criminal_amount', 'adminoffence_amount', 'admin_amount', 'commercial_amount')
+		->where('judge', '=', $judge)
+		->first());
 	}
  
 }
