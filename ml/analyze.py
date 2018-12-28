@@ -1,6 +1,10 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+
 from analyze.sections import *
+from analyze.civil import Civil
+from analyze.criminal import Criminal
+from analyze.adminoffence import AdminOffence
 
 import sys
 
@@ -31,18 +35,18 @@ if __name__ == '__main__':
 
         print('\nCivil')
         civil = Civil(judge=judge)
+        civil.count_appeal()
         civil.analyze_in_time()
-        # civil.count()
         civil.save()
 
         print('\nCriminal')
         criminal = Criminal(judge=judge)
+        criminal.count_appeal()
         criminal.analyze_in_time()
-        # criminal.count()
         criminal.save()
 
         print('\nAdminoffence')
         admin_offence = AdminOffence(judge=judge)
+        admin_offence.count_appeal()
         admin_offence.analyze_in_time()
-        # criminal.count()
         admin_offence.save()

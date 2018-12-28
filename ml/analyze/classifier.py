@@ -11,6 +11,19 @@ from lib.validation import Validator
 from lib.config import *
 
 
+def get_classifier(file):
+    if file is None:
+        return None
+    try:
+        open_file = open(f'{PICKLES_PATH}/' + file, "rb")
+    except Exception:
+        print('Exception: file "' + f'{PICKLES_PATH}/' + file + '" not found')
+        sys.exit(2)
+    classifier = pickle.load(open_file)
+    open_file.close()
+    return classifier
+
+
 alias_category = {
     5: 2, 22: 6,
     6: 2, 23: 6,
@@ -33,15 +46,15 @@ alias_category = {
 
 map_categories = {
     # адмінправопорушення типи кінцевих рішень
-    2: {'pickle1': '5_6.pickle',
-        'pickle2': '5_6_7.pickle',
+    2: {'pickle1': get_classifier('5_6.pickle'),
+        'pickle2': get_classifier('5_6_7.pickle'),
         'part_text': 'operative',
         'categories': [5, 6],
         'other': 7,
         'regexp': None},
     # цивільне своєчасність
-    3: {'pickle1': '8_9_10_11.pickle',
-        'pickle2': '8_9_10_11_12.pickle',
+    3: {'pickle1': get_classifier('8_9_10_11.pickle'),
+        'pickle2': get_classifier('8_9_10_11_12.pickle'),
         'part_text': 'operative',
         'categories': [8, 9, 10, 11],
         'other': 12,
@@ -68,7 +81,7 @@ map_categories = {
             }
         },
     # цивільне типи кінцевих рішень
-    4: {'pickle1': '13_14_15.pickle',
+    4: {'pickle1': get_classifier('13_14_15.pickle'),
         'pickle2': None,
         'part_text': 'operative',
         'categories': [13, 14, 15],
@@ -98,8 +111,8 @@ map_categories = {
             }
         },
     # кримінальне своєчасність
-    5: {'pickle1': '17_18_19_20.pickle',
-        'pickle2': '17_18_19_20_21.pickle',
+    5: {'pickle1': get_classifier('17_18_19_20.pickle'),
+        'pickle2': get_classifier('17_18_19_20_21.pickle'),
         'part_text': 'operative',
         'categories': [17, 18, 19, 20],
         'other': 21,
@@ -129,7 +142,7 @@ map_categories = {
             }
         },
     # кримінальне типи кінцевих рішень
-    6: {'pickle1': '22_23.pickle',
+    6: {'pickle1': get_classifier('22_23.pickle'),
         'pickle2': None,
         'part_text': 'operative',
         'categories': [22, 23],
@@ -149,22 +162,22 @@ map_categories = {
             }
         },
     # адмінправопорушення апеляція
-    7: {'pickle1': '25_26.pickle',
-        'pickle2': '25_26_27.pickle',
+    7: {'pickle1': get_classifier('25_26.pickle'),
+        'pickle2': get_classifier('25_26_27.pickle'),
         'part_text': 'operative',
         'categories': [25, 26],
         'other': 27,
         'regexp': None},
     # цивільне апеляція
-    8: {'pickle1': '28_29.pickle',
-        'pickle2': '28_29_30.pickle',
+    8: {'pickle1': get_classifier('28_29.pickle'),
+        'pickle2': get_classifier('28_29_30.pickle'),
         'part_text': 'operative',
         'categories': [28, 29],
         'other': 30,
         'regexp': None},
     # кримінальне апеляція
-    9: {'pickle1': '31_32.pickle',
-        'pickle2': '31_32_33.pickle',
+    9: {'pickle1': get_classifier('31_32.pickle'),
+        'pickle2': get_classifier('31_32_33.pickle'),
         'part_text': 'operative',
         'categories': [31, 32],
         'other': 33,
@@ -188,18 +201,6 @@ def guess_by_regexp(regexp, text):
                 return key
     return 0
 
-
-def get_classifier(file):
-    if file is None:
-        return None
-    try:
-        open_file = open(f'{PICKLES_PATH}/' + file, "rb")
-    except Exception:
-        print('Exception: file "' + f'{PICKLES_PATH}/' + file + '" not found')
-        sys.exit(2)
-    classifier = pickle.load(open_file)
-    open_file.close()
-    return classifier
 
 
 sent_detector = nltk.data.load('tokenizers/punkt/english.pickle')
@@ -259,12 +260,6 @@ def find_category(prob1, prob2, other):
             category = k
     return category
 
-all_pickles = {
-    '8_9_10_11.pickle': get_classifier('8_9_10_11.pickle'),
-    '8_9_10_11_12.pickle': get_classifier('8_9_10_11_12.pickle'),
-    '17_18_19_20.pickle': get_classifier('17_18_19_20.pickle'),
-    '17_18_19_20_21.pickle': get_classifier('17_18_19_20_21.pickle')
-}
 
 def guess_category(text, anticipated_category):
     """
@@ -288,8 +283,8 @@ def guess_category(text, anticipated_category):
         return category
 
     # отримуємо класифікатори з pickle
-    classifier1 = all_pickles[prop['pickle1']]
-    classifier2 = all_pickles[prop['pickle2']]
+    classifier1 = prop['pickle1']
+    classifier2 = prop['pickle2']
 
     clean_text = validator.validate_text(text)
 

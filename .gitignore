@@ -10,8 +10,6 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 package.json
-composer.json
-composer.lock
 yarn-error.log
 .env
 /venv/*
@@ -20,5 +18,5 @@ yarn-error.log
 /ml/config.json
 /ml/lib/config.py
 /ml/.idea
-/analyze/__pycache__
-/lib/__pycache__
+/ml/analyze/__pycache__
+/ml/lib/__pycache__
