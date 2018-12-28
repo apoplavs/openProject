@@ -16,7 +16,6 @@ yarn-error.log
 /ml/nltk_packages
 /ml/pickles
 /ml/config.json
-/ml/lib/config.py
 /ml/.idea
 /ml/analyze/__pycache__
 /ml/lib/__pycache__
