@@ -50,6 +50,10 @@ class JudgesStatistic extends Model
 				'negative_judgment', 'was_appeal', 'approved_by_appeal', 'not_approved_by_appeal')
 			->where('judge', '=', $judge)
 			->first();
+		// якщо статистики немає
+		if (empty($statistic)) {
+			return NULL;
+		}
 		$result = [];
 		$result['amount'] = $statistic->amount;
 		
@@ -90,14 +94,19 @@ class JudgesStatistic extends Model
 				'negative_judgment', 'other_judgment', 'was_appeal', 'approved_by_appeal', 'not_approved_by_appeal')
 			->where('judge', '=', $judge)
 			->first();
+		// якщо статистики немає
+		if (empty($statistic)) {
+			return NULL;
+		}
 		$result = [];
 		$result['amount'] = $statistic->amount;
 		
-		$type_judgments = $statistic->positive_judgment + $statistic->negative_judgment;
+		$type_judgments = $statistic->positive_judgment + $statistic->negative_judgment + $statistic->other_judgment;
 		// якщо достатньо справ для рахування типів рішень
 		if ($type_judgments > 10) {
 			$result['positive_judgment'] = intval(round (($statistic->positive_judgment / $type_judgments) * 100));
 			$result['negative_judgment'] = intval(round (($statistic->negative_judgment / $type_judgments) * 100));
+			$result['other_judgment']  =  intval(round (($statistic->other_judgment / $type_judgments) * 100));
 		}
 		
 		$has_cases = $statistic->cases_on_time + $statistic->cases_not_on_time;
@@ -129,6 +138,10 @@ class JudgesStatistic extends Model
 				'negative_judgment', 'was_appeal', 'approved_by_appeal', 'not_approved_by_appeal')
 			->where('judge', '=', $judge)
 			->first();
+		// якщо статистики немає
+		if (empty($statistic)) {
+			return NULL;
+		}
 		$result = [];
 		$result['amount'] = $statistic->amount;
 		
@@ -175,6 +188,10 @@ class JudgesStatistic extends Model
 			->select('amount')
 			->where('judge', '=', $judge)
 			->first();
+		// якщо статистики немає
+		if (empty($statistic)) {
+			return NULL;
+		}
 		$result = [];
 		$result['amount'] = $statistic->amount;
 		return ($result);
@@ -191,6 +208,10 @@ class JudgesStatistic extends Model
 			->select('amount')
 			->where('judge', '=', $judge)
 			->first();
+		// якщо статистики немає
+		if (empty($statistic)) {
+			return NULL;
+		}
 		$result = [];
 		$result['amount'] = $statistic->amount;
 		return ($result);
