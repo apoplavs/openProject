@@ -11,6 +11,7 @@ use Toecyd\Jobs\SendNotification1;
 use Toecyd\Jobs\SendNotification3;
 use Toecyd\Judge;
 use Toecyd\JudgesStatistic;
+use Toecyd\JudgeStatus;
 use Toecyd\UserBookmarkJudge;
 use Toecyd\UserHistory;
 use Toecyd\UsersLikesJudge;
@@ -788,6 +789,16 @@ class JudgesController extends Controller
         }
         $court_sessions = CourtSession::getSessionByJudge($id);
         
+        // отимуємо статистику по типах справ
+		$adminoffence_statistic = JudgesStatistic::getAdminoffenceStatistic($id);
+		$civil_statistic = 	JudgesStatistic::getCivilStatistic($id);
+		$criminal_statistic = JudgesStatistic::getCriminalStatistic($id);
+		$admin_statistic = JudgesStatistic::getAdminStatistic($id);
+		$commercial_statistic = JudgesStatistic::getCommercialStatistic($id);
+	
+		// рахуємо загальну статистику
+		$common_statistic = $this->countCommonStatistic($adminoffence_statistic, $criminal_statistic, $civil_statistic);
+        
         // вносим в історію переглядів
         if (Auth::check()) {
         UserHistory::addToHistory($id);
@@ -797,6 +808,12 @@ class JudgesController extends Controller
             'data' => $data, 
             'previous_works' => $previous_works,
             'court_sessions' => $court_sessions,
+			'common_statistic' => $common_statistic,
+			'adminoffence_statistic' => $adminoffence_statistic,
+			'civil_statistic' => $civil_statistic,
+			'criminal_statistic' => $criminal_statistic,
+			'admin_statistic' => $admin_statistic,
+			'commercial_statistic' => $commercial_statistic
         ]);
     }
 	
@@ -959,10 +976,27 @@ class JudgesController extends Controller
 		}
 		$court_sessions = CourtSession::getSessionByJudgeGuest($id);
 		
+		// отимуємо статистику по типах справ
+		$adminoffence_statistic = JudgesStatistic::getAdminoffenceStatistic($id);
+		$civil_statistic = 	JudgesStatistic::getCivilStatistic($id);
+		$criminal_statistic = JudgesStatistic::getCriminalStatistic($id);
+		$admin_statistic = JudgesStatistic::getAdminStatistic($id);
+		$commercial_statistic = JudgesStatistic::getCommercialStatistic($id);
+		
+		// рахуємо загальну статистику
+		$common_statistic = $this->countCommonStatistic($adminoffence_statistic, $criminal_statistic, $civil_statistic);
+		
+		
 		return response()->json([
 			'data' => $data,
 			'previous_works' => $previous_works,
 			'court_sessions' => $court_sessions,
+			'common_statistic' => $common_statistic,
+			'adminoffence_statistic' => $adminoffence_statistic,
+			'civil_statistic' => $civil_statistic,
+			'criminal_statistic' => $criminal_statistic,
+			'admin_statistic' => $admin_statistic,
+			'commercial_statistic' => $commercial_statistic
 		]);
 	}
     
@@ -1801,8 +1835,7 @@ class JudgesController extends Controller
             'search'=>$search,
             'powers_expired'=>$powers_expired]);
     }
-
-    
+	
 	/**
 	 * виконується, якщо застосовувалась фільтрація до списку суддів
 	 * @return array
@@ -1839,7 +1872,6 @@ class JudgesController extends Controller
 			$all_approved += $adminoffence_statistic['cases_on_time'];
 			$count_judgements++;
 		}
-		
 		$common_statistic['timeliness'] = intval($all_approved / $count_judgements);
 		
 		return $common_statistic;
