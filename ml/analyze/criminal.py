@@ -2,35 +2,31 @@ from analyze.sections import Section
 from analyze.classifier import guess_category
 
 
-class Civil(Section):
-
+class Criminal(Section):
     def __init__(self, judge):
         super().__init__(
             judge=judge,
-            justice_kind="1",
-            anticipated_category=28,
-            judge_results_table='judges_civil_statistic',
-            judgment_codes=[3, 5]
+            justice_kind="2",
+            anticipated_category=31,
+            judge_results_table='judges_criminal_statistic',
+            judgment_codes=[5, 1]
         )
         # налаштування і параметри для даної категорії
         self.numbers_data = {
-            'start_document': 8,
-            'pause_document': 9,
-            'stop_document': 10,
-            'end_document': 11,
-            'interval': 75,
-            'stop_judgment_code': 3,
-            'positive_judgment': 13,
-            'other_judgment': 14,
-            'negative_judgment': 15
-
+            'start_document': 17,
+            'pause_document': 18,
+            'stop_document': 19,
+            'end_document': 20,
+            'interval': 183,
+            'stop_judgment_code': 1,
+            'negative_judgment': 22,
+            'positive_judgment': 23
 
         }
 
         # типи рішень
         self.data_dict['positive_judgment'] = 0
         self.data_dict['negative_judgment'] = 0
-        self.data_dict['other_judgment'] = 0
 
         # отримуємо всі справи даного судді
         self.all_applications = self._get_application_documents(self._prepare_applications)
@@ -52,11 +48,11 @@ class Civil(Section):
             return
 
         for appeal in civil_in_appeal:
-            # отримуємо всі документи апеляції по справі
             documents = self._get_appeal_documents(appeal['cause_num'])
             for document in documents:
-                # якщо апеляція винесла рішення - точно не вистояло, переходимо до наступної справи
-                if document['judgment_code'] == 3:
+                # якщо апеляція винесла вирок - точно не вистояло,
+                # переходимо до наступної справи
+                if document['judgment_code'] == 1:
                     self.data_dict['not_approved_by_appeal'] += 1
                     break
                 doc_text = document['doc_text']
@@ -64,16 +60,15 @@ class Civil(Section):
                     text=doc_text,
                     anticipated_category=self.anticipated_category
                 )
-                if category == 28:
+                if category == 31:
                     self.data_dict['approved_by_appeal'] += 1
                     break
-                elif category == 29:
+                elif category == 32:
                     self.data_dict['not_approved_by_appeal'] += 1
                     break
 
     def analyze_in_time(self):
-        """рахування скільки часу в середньому суддя витрачає на розгляд справи
-        а також скільки справ він розгляну з порушенням строків"""
+        """рахування скільки часу в середньому суддя витрачає на розгляд справи"""
 
         autoassigned_cases = self._get_autoasigned_cases(
             list(self.all_applications),
@@ -121,23 +116,18 @@ class Civil(Section):
                     self._count_days_on_time(date_dict, pause_days)
                     break
 
-
     def count_decisions_types(self, is_uhvala, document):
-        """Рахує скільки рішень прийняв суддя"""
+        """Рахує скільки обвинувальних і виправдувальних вироків виніс суддя"""
 
         # дізнаємось тип кінцевого документа
         category = guess_category(text=document['doc_text'],
                     anticipated_category=self.numbers_data['positive_judgment'])
 
-        # якщо задоволено вимоги позивача
-        if (category == self.numbers_data['positive_judgment']):
+        # якщо це ухвала або випавдувальний вирок
+        if ((is_uhvala == self.numbers_data['end_document']) or
+                (category == self.numbers_data['positive_judgment'])):
             self.data_dict['positive_judgment'] += 1
 
-        # якщо справу вирішено іншим чином
-        elif ((is_uhvala == self.numbers_data['end_document']) or
-              (category == self.numbers_data['other_judgment'])):
-            self.data_dict['other_judgment'] += 1
-
-        # якщо відмовлено у задоволенні вимог позивача
+        # якщо це обвинувальний вирок
         elif (category == self.numbers_data['negative_judgment']):
             self.data_dict['negative_judgment'] += 1
