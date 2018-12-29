@@ -115,13 +115,13 @@
                         <div>
                             <label for="">Компетентність</label>
                             <div class="progress">
-                                <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="progress-bar bg-success" role="progressbar" :style="{ width: judge.common_statistic.competence + '%'}" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                         </div>
                         <div class="mt-2">
                             <label for="">Своєчасність</label>
                             <div class="progress">
-                                <div class="progress-bar bg-success" role="progressbar" style="width: 75%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="progress-bar bg-success" role="progressbar" :style="{ width: judge.common_statistic.timeliness + '%'}"  aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                         </div>
                     </div>
@@ -140,11 +140,11 @@
                         </div>
                         <div class="row">
                             <div class="col-6">
-                                <doughnut-chart :percent="37" :visibleValue="true" foregroundColor="#8fdb42" :width="gchart.width" :height="gchart.width" />
+                                <doughnut-chart :percent="judge.civil_statistic.cases_on_time" :visibleValue="true" foregroundColor="#8fdb42" :width="gchart.width" :height="gchart.width" />
                                 <span>Справ розглянуто своєчасно</span>
                             </div>
                             <div class="col-6">
-                                <doughnut-chart :percent="65" :visibleValue="true" foregroundColor="#cebd4b" :width="gchart.width" :height="gchart.width" />
+                                <doughnut-chart :percent="judge.civil_statistic.approved_by_appeal" :visibleValue="true" foregroundColor="#cebd4b" :width="gchart.width" :height="gchart.width" />
                                 <span>Рішень вистояли у вищих інстанціях</span>
                             </div>
                         </div>
@@ -357,7 +357,7 @@
                         this.judge.data.is_bookmark = 1;
                     })
                     .catch(error => {
-                        if (error.response.status === 401) {
+                        if (error.response && error.response.status === 401) {
                             this.$router.push("/login");
                         }
                         console.log("Bookmark", error);
