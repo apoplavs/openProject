@@ -145,6 +145,8 @@ export default {
             if (index >= 0) {   
               this.courtSessions.splice(index, 1);
             }
+            console.log('courtSessions',this.courtSessions);
+            
             this.deleteSession = null;
             this.loadData = true;
           })

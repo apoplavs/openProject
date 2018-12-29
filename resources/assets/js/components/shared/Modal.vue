@@ -1,7 +1,7 @@
 <template>
     <transition name="modal-fade">
         <div class="modal-backdrop">
-            <div class="modal" role="dialog" aria-labelledby="modalTitle" aria-describedby="modalDescription">
+            <div class="modal" role="dialog" aria-labelledby="modalTitle" aria-describedby="modalDescription" :style="[confirm ? {height: '200px'} : {}]">
                 <header class="modal-header" id="modalTitle">
                     <slot name="header"></slot>
                     <button type="button" class="btn-close" @click="close" aria-label="Close modal">x</button>
