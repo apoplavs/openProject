@@ -1,41 +1,36 @@
 <template>
   <div class="courtSessions">
-    <div class="card mt-2">
+    <spinner v-if="!loadData" />
+    <div v-if="loadData" class="card mt-2">
       <div class="card-header d-flex justify-content-between">
-        <span>Найближчі судові засідання</span>
+        <span>Cудові засідання</span>
         <input type="search" class="form-control" placeholder="Пошук..." v-model.trim="search">
       </div>
       <div class="card-body court-sessions-container">
         <div class="court-sessions">
-          <div v-if="true" class="container-component">
-            <div class="row header text-muted">
+          <div v-if="filterSessions.length > 0" class="container-component">
+            <div class="row header">
               <div class="col-1 pl-0">Дата розгляду</div>
               <div class="col-1">Номер справи</div>
               <div class="col-2">Судді</div>
-              <div class="col-2">Форма</div>
+              <div class="col-1">Форма</div>
               <div class="col-3">Сторони у справі</div>
               <div class="col-2">Суть справи</div>
-              <div class="col-1 pr-0">Примітки</div>
+              <div class="col-2 pr-0">Примітки</div>
             </div>
-            <div class="row">
+            <div class="row" v-for="(session, i_el) in filterSessions" :key="i_el + 'A'">
               <div class="col-1 pl-0">
-                <div>25.09.2018</div>
+                <div>{{ session.date }}</div>
               </div>
-              <div class="col-1">923/623.10</div>
-              <div class="col-2">Господарський суд Херсонської області Немченко Л.M.</div>
-              <div class="col-1">Aміністративна</div>
-              <div class="col-3">
-                Позивач: Головня Максим Феодосієвич, відповідач: Публічне Акціонерне Товариство Херсонський Суднобудівний завод,
-                Позивач: Головня Максим Феодосієвич, відповідач: Публічне Акціонерне Товариство Херсонський Суднобудівний завод
-              </div>
-              <div class="col-2">
-                Позивач: Головня Максим Феодосієвич, відповідач: Публічне Акціонерне Товариство Херсонський Суднобудівний завод,
-                Позивач: Головня Максим Феодосієвич
-              </div>
-              <div class="col-2 pr-0 text-center">
-                <i class="fas fa-star" @click="delBookmarkCourtSession(session)"></i>
+              <div class="col-1">{{ session.number }}</div>
+              <div class="col-2">{{ session.judges }}</div>
+              <div class="col-1">{{ session.forma }}</div>
+              <div class="col-3">{{ session.involved }}</div>
+              <div class="col-2">{{ session.description }}</div>
+              <div class="col-2 pr-0 text-center position-relative">
+                <i class="fas fa-star" @click="showModalDelete(session)"></i>
                 <textarea class="note" maxlength="254"></textarea>
-                <i class="icon-ok"></i>
+                <img class="checkmark" src="../../../../images/checkmark.png"/>
               </div>
             </div>
           </div>
@@ -45,62 +40,108 @@
         </div>
       </div>
     </div>
+    <!-- modal confirm -->
+    <modal v-show="showModalConfirm" @close="showModalConfirm = false" @confirm="deleteBookmarkCourtSession()" :modalConfirm="true" >
+        <div slot="body">
+           Ви впевнені, що хочете видалити закладку?
+        </div>
+    </modal>
   </div>
 </template>
 
 <script>
+import Modal from "../../shared/Modal.vue";
+import Spinner from "../../shared/Spinner.vue";
 export default {
   name: "CourtSessions",
+  components: {
+    Modal,
+    Spinner
+  },
   data() {
     return {
-      courtSessions: {},
-      filterSessions: null,
-      search: ""
+      courtSessions: [],
+      search: '',
+      showModalConfirm: false,
+      deleteSession: null,
+      loadData: false
     };
+  },
+  computed: {
+    filterSessions() {
+      //  живий пошук = фільтер
+      return _.filter(this.courtSessions, el => {
+        let arr = _.filter(Object.keys(el), key => {
+          let regEx = new RegExp(`(${this.search})`, "i");
+          return regEx.test(el[key]) || this.search.length == 0;
+        });
+        return arr.length > 0 ? true : false;
+      });
+    },
+    isAuth: () => {
+      return localStorage.getItem("token");
+    }
+  },
+  beforeMount() {
+    if (this.isAuth) {
+      axios
+        .get(`/api/v1/court-sessions/bookmarks`, {
+          headers: {
+            "Content-Type": "application/json",
+            "X-Requested-With": "XMLHttpRequest",
+            Authorization: localStorage.getItem("token")
+          }
+        })
+        .then(response => {
+          this.courtSessions = response.data;
+          this.loadData = true;
+          console.log("User profile CourtSessions", this.courtSessions);
+        })
+        .catch(error => {
+          if (error.response.status === 401) {
+            this.$router.push("/login");
+          }
+          console.log("error");
+        });
+    } else {
+      this.$router.push("/login");
+    }
+  },
+  methods: {
+    showModalDelete(session) {
+      this.showModalConfirm = true;
+      this.deleteSession = session;
+    },
+
+    deleteBookmarkCourtSession() { 
+      this.showModalConfirm = false;
+      if (!this.isAuth) {
+        this.$router.push("/login");
+      } else {
+        this.loadData = false;
+        axios({
+          method: "delete",
+          url: `/api/v1/court-sessions/${this.deleteSession.id}/bookmark`,
+          headers: {
+            "Content-Type": "application/json",
+            "X-Requested-With": "XMLHttpRequest",
+            Authorization: localStorage.getItem("token")
+          }
+        })
+          .then(response => {
+            console.log('There we need to delete from array')
+            this.deleteSession = null;
+            
+            this.loadData = true;
+          })
+          .catch(error => {
+            if (error.response.status === 401) {
+              this.$router.push("/login");
+            }
+          });
+      }
+    }
   }
-  // beforeMount() {
-  //     if (this.isAuth) {
-  //         axios
-  //             .get(`/api/v1/judges/${this.$route.params.id}`, {
-  //                 headers: {
-  //                     "Content-Type": "application/json",
-  //                     "X-Requested-With": "XMLHttpRequest",
-  //                     "Authorization": localStorage.getItem('token')
-  //                 },
-  //             })
-  //             .then(response => {
-  //                 this.judge = response.data;
-  //                 this.loadData = true;
-  //                 console.log('JUdge PROFILE', this.judge);
-
-  //             })
-  //             .catch(error => {
-  //                 if (error.response.status === 401) {
-  //                     this.$router.push('/login');
-  //                 }
-  //                 console.log('error');
-  //             });
-  //     } else {
-  //         axios
-  //             .get(`/api/v1/guest/judges/${this.$route.params.id}`, {
-  //                 headers: {
-  //                     "Content-Type": "application/json",
-  //                     "X-Requested-With": "XMLHttpRequest",
-  //                 },
-  //             })
-  //             .then(response => {
-  //                 this.judge = response.data;
-  //                 this.loadData = true;
-  //             })
-  //             .catch(error => {
-  //                 if (error.response.status === 401) {
-  //                     this.$router.push('/login');
-  //                 }
-  //                 console.log('error');
-  //             });
-
-  //     }
-  // }
 };
 </script>
 
@@ -116,33 +157,44 @@ export default {
     > p:first-child {
       font-size: 1.1rem;
     }
-    
+  }
+  .header {
+    font-size: .9rem;
+    font-weight: 700;
   }
   .fa-star {
-        color: $main-color;
-        cursor: pointer;
-        font-size: 15px;
-        float: right;
-        padding: 0 10px 0 10px;
-    }
+    color: $main-color;
+    cursor: pointer;
+    font-size: 20px;
+    float: right;
+    padding: 0 0px 10px 10px;
+  }
   input[type="search"] {
     width: 200px;
   }
   .note {
-    height: 100%;
+    height: calc(100% - 32.5px);
     width: 100%;
     border: none;
     resize: none;
     background-color: #fafa599c;
-    padding: 10px;
+    padding: 15px 10px 50px 10px;
     &:before {
-        content: '';
-        position: absolute;
-        top: 0; right: 0;
-        border-top: 80px solid white;
-        border-left: 80px solid #fafa599c;
-        width: 0;
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      border-top: 80px solid white;
+      border-left: 80px solid #fafa599c;
+      width: 0;
     }
+  }
+  .checkmark {
+    width: 40px;
+    position: absolute;
+    bottom: 5px;
+    right: 0;
+    cursor: pointer;
   }
 
   .container-component {

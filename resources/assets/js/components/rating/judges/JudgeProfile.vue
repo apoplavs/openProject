@@ -86,7 +86,7 @@
                                     <div class="col-3">{{ session.involved }}</div>
                                     <div class="col-2">{{ session.description }}</div>
                                     <div class="col-1 pr-0 text-center" v-if="isAuth">
-                                        <i v-if="session.is_bookmark" class="fas fa-star" @click="delBookmarkCourtSession(session)"></i>
+                                        <i v-if="session.is_bookmark" class="fas fa-star" @click="deleteBookmarkCourtSession(session)"></i>
                                         <i v-else class="far fa-star" @click="addBookmarkCourtSession(session)"></i>
                                     </div>
                                 </div>
@@ -487,7 +487,7 @@
                         });
                 }
             },
-            delBookmarkCourtSession(session) {
+            deleteBookmarkCourtSession(session) {
                 if (!this.isAuth) {
                     this.$router.push("/login");
                 } else {
