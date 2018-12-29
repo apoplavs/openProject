@@ -133,3 +133,10 @@ i.fa-edit {
   min-width: 1140px;
 }
 
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+  -webkit-transition: opacity .5s;
+  transition: opacity .5s;
+}
+

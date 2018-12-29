@@ -1,48 +1,55 @@
 <template>
   <div class="courtSessions">
-    <spinner v-if="!loadData" />
-    <div v-if="loadData" class="card mt-2">
+    <spinner v-show="!loadData" />
+    <div v-show="loadData" class="card mt-2">
       <div class="card-header d-flex justify-content-between">
         <span>Cудові засідання</span>
         <input type="search" class="form-control" placeholder="Пошук..." v-model.trim="search">
       </div>
       <div class="card-body court-sessions-container">
         <div class="court-sessions">
-          <div v-if="filterSessions.length > 0" class="container-component">
-            <div class="row header">
-              <div class="col-1 pl-0">Дата розгляду</div>
-              <div class="col-1">Номер справи</div>
-              <div class="col-2">Судді</div>
-              <div class="col-1">Форма</div>
-              <div class="col-3">Сторони у справі</div>
-              <div class="col-2">Суть справи</div>
-              <div class="col-2 pr-0">Примітки</div>
-            </div>
-            <div class="row" v-for="(session, i_el) in filterSessions" :key="i_el + 'A'">
-              <div class="col-1 pl-0">
-                <div>{{ session.date }}</div>
+          
+            <div v-if="filterSessions.length > 0" class="container-component">
+              <div class="row header">
+                <div class="col-1 pl-0">Дата розгляду</div>
+                <div class="col-1">Номер справи</div>
+                <div class="col-2">Судді</div>
+                <div class="col-1">Форма</div>
+                <div class="col-3">Сторони у справі</div>
+                <div class="col-2">Суть справи</div>
+                <div class="col-2 pr-0">Примітки</div>
               </div>
-              <div class="col-1">{{ session.number }}</div>
-              <div class="col-2">{{ session.judges }}</div>
-              <div class="col-1">{{ session.forma }}</div>
-              <div class="col-3">{{ session.involved }}</div>
-              <div class="col-2">{{ session.description }}</div>
-              <div class="col-2 pr-0 text-center position-relative">
-                <i class="fas fa-star" @click="showModalDelete(session)"></i>
-                <textarea class="note" maxlength="254"></textarea>
-                <img class="checkmark" src="../../../../images/checkmark.png"/>
-              </div>
+              <!-- <transition name='fade'> -->
+                <div class="row" v-for="(session, i_el) in filterSessions" :key="i_el + 'A'">
+                  <!-- <transition name='fade'> -->
+                  <div class="col-1 pl-0">
+                    <div>{{ session.date }}</div>
+                  </div>
+                  <div class="col-1">{{ session.number }}</div>
+                  <div class="col-2">{{ session.judges }}</div>
+                  <div class="col-1">{{ session.forma }}</div>
+                  <div class="col-3">{{ session.involved }}</div>
+                  <div class="col-2">{{ session.description }}</div>
+                  <div class="col-2 pr-0 text-center position-relative">
+                    <i class="fas fa-star" @click="showModalDelete(session)"></i>
+                    <textarea class="note" maxlength="254"></textarea>
+                    <img class="checkmark" src="../../../../images/checkmark.png"/>
+                  </div>
+                  <!-- </transition> -->
+                </div>
+              <!-- </transition> -->
             </div>
-          </div>
           <div v-else class="container-component">
             <p>Нічого не знайдено...</p>
           </div>
+         
         </div>
       </div>
     </div>
     <!-- modal confirm -->
     <modal v-show="showModalConfirm" @close="showModalConfirm = false" @confirm="deleteBookmarkCourtSession()" :modalConfirm="true" >
-        <div slot="body">
+        <div slot="header"> </div>
+        <div slot="body" style="text-align: center; font-size: 16px;">
            Ви впевнені, що хочете видалити закладку?
         </div>
     </modal>
@@ -129,13 +136,20 @@ export default {
           }
         })
           .then(response => {
-            console.log('There we need to delete from array')
+            let index;
+            this.courtSessions.forEach( (el, i) => {
+              if (this.deleteSession.id === el.id){
+                index = i;
+              }
+            });            
+            if (index >= 0) {   
+              this.courtSessions.splice(index, 1);
+            }
             this.deleteSession = null;
-            
             this.loadData = true;
           })
           .catch(error => {
-            if (error.response.status === 401) {
+            if (error && error.response && error.response.status === 401) {
               this.$router.push("/login");
             }
           });
@@ -179,16 +193,15 @@ export default {
     resize: none;
     background-color: #fafa599c;
     padding: 15px 10px 50px 10px;
-    &:before {
-      content: "";
-      position: absolute;
-      top: 0;
-      right: 0;
-      border-top: 80px solid white;
-      border-left: 80px solid #fafa599c;
-      width: 0;
-    }
   }
+  textarea.note:before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    border-top: 80px solid white;
+    border-left: 80px solid rgba(0,0,0,0);
+    width: 0;
+}
   .checkmark {
     width: 40px;
     position: absolute;
@@ -209,5 +222,6 @@ export default {
       border-bottom: 1px solid $text-muted;
     }
   }
+
 }
 </style>
