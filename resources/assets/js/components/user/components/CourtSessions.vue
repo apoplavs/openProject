@@ -30,7 +30,7 @@
                   <div class="col-1">{{ session.forma }}</div>
                   <div class="col-3">{{ session.involved }}</div>
                   <div class="col-2">{{ session.description }}</div>
-                  <div class="col-2 pr-0 text-center position-relative">
+                  <div class="col-2 pr-0 text-center position-relative note-wrap">
                     <i class="fas fa-star" @click="showModalDelete(session)"></i>
                     <textarea class="note" maxlength="254"></textarea>
                     <img class="checkmark" src="../../../../images/checkmark.png"/>
@@ -181,20 +181,26 @@ export default {
   .fa-star {
     color: $main-color;
     cursor: pointer;
-    font-size: 20px;
+    font-size: 15px;
     float: right;
-    padding: 0 0px 10px 10px;
+    padding: 0 0px 0px 10px;
+    margin-right: -10px;
   }
   input[type="search"] {
     width: 200px;
   }
   .note {
-    height: calc(100% - 32.5px);
+    height: calc(100% - 13.5px);
     width: 100%;
     border: none;
     resize: none;
     background-color: #fafa599c;
-    padding: 15px 10px 50px 10px;
+    padding: 3px 5px 15px 5px;
+    font-size: .7rem;
+    margin-top: -5px;
+    color: #002366;
+    font-style: italic;
+    background:linear-gradient(-135deg, transparent 10px, #fafa599c 0);
   }
   textarea.note:before {
     content: '';
@@ -205,7 +211,7 @@ export default {
     width: 0;
 }
   .checkmark {
-    width: 40px;
+    width: 25px;
     position: absolute;
     bottom: 5px;
     right: 0;
@@ -213,7 +219,7 @@ export default {
   }
 
   .container-component {
-    padding: 20px;
+    padding: 0;
     background-color: #ffffff;
   }
 
@@ -224,6 +230,13 @@ export default {
       border-bottom: 1px solid $text-muted;
     }
   }
-
+  .note-wrap {
+  	min-height: 160px;
+  	max-height: 200px;
+  }
+  .col-1, .col-2, .col-3 {
+  	padding-right: 5px;
+  	padding-left: 5px;
+  }
 }
 </style>
