@@ -44481,7 +44481,7 @@ exports = module.exports = __webpack_require__(0)(false);
 exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&subset=cyrillic);", ""]);
 
 // module
-exports.push([module.i, "\nbody {\n  background-color: #fafafa;\n  font-family: 'Roboto', sans-serif;\n  font-weight: 400;\n  font-style: normal;\n  color: #112F41;\n}\nbutton::-moz-focus-inner,\ninput::-moz-focus-inner {\n  border: 0;\n  padding: 0;\n}\n.btn-primary {\n  color: #ffff;\n  background-color: #4c88bd;\n  border-color: #4c88bd;\n  -webkit-box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);\n  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);\n}\n.btn-primary:hover {\n    background-color: #5f94c4;\n    border-color: #5f94c4;\n}\n.btn-confirm {\n  color: #2b989b;\n  background-color: #ffffff;\n  border-color: #2b989b;\n}\n.btn-confirm:active {\n    color: #2b989b;\n    background-color: #ffffff;\n    border-color: #2b989b;\n}\n.btn-confirm:hover {\n    background-color: #2b989b;\n    color: #ffffff;\n}\nbutton {\n  cursor: pointer;\n  border-color: transparent;\n}\nbutton:active, button:hover, button:focus {\n    outline: none;\n    background-color: #e1e1e1;\n}\n.card {\n  border: none;\n  -webkit-box-shadow: 0 2px 43px -4px rgba(0, 0, 0, 0.19);\n  box-shadow: 0 2px 43px -4px rgba(0, 0, 0, 0.19);\n}\n.card-header {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  background-color: #2b989b;\n  color: #ffffff;\n  font-size: 1.5rem;\n}\ni[class^=\"fa-bookmark\"],\ni.fa-edit {\n  cursor: pointer;\n}\n.fa-bookmark-o,\n.fa-bookmark {\n  color: #ef6733;\n}\n.fa-briefcase {\n  color: #2ab27b;\n}\n.fa-line-chart {\n  color: #2b989b;\n}\n.fa-medkit {\n  color: #ef6733;\n}\n.fa-calendar-minus-o {\n  color: #304040;\n}\n.fa-umbrella-beach {\n  color: orange;\n}\n.fa-calendar-times-o {\n  color: red;\n}\n.fa-edit {\n  color: #2C5F9C;\n}\n.content-wrapper {\n  min-width: 1140px;\n  height: 100vh;\n  padding-top: 5rem;\n  padding-bottom: 5rem;\n}\n::-webkit-scrollbar {\n  width: 0px;\n  background-color: #ffffff;\n}\n.min-width {\n  min-width: 1140px;\n}\n.fade-enter, .fade-leave-to {\n  opacity: 0;\n  -webkit-transition: opacity .5s;\n  transition: opacity .5s;\n}\n", ""]);
+exports.push([module.i, "\nbody {\n  background-color: #fafafa;\n  font-family: 'Roboto', sans-serif;\n  font-weight: 400;\n  font-style: normal;\n  color: #112F41;\n}\nbutton::-moz-focus-inner,\ninput::-moz-focus-inner {\n  border: 0;\n  padding: 0;\n}\n.btn-primary {\n  color: #ffff;\n  background-color: #4c88bd;\n  border-color: #4c88bd;\n  -webkit-box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);\n  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);\n}\n.btn-primary:hover {\n    background-color: #5f94c4;\n    border-color: #5f94c4;\n}\n.btn-confirm {\n  color: #2b989b;\n  background-color: #ffffff;\n  border-color: #2b989b;\n}\n.btn-confirm:active {\n    color: #2b989b;\n    background-color: #ffffff;\n    border-color: #2b989b;\n}\n.btn-confirm:hover {\n    background-color: #2b989b;\n    color: #ffffff;\n}\nbutton {\n  cursor: pointer;\n  border-color: transparent;\n}\nbutton:active, button:hover, button:focus {\n    outline: none;\n    background-color: #e1e1e1;\n}\n.card {\n  border: none;\n  -webkit-box-shadow: 0 2px 43px -4px rgba(0, 0, 0, 0.19);\n  box-shadow: 0 2px 43px -4px rgba(0, 0, 0, 0.19);\n}\n.card-header {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  background-color: #2b989b;\n  color: #ffffff;\n  font-size: 1.5rem;\n}\ni[class^=\"fa-bookmark\"],\ni.fa-edit {\n  cursor: pointer;\n}\n.fa-bookmark-o,\n.fa-bookmark {\n  color: #ef6733;\n}\n.fa-briefcase {\n  color: #2ab27b;\n}\n.fa-line-chart {\n  color: #2b989b;\n}\n.fa-medkit {\n  color: #ef6733;\n}\n.fa-calendar-minus-o {\n  color: #304040;\n}\n.fa-umbrella-beach {\n  color: orange;\n}\n.fa-calendar-times-o {\n  color: red;\n}\n.fa-edit {\n  color: #2C5F9C;\n}\n.content-wrapper {\n  min-width: 1140px;\n  height: 100vh;\n  padding-top: 3rem;\n  padding-bottom: 5rem;\n}\n::-webkit-scrollbar {\n  width: 0;\n  background-color: #ffffff;\n}\n.min-width {\n  min-width: 1140px;\n}\n.fade-enter, .fade-leave-to {\n  opacity: 0;\n  -webkit-transition: opacity .5s;\n  transition: opacity .5s;\n}\n", ""]);
 
 // exports
 
@@ -45305,7 +45305,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "/* styles for welcome page */\n#welcome-page[data-v-52579982] {\n  height: 100vh;\n  width: 100%;\n  background-color: #4686a08f;\n  background-attachment: fixed, fixed, fixed;\n  background-image: -webkit-gradient(linear, left top, left bottom, from(#3081cf), to(#82db85));\n  background-image: linear-gradient(to bottom, #3081cf 0%, #82db85 100%);\n  /* background-position: top left, center center, center center;\n      background-size: auto, cover, cover; */\n  overflow: hidden;\n}\n#title-label[data-v-52579982] {\n  font-family: BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif;\n  color: white;\n}\n#title-label h1[data-v-52579982] {\n  font-size: 7em;\n  -webkit-animation-name: title1-data-v-52579982;\n          animation-name: title1-data-v-52579982;\n  -webkit-animation-duration: 1s;\n          animation-duration: 1s;\n}\n#title-label div[data-v-52579982] {\n  font-size: 2.8em;\n  text-decoration: overline;\n  margin-top: -22px;\n  -webkit-animation-name: title2-data-v-52579982;\n          animation-name: title2-data-v-52579982;\n  -webkit-animation-duration: 1s;\n          animation-duration: 1s;\n}\n@-webkit-keyframes title1-data-v-52579982 {\n0% {\n    color: rgba(255, 255, 255, 0.1);\n    font-size: 4.5em;\n}\n10% {\n    color: rgba(255, 255, 255, 0.2);\n    font-size: 5em;\n}\n20% {\n    color: rgba(255, 255, 255, 0.3);\n    font-size: 5.4em;\n}\n30% {\n    color: rgba(255, 255, 255, 0.4);\n    font-size: 5.7em;\n}\n40% {\n    color: rgba(255, 255, 255, 0.5);\n    font-size: 6em;\n}\n50% {\n    color: rgba(255, 255, 255, 0.6);\n    font-size: 6.3em;\n}\n60% {\n    color: rgba(255, 255, 255, 0.7);\n    font-size: 6.5em;\n}\n70% {\n    color: rgba(255, 255, 255, 0.7);\n    font-size: 6.7em;\n}\n80% {\n    color: rgba(255, 255, 255, 0.8);\n    font-size: 6.8em;\n}\n90% {\n    color: rgba(255, 255, 255, 0.9);\n    font-size: 6.9em;\n}\n}\n@keyframes title1-data-v-52579982 {\n0% {\n    color: rgba(255, 255, 255, 0.1);\n    font-size: 4.5em;\n}\n10% {\n    color: rgba(255, 255, 255, 0.2);\n    font-size: 5em;\n}\n20% {\n    color: rgba(255, 255, 255, 0.3);\n    font-size: 5.4em;\n}\n30% {\n    color: rgba(255, 255, 255, 0.4);\n    font-size: 5.7em;\n}\n40% {\n    color: rgba(255, 255, 255, 0.5);\n    font-size: 6em;\n}\n50% {\n    color: rgba(255, 255, 255, 0.6);\n    font-size: 6.3em;\n}\n60% {\n    color: rgba(255, 255, 255, 0.7);\n    font-size: 6.5em;\n}\n70% {\n    color: rgba(255, 255, 255, 0.7);\n    font-size: 6.7em;\n}\n80% {\n    color: rgba(255, 255, 255, 0.8);\n    font-size: 6.8em;\n}\n90% {\n    color: rgba(255, 255, 255, 0.9);\n    font-size: 6.9em;\n}\n}\n@-webkit-keyframes title2-data-v-52579982 {\n0% {\n    color: rgba(255, 255, 255, 0.1);\n    font-size: 1em;\n    text-decoration: none;\n}\n10% {\n    color: rgba(255, 255, 255, 0.2);\n    font-size: 1.3em;\n}\n20% {\n    color: rgba(255, 255, 255, 0.3);\n    font-size: 1.5em;\n}\n30% {\n    color: rgba(255, 255, 255, 0.4);\n    font-size: 1.7em;\n}\n40% {\n    color: rgba(255, 255, 255, 0.5);\n    font-size: 1.9em;\n}\n50% {\n    color: rgba(255, 255, 255, 0.6);\n    font-size: 2.1em;\n}\n60% {\n    color: rgba(255, 255, 255, 0.7);\n    font-size: 2.3em;\n}\n70% {\n    color: rgba(255, 255, 255, 0.7);\n    font-size: 2.5em;\n}\n80% {\n    color: rgba(255, 255, 255, 0.8);\n    font-size: 2.6em;\n}\n90% {\n    color: rgba(255, 255, 255, 0.9);\n    font-size: 2.7em;\n    text-decoration: none;\n}\n}\n@keyframes title2-data-v-52579982 {\n0% {\n    color: rgba(255, 255, 255, 0.1);\n    font-size: 1em;\n    text-decoration: none;\n}\n10% {\n    color: rgba(255, 255, 255, 0.2);\n    font-size: 1.3em;\n}\n20% {\n    color: rgba(255, 255, 255, 0.3);\n    font-size: 1.5em;\n}\n30% {\n    color: rgba(255, 255, 255, 0.4);\n    font-size: 1.7em;\n}\n40% {\n    color: rgba(255, 255, 255, 0.5);\n    font-size: 1.9em;\n}\n50% {\n    color: rgba(255, 255, 255, 0.6);\n    font-size: 2.1em;\n}\n60% {\n    color: rgba(255, 255, 255, 0.7);\n    font-size: 2.3em;\n}\n70% {\n    color: rgba(255, 255, 255, 0.7);\n    font-size: 2.5em;\n}\n80% {\n    color: rgba(255, 255, 255, 0.8);\n    font-size: 2.6em;\n}\n90% {\n    color: rgba(255, 255, 255, 0.9);\n    font-size: 2.7em;\n    text-decoration: none;\n}\n}\n", ""]);
+exports.push([module.i, "/* styles for welcome page */\n#welcome-page[data-v-52579982] {\n  height: 100vh;\n  width: 100%;\n  background-color: #4686a08f;\n  background-attachment: fixed, fixed, fixed;\n  background-image: -webkit-gradient(linear, left top, left bottom, from(#3081cf), to(#82db85));\n  background-image: linear-gradient(to bottom, #3081cf 0%, #82db85 100%);\n  /* background-position: top left, center center, center center;\n      background-size: auto, cover, cover; */\n  overflow: hidden;\n}\n#title-label[data-v-52579982] {\n  font-family: BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif;\n  color: white;\n  -moz-user-select: none;\n  -webkit-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n}\n#title-label h1[data-v-52579982] {\n  font-size: 7em;\n  -webkit-animation-name: title1-data-v-52579982;\n          animation-name: title1-data-v-52579982;\n  -webkit-animation-duration: 1s;\n          animation-duration: 1s;\n}\n#title-label div[data-v-52579982] {\n  font-size: 2.2em;\n  text-decoration: overline;\n  margin-top: -22px;\n  -webkit-animation-name: title2-data-v-52579982;\n          animation-name: title2-data-v-52579982;\n  -webkit-animation-duration: 1s;\n          animation-duration: 1s;\n}\n@-webkit-keyframes title1-data-v-52579982 {\n0% {\n    color: rgba(255, 255, 255, 0.1);\n    font-size: 4.5em;\n}\n10% {\n    color: rgba(255, 255, 255, 0.2);\n    font-size: 5em;\n}\n20% {\n    color: rgba(255, 255, 255, 0.3);\n    font-size: 5.4em;\n}\n30% {\n    color: rgba(255, 255, 255, 0.4);\n    font-size: 5.7em;\n}\n40% {\n    color: rgba(255, 255, 255, 0.5);\n    font-size: 6em;\n}\n50% {\n    color: rgba(255, 255, 255, 0.6);\n    font-size: 6.3em;\n}\n60% {\n    color: rgba(255, 255, 255, 0.7);\n    font-size: 6.5em;\n}\n70% {\n    color: rgba(255, 255, 255, 0.7);\n    font-size: 6.7em;\n}\n80% {\n    color: rgba(255, 255, 255, 0.8);\n    font-size: 6.8em;\n}\n90% {\n    color: rgba(255, 255, 255, 0.9);\n    font-size: 6.9em;\n}\n}\n@keyframes title1-data-v-52579982 {\n0% {\n    color: rgba(255, 255, 255, 0.1);\n    font-size: 4.5em;\n}\n10% {\n    color: rgba(255, 255, 255, 0.2);\n    font-size: 5em;\n}\n20% {\n    color: rgba(255, 255, 255, 0.3);\n    font-size: 5.4em;\n}\n30% {\n    color: rgba(255, 255, 255, 0.4);\n    font-size: 5.7em;\n}\n40% {\n    color: rgba(255, 255, 255, 0.5);\n    font-size: 6em;\n}\n50% {\n    color: rgba(255, 255, 255, 0.6);\n    font-size: 6.3em;\n}\n60% {\n    color: rgba(255, 255, 255, 0.7);\n    font-size: 6.5em;\n}\n70% {\n    color: rgba(255, 255, 255, 0.7);\n    font-size: 6.7em;\n}\n80% {\n    color: rgba(255, 255, 255, 0.8);\n    font-size: 6.8em;\n}\n90% {\n    color: rgba(255, 255, 255, 0.9);\n    font-size: 6.9em;\n}\n}\n@-webkit-keyframes title2-data-v-52579982 {\n0% {\n    color: rgba(255, 255, 255, 0.1);\n    font-size: 1em;\n    text-decoration: none;\n}\n10% {\n    color: rgba(255, 255, 255, 0.2);\n    font-size: 1.3em;\n}\n20% {\n    color: rgba(255, 255, 255, 0.3);\n    font-size: 1.5em;\n}\n30% {\n    color: rgba(255, 255, 255, 0.4);\n    font-size: 1.6em;\n}\n40% {\n    color: rgba(255, 255, 255, 0.5);\n    font-size: 1.7em;\n}\n50% {\n    color: rgba(255, 255, 255, 0.6);\n    font-size: 1.8em;\n}\n60% {\n    color: rgba(255, 255, 255, 0.7);\n    font-size: 1.9em;\n}\n70% {\n    color: rgba(255, 255, 255, 0.7);\n    font-size: 2em;\n}\n80% {\n    color: rgba(255, 255, 255, 0.8);\n    font-size: 2.1em;\n}\n90% {\n    color: rgba(255, 255, 255, 0.9);\n    font-size: 2.2em;\n    text-decoration: none;\n}\n}\n@keyframes title2-data-v-52579982 {\n0% {\n    color: rgba(255, 255, 255, 0.1);\n    font-size: 1em;\n    text-decoration: none;\n}\n10% {\n    color: rgba(255, 255, 255, 0.2);\n    font-size: 1.3em;\n}\n20% {\n    color: rgba(255, 255, 255, 0.3);\n    font-size: 1.5em;\n}\n30% {\n    color: rgba(255, 255, 255, 0.4);\n    font-size: 1.6em;\n}\n40% {\n    color: rgba(255, 255, 255, 0.5);\n    font-size: 1.7em;\n}\n50% {\n    color: rgba(255, 255, 255, 0.6);\n    font-size: 1.8em;\n}\n60% {\n    color: rgba(255, 255, 255, 0.7);\n    font-size: 1.9em;\n}\n70% {\n    color: rgba(255, 255, 255, 0.7);\n    font-size: 2em;\n}\n80% {\n    color: rgba(255, 255, 255, 0.8);\n    font-size: 2.1em;\n}\n90% {\n    color: rgba(255, 255, 255, 0.9);\n    font-size: 2.2em;\n    text-decoration: none;\n}\n}\n", ""]);
 
 // exports
 
@@ -45357,7 +45357,7 @@ var staticRenderFns = [
           [
             _c("h1", [_vm._v("ТОЕсуд")]),
             _vm._v(" "),
-            _c("div", [_vm._v("робимо суд прозорішим")])
+            _c("div", [_vm._v("прозорий відкритий ефективний суд")])
           ]
         )
       ])
@@ -51410,7 +51410,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n.judge-profile .main-info[data-v-7cdb9c0a] {\n  border-bottom: 1px solid rgba(0, 0, 0, 0.1);\n}\n.judge-profile .main-info .fa-university[data-v-7cdb9c0a] {\n    color: #4c88bd;\n    font-size: 1.3rem;\n    margin-right: 5px;\n}\n.judge-profile .main-info .court-name[data-v-7cdb9c0a] {\n    color: #5c7a7a;\n    font-weight: 300;\n}\n.judge-profile .main-info .detail-info[data-v-7cdb9c0a] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: row;\n            flex-direction: row;\n    -webkit-box-pack: start;\n        -ms-flex-pack: start;\n            justify-content: start;\n    -webkit-box-align: start;\n        -ms-flex-align: start;\n            align-items: start;\n    color: #5c7a7a;\n}\n.judge-profile .main-info .detail-info i[class^=\"fa\"][data-v-7cdb9c0a] {\n      margin-right: 10px;\n      padding-top: 5px;\n}\n.judge-profile .status-info .rating[data-v-7cdb9c0a] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.judge-profile .status-info .rating .like[data-v-7cdb9c0a] {\n    color: green;\n}\n.judge-profile .status-info .rating .dislike[data-v-7cdb9c0a] {\n    color: red;\n}\n.judge-profile .status-info .status[data-v-7cdb9c0a] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: start;\n      -ms-flex-align: start;\n          align-items: start;\n}\n.judge-profile .status-info .bookmark > span[data-v-7cdb9c0a] {\n  width: 20px;\n  float: right;\n}\n.judge-profile .court-sessions-container[data-v-7cdb9c0a] {\n  max-height: 600px;\n  overflow-y: auto;\n}\n.judge-profile .court-sessions-container .court-sessions[data-v-7cdb9c0a] {\n    width: 100%;\n    height: auto;\n    font-size: 0.7rem;\n}\n.judge-profile .court-sessions-container .court-sessions .fa-star[data-v-7cdb9c0a] {\n      color: #2b989b;\n      cursor: pointer;\n      font-size: 20px;\n}\n.judge-profile .court-sessions-container .court-sessions .container-component[data-v-7cdb9c0a] {\n      background-color: #ffffff;\n}\n.judge-profile .court-sessions-container .court-sessions .header[data-v-7cdb9c0a] {\n      -webkit-box-align: center;\n          -ms-flex-align: center;\n              align-items: center;\n      font-weight: 700;\n}\n.judge-profile .court-sessions-container .court-sessions .row[data-v-7cdb9c0a] {\n      margin: 0;\n      padding: 15px 0;\n}\n.judge-profile .court-sessions-container .court-sessions .row[data-v-7cdb9c0a]:not(:last-child) {\n        border-bottom: 1px solid lightgrey;\n}\n.judge-profile .court-sessions-container .court-sessions .row div[class^=\"col\"][data-v-7cdb9c0a] {\n        padding-right: 0;\n}\n.judge-profile input[type=\"search\"][data-v-7cdb9c0a] {\n  width: 200px;\n}\n", ""]);
+exports.push([module.i, "\n.judge-profile .card-body[data-v-7cdb9c0a] {\n  font-size: 0.9rem;\n}\n.judge-profile .progress[data-v-7cdb9c0a] {\n  height: 20px;\n  font-size: 1.1rem;\n}\n.judge-profile .main-info[data-v-7cdb9c0a] {\n  border-bottom: 1px solid rgba(0, 0, 0, 0.1);\n}\n.judge-profile .main-info .fa-university[data-v-7cdb9c0a] {\n    color: #4c88bd;\n    font-size: 1.3rem;\n    margin-right: 5px;\n}\n.judge-profile .main-info .court-name[data-v-7cdb9c0a] {\n    color: #5c7a7a;\n    font-weight: 300;\n}\n.judge-profile .main-info .detail-info[data-v-7cdb9c0a] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: row;\n            flex-direction: row;\n    -webkit-box-pack: start;\n        -ms-flex-pack: start;\n            justify-content: start;\n    -webkit-box-align: start;\n        -ms-flex-align: start;\n            align-items: start;\n    color: #5c7a7a;\n}\n.judge-profile .main-info .detail-info i[class^=\"fa\"][data-v-7cdb9c0a] {\n      margin-right: 10px;\n      padding-top: 5px;\n}\n.judge-profile .status-info .rating[data-v-7cdb9c0a] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.judge-profile .status-info .rating .like[data-v-7cdb9c0a] {\n    color: green;\n}\n.judge-profile .status-info .rating .dislike[data-v-7cdb9c0a] {\n    color: red;\n}\n.judge-profile .status-info .status[data-v-7cdb9c0a] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: start;\n      -ms-flex-align: start;\n          align-items: start;\n}\n.judge-profile .status-info .bookmark > span[data-v-7cdb9c0a] {\n  width: 20px;\n  float: right;\n}\n.judge-profile .court-sessions-container[data-v-7cdb9c0a] {\n  max-height: 600px;\n  overflow-y: auto;\n}\n.judge-profile .court-sessions-container .court-sessions[data-v-7cdb9c0a] {\n    width: 100%;\n    height: auto;\n    font-size: 0.7rem;\n}\n.judge-profile .court-sessions-container .court-sessions .fa-star[data-v-7cdb9c0a] {\n      color: #2b989b;\n      cursor: pointer;\n      font-size: 20px;\n}\n.judge-profile .court-sessions-container .court-sessions .container-component[data-v-7cdb9c0a] {\n      background-color: #ffffff;\n}\n.judge-profile .court-sessions-container .court-sessions .header[data-v-7cdb9c0a] {\n      -webkit-box-align: center;\n          -ms-flex-align: center;\n              align-items: center;\n      font-weight: 700;\n}\n.judge-profile .court-sessions-container .court-sessions .row[data-v-7cdb9c0a] {\n      margin: 0;\n      padding: 15px 0;\n}\n.judge-profile .court-sessions-container .court-sessions .row[data-v-7cdb9c0a]:not(:last-child) {\n        border-bottom: 1px solid lightgrey;\n}\n.judge-profile .court-sessions-container .court-sessions .row div[class^=\"col\"][data-v-7cdb9c0a] {\n        padding-right: 0;\n}\n.judge-profile input[type=\"search\"][data-v-7cdb9c0a] {\n  width: 200px;\n}\n", ""]);
 
 // exports
 
@@ -51432,6 +51432,28 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__shared_ChangeStatus_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__shared_ChangeStatus_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__shared_Spinner_vue__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__shared_Spinner_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__shared_Spinner_vue__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -51674,30 +51696,64 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 status: 1
             },
             // Array will be automatically processed with visualization.arrayToDataTable function
-            pieChartData: [['Task', 'Hours per Day'], ['Work', 11], ['Eat', 2], ['Commute', 2], ['Watch TV', 2], ['Sleep', 7]],
-            pieChartOptions: {
+            // налаштування для Google графіка загальної статистики
+            commonChartData: [],
+            commonChartOptions: {
                 is3D: true,
-                width: 400,
-                height: 300,
+                width: '100%',
+                height: '100%',
                 legend: {
                     position: 'left',
                     alignment: 'start'
                 }
             },
-            columnChartData: [['Element', 'Density', {
-                role: 'style'
-            }, {
-                role: 'annotation'
-            }], ['Copper', 8.94, '#b87333', '400'], // RGB value
-            ['Silver', 10.49, 'silver', '500'], // English color name
-            ['Gold', 19.30, 'gold', '200'], ['Platinum', 21.45, 'color: #e5e4e2', '800']],
-            columnChartOptions: {
-                legend: {
-                    position: "none"
-                }
+            // налаштування для Google графіка статистики по цивільних справах
+            civilChartData: [],
+            civilChartOptions: {
+                title: "співвідношення % задоволених/частково/відмовлених у позові справ",
+                chartArea: { left: 40, top: 30, bottom: 30, width: '100%', height: '100%' },
+                bar: { groupWidth: "65%" },
+                legend: { position: "none" }
             },
+
+            // налаштування для Google графіка статистики по кримінальних справах
+            criminalChartData: [],
+            criminalChartOptions: {
+                title: "співвідношення % результатів розглянутих справ",
+                chartArea: { left: 40, top: 30, bottom: 30, width: '100%', height: '100%' },
+                bar: { groupWidth: "65%" },
+                legend: { position: "none" }
+            },
+
+            // налаштування для Google графіка статистики по КУпАП
+            adminoffenceChartData: [],
+            adminoffenceChartOptions: {
+                title: "співвідношення % результатів розглянутих справ",
+                chartArea: { left: 40, top: 30, bottom: 30, width: '100%', height: '100%' },
+                bar: { groupWidth: "65%" },
+                legend: { position: "none" }
+            },
+
+            // columnChartData: [
+            //     ['Element', 'Density', {
+            //         role: 'style'
+            //     }, {
+            //         role: 'annotation'
+            //     }],
+            //     ['Copper', 8.94, '#b87333', '400'], // RGB value
+            //     ['Silver', 10.49, 'silver', '500'], // English color name
+            //     ['Gold', 19.30, 'gold', '200'],
+            //     ['Platinum', 21.45, 'color: #e5e4e2', '800'],
+            // ],
+            // columnChartOptions: {
+            //     legend: {
+            //         position: "none"
+            //     },
+            // },
+
+            // розмір кругів
             gchart: {
-                width: 120
+                width: 135
             }
 
         };
@@ -51707,13 +51763,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         filterSessions: function filterSessions() {
             var _this = this;
 
-            //  живий пошук = фільтер
+            //  живий пошук = фільтр
             return __WEBPACK_IMPORTED_MODULE_2_lodash___default.a.filter(this.judge.court_sessions, function (el) {
                 var arr = __WEBPACK_IMPORTED_MODULE_2_lodash___default.a.filter(Object.keys(el), function (key) {
                     var regEx = new RegExp('(' + _this.search + ')', 'i');
                     return regEx.test(el[key]) || _this.search.length == 0;
                 });
-                return arr.length > 0 ? true : false;
+                return arr.length > 0;
             });
         },
 
@@ -51735,6 +51791,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 _this2.judge = response.data;
                 _this2.loadData = true;
                 console.log('JUdge PROFILE', _this2.judge);
+
+                _this2.commonChartData = [['Категорія', 'Кількість справ'], ['Цивільні', _this2.judge.civil_statistic.amount], ['Кримінальні', _this2.judge.criminal_statistic.amount], ['Справи про адмін. правопорушення', _this2.judge.adminoffence_statistic.amount], ['Адміністративні справи', _this2.judge.admin_statistic.amount], ['Господарські справи', _this2.judge.commercial_statistic.amount]];
+                _this2.civilChartData = [["Element", "відсотків", { role: "style" }], ["у позові відмовлено повністю", _this2.judge.civil_statistic.negative_judgment, "red"], ["позов задоволено повністю", _this2.judge.civil_statistic.positive_judgment, "green"], ["задоволено частково, укладено мирову угоду", _this2.judge.civil_statistic.other_judgment, "gold"]];
+                _this2.criminalChartData = [["Element", "відсотків", { role: "style" }], ["особу притягнено до кримінальної відповідальності", _this2.judge.criminal_statistic.negative_judgment, "red"], ["особа звільнена від кримінальної відповідальності", _this2.judge.criminal_statistic.positive_judgment, "green"]];
+                _this2.adminoffenceChartData = [["Element", "відсотків", { role: "style" }], ["особу притягнено до адміністративної відповідальності", _this2.judge.adminoffence_statistic.negative_judgment, "red"], ["особа звільнена від адміністративної відповідальності", _this2.judge.adminoffence_statistic.positive_judgment, "green"]];
             }).catch(function (error) {
                 if (error.response.status === 401) {
                     _this2.$router.push('/login');
@@ -51750,6 +51811,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }).then(function (response) {
                 _this2.judge = response.data;
                 _this2.loadData = true;
+
+                _this2.commonChartData = [['Категорія', 'Кількість справ'], ['Цивільні', _this2.judge.civil_statistic.amount], ['Кримінальні', _this2.judge.criminal_statistic.amount], ['Справи про адмін. правопорушення', _this2.judge.adminoffence_statistic.amount], ['Адміністративні справи', _this2.judge.admin_statistic.amount], ['Господарські справи', _this2.judge.commercial_statistic.amount]];
+                _this2.civilChartData = [["Element", "відсотків", { role: "style" }], ["у позові відмовлено повністю", _this2.judge.civil_statistic.negative_judgment, "red"], ["позов задоволено повністю", _this2.judge.civil_statistic.positive_judgment, "green"], ["задоволено частково, укладено мирову угоду", _this2.judge.civil_statistic.other_judgment, "gold"]];
+                _this2.criminalChartData = [["Element", "відсотків", { role: "style" }], ["особу притягнено до кримінальної відповідальності", _this2.judge.criminal_statistic.negative_judgment, "red"], ["особа звільнена від кримінальної відповідальності", _this2.judge.criminal_statistic.positive_judgment, "green"]];
+                _this2.adminoffenceChartData = [["Element", "відсотків", { role: "style" }], ["особу притягнено до адміністративної відповідальності", _this2.judge.adminoffence_statistic.negative_judgment, "red"], ["особа звільнена від адміністративної відповідальності", _this2.judge.adminoffence_statistic.positive_judgment, "green"]];
             }).catch(function (error) {
                 if (error.response.status === 401) {
                     _this2.$router.push('/login');
@@ -51945,7 +52011,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     }
                 });
             }
-        }
+        },
+        calculateColor: function calculateColor(val) {
+            var red = 205 - val * 2;
+            var green = 5 + val * 2;
+
+            if (val >= 50 && val < 70) {
+                red += 90;
+                green += 60;
+            } else if (val >= 50 && val < 80) {
+                green += 60;
+            } else if (val < 50) {
+                red += val;
+                green -= val;
+            }
+
+            return 'rgb(' + red + ' ' + green + ' 0)';
+        },
+        getVal: function getVal(val) {}
     }
 });
 
@@ -52325,7 +52408,24 @@ var render = function() {
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "d-flex" }, [
-              _vm._m(1),
+              _c("div", { staticClass: "card w-50 mt-2 mr-1" }, [
+                _vm._m(1),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "card-body p-0" },
+                  [
+                    _c("GChart", {
+                      attrs: {
+                        type: "PieChart",
+                        data: _vm.commonChartData,
+                        options: _vm.commonChartOptions
+                      }
+                    })
+                  ],
+                  1
+                )
+              ]),
               _vm._v(" "),
               _c("div", { staticClass: "card w-50 mt-2 ml-1" }, [
                 _c("div", { staticClass: "card-header" }, [
@@ -52336,42 +52436,64 @@ var render = function() {
                 _vm._v(" "),
                 _c("div", { staticClass: "card-body" }, [
                   _c("div", [
-                    _c("label", { attrs: { for: "" } }, [
-                      _vm._v("Компетентність")
+                    _c("label", [
+                      _vm._v("Рішень вистоюють у вищих інстанціях")
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "progress" }, [
-                      _c("div", {
-                        staticClass: "progress-bar bg-success",
-                        style: {
-                          width: _vm.judge.common_statistic.competence + "%"
+                      _c(
+                        "div",
+                        {
+                          staticClass: "progress-bar",
+                          style: {
+                            width: _vm.judge.common_statistic.competence + "%",
+                            backgroundColor: _vm.calculateColor(
+                              _vm.judge.common_statistic.competence
+                            )
+                          },
+                          attrs: {
+                            role: "progressbar",
+                            "aria-valuemin": "0",
+                            "aria-valuemax": "100"
+                          }
                         },
-                        attrs: {
-                          role: "progressbar",
-                          "aria-valuemin": "0",
-                          "aria-valuemax": "100"
-                        }
-                      })
+                        [
+                          _vm._v(
+                            _vm._s(_vm.judge.common_statistic.competence) + "%"
+                          )
+                        ]
+                      )
                     ])
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "mt-2" }, [
-                    _c("label", { attrs: { for: "" } }, [
-                      _vm._v("Своєчасність")
+                  _c("div", { staticClass: "mt-5" }, [
+                    _c("label", [
+                      _vm._v("Справ розглядаються у визначений законом строк")
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "progress" }, [
-                      _c("div", {
-                        staticClass: "progress-bar bg-success",
-                        style: {
-                          width: _vm.judge.common_statistic.timeliness + "%"
+                      _c(
+                        "div",
+                        {
+                          staticClass: "progress-bar",
+                          style: {
+                            width: _vm.judge.common_statistic.timeliness + "%",
+                            backgroundColor: _vm.calculateColor(
+                              _vm.judge.common_statistic.timeliness
+                            )
+                          },
+                          attrs: {
+                            role: "progressbar",
+                            "aria-valuemin": "0",
+                            "aria-valuemax": "100"
+                          }
                         },
-                        attrs: {
-                          role: "progressbar",
-                          "aria-valuemin": "0",
-                          "aria-valuemax": "100"
-                        }
-                      })
+                        [
+                          _vm._v(
+                            _vm._s(_vm.judge.common_statistic.timeliness) + "%"
+                          )
+                        ]
+                      )
                     ])
                   ])
                 ])
@@ -52387,7 +52509,24 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "card-body" }, [
-                  _vm._m(2),
+                  _c("div", { staticClass: "row" }, [
+                    _c(
+                      "div",
+                      { staticClass: "col" },
+                      [
+                        _c("GChart", {
+                          attrs: {
+                            type: "ColumnChart",
+                            data: _vm.civilChartData,
+                            options: _vm.civilChartOptions
+                          }
+                        })
+                      ],
+                      1
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("hr"),
                   _vm._v(" "),
                   _c("div", { staticClass: "row" }, [
                     _c(
@@ -52398,7 +52537,10 @@ var render = function() {
                           attrs: {
                             percent: _vm.judge.civil_statistic.cases_on_time,
                             visibleValue: true,
-                            foregroundColor: "#8fdb42",
+                            emptyText: "N/A",
+                            foregroundColor: _vm.calculateColor(
+                              _vm.judge.civil_statistic.cases_on_time
+                            ),
                             width: _vm.gchart.width,
                             height: _vm.gchart.width
                           }
@@ -52418,7 +52560,10 @@ var render = function() {
                             percent:
                               _vm.judge.civil_statistic.approved_by_appeal,
                             visibleValue: true,
-                            foregroundColor: "#cebd4b",
+                            emptyText: "N/A",
+                            foregroundColor: _vm.calculateColor(
+                              _vm.judge.civil_statistic.approved_by_appeal
+                            ),
                             width: _vm.gchart.width,
                             height: _vm.gchart.width
                           }
@@ -52430,6 +52575,23 @@ var render = function() {
                       ],
                       1
                     )
+                  ]),
+                  _vm._v(" "),
+                  _c("hr"),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "col-12" }, [
+                      _c("span", [
+                        _c("b", [
+                          _vm._v(
+                            _vm._s(_vm.judge.civil_statistic.average_duration)
+                          )
+                        ]),
+                        _vm._v(
+                          " днів - середня тривалість розгляду однієї справи"
+                        )
+                      ])
+                    ])
                   ])
                 ])
               ]),
@@ -52442,7 +52604,24 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "card-body" }, [
-                  _vm._m(3),
+                  _c("div", { staticClass: "row" }, [
+                    _c(
+                      "div",
+                      { staticClass: "col" },
+                      [
+                        _c("GChart", {
+                          attrs: {
+                            type: "ColumnChart",
+                            data: _vm.criminalChartData,
+                            options: _vm.criminalChartOptions
+                          }
+                        })
+                      ],
+                      1
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("hr"),
                   _vm._v(" "),
                   _c("div", { staticClass: "row" }, [
                     _c(
@@ -52451,15 +52630,18 @@ var render = function() {
                       [
                         _c("doughnut-chart", {
                           attrs: {
-                            percent: 37,
+                            percent: _vm.judge.criminal_statistic.cases_on_time,
                             visibleValue: true,
-                            foregroundColor: "#8fdb42",
+                            emptyText: "N/A",
+                            foregroundColor: _vm.calculateColor(
+                              _vm.judge.criminal_statistic.cases_on_time
+                            ),
                             width: _vm.gchart.width,
                             height: _vm.gchart.width
                           }
                         }),
                         _vm._v(" "),
-                        _c("span", [_vm._v("Справ розглянуто своєчасно")])
+                        _c("span", [_vm._v("Справ розглядаються менше 6 міс.")])
                       ],
                       1
                     ),
@@ -52470,9 +52652,13 @@ var render = function() {
                       [
                         _c("doughnut-chart", {
                           attrs: {
-                            percent: 65,
+                            percent:
+                              _vm.judge.criminal_statistic.approved_by_appeal,
                             visibleValue: true,
-                            foregroundColor: "#cebd4b",
+                            emptyText: "N/A",
+                            foregroundColor: _vm.calculateColor(
+                              _vm.judge.criminal_statistic.approved_by_appeal
+                            ),
                             width: _vm.gchart.width,
                             height: _vm.gchart.width
                           }
@@ -52484,6 +52670,25 @@ var render = function() {
                       ],
                       1
                     )
+                  ]),
+                  _vm._v(" "),
+                  _c("hr"),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "col-12" }, [
+                      _c("span", [
+                        _c("b", [
+                          _vm._v(
+                            _vm._s(
+                              _vm.judge.criminal_statistic.average_duration
+                            )
+                          )
+                        ]),
+                        _vm._v(
+                          " днів - середня тривалість розгляду однієї справи"
+                        )
+                      ])
+                    ])
                   ])
                 ])
               ])
@@ -52491,10 +52696,27 @@ var render = function() {
             _vm._v(" "),
             _c("div", { staticClass: "d-flex" }, [
               _c("div", { staticClass: "card w-50 mt-2 mr-1" }, [
-                _vm._m(4),
+                _vm._m(2),
                 _vm._v(" "),
                 _c("div", { staticClass: "card-body" }, [
-                  _vm._m(5),
+                  _c("div", { staticClass: "row" }, [
+                    _c(
+                      "div",
+                      { staticClass: "col" },
+                      [
+                        _c("GChart", {
+                          attrs: {
+                            type: "ColumnChart",
+                            data: _vm.adminoffenceChartData,
+                            options: _vm.adminoffenceChartOptions
+                          }
+                        })
+                      ],
+                      1
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("hr"),
                   _vm._v(" "),
                   _c("div", { staticClass: "row" }, [
                     _c(
@@ -52503,9 +52725,13 @@ var render = function() {
                       [
                         _c("doughnut-chart", {
                           attrs: {
-                            percent: 37,
+                            percent:
+                              _vm.judge.adminoffence_statistic.cases_on_time,
                             visibleValue: true,
-                            foregroundColor: "#8fdb42",
+                            emptyText: "N/A",
+                            foregroundColor: _vm.calculateColor(
+                              _vm.judge.adminoffence_statistic.cases_on_time
+                            ),
                             width: _vm.gchart.width,
                             height: 120
                           }
@@ -52522,9 +52748,15 @@ var render = function() {
                       [
                         _c("doughnut-chart", {
                           attrs: {
-                            percent: 65,
+                            percent:
+                              _vm.judge.adminoffence_statistic
+                                .approved_by_appeal,
                             visibleValue: true,
-                            foregroundColor: "#cebd4b",
+                            emptyText: "N/A",
+                            foregroundColor: _vm.calculateColor(
+                              _vm.judge.adminoffence_statistic
+                                .approved_by_appeal
+                            ),
                             width: _vm.gchart.width,
                             height: 120
                           }
@@ -52536,16 +52768,33 @@ var render = function() {
                       ],
                       1
                     )
+                  ]),
+                  _vm._v(" "),
+                  _c("hr"),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "col-12" }, [
+                      _c("span", [
+                        _c("b", [
+                          _vm._v(
+                            _vm._s(
+                              _vm.judge.adminoffence_statistic.average_duration
+                            )
+                          )
+                        ]),
+                        _vm._v(
+                          " днів - середня тривалість розгляду однієї справи"
+                        )
+                      ])
+                    ])
                   ])
                 ])
               ]),
               _vm._v(" "),
-              _vm._m(6)
+              _vm._m(3)
             ])
           ])
         : _vm._e(),
-      _vm._v(" "),
-      _c("GChart", { attrs: { tupe: "PieChart" } }),
       _vm._v(" "),
       _vm.showModal
         ? _c("change-status", {
@@ -52586,28 +52835,8 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card w-50 mt-2 mr-1" }, [
-      _c("div", { staticClass: "card-header" }, [
-        _c("span", [_vm._v("Статистика розгрянутих справ")])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "card-body" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col" })
+    return _c("div", { staticClass: "card-header" }, [
+      _c("span", [_vm._v("Статистика розглянутих справ")])
     ])
   },
   function() {
@@ -52616,14 +52845,6 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "card-header" }, [
       _c("span", [_vm._v("Судочинство в порядку КУпАП")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col" })
     ])
   },
   function() {

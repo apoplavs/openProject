@@ -101,10 +101,10 @@
             <div class="d-flex">
                 <div class="card w-50 mt-2 mr-1">
                     <div class="card-header">
-                        <span>Статистика розгрянутих справ</span>
+                        <span>Статистика розглянутих справ</span>
                     </div>
-                    <div class="card-body">
-                        <!-- <GChart type="PieChart" :data="pieChartData" :options="pieChartOptions" /> -->
+                    <div class="card-body p-0">
+                         <GChart type="PieChart" :data="commonChartData" :options="commonChartOptions" />
                     </div>
                 </div>
                 <div class="card w-50 mt-2 ml-1">
@@ -113,15 +113,16 @@
                     </div>
                     <div class="card-body">
                         <div>
-                            <label for="">Компетентність</label>
+                            <label>Рішень вистоюють у вищих інстанціях</label>
                             <div class="progress">
-                                <div class="progress-bar bg-success" role="progressbar" :style="{ width: judge.common_statistic.competence + '%'}" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="progress-bar" role="progressbar"
+                                     :style="{ width: judge.common_statistic.competence + '%', backgroundColor: calculateColor(judge.common_statistic.competence) }" aria-valuemin="0" aria-valuemax="100">{{ judge.common_statistic.competence }}%</div>
                             </div>
                         </div>
-                        <div class="mt-2">
-                            <label for="">Своєчасність</label>
+                        <div class="mt-5">
+                            <label>Справ розглядаються у визначений законом строк</label>
                             <div class="progress">
-                                <div class="progress-bar bg-success" role="progressbar" :style="{ width: judge.common_statistic.timeliness + '%'}"  aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="progress-bar" role="progressbar" :style="{ width: judge.common_statistic.timeliness + '%', backgroundColor: calculateColor(judge.common_statistic.timeliness) }"  aria-valuemin="0" aria-valuemax="100">{{ judge.common_statistic.timeliness }}%</div>
                             </div>
                         </div>
                     </div>
@@ -135,17 +136,24 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col">
-                                <!-- <GChart type="ColumnChart" :data="columnChartData" :options="columnChartOptions" /> -->
+                                 <GChart type="ColumnChart" :data="civilChartData" :options="civilChartOptions" />
                             </div>
                         </div>
+                        <hr>
                         <div class="row">
                             <div class="col-6">
-                                <doughnut-chart :percent="judge.civil_statistic.cases_on_time" :visibleValue="true" foregroundColor="#8fdb42" :width="gchart.width" :height="gchart.width" />
+                                <doughnut-chart :percent="judge.civil_statistic.cases_on_time" :visibleValue="true" emptyText="N/A" :foregroundColor="calculateColor(judge.civil_statistic.cases_on_time)" :width="gchart.width" :height="gchart.width" />
                                 <span>Справ розглянуто своєчасно</span>
                             </div>
                             <div class="col-6">
-                                <doughnut-chart :percent="judge.civil_statistic.approved_by_appeal" :visibleValue="true" foregroundColor="#cebd4b" :width="gchart.width" :height="gchart.width" />
+                                <doughnut-chart :percent="judge.civil_statistic.approved_by_appeal" :visibleValue="true" emptyText="N/A" :foregroundColor="calculateColor(judge.civil_statistic.approved_by_appeal)" :width="gchart.width" :height="gchart.width" />
                                 <span>Рішень вистояли у вищих інстанціях</span>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-12">
+                                <span><b>{{ judge.civil_statistic.average_duration }}</b> днів - середня тривалість розгляду однієї справи</span>
                             </div>
                         </div>
                     </div>
@@ -157,17 +165,24 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col">
-                                <!-- <GChart type="ColumnChart" :data="columnChartData" :options="columnChartOptions" /> -->
+                                 <GChart type="ColumnChart" :data="criminalChartData" :options="criminalChartOptions" />
                             </div>
                         </div>
+                        <hr>
                         <div class="row">
                             <div class="col-6">
-                                <doughnut-chart :percent="37" :visibleValue="true" foregroundColor="#8fdb42" :width="gchart.width" :height="gchart.width" />
-                                <span>Справ розглянуто своєчасно</span>
+                                <doughnut-chart :percent="judge.criminal_statistic.cases_on_time" :visibleValue="true" emptyText="N/A" :foregroundColor="calculateColor(judge.criminal_statistic.cases_on_time)" :width="gchart.width" :height="gchart.width" />
+                                <span>Справ розглядаються менше 6 міс.</span>
                             </div>
                             <div class="col-6">
-                                <doughnut-chart :percent="65" :visibleValue="true" foregroundColor="#cebd4b" :width="gchart.width" :height="gchart.width" />
+                                <doughnut-chart :percent="judge.criminal_statistic.approved_by_appeal" :visibleValue="true" emptyText="N/A" :foregroundColor="calculateColor(judge.criminal_statistic.approved_by_appeal)" :width="gchart.width" :height="gchart.width" />
                                 <span>Рішень вистояли у вищих інстанціях</span>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-12">
+                                <span><b>{{ judge.criminal_statistic.average_duration }}</b> днів - середня тривалість розгляду однієї справи</span>
                             </div>
                         </div>
                     </div>
@@ -181,17 +196,24 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col">
-                                <!-- <GChart type="ColumnChart" :data="columnChartData" :options="columnChartOptions" /> -->
+                                 <GChart type="ColumnChart" :data="adminoffenceChartData" :options="adminoffenceChartOptions" />
                             </div>
                         </div>
+                        <hr>
                         <div class="row">
                             <div class="col-6">
-                                <doughnut-chart :percent="37" :visibleValue="true" foregroundColor="#8fdb42" :width="gchart.width" :height="120" />
+                                <doughnut-chart :percent="judge.adminoffence_statistic.cases_on_time" :visibleValue="true" emptyText="N/A" :foregroundColor="calculateColor(judge.adminoffence_statistic.cases_on_time)" :width="gchart.width" :height="120" />
                                 <span>Справ розглянуто своєчасно</span>
                             </div>
                             <div class="col-6">
-                                <doughnut-chart :percent="65" :visibleValue="true" foregroundColor="#cebd4b" :width="gchart.width" :height="120" />
+                                <doughnut-chart :percent="judge.adminoffence_statistic.approved_by_appeal" :visibleValue="true" emptyText="N/A" :foregroundColor="calculateColor(judge.adminoffence_statistic.approved_by_appeal)" :width="gchart.width" :height="120" />
                                 <span>Рішень вистояли у вищих інстанціях</span>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-12">
+                                <span><b>{{ judge.adminoffence_statistic.average_duration }}</b> днів - середня тривалість розгляду однієї справи</span>
                             </div>
                         </div>
                     </div>
@@ -206,7 +228,7 @@
                 </div>
              </div>
         </div>
-        <GChart tupe="PieChart"/>
+        <!--<GChart tupe="PieChart"/>-->
         <!-- modal change status -->
         <change-status v-if="showModal" :judgeData="judge.data" @closeModal="showModal = !showModal"  />
     </div>
@@ -240,62 +262,86 @@
                     status: 1,
                 },
                 // Array will be automatically processed with visualization.arrayToDataTable function
-                pieChartData: [
-                    ['Task', 'Hours per Day'],
-                    ['Work', 11],
-                    ['Eat', 2],
-                    ['Commute', 2],
-                    ['Watch TV', 2],
-                    ['Sleep', 7]
-                ],
-                pieChartOptions: {
+                // налаштування для Google графіка загальної статистики
+                commonChartData: [],
+                commonChartOptions: {
                     is3D: true,
-                    width: 400,
-                    height: 300,
+                    width: '100%',
+                    height: '100%',
                     legend: {
                         position: 'left',
                         alignment: 'start',
                     },
                 },
-                columnChartData: [
-                    ['Element', 'Density', {
-                        role: 'style'
-                    }, {
-                        role: 'annotation'
-                    }],
-                    ['Copper', 8.94, '#b87333', '400'], // RGB value
-                    ['Silver', 10.49, 'silver', '500'], // English color name
-                    ['Gold', 19.30, 'gold', '200'],
-                    ['Platinum', 21.45, 'color: #e5e4e2', '800'],
-                ],
-                columnChartOptions: {
-                    legend: {
-                        position: "none"
-                    },
+				// налаштування для Google графіка статистики по цивільних справах
+				civilChartData: [],
+                civilChartOptions: {
+					title: "співвідношення % задоволених/частково/відмовлених у позові справ",
+					chartArea:{left:40,top:30,bottom:30,width:'100%',height:'100%'},
+					bar: {groupWidth: "65%"},
+					legend: { position: "none" }
                 },
+
+				// налаштування для Google графіка статистики по кримінальних справах
+				criminalChartData: [],
+				criminalChartOptions: {
+					title: "співвідношення % результатів розглянутих справ",
+					chartArea:{left:40,top:30,bottom:30,width:'100%',height:'100%'},
+					bar: {groupWidth: "65%"},
+					legend: { position: "none" }
+				},
+
+				// налаштування для Google графіка статистики по КУпАП
+				adminoffenceChartData: [],
+				adminoffenceChartOptions: {
+					title: "співвідношення % результатів розглянутих справ",
+					chartArea:{left:40,top:30,bottom:30,width:'100%',height:'100%'},
+					bar: {groupWidth: "65%"},
+					legend: { position: "none" }
+				},
+
+
+                // columnChartData: [
+                //     ['Element', 'Density', {
+                //         role: 'style'
+                //     }, {
+                //         role: 'annotation'
+                //     }],
+                //     ['Copper', 8.94, '#b87333', '400'], // RGB value
+                //     ['Silver', 10.49, 'silver', '500'], // English color name
+                //     ['Gold', 19.30, 'gold', '200'],
+                //     ['Platinum', 21.45, 'color: #e5e4e2', '800'],
+                // ],
+                // columnChartOptions: {
+                //     legend: {
+                //         position: "none"
+                //     },
+                // },
+
+                // розмір кругів
                 gchart: {
-                    width: 120
+                    width: 135
                 }
     
             };
         },
         computed: {
             filterSessions() {
-                //  живий пошук = фільтер
+                //  живий пошук = фільтр
                 return _.filter(this.judge.court_sessions, (el) => {
                     let arr = _.filter(Object.keys(el), (key) => {
                         let regEx = new RegExp(`(${this.search})`, 'i');
                         return (regEx.test(el[key]) || this.search.length == 0)
-                    })
-                    return (arr.length > 0) ? true : false
+                    });
+                    return (arr.length > 0)
                 })
             },
             isAuth: () => {
                 return localStorage.getItem("token");
             }
-        },  
+        },
         beforeMount() {
-            if (this.isAuth) { 
+            if (this.isAuth) {
                 axios
                     .get(`/api/v1/judges/${this.$route.params.id}`, {
                         headers: {
@@ -306,9 +352,34 @@
                     })
                     .then(response => {
                         this.judge = response.data;
-                        this.loadData = true;   
+                        this.loadData = true;
                         console.log('JUdge PROFILE', this.judge);
-                                             
+
+						this.commonChartData = [
+							['Категорія', 'Кількість справ'],
+							['Цивільні', this.judge.civil_statistic.amount],
+							['Кримінальні', this.judge.criminal_statistic.amount],
+							['Справи про адмін. правопорушення', this.judge.adminoffence_statistic.amount],
+							['Адміністративні справи', this.judge.admin_statistic.amount],
+							['Господарські справи', this.judge.commercial_statistic.amount]
+						];
+						this.civilChartData = [
+							["Element", "відсотків", { role: "style" } ],
+							["у позові відмовлено повністю", this.judge.civil_statistic.negative_judgment, "red"],
+							["позов задоволено повністю", this.judge.civil_statistic.positive_judgment, "green"],
+							["задоволено частково, укладено мирову угоду", this.judge.civil_statistic.other_judgment, "gold"]
+                        ];
+						this.criminalChartData = [
+							["Element", "відсотків", { role: "style" } ],
+							["особу притягнено до кримінальної відповідальності", this.judge.criminal_statistic.negative_judgment, "red"],
+							["особа звільнена від кримінальної відповідальності", this.judge.criminal_statistic.positive_judgment, "green"]
+						];
+						this.adminoffenceChartData = [
+							["Element", "відсотків", { role: "style" } ],
+							["особу притягнено до адміністративної відповідальності", this.judge.adminoffence_statistic.negative_judgment, "red"],
+							["особа звільнена від адміністративної відповідальності", this.judge.adminoffence_statistic.positive_judgment, "green"]
+						];
+
                     })
                     .catch(error => {
                         if (error.response.status === 401) {
@@ -327,7 +398,31 @@
                     .then(response => {
                         this.judge = response.data;
                         this.loadData = true;
-                        
+
+						this.commonChartData = [
+							['Категорія', 'Кількість справ'],
+							['Цивільні', this.judge.civil_statistic.amount],
+							['Кримінальні', this.judge.criminal_statistic.amount],
+							['Справи про адмін. правопорушення', this.judge.adminoffence_statistic.amount],
+							['Адміністративні справи', this.judge.admin_statistic.amount],
+							['Господарські справи', this.judge.commercial_statistic.amount]
+						];
+						this.civilChartData = [
+							["Element", "відсотків", { role: "style" } ],
+							["у позові відмовлено повністю", this.judge.civil_statistic.negative_judgment, "red"],
+							["позов задоволено повністю", this.judge.civil_statistic.positive_judgment, "green"],
+							["задоволено частково, укладено мирову угоду", this.judge.civil_statistic.other_judgment, "gold"]
+						];
+						this.criminalChartData = [
+							["Element", "відсотків", { role: "style" } ],
+							["особу притягнено до кримінальної відповідальності", this.judge.criminal_statistic.negative_judgment, "red"],
+							["особа звільнена від кримінальної відповідальності", this.judge.criminal_statistic.positive_judgment, "green"]
+						];
+						this.adminoffenceChartData = [
+							["Element", "відсотків", { role: "style" } ],
+							["особу притягнено до адміністративної відповідальності", this.judge.adminoffence_statistic.negative_judgment, "red"],
+							["особа звільнена від адміністративної відповідальності", this.judge.adminoffence_statistic.positive_judgment, "green"]
+						];
                     })
                     .catch(error => {
                         if (error.response.status === 401) {
@@ -532,7 +627,26 @@
                         }
                     });
                 }
-            }
+            },
+        calculateColor(val) {
+            	let red = 205 - (val*2);
+            	let green = 5 + (val*2);
+
+            	if (val >= 50 && val < 70) {
+            		red += 90;
+            		green += 60;
+                } else if (val >= 50 && val < 80) {
+					green += 60;
+            	} else if (val < 50) {
+					red += val;
+					green -= val;
+				}
+
+            	return ('rgb('+ red + ' ' + green +' 0)');
+        },
+        getVal(val) {
+
+        }
         }
     };
 </script>
@@ -540,7 +654,15 @@
 <style scoped lang="scss">
     @import "../../../../sass/_variables.scss";
     @import "../../../../sass/_mixins.scss";
+
     .judge-profile {
+        .card-body {
+            font-size: 0.9rem;
+        }
+        .progress {
+            height: 20px;
+            font-size: 1.1rem;
+        }
         .main-info {
             border-bottom: 1px solid rgba(0, 0, 0, 0.1);
             .fa-university {
