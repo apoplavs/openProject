@@ -602,11 +602,11 @@
             console.log(this.judge.civil_statistic.amount);
             this.commonChartData = [
                 ['Категорія', 'Кількість справ'],
-                ['Цивільні', this.judge.civil_statistic.amount],
-                ['Кримінальні', this.judge.criminal_statistic.amount],
-                ['Справи про адмін. правопорушення', this.judge.adminoffence_statistic.amount],
-                ['Адміністративні справи', this.judge.admin_statistic.amount],
-                ['Господарські справи', this.judge.commercial_statistic.amount]
+                ['Цивільні', parseInt(this.judge.civil_statistic.amount)],
+                ['Кримінальні', parseInt(this.judge.criminal_statistic.amount)],
+                ['Справи про адмін. правопорушення', parseInt(this.judge.adminoffence_statistic.amount)],
+                ['Адміністративні справи', parseInt(this.judge.admin_statistic.amount)],
+                ['Господарські справи', parseInt(this.judge.commercial_statistic.amount)]
             ];
             console.log(this.commonChartData);
             this.civilChartData = [
