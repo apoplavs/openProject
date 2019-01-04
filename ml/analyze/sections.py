@@ -93,9 +93,14 @@ class Section:
         return documents
 
     def _get_autoasigned_cases(self, cause_nums, prepare_func=None):
+
         all_applications = ', '.join(
             "'" + num + "'" for num in cause_nums
         )
+
+        if not all_applications :
+            return None
+
         sql_query = (f"SELECT * FROM auto_assigned_cases "
                      f"WHERE court = {self.judge.court_code} "
                      f"AND judge = {self.judge.id} "
