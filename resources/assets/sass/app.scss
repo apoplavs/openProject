@@ -106,12 +106,25 @@ i.fa-edit{
 .content-wrapper {
   min-width: 1140px;
   height: 100vh;
-  padding-top: 5rem;
+  padding-top: 3rem;
   padding-bottom: 5rem;
 }
 
 ::-webkit-scrollbar {
-  width: 0px;
+  width: 0;
   background-color: #ffffff;
 }
+
+.min-width {
+  min-width: 1140px;
+}
+
+  // animation 
+  // .fade-enter-active, .fade-leave-active {
+  //   transition: opacity .5s;
+  // }
+  .fade-enter, .fade-leave-to /* .fade-leave-active до версии 2.1.8 */ {
+    opacity: 0;
+    transition: opacity .5s;
+  }
 

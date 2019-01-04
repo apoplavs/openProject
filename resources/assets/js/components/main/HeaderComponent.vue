@@ -1,11 +1,11 @@
 <template>
   <div class>
-    <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
-      <div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light min-width">
+      <div class="container min-width">
         <a class="navbar-brand" href="#">
           <img src="../../../images/logo.png" width="40" alt="logo">ТОЕсуд
         </a>
-        <button
+        <!-- <button
           class="navbar-toggler"
           type="button"
           data-toggle="collapse"
@@ -15,8 +15,8 @@
           aria-label="Toggle navigation"
         >
           <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="NavbarMenu">
+        </button> -->
+        <div class="custom-navbar">
           <!-- NAVIGATION -->
           <ul class="navbar-nav">
             <!-- right -->
@@ -158,7 +158,11 @@ export default {
 
 <style scoped lang="scss">
 @import "../../../sass/_variables.scss";
+@import "../../../sass/_mixins.scss";
 
+.custom-navbar {
+   @include alignElement($justifyContent: flex-end);
+}
 .active {
   > a.nav-link {
     color: $main-color !important;
