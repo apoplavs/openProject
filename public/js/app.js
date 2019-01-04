@@ -51791,13 +51791,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 _this2.judge = response.data;
                 _this2.loadData = true;
                 console.log('JUdge PROFILE', _this2.judge);
-
-                _this2.commonChartData = [['Категорія', 'Кількість справ'], ['Цивільні', _this2.judge.civil_statistic.amount], ['Кримінальні', _this2.judge.criminal_statistic.amount], ['Справи про адмін. правопорушення', _this2.judge.adminoffence_statistic.amount], ['Адміністративні справи', _this2.judge.admin_statistic.amount], ['Господарські справи', _this2.judge.commercial_statistic.amount]];
-                _this2.civilChartData = [["Element", "відсотків", { role: "style" }], ["у позові відмовлено повністю", _this2.judge.civil_statistic.negative_judgment, "red"], ["позов задоволено повністю", _this2.judge.civil_statistic.positive_judgment, "green"], ["задоволено частково, укладено мирову угоду", _this2.judge.civil_statistic.other_judgment, "gold"]];
-                _this2.criminalChartData = [["Element", "відсотків", { role: "style" }], ["особу притягнено до кримінальної відповідальності", _this2.judge.criminal_statistic.negative_judgment, "red"], ["особа звільнена від кримінальної відповідальності", _this2.judge.criminal_statistic.positive_judgment, "green"]];
-                _this2.adminoffenceChartData = [["Element", "відсотків", { role: "style" }], ["особу притягнено до адміністративної відповідальності", _this2.judge.adminoffence_statistic.negative_judgment, "red"], ["особа звільнена від адміністративної відповідальності", _this2.judge.adminoffence_statistic.positive_judgment, "green"]];
+                _this2.setStatistic();
             }).catch(function (error) {
-                if (error.response.status === 401) {
+                if (error.response && error.response.status === 401) {
                     _this2.$router.push('/login');
                 }
                 console.log('error');
@@ -51811,16 +51807,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }).then(function (response) {
                 _this2.judge = response.data;
                 _this2.loadData = true;
-
-                _this2.commonChartData = [['Категорія', 'Кількість справ'], ['Цивільні', _this2.judge.civil_statistic.amount], ['Кримінальні', _this2.judge.criminal_statistic.amount], ['Справи про адмін. правопорушення', _this2.judge.adminoffence_statistic.amount], ['Адміністративні справи', _this2.judge.admin_statistic.amount], ['Господарські справи', _this2.judge.commercial_statistic.amount]];
-                _this2.civilChartData = [["Element", "відсотків", { role: "style" }], ["у позові відмовлено повністю", _this2.judge.civil_statistic.negative_judgment, "red"], ["позов задоволено повністю", _this2.judge.civil_statistic.positive_judgment, "green"], ["задоволено частково, укладено мирову угоду", _this2.judge.civil_statistic.other_judgment, "gold"]];
-                _this2.criminalChartData = [["Element", "відсотків", { role: "style" }], ["особу притягнено до кримінальної відповідальності", _this2.judge.criminal_statistic.negative_judgment, "red"], ["особа звільнена від кримінальної відповідальності", _this2.judge.criminal_statistic.positive_judgment, "green"]];
-                _this2.adminoffenceChartData = [["Element", "відсотків", { role: "style" }], ["особу притягнено до адміністративної відповідальності", _this2.judge.adminoffence_statistic.negative_judgment, "red"], ["особа звільнена від адміністративної відповідальності", _this2.judge.adminoffence_statistic.positive_judgment, "green"]];
+                _this2.setStatistic();
             }).catch(function (error) {
-                if (error.response.status === 401) {
+                if (error.response && error.response.status === 401) {
                     _this2.$router.push('/login');
                 }
-                console.log('error');
+                console.log(error);
             });
         }
     },
@@ -52028,7 +52020,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             return 'rgb(' + red + ' ' + green + ' 0)';
         },
-        getVal: function getVal(val) {}
+        setStatistic: function setStatistic() {
+            console.log(this.judge.civil_statistic);
+            console.log(this.judge.civil_statistic.amount);
+            this.commonChartData = [['Категорія', 'Кількість справ'], ['Цивільні', this.judge.civil_statistic.amount], ['Кримінальні', this.judge.criminal_statistic.amount], ['Справи про адмін. правопорушення', this.judge.adminoffence_statistic.amount], ['Адміністративні справи', this.judge.admin_statistic.amount], ['Господарські справи', this.judge.commercial_statistic.amount]];
+            console.log(this.commonChartData);
+            this.civilChartData = [["Element", "відсотків", { role: "style" }], ["у позові відмовлено повністю", this.judge.civil_statistic.negative_judgment, "red"], ["позов задоволено повністю", this.judge.civil_statistic.positive_judgment, "green"], ["задоволено частково, укладено мирову угоду", this.judge.civil_statistic.other_judgment, "gold"]];
+            this.criminalChartData = [["Element", "відсотків", { role: "style" }], ["особу притягнено до кримінальної відповідальності", this.judge.criminal_statistic.negative_judgment, "red"], ["особа звільнена від кримінальної відповідальності", this.judge.criminal_statistic.positive_judgment, "green"]];
+            this.adminoffenceChartData = [["Element", "відсотків", { role: "style" }], ["особу притягнено до адміністративної відповідальності", this.judge.adminoffence_statistic.negative_judgment, "red"], ["особа звільнена від адміністративної відповідальності", this.judge.adminoffence_statistic.positive_judgment, "green"]];
+        }
     }
 });
 

@@ -276,8 +276,13 @@ def guess_category(text, anticipated_category):
     # ['full', 'operative', 'motive', 'introduction']
     validator = Validator(prop['part_text'])
 
+    # пробуємо обрізати потрібну частину тексту
+    clean_text = validator.cut_part(text)
+    if clean_text == None:
+        return 0
+
     # пробуємо визначити категорію за регулярками
-    category = guess_by_regexp(regexp=prop['regexp'], text=validator.cut_part(text))
+    category = guess_by_regexp(regexp=prop['regexp'], text=clean_text)
 
     if category != 0:
         return category

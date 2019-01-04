@@ -1173,6 +1173,10 @@ class Validator():
         if not (self.part == 'full'):
             text = self.cut_part(text)
 
+        # якщо не вдалось обрізати потрібну частину тексту  
+        if text == None:
+              return None
+
         # додаємо пробіли з початку і в кінці тексту
         text = ' ' + text + ' '
 
@@ -1298,4 +1302,5 @@ class Validator():
         try:
             return part_text.group(3)
         except Exception:
-            raise Exception('Exception: Cannot separate text')
+            return None
+            #raise Exception('Exception: Cannot separate text')

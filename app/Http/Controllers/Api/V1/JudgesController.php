@@ -2012,11 +2012,16 @@ class JudgesController extends Controller
 			$all_approved += $adminoffence_statistic['approved_by_appeal'];
 			$count_judgements++;
 		}
-		$common_statistic['competence'] = intval($all_approved / $count_judgements);
+          if ($count_judgements != 0) {
+               $common_statistic['competence'] = intval($all_approved / $count_judgements);
+          } else {
+               $common_statistic['competence'] = 0;
+          }
+		
 		
 		$all_approved = 0;
 		$count_judgements = 0;
-		if (array_key_exists('cases_on_time', $adminoffence_statistic)) {
+		if (array_key_exists('cases_on_time', $civil_statistic)) {
 			$all_approved += $civil_statistic['cases_on_time'];
 			$count_judgements++;
 		}
@@ -2028,7 +2033,12 @@ class JudgesController extends Controller
 			$all_approved += $adminoffence_statistic['cases_on_time'];
 			$count_judgements++;
 		}
-		$common_statistic['timeliness'] = intval($all_approved / $count_judgements);
+          if ($count_judgements != 0) {
+               $common_statistic['timeliness'] = intval($all_approved / $count_judgements);
+          } else {
+               $common_statistic['timeliness'] = 0;
+          }
+		
 		
 		return $common_statistic;
 	}

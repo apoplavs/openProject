@@ -52,9 +52,12 @@ class JudgesStatistic extends Model
 			->first();
 		// якщо статистики немає
 		if (empty($statistic)) {
-			return NULL;
+			return ['amount' => 0,
+				'positive_judgment' => 0, 
+				'negative_judgment' => 0];
 		}
-		$result = [];
+
+		$result = ['positive_judgment' => 0, 'negative_judgment' => 0];
 		$result['amount'] = $statistic->amount;
 		
 		$type_judgments = $statistic->positive_judgment + $statistic->negative_judgment;
@@ -96,9 +99,11 @@ class JudgesStatistic extends Model
 			->first();
 		// якщо статистики немає
 		if (empty($statistic)) {
-			return NULL;
+			return ['amount' => 0,
+				'positive_judgment' => 0, 
+				'negative_judgment' => 0];
 		}
-		$result = [];
+		$result = ['positive_judgment' => 0, 'negative_judgment' => 0, 'other_judgment' => 0];
 		$result['amount'] = $statistic->amount;
 		
 		$type_judgments = $statistic->positive_judgment + $statistic->negative_judgment + $statistic->other_judgment;
@@ -140,9 +145,11 @@ class JudgesStatistic extends Model
 			->first();
 		// якщо статистики немає
 		if (empty($statistic)) {
-			return NULL;
+			return ['amount' => 0,
+				'positive_judgment' => 0, 
+				'negative_judgment' => 0];
 		}
-		$result = [];
+		$result = ['positive_judgment' => 0, 'negative_judgment' => 0];
 		$result['amount'] = $statistic->amount;
 		
 		$type_judgments = $statistic->positive_judgment + $statistic->negative_judgment;
@@ -190,7 +197,7 @@ class JudgesStatistic extends Model
 			->first();
 		// якщо статистики немає
 		if (empty($statistic)) {
-			return NULL;
+			return ['amount' => 0];
 		}
 		$result = [];
 		$result['amount'] = $statistic->amount;
@@ -210,7 +217,7 @@ class JudgesStatistic extends Model
 			->first();
 		// якщо статистики немає
 		if (empty($statistic)) {
-			return NULL;
+			return ['amount' => 0];
 		}
 		$result = [];
 		$result['amount'] = $statistic->amount;
