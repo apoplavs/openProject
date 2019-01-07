@@ -181,6 +181,9 @@ class CourtSessions extends Command
      * @return array
      */
     private function getSessionToInsert(int $court_code, \stdClass $item) {
+		// очищуємо номер справи від всіх пробільних символів
+		$item->number = preg_replace('/\s+/u', "", $item->number);
+		
         $item->date = date('Y-m-d H:i:s', strtotime($item->date));
         if (isset($this->existing_sessions[$item->number][$item->date])) {
             return [];
@@ -298,6 +301,12 @@ class CourtSessions extends Command
             'Господарські справи'            => 3,
             'Адміністративні справи'         => 4,
             'Справи про адмінправопорушення' => 5,
+
+            'Цивільне судочинство'           => 1,
+            'Кримінальне судочинство'        => 2,
+            'Господарське судочинство'       => 3,
+            'Адміністративне судочинство'    => 4,
+            'Адміністративні правопорушення' => 5,
         ];
 
         $result = $forma_to_id[trim($forma)] ?? null;

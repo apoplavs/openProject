@@ -13,6 +13,99 @@ use Toecyd\UserBookmarkSession;
  */
 class CourtSessionController extends Controller
 {
+
+    /**
+     * Get the bookmarks of user
+     *
+     * @SWG\Get(
+     *     path="/court-sessions/bookmarks",
+     *     summary="Отримати список судових засідань",
+     *     description="Отримати список судових засідань, що знаходяться в закладках поточного користувача",
+     *     operationId="court-sessions-bookmarks",
+     *     produces={"application/json"},
+     *     tags={"Судові засідання"},
+     *     security={
+     *     {"passport": {}},
+     *      },
+     *     @SWG\Parameter(
+     *      ref="#/parameters/Content-Type",
+     *     ),
+     *     @SWG\Parameter(
+     *      ref="#/parameters/X-Requested-With",
+     *     ),
+     *
+     *     @SWG\Response(
+     *         response=200,
+     *         description="ОК",
+     *        @SWG\Schema(
+     *          @SWG\Property(
+     *              property="court-sessions",
+     *              type="array",
+     *              description="Список судових засідань, що знаходяться в закладках у користувача",
+     *              @SWG\Items(
+     *                  type="object",
+     *                  @SWG\Property(property="id", type="string", description="id судового засідання"),
+     *                  @SWG\Property(property="date", type="string", description="Дата судового засідання"),
+     *                  @SWG\Property(property="judges", type="string", description="Склад суду"),
+     *                  @SWG\Property(property="court_code", type="string", description="Номер суду"),
+     *                  @SWG\Property(property="name", type="string", description="Назва суду"),
+     *                  @SWG\Property(property="forma", type="string", description="Форма судочинства"),
+     *                  @SWG\Property(property="number", type="string", description="Номер справи"),
+     *                  @SWG\Property(property="involved", type="string", description="Учасники справи"),
+     *                  @SWG\Property(property="description", type="string", description="Короткий опис справи"),
+     *              ),
+     *            ),
+     *          ),
+     *           examples={"application/json":
+     *               {
+ *                      {
+ *                          "id":2,
+ *                          "date":"2018-11-02 08:15:00",
+ *                          "judges":"головуючий суддя: Воробйов Андрій Володимирович; учасник колегії: Ходько В М; учасник колегії: Наполов Микола Іванович",
+ *                          "court_code":"201",
+ *                          "name":"Барський районний суд Вінницької області",
+ *                          "forma":"Цивільне",
+ *                          "number":"125/1530/18",
+ *                          "involved":"Позивач: АТ КБ БАНК, відповідач: Шевченко Іван Іваноич",
+ *                          "description":"про стягнення заборгованості"
+ *                      },
+ *                      {
+ *                          "id":3,
+ *                          "date":"2018-11-03 08:15:00",
+ *                          "judges":"Єрмічова Віта Валентинівна",
+ *                          "court_code":"201",
+ *                          "name":"Барський районний суд Вінницької області",
+ *                          "forma":"Адмінправопорушення",
+ *                          "number":"125/1530/19",
+ *                          "involved":"",
+ *                          "description":""
+ *                      }
+     *              }
+     *          }
+     *     ),
+     *
+     *     @SWG\Response(
+     *         response=401,
+     *         description="Необхідна аутентифікація користувача, можливо токен не існує, або анульований",
+     *         examples={"application/json":
+     *              {
+     *                  "message": "Unauthenticated",
+     *              }
+     *          }
+     *     ),
+     *     @SWG\Response(
+     *         response=405,
+     *         description="Метод, з яким виконувався запит, не дозволено використовувати для заданого ресурсу; наприклад, запит був здійснений за методом POST, хоча очікується GET.",
+     *     )
+     * )
+     *
+     * @return [json] user object
+     */
+    public function index() {
+        return response()->json(UserBookmarkSession::getBookmarks());
+    }
+    
+
     /**
      * @SWG\Put(
      *     path="/court-sessions/{id}/bookmark",
@@ -40,7 +133,6 @@ class CourtSessionController extends Controller
      *     collectionFormat="multi",
      *     uniqueItems=true,
      *     minimum=1,
-     *     maximum=15000,
      *     allowEmptyValue=false
      *     ),
      *
@@ -250,9 +342,6 @@ class CourtSessionController extends Controller
 		$request->validate([
 			'note'    => 'required|string|max:255'
 		]);
-		
-		// todo зробити перевірку прав користувача додавати замітку до даної закладки
-		$user_id = Auth::user()->id;
 		
 		$bookmark_id = intval($bookmark_id);
 		

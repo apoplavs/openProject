@@ -7,13 +7,14 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Toecyd\CourtSession;
 use Toecyd\Http\Controllers\Controller;
+use Toecyd\Jobs\SendNotification1;
+use Toecyd\Jobs\SendNotification3;
 use Toecyd\Judge;
 use Toecyd\JudgesStatistic;
 use Toecyd\UserBookmarkJudge;
 use Toecyd\UserHistory;
 use Toecyd\UsersLikesJudge;
 use Toecyd\UsersUnlikesJudge;
-use Illuminate\Support\Facades\DB;
 
 /**
  * Class JudgesController
@@ -706,6 +707,69 @@ class JudgesController extends Controller
      *                  @SWG\Property(property="is_bookmark", type="integer", description="1 || 0 відображає чи знаходяться судові засідання по даній справі в закладках в поточного користувача"),
      *              ),
      *            ),
+	 *     		@SWG\Property(
+	 *              property="common_statistic",
+	 *              type="array",
+	 *              description="Загальна зведена статистика",
+	 *              @SWG\Items(
+	 *                  type="object",
+	 *     				required={"competence", "timeliness"},
+	 *     				@SWG\Property(property="competence", type="integer", description="Показує скільки відсотків рішень даного судді вистояли у вищих інстанціях"),
+	 *                  @SWG\Property(property="timeliness", type="integer", description="Показує скільки відсотків проваджень були розглянуті в визначений законом строк"),
+	 *              ),
+	 *            ),
+	 *     		@SWG\Property(
+	 *              property="adminoffence_statistic",
+	 *              type="array",
+	 *              description="Статистика розглянутих суддею справ в порядку КУпАП",
+	 *              @SWG\Items(
+	 *                  type="object",
+	 *     				required={"amount"},
+	 *     				@SWG\Property(property="amount", type="integer", description="Загальна кількість справ, розглянутих суддею"),
+	 *                  @SWG\Property(property="positive_judgment", type="integer", description="Відсоток постанов в яких особу звільнено від відповідальності"),
+	 *                  @SWG\Property(property="negative_judgment", type="integer", description="Відсоток постанов в яких особу притягнено до відповідальності"),
+	 *                  @SWG\Property(property="cases_on_time", type="integer", description="Відсоток справ розглянутих у визначені законом строки"),
+	 *     				@SWG\Property(property="cases_not_on_time", type="integer", description="Відсоток розглянутих справ з порушенням строків визначених законодавством"),
+	 *                  @SWG\Property(property="average_duration", type="integer", description="Кількість днів, що відображає середню тривалість розгляду однієї справи"),
+	 *     				@SWG\Property(property="approved_by_appeal", type="integer", description="Відсоток постанов, які встояли в апеляції"),
+	 *     				@SWG\Property(property="not_approved_by_appeal", type="integer", description="Відсоток постанов, які НЕ встояли в апеляції"),
+	 *              ),
+	 *            ),
+	 *     		@SWG\Property(
+	 *              property="criminal_statistic",
+	 *              type="array",
+	 *              description="Статистика розглянутих суддею кримінальних справ",
+	 *              @SWG\Items(
+	 *                  type="object",
+	 *     				required={"amount"},
+	 *     				@SWG\Property(property="amount", type="integer", description="Загальна кількість справ, розглянутих суддею"),
+	 *                  @SWG\Property(property="positive_judgment", type="integer", description="Відсоток вироків в яких особу звільнено від відповідальності"),
+	 *                  @SWG\Property(property="negative_judgment", type="integer", description="Відсоток вироків в яких особу притягнено до відповідальності"),
+	 *                  @SWG\Property(property="cases_on_time", type="integer", description="Відсоток справ розглянутих у визначені законом строки"),
+	 *     				@SWG\Property(property="cases_not_on_time", type="integer", description="Відсоток розглянутих справ з порушенням строків визначених законодавством"),
+	 *                  @SWG\Property(property="average_duration", type="integer", description="Кількість днів, що відображає середню тривалість розгляду однієї справи"),
+	 *     				@SWG\Property(property="approved_by_appeal", type="integer", description="Відсоток справ, які встояли в апеляції"),
+	 *     				@SWG\Property(property="not_approved_by_appeal", type="integer", description="Відсоток справ, які НЕ встояли в апеляції"),
+	 *              ),
+	 *            ),
+	 *     		@SWG\Property(
+	 *              property="civil_statistic",
+	 *              type="array",
+	 *              description="Статистика розглянутих суддею цивільних справ",
+	 *              @SWG\Items(
+	 *                  type="object",
+	 *     				required={"amount"},
+	 *     				@SWG\Property(property="amount", type="integer", description="Загальна кількість справ, розглянутих суддею"),
+	 *                  @SWG\Property(property="positive_judgment", type="integer", description="Відсоток справ в яких задоволено вимоги позивача"),
+	 *                  @SWG\Property(property="negative_judgment", type="integer", description="Відсоток справ в яких відмовлено у задоволенні вимог позивача"),
+	 *    				@SWG\Property(property="other_judgment", type="integer", description="Відсоток справ, в яких укладено мирову угоду, або закрито справу"),
+	 *                  @SWG\Property(property="cases_on_time", type="integer", description="Відсоток справ розглянутих у визначені законом строки"),
+	 *     				@SWG\Property(property="cases_not_on_time", type="integer", description="Відсоток розглянутих справ з порушенням строків визначених законодавством"),
+	 *                  @SWG\Property(property="average_duration", type="integer", description="Кількість днів, що відображає середню тривалість розгляду однієї справи"),
+	 *     				@SWG\Property(property="approved_by_appeal", type="integer", description="Відсоток рішень, які встояли в апеляції"),
+	 *     				@SWG\Property(property="not_approved_by_appeal", type="integer", description="Відсоток рішень, які НЕ встояли в апеляції"),
+	 *              ),
+	 *            ),
      *          ),
      *         examples={"application/json":
      *              {
@@ -754,7 +818,46 @@ class JudgesController extends Controller
 	 *								"description": "про стягнення заборгованості",
 	 *								"is_bookmark": 0
 	 *								},
-	 *     						}
+	 *     						},
+	 *     						"common_statistic": {
+	 *								"competence": 65,
+	 *								"timeliness": 85
+	 *							},
+	 *							"adminoffence_statistic": {
+	 *								"amount": 1111,
+	 *								"positive_judgment": 9,
+	 *								"negative_judgment": 91,
+	 *								"cases_on_time": 84,
+	 *								"cases_not_on_time": 16,
+	 *								"average_duration": 11
+	 *							},
+	 * 							"civil_statistic": {
+	 *								"amount": 1598,
+	 *								"positive_judgment": 76,
+	 *								"negative_judgment": 4,
+	 *								"other_judgment": 20,
+	 *								"cases_on_time": 79,
+	 *								"cases_not_on_time": 21,
+	 *								"average_duration": 57,
+	 *								"approved_by_appeal": 57,
+	 * 								"not_approved_by_appeal": 43
+	 *							},
+	 *							"criminal_statistic": {
+	 *								"amount": 552,
+	 *								"positive_judgment": 17,
+	 *								"negative_judgment": 83,
+	 *								"cases_on_time": 93,
+	 *								"cases_not_on_time": 7,
+	 *								"average_duration": 87,
+	 *								"approved_by_appeal": 73,
+	 *								"not_approved_by_appeal": 27
+	 * 							},
+	 *							"admin_statistic": {
+	 * 								"amount": 111
+	 * 							},
+	 *							"commercial_statistic": {
+	 *								"amount": 0
+	 *							}
      *              	}
 	 *	 		}
      *     ),
@@ -786,6 +889,16 @@ class JudgesController extends Controller
         }
         $court_sessions = CourtSession::getSessionByJudge($id);
         
+        // отимуємо статистику по типах справ
+		$adminoffence_statistic = JudgesStatistic::getAdminoffenceStatistic($id);
+		$civil_statistic = 	JudgesStatistic::getCivilStatistic($id);
+		$criminal_statistic = JudgesStatistic::getCriminalStatistic($id);
+		$admin_statistic = JudgesStatistic::getAdminStatistic($id);
+		$commercial_statistic = JudgesStatistic::getCommercialStatistic($id);
+	
+		// рахуємо загальну статистику
+		$common_statistic = $this->countCommonStatistic($adminoffence_statistic, $criminal_statistic, $civil_statistic);
+        
         // вносим в історію переглядів
         if (Auth::check()) {
         UserHistory::addToHistory($id);
@@ -795,6 +908,12 @@ class JudgesController extends Controller
             'data' => $data, 
             'previous_works' => $previous_works,
             'court_sessions' => $court_sessions,
+			'common_statistic' => $common_statistic,
+			'adminoffence_statistic' => $adminoffence_statistic,
+			'civil_statistic' => $civil_statistic,
+			'criminal_statistic' => $criminal_statistic,
+			'admin_statistic' => $admin_statistic,
+			'commercial_statistic' => $commercial_statistic
         ]);
     }
 	
@@ -884,6 +1003,58 @@ class JudgesController extends Controller
 	 *                  @SWG\Property(property="description", type="string", description="Суть справи"),
 	 *              ),
 	 *            ),
+	 *     		@SWG\Property(
+	 *              property="adminoffence_statistic",
+	 *              type="array",
+	 *              description="Статистика розглянутих суддею справ в порядку КУпАП",
+	 *              @SWG\Items(
+	 *                  type="object",
+	 *     				required={"amount"},
+	 *     				@SWG\Property(property="amount", type="integer", description="Загальна кількість справ, розглянутих суддею"),
+	 *                  @SWG\Property(property="positive_judgment", type="integer", description="Відсоток постанов в яких особу звільнено від відповідальності"),
+	 *                  @SWG\Property(property="negative_judgment", type="integer", description="Відсоток постанов в яких особу притягнено до відповідальності"),
+	 *                  @SWG\Property(property="cases_on_time", type="integer", description="Відсоток справ розглянутих у визначені законом строки"),
+	 *     				@SWG\Property(property="cases_not_on_time", type="integer", description="Відсоток розглянутих справ з порушенням строків визначених законодавством"),
+	 *                  @SWG\Property(property="average_duration", type="integer", description="Кількість днів, що відображає середню тривалість розгляду однієї справи"),
+	 *     				@SWG\Property(property="approved_by_appeal", type="integer", description="Відсоток постанов, які встояли в апеляції"),
+	 *     				@SWG\Property(property="not_approved_by_appeal", type="integer", description="Відсоток постанов, які НЕ встояли в апеляції"),
+	 *              ),
+	 *            ),
+	 *     		@SWG\Property(
+	 *              property="criminal_statistic",
+	 *              type="array",
+	 *              description="Статистика розглянутих суддею кримінальних справ",
+	 *              @SWG\Items(
+	 *                  type="object",
+	 *     				required={"amount"},
+	 *     				@SWG\Property(property="amount", type="integer", description="Загальна кількість справ, розглянутих суддею"),
+	 *                  @SWG\Property(property="positive_judgment", type="integer", description="Відсоток вироків в яких особу звільнено від відповідальності"),
+	 *                  @SWG\Property(property="negative_judgment", type="integer", description="Відсоток вироків в яких особу притягнено до відповідальності"),
+	 *                  @SWG\Property(property="cases_on_time", type="integer", description="Відсоток справ розглянутих у визначені законом строки"),
+	 *     				@SWG\Property(property="cases_not_on_time", type="integer", description="Відсоток розглянутих справ з порушенням строків визначених законодавством"),
+	 *                  @SWG\Property(property="average_duration", type="integer", description="Кількість днів, що відображає середню тривалість розгляду однієї справи"),
+	 *     				@SWG\Property(property="approved_by_appeal", type="integer", description="Відсоток справ, які встояли в апеляції"),
+	 *     				@SWG\Property(property="not_approved_by_appeal", type="integer", description="Відсоток справ, які НЕ встояли в апеляції"),
+	 *              ),
+	 *            ),
+	 *     		@SWG\Property(
+	 *              property="civil_statistic",
+	 *              type="array",
+	 *              description="Статистика розглянутих суддею цивільних справ",
+	 *              @SWG\Items(
+	 *                  type="object",
+	 *     				required={"amount"},
+	 *     				@SWG\Property(property="amount", type="integer", description="Загальна кількість справ, розглянутих суддею"),
+	 *                  @SWG\Property(property="positive_judgment", type="integer", description="Відсоток справ в яких задоволено вимоги позивача"),
+	 *                  @SWG\Property(property="negative_judgment", type="integer", description="Відсоток справ в яких відмовлено у задоволенні вимог позивача"),
+	 *    				@SWG\Property(property="other_judgment", type="integer", description="Відсоток справ, в яких укладено мирову угоду, або закрито справу"),
+	 *                  @SWG\Property(property="cases_on_time", type="integer", description="Відсоток справ розглянутих у визначені законом строки"),
+	 *     				@SWG\Property(property="cases_not_on_time", type="integer", description="Відсоток розглянутих справ з порушенням строків визначених законодавством"),
+	 *                  @SWG\Property(property="average_duration", type="integer", description="Кількість днів, що відображає середню тривалість розгляду однієї справи"),
+	 *     				@SWG\Property(property="approved_by_appeal", type="integer", description="Відсоток рішень, які встояли в апеляції"),
+	 *     				@SWG\Property(property="not_approved_by_appeal", type="integer", description="Відсоток рішень, які НЕ встояли в апеляції"),
+	 *              ),
+	 *            ),
 	 *          ),
 	 *         examples={"application/json":
 	 *              {
@@ -957,10 +1128,27 @@ class JudgesController extends Controller
 		}
 		$court_sessions = CourtSession::getSessionByJudgeGuest($id);
 		
+		// отимуємо статистику по типах справ
+		$adminoffence_statistic = JudgesStatistic::getAdminoffenceStatistic($id);
+		$civil_statistic = 	JudgesStatistic::getCivilStatistic($id);
+		$criminal_statistic = JudgesStatistic::getCriminalStatistic($id);
+		$admin_statistic = JudgesStatistic::getAdminStatistic($id);
+		$commercial_statistic = JudgesStatistic::getCommercialStatistic($id);
+		
+		// рахуємо загальну статистику
+		$common_statistic = $this->countCommonStatistic($adminoffence_statistic, $criminal_statistic, $civil_statistic);
+		
+		
 		return response()->json([
 			'data' => $data,
 			'previous_works' => $previous_works,
 			'court_sessions' => $court_sessions,
+			'common_statistic' => $common_statistic,
+			'adminoffence_statistic' => $adminoffence_statistic,
+			'civil_statistic' => $civil_statistic,
+			'criminal_statistic' => $criminal_statistic,
+			'admin_statistic' => $admin_statistic,
+			'commercial_statistic' => $commercial_statistic
 		]);
 	}
     
@@ -1393,6 +1581,14 @@ class JudgesController extends Controller
         if ($new_status == 1 || $new_status == 5) {
             $due_date = NULL;
         }
+        $old_status = Judge::find($id)->status;
+        
+        // Додати в чергу відправку повідомлень всім хто:
+		// підписаний на судові засідання даного судді
+		SendNotification3::dispatch($id, $old_status, $new_status)->delay(now()->addMinute());
+		// відстежує даного суддю
+        SendNotification1::dispatch($id, $old_status, $new_status)->delay(now()->addMinute());
+        
         // оновлення статусу судді
         Judge::setNewStatus($id, $new_status, $due_date);
         
@@ -1791,4 +1987,59 @@ class JudgesController extends Controller
             'search'=>$search,
             'powers_expired'=>$powers_expired]);
     }
+	
+	/**
+	 * виконується, якщо застосовувалась фільтрація до списку суддів
+	 * @return array
+	 */
+	private function countCommonStatistic($adminoffence_statistic, $criminal_statistic, $civil_statistic) {
+		// якщо статистики немає
+		if (!$adminoffence_statistic && !$criminal_statistic && !$civil_statistic) {
+			return NULL;
+		}
+		$common_statistic = [];
+		$all_approved = 0;
+		$count_judgements = 0;
+		if (array_key_exists('approved_by_appeal', $civil_statistic)) {
+			$all_approved += $civil_statistic['approved_by_appeal'];
+			$count_judgements++;
+		}
+		if (array_key_exists('approved_by_appeal', $criminal_statistic)) {
+			$all_approved += $criminal_statistic['approved_by_appeal'];
+			$count_judgements++;
+		}
+		if (array_key_exists('approved_by_appeal', $adminoffence_statistic)) {
+			$all_approved += $adminoffence_statistic['approved_by_appeal'];
+			$count_judgements++;
+		}
+          if ($count_judgements != 0) {
+               $common_statistic['competence'] = intval($all_approved / $count_judgements);
+          } else {
+               $common_statistic['competence'] = 0;
+          }
+		
+		
+		$all_approved = 0;
+		$count_judgements = 0;
+		if (array_key_exists('cases_on_time', $civil_statistic)) {
+			$all_approved += $civil_statistic['cases_on_time'];
+			$count_judgements++;
+		}
+		if (array_key_exists('cases_on_time', $criminal_statistic)) {
+			$all_approved += $criminal_statistic['cases_on_time'];
+			$count_judgements++;
+		}
+		if (array_key_exists('cases_on_time', $adminoffence_statistic)) {
+			$all_approved += $adminoffence_statistic['cases_on_time'];
+			$count_judgements++;
+		}
+          if ($count_judgements != 0) {
+               $common_statistic['timeliness'] = intval($all_approved / $count_judgements);
+          } else {
+               $common_statistic['timeliness'] = 0;
+          }
+		
+		
+		return $common_statistic;
+	}
 }

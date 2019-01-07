@@ -41,22 +41,24 @@
                             >
                             Запамятати мене
                         </label>
+                         <router-link to="/recover-password">
+                            <a>Забув пароль?</a>
+                        </router-link>
                     </div>
                     <div class="form-group mt-3">
-                        <div class="d-flex justify-content-between">
+                        <div class="d-flex justify-content-center">
                             <button type="submit" class="btn btn-primary" id="submit-btn">
                                 Увійти
                             </button>
-                            <div class="footer-link d-flex align-items-center">
-                                <router-link to="/registration">
-                                    <a>Забув пароль?</a>
-                                </router-link>
-                            </div>
                         </div>
                     </div>
-                    <!--<g-signin-button/>-->
-                </form>
-                <login-facebook/>
+                    <hr>
+                    <div class="form-group socials">
+                        <login-google/>
+                        <span class="px-3">або</span>
+                        <login-facebook/>
+                    </div>    
+                </form>              
             </div>
         </div>
     </div>
@@ -64,15 +66,19 @@
 </template>
 
 <script>
-	import LoginFacebook from "../shared/FacebookSignInButton.vue";
+    import LoginFacebook from "../shared/FacebookSignInButton.vue";
+    import LoginGoogle from "../shared/GoogleSignInButton.vue";
+
     export default {
-		components: {
-			LoginFacebook
-		},
         name: "Login",
+		components: {
+            LoginFacebook,
+            LoginGoogle
+		}, 
         data() {
             return {
                 user: {
+                    isAuth: false,
                     email: "",
                     password: "",
                     remember_me: 1
@@ -91,11 +97,13 @@
     
                     })
                     .then(response => {
-                        let name = response.data.name;
-                        let email = response.data.email;
-                        localStorage.setItem("name", name);
-                        localStorage.setItem("email", email);
-                        console.log('Response', response);
+                        let user = {
+                            name: response.data.name,
+                            email: response.data.email
+                        }
+                       
+                        localStorage.setItem('user', JSON.stringify(user));     
+                        this.$store.commit('auth_success', response.data.email);
                         callback();
                     })
                     .catch(error => {
@@ -103,12 +111,11 @@
                     });
             },
             validateBeforeSubmit() {
-                const _this = this;
                 this.$validator.validateAll().then(result => {
                     if (result) {
                         this.user.remember_me = this.user.remember_me === true || this.user.remember_me === 1 ? 1 : 0; //конвертую чекбокс в 1 або 0 по дефолку true/false
                         axios
-                            .post("/api/v1/login", _this.user, {
+                            .post("/api/v1/login", this.user, {
                                 headers: {
                                     "Content-Type": "application/json",
                                     "X-Requested-With": "XMLHttpRequest"
@@ -117,11 +124,9 @@
                             .then(response => {
                                 if (response) {
                                     let token = response.data.token_type + " " + response.data.access_token;
-                                    localStorage.setItem("token", token);
-                                    window.location.reload();
-                                    _this.getUserData( () => {
-                                        _this.$router.push("/user-profile"); 
-                                                                   
+                                    localStorage.setItem("token", token);  
+                                    this.getUserData( () => {
+                                        this.$router.push("/user-profile");                             
                                     });
                                 }
                             })
@@ -154,10 +159,6 @@
             },
            
         },
-        beforeRouteLeave (to, from , next) {
-            location.reload()
-            next()
-        }
     };
 </script>
 
@@ -171,6 +172,7 @@
         input[aria-invalid="true"] {
             border: 1px solid red;
         }
+
         i.fa-warning,
         span.is-danger,
         #back-error {
@@ -186,5 +188,13 @@
         .card-header {
             font-size: 1.3rem;
         }
+        .form-check {
+            @include alignElement($justifyContent: space-between);
+        }
+        .socials {
+            @include alignElement();
+            margin-top: 1.5rem;
+        }
+        
     }
 </style>

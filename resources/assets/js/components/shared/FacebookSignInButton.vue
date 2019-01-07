@@ -1,14 +1,10 @@
 <template>
-	<div class="form-group">
-		<div class="text-right">
-			<fb-signin-button
-					:params="fbSignInParams"
-					@success="onSignInSuccess"
-					@error="onSignInError">
-				Продовжити з Facebook
-			</fb-signin-button>
-		</div>
-	</div>
+	<fb-signin-button
+			:params="fbSignInParams"
+			@success="onSignInSuccess"
+			@error="onSignInError">
+			<img width="30" src="../../../images/facebook.png"/>
+	</fb-signin-button>
 </template>
 
 <script>
@@ -37,7 +33,7 @@
 		data() {
 			return {
 				fbSignInParams: {
-					scope: 'email,public_profile',
+					scope: 'email, public_profile',
 					return_scopes: true
 				}
 			}
@@ -55,11 +51,12 @@
 
 					})
 					.then(response => {
-						let name = response.data.name;
-						let email = response.data.email;
-						localStorage.setItem("name", name);
-						localStorage.setItem("email", email);
-						console.log('Response', response);
+						let user = {
+                            name: response.data.name,
+                            email: response.data.email
+                        }                      
+                        localStorage.setItem('user', JSON.stringify(user));     
+                        this.$store.commit('auth_success', response.data.email);
 						callback();
 					})
 					.catch(error => {
@@ -122,7 +119,6 @@
 	@import "../../../sass/_mixins.scss";
 
 	.fb-signin-button {
-		/* This is where you control how the button looks. */
 		display: inline-block;
 		padding: 4px 8px;
 		border-radius: 3px;

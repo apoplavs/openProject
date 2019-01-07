@@ -97,12 +97,14 @@ Route::group(['prefix' => 'v1/', 'namespace' => 'Api\V1',], function () {
 		/**
 		 * Cудові засідання
 		 */
+		// Отримати судові засідання, які знаходяться в заладках користувача
+		Route::get('court-sessions/bookmarks', 'CourtSessionController@index');
 		// Додати судове засідання в закладки
 		Route::put('court-sessions/{id}/bookmark', 'CourtSessionController@addSessionBookmark')->middleware('checkId:session');
         // Видалити судове засідання з закладок
         Route::delete('court-sessions/{id}/bookmark', 'CourtSessionController@deleteSessionBookmark')->middleware('checkId:session');
 		// Додати примітку до закладки на судове засідання
-		Route::post('court-sessions/bookmark/{id}/note', 'CourtSessionController@addNote')->middleware('checkId:session-bookmark')->middleware('checkId:court');
+		Route::post('court-sessions/bookmark/{id}/note', 'CourtSessionController@addNote')->middleware('checkId:session-bookmark')->middleware('checkAccess:session-bookmark');
 		
 		
 		/**
@@ -112,6 +114,18 @@ Route::group(['prefix' => 'v1/', 'namespace' => 'Api\V1',], function () {
 		Route::get('user/history', 'HomeController@indexHistory');
 		// Закладки користувача
 		Route::get('user/bookmarks', 'HomeController@indexBookmarks');
+		
+		/**
+		 * Налаштування користувача
+		 */
+		// Отримати налаштування користувача
+		Route::get('user/settings', 'UserSettingsController@indexSettings');
+		// Змінити пароль користувача
+		Route::post('user/settings/password', 'UserSettingsController@changePassword');
+		// Змінити дані користувача
+		Route::post('user/settings/user-data', 'UserSettingsController@changeUserData');
+		// Змінити налаштування повідомлень користувача
+		Route::post('user/settings/notification', 'UserSettingsController@changeNotifications');
 		
 		
 	});

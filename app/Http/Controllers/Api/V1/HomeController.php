@@ -3,7 +3,12 @@
 namespace Toecyd\Http\Controllers\Api\V1;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Lang;
 use Toecyd\Http\Controllers\Controller;
+use Toecyd\User;
 use Toecyd\UserBookmarkCourt;
 use Toecyd\UserBookmarkJudge;
 use Toecyd\UserBookmarkSession;
@@ -290,22 +295,6 @@ class HomeController extends Controller
      *     	            @SWG\Property(property="rating", type="integer", description="Місце в рейтингу серед усіх суддів"),
      *              ),
      *            ),
-     *          @SWG\Property(
-     *              property="court-sessions",
-     *              type="array",
-     *              description="Список судових засідань, що знаходяться в закладках у користувача",
-     *              @SWG\Items(
-     *                  type="object",
-     *     	            @SWG\Property(property="id", type="string", description="id судового засідання"),
-     *     	            @SWG\Property(property="date", type="string", description="Дата судового засідання"),
-     *     	            @SWG\Property(property="judges", type="string", description="Склад суду"),
-     *     	            @SWG\Property(property="court_code", type="string", description="Номер суду"),
-     *     	            @SWG\Property(property="name", type="string", description="Назва суду"),
-     *     	            @SWG\Property(property="number", type="string", description="Номер справи"),
-     *     	            @SWG\Property(property="involved", type="string", description="Учасники справи"),
-     *     	            @SWG\Property(property="description", type="string", description="Короткий опис справи"),
-     *              ),
-     *            ),
      *          ),
      *           examples={"application/json":
      *     	         {
@@ -356,28 +345,6 @@ class HomeController extends Controller
      *                          "head_judge":null,
      *                          "rating":0
      *                      }
-     *                  },
-     *                  "court-sessions":{
-     *                      {
-     *                          "id":2,
-     *                          "date":"2018-11-02 08:15:00",
-     *                          "judges":"головуючий суддя: Воробйов Андрій Володимирович; учасник колегії: Ходько В М; учасник колегії: Наполов Микола Іванович",
-     *                          "court_code":"201",
-     *                          "name":"Барський районний суд Вінницької області",
-     *                          "number":"125/1530/18",
-     *                          "involved":"Позивач: АТ КБ БАНК, відповідач: Шевченко Іван Іваноич",
-     *                          "description":"про стягнення заборгованості"
-     *                      },
-     *                      {
-     *                          "id":3,
-     *                          "date":"2018-11-03 08:15:00",
-     *                          "judges":"Єрмічова Віта Валентинівна",
-     *                          "court_code":"201",
-     *                          "name":"Барський районний суд Вінницької області",
-     *                          "number":"125/1530/19",
-     *                          "involved":"",
-     *                          "description":""
-     *                      }
      *                  }
      *              }
      *          }
@@ -403,9 +370,10 @@ class HomeController extends Controller
 	public function indexBookmarks() {
 		return response()->json([
 		    'judges'            => UserBookmarkJudge::getBookmarkJudges(),
-            'courts'            => UserBookmarkCourt::getBookmarkCourts(),
-            'court-sessions'    => UserBookmarkSession::getBookmarks(),
+            'courts'            => UserBookmarkCourt::getBookmarkCourts()
         ]);
 	}
+	
+	
 
 }

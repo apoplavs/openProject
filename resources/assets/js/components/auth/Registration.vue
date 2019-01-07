@@ -98,7 +98,12 @@
                             </button>
                         </div>
                     </div>
-                    <login-facebook/>
+                   <hr>
+                    <div class="form-group socials">
+                        <login-google/>
+                        <span class="px-3">або</span>
+                        <login-facebook/>
+                    </div>  
                 </form>
             </div>
         </div>
@@ -108,12 +113,14 @@
 
 <script>
     import LoginFacebook from "../shared/FacebookSignInButton.vue";
+    import LoginGoogle from "../shared/GoogleSignInButton.vue";
 
-	export default {
+    export default {
+        name: "Registration",
 		components: {
-			LoginFacebook
-        },
-		name: "Registration",
+            LoginFacebook,
+            LoginGoogle
+		}, 	
         data() {
             return {
                 user: {
@@ -206,6 +213,10 @@
         }
         .card-header {
             font-size: 1.3rem;
+        }
+        .socials {
+            @include alignElement();
+            margin-top: 1.5rem;
         }
     }
 

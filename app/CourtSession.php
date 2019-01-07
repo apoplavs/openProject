@@ -113,7 +113,9 @@ class CourtSession extends Model
 	 * якщо воно існує
 	 */
 	public static function getFutureSession($number) {
-		$future_session = static::select('court_sessions.id')
+		$future_session = static::select('court_sessions.id',
+			DB::raw('DATE_FORMAT(`court_sessions`.`date`, "%d.%m.%Y") AS date_session'),
+			DB::raw('DATE_FORMAT(`court_sessions`.`date`, "%H:%i") AS time_session'))
 			->where('court_sessions.date', '>', Carbon::now('Europe/Kiev'))
 			->where('court_sessions.number', '=', $number)
 			->first();

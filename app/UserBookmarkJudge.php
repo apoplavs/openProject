@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
+/**
+ * Class UserBookmarkJudge
+ * @package Toecyd
+ */
 class UserBookmarkJudge extends Model
 {
 	public $timestamps = false;
@@ -98,4 +102,18 @@ class UserBookmarkJudge extends Model
             'judges.rating'
         ];
     }
+	
+	/**
+	 * отримати всіх отримувачів email для Notification1
+	 * про зміну статусу судді користувачам, які його відстежують
+	 * @param $judge_id
+	 */
+	public static function getRecipientsN1($judge_id) {
+		return (static::select('users.name', 'users.email')
+			->join('user_settings', 'user_settings.user', '=', 'user_bookmark_judges.user')
+			->join('users', 'users.id', '=', 'user_bookmark_judges.user')
+			->where('user_settings.email_notification_1', '=', 1)
+			->where('user_bookmark_judges.judge', '=', $judge_id)
+			->get());
+	}
 }
