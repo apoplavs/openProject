@@ -1,7 +1,9 @@
 <template>
   <div>
     <header-component/>
-    <router-view></router-view>
+    <keep-alive>
+        <router-view></router-view>
+    </keep-alive>
     <!--<footer-component></footer-component>-->
   </div>
 
