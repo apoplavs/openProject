@@ -54,7 +54,7 @@
         },
         filters: {
             formatDate(date) {
-                // getMobth() чомусь рахує місяці з 0 date.getMonth() + 1 //костиль
+                // getMobth() чомусь рахує місяці з 0 date.getMonth() + 1 
                 if (date === '' || date === null) {
                     return '';
                 } else {

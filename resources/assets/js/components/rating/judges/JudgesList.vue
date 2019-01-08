@@ -308,34 +308,6 @@
   };
 </script>
 
-<style lang="scss">
-  @import "../../../../sass/_variables.scss";
-  .pagination {
-    .bg-active {
-      background-color: $main-color;
-      border-color: $main-color;
-    }
-    button{
-      &:active,
-      &:focus{
-        background-color: $main-color;
-        border-color: $main-color;
-      }
-    }
-    div.pr-2.leading-loose {
-      display: none !important;
-    }
-    .disabled {
-      color: $input-placeholder-color;
-      cursor: no-drop;
-    }
-    .dots {
-      background-color: transparent;
-      border: none !important;
-    }
-  }
-</style>
-
 <style lang="scss" scoped>
   @import "../../../../sass/judges_coutrs_list.scss";
 </style>

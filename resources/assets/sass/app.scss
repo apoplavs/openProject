@@ -5,11 +5,10 @@
 
 body {
   background-color: $body-bg;
-  // height: 100vh;
   font-family: 'Roboto', sans-serif;
   font-weight: 400;
   font-style: normal;
-  color: $color-1;
+  color: $text-color;
   // background-image: linear-gradient(to bottom, #3081cf, #82db85);
 }
 
@@ -21,12 +20,14 @@ input::-moz-focus-inner {
 
 .btn-primary {
   color: #ffff;
-  background-color: $primary;
-  border-color: $primary;
+  background-color: $success;
+  border-color: $success;
+  min-width: 100px;
   @include boxShadow($shadow-btn);
   &:hover{
-    background-color: lighten($primary, 5%);
-    border-color: lighten($primary, 5%);
+    background-color: darken($success, 5%);
+    border-color: darken($success, 5%);
+    box-shadow: none;
   }
 }
 
@@ -118,13 +119,39 @@ i.fa-edit{
 .min-width {
   min-width: 1140px;
 }
-
-  // animation 
-  // .fade-enter-active, .fade-leave-active {
-  //   transition: opacity .5s;
-  // }
   .fade-enter, .fade-leave-to /* .fade-leave-active до версии 2.1.8 */ {
     opacity: 0;
     transition: opacity .5s;
   }
+
+  // ----- pagination ------- //
+  .pagination {
+    .bg-active {
+      background-color: $main-color;
+      border-color: $main-color;
+    }
+    button{
+      &:active,
+      &:focus{
+        background-color: $main-color;
+        border-color: $main-color;
+      }
+    }
+    div.pr-2.leading-loose {
+      display: none !important;
+    }
+    .disabled {
+      color: $input-placeholder-color;
+      cursor: no-drop;
+    }
+    .dots {
+      background-color: transparent;
+      border: none !important;
+    }
+    .border {
+      border: 0 !important;
+      box-shadow: 1px 1px 1px 1px #dee2e6 !important;
+    }
+  }
+  // ------ end ------- //
 
