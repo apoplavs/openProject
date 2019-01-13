@@ -98,7 +98,7 @@
                             </button>
                         </div>
                     </div>
-                   <hr>
+                    <hr>
                     <div class="form-group socials">
                         <login-google/>
                         <span class="px-3">або</span>

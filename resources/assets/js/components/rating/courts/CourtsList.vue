@@ -1,5 +1,5 @@
 <template>
-  <div class="container content-wrapper">
+  <div class="container content-wrapper" @keyup.enter="setFilters()"run>
     <div class="row">
       <div class="col-3 filters">
         <div class="card">

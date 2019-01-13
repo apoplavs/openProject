@@ -6,7 +6,6 @@
     </keep-alive>
     <!--<footer-component></footer-component>-->
   </div>
-
 </template>
 
 <script>

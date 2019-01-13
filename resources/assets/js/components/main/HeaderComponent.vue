@@ -195,9 +195,9 @@ export default {
     .logo {
       color: #4e5b5b;
       font-weight: 800;
-      font-size: 1.8rem;
+      font-size: 2rem;
       letter-spacing: .1em;
-      text-shadow: 3px 0 $main-color;
+      // text-shadow: 3px 0 $main-color;
     }
   }
 }

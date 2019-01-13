@@ -37,7 +37,6 @@
 					return_scopes: true
 				}
 			}
-
 		},
 		methods: {
 			getUserData(callback) {
@@ -84,22 +83,22 @@
 							});
 						}
 					}).catch(error => {
-							if (error.response && error.response) {
-								if (error.response.data && error.response.data.message) {
-									this.$toasted.error(error.response.data.message, {
-										theme: "primary",
-										position: "top-right",
-										duration: 15000
-									});
-								}
-							} else {
-								this.$toasted.error("Щось пішло не так :(  Спробуйте ввійти через google", {
+						if (error.response && error.response) {
+							if (error.response.data && error.response.data.message) {
+								this.$toasted.error(error.response.data.message, {
 									theme: "primary",
 									position: "top-right",
 									duration: 15000
 								});
-								alert(error);
 							}
+						} else {
+							this.$toasted.error("Щось пішло не так :(  Спробуйте ввійти через google", {
+								theme: "primary",
+								position: "top-right",
+								duration: 15000
+							});
+							alert(error);
+						}
 					});
 				});
 			},
