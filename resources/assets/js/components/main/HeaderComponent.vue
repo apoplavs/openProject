@@ -193,10 +193,10 @@ export default {
   .navbar-brand {
     @include alignElement();
     .logo {
-      color: #4e5b5b;
       font-weight: 800;
-      font-size: 2rem;
-      letter-spacing: .1em;
+      font-size: 1.5rem;
+      letter-spacing: em;
+      color: #4f8a8b;
       // text-shadow: 3px 0 $main-color;
     }
   }

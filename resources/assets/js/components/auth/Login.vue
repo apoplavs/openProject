@@ -55,7 +55,7 @@
                     <hr>
                     <div class="form-group socials">
                         <login-google/>
-                        <span class="px-3">або</span>
+                        <span class="px-3">-або-</span>
                         <login-facebook/>
                     </div>    
                 </form>              
@@ -197,4 +197,13 @@
         }
         
     }
+
+    hr {
+    height: 1px;
+    margin: 2em 0;
+    border: 0;
+    /* background-color: rgba(228,228,231,0); */
+    background-image: -webkit-linear-gradient(left, rgba(228,228,231,0), rgba(228,228,231,0.9) 10%, rgba(228,228,231,0.9) 90%, rgba(228,228,231,0));
+    background-image: linear-gradient(to right, rgba(228,228,231,0), rgba(228,228,231,0.9) 10%, rgba(228,228,231,0.9) 90%, rgba(228,228,231,0));
+}
 </style>

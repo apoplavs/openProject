@@ -90,7 +90,6 @@
                             </small>
                         </p>
                     </div>
-
                     <div class="form-group">
                         <div class="text-center">
                             <button type="submit" class="btn btn-primary" id="register-btn">
@@ -101,7 +100,7 @@
                     <hr>
                     <div class="form-group socials">
                         <login-google/>
-                        <span class="px-3">або</span>
+                        <span class="px-3">-або-</span>
                         <login-facebook/>
                     </div>  
                 </form>

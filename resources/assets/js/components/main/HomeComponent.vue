@@ -23,7 +23,7 @@
     /* styles for welcome page */
     
     #welcome-page {
-        height: 100vh;
+        height: calc(100vh-100px);
         width: 100%;
         background-color: #4686a08f;
         background-attachment: fixed, fixed, fixed;
