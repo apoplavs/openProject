@@ -41,7 +41,7 @@
                                     <div class="w-50 d-flex align-items-center">
                                         <!-- status component-->
                                         <status-component :judgeData="judge.data" />
-                                        <span><i class="fas fa-edit float-right pl-3" aria-hidden="true" @click="showModal = true"></i></span>
+                                        <span><i class="fa fa-edit float-right pl-3" aria-hidden="true" @click="showModal = true"></i></span>
                                     </div>
                                     <div class="bookmark w-50">
                                         <span v-if="judge.data.is_bookmark" @click="changeBookmarkStatus()"><i class="fa fa-bookmark" aria-hidden="true"></i></span>
@@ -688,7 +688,7 @@
             .court-sessions {
                 width: 100%;
                 height: auto;
-                font-size: 0.7rem;
+                font-size: 0.9rem;
                 .fa-star {
                     color: $main-color;
                     cursor: pointer;
@@ -700,6 +700,7 @@
                 .header {
                     align-items: center;
                     font-weight: 700;
+                    line-height: 1.3;
                 }
                 .row {
                     margin: 0;

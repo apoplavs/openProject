@@ -30,7 +30,7 @@
                                 <!-- status-component -->
                                 <status-component :judgeData="judge" />         
                             </div>
-                            <div class="w-25"><i class="fas fa-edit p-1 float-right" aria-hidden="true" @click="showModal(judge)"></i></div>
+                            <div class="w-25"><i class="fa fa-edit p-1 float-right" aria-hidden="true" @click="showModal(judge)"></i></div>
                         </div>
                     </div>
                 </div>
@@ -167,7 +167,7 @@
         }
         /* styles for font awesome */
         .align-center {
-            @include alignElement($alignItems: start);
+            @include alignElement();
         }
     }
     

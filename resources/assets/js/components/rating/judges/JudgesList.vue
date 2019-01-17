@@ -1,4 +1,5 @@
 <template>
+ <keep-alive>
   <div class="container content-wrapper" @keyup.enter="setFilters()">
     <div class="row min-width">
       <div class="col-3 filters">
@@ -83,10 +84,10 @@
               <hr>
               <div class="row">
                 <div class="col-6">
-                  <button type="reset" @click="resetFilters()" class="btn btn-outline-info">Скинути</button>
+                  <button type="reset" @click="resetFilters()" class="btn btn-secondary">Скинути</button>
                 </div>
                 <div class="col-6">
-                  <button type="button" @click="setFilters()" class="btn btn-primary">Показати</button>
+                  <button type="button" @click="setFilters()" class="btn btn-info">Показати</button>
                 </div>
               </div>
             </div>
@@ -108,7 +109,7 @@
             </div>
           </div>
           <div class="col-2 pl-0">
-            <button type="button" class="btn btn-confirm w-100" @click="setFilters()"><i class="fa fa-search" aria-hidden="true"></i> знайти</button>
+            <button type="button" class="btn b-confirm w-100" @click="setFilters()"><i class="fa fa-search" aria-hidden="true"></i> знайти</button>
           </div>
         </div>
         <div class="card">
@@ -142,6 +143,7 @@
     <!-- contaner -->
   
   </div>
+</keep-alive>
 </template>
 
 <script>

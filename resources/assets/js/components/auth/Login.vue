@@ -3,7 +3,7 @@
     <div class="container d-flex justify-content-center ">
         <!--<vue-toasted ref="toasted"></vue-toasted>-->
         <div class="card">
-            <div class="card-header text-center">
+            <div class="card-header justify-content-center">
                 Вхід
             </div>
             <div class="card-body">
@@ -47,7 +47,8 @@
                     </div>
                     <div class="form-group mt-3">
                         <div class="d-flex justify-content-center">
-                            <button type="submit" class="btn btn-primary" id="submit-btn">
+                            <button type="submit" class="btn b-primary" id="submit-btn">
+                               <i class="fas fa-spinner" v-if="isLoading"></i>
                                 Увійти
                             </button>
                         </div>
@@ -77,6 +78,7 @@
 		}, 
         data() {
             return {
+                isLoading: false,
                 user: {
                     isAuth: false,
                     email: "",
@@ -86,7 +88,7 @@
             };
         },
         methods: {
-             getUserData(callback) {
+             getUserData(callback) {     
                 axios
                     .get('/api/v1/user', {
                         headers: {
@@ -114,6 +116,7 @@
                 this.$validator.validateAll().then(result => {
                     if (result) {
                         this.user.remember_me = this.user.remember_me === true || this.user.remember_me === 1 ? 1 : 0; //конвертую чекбокс в 1 або 0 по дефолку true/false
+                        this.isLoading = true;
                         axios
                             .post("/api/v1/login", this.user, {
                                 headers: {
@@ -195,6 +198,10 @@
             @include alignElement();
             margin-top: 1.5rem;
         }
+        hr {
+            height: 2px;
+        }
+
         
     }
 

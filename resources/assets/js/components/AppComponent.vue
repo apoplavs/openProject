@@ -1,9 +1,9 @@
 <template>
   <div>
     <header-component/>
-    <keep-alive>
-        <router-view></router-view>
-    </keep-alive>
+    <!-- <keep-alive> -->
+        <router-view class="content" />
+    <!-- </keep-alive> -->
     <!--<footer-component></footer-component>-->
   </div>
 </template>
@@ -35,6 +35,7 @@
 
 <style lang="scss">
     @import "../../sass/app.scss";
-    
-
+    .content {
+        height: calc(100vh - 90px);
+    }
 </style>

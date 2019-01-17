@@ -2,7 +2,7 @@
 <div class="content-wrapper">
     <div class="container d-flex justify-content-center">
         <div class="card">
-            <div class="card-header text-center">
+            <div class="card-header justify-content-center">
                 Реєстрація
             </div>
             <div class="card-body">
@@ -92,7 +92,8 @@
                     </div>
                     <div class="form-group">
                         <div class="text-center">
-                            <button type="submit" class="btn btn-primary" id="register-btn">
+                            <button type="submit" class="btn b-primary" id="register-btn">
+                                <i class="fas fa-spinner" v-if="isLoading"></i>
                                 Зареєструватись
                             </button>
                         </div>
@@ -122,6 +123,7 @@
 		}, 	
         data() {
             return {
+                isLoading: false,
                 user: {
                     name: '',
                     email: '',
@@ -134,6 +136,8 @@
             validateBeforeSubmit() {
                 this.$validator.validateAll().then((result) => {
                     if (result && this.user.password === this.user.repassword) {
+                        this.isLoading = true;
+                        // document.getElementById('register-btn').setAttribute('disabled');
                         let newUser = {};
                         newUser.name = this.user.name;
                         newUser.email = this.user.email;
@@ -216,6 +220,9 @@
         .socials {
             @include alignElement();
             margin-top: 1.5rem;
+        }
+         hr {
+            height: 2px;
         }
     }
 

@@ -177,6 +177,8 @@ export default {
   .header {
     font-size: .9rem;
     font-weight: 700;
+    align-items: center;
+    line-height: 1.4;
   }
   .fa-star {
     color: $main-color;
