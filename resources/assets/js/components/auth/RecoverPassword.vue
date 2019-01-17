@@ -2,7 +2,7 @@
 <div class="content-wrapper">
     <div class="container d-flex justify-content-center ">
         <div class="card">
-            <div class="card-header text-center">
+            <div class="card-header justify-content-center">
                 Відновлення паролю
             </div>
             <div class="card-body">
@@ -22,7 +22,7 @@
                     </div>
                     <div class="form-group mt-3">
                         <div class="d-flex justify-content-center">
-                            <button type="submit" class="btn btn-primary" id="submit-btn">
+                            <button type="submit" class="btn b-primary" id="submit-btn">
                                 Відправити
                             </button>
                         </div>

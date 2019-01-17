@@ -109,12 +109,13 @@
     
     .nav-tabs .nav-item.show .nav-link,
     .nav-tabs .nav-link.active {
-        color: $text-color; //$text-color;
+        color: #568a8a; //$text-color;
         background-color: $body-bg; // $body-bg;
         border: 0;
         padding: 15px;
         border-radius: 0;
         border-top: 2px solid $main-color;
+        text-transform: uppercase;
     }
     
     .nav-tabs .nav-item.show .nav-link,

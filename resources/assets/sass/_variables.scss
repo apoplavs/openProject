@@ -1,6 +1,6 @@
 
 // Body
-$body-bg: #fafafa;;
+$body-bg: #F5F6F7;
 
 // Borders
 $laravel-border-color: darken($body-bg, 10%);
@@ -17,7 +17,9 @@ $danger: #ef6733;
 
 
 //Color range 
-$main-color: #2b989b;
+$main-color: #04bcb7;
+// $main-color: #2b989b;
+
 $color-1: #112F41;
 $color-2: #435b71;
 $color-3: #0C4E4F;
@@ -26,15 +28,16 @@ $color-5: #2C5F9C;
 $text-muted: lighten($text-color, 20%);
 
 // btn 
-
-
+$btn-border-radius: 4px;
+$btn-c1: linear-gradient(150deg, #0bceb7 10%, #09b3af 70%, #09b3af 94%);
 // fa icons
 
 
 // box-shadow
 $shadow-btn: 0px 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12);
 $shadow-light: 0 2px 43px -4px rgba(0,0,0,.19);
-$shadow-header: 0px 3px 9px -1px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14);
+// $shadow-header: 0px 3px 9px -1px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14);
+$shadow-header: 0 2px 4px -1px rgba(0,0,0,0.06), 0 4px 5px 0 rgba(0,0,0,0.06), 0 1px 10px 0 rgba(0,0,0,0.08);
 $shadow-input: inset 0 0 3px 0 rgba(0, 0, 0, 0.22);
 $shadow-3D-effect: 0 3rem 3rem -1rem rgba(10,10,10,.2);
 $shadow-autocomplete: $shadow-3D-effect;
