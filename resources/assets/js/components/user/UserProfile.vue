@@ -76,9 +76,6 @@
                 user: {}
             }
         },
-        beforeMount() {
-           
-        },
     }
 </script>
 

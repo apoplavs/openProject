@@ -1,81 +1,81 @@
 <template>
-<div class="content-wrapper">
-    <div class="container d-flex justify-content-center ">
-        <!--<vue-toasted ref="toasted"></vue-toasted>-->
-        <div class="card">
-            <div class="card-header justify-content-center">
-                Вхід
-            </div>
-            <div class="card-body">
-                <div id="back-error" class="is-danger w-100 text-center">
-                    <small>Не вірний логін або пароль</small>
+    <div class="content-wrapper">
+        <div class="container d-flex justify-content-center ">
+            <!--<vue-toasted ref="toasted"></vue-toasted>-->
+            <div class="card">
+                <div class="card-header justify-content-center">
+                    Вхід
                 </div>
-                <form @submit.prevent="validateBeforeSubmit">
-                    <div class="form-group">
-                        <label for="email" class="form-control-label">E-Mail</label>
-                        <p class="control has-icon has-icon-right">
-                            <input id="email" type="email" class="form-control" name="email" v-model="user.email" v-validate="'required|email'" :class="{'input': true, 'is-danger': errors.has('email') }">
-                            <small>
-                                <i v-show="errors.has('email')" class="fa fa-warning"></i>
-                                <span v-show="errors.has('email')" class="help is-danger">{{ errors.first('email') }}</span>
-                            </small>
-                        </p>
+                <div class="card-body">
+                    <div id="back-error" class="is-danger w-100 text-center">
+                        <small>Не вірний логін або пароль</small>
                     </div>
-                    <div class="form-group">
-                        <label for="password" class="form-control-label">Пароль</label>
-                        <p class="control has-icon has-icon-right">
-                            <input id="password" type="password" class="form-control" name="password" v-model="user.password" v-validate="'required|min:6|max:32'">
-                            <small><i v-show="errors.has('password')" class="fa fa-warning"></i>
-                                <span v-show="errors.has('password')" class="help is-danger">{{ errors.first('password') }}</span>
-                            </small>
-                        </p>
-                    </div>
-                    <div class="form-check">
-                        <label class="form-check-label">
-                            <input
-                                    type="checkbox"
-                                    class="form-check-input"
-                                    name="remember"
-                                    value=1
-                                    v-model="user.remember_me"
-                            >
-                            Запамятати мене
-                        </label>
-                         <router-link to="/recover-password">
-                            <a>Забув пароль?</a>
-                        </router-link>
-                    </div>
-                    <div class="form-group mt-3">
-                        <div class="d-flex justify-content-center">
-                            <button type="submit" class="btn b-primary" id="submit-btn">
-                               <i class="fas fa-spinner" v-if="isLoading"></i>
-                                Увійти
-                            </button>
+                    <form @submit.prevent="validateBeforeSubmit">
+                        <div class="form-group">
+                            <label for="email" class="form-control-label">E-Mail</label>
+                            <p class="control has-icon has-icon-right">
+                                <input id="email" type="email" class="form-control" name="email" v-model="user.email" v-validate="'required|email'" :class="{'input': true, 'is-danger': errors.has('email') }">
+                                <small>
+                                    <i v-show="errors.has('email')" class="fa fa-warning"></i>
+                                    <span v-show="errors.has('email')" class="help is-danger">{{ errors.first('email') }}</span>
+                                </small>
+                            </p>
                         </div>
-                    </div>
-                    <hr>
-                    <div class="form-group socials">
-                        <login-google/>
-                        <span class="px-3">-або-</span>
-                        <login-facebook/>
-                    </div>    
-                </form>              
+                        <div class="form-group">
+                            <label for="password" class="form-control-label">Пароль</label>
+                            <p class="control has-icon has-icon-right">
+                                <input id="password" type="password" class="form-control" name="password" v-model="user.password" v-validate="'required|min:6|max:32'">
+                                <small><i v-show="errors.has('password')" class="fa fa-warning"></i>
+                                    <span v-show="errors.has('password')" class="help is-danger">{{ errors.first('password') }}</span>
+                                </small>
+                            </p>
+                        </div>
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input
+                                        type="checkbox"
+                                        class="form-check-input"
+                                        name="remember"
+                                        value=1
+                                        v-model="user.remember_me"
+                                >
+                                Запамятати мене
+                            </label>
+                            <router-link to="/recover-password">
+                                <a>Забув пароль?</a>
+                            </router-link>
+                        </div>
+                        <div class="form-group mt-3">
+                            <div class="d-flex justify-content-center">
+                                <button type="submit" class="btn b-primary" id="submit-btn">
+                                   <i class="fas fa-spinner" v-if="isLoading"></i>
+                                    Увійти
+                                </button>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="form-group socials">
+                            <login-google/>
+                            <span class="px-3">-або-</span>
+                            <login-facebook/>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
     </div>
 </template>
 
 <script>
     import LoginFacebook from "../shared/FacebookSignInButton.vue";
     import LoginGoogle from "../shared/GoogleSignInButton.vue";
-
+    
     export default {
         name: "Login",
-		components: {
+        components: {
             LoginFacebook,
             LoginGoogle
-		}, 
+        },
         data() {
             return {
                 isLoading: false,
@@ -88,7 +88,7 @@
             };
         },
         methods: {
-             getUserData(callback) {     
+            getUserData(callback) {
                 axios
                     .get('/api/v1/user', {
                         headers: {
@@ -103,8 +103,8 @@
                             name: response.data.name,
                             email: response.data.email
                         }
-                       
-                        localStorage.setItem('user', JSON.stringify(user));     
+    
+                        localStorage.setItem('user', JSON.stringify(user));
                         this.$store.commit('auth_success', response.data.email);
                         callback();
                     })
@@ -127,9 +127,9 @@
                             .then(response => {
                                 if (response) {
                                     let token = response.data.token_type + " " + response.data.access_token;
-                                    localStorage.setItem("token", token);  
-                                    this.getUserData( () => {
-                                        this.$router.push("/user-profile");                             
+                                    localStorage.setItem("token", token);
+                                    this.getUserData(() => {
+                                        this.$router.push("/user-profile");
                                     });
                                 }
                             })
@@ -160,22 +160,20 @@
                     }
                 });
             },
-           
+    
         },
     };
 </script>
 
 <style lang="scss" scoped>
-  @import "../../../sass/_variables.scss";
-  @import "../../../sass/_mixins.scss";
-
+    @import "../../../sass/_variables.scss";
+    @import "../../../sass/_mixins.scss";
     .card {
         width: 100%;
         max-width: 450px;
         input[aria-invalid="true"] {
             border: 1px solid red;
         }
-
         i.fa-warning,
         span.is-danger,
         #back-error {
@@ -201,16 +199,13 @@
         hr {
             height: 2px;
         }
-
-        
     }
-
+    
     hr {
-    height: 1px;
-    margin: 2em 0;
-    border: 0;
-    /* background-color: rgba(228,228,231,0); */
-    background-image: -webkit-linear-gradient(left, rgba(228,228,231,0), rgba(228,228,231,0.9) 10%, rgba(228,228,231,0.9) 90%, rgba(228,228,231,0));
-    background-image: linear-gradient(to right, rgba(228,228,231,0), rgba(228,228,231,0.9) 10%, rgba(228,228,231,0.9) 90%, rgba(228,228,231,0));
-}
+        height: 1px;
+        margin: 2em 0;
+        border: 0;
+        background-image: -webkit-linear-gradient(left, rgba(228, 228, 231, 0), rgba(228, 228, 231, 0.9) 10%, rgba(228, 228, 231, 0.9) 90%, rgba(228, 228, 231, 0));
+        background-image: linear-gradient(to right, rgba(228, 228, 231, 0), rgba(228, 228, 231, 0.9) 10%, rgba(228, 228, 231, 0.9) 90%, rgba(228, 228, 231, 0));
+    }
 </style>

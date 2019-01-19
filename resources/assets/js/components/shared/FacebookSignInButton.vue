@@ -47,7 +47,6 @@
 							"X-Requested-With": "XMLHttpRequest",
 							"Authorization": localStorage.getItem('token')
 						}
-
 					})
 					.then(response => {
 						let user = {

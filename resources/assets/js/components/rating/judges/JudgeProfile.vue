@@ -104,7 +104,7 @@
                         <span>Статистика розглянутих справ</span>
                     </div>
                     <div class="card-body p-0">
-                         <GChart type="PieChart" :data="commonChartData" :options="commonChartOptions" />
+                        <GChart type="PieChart" :data="commonChartData" :options="commonChartOptions" />
                     </div>
                 </div>
                 <div class="card w-50 mt-2 ml-1">
@@ -115,14 +115,13 @@
                         <div>
                             <label>Рішень вистоюють у вищих інстанціях</label>
                             <div class="progress">
-                                <div class="progress-bar" role="progressbar"
-                                     :style="{ width: judge.common_statistic.competence + '%', backgroundColor: calculateColor(judge.common_statistic.competence) }" aria-valuemin="0" aria-valuemax="100">{{ judge.common_statistic.competence }}%</div>
+                                <div class="progress-bar" role="progressbar" :style="{ width: judge.common_statistic.competence + '%', backgroundColor: calculateColor(judge.common_statistic.competence) }" aria-valuemin="0" aria-valuemax="100">{{ judge.common_statistic.competence }}%</div>
                             </div>
                         </div>
                         <div class="mt-5">
                             <label>Справ розглядаються у визначений законом строк</label>
                             <div class="progress">
-                                <div class="progress-bar" role="progressbar" :style="{ width: judge.common_statistic.timeliness + '%', backgroundColor: calculateColor(judge.common_statistic.timeliness) }"  aria-valuemin="0" aria-valuemax="100">{{ judge.common_statistic.timeliness }}%</div>
+                                <div class="progress-bar" role="progressbar" :style="{ width: judge.common_statistic.timeliness + '%', backgroundColor: calculateColor(judge.common_statistic.timeliness) }" aria-valuemin="0" aria-valuemax="100">{{ judge.common_statistic.timeliness }}%</div>
                             </div>
                         </div>
                     </div>
@@ -136,7 +135,7 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col">
-                                 <GChart type="ColumnChart" :data="civilChartData" :options="civilChartOptions" />
+                                <GChart type="ColumnChart" :data="civilChartData" :options="civilChartOptions" />
                             </div>
                         </div>
                         <hr>
@@ -165,7 +164,7 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col">
-                                 <GChart type="ColumnChart" :data="criminalChartData" :options="criminalChartOptions" />
+                                <GChart type="ColumnChart" :data="criminalChartData" :options="criminalChartOptions" />
                             </div>
                         </div>
                         <hr>
@@ -187,8 +186,8 @@
                         </div>
                     </div>
                 </div>
-            </div> 
-             <div class="d-flex">
+            </div>
+            <div class="d-flex">
                 <div class="card w-50 mt-2 mr-1">
                     <div class="card-header">
                         <span>Судочинство в порядку КУпАП</span>
@@ -196,7 +195,7 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col">
-                                 <GChart type="ColumnChart" :data="adminoffenceChartData" :options="adminoffenceChartOptions" />
+                                <GChart type="ColumnChart" :data="adminoffenceChartData" :options="adminoffenceChartOptions" />
                             </div>
                         </div>
                         <hr>
@@ -226,19 +225,21 @@
                         В розробці...
                     </div>
                 </div>
-             </div>
+            </div>
         </div>
         <!--<GChart tupe="PieChart"/>-->
         <!-- modal change status -->
-        <change-status v-if="showModal" :judgeData="judge.data" @closeModal="showModal = !showModal"  />
+        <change-status v-if="showModal" :judgeData="judge.data" @closeModal="showModal = !showModal" />
     </div>
 </template>
 
 <script>
-    import { GChart } from "vue-google-charts";
+    import {
+        GChart
+    } from "vue-google-charts";
     import DoughnutChart from 'vue-doughnut-chart'
     import _ from 'lodash';
-
+    
     import StatusComponent from "../../shared/StatusComponent.vue";
     import ChangeStatus from "../../shared/ChangeStatus.vue";
     import Spinner from "../../shared/Spinner.vue";
@@ -273,51 +274,62 @@
                         alignment: 'start',
                     },
                 },
-				// налаштування для Google графіка статистики по цивільних справах
-				civilChartData: [],
+                // налаштування для Google графіка статистики по цивільних справах
+                civilChartData: [],
                 civilChartOptions: {
-					title: "співвідношення % задоволених/частково/відмовлених у позові справ",
-					chartArea:{left:40,top:30,bottom:30,width:'100%',height:'100%'},
-					bar: {groupWidth: "65%"},
-					legend: { position: "none" }
+                    title: "співвідношення % задоволених/частково/відмовлених у позові справ",
+                    chartArea: {
+                        left: 40,
+                        top: 30,
+                        bottom: 30,
+                        width: '100%',
+                        height: '100%'
+                    },
+                    bar: {
+                        groupWidth: "65%"
+                    },
+                    legend: {
+                        position: "none"
+                    }
                 },
-
-				// налаштування для Google графіка статистики по кримінальних справах
-				criminalChartData: [],
-				criminalChartOptions: {
-					title: "співвідношення % результатів розглянутих справ",
-					chartArea:{left:40,top:30,bottom:30,width:'100%',height:'100%'},
-					bar: {groupWidth: "65%"},
-					legend: { position: "none" }
-				},
-
-				// налаштування для Google графіка статистики по КУпАП
-				adminoffenceChartData: [],
-				adminoffenceChartOptions: {
-					title: "співвідношення % результатів розглянутих справ",
-					chartArea:{left:40,top:30,bottom:30,width:'100%',height:'100%'},
-					bar: {groupWidth: "65%"},
-					legend: { position: "none" }
-				},
-
-
-                // columnChartData: [
-                //     ['Element', 'Density', {
-                //         role: 'style'
-                //     }, {
-                //         role: 'annotation'
-                //     }],
-                //     ['Copper', 8.94, '#b87333', '400'], // RGB value
-                //     ['Silver', 10.49, 'silver', '500'], // English color name
-                //     ['Gold', 19.30, 'gold', '200'],
-                //     ['Platinum', 21.45, 'color: #e5e4e2', '800'],
-                // ],
-                // columnChartOptions: {
-                //     legend: {
-                //         position: "none"
-                //     },
-                // },
-
+    
+                // налаштування для Google графіка статистики по кримінальних справах
+                criminalChartData: [],
+                criminalChartOptions: {
+                    title: "співвідношення % результатів розглянутих справ",
+                    chartArea: {
+                        left: 40,
+                        top: 30,
+                        bottom: 30,
+                        width: '100%',
+                        height: '100%'
+                    },
+                    bar: {
+                        groupWidth: "65%"
+                    },
+                    legend: {
+                        position: "none"
+                    }
+                },
+    
+                // налаштування для Google графіка статистики по КУпАП
+                adminoffenceChartData: [],
+                adminoffenceChartOptions: {
+                    title: "співвідношення % результатів розглянутих справ",
+                    chartArea: {
+                        left: 40,
+                        top: 30,
+                        bottom: 30,
+                        width: '100%',
+                        height: '100%'
+                    },
+                    bar: {
+                        groupWidth: "65%"
+                    },
+                    legend: {
+                        position: "none"
+                    }
+                },
                 // розмір кругів
                 gchart: {
                     width: 135
@@ -341,7 +353,7 @@
             }
         },
         beforeMount() {
-            if (this.isAuth) {
+            if (this.$store.getters.isAuth) {
                 axios
                     .get(`/api/v1/judges/${this.$route.params.id}`, {
                         headers: {
@@ -354,8 +366,8 @@
                         this.judge = response.data;
                         this.loadData = true;
                         console.log('JUdge PROFILE', this.judge);
-						this.setStatistic();
-
+                        this.setStatistic();
+    
                     })
                     .catch(error => {
                         if (error.response && error.response.status === 401) {
@@ -375,7 +387,7 @@
                         this.judge = response.data;
                         this.loadData = true;
                         this.setStatistic();
-
+    
                     })
                     .catch(error => {
                         if (error.response && error.response.status === 401) {
@@ -383,63 +395,63 @@
                         }
                         console.log(error);
                     });
-
+    
             }
         },
         methods: {
             changeBookmarkStatus() {
-                if (!this.isAuth) {
+                if (!this.$store.getters.isAuth) {
                     this.$router.push("/login");
                 }
                 if (this.judge.data.is_bookmark === 0) {
                     axios({
-                        method: "put",
-                        url: `/api/v1/judges/${this.$route.params.id}/bookmark`,
-                        headers: {
-                            "Content-Type": "application/json",
-                            "X-Requested-With": "XMLHttpRequest",
-                            Authorization: localStorage.getItem("token")
-                        }
-                    })
-                    .then(response => {
-                        this.judge.data.is_bookmark = 1;
-                    })
-                    .catch(error => {
-                        if (error.response && error.response.status === 401) {
-                            this.$router.push("/login");
-                        }
-                        console.log("Bookmark", error);
-                    });
+                            method: "put",
+                            url: `/api/v1/judges/${this.$route.params.id}/bookmark`,
+                            headers: {
+                                "Content-Type": "application/json",
+                                "X-Requested-With": "XMLHttpRequest",
+                                Authorization: localStorage.getItem("token")
+                            }
+                        })
+                        .then(response => {
+                            this.judge.data.is_bookmark = 1;
+                        })
+                        .catch(error => {
+                            if (error.response && error.response.status === 401) {
+                                this.$router.push("/login");
+                            }
+                            console.log("Bookmark", error);
+                        });
                 } else {
                     axios({
-                        method: "delete",
-                        url: `/api/v1/judges/${this.$route.params.id}/bookmark`,
-                        headers: {
-                            "Content-Type": "application/json",
-                            "X-Requested-With": "XMLHttpRequest",
-                            Authorization: localStorage.getItem("token")
-                        }
-                    })
-                    .then(response => {
-                        this.judge.data.is_bookmark = 0;
-                    })
-                    .catch(error => {
-                        if (error.response.status === 401) {
-                            this.$router.push("/login");
-                        }
-                        console.log("Bookmark", error.response);
-                    });
+                            method: "delete",
+                            url: `/api/v1/judges/${this.$route.params.id}/bookmark`,
+                            headers: {
+                                "Content-Type": "application/json",
+                                "X-Requested-With": "XMLHttpRequest",
+                                Authorization: localStorage.getItem("token")
+                            }
+                        })
+                        .then(response => {
+                            this.judge.data.is_bookmark = 0;
+                        })
+                        .catch(error => {
+                            if (error.response.status === 401) {
+                                this.$router.push("/login");
+                            }
+                            console.log("Bookmark", error.response);
+                        });
                 }
             },
             changeLikes() {
-                if (!this.isAuth) {
+                if (!this.$store.getters.isAuth) {
                     this.$router.push("/login");
                 }
                 if (this.judge.data.is_unliked) {
                     this.changeUnlikes();
                 }
                 if (this.judge.data.is_liked) {
-                    // dell like
+                    // delete like
                     axios({
                             method: "delete",
                             url: `/api/v1/judges/${this.$route.params.id}/like`,
@@ -480,12 +492,10 @@
                             }
                             console.log("set Likes", error);
                         });
-    
                 }
-    
             },
             changeUnlikes() {
-                if (!this.isAuth) {
+                if (!this.$store.getters.isAuth) {
                     this.$router.push("/login");
                 }
                 if (this.judge.data.is_liked) {
@@ -536,104 +546,109 @@
                 }
             },
             deleteBookmarkCourtSession(session) {
-                if (!this.isAuth) {
+                if (!this.$store.getters.isAuth) {
                     this.$router.push("/login");
                 } else {
                     axios({
-                        method: "delete",
-                        url: `/api/v1/court-sessions/${session.id}/bookmark`,
-                        headers: {
-                            "Content-Type": "application/json",
-                            "X-Requested-With": "XMLHttpRequest",
-                            Authorization: localStorage.getItem("token")
-                        }
-                    })
-                    .then(response => {
-                        session.is_bookmark = 0;
-                    })
-                    .catch(error => {
-                        if (error.response.status === 401) {
-                            this.$router.push("/login");
-                        }
-                    });
+                            method: "delete",
+                            url: `/api/v1/court-sessions/${session.id}/bookmark`,
+                            headers: {
+                                "Content-Type": "application/json",
+                                "X-Requested-With": "XMLHttpRequest",
+                                Authorization: localStorage.getItem("token")
+                            }
+                        })
+                        .then(response => {
+                            session.is_bookmark = 0;
+                        })
+                        .catch(error => {
+                            if (error.response.status === 401) {
+                                this.$router.push("/login");
+                            }
+                        });
                 }
             },
             addBookmarkCourtSession(session) {
-                 if (!this.isAuth) {
+                if (!this.$store.getters.isAuth) {
                     this.$router.push("/login");
                 } else {
                     axios({
-                        method: "put",
-                        url: `/api/v1/court-sessions/${session.id}/bookmark`,
-                        headers: {
-                            "Content-Type": "application/json",
-                            "X-Requested-With": "XMLHttpRequest",
-                            Authorization: localStorage.getItem("token")
-                        }
-                    })
-                    .then(response => {
-                        session.is_bookmark = 1;
-                    })
-                    .catch(error => {
-                        if (error.response.status === 401) {
-                            this.$router.push("/login");
-                        }
-                    });
+                            method: "put",
+                            url: `/api/v1/court-sessions/${session.id}/bookmark`,
+                            headers: {
+                                "Content-Type": "application/json",
+                                "X-Requested-With": "XMLHttpRequest",
+                                Authorization: localStorage.getItem("token")
+                            }
+                        })
+                        .then(response => {
+                            session.is_bookmark = 1;
+                        })
+                        .catch(error => {
+                            if (error.response.status === 401) {
+                                this.$router.push("/login");
+                            }
+                        });
                 }
             },
-        calculateColor(val) {
-            	let red = 205 - (val*2);
-            	let green = 5 + (val*2);
-
-            	if (val >= 50 && val < 70) {
-            		red += 90;
-            		green += 60;
+            calculateColor(val) {
+                let red = 205 - (val * 2);
+                let green = 5 + (val * 2);
+    
+                if (val >= 50 && val < 70) {
+                    red += 90;
+                    green += 60;
                 } else if (val >= 50 && val < 80) {
-					green += 60;
-            	} else if (val < 50) {
-					red += val;
-					green -= val;
-				}
-
-            	return ('rgb('+ red + ' ' + green +' 0)');
-        },
-        setStatistic() {
-            console.log(this.judge.civil_statistic);
-            console.log(this.judge.civil_statistic.amount);
-            this.commonChartData = [
-                ['Категорія', 'Кількість справ'],
-                ['Цивільні', this.judge.civil_statistic.amount],
-                ['Кримінальні', this.judge.criminal_statistic.amount],
-                ['Справи про адмін. правопорушення', this.judge.adminoffence_statistic.amount],
-                ['Адміністративні справи', this.judge.admin_statistic.amount],
-                ['Господарські справи', this.judge.commercial_statistic.amount]
-            ];
-            console.log(this.commonChartData);
-            this.civilChartData = [
-                ["Element", "відсотків", { role: "style" } ],
-                ["у позові відмовлено повністю", this.judge.civil_statistic.negative_judgment, "red"],
-                ["позов задоволено повністю", this.judge.civil_statistic.positive_judgment, "green"],
-                ["задоволено частково, укладено мирову угоду", this.judge.civil_statistic.other_judgment, "gold"]
-            ];
-            this.criminalChartData = [
-                ["Element", "відсотків", { role: "style" } ],
-                ["особу притягнено до кримінальної відповідальності", this.judge.criminal_statistic.negative_judgment, "red"],
-                ["особа звільнена від кримінальної відповідальності", this.judge.criminal_statistic.positive_judgment, "green"]
-            ];
-            this.adminoffenceChartData = [
-                ["Element", "відсотків", { role: "style" } ],
-                ["особу притягнено до адміністративної відповідальності", this.judge.adminoffence_statistic.negative_judgment, "red"],
-                ["особа звільнена від адміністративної відповідальності", this.judge.adminoffence_statistic.positive_judgment, "green"]
-            ];
+                    green += 60;
+                } else if (val < 50) {
+                    red += val;
+                    green -= val;
+                }
+    
+                return ('rgb(' + red + ' ' + green + ' 0)');
+            },
+            setStatistic() {
+                // console.log(this.judge.civil_statistic);
+                // console.log(this.judge.civil_statistic.amount);
+                this.commonChartData = [
+                    ['Категорія', 'Кількість справ'],
+                    ['Цивільні', this.judge.civil_statistic.amount],
+                    ['Кримінальні', this.judge.criminal_statistic.amount],
+                    ['Справи про адмін. правопорушення', this.judge.adminoffence_statistic.amount],
+                    ['Адміністративні справи', this.judge.admin_statistic.amount],
+                    ['Господарські справи', this.judge.commercial_statistic.amount]
+                ];
+                // console.log(this.commonChartData);
+                this.civilChartData = [
+                    ["Element", "відсотків", {
+                        role: "style"
+                    }],
+                    ["у позові відмовлено повністю", this.judge.civil_statistic.negative_judgment, "red"],
+                    ["позов задоволено повністю", this.judge.civil_statistic.positive_judgment, "green"],
+                    ["задоволено частково, укладено мирову угоду", this.judge.civil_statistic.other_judgment, "gold"]
+                ];
+                this.criminalChartData = [
+                    ["Element", "відсотків", {
+                        role: "style"
+                    }],
+                    ["особу притягнено до кримінальної відповідальності", this.judge.criminal_statistic.negative_judgment, "red"],
+                    ["особа звільнена від кримінальної відповідальності", this.judge.criminal_statistic.positive_judgment, "green"]
+                ];
+                this.adminoffenceChartData = [
+                    ["Element", "відсотків", {
+                        role: "style"
+                    }],
+                    ["особу притягнено до адміністративної відповідальності", this.judge.adminoffence_statistic.negative_judgment, "red"],
+                    ["особа звільнена від адміністративної відповідальності", this.judge.adminoffence_statistic.positive_judgment, "green"]
+                ];
+            }
         }
-    }
-};
+    };
 </script>
 
 <style scoped lang="scss">
     @import "../../../../sass/_variables.scss";
     @import "../../../../sass/_mixins.scss";
-
     .judge-profile {
         .card-body {
             font-size: 0.9rem;

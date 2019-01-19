@@ -48,15 +48,10 @@
                     Authorization: localStorage.getItem("token")
                 }
             };
-        },
-        computed: {
-            isAuth() {
-                return localStorage.getItem("token");
-            }
-        },  
+        }, 
         methods: {
             changeBookmarkStatus(court) {
-                if (!this.isAuth) {
+                if (!this.$store.getters.isAuth) {
                     this.$router.push("/login");
                 }
                 if (court.is_bookmark === 0) {

@@ -62,11 +62,6 @@
                 currentJudge: {},
             };
         },
-        computed:{
-            isAuth() {
-                return localStorage.getItem("token");
-            }
-        },
         filters: {
             formatDate(date) {
                 // getMobth() чомусь рахує місяці з 0 date.getMonth() + 1 //
@@ -87,7 +82,7 @@
                 }
             },
             changeBookmarkStatus(judge) {
-                if (!this.isAuth) {
+                if (!this.$store.getters.isAuth) {
                     this.$router.push("/login");
                 }
                 if (judge.is_bookmark === 0) {
@@ -131,8 +126,8 @@
                 }
             },
             showModal(judge) {
-                if (!this.isAuth) {
-                    this.$router.push("/login");
+                if (!this.$store.getters.isAuth) {
+                    this.$router.push('/login');
                 }
                 this.currentJudge = judge;
                 this.isModalVisible = true;

@@ -1,5 +1,4 @@
 <template>
- <keep-alive>
   <div class="container content-wrapper" @keyup.enter="setFilters()">
     <div class="row min-width">
       <div class="col-3 filters">
@@ -139,11 +138,7 @@
         </div>
       </div>
     </div>
-    <!-- </div> -->
-    <!-- contaner -->
-  
   </div>
-</keep-alive>
 </template>
 
 <script>
@@ -243,7 +238,7 @@
         if (this.validateInputSearch() === false) { // !! = true
           this.params.search = null;
         }
-        if (localStorage.getItem('token')) {
+        if (this.$store.getters.isAuth) {
           axios
             .get('/api/v1/judges/list', {
               headers: {
@@ -304,7 +299,6 @@
             element.due_date_status = data.status.due_date;
           }          
         });
-        console.log('status data', this.judgesList); 
       }
     },
   };
