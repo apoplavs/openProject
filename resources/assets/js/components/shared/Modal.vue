@@ -11,10 +11,10 @@
                 </section>
                 <footer class="modal-footer">
                     <slot name="footer">
-                        <button type="button" class="btn-grey" @click="close">
+                        <button type="button" class="btn btn-secondary" @click="close">
                             Відмінити
                         </button> 
-                        <button type="button" class="btn-green" @click="confirm">
+                        <button type="button" class="btn btn-danger" @click="confirm">
                             Видалити
                         </button>                        
                     </slot>

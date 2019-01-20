@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="card-body px-4 py-2">
+        <div class="card-body">
             <div v-if="!this.judgesList || this.judgesList.length == 0">За заданими параметрами нічого не знайдено</div>
             <div v-if="this.judgesList && this.judgesList.length > 0">
                 <div class="judge-component row py-3 mx-1" v-for="(judge, index) of this.judgesList" :key="index">

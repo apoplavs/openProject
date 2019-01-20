@@ -18,9 +18,7 @@
 	<!-- <link href="{{ asset('css/plugins/bootstrap.min.css', env('HTTPS', NULL)) }}" rel="stylesheet"> -->
 	<link href="{{ asset('css/plugins/font-awesome/css/font-awesome.min.css', env('HTTPS', NULL)) }}" rel="stylesheet">
 	<link href="{{ asset('css/style.css', env('HTTPS', NULL)) }}" rel="stylesheet">
-	<!-- <script src="{{ asset('js/plugins/jquery-3.3.1.min.js') }}"></script> -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-	<!-- <link href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css" rel="stylesheet"> -->
 
 </head>
 
@@ -41,7 +39,7 @@
 	<div id="app">
 		<router-view></router-view>
 	</div>
-	
+
 	<script src="https://apis.google.com/js/platform.js" async defer></script>
 	<script src="https://apis.google.com/js/api:client.js"></script>
 	<!-- Scripts -->

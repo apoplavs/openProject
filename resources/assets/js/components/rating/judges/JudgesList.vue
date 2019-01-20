@@ -132,7 +132,7 @@
           </div>
   
         </div>
-        <div class="pagination mb-5">
+        <div class="pagination mb-5 mt-3">
           <vue-ads-pagination  ref="pagins" @page-change="pageChange" :total-items="judgesList.total" :max-visible-pages="5" :button-classes="buttonClasses" :loading="false">
           </vue-ads-pagination>
         </div>

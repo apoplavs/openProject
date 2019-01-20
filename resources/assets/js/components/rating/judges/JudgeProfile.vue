@@ -20,7 +20,7 @@
                                     <span>{{ judge.data.court_address }}</span>
                                 </div>
                                 <!-- previous works -->
-                                <div class="detail-info" v-for="(prevWork, ind_1) in judge.previous_works" :key="ind_1 + 'H'" v-if="ind_1 < 3">
+                                <div class="detail-info" v-for="(prevWork, ind) in judge.previous_works" :key="ind">
                                     <span>{{ prevWork }}</span>
                                 </div>
                                 <div class="detail-info mt-1" v-if="judge.data.court_phone">
@@ -84,7 +84,7 @@
                                     <div class="col-2">{{ session.judges }}</div>
                                     <div class="col-2">{{ session.forma }}</div>
                                     <div class="col-3">{{ session.involved }}</div>
-                                    <div class="col-2">{{ session.description }}</div>
+                                    <div class="col-2">{{ session.description }}{{isAuth}}</div>
                                     <div class="col-1 pr-0 text-center" v-if="isAuth">
                                         <i v-if="session.is_bookmark" class="fas fa-star" @click="deleteBookmarkCourtSession(session)"></i>
                                         <i v-else class="far fa-star" @click="addBookmarkCourtSession(session)"></i>
@@ -348,8 +348,8 @@
                     return (arr.length > 0)
                 })
             },
-            isAuth: () => {
-                return localStorage.getItem("token");
+            isAuth() {
+                return this.$store.getters.isAuth;
             }
         },
         beforeMount() {

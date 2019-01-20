@@ -174,10 +174,6 @@ i.fa-edit {
           box-shadow: 1px 1px 1px 1px #dee2e6 !important;
 }
 
-hr {
-  border-bottom: 1px solid lightgray;
-}
-
 .fa-spinner {
   animation: 1s linear 0s normal none infinite running rotate;
   -webkit-animation: 1s linear 0s normal none infinite running rotate;

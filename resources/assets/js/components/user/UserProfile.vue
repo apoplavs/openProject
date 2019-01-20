@@ -2,54 +2,51 @@
     <div class="user-profile">  
         <div class="w-100">
             <div class="">
-                <ul class="nav nav-tabs w-1140" role="tablist" >
+                <ul class="nav nav-tabs w-1140">              
                     <li class="nav-item">
-                        <a class="nav-link active" href="#CourtSessions" role="tab" data-toggle="tab">Судові засідання</a>
+                        <a class="nav-link tab" href="javascript:" @click="setActiveTab(1)">Судові засідання</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#CourtPractice" role="tab" data-toggle="tab">Судова практика</a>
+                        <a class="nav-link tab" href="javascript:" @click="setActiveTab(2)">Судова практика</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#Establishments" role="tab" data-toggle="tab">Заклади</a>
+                        <a class="nav-link tab" href="javascript:" @click="setActiveTab(3)">Заклади</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#ViewsHistory" role="tab" data-toggle="tab">Історія переглядів</a>
+                        <a class="nav-link tab" href="javascript:" @click="setActiveTab(4)">Історія переглядів</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#Templates" role="tab" data-toggle="tab">Шаблони</a>
+                        <a class="nav-link tab" href="javascript:" @click="setActiveTab(5)">Шаблони</a>
                     </li>
                 </ul>
             </div>
-            <div class="d-flex justify-content-center">
-                <!-- Tab panes -->
+             <div class="tab-content container w-1140">
+                <court-sessions v-if="tabs.sessions"/>
+                <court-practice v-if="tabs.practice"/>
+                <establishments v-if="tabs.establishments"/>
+                <view-history v-if="tabs.history"/>
+                <templates v-if="tabs.templates"/>
+             </div>
+            <!-- <div class="d-flex justify-content-center">
                 <div class="tab-content container w-1140">
-                    <div role="tabpanel" class="tab-pane  active" id="CourtSessions">
-                        <keep-alive>
-                            <court-sessions/>
-                        </keep-alive>
+                    <div role="tabpanel" class="tab-pane" id="CourtSessions">
+                        <court-sessions/>
                     </div>
                     <div role="tabpanel" class="tab-pane" id="CourtPractice">
-                        <keep-alive>
-                            <court-practice/>
-                        </keep-alive>
+                        <court-practice/>
                     </div>
                     <div role="tabpanel" class="tab-pane" id="Establishments">
-                        <keep-alive>
-                            <establishments />
-                        </keep-alive>
+                        <establishments />
                     </div>
-                    <div role="tabpanel" class="tab-pane" id="ViewsHistory">
-                        <keep-alive>
-                            <views-history />
-                        </keep-alive>
+                    <div role="tabpanel" class="tab-pane" id="ViewHistory">
+                        <h1>BLYAA</h1>
+                        <view-history />
                     </div>
                     <div role="tabpanel" class="tab-pane" id="Templates">
-                        <keep-alive>
-                            <templates />
-                        </keep-alive>
+                        <templates />
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 </template>
@@ -58,7 +55,7 @@
     import CourtSessions from './components/CourtSessions.vue';
     import CourtPractice from './components/CourtPractice.vue';
     import Establishments from './components/Establishments.vue';
-    import ViewsHistory from './components/ViewsHistory.vue';
+    import ViewHistory from './components/ViewHistory.vue';
     import Templates from './components/Templates.vue';
     
     
@@ -68,14 +65,43 @@
             CourtSessions,
             CourtPractice,
             Establishments,
-            ViewsHistory,
+            ViewHistory,
             Templates
         },
         data() {
             return {
+                tabs: {
+                    sessions: false,
+                    practice: false,
+                    establishments: false,
+                    history: false,
+                    templates: false
+                },
                 user: {}
             }
         },
+        // beforeMount() {
+            
+        //     console.log('LOL');
+        // },
+        mounted() {
+            this.setActiveTab(1);
+        },
+        methods: {
+            setActiveTab(indexTab) {                                
+                Object.keys(this.tabs).forEach((key, index) => {
+                    this.tabs[key] = false;
+                    if (index + 1 === indexTab) {
+                        this.tabs[key] = true;
+                    }
+                });                      
+                let list = document.getElementsByClassName('nav-link tab');
+                for (let index = 0; index < list.length; index++) {   
+                    list[index].classList.remove("active");                
+                }
+                list[indexTab - 1].classList.add('active')
+            }
+        }
     }
 </script>
 
