@@ -129,7 +129,7 @@
                                     let token = response.data.token_type + " " + response.data.access_token;
                                     localStorage.setItem("token", token);
                                     this.getUserData(() => {
-                                        this.$router.push("/user-profile");
+                                        this.$router.go(-1);
                                     });
                                 }
                             })

@@ -39,7 +39,7 @@
             <a class="nav-link" :class="{'active': $route.fullPath === '/contacts'}">Контакти</a>
           </router-link>
           <!-- left  -->
-          <div class="d-lg-flex ml-lg-5">
+          <div class="d-flex ml-lg-5">
             <router-link to="/login" tag="li" class="nav-item" v-if="!isAuth">
               <a class="nav-link login" :class="{'active': $route.fullPath === '/login'}">Вхід</a>
             </router-link>
