@@ -54,7 +54,10 @@ class CourtSession extends Model
 			DB::raw('justice_kinds.name AS forma'),
 			 'court_sessions.involved', 'court_sessions.description',
 			DB::raw("(CASE WHEN user_bookmark_sessions.user = {$user_id} THEN 1 ELSE 0 END) AS is_bookmark"))
-			->leftJoin('user_bookmark_sessions', 'user_bookmark_sessions.user', '=', 'court_sessions.judge1')
+			->leftJoin('user_bookmark_sessions', function ($join) use ($user_id) {
+                    $join->on('court_sessions.id', '=', 'user_bookmark_sessions.court_session');
+                    $join->on('user_bookmark_sessions.user', '=', DB::raw($user_id));
+                })
 			->join('justice_kinds', 'justice_kinds.justice_kind', '=', 'court_sessions.forma')
 			->whereRaw("DATE(court_sessions.date) >= CURDATE() AND ".
 				"(court_sessions.judge1={$judge} OR court_sessions.judge2={$judge} OR court_sessions.judge3={$judge})")
