@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="card-body px-4 py-2">
+        <div class="card-body">
             <div v-if="!this.judgesList || this.judgesList.length == 0">За заданими параметрами нічого не знайдено</div>
             <div v-if="this.judgesList && this.judgesList.length > 0">
                 <div class="judge-component row py-3 mx-1" v-for="(judge, index) of this.judgesList" :key="index">
@@ -30,7 +30,7 @@
                                 <!-- status-component -->
                                 <status-component :judgeData="judge" />         
                             </div>
-                            <div class="w-25"><i class="fas fa-edit p-1 float-right" aria-hidden="true" @click="showModal(judge)"></i></div>
+                            <div class="w-25"><i class="fa fa-edit p-1 float-right" aria-hidden="true" @click="showModal(judge)"></i></div>
                         </div>
                     </div>
                 </div>
@@ -62,11 +62,6 @@
                 currentJudge: {},
             };
         },
-        computed:{
-            isAuth() {
-                return localStorage.getItem("token");
-            }
-        },
         filters: {
             formatDate(date) {
                 // getMobth() чомусь рахує місяці з 0 date.getMonth() + 1 //
@@ -87,7 +82,7 @@
                 }
             },
             changeBookmarkStatus(judge) {
-                if (!this.isAuth) {
+                if (!this.$store.getters.isAuth) {
                     this.$router.push("/login");
                 }
                 if (judge.is_bookmark === 0) {
@@ -131,8 +126,8 @@
                 }
             },
             showModal(judge) {
-                if (!this.isAuth) {
-                    this.$router.push("/login");
+                if (!this.$store.getters.isAuth) {
+                    this.$router.push('/login');
                 }
                 this.currentJudge = judge;
                 this.isModalVisible = true;
@@ -167,7 +162,7 @@
         }
         /* styles for font awesome */
         .align-center {
-            @include alignElement($alignItems: start);
+            @include alignElement();
         }
     }
     

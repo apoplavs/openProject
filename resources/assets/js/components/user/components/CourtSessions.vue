@@ -7,8 +7,7 @@
         <input type="search" class="form-control" placeholder="Пошук..." v-model.trim="search">
       </div>
       <div class="card-body court-sessions-container">
-        <div class="court-sessions">
-          
+        <div class="court-sessions"> 
             <div v-if="filterSessions.length > 0" class="container-component">
               <div class="row header">
                 <div class="col-1 pl-0">Дата розгляду</div>
@@ -20,7 +19,7 @@
                 <div class="col-2 pr-0">Примітки</div>
               </div>
               <!-- <transition name='fade'> -->
-                <div class="row" v-for="(session, i_el) in filterSessions" :key="i_el + 'A'">
+                <div class="row" v-for="(session, i_el) in filterSessions" :key="i_el">
                   <!-- <transition name='fade'> -->
                   <div class="col-1 pl-0">
                     <div>{{ session.date }}</div>
@@ -177,6 +176,8 @@ export default {
   .header {
     font-size: .9rem;
     font-weight: 700;
+    align-items: center;
+    line-height: 1.4;
   }
   .fa-star {
     color: $main-color;

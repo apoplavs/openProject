@@ -3,7 +3,6 @@
 namespace Tests\Feature;
 
 use Toecyd\Judge;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Foundation\Testing\TestResponse;
 

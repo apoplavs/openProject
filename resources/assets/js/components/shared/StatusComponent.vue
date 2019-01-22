@@ -33,7 +33,6 @@
                 return Number(judgeData.status) === number;
             }
         }
-
     }
 </script>
 

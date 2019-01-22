@@ -636,9 +636,335 @@ class CourtsController extends Controller
 		$autocomplete = Court::getAutocomplete($search);
 		return response()->json($autocomplete);
 	}
-	
-	
-	
+
+
+
+    /**
+     *
+     * @SWG\Get(
+     *     path="/guest/courts/{id}",
+     *     summary="Дані про певний суд",
+     *     description="Отримати дані про суд, id якого передано в параметрах; якщо будь-які дані будуть невідомі, значення відповідного параметра буде NULL",
+     *     operationId="guest-courts-id",
+     *     produces={"application/json"},
+     *     tags={"Суди"},
+     *     security={
+     *     {"passport": {}},
+     *      },
+     *     @SWG\Parameter(
+     *      ref="#/parameters/Content-Type",
+     *     ),
+     *     @SWG\Parameter(
+     *      ref="#/parameters/X-Requested-With",
+     *     ),
+     *    @SWG\Parameter(
+     *     name="id",
+     *     in="path",
+     *     required=true,
+     *     description="Id суду, про якого потрібно отримати дані",
+     *     type="integer",
+     *     collectionFormat="multi",
+     *     uniqueItems=true,
+     *     minimum=1,
+     *     maximum=9999,
+     *     allowEmptyValue=false
+     *     ),
+     *
+     *     @SWG\Response(
+     *         response=200,
+     *         description="ОК",
+     *         @SWG\Schema(
+     *           @SWG\Property(property="court_code", type="integer", description="Код суду"),
+     *           @SWG\Property(property="name", type="string", description="Назва суду"),
+     *           @SWG\Property(property="phone", type="string", description="Телефони суду"),
+     *           @SWG\Property(property="email", type="string", description="Email суду"),
+     *           @SWG\Property(property="site", type="string", description="Сайт суду"),
+     *           @SWG\Property(property="rating", type="integer", description="Рейтинг суду"),
+     *           @SWG\Property(property="instance", type="string", description="Інстанція суду"),
+     *           @SWG\Property(property="region", type="string", description="Область суду"),
+     *           @SWG\Property(property="jurisdiction", type="string", description="Юрисдикція"),
+     *           @SWG\Property(property="head_judge", type="string", description="ПІБ головного судді"),
+     *           @SWG\Property(property="address", type="array", description="Масив унікальних адрес всіх суддів з цього суду", @SWG\Items(type="string")),
+     *
+     *           @SWG\Property(
+     *                property="judges",
+     *                type="array",
+     *                description="Список всіх суддів даного суду в порядку їх рейтингу від найвищого до найнижчого",
+     *                @SWG\Items(
+     *                    type="object",
+     *     	  			  @SWG\Property(property="surname", type="string", description="Прізвище судді"),
+     *                    @SWG\Property(property="name", type="string", description="Ім'я судді"),
+     *                    @SWG\Property(property="patronymic", type="string", description="По-батькові судді"),
+     *                    @SWG\Property(property="status", type="integer", description="Id поточного статусу судді
+     *                      1 - суддя на роботі
+     *                      2 - На лікарняному
+     *                      3 - У відпустці
+     *                      4 - Відсуній на робочому місці з інших причин
+     *                      5 - Припинено повноваження"),
+     *     	  			  @SWG\Property(property="updated_status", type="string", description="Дата оновлення статусу"),
+     *                    @SWG\Property(property="due_date_status", type="string", description="Дата дії статусу (до якого часу даний статус буде діяти)"),
+     *                    @SWG\Property(property="rating", type="integer", description="Рейтинг судді"),
+     *                ),
+     *              ),
+     *
+     *         @SWG\Property(
+     *              property="court_sessions",
+     *              type="array",
+     *              description="Список судових засідань у даному суді розташований в хронологічному порядку",
+     *              @SWG\Items(
+     *                  type="object",
+     *                  @SWG\Property(property="date", type="string", description="Час та дата розгляду"),
+     *                  @SWG\Property(property="judges", type="string", description="Склад суду"),
+     *     				@SWG\Property(property="fоrma", type="string", description="Форма судочинства [Цивільне, Кримінальне ...]"),
+     *                  @SWG\Property(property="number", type="string", description="Номер справи"),
+     *                  @SWG\Property(property="involved", type="string", description="Сторони у справі"),
+     *                  @SWG\Property(property="description", type="string", description="Суть справи"),
+     *              ),
+     *            ),
+     *          ),
+     *         examples={"application/json":
+     *              {
+     *                   "court_code": 201,
+     *                   "name": "Барський районний суд Вінницької області",
+     *                   "phone": "(04341) 2-41-74( канцелярія)",
+     *                   "email": "inbox@brs.vn.court.gov.ua",
+     *                   "site": "https://brs.vn.court.gov.ua",
+     *                   "rating": 0,
+     *                   "instance": "Перша",
+     *                   "region": "Вінницька область",
+     *                   "jurisdiction": "Загальна",
+     *                   "head_judge": "Єрмічова Віта Валентинівна",
+     *                   "address": {
+     *                       "23000, Вінницька, Барський, м. Бар, вул.Соборна, 2",
+     *                       "23000, м. Бар, вул. Соборна, 2"
+     *                   },
+     *                   "judges": {
+     *                       {
+     *                           "surname": "Питель",
+     *                           "name": "Олена",
+     *                           "patronymic": "Віталіївна",
+     *                           "status": 1,
+     *                           "updated_status": "2018-11-15 19:56:16",
+     *                           "due_date_status": null,
+     *                           "rating": 0
+     *                       },
+     *                       {
+     *                           "surname": "Єрмічова",
+     *                           "name": "Віта",
+     *                           "patronymic": "Валентинівна",
+     *                           "status": 1,
+     *                           "updated_status": "2018-11-15 18:35:43",
+     *                           "due_date_status": "2018-06-09",
+     *                           "rating": 0
+     *                       }
+     *                   },
+     *                   "court_sessions": {
+     *                       {
+     *                           "date": "2018-11-02 08:00:00",
+     *                           "judges": "Єрмічова Віта Валентинівна",
+     *                           "forma": "Цивільне",
+     *                           "number": "125/1845/18",
+     *                           "involved": "Позивач: Салюк Олена Ігорівна, відповідач: Беша Олександр Вікторович",
+     *                           "description": "про визнання права власності на спадкове майно за законом"
+     *                       },
+     *                       {
+     *                           "date": "2018-11-02 09:00:00",
+     *                           "judges": "Хитрук Володимир Миколайович",
+     *                           "forma": "Цивільне",
+     *                           "number": "125/2019/18",
+     *                           "involved": "Заявник: Іздепський Василь Васильович, заінтересована особа: Кузьминецька сільська рада",
+     *                           "description": "про встановлення факту, що має юридичне значення"
+     *                       }
+     *                   }
+     *               }
+     *	 		}
+     *     ),
+     *     @SWG\Response(
+     *         response=422,
+     *         description="Передані не валідні дані, у відповіді буде зазначена причина",
+     *         examples={"application/json":
+     *              {
+     *                  "message": "Неіснуючий id суду!"
+     *              }
+     *          }
+     *     ),
+     *
+     *     @SWG\Response(
+     *         response=405,
+     *         description="Метод, з яким виконувався запит, не дозволено використовувати для заданого ресурсу; наприклад, запит був здійснений за методом POST, хоча очікується GET.",
+     *     )
+     * )
+     */
+	public function showGuest(int $id) {
+	    return response()->json(Court::getCourtByIdGuest($id), 200);
+    }
+
+    /**
+     * @SWG\Get(
+     *     path="/courts/{id}",
+     *     summary="Дані про певний суд",
+     *     description="Отримати дані про суд, id якого передано в параметрах; якщо будь-які дані будуть невідомі, значення відповідного параметра буде NULL",
+     *     operationId="courts-id",
+     *     produces={"application/json"},
+     *     tags={"Суди"},
+     *     security={
+     *     {"passport": {}},
+     *      },
+     *     @SWG\Parameter(
+     *      ref="#/parameters/Content-Type",
+     *     ),
+     *     @SWG\Parameter(
+     *      ref="#/parameters/X-Requested-With",
+     *     ),
+     *    @SWG\Parameter(
+     *     name="id",
+     *     in="path",
+     *     required=true,
+     *     description="Id суду, про якого потрібно отримати дані",
+     *     type="integer",
+     *     collectionFormat="multi",
+     *     uniqueItems=true,
+     *     minimum=1,
+     *     maximum=9999,
+     *     allowEmptyValue=false
+     *     ),
+     *
+     *     @SWG\Response(
+     *         response=200,
+     *         description="ОК",
+     *         @SWG\Schema(
+     *           @SWG\Property(property="court_code", type="integer", description="Код суду"),
+     *           @SWG\Property(property="name", type="string", description="Назва суду"),
+     *           @SWG\Property(property="phone", type="string", description="Телефони суду"),
+     *           @SWG\Property(property="email", type="string", description="Email суду"),
+     *           @SWG\Property(property="site", type="string", description="Сайт суду"),
+     *           @SWG\Property(property="rating", type="integer", description="Рейтинг суду"),
+     *           @SWG\Property(property="instance", type="string", description="Інстанція суду"),
+     *           @SWG\Property(property="region", type="string", description="Область суду"),
+     *           @SWG\Property(property="jurisdiction", type="string", description="Юрисдикція"),
+     *           @SWG\Property(property="head_judge", type="string", description="ПІБ головного судді"),
+     *           @SWG\Property(property="is_bookmark", type="integer", description="Чи є суд в закладках поточного користувача (1 або 0)"),
+     *           @SWG\Property(property="address", type="array", description="Масив унікальних адрес всіх суддів з цього суду", @SWG\Items(type="string")),
+     *
+     *           @SWG\Property(
+     *                property="judges",
+     *                type="array",
+     *                description="Список всіх суддів даного суду в порядку їх рейтингу від найвищого до найнижчого",
+     *                @SWG\Items(
+     *                    type="object",
+     *     	  			  @SWG\Property(property="surname", type="string", description="Прізвище судді"),
+     *                    @SWG\Property(property="name", type="string", description="Ім'я судді"),
+     *                    @SWG\Property(property="patronymic", type="string", description="По-батькові судді"),
+     *                    @SWG\Property(property="status", type="integer", description="Id поточного статусу судді
+     *                      1 - суддя на роботі
+     *                      2 - На лікарняному
+     *                      3 - У відпустці
+     *                      4 - Відсуній на робочому місці з інших причин
+     *                      5 - Припинено повноваження"),
+     *     	  			  @SWG\Property(property="updated_status", type="string", description="Дата оновлення статусу"),
+     *                    @SWG\Property(property="due_date_status", type="string", description="Дата дії статусу (до якого часу даний статус буде діяти)"),
+     *                    @SWG\Property(property="rating", type="integer", description="Рейтинг судді"),
+     *                    @SWG\Property(property="is_bookmark", type="integer", description="Чи є суддя в закладках поточного користувача (1 або 0)"),
+     *                ),
+     *              ),
+     *
+     *         @SWG\Property(
+     *              property="court_sessions",
+     *              type="array",
+     *              description="Список судових засідань у даному суді розташований в хронологічному порядку",
+     *              @SWG\Items(
+     *                  type="object",
+     *                  @SWG\Property(property="date", type="string", description="Час та дата розгляду"),
+     *                  @SWG\Property(property="judges", type="string", description="Склад суду"),
+     *     				@SWG\Property(property="fоrma", type="string", description="Форма судочинства [Цивільне, Кримінальне ...]"),
+     *                  @SWG\Property(property="number", type="string", description="Номер справи"),
+     *                  @SWG\Property(property="involved", type="string", description="Сторони у справі"),
+     *                  @SWG\Property(property="description", type="string", description="Суть справи"),
+     *                  @SWG\Property(property="is_bookmark", type="integer", description="Чи є засідання в закладках поточного користувача (1 або 0)"),
+     *              ),
+     *            ),
+     *          ),
+     *         examples={"application/json":
+     *              {
+     *                   "court_code": 201,
+     *                   "name": "Барський районний суд Вінницької області",
+     *                   "phone": "(04341) 2-41-74( канцелярія)",
+     *                   "email": "inbox@brs.vn.court.gov.ua",
+     *                   "site": "https://brs.vn.court.gov.ua",
+     *                   "rating": 0,
+     *                   "instance": "Перша",
+     *                   "region": "Вінницька область",
+     *                   "jurisdiction": "Загальна",
+     *                   "head_judge": "Єрмічова Віта Валентинівна",
+     *                   "is_bookmark": 0,
+     *                   "address": {
+     *                       "23000, Вінницька, Барський, м. Бар, вул.Соборна, 2",
+     *                       "23000, м. Бар, вул. Соборна, 2"
+     *                   },
+     *                   "judges": {
+     *                       {
+     *                           "surname": "Питель",
+     *                           "name": "Олена",
+     *                           "patronymic": "Віталіївна",
+     *                           "status": 1,
+     *                           "updated_status": "2018-11-15 19:56:16",
+     *                           "due_date_status": null,
+     *                           "rating": 0,
+     *                           "is_bookmark": 1
+     *                       },
+     *                       {
+     *                           "surname": "Єрмічова",
+     *                           "name": "Віта",
+     *                           "patronymic": "Валентинівна",
+     *                           "status": 1,
+     *                           "updated_status": "2018-11-15 18:35:43",
+     *                           "due_date_status": "2018-06-09",
+     *                           "rating": 0,
+     *                           "is_bookmark": 0
+     *                       }
+     *                   },
+     *                   "court_sessions": {
+     *                       {
+     *                           "date": "2018-11-02 08:00:00",
+     *                           "judges": "Єрмічова Віта Валентинівна",
+     *                           "forma": "Цивільне",
+     *                           "number": "125/1845/18",
+     *                           "involved": "Позивач: Салюк Олена Ігорівна, відповідач: Беша Олександр Вікторович",
+     *                           "description": "про визнання права власності на спадкове майно за законом",
+     *                           "is_bookmark": 0
+     *                       },
+     *                       {
+     *                           "date": "2018-11-02 09:00:00",
+     *                           "judges": "Хитрук Володимир Миколайович",
+     *                           "forma": "Цивільне",
+     *                           "number": "125/2019/18",
+     *                           "involved": "Заявник: Іздепський Василь Васильович, заінтересована особа: Кузьминецька сільська рада",
+     *                           "description": "про встановлення факту, що має юридичне значення",
+     *                           "is_bookmark": 1
+     *                       }
+     *                   }
+     *               }
+     *	 		}
+     *     ),
+     *     @SWG\Response(
+     *         response=422,
+     *         description="Передані не валідні дані, у відповіді буде зазначена причина",
+     *         examples={"application/json":
+     *              {
+     *                  "message": "Неіснуючий id суду!"
+     *              }
+     *          }
+     *     ),
+     *
+     *     @SWG\Response(
+     *         response=405,
+     *         description="Метод, з яким виконувався запит, не дозволено використовувати для заданого ресурсу; наприклад, запит був здійснений за методом POST, хоча очікується GET.",
+     *     )
+     * )
+     */
+    public function show(int $id) {
+        return response()->json(Court::getCourtById($id), 200);
+    }
 	
 	
 	

@@ -47,7 +47,8 @@ Route::group(['prefix' => 'v1/', 'namespace' => 'Api\V1',], function () {
 	Route::get('guest/courts/list', 'CourtsController@indexGuest');
 	// швидкий пошук за назвою суду, для поля автодоповнення
 	Route::get('courts/autocomplete', 'CourtsController@autocomplete');
-	
+    // сторінка суду з інформацією про нього
+    Route::get('guest/courts/{id}', 'CourtsController@showGuest')->middleware('checkId:court');
 	
 	// Маршрути які вимагають реєстрації користувача
 	Route::group(['middleware' => 'auth:api'], function() {
@@ -85,10 +86,13 @@ Route::group(['prefix' => 'v1/', 'namespace' => 'Api\V1',], function () {
 		 */
 		// список судів з застосованими фільтрами (Рейтинг->суди)
 		Route::get('courts/list', 'CourtsController@index');
+        // сторінка суду з інформацією про нього
+        Route::get('courts/{id}', 'CourtsController@show')->middleware('checkId:court');
 		// додати суд в закладки
 		Route::put('courts/{id}/bookmark', 'CourtsController@addCourtBookmark')->middleware('checkId:court');
 		// видалити суд з закладок
 		Route::delete('courts/{id}/bookmark', 'CourtsController@delCourtBookmark')->middleware('checkId:court');
+
 		
 		/**
 		 * Cудові засідання

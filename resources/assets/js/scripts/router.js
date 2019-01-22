@@ -14,6 +14,12 @@ import CourtsList from '../components/rating/courts/CourtsList.vue';
 import CourtProfile from '../components/rating/courts/CourtProfile.vue';
 import UserProfile from '../components/user/UserProfile.vue';
 
+import CourtSessions from '../components/user/components/CourtSessions.vue';
+import CourtPractice from '../components/user/components/CourtPractice.vue';
+import Establishments from '../components/user/components/Establishments.vue';
+import ViewHistory from '../components/user/components/ViewHistory.vue';
+import Templates from '../components/user/components/Templates.vue';
+
 export default new Router({
     mode: 'history',
     base: __dirname,
@@ -41,7 +47,14 @@ export default new Router({
         {
             path: '/user-profile',
             component: UserProfile,
-            name: 'user-profile'
+            name: 'user-profile',
+            // children: [
+            //     { path: '/court-sessions', component: CourtSessions },
+            //     { path: '/court-practice', component: CourtPractice },
+            //     { path: '/establishments', component: Establishments },
+            //     { path: '/view-history', component: ViewHistory },
+            //     { path: '/templates', component: Templates },
+            //   ]
         },
         {
             path: '/judges',

@@ -1,5 +1,5 @@
 <template>
-  <div class="container content-wrapper">
+  <div class="container content-wrapper" @keyup.enter="setFilters()">
     <div class="row min-width">
       <div class="col-3 filters">
         <div class="card">
@@ -83,10 +83,10 @@
               <hr>
               <div class="row">
                 <div class="col-6">
-                  <button type="reset" @click="resetFilters()" class="btn btn-outline-info">Скинути</button>
+                  <button type="reset" @click="resetFilters()" class="btn btn-secondary">Скинути</button>
                 </div>
                 <div class="col-6">
-                  <button type="button" @click="setFilters()" class="btn btn-primary">Показати</button>
+                  <button type="button" @click="setFilters()" class="btn btn-info">Показати</button>
                 </div>
               </div>
             </div>
@@ -108,7 +108,7 @@
             </div>
           </div>
           <div class="col-2 pl-0">
-            <button type="button" class="btn btn-confirm w-100" @click="setFilters()"><i class="fa fa-search" aria-hidden="true"></i> знайти</button>
+            <button type="button" class="btn b-confirm w-100" @click="setFilters()"><i class="fa fa-search" aria-hidden="true"></i> знайти</button>
           </div>
         </div>
         <div class="card">
@@ -132,15 +132,12 @@
           </div>
   
         </div>
-        <div class="pagination mb-5">
+        <div class="pagination mb-5 mt-3">
           <vue-ads-pagination  ref="pagins" @page-change="pageChange" :total-items="judgesList.total" :max-visible-pages="5" :button-classes="buttonClasses" :loading="false">
           </vue-ads-pagination>
         </div>
       </div>
     </div>
-    <!-- </div> -->
-    <!-- contaner -->
-  
   </div>
 </template>
 
@@ -241,7 +238,7 @@
         if (this.validateInputSearch() === false) { // !! = true
           this.params.search = null;
         }
-        if (localStorage.getItem('token')) {
+        if (this.$store.getters.isAuth) {
           axios
             .get('/api/v1/judges/list', {
               headers: {
@@ -302,39 +299,10 @@
             element.due_date_status = data.status.due_date;
           }          
         });
-        console.log('status data', this.judgesList); 
       }
     },
   };
 </script>
-
-<style lang="scss">
-  @import "../../../../sass/_variables.scss";
-  .pagination {
-    .bg-active {
-      background-color: $main-color;
-      border-color: $main-color;
-    }
-    button{
-      &:active,
-      &:focus{
-        background-color: $main-color;
-        border-color: $main-color;
-      }
-    }
-    div.pr-2.leading-loose {
-      display: none !important;
-    }
-    .disabled {
-      color: $input-placeholder-color;
-      cursor: no-drop;
-    }
-    .dots {
-      background-color: transparent;
-      border: none !important;
-    }
-  }
-</style>
 
 <style lang="scss" scoped>
   @import "../../../../sass/judges_coutrs_list.scss";
