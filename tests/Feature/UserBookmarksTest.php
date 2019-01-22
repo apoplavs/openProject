@@ -97,20 +97,42 @@ class UserBookmarksTest extends BaseApiTest
                 ->limit(self::LIMIT)
                 ->get()
                 ->all(),
-            'court-sessions' => call_user_func_array(['Toecyd\CourtSession', 'select'], UserBookmarkSession::getBookmarkFields())
-                ->join('courts', 'court_sessions.court', '=', 'courts.court_code')
-                ->limit(self::LIMIT)
-                ->get()
-                ->all(),
         ];
 
         // Застосовуємо toArray() до кожного рядка даних з результату
         foreach ($result as $key => $rows) {
-            $result[$key] = array_map(function ($row) {
-                return $row->toArray();
-            }, $rows);
+            $result[$key] = array_map(function ($row) {return $row->toArray();}, $rows);
         }
 
         return $result;
+    }
+
+    private function getCourtSessionBookmarks()
+    {
+        $result = call_user_func_array(['Toecyd\CourtSession', 'select'], UserBookmarkSession::getBookmarkFields())
+                ->join('courts', 'court_sessions.court', '=', 'courts.court_code')
+                ->join('justice_kinds', 'court_sessions.forma', '=', 'justice_kinds.justice_kind')
+                ->limit(self::LIMIT)
+                ->get()
+                ->all();
+
+        $result = array_map(function ($row) {return $row->toArray();}, $result);
+
+        return $result;
+    }
+
+    // ці закладки відокремили, тож доведеться їх тестувати окремо
+    public function testSessionsBookmarks()
+    {
+        $headers_with_token = $this->headersWithToken($this->login($this->user_data));
+        $etalon_data = $this->getCourtSessionBookmarks();
+
+        foreach ($etalon_data as $row) {
+            $this->put("api/v1/court-sessions/{$row['id']}/bookmark", [], $headers_with_token)->assertStatus(201);
+        }
+
+        $response = $this->get('api/v1/court-sessions/bookmarks', $headers_with_token);
+        $response->assertStatus(200);
+        $this->assertEquals($etalon_data, $response->decodeResponseJson());
     }
 }
