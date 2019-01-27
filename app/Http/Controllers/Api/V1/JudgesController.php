@@ -1979,6 +1979,10 @@ class JudgesController extends Controller
      * @return string
      */
     public function addPhoto(Request $request) {
+        $judge_id = $request->get('judge_id');
+        if (!Judge::checkJudgeById($judge_id)) {
+            return response()->json(['message' => 'Неіснуючий id судді'], 422);
+        }
         return response()->json([], 200);
     }
     

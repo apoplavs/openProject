@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use Toecyd\User;
 use Tests\TestCase;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Foundation\Testing\TestResponse;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
@@ -103,5 +104,12 @@ class BaseApiTest extends TestCase
     {
         $response->assertStatus(200);
         $response->assertDontSee('<html');
+    }
+
+    public function insertDataToDb($insert_db_data)
+    {
+        foreach ($insert_db_data as $table => $data) {
+            DB::table($table)->insert($data);
+        }
     }
 }
