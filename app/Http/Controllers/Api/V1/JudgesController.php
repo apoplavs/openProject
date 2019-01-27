@@ -1980,9 +1980,21 @@ class JudgesController extends Controller
      */
     public function addPhoto(Request $request) {
         $judge_id = $request->get('judge_id');
-        if (!Judge::checkJudgeById($judge_id)) {
+
+        $judge = Judge::select('judges.id')
+                       ->where('judges.id', '=', $judge_id)
+                       ->first();
+
+        if (empty($judge)) {
             return response()->json(['message' => 'Неіснуючий id судді'], 422);
         }
+
+        $photo_url = $judge->photo;
+
+        if (!empty($photo_url) && $photo_url != '/img/judges/no_photo.jpg') {
+            return response()->json(['message' => 'Фото даного судді вже існує'], 422);
+        }
+
         return response()->json([], 200);
     }
     

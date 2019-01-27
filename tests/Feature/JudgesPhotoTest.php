@@ -46,6 +46,16 @@ class JudgesPhotoTest extends BaseApiTest
     public function testBadJudgeId()
     {
         $insert_db_data = $this->getInsertDbData();
+        $insert_db_data['judges'][0]['photo'] = '/img/judges/yes_photo.jpg';
+        $judge_id = $insert_db_data['judges'][0]['id'];
+        $this->insertDataToDb($insert_db_data);
+        $response = $this->post($this->url, ['judge_id' => $judge_id + 1], $this->headersWithToken($this->login($this->user_data)));
+        $response->assertStatus(422);
+    }
+
+    public function testPhotoAlreadyExists()
+    {
+        $insert_db_data = $this->getInsertDbData();
         $judge_id = $insert_db_data['judges'][0]['id'];
         $this->insertDataToDb($insert_db_data);
         $response = $this->post($this->url, ['judge_id' => $judge_id + 1], $this->headersWithToken($this->login($this->user_data)));
