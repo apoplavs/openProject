@@ -1920,19 +1920,66 @@ class JudgesController extends Controller
             return response()->json([], 204);
         }
     }
-    
-    
-    
-    
-    
+
+
+
+    /**
+     * @SWG\Post(
+     *     path="/judges/photo",
+     *     summary="Додати фото судді",
+     *     description="Додати фото судді",
+     *     operationId="judges-addPhoto",
+     *     produces={"application/json"},
+     *     tags={"Судді"},
+     *     security={
+     *     {"passport": {}},
+     *      },
+     *     @SWG\Parameter(
+     *      ref="#/parameters/Content-Type",
+     *     ),
+     *     @SWG\Parameter(
+     *      ref="#/parameters/X-Requested-With",
+     *     ),
+     *
+     *
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Фото успішно додано"
+     *     ),
+     *
+     *     @SWG\Response(
+     *         response=401,
+     *         description="Необхідна аутентифікація користувача",
+     *         examples={"application/json":
+     *              {
+     *                  "message": "Unauthenticated",
+     *              }
+     *          }
+     *     ),
+     *
+     *     @SWG\Response(
+     *         response=405,
+     *         description="Метод, з яким виконувався запит, не дозволено використовувати для заданого ресурсу; наприклад, запит був здійснений за методом GET, хоча очікується POST.",
+     *     ),
+     *
+     *     @SWG\Response(
+     *         response=422,
+     *         description="Передані не валідні дані, неіснуючий id, або фото для цього судді вже існує",
+     *         examples={"application/json":
+     *              {
+     *                  "message": "Фото для цього судді вже існує",
+     *              }
+     *          }
+     *     ),
+     * )
+     */
     /**
      * функція для додавання фото судді
-     * ПОКИ ЩО НЕ ВИКОРИСТОВУЄЬСЯ
      * @param Request $request
      * @return string
      */
     public function addPhoto(Request $request) {
-        return json_encode(Input::all());
+        return response()->json([], 200);
     }
     
     

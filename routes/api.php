@@ -79,8 +79,10 @@ Route::group(['prefix' => 'v1/', 'namespace' => 'Api\V1',], function () {
 		Route::put('judges/{id}/unlike', 'JudgesController@putUnlike')->middleware('checkId:judge');
 		// видалити дизлайк судді
 		Route::delete('judges/{id}/unlike', 'JudgesController@deleteUnlike')->middleware('checkId:judge');
-		
-		
+
+        // додати фото судді
+        Route::post('judges/photo', 'JudgesController@addPhoto');
+
 		/**
 		 * Суди
 		 */

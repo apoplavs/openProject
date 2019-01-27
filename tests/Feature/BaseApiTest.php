@@ -98,4 +98,10 @@ class BaseApiTest extends TestCase
     {
         $this->assertTrue(true);
     }
+
+    public function assertCorrectResponse(TestResponse $response)
+    {
+        $response->assertStatus(200);
+        $response->assertDontSee('<html');
+    }
 }
