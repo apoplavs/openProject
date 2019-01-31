@@ -3,7 +3,7 @@
       <div class="row">
         <div class="col-3 filters">
           <!-- filters -->
-          <Filters :filters="filters" @resetFilters="resetFilters" @setFilters="setFilters"/> 
+          <filters :filters="filters" @resetFilters="resetFilters" @setFilters="setFilters"/> 
         </div>
         <!-- Main list -->
         <div class="col-9 list-data-container">
@@ -42,8 +42,7 @@
             </div>
           </div>
           <div class="pagination mb-5">
-            <vue-ads-pagination ref="pagins" @page-change="pageChange" :total-items="courtsList.total" :max-visible-pages="5" :button-classes="buttonClasses" :loading="false">
-            </vue-ads-pagination>
+            <vue-ads-pagination ref="pagins" @page-change="pageChange" :total-items="courtsList.total" :max-visible-pages="5" :button-classes="buttonClasses" :loading="false"/>
           </div>
         </div>
       </div>
