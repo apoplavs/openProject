@@ -1,7 +1,7 @@
 <template>
   <div class="container content-wrapper">
     <div class="row min-width">
-      <div class="col-9 list-data-container">
+      <div class="col-12 list-data-container">
         <div class="card">
           <div class="card-header d-flex justify-content-between">
             <span>Список суддів</span>

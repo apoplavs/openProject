@@ -90,6 +90,8 @@ i.fa-edit {
 .fa-bookmark-o,
 .fa-bookmark {
   color: #ef6733;
+  font-size: 1.1rem;
+  cursor: pointer;
 }
 
 .fa-briefcase {

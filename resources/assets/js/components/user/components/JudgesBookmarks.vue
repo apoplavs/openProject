@@ -1,12 +1,12 @@
 <template>
-    <div class="establishments">
-        Establishments
+    <div class="judgesBookmarks">
+        JudgesEstablishments
     </div>
 </template>
 
 <script>
     export default {
-        name: "Establishments"
+        name: "JudgesBookmarks"
     }
 </script>
 
