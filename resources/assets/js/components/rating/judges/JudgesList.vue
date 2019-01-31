@@ -2,103 +2,15 @@
   <div class="container content-wrapper" @keyup.enter="setFilters()">
     <div class="row min-width">
       <div class="col-3 filters">
-        <div class="card">
-          <div class="card-header">
-            <div>
-              <i class="fa fa-filter" aria-hidden="true"></i> 
-              <span>Фільтри</span>
-            </div>
-          </div>
-          <div class="card-body">
-            <div class="row">
-              <div class="col-12">
-                <h6>Інстанція</h6>
-                <ul class="list-unstyled mb-0">
-                  <li><label><input type="checkbox" value="3" name="instances" v-model="params.instances"><span class="checkmark"></span> Перша</label></li>
-                  <li><label><input type="checkbox" value="2" name="instances" v-model="params.instances"><span class="checkmark"></span> Апеляційна</label></li>
-                  <li><label><input type="checkbox" value="1" name="instances" v-model="params.instances"><span class="checkmark"></span> Касаційна</label></li>
-                </ul>
-              </div>
-            </div>
-  
-            <hr>
-  
-            <div class="row">
-              <div class="col-lg-12">
-                <h6>Юрисдикція</h6>
-                <ul class="list-unstyled mb-0">
-                  <li><label><input type="checkbox" value="3" name="jurisdictions" v-model="params.jurisdictions"><span class="checkmark"></span> Господарська</label></li>
-                  <li><label><input type="checkbox" value="2" name="jurisdictions" v-model="params.jurisdictions"><span class="checkmark"></span> Адміністративна</label></li>
-                  <li><label><input type="checkbox" value="1" name="jurisdictions" v-model="params.jurisdictions"><span class="checkmark"></span> Загальна</label></li>
-                </ul>
-              </div>
-            </div>
-  
-            <hr>
-  
-            <div class="row">
-              <div class="col-lg-12">
-                <h6>Регіон суду</h6>
-                <ul class="list-unstyled mb-0">
-                  <li><label><input type="checkbox" value="2" name="region" v-model="params.regions"><span class="checkmark"></span> Вінницька</label></li>
-                  <li><label><input type="checkbox" value="3" name="region" v-model="params.regions"><span class="checkmark"></span> Волинська</label></li>
-                  <li><label><input type="checkbox" value="4" name="region" v-model="params.regions"><span class="checkmark"></span> Дніпропетровська</label></li>
-                  <li><label><input type="checkbox" value="5" name="region" v-model="params.regions"><span class="checkmark"></span> Донецька</label></li>
-                  <li><label><input type="checkbox" value="6" name="region" v-model="params.regions"><span class="checkmark"></span> Житомирська</label></li>
-                  <li><label><input type="checkbox" value="7" name="region" v-model="params.regions"><span class="checkmark"></span> Закарпатська</label></li>
-                  <li><label><input type="checkbox" value="8" name="region" v-model="params.regions"><span class="checkmark"></span> Запорізька</label></li>
-                  <li><label><input type="checkbox" value="9" name="region" v-model="params.regions"><span class="checkmark"></span> Івано-Франківська</label></li>
-                  <li><label><input type="checkbox" value="10" name="region" v-model="params.regions"><span class="checkmark"></span> Київська</label></li>
-                  <li><label><input type="checkbox" value="11" name="region" v-model="params.regions"><span class="checkmark"></span> Кіровоградська</label></li>
-                  <li><label><input type="checkbox" value="12" name="region" v-model="params.regions"><span class="checkmark"></span> Луганська</label></li>
-                  <li><label><input type="checkbox" value="13" name="region" v-model="params.regions"><span class="checkmark"></span> Львівська</label></li>
-                  <li><label><input type="checkbox" value="14" name="region" v-model="params.regions"><span class="checkmark"></span> Миколаївська</label></li>
-                  <li><label><input type="checkbox" value="15" name="region" v-model="params.regions"><span class="checkmark"></span> Одеська</label></li>
-                  <li><label><input type="checkbox" value="16" name="region" v-model="params.regions"><span class="checkmark"></span> Полтавська</label></li>
-                  <li><label><input type="checkbox" value="17" name="region" v-model="params.regions"><span class="checkmark"></span> Рівненська</label></li>
-                  <li><label><input type="checkbox" value="18" name="region" v-model="params.regions"><span class="checkmark"></span> Сумська</label></li>
-                  <li><label><input type="checkbox" value="19" name="region" v-model="params.regions"><span class="checkmark"></span> Тернопільська</label></li>
-                  <li><label><input type="checkbox" value="20" name="region" v-model="params.regions"><span class="checkmark"></span> Харківська</label></li>
-                  <li><label><input type="checkbox" value="21" name="region" v-model="params.regions"><span class="checkmark"></span> Херсонська</label></li>
-                  <li><label><input type="checkbox" value="22" name="region" v-model="params.regions"><span class="checkmark"></span> Хмельницька</label></li>
-                  <li><label><input type="checkbox" value="23" name="region" v-model="params.regions"><span class="checkmark"></span> Черкаська</label></li>
-                  <li><label><input type="checkbox" value="24" name="region" v-model="params.regions"><span class="checkmark"></span> Чернівецька</label></li>
-                  <li><label><input type="checkbox" value="25" name="region" v-model="params.regions"><span class="checkmark"></span> Чернігівська</label></li>
-                  <li><label><input type="checkbox" value="26" name="region" v-model="params.regions"><span class="checkmark"></span> м. Київ</label></li>
-                </ul>
-              </div>
-            </div>
-  
-            <hr>
-  
-            <div class="row">
-              <div class="col-lg-12">
-                <ul class="list-unstyled mb-0">
-                  <li><label><input type="checkbox" value="1" v-model="params.expired"><span class="checkmark"></span>Закінчилися повноваження</label></li>
-                </ul>
-              </div>
-            </div>
-  
-            <div class="apply-filters" id="apply-filters">
-              <hr>
-              <div class="row">
-                <div class="col-6">
-                  <button type="reset" @click="resetFilters()" class="btn btn-secondary">Скинути</button>
-                </div>
-                <div class="col-6">
-                  <button type="button" @click="setFilters()" class="btn btn-info">Показати</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+          <!-- filters -->
+          <Filters :filters="filters" @resetFilters="resetFilters" @setFilters="setFilters"/> 
       </div>
   
       <!-- Main list -->
       <div class="col-9 list-data-container">
         <div class="row">
           <div class="col-10 autocomplete">
-            <input type="search" class="form-control" placeholder="Пошук..." v-model.trim="params.search" @keyup="liveSearch()">
+            <input type="search" class="form-control" placeholder="Пошук..." v-model.trim="filters.search" @keyup="liveSearch()">
             <div class="autocomplete-block-result" v-if="autocomplete.length">
               <div class="autocomplete-block-result_element" v-for="(el, ind_1) in autocomplete" :key="ind_1">
                 <router-link :to="`/judges/${el.id}`">
@@ -116,7 +28,7 @@
             <span>Список суддів</span>
             <div class="d-flex align-items-center">
               <span class="mr-2"> сортувати за: </span>
-              <select class="form-control select-sort" name="sorting" v-model="params.sort" @change="sortList()">
+              <select class="form-control select-sort" name="sorting" v-model="filters.sort" @change="sortList()">
                   <option value="1" selected>прізвищем (А->Я) <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i></option>
                   <option value="2">прізвищем (Я->А)</option>
                   <option value="3">рейтингом (низький->високий)</option>
@@ -147,18 +59,20 @@
   
   import JudgeComponent from './JudgeComponent.vue';
   import Spinner from '../../shared/Spinner.vue';
+  import Filters from '../../shared/Filters.vue';
   
   export default {
     name: "judges-list",
     components: {
       JudgeComponent,
       VueAdsPagination,
-      Spinner
+      Spinner,
+      Filters
     },
     data() {
       return {
         loadData: false,
-        params: {
+        filters: {
           page: 0,
           regions: [],
           jurisdictions: [],
@@ -179,13 +93,20 @@
         },
       }
     },
+    created() {
+      let initialFilters = JSON.parse(localStorage.getItem('judges-filters'));
+      if (initialFilters) {
+        this.filters = initialFilters;
+      }
+      this.getJudgesList()
+    },
     methods: {
       validateInputSearch() {
         const regexp = new RegExp(/^[а-щА-ЩЬьЮюЯяЇїІіЄєҐґ']+$/iu);
-        let str = _.trim(this.params.search);
+        let str = _.trim(this.filters.search);
         if (str.search(regexp) === -1 || str === '') {
           if (str === '') {
-            this.params.search = null;
+            this.filters.search = null;
           }
           this.autocomplete = [];
           return false;
@@ -201,7 +122,7 @@
                 "X-Requested-With": "XMLHttpRequest",
               },
               params: {
-                search: this.params.search
+                search: this.filters.search
               }
             })
             .then(response => {
@@ -212,31 +133,12 @@
             });
         }
       }, 1000),
-      sortList: _.debounce(function(event) {
-        this.loadData = false;
-        window.scrollTo(0, 0);
-        this.getJudgesList();
-      }, 10),
-  
-      pageChange(page) {
-        this.loadData = false;
-        window.scrollTo(0, 0);
-        this.params.page = page + 1;
-        this.getJudgesList();
-      },
-      setFilters() {
-        this.loadData = false;
-        window.scrollTo(0, 0);
-        this.$refs.pagins.currentPage = 0;
-        this.params.page = 1; 
-        this.getJudgesList();
-      },
   
       getJudgesList() {    
         this.autocomplete = []; // коли визиваємо цей метод liveSearch маємо закрити
-        this.params.expired = (this.params.expired === true || this.params.expired === 1) ? 1 : 0; 
+        this.filters.expired = (this.filters.expired === true || this.filters.expired === 1) ? 1 : 0; 
         if (this.validateInputSearch() === false) { // !! = true
-          this.params.search = null;
+          this.filters.search = null;
         }
         if (this.$store.getters.isAuth) {
           axios
@@ -246,28 +148,28 @@
                 "X-Requested-With": "XMLHttpRequest",
                 "Authorization": localStorage.getItem('token')
               },
-              params: this.params
+              params: this.filters
             })
             .then(response => {
               this.judgesList = response.data;
               this.loadData = true;  
-              console.log('getJudges Response', this.judgesList);
+              // console.log('getJudges Response', this.judgesList);
             })
             .catch(error => {
                if (error.response.status === 401) {
                   this.$router.push('/login');
               }
-              console.log('Каже що не авторизований пффф та Канеха');
+              // console.log('Каже що не авторизований пффф та Канеха');
             });
         } else {
-          console.log('no token')
+          // console.log('no token')
           axios
             .get("/api/v1/guest/judges/list", {
               headers: {
                 "Content-Type": "application/json",
                 "X-Requested-With": "XMLHttpRequest",
               },
-              params: this.params
+              params: this.filters
             })
             .then(response => {
               this.judgesList = response.data;
@@ -276,22 +178,41 @@
             })
             .catch(error => {
               console.log(error);
-              console.log('Ну нє не логінився я ще');
+              // console.log('Ну нє не логінився я ще');
             });
         }
       },
-      resetFilters() {
-        this.params.regions = [];
-        this.params.instances = [];
-        this.params.jurisdictions = [];
-        this.params.expired = 1;
-        this.params.search = null;
-        this.autocomplete = [];
-        this.loadData = false;
+      
+      sortList: _.debounce(function(event) {
         this.loadData = false;
         window.scrollTo(0, 0);
-        this.getJudgesList(); // онуляємо всі фільтри і визиваємо функцію
+        this.getJudgesList();
+        localStorage.setItem('judges-filters', JSON.stringify(this.filters));
+      }, 10),
+  
+      pageChange(page) {
+        this.loadData = false;
+        window.scrollTo(0, 0);
+        this.filters.page = page + 1;
+        this.getJudgesList();
       },
+
+       setFilters() {
+        window.scrollTo(0, 0);
+        this.loadData = false;
+        this.$refs.pagins.currentPage = 0;
+        this.filters.page = 1;
+        this.getJudgesList();
+        localStorage.setItem('judges-filters', JSON.stringify(this.filters));
+      },
+  
+      resetFilters() {
+        this.autocomplete = [];
+        this.loadData = false;   
+        this.getJudgesList(); // онуляємо всі фільтри і визиваємо функцію
+        localStorage.removeItem('judges-filters');
+      },
+
       changeStatus: function(data){
         this.judgesList.data.forEach(element => {
           if (element.id === data.id){ 
