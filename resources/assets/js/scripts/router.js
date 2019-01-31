@@ -59,7 +59,11 @@ export default new Router({
         {
             path: '/judges',
             component: JudgesList,
-            name: 'judges-list'
+            name: 'judges-list',
+            beforeRouteLeave (to, from, next) {
+                console.log('beforeRouteLeave JUDGES')
+                next()
+              }
         },
         {
             path: '/judges/:id',
@@ -70,6 +74,10 @@ export default new Router({
             path: '/courts',
             component: CourtsList,
             name: 'courts-list',
+            beforeRouteLeave (to, from, next) {
+                console.log('beforeRouteLeave COURTS')
+                next()
+              }
         },
         {
             path: '/courts/:id',
