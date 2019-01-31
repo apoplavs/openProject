@@ -112,8 +112,10 @@ Route::group(['prefix' => 'v1/', 'namespace' => 'Api\V1',], function () {
 		 */
 		// Історія переглядів користувача
 		Route::get('user/history', 'HomeController@indexHistory');
-		// Закладки користувача
-		Route::get('user/bookmarks', 'HomeController@indexBookmarks');
+		// Закладки на суддів для користувача
+		Route::get('user/bookmarks/judges', 'HomeController@indexBookmarksJudges');
+		// Закладки на судові установи для користувача
+		Route::get('user/bookmarks/courts', 'HomeController@indexBookmarksCourts');
 		
 		/**
 		 * Налаштування користувача
