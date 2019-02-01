@@ -1,6 +1,6 @@
 <template>
   <div class="courtSessions">
-    <div v-show="loadData" class="card mt-2">
+    <div class="card mt-2">
       <div class="card-header d-flex justify-content-between">
         <span>Cудові засідання</span>
         <input type="search" class="form-control" placeholder="Пошук..." v-model.trim="search">
@@ -8,11 +8,10 @@
       <div class="card-body court-sessions-container">
         <spinner v-if="!loadData"/>
         <div
-          class=""
           v-if="loadData && !filterSessions.length"
           >За даними параметрами нічого не знайдено...
         </div>
-        <div class="court-sessions">
+        <div v-if="loadData" class="court-sessions">
           <div v-if="filterSessions.length" class="container-component">
             <div class="row header">
               <div class="col-1 pl-0">Дата розгляду</div>
@@ -24,7 +23,7 @@
               <div class="col-2 pr-0">Примітки</div>
             </div>
             <!-- <transition name='fade'> -->
-            <div class="row" v-for="(session, i_el) in filterSessions" :key="i_el">
+            <div class="row body" v-for="(session, i_el) in filterSessions" :key="i_el">
               <!-- <transition name='fade'> -->
               <div class="col-1 pl-0">
                 <div>{{ session.date }}</div>
@@ -50,7 +49,7 @@
     <modal
       v-show="showModalConfirm"
       @close="showModalConfirm = false"
-      @confirm="deleteBookmarkCourtSession()"
+      @confirm="deleteBookmark"
       :modalConfirm="true"
     >
       <div slot="header"></div>
@@ -74,7 +73,7 @@ export default {
   data() {
     return {
       courtSessions: [],
-      search: "",
+      search: '',
       showModalConfirm: false,
       deleteSession: null,
       loadData: false
@@ -91,12 +90,9 @@ export default {
         return arr.length > 0 ? true : false;
       });
     },
-    isAuth: () => {
-      return localStorage.getItem("token");
-    }
   },
   beforeMount() {
-    if (this.isAuth) {
+    if (this.$store.getters.isAuth) {
       axios
         .get(`/api/v1/court-sessions/bookmarks`, {
           headers: {
@@ -111,7 +107,7 @@ export default {
           console.log("User profile CourtSessions", this.courtSessions);
         })
         .catch(error => {
-          if (error.response.status === 401) {
+          if (error.response && error.response.status === 401) {
             this.$router.push("/login");
           }
           console.log("error");
@@ -126,9 +122,9 @@ export default {
       this.deleteSession = session;
     },
 
-    deleteBookmarkCourtSession() {
+    deleteBookmark() {
       this.showModalConfirm = false;
-      if (!this.isAuth) {
+      if (!this.$store.getters.isAuth) {
         this.$router.push("/login");
       } else {
         this.loadData = false;
@@ -152,7 +148,6 @@ export default {
               this.courtSessions.splice(index, 1);
             }
             console.log("courtSessions", this.courtSessions);
-
             this.deleteSession = null;
             this.loadData = true;
           })
@@ -181,8 +176,6 @@ export default {
   }
   .header {
     font-size: 0.9rem;
-
-    
     font-weight: 700;
     align-items: center;
     line-height: 1.4;
@@ -231,6 +224,9 @@ export default {
   .container-component {
     padding: 0;
     background-color: #ffffff;
+    .body {
+      font-size: .9rem;
+    }
   }
 
   .row {
