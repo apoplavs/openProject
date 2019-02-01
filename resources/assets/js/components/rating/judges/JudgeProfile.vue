@@ -682,9 +682,13 @@
                 @include alignElement($justifyContent: space-between);
                 .like {
                     color: green;
+                    font-size: 1.1rem;
+                    cursor: pointer;
                 }
                 .dislike {
                     color: red;
+                    font-size: 1.1rem;
+                    cursor: pointer;
                 }
             }
             .status {

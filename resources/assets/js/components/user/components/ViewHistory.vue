@@ -33,8 +33,7 @@
       return {
         loadData: false,
         search: '',
-        judgesList: {
-        },
+        judgesList: [],
       }
     },
     computed: {

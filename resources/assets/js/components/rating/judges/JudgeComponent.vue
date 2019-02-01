@@ -3,7 +3,7 @@
         <div class="card-body">
             <div v-if="!this.judgesList || this.judgesList.length == 0">За заданими параметрами нічого не знайдено</div>
             <div v-if="this.judgesList && this.judgesList.length > 0">
-                <div class="judge-component row py-3 mx-1" v-for="(judge, index) of this.judgesList" :key="index">
+                <div class="judge-component row py-3 mx-1" v-for="(judge, index) of judgesList" :key="index">
                     <div class="col-9 d-flex pl-0 main-info">
                         <div class="mr-3"><img class="avatar" :src="judge.photo" alt="фото" /></div>
                         <div>
