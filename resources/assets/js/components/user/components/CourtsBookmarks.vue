@@ -6,7 +6,7 @@
         <div class="card-header d-flex justify-content-between">
             <span>
                 <i class="fa fa-bookmark " aria-hidden="true"></i>
-                Закладки судових установ
+                Закладки судових установ..
             </span>
           <input type="search" class="form-control" placeholder="Пошук..." v-model.trim="search">
         </div>
@@ -39,7 +39,7 @@ export default {
     return {
       loadData: false,
       bookmarks: [],
-      search: ""
+      search: ''
     };
   },
   computed: {

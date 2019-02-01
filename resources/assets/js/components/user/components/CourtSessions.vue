@@ -1,56 +1,63 @@
 <template>
   <div class="courtSessions">
-    <spinner v-show="!loadData" />
     <div v-show="loadData" class="card mt-2">
       <div class="card-header d-flex justify-content-between">
         <span>Cудові засідання</span>
         <input type="search" class="form-control" placeholder="Пошук..." v-model.trim="search">
       </div>
       <div class="card-body court-sessions-container">
-        <div class="court-sessions"> 
-            <div v-if="filterSessions.length > 0" class="container-component">
-              <div class="row header">
-                <div class="col-1 pl-0">Дата розгляду</div>
-                <div class="col-1">Номер справи</div>
-                <div class="col-2">Судді</div>
-                <div class="col-1">Форма</div>
-                <div class="col-3">Сторони у справі</div>
-                <div class="col-2">Суть справи</div>
-                <div class="col-2 pr-0">Примітки</div>
-              </div>
+        <spinner v-if="!loadData"/>
+        <div
+          class=""
+          v-if="loadData && !filterSessions.length"
+          >За даними параметрами нічого не знайдено...
+        </div>
+        <div class="court-sessions">
+          <div v-if="filterSessions.length" class="container-component">
+            <div class="row header">
+              <div class="col-1 pl-0">Дата розгляду</div>
+              <div class="col-1">Номер справи</div>
+              <div class="col-2">Судді</div>
+              <div class="col-1">Форма</div>
+              <div class="col-3">Сторони у справі</div>
+              <div class="col-2">Суть справи</div>
+              <div class="col-2 pr-0">Примітки</div>
+            </div>
+            <!-- <transition name='fade'> -->
+            <div class="row" v-for="(session, i_el) in filterSessions" :key="i_el">
               <!-- <transition name='fade'> -->
-                <div class="row" v-for="(session, i_el) in filterSessions" :key="i_el">
-                  <!-- <transition name='fade'> -->
-                  <div class="col-1 pl-0">
-                    <div>{{ session.date }}</div>
-                  </div>
-                  <div class="col-1">{{ session.number }}</div>
-                  <div class="col-2">{{ session.judges }}</div>
-                  <div class="col-1">{{ session.forma }}</div>
-                  <div class="col-3">{{ session.involved }}</div>
-                  <div class="col-2">{{ session.description }}</div>
-                  <div class="col-2 pr-0 text-center position-relative note-wrap">
-                    <i class="fas fa-star" @click="showModalDelete(session)"></i>
-                    <textarea class="note" maxlength="254"></textarea>
-                    <img class="checkmark" src="../../../../images/checkmark.png"/>
-                  </div>
-                  <!-- </transition> -->
-                </div>
+              <div class="col-1 pl-0">
+                <div>{{ session.date }}</div>
+              </div>
+              <div class="col-1">{{ session.number }}</div>
+              <div class="col-2">{{ session.judges }}</div>
+              <div class="col-1">{{ session.forma }}</div>
+              <div class="col-3">{{ session.involved }}</div>
+              <div class="col-2">{{ session.description }}</div>
+              <div class="col-2 pr-0 text-center position-relative note-wrap">
+                <i class="fas fa-star" @click="showModalDelete(session)"></i>
+                <textarea class="note" maxlength="254"></textarea>
+                <img class="checkmark" src="../../../../images/checkmark.png">
+              </div>
               <!-- </transition> -->
             </div>
-          <div v-else class="container-component">
-            <p>Нічого не знайдено...</p>
+            <!-- </transition> -->
           </div>
-         
         </div>
       </div>
     </div>
     <!-- modal confirm -->
-    <modal v-show="showModalConfirm" @close="showModalConfirm = false" @confirm="deleteBookmarkCourtSession()" :modalConfirm="true" >
-        <div slot="header"> </div>
-        <div slot="body" style="text-align: center; font-size: 16px;">
-           Ви впевнені, що хочете видалити закладку?
-        </div>
+    <modal
+      v-show="showModalConfirm"
+      @close="showModalConfirm = false"
+      @confirm="deleteBookmarkCourtSession()"
+      :modalConfirm="true"
+    >
+      <div slot="header"></div>
+      <div
+        slot="body"
+        style="text-align: center; font-size: 16px;"
+      >Ви впевнені, що хочете видалити закладку?</div>
     </modal>
   </div>
 </template>
@@ -67,7 +74,7 @@ export default {
   data() {
     return {
       courtSessions: [],
-      search: '',
+      search: "",
       showModalConfirm: false,
       deleteSession: null,
       loadData: false
@@ -119,7 +126,7 @@ export default {
       this.deleteSession = session;
     },
 
-    deleteBookmarkCourtSession() { 
+    deleteBookmarkCourtSession() {
       this.showModalConfirm = false;
       if (!this.isAuth) {
         this.$router.push("/login");
@@ -136,16 +143,16 @@ export default {
         })
           .then(response => {
             let index;
-            this.courtSessions.forEach( (el, i) => {
-              if (this.deleteSession.id === el.id){
+            this.courtSessions.forEach((el, i) => {
+              if (this.deleteSession.id === el.id) {
                 index = i;
               }
-            });            
-            if (index >= 0) {   
+            });
+            if (index >= 0) {
               this.courtSessions.splice(index, 1);
             }
-            console.log('courtSessions',this.courtSessions);
-            
+            console.log("courtSessions", this.courtSessions);
+
             this.deleteSession = null;
             this.loadData = true;
           })
@@ -166,7 +173,6 @@ export default {
   width: 100%;
   height: auto;
   margin-top: 50px;
-  font-size: 0.8rem;
   .infoCard {
     padding: 20px;
     > p:first-child {
@@ -174,7 +180,9 @@ export default {
     }
   }
   .header {
-    font-size: .9rem;
+    font-size: 0.9rem;
+
+    
     font-weight: 700;
     align-items: center;
     line-height: 1.4;
@@ -197,20 +205,21 @@ export default {
     resize: none;
     background-color: #fafa599c;
     padding: 3px 5px 15px 5px;
-    font-size: .7rem;
+    font-size: 0.7rem;
     margin-top: -5px;
     color: #002366;
     font-style: italic;
-    background:linear-gradient(-135deg, transparent 10px, #fafa599c 0);
+    background: linear-gradient(-135deg, transparent 10px, #fafa599c 0);
   }
   textarea.note:before {
-    content: '';
+    content: "";
     position: absolute;
-    top: 0; right: 0;
+    top: 0;
+    right: 0;
     border-top: 80px solid white;
-    border-left: 80px solid rgba(0,0,0,0);
+    border-left: 80px solid rgba(0, 0, 0, 0);
     width: 0;
-}
+  }
   .checkmark {
     width: 25px;
     position: absolute;
@@ -232,12 +241,14 @@ export default {
     }
   }
   .note-wrap {
-  	min-height: 160px;
-  	max-height: 200px;
+    min-height: 160px;
+    max-height: 200px;
   }
-  .col-1, .col-2, .col-3 {
-  	padding-right: 5px;
-  	padding-left: 5px;
+  .col-1,
+  .col-2,
+  .col-3 {
+    padding-right: 5px;
+    padding-left: 5px;
   }
 }
 </style>

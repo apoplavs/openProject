@@ -10,9 +10,8 @@
         <div class="jugdes-list">
           <!--court-list-->
           <spinner v-if="!loadData"/>
-          <div class="p-3" v-if="filterBookmarks && !filterBookmarks.length && loadData">За заданими параметрами нічого не знайдено</div>
-          <div v-else class="judge-card" v-for="(judge, ind) of filterBookmarks" :key="ind">
-            
+          <div class="p-3" v-if="filterBookmarks && !filterBookmarks.length && loadData">За заданими параметрами нічого не знайдено...</div>
+          <div class="judge-card" v-for="(judge, ind) of filterBookmarks" :key="ind">
             <div class="body">
               <div class="name pb-1 text-center">
                 <router-link :to="`/judges/${judge.id}`">
