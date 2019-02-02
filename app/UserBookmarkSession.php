@@ -41,6 +41,7 @@ class UserBookmarkSession extends Model
             'court_sessions.number',
             'court_sessions.involved',
             'court_sessions.description',
+			'user_bookmark_sessions.note'
         ];
     }
 

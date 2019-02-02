@@ -67,7 +67,8 @@ class CourtSessionController extends Controller
  *                          "forma":"Цивільне",
  *                          "number":"125/1530/18",
  *                          "involved":"Позивач: АТ КБ БАНК, відповідач: Шевченко Іван Іваноич",
- *                          "description":"про стягнення заборгованості"
+ *                          "description":"про стягнення заборгованості",
+ *     						"note": "підготувати документи"
  *                      },
  *                      {
  *                          "id":3,
@@ -78,7 +79,8 @@ class CourtSessionController extends Controller
  *                          "forma":"Адмінправопорушення",
  *                          "number":"125/1530/19",
  *                          "involved":"",
- *                          "description":""
+ *                          "description":"",
+ *     						"note": null
  *                      }
      *              }
      *          }
