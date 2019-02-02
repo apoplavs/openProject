@@ -1,10 +1,10 @@
 <template>
   <div class="container content-wrapper">
     <div class="row min-width">
-      <div class="col-9 list-data-container">
+      <div class="col-12 list-data-container">
         <div class="card">
           <div class="card-header d-flex justify-content-between">
-            <span>Список суддів</span>
+            <span>Історія переглядів</span>
             <input type="search" class="form-control" placeholder="Пошук..." v-model.trim="search">
           </div>
           <div>
@@ -33,8 +33,7 @@
       return {
         loadData: false,
         search: '',
-        judgesList: {
-        },
+        judgesList: [],
       }
     },
     computed: {

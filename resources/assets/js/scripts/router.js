@@ -13,12 +13,13 @@ import JudgeProfile from '../components/rating/judges/JudgeProfile.vue';
 import CourtsList from '../components/rating/courts/CourtsList.vue';
 import CourtProfile from '../components/rating/courts/CourtProfile.vue';
 import UserProfile from '../components/user/UserProfile.vue';
+import UserSettings from '../components/user/UserSettings.vue';
 
-import CourtSessions from '../components/user/components/CourtSessions.vue';
-import CourtPractice from '../components/user/components/CourtPractice.vue';
-import Establishments from '../components/user/components/Establishments.vue';
-import ViewHistory from '../components/user/components/ViewHistory.vue';
-import Templates from '../components/user/components/Templates.vue';
+// import CourtSessions from '../components/user/components/CourtSessions.vue';
+// import CourtPractice from '../components/user/components/CourtPractice.vue';
+// import CourtsBookmarks from '../components/user/components/CourtsBookmarks.vue';
+// import ViewHistory from '../components/user/components/ViewHistory.vue';
+// import JudgesBookmarks from '../components/user/components/JudgesBookmarks.vue';
 
 export default new Router({
     mode: 'history',
@@ -45,25 +46,9 @@ export default new Router({
             name: 'recover-password'
         },
         {
-            path: '/user-profile',
-            component: UserProfile,
-            name: 'user-profile',
-            // children: [
-            //     { path: '/court-sessions', component: CourtSessions },
-            //     { path: '/court-practice', component: CourtPractice },
-            //     { path: '/establishments', component: Establishments },
-            //     { path: '/view-history', component: ViewHistory },
-            //     { path: '/templates', component: Templates },
-            //   ]
-        },
-        {
             path: '/judges',
             component: JudgesList,
-            name: 'judges-list',
-            beforeRouteLeave (to, from, next) {
-                console.log('beforeRouteLeave JUDGES')
-                next()
-              }
+            name: 'judges-list'
         },
         {
             path: '/judges/:id',
@@ -73,16 +58,22 @@ export default new Router({
         {
             path: '/courts',
             component: CourtsList,
-            name: 'courts-list',
-            beforeRouteLeave (to, from, next) {
-                console.log('beforeRouteLeave COURTS')
-                next()
-              }
+            name: 'courts-list'
         },
         {
             path: '/courts/:id',
             component: CourtProfile,
             name: 'court-profile'
+        },
+        {
+            path: '/user-profile',
+            component: UserProfile,
+            name: 'user-profile',
+        },
+        {
+            path: '/settings',
+            component: UserSettings,
+            name: 'user-settings',
         },
     ]
 });

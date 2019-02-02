@@ -7,7 +7,6 @@ import uk from 'vee-validate/dist/locale/uk';
 import Toasted from 'vue-toasted';
 import Vuex from 'vuex';
 
-
 import AppComponent from './components/AppComponent.vue';
 import router from './scripts/router';
 import GSignInButton from 'vue-google-signin-button';
@@ -21,7 +20,6 @@ Vue.use(Vuex);
 
 Validator.localize('uk', uk);
 window.axios = axios;
-
 
 new Vue({
     el: '#app',

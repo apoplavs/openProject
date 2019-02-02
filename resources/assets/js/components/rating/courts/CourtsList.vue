@@ -94,7 +94,7 @@
       if (initialFilters) {
         this.filters = initialFilters;
       }
-      this.courtsList();
+      this.getCourtsList();
     },
     methods: {
       validateInputSearch() {
