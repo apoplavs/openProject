@@ -100,6 +100,7 @@ class UserBookmarkCourt extends Model
             DB::raw('jurisdictions.title AS jurisdiction'),
             'courts.address',
             DB::raw('CONCAT(judges.surname, " ", judges.name, " ", judges.patronymic) AS head_judge'),
+			DB::raw('1 AS is_bookmark'),
             'courts.rating',
         ];
     }
