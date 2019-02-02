@@ -599,49 +599,39 @@
                     red += 90;
                     green += 60;
                 } else if (val >= 50 && val < 80) {
-                    green += 60;
-                } else if (val < 50) {
-                    red += val;
-                    green -= val;
-                }
-    
-                return ('rgb(' + red + ' ' + green + ' 0)');
-            },
-            setStatistic() {
-                // console.log(this.judge.civil_statistic);
-                // console.log(this.judge.civil_statistic.amount);
-                this.commonChartData = [
-                    ['Категорія', 'Кількість справ'],
-                    ['Цивільні', this.judge.civil_statistic.amount],
-                    ['Кримінальні', this.judge.criminal_statistic.amount],
-                    ['Справи про адмін. правопорушення', this.judge.adminoffence_statistic.amount],
-                    ['Адміністративні справи', this.judge.admin_statistic.amount],
-                    ['Господарські справи', this.judge.commercial_statistic.amount]
-                ];
-                // console.log(this.commonChartData);
-                this.civilChartData = [
-                    ["Element", "відсотків", {
-                        role: "style"
-                    }],
-                    ["у позові відмовлено повністю", this.judge.civil_statistic.negative_judgment, "red"],
-                    ["позов задоволено повністю", this.judge.civil_statistic.positive_judgment, "green"],
-                    ["задоволено частково, укладено мирову угоду", this.judge.civil_statistic.other_judgment, "gold"]
-                ];
-                this.criminalChartData = [
-                    ["Element", "відсотків", {
-                        role: "style"
-                    }],
-                    ["особу притягнено до кримінальної відповідальності", this.judge.criminal_statistic.negative_judgment, "red"],
-                    ["особа звільнена від кримінальної відповідальності", this.judge.criminal_statistic.positive_judgment, "green"]
-                ];
-                this.adminoffenceChartData = [
-                    ["Element", "відсотків", {
-                        role: "style"
-                    }],
-                    ["особу притягнено до адміністративної відповідальності", this.judge.adminoffence_statistic.negative_judgment, "red"],
-                    ["особа звільнена від адміністративної відповідальності", this.judge.adminoffence_statistic.positive_judgment, "green"]
-                ];
-            }
+					green += 60;
+            	} else if (val < 50) {
+					red += val;
+					green -= val;
+				}
+
+            	return ('rgb('+ red + ' ' + green +' 0)');
+        },
+        setStatistic() {
+            this.commonChartData = [
+                ['Категорія', 'Кількість справ'],
+                ['Цивільні', parseInt(this.judge.civil_statistic.amount)],
+                ['Кримінальні', parseInt(this.judge.criminal_statistic.amount)],
+                ['Справи про адмін. правопорушення', parseInt(this.judge.adminoffence_statistic.amount)],
+                ['Адміністративні справи', parseInt(this.judge.admin_statistic.amount)],
+                ['Господарські справи', parseInt(this.judge.commercial_statistic.amount)]
+            ];
+            this.civilChartData = [
+                ["Element", "відсотків", { role: "style" } ],
+                ["у позові відмовлено повністю", this.judge.civil_statistic.negative_judgment, "red"],
+                ["позов задоволено повністю", this.judge.civil_statistic.positive_judgment, "green"],
+                ["задоволено частково, укладено мирову угоду", this.judge.civil_statistic.other_judgment, "gold"]
+            ];
+            this.criminalChartData = [
+                ["Element", "відсотків", { role: "style" } ],
+                ["особу притягнено до кримінальної відповідальності", this.judge.criminal_statistic.negative_judgment, "red"],
+                ["особа звільнена від кримінальної відповідальності", this.judge.criminal_statistic.positive_judgment, "green"]
+            ];
+            this.adminoffenceChartData = [
+                ["Element", "відсотків", { role: "style" } ],
+                ["особу притягнено до адміністративної відповідальності", this.judge.adminoffence_statistic.negative_judgment, "red"],
+                ["особа звільнена від адміністративної відповідальності", this.judge.adminoffence_statistic.positive_judgment, "green"]
+            ];
         }
     };
 </script>
