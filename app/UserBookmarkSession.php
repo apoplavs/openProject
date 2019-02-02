@@ -138,12 +138,15 @@ class UserBookmarkSession extends Model
 	
 	/**
 	 * записує або оновлює примітку до закладки
-	 * @param $bookmark_id
+	 * @param $court_session_id
 	 * @param $note
 	 */
-	public static function writeNoteForBookmark(int $bookmark_id, string $note)
-	{
-		static::where('user_bookmark_sessions.id', '=', $bookmark_id)
+	public static function writeNoteForBookmark(int $court_session_id, string $note) {
+		
+		$user_id = Auth::user()->id;
+		
+		static::where('user_bookmark_sessions.court_session', '=', $court_session_id)
+			->where('user', '=', $user_id)
 			->update(['user_bookmark_sessions.note' => $note]);
 	}
 	
@@ -164,15 +167,16 @@ class UserBookmarkSession extends Model
 	
 	
 	/**
-	 * перевірити чи існує закладка на судове засідання з даним id
+	 * Перевіряє, чи має поточний користувач доступ до закладки на судове засідання
+	 * з таким id судового засідання
 	 *
-	 * @param $id
+	 * @param $id - судового засіданн (не закладки)
 	 * @param $user_id
 	 * @return boolean
 	 */
 	public static function checkAccessToBookmark($id, $user_id) {
 		$bookmark = static::select('user_bookmark_sessions.id')
-			->where('user_bookmark_sessions.id', '=', $id)
+			->where('user_bookmark_sessions.court_session', '=', $id)
 			->where('user_bookmark_sessions.user', '=', $user_id)
 			->first();
 		
