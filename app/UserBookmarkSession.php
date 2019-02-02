@@ -142,7 +142,7 @@ class UserBookmarkSession extends Model
 	 * @param $court_session_id
 	 * @param $note
 	 */
-	public static function writeNoteForBookmark(int $court_session_id, string $note) {
+	public static function writeNoteForBookmark(int $court_session_id, $note) {
 		
 		$user_id = Auth::user()->id;
 		

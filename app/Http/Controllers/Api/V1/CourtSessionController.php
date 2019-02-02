@@ -343,12 +343,12 @@ class CourtSessionController extends Controller
 	public function addNote($court_session_id, Request $request) {
 		
 		$request->validate([
-			'note'    => 'required|string|max:255'
+			'note'    => 'nullable|string|max:255'
 		]);
-		
+		$note = $request->note ?? NULL;
 		$court_session_id = intval($court_session_id);
 		
-		UserBookmarkSession::writeNoteForBookmark($court_session_id, $request->note);
+		UserBookmarkSession::writeNoteForBookmark($court_session_id, $note);
 		return response()->json(['message' => 'Примітка успішно створена/оновлена'], 200);
 	}
 	
