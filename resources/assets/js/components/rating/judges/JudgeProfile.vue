@@ -399,240 +399,241 @@
             }
         },
         methods: {
-            changeBookmarkStatus() {
-                if (!this.$store.getters.isAuth) {
-                    this.$router.push("/login");
-                }
-                if (this.judge.data.is_bookmark === 0) {
-                    axios({
-                            method: "put",
-                            url: `/api/v1/judges/${this.$route.params.id}/bookmark`,
-                            headers: {
-                                "Content-Type": "application/json",
-                                "X-Requested-With": "XMLHttpRequest",
-                                Authorization: localStorage.getItem("token")
-                            }
-                        })
-                        .then(response => {
-                            this.judge.data.is_bookmark = 1;
-                        })
-                        .catch(error => {
-                            if (error.response && error.response.status === 401) {
-                                this.$router.push("/login");
-                            }
-                            console.log("Bookmark", error);
-                        });
-                } else {
-                    axios({
-                            method: "delete",
-                            url: `/api/v1/judges/${this.$route.params.id}/bookmark`,
-                            headers: {
-                                "Content-Type": "application/json",
-                                "X-Requested-With": "XMLHttpRequest",
-                                Authorization: localStorage.getItem("token")
-                            }
-                        })
-                        .then(response => {
-                            this.judge.data.is_bookmark = 0;
-                        })
-                        .catch(error => {
-                            if (error.response.status === 401) {
-                                this.$router.push("/login");
-                            }
-                            console.log("Bookmark", error.response);
-                        });
-                }
-            },
-            changeLikes() {
-                if (!this.$store.getters.isAuth) {
-                    this.$router.push("/login");
-                }
-                if (this.judge.data.is_unliked) {
-                    this.changeUnlikes();
-                }
-                if (this.judge.data.is_liked) {
-                    // delete like
-                    axios({
-                            method: "delete",
-                            url: `/api/v1/judges/${this.$route.params.id}/like`,
-                            headers: {
-                                "Content-Type": "application/json",
-                                "X-Requested-With": "XMLHttpRequest",
-                                Authorization: localStorage.getItem("token")
-                            }
-                        })
-                        .then(response => {
-                            this.judge.data.likes -= 1;
-                            this.judge.data.is_liked = 0;
-                        })
-                        .catch(error => {
-                            if (error.response.status === 401) {
-                                this.$router.push("/login");
-                            }
-                            console.log("set Likes", error);
-                        });
-                } else {
-                    // set like
-                    axios({
-                            method: "put",
-                            url: `/api/v1/judges/${this.$route.params.id}/like`,
-                            headers: {
-                                "Content-Type": "application/json",
-                                "X-Requested-With": "XMLHttpRequest",
-                                Authorization: localStorage.getItem("token")
-                            }
-                        })
-                        .then(response => {
-                            this.judge.data.likes += 1;
-                            this.judge.data.is_liked = 1;
-                        })
-                        .catch(error => {
-                            if (error.response.status === 401) {
-                                this.$router.push("/login");
-                            }
-                            console.log("set Likes", error);
-                        });
-                }
-            },
-            changeUnlikes() {
-                if (!this.$store.getters.isAuth) {
-                    this.$router.push("/login");
-                }
-                if (this.judge.data.is_liked) {
-                    this.changeLikes();
-                }
-                if (this.judge.data.is_unliked) {
-                    // dell unlike
-                    axios({
-                            method: "delete",
-                            url: `/api/v1/judges/${this.$route.params.id}/unlike`,
-                            headers: {
-                                "Content-Type": "application/json",
-                                "X-Requested-With": "XMLHttpRequest",
-                                Authorization: localStorage.getItem("token")
-                            }
-                        })
-                        .then(response => {
-                            this.judge.data.unlikes -= 1;
-                            this.judge.data.is_unliked = 0;
-                        })
-                        .catch(error => {
-                            if (error.response.status === 401) {
-                                this.$router.push("/login");
-                            }
-                            console.log("set Likes", error);
-                        });
-                } else {
-                    // set unlike
-                    axios({
-                            method: "put",
-                            url: `/api/v1/judges/${this.$route.params.id}/unlike`,
-                            headers: {
-                                "Content-Type": "application/json",
-                                "X-Requested-With": "XMLHttpRequest",
-                                Authorization: localStorage.getItem("token")
-                            }
-                        })
-                        .then(response => {
-                            this.judge.data.unlikes += 1;
-                            this.judge.data.is_unliked = 1;
-                        })
-                        .catch(error => {
-                            if (error.response.status === 401) {
-                                this.$router.push("/login");
-                            }
-                            console.log("set Likes", error);
-                        });
-                }
-            },
-            deleteBookmarkCourtSession(session) {
-                if (!this.$store.getters.isAuth) {
-                    this.$router.push("/login");
-                } else {
-                    axios({
-                            method: "delete",
-                            url: `/api/v1/court-sessions/${session.id}/bookmark`,
-                            headers: {
-                                "Content-Type": "application/json",
-                                "X-Requested-With": "XMLHttpRequest",
-                                Authorization: localStorage.getItem("token")
-                            }
-                        })
-                        .then(response => {
-                            session.is_bookmark = 0;
-                        })
-                        .catch(error => {
-                            if (error.response.status === 401) {
-                                this.$router.push("/login");
-                            }
-                        });
-                }
-            },
-            addBookmarkCourtSession(session) {
-                if (!this.$store.getters.isAuth) {
-                    this.$router.push("/login");
-                } else {
-                    axios({
-                            method: "put",
-                            url: `/api/v1/court-sessions/${session.id}/bookmark`,
-                            headers: {
-                                "Content-Type": "application/json",
-                                "X-Requested-With": "XMLHttpRequest",
-                                Authorization: localStorage.getItem("token")
-                            }
-                        })
-                        .then(response => {
-                            session.is_bookmark = 1;
-                        })
-                        .catch(error => {
-                            if (error.response.status === 401) {
-                                this.$router.push("/login");
-                            }
-                        });
-                }
-            },
-            calculateColor(val) {
-                let red = 205 - (val * 2);
-                let green = 5 + (val * 2);
-    
-                if (val >= 50 && val < 70) {
-                    red += 90;
-                    green += 60;
-                } else if (val >= 50 && val < 80) {
+			changeBookmarkStatus() {
+				if (!this.$store.getters.isAuth) {
+					this.$router.push("/login");
+				}
+				if (this.judge.data.is_bookmark === 0) {
+					axios({
+						method: "put",
+						url: `/api/v1/judges/${this.$route.params.id}/bookmark`,
+						headers: {
+							"Content-Type": "application/json",
+							"X-Requested-With": "XMLHttpRequest",
+							Authorization: localStorage.getItem("token")
+						}
+					})
+						.then(response => {
+							this.judge.data.is_bookmark = 1;
+						})
+						.catch(error => {
+							if (error.response && error.response.status === 401) {
+								this.$router.push("/login");
+							}
+							console.log("Bookmark", error);
+						});
+				} else {
+					axios({
+						method: "delete",
+						url: `/api/v1/judges/${this.$route.params.id}/bookmark`,
+						headers: {
+							"Content-Type": "application/json",
+							"X-Requested-With": "XMLHttpRequest",
+							Authorization: localStorage.getItem("token")
+						}
+					})
+						.then(response => {
+							this.judge.data.is_bookmark = 0;
+						})
+						.catch(error => {
+							if (error.response.status === 401) {
+								this.$router.push("/login");
+							}
+							console.log("Bookmark", error.response);
+						});
+				}
+			},
+			changeLikes() {
+				if (!this.$store.getters.isAuth) {
+					this.$router.push("/login");
+				}
+				if (this.judge.data.is_unliked) {
+					this.changeUnlikes();
+				}
+				if (this.judge.data.is_liked) {
+					// delete like
+					axios({
+						method: "delete",
+						url: `/api/v1/judges/${this.$route.params.id}/like`,
+						headers: {
+							"Content-Type": "application/json",
+							"X-Requested-With": "XMLHttpRequest",
+							Authorization: localStorage.getItem("token")
+						}
+					})
+						.then(response => {
+							this.judge.data.likes -= 1;
+							this.judge.data.is_liked = 0;
+						})
+						.catch(error => {
+							if (error.response.status === 401) {
+								this.$router.push("/login");
+							}
+							console.log("set Likes", error);
+						});
+				} else {
+					// set like
+					axios({
+						method: "put",
+						url: `/api/v1/judges/${this.$route.params.id}/like`,
+						headers: {
+							"Content-Type": "application/json",
+							"X-Requested-With": "XMLHttpRequest",
+							Authorization: localStorage.getItem("token")
+						}
+					})
+						.then(response => {
+							this.judge.data.likes += 1;
+							this.judge.data.is_liked = 1;
+						})
+						.catch(error => {
+							if (error.response.status === 401) {
+								this.$router.push("/login");
+							}
+							console.log("set Likes", error);
+						});
+				}
+			},
+			changeUnlikes() {
+				if (!this.$store.getters.isAuth) {
+					this.$router.push("/login");
+				}
+				if (this.judge.data.is_liked) {
+					this.changeLikes();
+				}
+				if (this.judge.data.is_unliked) {
+					// dell unlike
+					axios({
+						method: "delete",
+						url: `/api/v1/judges/${this.$route.params.id}/unlike`,
+						headers: {
+							"Content-Type": "application/json",
+							"X-Requested-With": "XMLHttpRequest",
+							Authorization: localStorage.getItem("token")
+						}
+					})
+						.then(response => {
+							this.judge.data.unlikes -= 1;
+							this.judge.data.is_unliked = 0;
+						})
+						.catch(error => {
+							if (error.response.status === 401) {
+								this.$router.push("/login");
+							}
+							console.log("set Likes", error);
+						});
+				} else {
+					// set unlike
+					axios({
+						method: "put",
+						url: `/api/v1/judges/${this.$route.params.id}/unlike`,
+						headers: {
+							"Content-Type": "application/json",
+							"X-Requested-With": "XMLHttpRequest",
+							Authorization: localStorage.getItem("token")
+						}
+					})
+						.then(response => {
+							this.judge.data.unlikes += 1;
+							this.judge.data.is_unliked = 1;
+						})
+						.catch(error => {
+							if (error.response.status === 401) {
+								this.$router.push("/login");
+							}
+							console.log("set Likes", error);
+						});
+				}
+			},
+			deleteBookmarkCourtSession(session) {
+				if (!this.$store.getters.isAuth) {
+					this.$router.push("/login");
+				} else {
+					axios({
+						method: "delete",
+						url: `/api/v1/court-sessions/${session.id}/bookmark`,
+						headers: {
+							"Content-Type": "application/json",
+							"X-Requested-With": "XMLHttpRequest",
+							Authorization: localStorage.getItem("token")
+						}
+					})
+						.then(response => {
+							session.is_bookmark = 0;
+						})
+						.catch(error => {
+							if (error.response.status === 401) {
+								this.$router.push("/login");
+							}
+						});
+				}
+			},
+			addBookmarkCourtSession(session) {
+				if (!this.$store.getters.isAuth) {
+					this.$router.push("/login");
+				} else {
+					axios({
+						method: "put",
+						url: `/api/v1/court-sessions/${session.id}/bookmark`,
+						headers: {
+							"Content-Type": "application/json",
+							"X-Requested-With": "XMLHttpRequest",
+							Authorization: localStorage.getItem("token")
+						}
+					})
+						.then(response => {
+							session.is_bookmark = 1;
+						})
+						.catch(error => {
+							if (error.response.status === 401) {
+								this.$router.push("/login");
+							}
+						});
+				}
+			},
+			calculateColor(val) {
+				let red = 205 - (val * 2);
+				let green = 5 + (val * 2);
+
+				if (val >= 50 && val < 70) {
+					red += 90;
 					green += 60;
-            	} else if (val < 50) {
+				} else if (val >= 50 && val < 80) {
+					green += 60;
+				} else if (val < 50) {
 					red += val;
 					green -= val;
 				}
 
-            	return ('rgb('+ red + ' ' + green +' 0)');
-        },
-        setStatistic() {
-            this.commonChartData = [
-                ['Категорія', 'Кількість справ'],
-                ['Цивільні', parseInt(this.judge.civil_statistic.amount)],
-                ['Кримінальні', parseInt(this.judge.criminal_statistic.amount)],
-                ['Справи про адмін. правопорушення', parseInt(this.judge.adminoffence_statistic.amount)],
-                ['Адміністративні справи', parseInt(this.judge.admin_statistic.amount)],
-                ['Господарські справи', parseInt(this.judge.commercial_statistic.amount)]
-            ];
-            this.civilChartData = [
-                ["Element", "відсотків", { role: "style" } ],
-                ["у позові відмовлено повністю", this.judge.civil_statistic.negative_judgment, "red"],
-                ["позов задоволено повністю", this.judge.civil_statistic.positive_judgment, "green"],
-                ["задоволено частково, укладено мирову угоду", this.judge.civil_statistic.other_judgment, "gold"]
-            ];
-            this.criminalChartData = [
-                ["Element", "відсотків", { role: "style" } ],
-                ["особу притягнено до кримінальної відповідальності", this.judge.criminal_statistic.negative_judgment, "red"],
-                ["особа звільнена від кримінальної відповідальності", this.judge.criminal_statistic.positive_judgment, "green"]
-            ];
-            this.adminoffenceChartData = [
-                ["Element", "відсотків", { role: "style" } ],
-                ["особу притягнено до адміністративної відповідальності", this.judge.adminoffence_statistic.negative_judgment, "red"],
-                ["особа звільнена від адміністративної відповідальності", this.judge.adminoffence_statistic.positive_judgment, "green"]
-            ];
-        }
+				return ('rgb(' + red + ' ' + green + ' 0)');
+			},
+			setStatistic() {
+				this.commonChartData = [
+					['Категорія', 'Кількість справ'],
+					['Цивільні', parseInt(this.judge.civil_statistic.amount)],
+					['Кримінальні', parseInt(this.judge.criminal_statistic.amount)],
+					['Справи про адмін. правопорушення', parseInt(this.judge.adminoffence_statistic.amount)],
+					['Адміністративні справи', parseInt(this.judge.admin_statistic.amount)],
+					['Господарські справи', parseInt(this.judge.commercial_statistic.amount)]
+				];
+				this.civilChartData = [
+					["Element", "відсотків", {role: "style"}],
+					["у позові відмовлено повністю", this.judge.civil_statistic.negative_judgment, "red"],
+					["позов задоволено повністю", this.judge.civil_statistic.positive_judgment, "green"],
+					["задоволено частково, укладено мирову угоду", this.judge.civil_statistic.other_judgment, "gold"]
+				];
+				this.criminalChartData = [
+					["Element", "відсотків", {role: "style"}],
+					["особу притягнено до кримінальної відповідальності", this.judge.criminal_statistic.negative_judgment, "red"],
+					["особа звільнена від кримінальної відповідальності", this.judge.criminal_statistic.positive_judgment, "green"]
+				];
+				this.adminoffenceChartData = [
+					["Element", "відсотків", {role: "style"}],
+					["особу притягнено до адміністративної відповідальності", this.judge.adminoffence_statistic.negative_judgment, "red"],
+					["особа звільнена від адміністративної відповідальності", this.judge.adminoffence_statistic.positive_judgment, "green"]
+				];
+			}
+		}
     };
 </script>
 
