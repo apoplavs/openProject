@@ -4,9 +4,12 @@ namespace Toecyd\Http\Controllers\Api\V1;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\Facades\Mail;
 use Toecyd\Http\Controllers\Controller;
 use Carbon\Carbon;
+use Toecyd\Mail\NotificationMail;
 use Toecyd\User;
 
 /**
@@ -91,7 +94,16 @@ class AuthController extends Controller
             'name'     => $request->name,
             'email'    => $request->email,
             'password' => bcrypt($request->password),
+			'remember_token' => str_random(60)
         ]);
+        
+        // надсилання email для підтвердження паролю
+		Mail::to($request->email)
+			->send(new NotificationMail('confirm_email', 'Завершення реєстрації облікового запису', [
+				'name'  => $request->name,
+				'remember_token'  => $user->remember_token
+			]));
+		
         $user->save();
         return response()->json([
             'message' => Lang::get('auth.successfully_created'),
@@ -594,6 +606,100 @@ class AuthController extends Controller
     public function user(Request $request) {
         return response()->json($request->user());
     }
+	
+	
+	/**
+	 * Confirm email
+	 *
+	 * @SWG\Get(
+	 *     path="/confirm-email",
+	 *     summary="Підтвердити email користувача",
+	 *     description="Підтвердити email поточного користувача",
+	 *     operationId="confirm-email",
+	 *     produces={"application/json"},
+	 *     tags={"Автентифікація користувача"},
+	 *
+	 *
+	 *     @SWG\Parameter(
+	 *        ref="#/parameters/Content-Type",
+	 *     ),
+	 *     @SWG\Parameter(
+	 *        ref="#/parameters/X-Requested-With",
+	 *     ),
+	 *
+	 *     @SWG\Parameter(
+	 *     name="token",
+	 *     in="query",
+	 *     required=true,
+	 *     description="Токен користувача для підтвердження email",
+	 *     type="string",
+	 *     collectionFormat="multi",
+	 *     uniqueItems=true,
+	 *     allowEmptyValue=false
+	 *     ),
+	 *
+	 *     @SWG\Response(
+	 *         response=200,
+	 *         description="ОК, email підтверджено",
+	 *           examples={"application/json":
+	 *              {
+	 *                    "message": "Email успішно підтверджено"
+	 *                }
+	 *            }
+	 *     ),
+	 *
+	 *     @SWG\Response(
+	 *         response=401,
+	 *         description="Необхідна аутентифікація користувача, можливо токен, некоректний або анульований",
+	 *           examples={"application/json":
+	 *              {
+	 *                    "message": "Unauthenticated",
+	 *              }
+	 *            }
+	 *     ),
+	 *     @SWG\Response(
+	 *         response=405,
+	 *         description="Метод, з яким виконувався запит, не дозволено використовувати для заданого ресурсу; наприклад, запит був здійснений за методом POST, хоча очікується GET.",
+	 *     )
+	 * )
+	 *
+	 * @return [json] user object
+	 */
+	public function confirmEmail() {
+		$remember_token = Input::get('token') ?? NULL;
+		
+		// якщо токена немає в GET запиті
+		if (!$remember_token) {
+			return response()->json([
+				'message' => 'Unauthenticated'
+			], 401);
+		}
+		
+		$affected = User::where('remember_token', '=', $remember_token)
+			->update(['usertype' => 2]);
+		
+		// якщо токен некоректний
+		if ($affected == 0) {
+			return response()->json([
+				'message' => 'Unauthenticated'
+			], 401);
+		}
+		
+		return response()->json([
+			'message' => 'Email успішно підтверджено'
+		], 200);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	// PRIVATE METHODS
 
     /**
      * Функція виконує cURL запит по вказаному URL і повертає HTTP RESPONSE CODE (наприклад, 200 чи 404)
