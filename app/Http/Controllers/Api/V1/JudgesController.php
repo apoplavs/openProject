@@ -307,6 +307,7 @@ class JudgesController extends Controller
         // отримання результатів
         $judges_list = Judge::getJudgesList($filters['regions'], $filters['instances'], $filters['jurisdictions'],
             $filters['sort_order'], $filters['search'], $filters['powers_expired']);
+        var_dump($judges_list);
         
         return response()->json($judges_list);
     }
