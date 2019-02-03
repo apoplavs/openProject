@@ -2,7 +2,7 @@
   <div class="courtSessions">
     <div class="card mt-2">
       <div class="card-header d-flex justify-content-between">
-        <span>Cудові засідання</span>
+        <span> <i class="fa fa-bookmark" aria-hidden="true"></i>Закладки судових засідань</span>
         <input type="search" class="form-control" placeholder="Пошук..." v-model.trim="search">
       </div>
       <div class="card-body court-sessions-container">
@@ -22,9 +22,7 @@
               <div class="col-2">Суть справи</div>
               <div class="col-2 pr-0">Примітки</div>
             </div>
-            <!-- <transition name='fade'> -->
             <div class="row body" v-for="(session, i_el) in filterSessions" :key="i_el">
-              <!-- <transition name='fade'> -->
               <div class="col-1 pl-0">
                 <div>{{ session.date }}</div>
               </div>
@@ -35,12 +33,10 @@
               <div class="col-2">{{ session.description }}</div>
               <div class="col-2 pr-0 text-center position-relative note-wrap">
                 <i class="fas fa-star" @click="showModalDelete(session)"></i>
-                <textarea class="note" maxlength="254"></textarea>
-                <img class="checkmark" src="../../../../images/checkmark.png">
+                <textarea class="note" maxlength="254" v-model.trim="session.note"></textarea>
+                <img class="checkmark" src="../../../../images/checkmark.png" @click="saveNote(session)">
               </div>
-              <!-- </transition> -->
             </div>
-            <!-- </transition> -->
           </div>
         </div>
       </div>
@@ -138,15 +134,9 @@ export default {
           }
         })
           .then(response => {
-            let index;
-            this.courtSessions.forEach((el, i) => {
-              if (this.deleteSession.id === el.id) {
-                index = i;
-              }
+            this.courtSessions = _.filter( this.courtSessions, el => {
+                return this.deleteSession.id !== el.id
             });
-            if (index >= 0) {
-              this.courtSessions.splice(index, 1);
-            }
             console.log("courtSessions", this.courtSessions);
             this.deleteSession = null;
             this.loadData = true;
@@ -157,6 +147,21 @@ export default {
             }
           });
       }
+    },
+    saveNote(session) {
+      // якщо пуста строка передаємо null
+      session.note = !session.note.length ? null : session.note;
+      axios.post(`/api/v1/court-sessions/${session.id}/bookmark/note`, { 'note': session.note }, {
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Requested-With': 'XMLHttpRequest',
+          Authorization: localStorage.getItem("token")
+        }
+        }) .catch(error => {
+        if (error && error.response && error.response.status === 401) {
+          this.$router.push("/login");
+        }
+      })
     }
   }
 };
@@ -168,6 +173,13 @@ export default {
   width: 100%;
   height: auto;
   margin-top: 50px;
+  .card-header {
+    .fa-bookmark {
+      color: #ffffff;
+      font-size: 1.4rem;
+      margin-right: 15px;
+    }
+  }
   .infoCard {
     padding: 20px;
     > p:first-child {

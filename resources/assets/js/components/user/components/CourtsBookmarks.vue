@@ -71,9 +71,9 @@ export default {
           .then(response => {
             this.bookmarks = response.data;
             /* -------------------delete!!!!  ------------------------------------------*/
-            this.bookmarks.forEach(obj => {
-              obj.is_bookmark = true;
-            });
+            // this.bookmarks.forEach(obj => {
+            //   obj.is_bookmark = true;
+            // });
             this.loadData = true;
             console.log("Courts Bookmarks", this.bookmarks);
           })
