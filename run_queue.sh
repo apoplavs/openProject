@@ -5,5 +5,5 @@ if $( echo $QUEUE_STATUS | grep --quiet 'artisan queue:work')
 then
     exit;
 else
-    php artisan queue:work
+    php ~/public_html/toecyd/artisan queue:work
 fi
