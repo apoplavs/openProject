@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use Toecyd\Court;
 use Toecyd\Judge;
+use Illuminate\Http\UploadedFile;
 
 class JudgesPhotoTest extends BaseApiTest
 {
@@ -62,12 +63,27 @@ class JudgesPhotoTest extends BaseApiTest
         $response->assertStatus(422);
     }
 
+    public function testRequestWithoutPhoto()
+    {
+        $insert_db_data = $this->getInsertDbData();
+        $judge_id = $insert_db_data['judges'][0]['id'];
+        $this->insertDataToDb($insert_db_data);
+        $response = $this->post($this->url, ['judge_id' => $judge_id], $this->headersWithToken($this->login($this->user_data)));
+        $response->assertStatus(422);
+    }
+
+
     public function testTrivial()
     {
         $insert_db_data = $this->getInsertDbData();
         $this->insertDataToDb($insert_db_data);
         $judge_id = $insert_db_data['judges'][0]['id'];
-        $response = $this->post($this->url, ['judge_id' => $judge_id], $this->headersWithToken($this->login($this->user_data)));
+        $response = $this->post($this->url, ['judge_id' => $judge_id, 'photo' => UploadedFile::fake()->image('photo.jpg')->size($this->getMaxPhotoSizeInKb())], $this->headersWithToken($this->login($this->user_data)));
         $this->assertCorrectResponse($response);
+    }
+
+    private function getMaxPhotoSizeInKb()
+    {
+        return pow(2, 10);
     }
 }

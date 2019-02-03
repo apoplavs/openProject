@@ -1979,6 +1979,12 @@ class JudgesController extends Controller
      * @return string
      */
     public function addPhoto(Request $request) {
+        $sizeInKb = pow(2, 10);
+        $request->validate([
+            'judge_id' => 'int|min:1',
+            'photo' => "required|image|max:{$sizeInKb}|mimes:jpeg,png",
+        ]);
+
         $judge_id = $request->get('judge_id');
 
         $judge = Judge::select('judges.id')
