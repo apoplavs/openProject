@@ -10,43 +10,23 @@
                         <a class="nav-link tab" href="javascript:" @click="setActiveTab(2)">Судова практика</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link tab" href="javascript:" @click="setActiveTab(3)">Заклади</a>
+                        <a class="nav-link tab" href="javascript:" @click="setActiveTab(3)">Закладки суддів</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link tab" href="javascript:" @click="setActiveTab(4)">Історія переглядів</a>
+                        <a class="nav-link tab" href="javascript:" @click="setActiveTab(4)">Закладки судових установ</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link tab" href="javascript:" @click="setActiveTab(5)">Шаблони</a>
+                        <a class="nav-link tab" href="javascript:" @click="setActiveTab(5)">Історія переглядів</a>
                     </li>
                 </ul>
             </div>
              <div class="tab-content container w-1140">
                 <court-sessions v-if="tabs.sessions"/>
                 <court-practice v-if="tabs.practice"/>
-                <establishments v-if="tabs.establishments"/>
+                <judges-bookmarks v-if="tabs.judges"/>
+                <courts-bookmarks v-if="tabs.courts"/>
                 <view-history v-if="tabs.history"/>
-                <templates v-if="tabs.templates"/>
              </div>
-            <!-- <div class="d-flex justify-content-center">
-                <div class="tab-content container w-1140">
-                    <div role="tabpanel" class="tab-pane" id="CourtSessions">
-                        <court-sessions/>
-                    </div>
-                    <div role="tabpanel" class="tab-pane" id="CourtPractice">
-                        <court-practice/>
-                    </div>
-                    <div role="tabpanel" class="tab-pane" id="Establishments">
-                        <establishments />
-                    </div>
-                    <div role="tabpanel" class="tab-pane" id="ViewHistory">
-                        <h1>BLYAA</h1>
-                        <view-history />
-                    </div>
-                    <div role="tabpanel" class="tab-pane" id="Templates">
-                        <templates />
-                    </div>
-                </div>
-            </div> -->
         </div>
     </div>
 </template>
@@ -54,36 +34,31 @@
 <script>
     import CourtSessions from './components/CourtSessions.vue';
     import CourtPractice from './components/CourtPractice.vue';
-    import Establishments from './components/Establishments.vue';
+    import JudgesBookmarks from './components/JudgesBookmarks.vue';
+    import CourtsBookmarks from './components/CourtsBookmarks.vue';
     import ViewHistory from './components/ViewHistory.vue';
-    import Templates from './components/Templates.vue';
-    
-    
+      
     export default {
         name: "UserProfile",
         components: {
             CourtSessions,
             CourtPractice,
-            Establishments,
-            ViewHistory,
-            Templates
+            JudgesBookmarks,
+            CourtsBookmarks,
+            ViewHistory
         },
         data() {
             return {
                 tabs: {
                     sessions: false,
                     practice: false,
-                    establishments: false,
-                    history: false,
-                    templates: false
+                    judges: false,
+                    courts: false,
+                    history: false
                 },
                 user: {}
             }
         },
-        // beforeMount() {
-            
-        //     console.log('LOL');
-        // },
         mounted() {
             this.setActiveTab(1);
         },

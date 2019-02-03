@@ -28,6 +28,7 @@ Route::group(['prefix' => 'v1/', 'namespace' => 'Api\V1',], function () {
     Route::post('login/google', 'AuthController@loginGoogle');
     Route::post('login/facebook', 'AuthController@loginFacebook');
 	Route::post('signup', 'AuthController@signup');
+	Route::get('confirm-email', 'AuthController@confirmEmail');
 
 	
 	/**
@@ -104,7 +105,7 @@ Route::group(['prefix' => 'v1/', 'namespace' => 'Api\V1',], function () {
         // Видалити судове засідання з закладок
         Route::delete('court-sessions/{id}/bookmark', 'CourtSessionController@deleteSessionBookmark')->middleware('checkId:session');
 		// Додати примітку до закладки на судове засідання
-		Route::post('court-sessions/bookmark/{id}/note', 'CourtSessionController@addNote')->middleware('checkId:session-bookmark')->middleware('checkAccess:session-bookmark');
+		Route::post('court-sessions/{id}/bookmark/note', 'CourtSessionController@addNote')->middleware('checkAccess:session-bookmark');
 		
 		
 		/**
@@ -112,8 +113,10 @@ Route::group(['prefix' => 'v1/', 'namespace' => 'Api\V1',], function () {
 		 */
 		// Історія переглядів користувача
 		Route::get('user/history', 'HomeController@indexHistory');
-		// Закладки користувача
-		Route::get('user/bookmarks', 'HomeController@indexBookmarks');
+		// Закладки на суддів для користувача
+		Route::get('user/bookmarks/judges', 'HomeController@indexBookmarksJudges');
+		// Закладки на судові установи для користувача
+		Route::get('user/bookmarks/courts', 'HomeController@indexBookmarksCourts');
 		
 		/**
 		 * Налаштування користувача

@@ -236,10 +236,10 @@ class HomeController extends Controller
      * Get the bookmarks of user
      *
      * @SWG\Get(
-     *     path="/user/bookmarks",
-     *     summary="Отримати закладки",
-     *     description="Отримати закладки поточного користувача",
-     *     operationId="user-bookmarks",
+     *     path="/user/bookmarks/judges",
+     *     summary="Отримати закладки на суддів",
+     *     description="Отримати закладки на суддів для поточного користувача",
+     *     operationId="user-bookmarks-judges",
      *     produces={"application/json"},
      *     tags={"Особистий кабінет"},
      *     security={
@@ -256,22 +256,6 @@ class HomeController extends Controller
      *         response=200,
      *         description="ОК",
      *        @SWG\Schema(
-     *          @SWG\Property(
-     *              property="courts",
-     *              description="Список судових установ, що знаходяться в закладках у користувача",
-     *              type="array",
-     *              @SWG\Items(
-     *                  type="object",
-     *                  @SWG\Property(property="court_code", type="string", description="Код суду"),
-     *                  @SWG\Property(property="court_name", type="string", description="Назва суду"),
-     *     	            @SWG\Property(property="instance", type="string", description="Інстанція суду [Перша, Апеляційна, Касаційна]"),
-     *     	            @SWG\Property(property="region", type="string", description="Регіон суду"),
-     *     	            @SWG\Property(property="jurisdiction", type="string", description="Юрисдикція суду [Загальна, Адміністративна, Господарська]"),
-     *     	            @SWG\Property(property="address", type="string", description="Адреса суду"),
-     *     	            @SWG\Property(property="head_judge", type="string", description="ПІБ головуючого судді  || null якщо невідомо"),
-     *     	            @SWG\Property(property="rating", type="integer", description="Місце в рейтингу серед усіх судових установ"),
-     *              )
-     *          ),
      *         @SWG\Property(
      *              property="judges",
      *              type="array",
@@ -298,7 +282,6 @@ class HomeController extends Controller
      *          ),
      *           examples={"application/json":
      *     	         {
-     *                  "judges":{
      *                      {
      *                          "id":302,
      *                          "court_name":"Барський районний суд Вінницької області",
@@ -323,29 +306,6 @@ class HomeController extends Controller
      *                          "due_date_status":null,
      *                          "rating":0
      *                      }
-     *                  },
-     *                  "courts":{
-     *                      {
-     *                          "court_code":106,
-     *                          "court_name":"Євпаторійський міський суд Автономної Республіки Крим",
-     *                          "instance":"Перша",
-     *                          "region":"Автономна Республіка Крим",
-     *                          "jurisdiction":"Загальна",
-     *                          "address":"97412, м. Євпаторія, пр. Леніна, 30",
-     *                          "head_judge":null,
-     *                          "rating":0
-     *                      },
-     *                      {
-     *                          "court_code":1410,
-     *                          "court_name":"Єланецький районний суд Миколаївської області",
-     *                          "instance":"Перша",
-     *                          "region":"Миколаївська область",
-     *                          "jurisdiction":"Загальна",
-     *                          "address":"55501, смт Єланець, вул. Аграрна, 16",
-     *                          "head_judge":null,
-     *                          "rating":0
-     *                      }
-     *                  }
      *              }
      *          }
      *     ),
@@ -367,12 +327,101 @@ class HomeController extends Controller
      *
      * @return [json] user object
      */
-	public function indexBookmarks() {
-		return response()->json([
-		    'judges'            => UserBookmarkJudge::getBookmarkJudges(),
-            'courts'            => UserBookmarkCourt::getBookmarkCourts()
-        ]);
+	public function indexBookmarksJudges() {
+		return response()->json(UserBookmarkJudge::getBookmarkJudges());
 	}
+
+
+
+
+
+    /**
+     * Get the bookmarks of user
+     *
+     * @SWG\Get(
+     *     path="/user/bookmarks/courts",
+     *     summary="Отримати закладки на суди",
+     *     description="Отримати закладки на судові установи для поточного користувача",
+     *     operationId="user-bookmarks-courts",
+     *     produces={"application/json"},
+     *     tags={"Особистий кабінет"},
+     *     security={
+     *     {"passport": {}},
+     *      },
+     *     @SWG\Parameter(
+     *      ref="#/parameters/Content-Type",
+     *     ),
+     *     @SWG\Parameter(
+     *      ref="#/parameters/X-Requested-With",
+     *     ),
+     *
+     *     @SWG\Response(
+     *         response=200,
+     *         description="ОК",
+     *        @SWG\Schema(
+     *          @SWG\Property(
+     *              property="courts",
+     *              description="Список судових установ, що знаходяться в закладках у користувача",
+     *              type="array",
+     *              @SWG\Items(
+     *                  type="object",
+     *                  @SWG\Property(property="court_code", type="string", description="Код суду"),
+     *                  @SWG\Property(property="court_name", type="string", description="Назва суду"),
+     *                  @SWG\Property(property="instance", type="string", description="Інстанція суду [Перша, Апеляційна, Касаційна]"),
+     *                  @SWG\Property(property="region", type="string", description="Регіон суду"),
+     *                  @SWG\Property(property="jurisdiction", type="string", description="Юрисдикція суду [Загальна, Адміністративна, Господарська]"),
+     *                  @SWG\Property(property="address", type="string", description="Адреса суду"),
+     *                  @SWG\Property(property="head_judge", type="string", description="ПІБ головуючого судді  || null якщо невідомо"),
+     *                  @SWG\Property(property="rating", type="integer", description="Місце в рейтингу серед усіх судових установ"),
+     *              )
+     *            ),
+     *          ),
+     *           examples={"application/json":
+     *               {
+     *                  {
+     *                      "court_code":106,
+     *                      "court_name":"Євпаторійський міський суд Автономної Республіки Крим",
+     *                      "instance":"Перша",
+     *                      "region":"Автономна Республіка Крим",
+     *                      "jurisdiction":"Загальна",
+     *                      "address":"97412, м. Євпаторія, пр. Леніна, 30",
+     *                      "head_judge":null,
+     *                      "rating":0
+     *                  },
+     *                  {
+     *                      "court_code":1410,
+     *                      "court_name":"Єланецький районний суд Миколаївської області",
+     *                      "instance":"Перша",
+     *                      "region":"Миколаївська область",
+     *                      "jurisdiction":"Загальна",
+     *                      "address":"55501, смт Єланець, вул. Аграрна, 16",
+     *                      "head_judge":null,
+     *                      "rating":0
+     *                  }
+     *              }
+     *          }
+     *     ),
+     *
+     *     @SWG\Response(
+     *         response=401,
+     *         description="Необхідна аутентифікація користувача, можливо токен не існує, або анульований",
+     *         examples={"application/json":
+     *              {
+     *                  "message": "Unauthenticated",
+     *              }
+     *          }
+     *     ),
+     *     @SWG\Response(
+     *         response=405,
+     *         description="Метод, з яким виконувався запит, не дозволено використовувати для заданого ресурсу; наприклад, запит був здійснений за методом POST, хоча очікується GET.",
+     *     )
+     * )
+     *
+     * @return [json] user object
+     */
+    public function indexBookmarksCourts() {
+        return response()->json(UserBookmarkCourt::getBookmarkCourts());
+    }
 	
 	
 

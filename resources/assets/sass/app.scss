@@ -78,10 +78,13 @@ button {
 i[class^="fa-bookmark"],
 i.fa-edit{
   cursor: pointer;
+  font-size: 1.1rem;
 }
 .fa-bookmark-o,
 .fa-bookmark {
     color: $danger;
+    font-size: 1.1rem;
+    cursor: pointer;
 }
 .fa-briefcase {
     color: $success;
@@ -158,9 +161,6 @@ i.fa-edit{
   }
   // ------ end ------- //
 
-// .hr {
-//   border-bottom: 1px solid lightgray;
-// }
 .fa-spinner {
   animation: 1s linear 0s normal none infinite running rotate;
   -webkit-animation: 1s linear 0s normal none infinite running rotate;

@@ -89,11 +89,12 @@
         },
       }
     },
-    mounted() {
-      let initialFilters = JSON.parse(localStorage.getItem('courts-filters'));
+    created() {
+      let initialFilters = JSON.parse(sessionStorage.getItem('courts-filters'));
       if (initialFilters) {
         this.filters = initialFilters;
       }
+      this.getCourtsList();
     },
     methods: {
       validateInputSearch() {
@@ -132,20 +133,19 @@
         this.loadData = false;
         window.scrollTo(0, 0);
         this.getCourtsList();
-        localStorage.setItem('courts-filters', JSON.stringify(this.filters));
+        sessionStorage.setItem('courts-filters', JSON.stringify(this.filters));
       }, 10),
   
       pageChange(page) {
         window.scrollTo(0, 0);
         this.loadData = false;
         this.filters.page = page + 1;
-        this.getCourtsList();
-        console.log('lol');
-        
+        this.getCourtsList();        
       },
    
       getCourtsList() {
         this.autocomplete = []; // коли визиваємо цей метод liveSearch маємо закрити
+        this.filters.expired = (this.filters.expired === true || this.filters.expired === 1) ? 1 : 0; 
         if (this.validateInputSearch() === false) { // !! = true
           this.filters.search = null;
         }
@@ -198,14 +198,14 @@
         this.$refs.pagins.currentPage = 0;
         this.filters.page = 1;
         this.getCourtsList();
-        localStorage.setItem('courts-filters', JSON.stringify(this.filters));
+        sessionStorage.setItem('courts-filters', JSON.stringify(this.filters));
       },
   
       resetFilters() {
         this.autocomplete = [];
         this.loadData = false;   
         this.getCourtsList(); // онуляємо всі фільтри і визиваємо функцію
-        localStorage.removeItem('courts-filters');
+        sessionStorage.removeItem('courts-filters');
       }
     },
   };

@@ -19,7 +19,7 @@ class CourtSessionController extends Controller
      *
      * @SWG\Get(
      *     path="/court-sessions/bookmarks",
-     *     summary="Отримати список судових засідань",
+     *     summary="Отримати список закладок на судові засідання",
      *     description="Отримати список судових засідань, що знаходяться в закладках поточного користувача",
      *     operationId="court-sessions-bookmarks",
      *     produces={"application/json"},
@@ -67,7 +67,8 @@ class CourtSessionController extends Controller
  *                          "forma":"Цивільне",
  *                          "number":"125/1530/18",
  *                          "involved":"Позивач: АТ КБ БАНК, відповідач: Шевченко Іван Іваноич",
- *                          "description":"про стягнення заборгованості"
+ *                          "description":"про стягнення заборгованості",
+ *     						"note": "підготувати документи"
  *                      },
  *                      {
  *                          "id":3,
@@ -78,7 +79,8 @@ class CourtSessionController extends Controller
  *                          "forma":"Адмінправопорушення",
  *                          "number":"125/1530/19",
  *                          "involved":"",
- *                          "description":""
+ *                          "description":"",
+ *     						"note": null
  *                      }
      *              }
      *          }
@@ -261,7 +263,7 @@ class CourtSessionController extends Controller
 	
 	/**
 	 * @SWG\Post(
-	 *     path="/court-sessions/bookmark/{id}/note",
+	 *     path="/court-sessions/{id}/bookmark/note",
 	 *     summary="Створити примітку до закладки на судове засідання",
 	 *     description="Створити примітку до закладки на судове засідання поточного користувача",
 	 *     operationId="courtSessions-bookmark-note",
@@ -281,7 +283,7 @@ class CourtSessionController extends Controller
 	 *     name="id",
 	 *     in="path",
 	 *     required=true,
-	 *     description="Id закладки на судове засідання, для якої потрібно створити примітку",
+	 *     description="Id судового засідання, на яке потрібно створити примітку. Дане судове засідання повинно знаходитись в закалдках  користувача",
 	 *     type="integer",
 	 *     collectionFormat="multi",
 	 *     uniqueItems=true,
@@ -302,7 +304,7 @@ class CourtSessionController extends Controller
 	 *     ),
 	 *
 	 *     @SWG\Response(
-	 *         response=201,
+	 *         response=200,
 	 *         description="Примітка упішно створена",
 	 *         examples={"application/json":
 	 *              {
@@ -322,31 +324,32 @@ class CourtSessionController extends Controller
 	 *     ),
 	 *
 	 *     @SWG\Response(
-	 *         response=405,
-	 *         description="Метод, з яким виконувався запит, не дозволено використовувати для заданого ресурсу; наприклад, запит був здійснений за методом PUT, хоча очікується POST.",
-	 *     ),
-	 *
-	 *     @SWG\Response(
-	 *         response=422,
-	 *         description="Передані не валідні дані, неіснуючий id закладки",
+	 *         response=403,
+	 *         description="Користувач немає доступу до закладки на дане судове засідання,
+	 * можливо дане судове засідання не знаходиться в закалдках поточного користувача",
 	 *         examples={"application/json":
 	 *              {
-	 *                  "message": "Неіснуючий id",
+	 *                  "message": "Заборонено!",
 	 *              }
 	 *          }
 	 *     ),
+	 *
+	 *     @SWG\Response(
+	 *         response=405,
+	 *         description="Метод, з яким виконувався запит, не дозволено використовувати для заданого ресурсу; наприклад, запит був здійснений за методом PUT, хоча очікується POST.",
+	 *     ),
 	 * )
 	 */
-	public function addNote($bookmark_id, Request $request) {
+	public function addNote($court_session_id, Request $request) {
 		
 		$request->validate([
-			'note'    => 'required|string|max:255'
+			'note'    => 'nullable|string|max:255'
 		]);
+		$note = $request->note ?? NULL;
+		$court_session_id = intval($court_session_id);
 		
-		$bookmark_id = intval($bookmark_id);
-		
-		UserBookmarkSession::writeNoteForBookmark($bookmark_id, $request->note);
-		return response()->json(['message' => 'Примітка успішно створена/оновлена'], 201);
+		UserBookmarkSession::writeNoteForBookmark($court_session_id, $note);
+		return response()->json(['message' => 'Примітка успішно створена/оновлена'], 200);
 	}
 	
 }

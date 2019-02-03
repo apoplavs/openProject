@@ -93,7 +93,7 @@
       }
     },
     created() {
-      let initialFilters = JSON.parse(localStorage.getItem('judges-filters'));
+      let initialFilters = JSON.parse(sessionStorage.getItem('judges-filters'));
       if (initialFilters) {
         this.filters = initialFilters;
       }
@@ -186,7 +186,7 @@
         this.loadData = false;
         window.scrollTo(0, 0);
         this.getJudgesList();
-        localStorage.setItem('judges-filters', JSON.stringify(this.filters));
+        sessionStorage.setItem('judges-filters', JSON.stringify(this.filters));
       }, 10),
   
       pageChange(page) {
@@ -202,14 +202,14 @@
         this.$refs.pagins.currentPage = 0;
         this.filters.page = 1;
         this.getJudgesList();
-        localStorage.setItem('judges-filters', JSON.stringify(this.filters));
+        sessionStorage.setItem('judges-filters', JSON.stringify(this.filters));
       },
   
       resetFilters() {
         this.autocomplete = [];
         this.loadData = false;   
         this.getJudgesList(); // онуляємо всі фільтри і визиваємо функцію
-        localStorage.removeItem('judges-filters');
+        sessionStorage.removeItem('judges-filters');
       },
 
       changeStatus: function(data){

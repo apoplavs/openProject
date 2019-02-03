@@ -17,3 +17,5 @@ yarn-error.log
 /ml/pickles
 /ml/.idea
 /ml/lib/config.py
+/ml/analyze/__pycache__/
+/ml/lib/__pycache__/
