@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Mail;
 use Toecyd\Http\Controllers\Controller;
 use Carbon\Carbon;
+use Toecyd\Mail\AccountMail;
 use Toecyd\Mail\NotificationMail;
 use Toecyd\User;
 
@@ -90,18 +91,19 @@ class AuthController extends Controller
             'email'    => 'required|string|email|unique:users|max:255',
             'password' => 'required|string|min:6|max:32',
         ]);
+        $remember_token = str_random(60);
         $user = new User([
             'name'     => $request->name,
             'email'    => $request->email,
             'password' => bcrypt($request->password),
-			'remember_token' => str_random(60)
+			'remember_token' => $remember_token
         ]);
         
         // надсилання email для підтвердження паролю
 		Mail::to($request->email)
-			->send(new NotificationMail('confirm_email', 'Завершення реєстрації облікового запису', [
+			->send(new AccountMail('confirm_email', 'Завершення реєстрації облікового запису', [
 				'name'  => $request->name,
-				'remember_token'  => $user->remember_token
+				'remember_token'  => $remember_token
 			]));
 		
         $user->save();

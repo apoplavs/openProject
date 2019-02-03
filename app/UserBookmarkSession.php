@@ -31,6 +31,7 @@ class UserBookmarkSession extends Model
      */
     public static function getBookmarkFields()
     {
+    	// @togo додати поле, яким відмічати статус судді, чи знаходиться він на робомому місці
         return [
             'court_sessions.id',
             'court_sessions.date',
