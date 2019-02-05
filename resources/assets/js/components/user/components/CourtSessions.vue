@@ -73,7 +73,7 @@ export default {
       showModalConfirm: false,
       deleteSession: null,
       loadData: false
-    };
+    }; 
   },
   computed: {
     filterSessions() {
