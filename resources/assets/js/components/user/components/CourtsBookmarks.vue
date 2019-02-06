@@ -6,7 +6,7 @@
         <div class="card-header d-flex justify-content-between">
             <span>
                 <i class="fa fa-bookmark " aria-hidden="true"></i>
-                Закладки судових установ..
+                Закладки судових установ
             </span>
           <input type="search" class="form-control" placeholder="Пошук..." v-model.trim="search">
         </div>
@@ -44,7 +44,7 @@ export default {
   },
   computed: {
     filterBookmarks() {
-      //  живий пошук = фільтер
+      //  живий пошук = фільтр
       return _.filter(this.bookmarks, el => {
         let arr = _.filter(Object.keys(el), key => {
           let regEx = new RegExp(`(${this.search})`, "i");
