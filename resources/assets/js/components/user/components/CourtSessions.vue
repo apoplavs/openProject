@@ -9,7 +9,7 @@
         <spinner v-if="!loadData"/>
         <div
           v-if="loadData && !filterSessions.length"
-          >За даними параметрами нічого не знайдено...
+          >Немає ...
         </div>
         <div v-if="loadData" class="court-sessions">
           <div v-if="filterSessions.length" class="container-component">
@@ -237,7 +237,7 @@ export default {
     padding: 0;
     background-color: #ffffff;
     .body {
-      font-size: .9rem;
+      font-size: .8rem;
     }
   }
 
