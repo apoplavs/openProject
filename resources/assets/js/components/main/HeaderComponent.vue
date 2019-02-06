@@ -2,7 +2,7 @@
   <div class="header min-width">
     <nav class="navigation-menu">
       <div class="container min-width custom-navbar">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" :href="'/'">
           <img src="../../../images/logo.png" width="40" alt="logo">
           <span class="logo">ТОЕсуд</span>
         </a>
@@ -61,7 +61,7 @@
                 :class="{'active': $route.fullPath === '/settings' || $route.fullPath === '/user-profile' || $route.fullPath === '/user-profile'}"
               >{{ user.name }}</a>
               <div class="dropdown-menu user-cabinet">
-                <li class="py-3">
+                <li class="py-3 noselect">
                   <span class="email-user">{{ user.email }}</span>
                 </li>
                 <router-link to="/user-profile" tag="li" class="nav-item">
@@ -76,8 +76,8 @@
                     <i class="fa fa-cog float-right" aria-hidden="true"></i>
                   </a>
                 </router-link>
-                <li @click="logout()">
-                  <a class="dropdown-item">
+                <li @click="logout()" class="nav-item">
+                  <a class="dropdown-item" href="#">
                     Вийти
                     <i class="fa fa-sign-out float-right" aria-hidden="true"></i>
                   </a>
@@ -137,7 +137,7 @@ export default {
 @import "../../../sass/_mixins.scss";
 .header {
     height: 90px;
-    border-top: 2px solid $main-color;
+    background-color: white;
   nav.navigation-menu {
     box-shadow: $shadow-header;
   }

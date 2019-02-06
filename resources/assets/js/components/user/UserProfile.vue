@@ -86,6 +86,7 @@
     .user-profile {
         display: flex;
         justify-content: center;
+        margin-top: 30px;
     }
     
     .w-1140 {
@@ -93,7 +94,7 @@
     }
     
     .nav.nav-tabs {
-        height: 100px;
+        height: 60px;
         display: flex;
         align-items: flex-end;
         justify-content: center;
