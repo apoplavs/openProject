@@ -260,7 +260,7 @@ export default {
           }
         })
         .then(response => {
-          // this.user = response.data;
+          this.user = response.data;
           console.log("User settings", this.user);
         })
         .catch(error => {
