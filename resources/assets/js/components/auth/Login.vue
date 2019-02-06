@@ -128,8 +128,9 @@
                                 if (response) {
                                     let token = response.data.token_type + " " + response.data.access_token;
                                     localStorage.setItem("token", token);
+                                    // якщо токен отримано перекидаємо на профайл
                                     this.getUserData(() => {
-                                        this.$router.go(-1);
+                                        this.$router.push('/user-profile');
                                     });
                                 }
                             })
@@ -143,7 +144,7 @@
                                         });
                                     }
                                 } else {
-                                    this.$toasted.error("Щось пішло не так :( Cпробуй пізніше", {
+                                    this.$toasted.error("Щось пішло не так :( Cпробуйте пізніше", {
                                         theme: "primary",
                                         position: "top-right",
                                         duration: 5000

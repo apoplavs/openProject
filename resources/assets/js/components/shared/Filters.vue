@@ -246,7 +246,6 @@
                 <input type="checkbox" value="1" v-model="filters.expired">
                     <span class="checkmark"></span>Закінчилися повноваження
               </label>
-              {{filters.expired}}
             </li>
           </ul>
         </div>

@@ -112,9 +112,18 @@ i.fa-edit{
 
 .content-wrapper {
   min-width: 1140px;
-  height: 100vh;
-  padding-top: 3rem;
-  padding-bottom: 5rem;
+  height: 100%;
+  padding: 3rem 0;
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
 }
 
 ::-webkit-scrollbar {
