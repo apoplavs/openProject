@@ -40,7 +40,7 @@
                       class="form-control"
                       name="прізвище"
                       v-model="user.surname"
-                      v-validate="'required|alpha|min:3||max:250'"
+                      v-validate="'alpha|max:250'"
                       :class="{'input': true, 'is-danger': errors.has('прізвище') }"
                     >
                     <small>
@@ -98,10 +98,10 @@
             <div class="row">
               <div class="col-6">
                 <div class="form-group">
-                  <label for="password" class="form-control-label">Старий пароль:</label>
+                  <label for="currentPassword" class="form-control-label">Старий пароль:</label>
                   <p class="control has-icon has-icon-right">
                     <input
-                      id="password"
+                      id="currentPassword"
                       type="password"
                       class="form-control"
                       name="пароль"
@@ -121,10 +121,10 @@
               </div>
               <div class="col-6">
                 <div class="form-group">
-                  <label for="repassword" class="form-control-label">Новий пароль:</label>
+                  <label for="newPassword" class="form-control-label">Новий пароль:</label>
                   <p class="control" :class="{error: !(user.repassword === user.password)}">
                     <input
-                      id="repassword"
+                      id="newPassword"
                       type="password"
                       class="form-control"
                       name="repassword"
@@ -143,10 +143,10 @@
             <div class="row">
               <div class="col-6">
                 <div class="form-group">
-                  <label for="password" class="form-control-label">Підтвердити новий пароль:</label>
+                  <label for="rePassword" class="form-control-label">Підтвердити новий пароль:</label>
                   <p class="control has-icon has-icon-right">
                     <input
-                      id="password"
+                      id="rePassword"
                       type="password"
                       class="form-control"
                       name="пароль"
@@ -179,51 +179,61 @@
         <div class="notifications">
           <h4>Налаштування сповіщень</h4>
           <div class="table">
-            <div class="row">
+            <div class="row header">
               <div class="col-9">Подія</div>
               <div class="col-3">
                 <div>Спосіб зв'язку</div>
-                <input type="checkbox">
+                <input type="checkbox" v-model="allSelected" @change="selectAll()">
               </div>
             </div>
             <div class="row hr">
               <div class="col-9">В судді, якого користувач відстежує, змінився статус.</div>
               <div class="col-3">
-                <input type="checkbox"> Email
+                <input type="checkbox" v-model="notifications.email_notification_1" @click="select()"> Email
               </div>
             </div>
             <div class="row bg">
               <div class="col-9">По справі, яку користувач відстежує, додалось нове судове засідання</div>
               <div class="col-3">
-                <input type="checkbox"> Email
+                <input type="checkbox" v-model="notifications.email_notification_2" @click="select()"> Email
               </div>
             </div>
             <div class="row">
               <div class="col-9">По справі, яку користувач відстежує, в будь-якого судді змінився статус</div>
               <div class="col-3">
-                <input type="checkbox"> Email
+                <input type="checkbox" v-model="notifications.email_notification_3" @click="select()"> Email
               </div>
             </div>
             <div class="row bg">
               <div class="col-9">За один день до судового засідання, яке користувач відстежує</div>
               <div class="col-3">
-                <input type="checkbox"> Email
+                <input type="checkbox" v-model="notifications.email_notification_4" @click="select()"> Email
               </div>
             </div>
             <div class="row">
               <div class="col-9">Про пропозиції судової практики для користувача</div>
               <div class="col-3">
-                <input type="checkbox"> Email
+                <input type="checkbox" v-model="notifications.email_notification_5" @click="select()"> Email
               </div>
             </div>
             <div class="row bg">
                 <div class="col-9">Новини, пропозиції, оновлення</div>
                 <div class="col-3">
-                <input type="checkbox"> Email
+                <input type="checkbox" v-model="notifications.email_notification_6" @click="select()"> Email
                 </div>
+            </div>
+             <div class="row">
+              <div class="offset-6 col-6 text-center">
+                <button type="submit" class="btn btn-primary">Зберегти</button>
+              </div>
             </div>
           </div>
         </div>
+         <div class="row">
+            <div class="col-6">
+              <button type="button" class="btn btn-danger" @click="deleteProfile()">Видалити профайл</button>
+            </div>
+          </div>
       </div>
     </div>
   </div>
@@ -235,14 +245,25 @@ export default {
   data() {
     return {
       user: {
-        name: "Tetiana",
-        surname: "Prysiazhniuk",
-        phone: "+380660851225"
+        name: '',
+        surname: '',
+        phone: null,
+        email:'',
+        photo: ''
+      },
+      allSelected: false,
+      notifications: {
+        email_notification_1: 0,
+        email_notification_2: 0,
+        email_notification_3: 0,
+        email_notification_4: 0,
+        email_notification_5: 0,
+        email_notification_6: 0
       },
       password: {
-        currentPassword: "",
-        newPassword: "",
-        rePassword: ""
+        currentPassword: '',
+        newPassword: '',
+        rePassword: ''
       }
     };
   },
@@ -260,14 +281,32 @@ export default {
           }
         })
         .then(response => {
-          this.user = response.data;
-          console.log("User settings", this.user);
+          this.user = response.data.profile;
+          this.notifications = response.data.notifications;
+          console.log("User settings", response);
         })
         .catch(error => {
           if (error.response && error.response.status === 401) {
             this.$router.push("/login");
           }
         });
+    },
+    selectAll() {
+      if (this.allSelected) {
+        for (let key in this.notifications) {
+            this.notifications[key] = 1;           
+        }   
+      } else {
+        for (let key in this.notifications) {
+          this.notifications[key] = 0;       
+        }  
+      } 
+    },
+    select() {
+        this.allSelected = false;
+    },
+    deleteProfile() {
+      console.log('Я хочу видалити свій профайл. Що скажете?')
     }
   }
 };
@@ -288,6 +327,9 @@ input {
   background-color: $body-bg;
 }
 .table {
+  .header {
+    font-weight: bold;
+  }
   & > .row {
     padding: 15px 0;
   }
