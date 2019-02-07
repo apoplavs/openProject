@@ -271,7 +271,7 @@ class UserSettingsController extends Controller
 		$request->validate([
 			'new_name'    => 'string|min:3|max:255',
 			'new_surname' => 'string|min:3|max:255',
-			'new_phone' => 'string|min:9|max:12',
+			'new_phone' => 'string|min:9|max:10',
 		]);
 		
 		$user = Auth::user();
