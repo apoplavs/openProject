@@ -15,6 +15,8 @@ import CourtProfile from '../components/rating/courts/CourtProfile.vue';
 import UserProfile from '../components/user/UserProfile.vue';
 import UserSettings from '../components/user/UserSettings.vue';
 
+import PrivacyPolicy from '../components/system/PrivacyPolicy.vue'
+
 // import CourtSessions from '../components/user/components/CourtSessions.vue';
 // import CourtPractice from '../components/user/components/CourtPractice.vue';
 // import CourtsBookmarks from '../components/user/components/CourtsBookmarks.vue';
@@ -74,6 +76,11 @@ export default new Router({
             path: '/settings',
             component: UserSettings,
             name: 'user-settings',
+        },
+        {
+            path: '/privacy-policy',
+            component: PrivacyPolicy,
+            name: 'privacy-policy',
         },
     ]
 });
