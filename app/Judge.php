@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\DB;
 class Judge extends Model
 {
     const JUDGES_PER_PAGE = 10;
+    const NO_PHOTO = '/img/judges/no_photo.jpg';
+
     public $timestamps = false;
 
     // The attributes that are mass assignable.

@@ -15,6 +15,7 @@ use Toecyd\UserBookmarkJudge;
 use Toecyd\UserHistory;
 use Toecyd\UsersLikesJudge;
 use Toecyd\UsersUnlikesJudge;
+use Aws\S3\S3Client;
 
 /**
  * Class JudgesController
@@ -307,11 +308,11 @@ class JudgesController extends Controller
         // отримання результатів
         $judges_list = Judge::getJudgesList($filters['regions'], $filters['instances'], $filters['jurisdictions'],
             $filters['sort_order'], $filters['search'], $filters['powers_expired']);
-        
+
         return response()->json($judges_list);
     }
-    
-    
+
+
     /**
      * @SWG\Get(
      *     path="/guest/judges/list",
@@ -581,7 +582,7 @@ class JudgesController extends Controller
             $filters['sort_order'], $filters['search'], $filters['powers_expired']);
         return response()->json($judges_list);
     }
-    
+
 
     /**
      * Show the form for creating a new resource.
@@ -888,24 +889,24 @@ class JudgesController extends Controller
             $last_work = $pw['previous_work'];
         }
         $court_sessions = CourtSession::getSessionByJudge($id);
-        
+
         // отимуємо статистику по типах справ
 		$adminoffence_statistic = JudgesStatistic::getAdminoffenceStatistic($id);
 		$civil_statistic = 	JudgesStatistic::getCivilStatistic($id);
 		$criminal_statistic = JudgesStatistic::getCriminalStatistic($id);
 		$admin_statistic = JudgesStatistic::getAdminStatistic($id);
 		$commercial_statistic = JudgesStatistic::getCommercialStatistic($id);
-	
+
 		// рахуємо загальну статистику
 		$common_statistic = $this->countCommonStatistic($adminoffence_statistic, $criminal_statistic, $civil_statistic);
-        
+
         // вносим в історію переглядів
         if (Auth::check()) {
         UserHistory::addToHistory($id);
         }
 
         return response()->json([
-            'data' => $data, 
+            'data' => $data,
             'previous_works' => $previous_works,
             'court_sessions' => $court_sessions,
 			'common_statistic' => $common_statistic,
@@ -916,8 +917,8 @@ class JudgesController extends Controller
 			'commercial_statistic' => $commercial_statistic
         ]);
     }
-	
-	
+
+
 	/**
 	 *
 	 * @SWG\Get(
@@ -1120,25 +1121,25 @@ class JudgesController extends Controller
 		$data = Judge::getJudgeDataGuest($id);
 		$previous_works = [];
 		$last_work = $data['previous_work'];
-		
+
 		while ($last_work) {
 			$pw = Judge::getPreviousWork($last_work);
 			$previous_works[] = $pw['court_name'];
 			$last_work = $pw['previous_work'];
 		}
 		$court_sessions = CourtSession::getSessionByJudgeGuest($id);
-		
+
 		// отимуємо статистику по типах справ
 		$adminoffence_statistic = JudgesStatistic::getAdminoffenceStatistic($id);
 		$civil_statistic = 	JudgesStatistic::getCivilStatistic($id);
 		$criminal_statistic = JudgesStatistic::getCriminalStatistic($id);
 		$admin_statistic = JudgesStatistic::getAdminStatistic($id);
 		$commercial_statistic = JudgesStatistic::getCommercialStatistic($id);
-		
+
 		// рахуємо загальну статистику
 		$common_statistic = $this->countCommonStatistic($adminoffence_statistic, $criminal_statistic, $civil_statistic);
-		
-		
+
+
 		return response()->json([
 			'data' => $data,
 			'previous_works' => $previous_works,
@@ -1151,19 +1152,19 @@ class JudgesController extends Controller
 			'commercial_statistic' => $commercial_statistic
 		]);
 	}
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     /**
      * Show the form for editing the specified resource.
@@ -1187,8 +1188,8 @@ class JudgesController extends Controller
     {
         //
     }
-    
-    
+
+
 
     /**
      * Remove the specified resource from storage.
@@ -1200,7 +1201,7 @@ class JudgesController extends Controller
     {
         //
     }
-    
+
     /**
      *
      * @SWG\Get(
@@ -1301,7 +1302,7 @@ class JudgesController extends Controller
         if (strlen($search) < 1 || !preg_match("/^[а-яєіїґ'-]+$/iu", $search)) {
             return response()->json([]);
         }
-        
+
         // валідація фільтрів
         $request->validate([
             'search' => 'string|min:1|max:20'
@@ -1311,8 +1312,8 @@ class JudgesController extends Controller
         $autocomplete = Judge::getAutocomplete($search);
         return response()->json($autocomplete);
     }
-    
-    
+
+
     /**
      * @SWG\Put(
      *     path="/judges/{id}/bookmark",
@@ -1393,9 +1394,9 @@ class JudgesController extends Controller
             'message' => 'Закладка успішно створена'
         ], 201);
     }
-    
-    
-    
+
+
+
     /**
      * @SWG\Delete(
      *     path="/judges/{id}/bookmark",
@@ -1469,9 +1470,9 @@ class JudgesController extends Controller
         UserBookmarkJudge::deleteBookmark(Auth::user()->id, $id);
         return response()->json([], 204);
     }
-    
-    
-    
+
+
+
     /**
      * @SWG\Put(
      *     path="/judges/{id}/update-status",
@@ -1582,24 +1583,24 @@ class JudgesController extends Controller
             $due_date = NULL;
         }
         $old_status = Judge::find($id)->status;
-        
+
         // Додати в чергу відправку повідомлень всім хто:
 		// підписаний на судові засідання даного судді
 		SendNotification3::dispatch($id, $old_status, $new_status)->delay(now()->addMinute());
 		// відстежує даного суддю
         SendNotification1::dispatch($id, $old_status, $new_status)->delay(now()->addMinute());
-        
+
         // оновлення статусу судді
         Judge::setNewStatus($id, $new_status, $due_date);
-        
+
         return response()->json([
             'message' => 'Статус успішно оновлено'
         ], 200);
     }
-    
-    
-    
-    
+
+
+
+
     /**
      * @SWG\Put(
      *     path="/judges/{id}/like",
@@ -1670,7 +1671,7 @@ class JudgesController extends Controller
     public function putLike($id) {
         // перевіряємо чи користувач вже ставив лайк
         $is_liked = UsersLikesJudge::isLikedJudge($id);
-        
+
         // якщо ставив - то 422, в іншому випадку ставимо
         if ($is_liked) {
             return response()->json([
@@ -1682,7 +1683,7 @@ class JudgesController extends Controller
             'message' => 'ОК'
         ], 200);
     }
-    
+
     /**
      * @SWG\Delete(
      *     path="/judges/{id}/like",
@@ -1748,7 +1749,7 @@ class JudgesController extends Controller
     public function deleteLike($id) {
         // перевіряємо чи користувач ставив лайк
         $is_liked = UsersLikesJudge::isLikedJudge($id);
-        
+
         // якщо користувач не ставив лайк - 422
         if (!$is_liked) {
             return response()->json([
@@ -1758,8 +1759,8 @@ class JudgesController extends Controller
         UsersLikesJudge::deleteLike($id);
         return response()->json([], 204);
     }
-    
-    
+
+
     /**
      * @SWG\Put(
      *     path="/judges/{id}/unlike",
@@ -1830,7 +1831,7 @@ class JudgesController extends Controller
     public function putUnlike($id) {
         // перевіряємо чи користувач вже ставив дизлайк
         $is_unliked = UsersUnlikesJudge::isUnlikedJudge($id);
-        
+
         // якщо ставив - то 422, в іншому випадку ставимо
         if ($is_unliked) {
             return response()->json([
@@ -1842,8 +1843,8 @@ class JudgesController extends Controller
             'message' => 'ОК'
         ], 200);
     }
-    
-    
+
+
     /**
      * @SWG\Delete(
      *     path="/judges/{id}/unlike",
@@ -1909,7 +1910,7 @@ class JudgesController extends Controller
     public function deleteUnlike($id) {
         // перевіряємо чи користувач вже ставив дизлайк
         $is_unliked = UsersUnlikesJudge::isUnlikedJudge($id);
-        
+
         // якщо користувач не ставив дизлайк - 422
         if (!$is_unliked) {
             return response()->json([
@@ -1978,50 +1979,77 @@ class JudgesController extends Controller
      * @param Request $request
      * @return string
      */
-    public function addPhoto(Request $request) {
+    public function addPhoto(Request $request)
+    {
         $sizeInKb = pow(2, 10);
         $request->validate([
             'judge_id' => 'int|min:1',
-            'photo' => "required|image|max:{$sizeInKb}|mimes:jpeg,png",
+            'photo'    => "required|image|max:{$sizeInKb}|mimes:jpeg,png",
         ]);
 
         $judge_id = $request->get('judge_id');
 
-        $judge = Judge::select('judges.id')
-                       ->where('judges.id', '=', $judge_id)
-                       ->first();
+        /* @var $judge Judge */
+        $judge = Judge::where('judges.id', '=', $judge_id)->first();
 
         if (empty($judge)) {
             return response()->json(['message' => 'Неіснуючий id судді'], 422);
         }
 
-        $photo_url = $judge->photo;
-
-        if (!empty($photo_url) && $photo_url != '/img/judges/no_photo.jpg') {
+        if (!empty($judge->photo) && $judge->photo != Judge::NO_PHOTO) {
             return response()->json(['message' => 'Фото даного судді вже існує'], 422);
         }
 
+        $s3_client = S3Client::factory([
+            'signature'   => 'v4',
+            'region'      => 'eu-central-1',
+            'version'     => 'latest',
+            'credentials' => [
+                'key'    => env('AWS_ACCESS_KEY_ID'),
+                'secret' => env('AWS_SECRET_KEY'),
+            ],
+        ]);
+
+        $photo_file = $request->file('photo');
+        $file_extension = $photo_file->extension();
+
+        // Нюанс роботи методу extension(): він розпізнає розширення 'jpg' як 'jpeg'.
+        if ($file_extension == 'jpeg') {
+            $file_extension = 'jpg';
+        }
+
+        $judge->photo = "img/judges/{$judge_id}.{$file_extension}";
+
+        $s3_client->putObject([
+            'ACL'    => 'public-read',
+            'Body'   => $photo_file,
+            'Bucket' => 'toecyd',
+            'Key'    => $judge->photo,
+        ]);
+
+        $judge->save();
+
         return response()->json([], 200);
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     // PRIVATE METHODS
-    
-    
+
+
     /**
      * виконується, якщо застосовувалась фільтрація до списку суддів
      * @return array
@@ -2034,7 +2062,7 @@ class JudgesController extends Controller
         $sort_order = Input::has('sort') ? intval(Input::get('sort')) : 1;
         $search = Input::has('search') ? trim(Input::get('search')) : '';
         $powers_expired = (Input::has('expired') && Input::get('expired')) ? true : false;
-        
+
         // приведення всіх фільтрів до Integer
         $int_regions = [];
         $int_instances = [];
@@ -2056,7 +2084,7 @@ class JudgesController extends Controller
             'search'=>$search,
             'powers_expired'=>$powers_expired]);
     }
-	
+
 	/**
 	 * виконується, якщо застосовувалась фільтрація до списку суддів
 	 * @return array
@@ -2086,8 +2114,8 @@ class JudgesController extends Controller
           } else {
                $common_statistic['competence'] = 0;
           }
-		
-		
+
+
 		$all_approved = 0;
 		$count_judgements = 0;
 		if (array_key_exists('cases_on_time', $civil_statistic)) {
@@ -2107,8 +2135,8 @@ class JudgesController extends Controller
           } else {
                $common_statistic['timeliness'] = 0;
           }
-		
-		
+
+
 		return $common_statistic;
 	}
 }
