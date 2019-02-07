@@ -32,43 +32,48 @@ class UserSettingsController extends Controller
 	 *     tags={"Особистий кабінет"},
 	 *     security={
 	 *     {"passport": {}},
-	 *   	},
+	 *      },
 	 *     @SWG\Parameter(
-	 *     	ref="#/parameters/Content-Type",
+	 *      ref="#/parameters/Content-Type",
 	 *     ),
 	 *     @SWG\Parameter(
-	 *     	ref="#/parameters/X-Requested-With",
+	 *      ref="#/parameters/X-Requested-With",
 	 *     ),
 	 *
 	 *     @SWG\Response(
 	 *         response=200,
 	 *         description="ОК",
 	 *        @SWG\Schema(
-	 *     		@SWG\Property(property="name", type="string", example="Іван", description="Ім'я"),
-	 *     		@SWG\Property(property="surname", type="string", example="Коваленко", description="Прізвище"),
-	 *     		@SWG\Property(property="phone", type="string", example="0971234567", description="номер телефону"),
-	 *     		@SWG\Property(property="email", type="string", example="example@gmail.com", description="email користувача"),
-	 *     		@SWG\Property(property="photo", type="string", example="https://host/img/users/1542.jpg", description="посилання на фото профілю"),
-	 *     		@SWG\Property(property="email_notification_1", type="bool", example="1", description="надсилати повідомлення на email якщо в судді, якого користувач відстежує змінився статус"),
-	 *     		@SWG\Property(property="email_notification_2", type="bool", example="1", description="надсилати повідомлення на email якщо по справі яку користувач відстежує додалось нове судове засідання"),
-	 *     		@SWG\Property(property="email_notification_3", type="bool", example="1", description="надсилати повідомлення на email якщо по справі яку користувач відстежує в будь-якого судді змінився статус"),
-	 *     		@SWG\Property(property="email_notification_4", type="bool", example="1", description="надсилати повідомлення на email за 1 день до судового засідання яке користувач відстежує"),
-	 *     		@SWG\Property(property="email_notification_5", type="bool", example="0", description="надсилати повідомлення на email про пропозиції судової практики для користувача"),
-	 *     		@SWG\Property(property="email_notification_6", type="bool", example="0", description="надсилати повідомлення на email про новини, пропозиції, оновлення")
+	 *          @SWG\Property(property="name", type="string", example="Іван", description="Ім'я"),
+	 *          @SWG\Property(property="surname", type="string", example="Коваленко", description="Прізвище"),
+	 *          @SWG\Property(property="phone", type="string", example="0971234567", description="номер телефону"),
+	 *          @SWG\Property(property="email", type="string", example="example@gmail.com", description="email користувача"),
+	 *          @SWG\Property(property="photo", type="string", example="https://host/img/users/1542.jpg", description="посилання на фото профілю"),
+	 *          @SWG\Property(property="email_notification_1", type="bool", example="1", description="надсилати повідомлення на email якщо в судді, якого користувач відстежує змінився статус"),
+	 *          @SWG\Property(property="email_notification_2", type="bool", example="1", description="надсилати повідомлення на email якщо по справі яку користувач відстежує додалось нове судове засідання"),
+	 *          @SWG\Property(property="email_notification_3", type="bool", example="1", description="надсилати повідомлення на email якщо по справі яку користувач відстежує в будь-якого судді змінився статус"),
+	 *          @SWG\Property(property="email_notification_4", type="bool", example="1", description="надсилати повідомлення на email за 1 день до судового засідання яке користувач відстежує"),
+	 *          @SWG\Property(property="email_notification_5", type="bool", example="0", description="надсилати повідомлення на email про пропозиції судової практики для користувача"),
+	 *          @SWG\Property(property="email_notification_6", type="bool", example="0", description="надсилати повідомлення на email про новини, пропозиції, оновлення")
 	 *        ),
 	 *           examples={"application/json":
 	 *               {
-	 *                    "name": "Іван",
-	 *                    "surname": null,
-	 *                    "phone": null,
-	 *                    "email": "example@mail.com",
-	 *                    "photo": null,
-	 *     				  "email_notification_1": "1",
-	 *     				  "email_notification_2": "1",
-	 *     				  "email_notification_3": "0",
-	 *     				  "email_notification_4": "1",
-	 *     				  "email_notification_5": "0",
-	 *     				  "email_notification_6": "1"
+	 *                    "profile": {
+	 *                      "name": "Іван",
+	 *                      "surname": null,
+	 *                      "phone": null,
+	 *                      "email": "example@mail.com",
+	 *                      "photo": null
+	 *                      }
+	 *                    "notifications": {
+	 *                      "email_notification_1": 1,
+	 *                      "email_notification_2": 1,
+	 *                      "email_notification_3": 0,
+	 *                      "email_notification_4": 1,
+	 *                      "email_notification_5": 0,
+	 *                      "email_notification_6": 1
+	 *                    }
+	 *                    
 	 *                }
 	 *            }
 	 *     ),
@@ -76,11 +81,11 @@ class UserSettingsController extends Controller
 	 *     @SWG\Response(
 	 *         response=401,
 	 *         description="Необхідна аутентифікація користувача, можливо токен не існує, або анульований",
-	 *     	   examples={"application/json":
+	 *         examples={"application/json":
 	 *              {
-	 *     				"message": "Unauthenticated",
+	 *                  "message": "Unauthenticated",
 	 *              }
-	 *     		}
+	 *          }
 	 *     ),
 	 *     @SWG\Response(
 	 *         response=405,
@@ -107,12 +112,12 @@ class UserSettingsController extends Controller
 	 *     tags={"Особистий кабінет"},
 	 *     security={
 	 *     {"passport": {}},
-	 *   	},
+	 *      },
 	 *     @SWG\Parameter(
-	 *     	ref="#/parameters/Content-Type",
+	 *      ref="#/parameters/Content-Type",
 	 *     ),
 	 *     @SWG\Parameter(
-	 *     	ref="#/parameters/X-Requested-With",
+	 *      ref="#/parameters/X-Requested-With",
 	 *     ),
 	 *     @SWG\Parameter(
 	 *     name="Старий і новий паролі",
@@ -140,11 +145,11 @@ class UserSettingsController extends Controller
 	 *     @SWG\Response(
 	 *         response=401,
 	 *         description="Необхідна аутентифікація користувача, або передано невалідні дані. Можливо токен не існує, або неправильний старий пароль",
-	 *     	   examples={"application/json":
+	 *         examples={"application/json":
 	 *              {
-	 *     				"message": "Unauthenticated",
+	 *                  "message": "Unauthenticated",
 	 *              }
-	 *     		}
+	 *          }
 	 *     ),
 	 *     @SWG\Response(
 	 *         response=405,
@@ -206,12 +211,12 @@ class UserSettingsController extends Controller
 	 *     tags={"Особистий кабінет"},
 	 *     security={
 	 *     {"passport": {}},
-	 *   	},
+	 *      },
 	 *     @SWG\Parameter(
-	 *     	ref="#/parameters/Content-Type",
+	 *      ref="#/parameters/Content-Type",
 	 *     ),
 	 *     @SWG\Parameter(
-	 *     	ref="#/parameters/X-Requested-With",
+	 *      ref="#/parameters/X-Requested-With",
 	 *     ),
 	 *     @SWG\Parameter(
 	 *     name="Дані, які потрібно оновити",
@@ -221,7 +226,7 @@ class UserSettingsController extends Controller
 	 *     @SWG\Schema(
 	 *          type="object",
 	 *          @SWG\Property(property="new_name", type="string", example="Іван", description="Нове імʼя користувача (повинно складатися від 3 до 255 символів)"),
-	 *     		@SWG\Property(property="new_surname", type="string", example="Шевченко", description="Нове прізвище користувача (повинно складатися від 3 до 255 символів)"),
+	 *          @SWG\Property(property="new_surname", type="string", example="Шевченко", description="Нове прізвище користувача (повинно складатися від 3 до 255 символів)"),
 	 *          @SWG\Property(property="new_phone", type="string", example="0971234567", description="Новий мобільний номер телефону Користувача (повинен містити від 9 до 12 символів без пробілів)")
 	 *       )
 	 *     ),
@@ -239,11 +244,11 @@ class UserSettingsController extends Controller
 	 *     @SWG\Response(
 	 *         response=401,
 	 *         description="Необхідна аутентифікація користувача, або передано невалідні дані.",
-	 *     	   examples={"application/json":
+	 *         examples={"application/json":
 	 *              {
-	 *     				"message": "Unauthenticated",
+	 *                  "message": "Unauthenticated",
 	 *              }
-	 *     		}
+	 *          }
 	 *     ),
 	 *     @SWG\Response(
 	 *         response=405,
@@ -302,12 +307,12 @@ class UserSettingsController extends Controller
 	 *     tags={"Особистий кабінет"},
 	 *     security={
 	 *     {"passport": {}},
-	 *   	},
+	 *      },
 	 *     @SWG\Parameter(
-	 *     	ref="#/parameters/Content-Type",
+	 *      ref="#/parameters/Content-Type",
 	 *     ),
 	 *     @SWG\Parameter(
-	 *     	ref="#/parameters/X-Requested-With",
+	 *      ref="#/parameters/X-Requested-With",
 	 *     ),
 	 *     @SWG\Parameter(
 	 *     name="Дані, які потрібно оновити",
@@ -316,12 +321,12 @@ class UserSettingsController extends Controller
 	 *     description="Щоб змінити дані про користувача, потрібно передати лише ті нові дані, які необхідно змінити.",
 	 *     @SWG\Schema(
 	 *          type="object",
-	 *     		@SWG\Property(property="email_notification_1", type="integer", example="1", description="надсилати повідомлення на email якщо в судді, якого користувач відстежує змінився статус"),
-	 *     		@SWG\Property(property="email_notification_2", type="integer", example="1", description="надсилати повідомлення на email якщо по справі яку користувач відстежує додалось нове судове засідання"),
-	 *     		@SWG\Property(property="email_notification_3", type="integer", example="0", description="надсилати повідомлення на email якщо по справі яку користувач відстежує в будь-якого судді змінився статус"),
-	 *     		@SWG\Property(property="email_notification_4", type="integer", example="1", description="надсилати повідомлення на email за 1 день до судового засідання яке користувач відстежує"),
-	 *     		@SWG\Property(property="email_notification_5", type="integer", example="1", description="надсилати повідомлення на email про пропозиції судової практики для користувача"),
-	 *     		@SWG\Property(property="email_notification_6", type="integer", example="0", description="надсилати повідомлення на email про новини, пропозиції, оновлення")
+	 *          @SWG\Property(property="email_notification_1", type="integer", example="1", description="надсилати повідомлення на email якщо в судді, якого користувач відстежує змінився статус"),
+	 *          @SWG\Property(property="email_notification_2", type="integer", example="1", description="надсилати повідомлення на email якщо по справі яку користувач відстежує додалось нове судове засідання"),
+	 *          @SWG\Property(property="email_notification_3", type="integer", example="0", description="надсилати повідомлення на email якщо по справі яку користувач відстежує в будь-якого судді змінився статус"),
+	 *          @SWG\Property(property="email_notification_4", type="integer", example="1", description="надсилати повідомлення на email за 1 день до судового засідання яке користувач відстежує"),
+	 *          @SWG\Property(property="email_notification_5", type="integer", example="1", description="надсилати повідомлення на email про пропозиції судової практики для користувача"),
+	 *          @SWG\Property(property="email_notification_6", type="integer", example="0", description="надсилати повідомлення на email про новини, пропозиції, оновлення")
 	 *       )
 	 *     ),
 	 *
@@ -338,11 +343,11 @@ class UserSettingsController extends Controller
 	 *     @SWG\Response(
 	 *         response=401,
 	 *         description="Необхідна аутентифікація користувача, або передано невалідні дані.",
-	 *     	   examples={"application/json":
+	 *         examples={"application/json":
 	 *              {
-	 *     				"message": "Unauthenticated",
+	 *                  "message": "Unauthenticated",
 	 *              }
-	 *     		}
+	 *          }
 	 *     ),
 	 *     @SWG\Response(
 	 *         response=405,
@@ -354,12 +359,12 @@ class UserSettingsController extends Controller
 	 *         examples={"application/json":
 	 *              {
 	 *                  "message": "The given data was invalid.",
-	 *     				"errors": {
-	 *					"email_notification_3": {
-	 *					"email_notification_3 повинен бути числом.",
-	 *					"максимальне значення для email_notification_3 = 1."
-	 *					}
-	 *					}
+	 *                  "errors": {
+	 *                  "email_notification_3": {
+	 *                  "email_notification_3 повинен бути числом.",
+	 *                  "максимальне значення для email_notification_3 = 1."
+	 *                  }
+	 *                  }
 	 *              }
 	 *          }
 	 *     ),
