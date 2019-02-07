@@ -28,7 +28,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
  *     @OA\SecurityScheme(
  *			"components": {
  *				"securitySchemes": {
- *					"oAuthSample": {
+ *					"bearerAuth": {
  *						"type": "oauth2",
  *						"description": "Токен авторизації, представлений як: 'Bearer \<Token\>'",
  *						"flows": {
