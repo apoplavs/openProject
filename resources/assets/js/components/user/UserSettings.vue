@@ -5,7 +5,7 @@
         <!-- 1 -->
         <div class="profile">
           <h4>Профіль</h4>
-          <form>
+          <form @submit.prevent="saveProfileData()">
             <div class="row">
               <div class="col-6">
                 <div class="form-group">
@@ -20,10 +20,8 @@
                       v-validate="'required|alpha|min:3||max:250'"
                       :class="{'input': true, 'is-danger': errors.has('ім\'я') }"
                     >
-                    <small>
-                      <i v-show="errors.has('ім\'я')" class="fa fa-warning"></i>
-                      <span
-                        v-show="errors.has('ім\'я')"
+                    <small v-show="errors.has('ім\'я')">
+                      <span 
                         class="help is-danger"
                       >{{ errors.first('ім\'я') }}</span>
                     </small>
@@ -40,13 +38,11 @@
                       class="form-control"
                       name="прізвище"
                       v-model="user.surname"
-                      v-validate="'alpha|max:250'"
-                      :class="{'input': true, 'is-danger': errors.has('прізвище') }"
+                      v-validate="'alpha|min:3||max:250'"
+                      :class="{'input': true, 'is-danger': errors.has('прізвище')}"
                     >
-                    <small>
-                      <i v-show="errors.has('прізвище')" class="fa fa-warning"></i>
+                    <small  v-show="errors.has('прізвище')">
                       <span
-                        v-show="errors.has('прізвище')"
                         class="help is-danger"
                       >{{ errors.first('прізвище') }}</span>
                     </small>
@@ -65,12 +61,12 @@
                       class="form-control"
                       name="телефон"
                       v-model="user.phone"
+                      v-mask="'(###) ### ## ##'"
+                      v-validate="'min:15||max:15'"
                       :class="{'input': true, 'is-danger': errors.has('телефон') }"
                     >
-                    <small>
-                      <i v-show="errors.has('телефон')" class="fa fa-warning"></i>
-                      <span
-                        v-show="errors.has('телефон')"
+                    <small v-show="errors.has('телефон')">
+                      <span   
                         class="help is-danger"
                       >{{ errors.first('телефон') }}</span>
                     </small>
@@ -78,14 +74,15 @@
                 </div>
               </div>
             </div>
+            {{errors}}
             <div class="row">
               <div class="offset-6 col-6 text-center">
-                <button type="submit" class="btn btn-primary">Зберегти</button>
+                {{errors.items === []}}
+                <button type="submit" class="btn btn-primary" :disabled="errors.items === []">Зберегти</button>
               </div>
             </div>
           </form>
         </div>
-
         <div class="hr py-4"></div>
 
         <!-- 2 -->
@@ -178,56 +175,58 @@
         <!-- 3 -->
         <div class="notifications">
           <h4>Налаштування сповіщень</h4>
-          <div class="table">
-            <div class="row header">
-              <div class="col-9">Подія</div>
-              <div class="col-3">
-                <div>Спосіб зв'язку</div>
-                <input type="checkbox" v-model="allSelected" @change="selectAll()">
-              </div>
-            </div>
-            <div class="row hr">
-              <div class="col-9">В судді, якого користувач відстежує, змінився статус.</div>
-              <div class="col-3">
-                <input type="checkbox" v-model="notifications.email_notification_1" @click="select()"> Email
-              </div>
-            </div>
-            <div class="row bg">
-              <div class="col-9">По справі, яку користувач відстежує, додалось нове судове засідання</div>
-              <div class="col-3">
-                <input type="checkbox" v-model="notifications.email_notification_2" @click="select()"> Email
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-9">По справі, яку користувач відстежує, в будь-якого судді змінився статус</div>
-              <div class="col-3">
-                <input type="checkbox" v-model="notifications.email_notification_3" @click="select()"> Email
-              </div>
-            </div>
-            <div class="row bg">
-              <div class="col-9">За один день до судового засідання, яке користувач відстежує</div>
-              <div class="col-3">
-                <input type="checkbox" v-model="notifications.email_notification_4" @click="select()"> Email
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-9">Про пропозиції судової практики для користувача</div>
-              <div class="col-3">
-                <input type="checkbox" v-model="notifications.email_notification_5" @click="select()"> Email
-              </div>
-            </div>
-            <div class="row bg">
-                <div class="col-9">Новини, пропозиції, оновлення</div>
+          <form @submit.prevent="saveNotifications()">
+            <div class="table">
+              <div class="row header">
+                <div class="col-9">Подія</div>
                 <div class="col-3">
-                <input type="checkbox" v-model="notifications.email_notification_6" @click="select()"> Email
+                  <div>Спосіб зв'язку</div>
+                  <input type="checkbox" v-model="allSelected" @change="selectAll()">
                 </div>
-            </div>
-             <div class="row">
-              <div class="offset-6 col-6 text-center">
-                <button type="submit" class="btn btn-primary">Зберегти</button>
+              </div>
+              <div class="row hr">
+                <div class="col-9">В судді, якого користувач відстежує, змінився статус.</div>
+                <div class="col-3">
+                  <input type="checkbox" v-model="notifications.email_notification_1" @click="select()"> Email
+                </div>
+              </div>
+              <div class="row bg">
+                <div class="col-9">По справі, яку користувач відстежує, додалось нове судове засідання</div>
+                <div class="col-3">
+                  <input type="checkbox" v-model="notifications.email_notification_2" @click="select()"> Email
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-9">По справі, яку користувач відстежує, в будь-якого судді змінився статус</div>
+                <div class="col-3">
+                  <input type="checkbox" v-model="notifications.email_notification_3" @click="select()"> Email
+                </div>
+              </div>
+              <div class="row bg">
+                <div class="col-9">За один день до судового засідання, яке користувач відстежує</div>
+                <div class="col-3">
+                  <input type="checkbox" v-model="notifications.email_notification_4" @click="select()"> Email
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-9">Про пропозиції судової практики для користувача</div>
+                <div class="col-3">
+                  <input type="checkbox" v-model="notifications.email_notification_5" @click="select()"> Email
+                </div>
+              </div>
+              <div class="row bg">
+                  <div class="col-9">Новини, пропозиції, оновлення</div>
+                  <div class="col-3">
+                  <input type="checkbox" v-model="notifications.email_notification_6" @click="select()"> Email
+                  </div>
+              </div>
+              <div class="row">
+                <div class="offset-6 col-6 text-center">
+                  <button type="submit" class="btn btn-primary">Зберегти</button>
+                </div>
               </div>
             </div>
-          </div>
+          </form>
         </div>
          <div class="row">
             <div class="col-6">
@@ -242,6 +241,7 @@
 <script>
 export default {
   name: "UserSettings",
+
   data() {
     return {
       user: {
@@ -282,6 +282,7 @@ export default {
         })
         .then(response => {
           this.user = response.data.profile;
+          this.user.phone = '0660851225';
           this.notifications = response.data.notifications;
           console.log("User settings", response);
         })
@@ -303,7 +304,44 @@ export default {
       } 
     },
     select() {
-        this.allSelected = false;
+      this.allSelected = false;
+    },
+    saveProfileData() {
+      let newProfileData = {};
+      if (this.user.phone) {
+        newProfileData.new_phone = this.user.phone.replace(/(\(|\)|\s)/g, '');
+      }
+      newProfileData.new_name = this.user.name;
+      newProfileData.new_surname = this.user.surname;
+      axios.post(`/api/v1/user/settings/user-data`, newProfileData, {
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Requested-With': 'XMLHttpRequest',
+          Authorization: localStorage.getItem("token")
+        }
+        }) .catch(error => {
+        if (error && error.response && error.response.status === 401) {
+          this.$router.push("/login");
+        }
+      })
+    },
+    saveNotifications() {
+      // замінюємо в чекбоксі true/false на 0/1
+      for (let key in this.notifications) {
+        let elem = this.notifications[key];
+        this.notifications[key] = (elem === true || elem === 1) ? 1 : 0;
+      }
+      axios.post(`/api/v1/user/settings/notification`, this.notifications, {
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Requested-With': 'XMLHttpRequest',
+          Authorization: localStorage.getItem("token")
+        }
+        }) .catch( error => {
+          if (error && error.response && error.response.status === 401) {
+            this.$router.push("/login");
+        }
+      })
     },
     deleteProfile() {
       console.log('Я хочу видалити свій профайл. Що скажете?')
@@ -348,7 +386,4 @@ input {
     border-top: 1px solid rgba(0,0,0,.1);
 }
 
-// .content-wrapper  {
-//     border: 1px solid gray;
-// }
 </style>

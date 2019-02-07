@@ -11,6 +11,8 @@ import AppComponent from './components/AppComponent.vue';
 import router from './scripts/router';
 import GSignInButton from 'vue-google-signin-button';
 import store from './store/store';
+import VueMask from 'v-mask';
+Vue.use(VueMask);
 
 Vue.use(GSignInButton);
 Vue.use(VeeValidate);
