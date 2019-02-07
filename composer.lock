@@ -1250,18 +1250,6 @@
         },
         {
             "name": "league/flysystem",
-<<<<<<< HEAD
-            "version": "1.0.46",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "f3e0d925c18b92cf3ce84ea5cc58d62a1762a2b2"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/f3e0d925c18b92cf3ce84ea5cc58d62a1762a2b2",
-                "reference": "f3e0d925c18b92cf3ce84ea5cc58d62a1762a2b2",
-=======
             "version": "1.0.49",
             "source": {
                 "type": "git",
@@ -1272,7 +1260,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/a63cc83d8a931b271be45148fa39ba7156782ffd",
                 "reference": "a63cc83d8a931b271be45148fa39ba7156782ffd",
->>>>>>> b95ac334a214974b24cea15e800f832898453b97
                 "shasum": ""
             },
             "require": {
@@ -1343,11 +1330,7 @@
                 "sftp",
                 "storage"
             ],
-<<<<<<< HEAD
-            "time": "2018-08-22T07:45:22+00:00"
-=======
             "time": "2018-11-23T23:41:29+00:00"
->>>>>>> b95ac334a214974b24cea15e800f832898453b97
         },
         {
             "name": "league/oauth2-server",
@@ -2363,21 +2346,6 @@
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
             "time": "2019-01-04T04:42:43+00:00"
-<<<<<<< HEAD
-        },
-        {
-            "name": "symfony/css-selector",
-            "version": "v3.4.21",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/css-selector.git",
-                "reference": "12f86295c46c36af9896cf21db6b6b8a1465315d"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/css-selector/zipball/12f86295c46c36af9896cf21db6b6b8a1465315d",
-                "reference": "12f86295c46c36af9896cf21db6b6b8a1465315d",
-=======
         },
         {
             "name": "symfony/contracts",
@@ -2459,7 +2427,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/css-selector/zipball/76dac1dbe2830213e95892c7c2ec1edd74113ea4",
                 "reference": "76dac1dbe2830213e95892c7c2ec1edd74113ea4",
->>>>>>> b95ac334a214974b24cea15e800f832898453b97
                 "shasum": ""
             },
             "require": {
@@ -2468,11 +2435,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-<<<<<<< HEAD
-                    "dev-master": "3.4-dev"
-=======
                     "dev-master": "4.2-dev"
->>>>>>> b95ac334a214974b24cea15e800f832898453b97
                 }
             },
             "autoload": {
@@ -2503,11 +2466,7 @@
             ],
             "description": "Symfony CssSelector Component",
             "homepage": "https://symfony.com",
-<<<<<<< HEAD
-            "time": "2019-01-02T09:30:52+00:00"
-=======
             "time": "2019-01-03T09:07:35+00:00"
->>>>>>> b95ac334a214974b24cea15e800f832898453b97
         },
         {
             "name": "symfony/debug",
@@ -2567,22 +2526,6 @@
         },
         {
             "name": "symfony/event-dispatcher",
-<<<<<<< HEAD
-            "version": "v3.4.21",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/event-dispatcher.git",
-                "reference": "d1cdd46c53c264a2bd42505bd0e8ce21423bd0e2"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/d1cdd46c53c264a2bd42505bd0e8ce21423bd0e2",
-                "reference": "d1cdd46c53c264a2bd42505bd0e8ce21423bd0e2",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^5.5.9|>=7.0.8"
-=======
             "version": "v4.2.2",
             "source": {
                 "type": "git",
@@ -2598,7 +2541,6 @@
             "require": {
                 "php": "^7.1.3",
                 "symfony/contracts": "^1.0"
->>>>>>> b95ac334a214974b24cea15e800f832898453b97
             },
             "conflict": {
                 "symfony/dependency-injection": "<3.3"
@@ -2617,11 +2559,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-<<<<<<< HEAD
-                    "dev-master": "3.4-dev"
-=======
                     "dev-master": "4.2-dev"
->>>>>>> b95ac334a214974b24cea15e800f832898453b97
                 }
             },
             "autoload": {
@@ -2648,11 +2586,7 @@
             ],
             "description": "Symfony EventDispatcher Component",
             "homepage": "https://symfony.com",
-<<<<<<< HEAD
-            "time": "2019-01-01T18:08:36+00:00"
-=======
             "time": "2019-01-05T16:37:49+00:00"
->>>>>>> b95ac334a214974b24cea15e800f832898453b97
         },
         {
             "name": "symfony/finder",
@@ -3211,22 +3145,6 @@
         },
         {
             "name": "symfony/translation",
-<<<<<<< HEAD
-            "version": "v3.4.21",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/translation.git",
-                "reference": "5f357063f4907cef47e5cf82fa3187fbfb700456"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/translation/zipball/5f357063f4907cef47e5cf82fa3187fbfb700456",
-                "reference": "5f357063f4907cef47e5cf82fa3187fbfb700456",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^5.5.9|>=7.0.8",
-=======
             "version": "v4.2.2",
             "source": {
                 "type": "git",
@@ -3242,7 +3160,6 @@
             "require": {
                 "php": "^7.1.3",
                 "symfony/contracts": "^1.0.2",
->>>>>>> b95ac334a214974b24cea15e800f832898453b97
                 "symfony/polyfill-mbstring": "~1.0"
             },
             "conflict": {
@@ -3269,11 +3186,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-<<<<<<< HEAD
-                    "dev-master": "3.4-dev"
-=======
                     "dev-master": "4.2-dev"
->>>>>>> b95ac334a214974b24cea15e800f832898453b97
                 }
             },
             "autoload": {
@@ -3300,11 +3213,7 @@
             ],
             "description": "Symfony Translation Component",
             "homepage": "https://symfony.com",
-<<<<<<< HEAD
-            "time": "2019-01-01T13:45:19+00:00"
-=======
             "time": "2019-01-03T09:07:35+00:00"
->>>>>>> b95ac334a214974b24cea15e800f832898453b97
         },
         {
             "name": "symfony/var-dumper",
@@ -3377,18 +3286,6 @@
         },
         {
             "name": "symfony/yaml",
-<<<<<<< HEAD
-            "version": "v3.4.21",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/yaml.git",
-                "reference": "554a59a1ccbaac238a89b19c8e551a556fd0e2ea"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/554a59a1ccbaac238a89b19c8e551a556fd0e2ea",
-                "reference": "554a59a1ccbaac238a89b19c8e551a556fd0e2ea",
-=======
             "version": "v4.2.2",
             "source": {
                 "type": "git",
@@ -3399,7 +3296,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/yaml/zipball/d0aa6c0ea484087927b49fd513383a7d36190ca6",
                 "reference": "d0aa6c0ea484087927b49fd513383a7d36190ca6",
->>>>>>> b95ac334a214974b24cea15e800f832898453b97
                 "shasum": ""
             },
             "require": {
@@ -3418,11 +3314,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-<<<<<<< HEAD
-                    "dev-master": "3.4-dev"
-=======
                     "dev-master": "4.2-dev"
->>>>>>> b95ac334a214974b24cea15e800f832898453b97
                 }
             },
             "autoload": {
@@ -3449,11 +3341,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-<<<<<<< HEAD
-            "time": "2019-01-01T13:45:19+00:00"
-=======
             "time": "2019-01-03T09:07:35+00:00"
->>>>>>> b95ac334a214974b24cea15e800f832898453b97
         },
         {
             "name": "tijsverkoyen/css-to-inline-styles",
