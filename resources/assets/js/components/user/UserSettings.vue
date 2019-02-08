@@ -1,16 +1,16 @@
 <template>
   <div class="settings">
     <div class="container content-wrapper">
-      <div class="border content-wrapper_body">
+      <spinner v-if="!loadData"/>
+      <div v-if="loadData" class="border content-wrapper_body">
         <!-- 1 -->
         <div class="profile">
           <h4>Профіль</h4>
-          <form @submit.prevent="saveProfileData()">
+          <form @submit.prevent="changeProfileData()">
             <div class="row">
               <div class="col-6">
                 <div class="form-group">
                   <label for="name" class="form-control-label">Ім'я:</label>
-                  <p class="control has-icon has-icon-right">
                     <input
                       id="name"
                       type="text"
@@ -25,13 +25,11 @@
                         class="help is-danger"
                       >{{ errors.first('ім\'я') }}</span>
                     </small>
-                  </p>
                 </div>
               </div>
               <div class="col-6">
                 <div class="form-group">
                   <label for="name" class="form-control-label">Прізвище:</label>
-                  <p class="control has-icon has-icon-right">
                     <input
                       id="surname"
                       type="text"
@@ -46,7 +44,6 @@
                         class="help is-danger"
                       >{{ errors.first('прізвище') }}</span>
                     </small>
-                  </p>
                 </div>
               </div>
             </div>
@@ -54,7 +51,6 @@
               <div class="col-6">
                 <div class="form-group">
                   <label for="name" class="form-control-label">Номер мобільного:</label>
-                  <p class="control has-icon has-icon-right">
                     <input
                       id="telephone"
                       type="text"
@@ -70,15 +66,12 @@
                         class="help is-danger"
                       >{{ errors.first('телефон') }}</span>
                     </small>
-                  </p>
                 </div>
               </div>
             </div>
-            {{errors}}
             <div class="row">
               <div class="offset-6 col-6 text-center">
-                {{errors.items === []}}
-                <button type="submit" class="btn btn-primary" :disabled="errors.items === []">Зберегти</button>
+                <button type="submit" class="btn btn-primary" :disabled="errors.items.length > 0">Зберегти</button>
               </div>
             </div>
           </form>
@@ -88,7 +81,7 @@
         <!-- 2 -->
         <div class="change-password">
           <h4>Змінити пароль:</h4>
-          <form>
+          <form @submit.prevent="changePassword()">
             <div class="row">
               <div class="col-12 py-4">Пароль повинен бути мінімум 6 символів!</div>
             </div>
@@ -96,44 +89,40 @@
               <div class="col-6">
                 <div class="form-group">
                   <label for="currentPassword" class="form-control-label">Старий пароль:</label>
-                  <p class="control has-icon has-icon-right">
                     <input
                       id="currentPassword"
                       type="password"
                       class="form-control"
                       name="пароль"
                       v-model="password.currentPassword"
-                      v-validate="'required|min:6|max:32'"
+                      v-validate="'min:6|max:32'"
                       :class="{'input': true, 'is-danger': errors.has('пароль') }"
                     >
-                    <small>
-                      <i v-show="errors.has('пароль')" class="fa fa-warning"></i>
-                      <span
-                        v-show="errors.has('пароль')"
+                    <small  v-show="errors.has('пароль')">
+                      <span 
                         class="help is-danger"
                       >{{ errors.first('пароль') }}</span>
                     </small>
-                  </p>
                 </div>
               </div>
               <div class="col-6">
                 <div class="form-group">
                   <label for="newPassword" class="form-control-label">Новий пароль:</label>
-                  <p class="control" :class="{error: !(user.repassword === user.password)}">
                     <input
                       id="newPassword"
                       type="password"
                       class="form-control"
-                      name="repassword"
+                      name="новий пароль"
                       v-model="password.newPassword"
-                      v-validate="'required|min:6|max:32'"
-                      :class="{'is-danger': !(user.repassword === user.password)}"
+                      v-validate="'min:6|max:32'"
+                      :class="{'input': true, 'is-danger': errors.has('новий пароль') }"
                     >
-                    <small v-show="!(user.repassword === user.password)">
-                      <i class="fa fa-warning"></i>
-                      <span class="help is-danger">Паролі не співпадають</span>
+                    <small>
+                      <span
+                        v-show="errors.has('новий пароль')"
+                        class="help is-danger"
+                      >{{ errors.first('новий пароль') }}</span>
                     </small>
-                  </p>
                 </div>
               </div>
             </div>
@@ -141,30 +130,25 @@
               <div class="col-6">
                 <div class="form-group">
                   <label for="rePassword" class="form-control-label">Підтвердити новий пароль:</label>
-                  <p class="control has-icon has-icon-right">
                     <input
                       id="rePassword"
                       type="password"
                       class="form-control"
-                      name="пароль"
+                      name="rePassword"
                       v-model="password.rePassword"
-                      v-validate="'required|min:6|max:32'"
-                      :class="{'input': true, 'is-danger': errors.has('пароль') }"
+                      v-validate="'min:6|max:32'"
+                      :class="{'input': true, 'is-danger': password.rePassword !== password.newPassword}"
+                      
                     >
-                    <small>
-                      <i v-show="errors.has('пароль')" class="fa fa-warning"></i>
-                      <span
-                        v-show="errors.has('пароль')"
-                        class="help is-danger"
-                      >{{ errors.first('пароль') }}</span>
+                    <small v-show="password.rePassword !== password.newPassword">
+                      <span class="help is-danger">Паролі не співпадають</span>
                     </small>
-                  </p>
                 </div>
               </div>
             </div>
             <div class="row">
               <div class="offset-6 col-6 text-center">
-                <button type="submit" class="btn btn-primary">Зберегти</button>
+                <button type="submit" class="btn btn-primary" :disabled="isDisabled(errors, password)">Зберегти</button>
               </div>
             </div>
           </form>
@@ -175,7 +159,7 @@
         <!-- 3 -->
         <div class="notifications">
           <h4>Налаштування сповіщень</h4>
-          <form @submit.prevent="saveNotifications()">
+          <form @submit.prevent="changeNotifications()">
             <div class="table">
               <div class="row header">
                 <div class="col-9">Подія</div>
@@ -239,11 +223,15 @@
 </template>
 
 <script>
+import Spinner from "../shared/Spinner.vue";
 export default {
   name: "UserSettings",
-
+  components: {
+    Spinner
+  },
   data() {
     return {
+      loadData: false,
       user: {
         name: '',
         surname: '',
@@ -267,10 +255,22 @@ export default {
       }
     };
   },
+  computed: {
+    isEqualPasswords: () => {
+      return this.user.rePassword === this.user.newPassword;
+    },
+   
+  },
   created() {
     this.getUserInfo();
   },
   methods: {
+     isDisabled: (errors, password) => {
+       if (errors.items.length > 0 || !password.currentPassword.length || !password.rePassword.length || !password.newPassword.length) {
+        return true;
+      }
+      return false;
+    },
     getUserInfo() {
       axios
         .get(`/api/v1/user/settings`, {
@@ -284,6 +284,7 @@ export default {
           this.user = response.data.profile;
           this.user.phone = '0660851225';
           this.notifications = response.data.notifications;
+          this.loadData = true;
           console.log("User settings", response);
         })
         .catch(error => {
@@ -306,10 +307,12 @@ export default {
     select() {
       this.allSelected = false;
     },
-    saveProfileData() {
+    changeProfileData() {
       let newProfileData = {};
       if (this.user.phone) {
         newProfileData.new_phone = this.user.phone.replace(/(\(|\)|\s)/g, '');
+      } else {
+        newProfileData.new_phone = '';
       }
       newProfileData.new_name = this.user.name;
       newProfileData.new_surname = this.user.surname;
@@ -325,7 +328,26 @@ export default {
         }
       })
     },
-    saveNotifications() {
+    changePassword() {
+      let changePass = {
+        old_password: this.password.currentPassword,
+        new_password: this.password.newPassword
+      }
+      console.log(this.password);
+       axios.post(`/api/v1/user/settings/password`, changePass, {
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Requested-With': 'XMLHttpRequest',
+          Authorization: localStorage.getItem("token")
+        }
+      }) .catch(error => {
+      if (error && error.response && error.response.status === 401) {
+        this.$router.push("/login");
+      }
+    })
+
+    },
+    changeNotifications() {
       // замінюємо в чекбоксі true/false на 0/1
       for (let key in this.notifications) {
         let elem = this.notifications[key];
@@ -359,6 +381,12 @@ export default {
   border-radius: 4px;
   background: #ffffff;
 }
+.help.is-danger {
+    color: red;
+  }
+  .input.is-danger {
+    border: 1px solid red;
+  }
 input {
   @include boxShadow($shadow-input);
   border: none;
