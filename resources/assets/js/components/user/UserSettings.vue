@@ -17,7 +17,7 @@
                       class="form-control"
                       name="ім'я"
                       v-model="user.name"
-                      v-validate="'required|alpha|min:3||max:250'"
+                      v-validate="'required|alpha|min:3|max:250'"
                       :class="{'input': true, 'is-danger': errors.has('ім\'я') }"
                     >
                     <small v-show="errors.has('ім\'я')">
@@ -36,7 +36,7 @@
                       class="form-control"
                       name="прізвище"
                       v-model="user.surname"
-                      v-validate="'alpha|min:3||max:250'"
+                      v-validate="'required|alpha|min:3|max:250'"
                       :class="{'input': true, 'is-danger': errors.has('прізвище')}"
                     >
                     <small  v-show="errors.has('прізвище')">
@@ -58,7 +58,7 @@
                       name="телефон"
                       v-model="user.phone"
                       v-mask="'(###) ### ## ##'"
-                      v-validate="'min:15||max:15'"
+                      v-validate="'required|number|min:15|max:15'"
                       :class="{'input': true, 'is-danger': errors.has('телефон') }"
                     >
                     <small v-show="errors.has('телефон')">
@@ -311,11 +311,11 @@ export default {
       let newProfileData = {};
       if (this.user.phone) {
         newProfileData.new_phone = this.user.phone.replace(/(\(|\)|\s)/g, '');
-      } else {
-        newProfileData.new_phone = '';
       }
-      newProfileData.new_name = this.user.name;
-      newProfileData.new_surname = this.user.surname;
+      if (this.user.surname) {
+        newProfileData.new_surname = this.user.surname;
+      }
+      newProfileData.new_name = this.user.name; 
       axios.post(`/api/v1/user/settings/user-data`, newProfileData, {
         headers: {
           'Content-Type': 'application/json',
