@@ -141,15 +141,63 @@ class UserController extends Controller
     {
         //
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+	
+	/**
+	 * @SWG\Delete(
+	 *     path="/user/settings/delete-account",
+	 *     summary="Видалити профіль",
+	 *     description="Видалити профіль поточного користувача",
+	 *     operationId="user-delete",
+	 *     produces={"application/json"},
+	 *     tags={"Особистий кабінет"},
+	 *     security={
+	 *     {"passport": {}},
+	 *      },
+	 *     @SWG\Parameter(
+	 *      ref="#/parameters/Content-Type",
+	 *     ),
+	 *     @SWG\Parameter(
+	 *      ref="#/parameters/X-Requested-With",
+	 *     ),
+	 *
+	 *
+	 *     @SWG\Response(
+	 *         response=204,
+	 *         description="Користувач успішно видалений"
+	 *     ),
+	 *
+	 *     @SWG\Response(
+	 *         response=401,
+	 *         description="Необхідна аутентифікація користувача",
+	 *         examples={"application/json":
+	 *              {
+	 *                  "message": "Unauthenticated",
+	 *              }
+	 *          }
+	 *     ),
+	 *
+	 *     @SWG\Response(
+	 *         response=405,
+	 *         description="Метод, з яким виконувався запит, не дозволено використовувати для заданого ресурсу; наприклад, запит був здійснений за методом POST, хоча очікується DELETE.",
+	 *     ),
+	 * )
+	 */
     public function destroy(Request $request)
     {
-		$request->user()->token()->revoke();
+		$user = Auth::user();
+		
+		// отримуємо всі токени користувача
+		$tokens = $user->tokens;
+		
+		// переводимо в статус видалений
+		$user->usertype = 4;
+		$user->save();
+		
+		// анулюємо всі токени
+		foreach($tokens as $token) {
+			$token->revoke();
+		}
+		
+		return response()->json([], 204);
     }
 }
