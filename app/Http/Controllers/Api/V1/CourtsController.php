@@ -648,9 +648,6 @@ class CourtsController extends Controller
      *     operationId="guest-courts-id",
      *     produces={"application/json"},
      *     tags={"Суди"},
-     *     security={
-     *     {"passport": {}},
-     *      },
      *     @SWG\Parameter(
      *      ref="#/parameters/Content-Type",
      *     ),

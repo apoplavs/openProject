@@ -2,6 +2,7 @@
 
 namespace Toecyd;
 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
@@ -31,8 +32,15 @@ class Court extends Model
             ->where('court_code', '<', 2800) // відкидаємо спеціалізовані суди
             ->pluck('court_code'));
     }
-
-    public static function getCourtById(int $id)
+	
+	
+	/**
+	 * Отримання всієї необхідної інформації про суд
+	 * для сторінки пофайлу суду
+	 * @param int $id
+	 * @return mixed
+	 */
+	public static function getCourtById(int $id) : array
     {
         $result = call_user_func_array(['static', 'select'], self::getCourtFields())
             ->join('instances', 'instances.instance_code', '=', 'courts.instance_code')
@@ -46,38 +54,40 @@ class Court extends Model
             ->first();
 
         $result['address'] = DB::table('judges')->select('address')
-                               ->where('court', '=', $id)
-                               ->pluck('address')
-                               ->unique() // залишаємо в колекції лише унікальні елементи
-                               ->values(); // перенумеровуємо елементи колекції (після unique вони занумеровані не підряд)
+		   ->where('court', '=', $id)
+		   ->pluck('address')
+		   ->unique() // залишаємо в колекції лише унікальні елементи
+		   ->values(); // перенумеровуємо елементи колекції (після unique вони занумеровані не підряд)
 
         $result['judges'] = DB::table('judges')
-                              ->select('surname', 'name', 'patronymic', 'status', 'updated_status', 'due_date_status', 'rating',
-                                       DB::raw('(user_bookmark_judges.id IS NOT NULL) AS is_bookmark'))
-                              ->leftJoin('user_bookmark_judges', function ($join) {
-                                  $join->on('judges.id', '=', 'user_bookmark_judges.judge');
-                                  $join->on('user_bookmark_judges.user', '=',  DB::raw(Auth::user()->id));
-                              })
-                              ->where('court', '=', $id)
-                              ->orderBy('rating', 'DESC')
-                              ->get()
-                              ->toArray();
+		  ->select('surname', 'name', 'patronymic', 'status', 'updated_status', 'due_date_status', 'rating',
+				   DB::raw('(user_bookmark_judges.id IS NOT NULL) AS is_bookmark'))
+		  ->leftJoin('user_bookmark_judges', function ($join) {
+			  $join->on('judges.id', '=', 'user_bookmark_judges.judge');
+			  $join->on('user_bookmark_judges.user', '=',  DB::raw(Auth::user()->id));
+		  })
+		  ->where('court', '=', $id)
+		  ->where('status', '<>', 5)
+		  ->orderBy('rating', 'DESC')
+		  ->get()
+		  ->toArray();
 
         $result['court_sessions'] = DB::table('court_sessions')
-                                      ->select('date',
-                                               DB::raw('get_judges_by_id(judge1, judge2, judge3) AS judges'),
-                                               DB::raw('justice_kinds.name AS forma'),
-                                               'number', 'involved', 'description',
-                                               DB::raw('(user_bookmark_sessions.id IS NOT NULL) AS is_bookmark'))
-                                      ->join('justice_kinds', 'justice_kinds.justice_kind', '=', 'court_sessions.forma')
-                                      ->leftJoin('user_bookmark_sessions', function ($join) {
-                                          $join->on('court_sessions.id', '=', 'user_bookmark_sessions.court_session');
-                                          $join->on(DB::raw(Auth::user()->id), '=', 'user_bookmark_sessions.user');
-                                      })
-                                      ->where('court', '=', $id)
-                                      ->orderBy('date', 'ASC')
-                                      ->get()
-                                      ->toArray();
+		  ->select(DB::raw('DATE_FORMAT(`court_sessions`.`date`, "%d.%m.%Y %H:%i") AS date'),
+				   DB::raw('get_judges_by_id(judge1, judge2, judge3) AS judges'),
+				   DB::raw('justice_kinds.name AS forma'),
+				   'number', 'involved', 'description',
+				   DB::raw('(user_bookmark_sessions.id IS NOT NULL) AS is_bookmark'))
+		  ->join('justice_kinds', 'justice_kinds.justice_kind', '=', 'court_sessions.forma')
+		  ->leftJoin('user_bookmark_sessions', function ($join) {
+			  $join->on('court_sessions.id', '=', 'user_bookmark_sessions.court_session');
+			  $join->on(DB::raw(Auth::user()->id), '=', 'user_bookmark_sessions.user');
+		  })
+		  ->where('court', '=', $id)
+		  ->where('court_sessions.date', '>', Carbon::now('Europe/Kiev'))
+		  ->orderBy('date', 'ASC')
+		  ->get()
+		  ->toArray();
 
         return $result;
     }
@@ -100,17 +110,19 @@ class Court extends Model
         $result['judges'] = DB::table('judges')
             ->select('surname', 'name', 'patronymic', 'status', 'updated_status', 'due_date_status', 'rating')
             ->where('court', '=', $id)
+			->where('status', '<>', 5)
             ->orderBy('rating', 'DESC')
             ->get()
             ->toArray();
 
         $result['court_sessions'] = DB::table('court_sessions')
-            ->select('date',
+            ->select(DB::raw('DATE_FORMAT(`court_sessions`.`date`, "%d.%m.%Y %H:%i") AS date'),
                     DB::raw(' get_judges_by_id(judge1, judge2, judge3) AS judges'),
                     DB::raw('justice_kinds.name AS forma'),
                     'number', 'involved', 'description')
             ->join('justice_kinds', 'justice_kinds.justice_kind', '=', 'court_sessions.forma')
             ->where('court', '=', $id)
+			->where('court_sessions.date', '>', Carbon::now('Europe/Kiev'))
             ->orderBy('date', 'ASC')
             ->get()
             ->toArray();

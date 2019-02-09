@@ -54,7 +54,7 @@ Route::group(['prefix' => 'v1/', 'namespace' => 'Api\V1',], function () {
 	// Маршрути які вимагають реєстрації користувача
 	Route::group(['middleware' => 'auth:api'], function() {
 		Route::get('logout', 'AuthController@logout');
-		Route::get('user', 'AuthController@user');
+		Route::get('user', 'UserController@show');
 		
 		/**
 		 * Судді
@@ -129,6 +129,8 @@ Route::group(['prefix' => 'v1/', 'namespace' => 'Api\V1',], function () {
 		Route::post('user/settings/user-data', 'UserSettingsController@changeUserData');
 		// Змінити налаштування повідомлень користувача
 		Route::post('user/settings/notification', 'UserSettingsController@changeNotifications');
+		// Видалити акаунт користувача
+		Route::delete('user/settings/delete-account', 'UserController@destroy');
 		
 		
 	});
