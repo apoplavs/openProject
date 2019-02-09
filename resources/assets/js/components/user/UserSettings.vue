@@ -1,56 +1,49 @@
 <template>
   <div class="settings">
     <div class="container content-wrapper">
-      <div class="border content-wrapper_body">
+      <spinner v-if="!loadData"/>
+      <div v-if="loadData" class="border content-wrapper_body">
         <!-- 1 -->
         <div class="profile">
           <h4>Профіль</h4>
-          <form>
+          <form @submit.prevent="changeProfileData()">
             <div class="row">
               <div class="col-6">
                 <div class="form-group">
                   <label for="name" class="form-control-label">Ім'я:</label>
-                  <p class="control has-icon has-icon-right">
                     <input
                       id="name"
                       type="text"
                       class="form-control"
                       name="ім'я"
                       v-model="user.name"
-                      v-validate="'required|alpha|min:3||max:250'"
+                      v-validate="'required|alpha|min:3|max:250'"
                       :class="{'input': true, 'is-danger': errors.has('ім\'я') }"
                     >
-                    <small>
-                      <i v-show="errors.has('ім\'я')" class="fa fa-warning"></i>
-                      <span
-                        v-show="errors.has('ім\'я')"
+                    <small v-show="errors.has('ім\'я')">
+                      <span 
                         class="help is-danger"
                       >{{ errors.first('ім\'я') }}</span>
                     </small>
-                  </p>
                 </div>
               </div>
               <div class="col-6">
                 <div class="form-group">
                   <label for="name" class="form-control-label">Прізвище:</label>
-                  <p class="control has-icon has-icon-right">
                     <input
                       id="surname"
                       type="text"
                       class="form-control"
                       name="прізвище"
                       v-model="user.surname"
-                      v-validate="'required|alpha|min:3||max:250'"
-                      :class="{'input': true, 'is-danger': errors.has('прізвище') }"
+                      v-validate="'required|alpha|min:3|max:250'"
+                      :class="{'input': true, 'is-danger': errors.has('прізвище')}"
                     >
-                    <small>
-                      <i v-show="errors.has('прізвище')" class="fa fa-warning"></i>
+                    <small  v-show="errors.has('прізвище')">
                       <span
-                        v-show="errors.has('прізвище')"
                         class="help is-danger"
                       >{{ errors.first('прізвище') }}</span>
                     </small>
-                  </p>
                 </div>
               </div>
             </div>
@@ -58,116 +51,104 @@
               <div class="col-6">
                 <div class="form-group">
                   <label for="name" class="form-control-label">Номер мобільного:</label>
-                  <p class="control has-icon has-icon-right">
                     <input
                       id="telephone"
                       type="text"
                       class="form-control"
                       name="телефон"
                       v-model="user.phone"
+                      v-mask="'(###) ### ## ##'"
+                      v-validate="'required|number|min:15|max:15'"
                       :class="{'input': true, 'is-danger': errors.has('телефон') }"
                     >
-                    <small>
-                      <i v-show="errors.has('телефон')" class="fa fa-warning"></i>
-                      <span
-                        v-show="errors.has('телефон')"
+                    <small v-show="errors.has('телефон')">
+                      <span   
                         class="help is-danger"
                       >{{ errors.first('телефон') }}</span>
                     </small>
-                  </p>
                 </div>
               </div>
             </div>
             <div class="row">
               <div class="offset-6 col-6 text-center">
-                <button type="submit" class="btn btn-primary">Зберегти</button>
+                <button type="submit" class="btn btn-primary" :disabled="errors.items.length > 0">Зберегти</button>
               </div>
             </div>
           </form>
         </div>
-
         <div class="hr py-4"></div>
 
         <!-- 2 -->
         <div class="change-password">
           <h4>Змінити пароль:</h4>
-          <form>
+          <form @submit.prevent="changePassword()">
             <div class="row">
               <div class="col-12 py-4">Пароль повинен бути мінімум 6 символів!</div>
             </div>
             <div class="row">
               <div class="col-6">
                 <div class="form-group">
-                  <label for="password" class="form-control-label">Старий пароль:</label>
-                  <p class="control has-icon has-icon-right">
+                  <label for="currentPassword" class="form-control-label">Старий пароль:</label>
                     <input
-                      id="password"
+                      id="currentPassword"
                       type="password"
                       class="form-control"
                       name="пароль"
                       v-model="password.currentPassword"
-                      v-validate="'required|min:6|max:32'"
+                      v-validate="'min:6|max:32'"
                       :class="{'input': true, 'is-danger': errors.has('пароль') }"
                     >
-                    <small>
-                      <i v-show="errors.has('пароль')" class="fa fa-warning"></i>
-                      <span
-                        v-show="errors.has('пароль')"
+                    <small  v-show="errors.has('пароль')">
+                      <span 
                         class="help is-danger"
                       >{{ errors.first('пароль') }}</span>
                     </small>
-                  </p>
                 </div>
               </div>
               <div class="col-6">
                 <div class="form-group">
-                  <label for="repassword" class="form-control-label">Новий пароль:</label>
-                  <p class="control" :class="{error: !(user.repassword === user.password)}">
+                  <label for="newPassword" class="form-control-label">Новий пароль:</label>
                     <input
-                      id="repassword"
+                      id="newPassword"
                       type="password"
                       class="form-control"
-                      name="repassword"
+                      name="новий пароль"
                       v-model="password.newPassword"
-                      v-validate="'required|min:6|max:32'"
-                      :class="{'is-danger': !(user.repassword === user.password)}"
+                      v-validate="'min:6|max:32'"
+                      :class="{'input': true, 'is-danger': errors.has('новий пароль') }"
                     >
-                    <small v-show="!(user.repassword === user.password)">
-                      <i class="fa fa-warning"></i>
-                      <span class="help is-danger">Паролі не співпадають</span>
+                    <small>
+                      <span
+                        v-show="errors.has('новий пароль')"
+                        class="help is-danger"
+                      >{{ errors.first('новий пароль') }}</span>
                     </small>
-                  </p>
                 </div>
               </div>
             </div>
             <div class="row">
               <div class="col-6">
                 <div class="form-group">
-                  <label for="password" class="form-control-label">Підтвердити новий пароль:</label>
-                  <p class="control has-icon has-icon-right">
+                  <label for="rePassword" class="form-control-label">Підтвердити новий пароль:</label>
                     <input
-                      id="password"
+                      id="rePassword"
                       type="password"
                       class="form-control"
-                      name="пароль"
+                      name="rePassword"
                       v-model="password.rePassword"
-                      v-validate="'required|min:6|max:32'"
-                      :class="{'input': true, 'is-danger': errors.has('пароль') }"
+                      v-validate="'min:6|max:32'"
+                      :class="{'input': true, 'is-danger': password.rePassword !== password.newPassword}"
+                      
                     >
-                    <small>
-                      <i v-show="errors.has('пароль')" class="fa fa-warning"></i>
-                      <span
-                        v-show="errors.has('пароль')"
-                        class="help is-danger"
-                      >{{ errors.first('пароль') }}</span>
+                    <small v-show="password.rePassword !== password.newPassword">
+                      <span class="help is-danger">Паролі не співпадають</span>
                     </small>
-                  </p>
                 </div>
               </div>
             </div>
             <div class="row">
               <div class="offset-6 col-6 text-center">
-                <button type="submit" class="btn btn-primary">Зберегти</button>
+                <button type="submit" class="btn btn-primary" :disabled="isDisabled(errors, password)">Зберегти</button>
               </div>
             </div>
           </form>
@@ -178,78 +159,118 @@
         <!-- 3 -->
         <div class="notifications">
           <h4>Налаштування сповіщень</h4>
-          <div class="table">
-            <div class="row">
-              <div class="col-9">Подія</div>
-              <div class="col-3">
-                <div>Спосіб зв'язку</div>
-                <input type="checkbox">
-              </div>
-            </div>
-            <div class="row hr">
-              <div class="col-9">В судді, якого користувач відстежує, змінився статус.</div>
-              <div class="col-3">
-                <input type="checkbox"> Email
-              </div>
-            </div>
-            <div class="row bg">
-              <div class="col-9">По справі, яку користувач відстежує, додалось нове судове засідання</div>
-              <div class="col-3">
-                <input type="checkbox"> Email
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-9">По справі, яку користувач відстежує, в будь-якого судді змінився статус</div>
-              <div class="col-3">
-                <input type="checkbox"> Email
-              </div>
-            </div>
-            <div class="row bg">
-              <div class="col-9">За один день до судового засідання, яке користувач відстежує</div>
-              <div class="col-3">
-                <input type="checkbox"> Email
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-9">Про пропозиції судової практики для користувача</div>
-              <div class="col-3">
-                <input type="checkbox"> Email
-              </div>
-            </div>
-            <div class="row bg">
-                <div class="col-9">Новини, пропозиції, оновлення</div>
+          <form @submit.prevent="changeNotifications()">
+            <div class="table">
+              <div class="row header">
+                <div class="col-9">Подія</div>
                 <div class="col-3">
-                <input type="checkbox"> Email
+                  <div>Спосіб зв'язку</div>
+                  <input type="checkbox" v-model="allSelected" @change="selectAll()">
                 </div>
+              </div>
+              <div class="row hr">
+                <div class="col-9">В судді, якого користувач відстежує, змінився статус.</div>
+                <div class="col-3">
+                  <input type="checkbox" v-model="notifications.email_notification_1" @click="select()"> Email
+                </div>
+              </div>
+              <div class="row bg">
+                <div class="col-9">По справі, яку користувач відстежує, додалось нове судове засідання</div>
+                <div class="col-3">
+                  <input type="checkbox" v-model="notifications.email_notification_2" @click="select()"> Email
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-9">По справі, яку користувач відстежує, в будь-якого судді змінився статус</div>
+                <div class="col-3">
+                  <input type="checkbox" v-model="notifications.email_notification_3" @click="select()"> Email
+                </div>
+              </div>
+              <div class="row bg">
+                <div class="col-9">За один день до судового засідання, яке користувач відстежує</div>
+                <div class="col-3">
+                  <input type="checkbox" v-model="notifications.email_notification_4" @click="select()"> Email
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-9">Про пропозиції судової практики для користувача</div>
+                <div class="col-3">
+                  <input type="checkbox" v-model="notifications.email_notification_5" @click="select()"> Email
+                </div>
+              </div>
+              <div class="row bg">
+                  <div class="col-9">Новини, пропозиції, оновлення</div>
+                  <div class="col-3">
+                  <input type="checkbox" v-model="notifications.email_notification_6" @click="select()"> Email
+                  </div>
+              </div>
+              <div class="row">
+                <div class="offset-6 col-6 text-center">
+                  <button type="submit" class="btn btn-primary">Зберегти</button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+         <div class="row">
+            <div class="col-6">
+              <button type="button" class="btn btn-danger" @click="deleteProfile()">Видалити профайл</button>
             </div>
           </div>
-        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import Spinner from "../shared/Spinner.vue";
 export default {
   name: "UserSettings",
+  components: {
+    Spinner
+  },
   data() {
     return {
+      loadData: false,
       user: {
-        name: "Tetiana",
-        surname: "Prysiazhniuk",
-        phone: "+380660851225"
+        name: '',
+        surname: '',
+        phone: null,
+        email:'',
+        photo: ''
+      },
+      allSelected: false,
+      notifications: {
+        email_notification_1: 0,
+        email_notification_2: 0,
+        email_notification_3: 0,
+        email_notification_4: 0,
+        email_notification_5: 0,
+        email_notification_6: 0
       },
       password: {
-        currentPassword: "",
-        newPassword: "",
-        rePassword: ""
+        currentPassword: '',
+        newPassword: '',
+        rePassword: ''
       }
     };
+  },
+  computed: {
+    isEqualPasswords: () => {
+      return this.user.rePassword === this.user.newPassword;
+    },
+   
   },
   created() {
     this.getUserInfo();
   },
   methods: {
+     isDisabled: (errors, password) => {
+       if (errors.items.length > 0 || !password.currentPassword.length || !password.rePassword.length || !password.newPassword.length) {
+        return true;
+      }
+      return false;
+    },
     getUserInfo() {
       axios
         .get(`/api/v1/user/settings`, {
@@ -260,14 +281,92 @@ export default {
           }
         })
         .then(response => {
-          // this.user = response.data;
-          console.log("User settings", this.user);
+          this.user = response.data.profile;
+          this.user.phone = '0660851225';
+          this.notifications = response.data.notifications;
+          this.loadData = true;
+          console.log("User settings", response);
         })
         .catch(error => {
           if (error.response && error.response.status === 401) {
             this.$router.push("/login");
           }
         });
+    },
+    selectAll() {
+      if (this.allSelected) {
+        for (let key in this.notifications) {
+            this.notifications[key] = 1;           
+        }   
+      } else {
+        for (let key in this.notifications) {
+          this.notifications[key] = 0;       
+        }  
+      } 
+    },
+    select() {
+      this.allSelected = false;
+    },
+    changeProfileData() {
+      let newProfileData = {};
+      if (this.user.phone) {
+        newProfileData.new_phone = this.user.phone.replace(/(\(|\)|\s)/g, '');
+      }
+      if (this.user.surname) {
+        newProfileData.new_surname = this.user.surname;
+      }
+      newProfileData.new_name = this.user.name; 
+      axios.post(`/api/v1/user/settings/user-data`, newProfileData, {
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Requested-With': 'XMLHttpRequest',
+          Authorization: localStorage.getItem("token")
+        }
+        }) .catch(error => {
+        if (error && error.response && error.response.status === 401) {
+          this.$router.push("/login");
+        }
+      })
+    },
+    changePassword() {
+      let changePass = {
+        old_password: this.password.currentPassword,
+        new_password: this.password.newPassword
+      }
+      console.log(this.password);
+       axios.post(`/api/v1/user/settings/password`, changePass, {
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Requested-With': 'XMLHttpRequest',
+          Authorization: localStorage.getItem("token")
+        }
+      }) .catch(error => {
+      if (error && error.response && error.response.status === 401) {
+        this.$router.push("/login");
+      }
+    })
+
+    },
+    changeNotifications() {
+      // замінюємо в чекбоксі true/false на 0/1
+      for (let key in this.notifications) {
+        let elem = this.notifications[key];
+        this.notifications[key] = (elem === true || elem === 1) ? 1 : 0;
+      }
+      axios.post(`/api/v1/user/settings/notification`, this.notifications, {
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Requested-With': 'XMLHttpRequest',
+          Authorization: localStorage.getItem("token")
+        }
+        }) .catch( error => {
+          if (error && error.response && error.response.status === 401) {
+            this.$router.push("/login");
+        }
+      })
+    },
+    deleteProfile() {
+      console.log('Я хочу видалити свій профайл. Що скажете?')
     }
   }
 };
@@ -282,12 +381,21 @@ export default {
   border-radius: 4px;
   background: #ffffff;
 }
+.help.is-danger {
+    color: red;
+  }
+  .input.is-danger {
+    border: 1px solid red;
+  }
 input {
   @include boxShadow($shadow-input);
   border: none;
   background-color: $body-bg;
 }
 .table {
+  .header {
+    font-weight: bold;
+  }
   & > .row {
     padding: 15px 0;
   }
@@ -306,7 +414,4 @@ input {
     border-top: 1px solid rgba(0,0,0,.1);
 }
 
-// .content-wrapper  {
-//     border: 1px solid gray;
-// }
 </style>
