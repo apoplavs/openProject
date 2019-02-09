@@ -64,7 +64,7 @@ class UserSettingsController extends Controller
 	 *                      "phone": null,
 	 *                      "email": "example@mail.com",
 	 *                      "photo": null
-	 *                      }
+	 *                      },
 	 *                    "notifications": {
 	 *                      "email_notification_1": 1,
 	 *                      "email_notification_2": 1,
