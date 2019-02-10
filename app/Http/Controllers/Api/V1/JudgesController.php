@@ -2000,16 +2000,6 @@ class JudgesController extends Controller
             return response()->json(['message' => 'Фото даного судді вже існує'], 422);
         }
 
-        $s3_client = S3Client::factory([
-            'signature'   => 'v4',
-            'region'      => 'eu-central-1',
-            'version'     => 'latest',
-            'credentials' => [
-                'key'    => env('AWS_ACCESS_KEY_ID'),
-                'secret' => env('AWS_SECRET_KEY'),
-            ],
-        ]);
-
         $photo_file = $request->file('photo');
         $file_extension = $photo_file->extension();
 
@@ -2020,12 +2010,7 @@ class JudgesController extends Controller
 
         $judge->photo = "img/judges/{$judge_id}.{$file_extension}";
 
-        $s3_client->putObject([
-            'ACL'    => 'public-read',
-            'Body'   => $photo_file,
-            'Bucket' => 'toecyd',
-            'Key'    => $judge->photo,
-        ]);
+        Judge::getPhotoStorage()->put($judge->photo, $photo_file);
 
         $judge->save();
 

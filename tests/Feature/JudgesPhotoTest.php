@@ -89,26 +89,16 @@ class JudgesPhotoTest extends BaseApiTest
             'judge_id' => $judge_id,
             'photo'    => UploadedFile::fake()->image("photo.{$file_extension}")->size($this->getMaxPhotoSizeInKb()),
         ], $this->headersWithToken($this->login($this->user_data)));
+
         $this->assertCorrectResponse($response);
 
         $judge = Judge::where('judges.id', '=', $judge_id)->first();
         $etalon_photo_url = "img/judges/{$judge_id}.{$file_extension}";
         $this->assertEquals($etalon_photo_url, $judge->photo);
 
-        $s3_client = S3Client::factory([
-            'signature'   => 'v4',
-            'region'      => 'eu-central-1',
-            'version'     => 'latest',
-            'credentials' => [
-                'key'    => env('AWS_ACCESS_KEY_ID'),
-                'secret' => env('AWS_SECRET_KEY'),
-            ],
-        ]);
-
-        $file = $s3_client->getObject(['Bucket' => 'toecyd', 'Key' => $judge->photo]);
-        $this->assertNotEmpty($file);
-
-        $s3_client->deleteObject(['Bucket' => 'toecyd', 'Key' => $judge->photo]);
+        $storage = Judge::getPhotoStorage();
+        $this->assertNotEmpty($storage->exists($judge->photo));
+        $storage->delete($judge->photo);
     }
 
     public function fileExtensionProvider()

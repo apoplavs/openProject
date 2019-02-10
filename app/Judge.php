@@ -5,6 +5,8 @@ namespace Toecyd;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+
 
 /**
  * Class Judge
@@ -17,6 +19,9 @@ class Judge extends Model
 
     public $timestamps = false;
 
+    public static function getPhotoStorage() {
+        return Storage::disk('s3');
+    }
     // The attributes that are mass assignable.
     protected $fillable = [
         'id',
