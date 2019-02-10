@@ -1,10 +1,8 @@
 <template>
   <div>
     <header-component/>
-    <router-view></router-view>
-    <!--<footer-component></footer-component>-->
+    <router-view class="content" />
   </div>
-
 </template>
 
 <script>
@@ -12,28 +10,18 @@
     // import FooterComponent from './FooterComponent.vue';
 
     export default {
-        name: "app-component",
+        name: "AppComponent",
         
         components: {
             HeaderComponent,
             // FooterComponent,
         },
-        // Мы перехватываем вызов axios, чтобы определить, получим ли мы 401 Unauthorizedответ
-        //   created: function () {
-        //     this.$http.interceptors.response.use(undefined, function (err) {
-        //     return new Promise(function (resolve, reject) {
-        //         if (err.status === 401 && err.config && !err.config.__isRetryRequest) {
-        //         this.$store.dispatch(logout)
-        //         }
-        //         throw err;
-        //     });
-    // });
-//   }
     }
 </script>
 
 <style lang="scss">
     @import "../../sass/app.scss";
-    
-
+    .content {
+        height: calc(100vh - 90px);
+    }
 </style>

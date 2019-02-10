@@ -99,6 +99,7 @@ class UserBookmarkJudge extends Model
             'judges.status',
             DB::raw('DATE_FORMAT(judges.updated_status, "%d.%m.%Y") AS updated_status'),
             DB::raw('DATE_FORMAT(judges.due_date_status, "%d.%m.%Y") AS due_date_status'),
+			DB::raw('1 AS is_bookmark'),
             'judges.rating'
         ];
     }

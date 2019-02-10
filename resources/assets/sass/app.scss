@@ -2,14 +2,14 @@
 @import "_variables";
 @import "_mixins";
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&subset=cyrillic');
+@import url('https://fonts.googleapis.com/css?family=Coiny');
 
 body {
   background-color: $body-bg;
-  // height: 100vh;
   font-family: 'Roboto', sans-serif;
   font-weight: 400;
   font-style: normal;
-  color: $color-1;
+  color: $text-color;
   // background-image: linear-gradient(to bottom, #3081cf, #82db85);
 }
 
@@ -19,18 +19,22 @@ input::-moz-focus-inner {
   padding: 0;
 }
 
-.btn-primary {
+.b-primary {
   color: #ffff;
   background-color: $primary;
   border-color: $primary;
-  @include boxShadow($shadow-btn);
-  &:hover{
-    background-color: lighten($primary, 5%);
-    border-color: lighten($primary, 5%);
+  min-width: 100px;
+  
+  &:hover,
+  &:active{
+    outline: none;
+    background-color: $primary;
+    border-color: $primary;
+    @include boxShadow($shadow-btn);
   }
 }
 
-.btn-confirm {
+.b-confirm {
   color: $main-color;
   background-color: #ffffff;
   border-color: $main-color;
@@ -52,7 +56,6 @@ button {
   &:hover,
   &:focus {
     outline: none;
-    background-color: darken($body-bg, 10%);
   }
 }
 
@@ -65,6 +68,7 @@ button {
 .card-header {
   @include alignElement($alignItems: center, $justifyContent: space-between);
   background-color: $main-color;
+  border-bottom: 2px solid darken($main-color, 5%);
   color: #ffffff;
   font-size: 1.5rem;
 }
@@ -74,10 +78,13 @@ button {
 i[class^="fa-bookmark"],
 i.fa-edit{
   cursor: pointer;
+  font-size: 1.1rem;
 }
 .fa-bookmark-o,
 .fa-bookmark {
     color: $danger;
+    font-size: 1.1rem;
+    cursor: pointer;
 }
 .fa-briefcase {
     color: $success;
@@ -105,9 +112,18 @@ i.fa-edit{
 
 .content-wrapper {
   min-width: 1140px;
-  height: 100vh;
-  padding-top: 3rem;
-  padding-bottom: 5rem;
+  height: 100%;
+  padding: 3rem 0;
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
 }
 
 ::-webkit-scrollbar {
@@ -118,13 +134,52 @@ i.fa-edit{
 .min-width {
   min-width: 1140px;
 }
-
-  // animation 
-  // .fade-enter-active, .fade-leave-active {
-  //   transition: opacity .5s;
-  // }
   .fade-enter, .fade-leave-to /* .fade-leave-active до версии 2.1.8 */ {
     opacity: 0;
     transition: opacity .5s;
   }
 
+  // ----- pagination ------- //
+  .pagination {
+    .bg-active {
+      background-color: $main-color;
+      border-color: $main-color;
+    }
+    button{
+      &:active,
+      &:focus{
+        background-color: $main-color;
+        border-color: $main-color;
+      }
+    }
+    div.pr-2.leading-loose {
+      display: none !important;
+    }
+    .disabled {
+      color: $input-placeholder-color;
+      cursor: no-drop;
+    }
+    .dots {
+      background-color: transparent;
+      border: none !important;
+    }
+    .border {
+      border: 0 !important;
+      box-shadow: 1px 1px 1px 1px #dee2e6 !important;
+    }
+  }
+  // ------ end ------- //
+
+.fa-spinner {
+  animation: 1s linear 0s normal none infinite running rotate;
+  -webkit-animation: 1s linear 0s normal none infinite running rotate;
+}
+
+@keyframes rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+@-webkit-keyframes rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

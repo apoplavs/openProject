@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Storage;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class User
@@ -24,7 +25,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'surname', 'phone', 'facebook_id', 'google_id', 'email', 'password', 'photo', 'usertype'
+        'name', 'surname', 'phone', 'facebook_id', 'google_id', 'email', 'password', 'photo', 'usertype', 'remember_token'
     ];
 
     /**
@@ -67,15 +68,22 @@ class User extends Authenticatable
 	
 	/**
 	 * отримує всі налаштування поточного користувача
-	 * @return mixed
+	 * реалізовано в 2 запити оскільки так зручніше на фронті
+	 * @return array
 	 */
-	public static function getSettings() {
-		return static::select('users.name', 'users.surname', 'users.phone', 'users.phone',
-			'users.email', 'users.photo', 'user_settings.email_notification_1', 'user_settings.email_notification_2',
+	public static function getSettings() : array {
+		$profile = static::select('users.name', 'users.surname', 'users.phone', 'users.phone', 'users.email', 'users.photo')
+			->where('users.id', '=', Auth::user()->id)
+			->first();
+
+		$notifications = DB::table('user_settings')
+			->select('user_settings.email_notification_1', 'user_settings.email_notification_2',
 			'user_settings.email_notification_3', 'user_settings.email_notification_4',
 			'user_settings.email_notification_5', 'user_settings.email_notification_6')
-			->join('user_settings', 'user_settings.user', '=', 'users.id')
-			->where('users.id', '=', Auth::user()->id)
-			->get();
+			->where('user_settings.user', '=', Auth::user()->id)
+			->first();
+
+
+		return (['profile' => $profile, 'notifications' => $notifications]);
 	}
 }

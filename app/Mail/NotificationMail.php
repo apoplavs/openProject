@@ -25,12 +25,15 @@ class NotificationMail extends Mailable
 	
 	// дані для заповнення листа інформацією
 	private $data;
-
-    /**
-     * Create a new message instance.
-     *
-     * @return void
-     */
+	
+	
+	/**
+	 * Create a new message instance.
+	 *
+	 * @param int    $id of Notification
+	 * @param string $subject
+	 * @param array  $data
+	 */
     public function __construct(int $id = 1, string $subject = '', array $data) {
         $this->id = $id;
 		$this->subject = $subject;

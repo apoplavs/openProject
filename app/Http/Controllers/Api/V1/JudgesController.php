@@ -1430,7 +1430,7 @@ class JudgesController extends Controller
      *
      *     @SWG\Response(
      *         response=204,
-     *         description="Закладка упішно видалена"
+     *         description="Закладка успішно видалена"
      *     ),
      *
      *     @SWG\Response(

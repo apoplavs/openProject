@@ -27,8 +27,8 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')
         //          ->hourly();
 	
-		$schedule->command('get:court_sessions')->dailyAt('04:30')->timezone('Europe/Kiev');
-		$schedule->command('update:users_bookmarks')->dailyAt('05:00')->timezone('Europe/Kiev');
+		$schedule->command('get:court_sessions')->weekdays()->dailyAt('04:35')->timezone('Europe/Kiev');
+		$schedule->command('update:users_bookmarks')->weekdays()->dailyAt('08:40')->timezone('Europe/Kiev');
     }
 
     /**

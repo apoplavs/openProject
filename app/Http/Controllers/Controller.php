@@ -41,8 +41,8 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
  *          description="Ми використовуємо протокол OAuth 2.0 для автентифікації та авторизації користувачів. Кожен запит на любий маршрут (крім /signup, /login, /guest/*, /judges/autocomplete) повинен містити токен авторизації, який одночасно є ідентифікатором користувача. Його потрібно передавати в Headers при здійснені запиту. Він повинен виглядати наступним чином:
  *     'Authorization: token_type access_token'
 ____________________________________________________________
-     ПРИКЛАД:
- Headers:
+ПРИКЛАД:
+Headers:
  * * Content-Type: application/json
  * * X-Requested-With: XMLHttpRequest
  * * Authorization:  Bearer j7zRe7JO8-JaxjRyylhODMx . . . nk4GnDLwAibyja_ZDt1x6LnLAevmJkjYw",
@@ -87,5 +87,5 @@ ____________________________________________________________
  */
 class Controller extends BaseController
 {
-    use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+	use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 }
