@@ -49,9 +49,10 @@ class CourtSession extends Model
 	public static function getSessionByJudge($judge) {
 		// отримання id користувача
 		$user_id = Auth::check() ? Auth::user()->id : 0;
-		return(static::select('court_sessions.id', 'court_sessions.date', 'court_sessions.number',
+		return(static::select('court_sessions.id', 'court_sessions.number',
 			 DB::raw(' get_judges_by_id(judge1, judge2, judge3) AS judges'),
 			DB::raw('justice_kinds.name AS forma'),
+			DB::raw('DATE_FORMAT(`court_sessions`.`date`, "%d.%m.%Y %H:%i") AS date'),
 			 'court_sessions.involved', 'court_sessions.description',
 			DB::raw("(CASE WHEN user_bookmark_sessions.user = {$user_id} THEN 1 ELSE 0 END) AS is_bookmark"))
 			->leftJoin('user_bookmark_sessions', function ($join) use ($user_id) {
@@ -71,9 +72,10 @@ class CourtSession extends Model
 	 * @param $judge
 	 */
 	public static function getSessionByJudgeGuest($judge) {
-		return(static::select('court_sessions.date', 'court_sessions.number',
+		return(static::select('court_sessions.number',
 			DB::raw(' get_judges_by_id(judge1, judge2, judge3) AS judges'),
 			DB::raw('justice_kinds.name AS forma'),
+			DB::raw('DATE_FORMAT(`court_sessions`.`date`, "%d.%m.%Y %H:%i") AS date'),
 			'court_sessions.involved', 'court_sessions.description')
 			->join('justice_kinds', 'justice_kinds.justice_kind', '=', 'court_sessions.forma')
 			->whereRaw("DATE(court_sessions.date) >= CURDATE() AND ".

@@ -14,6 +14,7 @@ import CourtsList from '../components/rating/courts/CourtsList.vue';
 import CourtProfile from '../components/rating/courts/CourtProfile.vue';
 import UserProfile from '../components/user/UserProfile.vue';
 import UserSettings from '../components/user/UserSettings.vue';
+import ConfirmEmail from '../components/user/ConfirmEmail.vue';
 
 import PrivacyPolicy from '../components/system/PrivacyPolicy.vue'
 
@@ -82,6 +83,11 @@ export default new Router({
             component: PrivacyPolicy,
             name: 'privacy-policy',
         },
+		{
+			path: '/confirm-email',
+			component: ConfirmEmail,
+			name: 'confirm-email',
+		},
     ]
 });
 
