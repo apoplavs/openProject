@@ -5,7 +5,6 @@ namespace Toecyd\Mail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
 /**
  * Class AccountMail
@@ -31,9 +30,9 @@ class AccountMail extends Mailable
 	/**
 	 * Create a new message instance.
 	 *
-	 * @param string $view_name
-	 * @param string $subject
-	 * @param array  $data
+	 * @param string $view_name Назва view яку потрібно згенерувати і надісляти
+	 * @param string $subject Тема листа
+	 * @param array  $data Дані для заповнення листа
 	 */
 	public function __construct(string $view_name = '', string $subject = '', array $data) {
 		$this->view_name = $view_name;
@@ -43,7 +42,7 @@ class AccountMail extends Mailable
 	
 	/**
 	 * Build the message.
-	 *
+	 * Генерування листа, який передається в клас Mail::to()->send()
 	 * @return $this
 	 */
 	public function build() {

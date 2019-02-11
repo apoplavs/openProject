@@ -165,7 +165,7 @@
                 <div class="col-9">Подія</div>
                 <div class="col-3">
                   <div>Спосіб зв'язку</div>
-                  <input type="checkbox" v-model="allSelected" @change="selectAll()">
+                  <input type="checkbox" v-model="allSelected" @change="selectAll()"> <small>Виділити все/зняти виділення</small>
                 </div>
               </div>
               <div class="row hr">
@@ -212,9 +212,10 @@
             </div>
           </form>
         </div>
+        <div class="hr py-4"></div>
          <div class="row">
-            <div class="col-6">
-              <button type="button" class="btn btn-danger" @click="deleteProfile()">Видалити профайл</button>
+            <div class="col-6 offset-4">
+              <button type="button" class="btn btn-danger btn-lg" @click="deleteProfile()">Видалити профайл</button>
             </div>
           </div>
       </div>

@@ -64,7 +64,7 @@ class UserSettingsController extends Controller
 	 *                      "phone": null,
 	 *                      "email": "example@mail.com",
 	 *                      "photo": null
-	 *                      }
+	 *                      },
 	 *                    "notifications": {
 	 *                      "email_notification_1": 1,
 	 *                      "email_notification_2": 1,
@@ -178,7 +178,7 @@ class UserSettingsController extends Controller
 		if (!Hash::check(Input::get('old_password'), $user->password)) {
 			return response()->json([
 				'message' => Lang::get('passwords.incorrect')
-			], 401);
+			], 403);
 		}
 		// зберігаємо новий пароль
 		$user->password = Hash::make(Input::get('new_password'));
@@ -271,7 +271,7 @@ class UserSettingsController extends Controller
 		$request->validate([
 			'new_name'    => 'string|min:3|max:255',
 			'new_surname' => 'string|min:3|max:255',
-			'new_phone' => 'string|min:9|max:12',
+			'new_phone' => 'string|min:10|max:10',
 		]);
 		
 		$user = Auth::user();
@@ -299,7 +299,7 @@ class UserSettingsController extends Controller
 	/**
 	 *
 	 * @SWG\Post(
-	 *     path="/user/settings/notification",
+	 *     path="/user/settings/notifications",
 	 *     summary="Змінити налаштування повідомлень",
 	 *     description="Змінити налаштування повідомлень для поточного користувача.",
 	 *     operationId="user-settings-notification",

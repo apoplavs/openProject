@@ -13,7 +13,7 @@ class UserTest extends BaseApiTest
     /**
      *  Авторизуємось і перевіряємо, чи вірно відпрацює запит даних користувача
      */
-    public function testSuccess()
+    public function testSuccessUpload()
     {
         // Авторизуємось і отримуємо токен
         $headers_with_token = $this->headersWithToken($this->login($this->user_data));

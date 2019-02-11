@@ -14,6 +14,7 @@ import CourtsList from '../components/rating/courts/CourtsList.vue';
 import CourtProfile from '../components/rating/courts/CourtProfile.vue';
 import UserProfile from '../components/user/UserProfile.vue';
 import UserSettings from '../components/user/UserSettings.vue';
+import ConfirmEmail from '../components/user/ConfirmEmail.vue';
 
 // import CourtSessions from '../components/user/components/CourtSessions.vue';
 // import CourtPractice from '../components/user/components/CourtPractice.vue';
@@ -75,6 +76,11 @@ export default new Router({
             component: UserSettings,
             name: 'user-settings',
         },
+		{
+			path: '/confirm-email',
+			component: ConfirmEmail,
+			name: 'confirm-email',
+		},
     ]
 });
 
