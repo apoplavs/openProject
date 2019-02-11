@@ -60,7 +60,7 @@ class Court extends Model
 		   ->values(); // перенумеровуємо елементи колекції (після unique вони занумеровані не підряд)
 
         $result['judges'] = DB::table('judges')
-		  ->select('surname', 'name', 'patronymic', 'status', 'updated_status', 'due_date_status', 'rating',
+		  ->select('id', 'surname', 'name', 'patronymic', 'status', 'updated_status', 'due_date_status', 'rating',
 				   DB::raw('(user_bookmark_judges.id IS NOT NULL) AS is_bookmark'))
 		  ->leftJoin('user_bookmark_judges', function ($join) {
 			  $join->on('judges.id', '=', 'user_bookmark_judges.judge');
@@ -108,7 +108,7 @@ class Court extends Model
             ->values(); // перенумеровуємо елементи колекції (після unique вони занумеровані не підряд)
 
         $result['judges'] = DB::table('judges')
-            ->select('surname', 'name', 'patronymic', 'status', 'updated_status', 'due_date_status', 'rating')
+            ->select('id', 'surname', 'name', 'patronymic', 'status', 'updated_status', 'due_date_status', 'rating')
             ->where('court', '=', $id)
 			->where('status', '<>', 5)
             ->orderBy('rating', 'DESC')
