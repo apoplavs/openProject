@@ -58,7 +58,7 @@
                       name="телефон"
                       v-model="user.phone"
                       v-mask="'(###) ### ## ##'"
-                      v-validate="'required|number|min:15|max:15'"
+                      v-validate="'required|min:15|max:15'"
                       :class="{'input': true, 'is-danger': errors.has('телефон') }"
                     >
                     <small v-show="errors.has('телефон')">
