@@ -1,51 +1,33 @@
 <template>
-    <div class="user-profile">  
-        <div class="w-100">
-            <div class="">
-                <ul class="nav nav-tabs w-1140">              
-                    <li class="nav-item">
-                        <a class="nav-link tab" href="javascript:" @click="setActiveTab(1)">Судові засідання</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link tab" href="javascript:" @click="setActiveTab(2)">Судова практика</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link tab" href="javascript:" @click="setActiveTab(3)">Закладки суддів</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link tab" href="javascript:" @click="setActiveTab(4)">Закладки судових установ</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link tab" href="javascript:" @click="setActiveTab(5)">Історія переглядів</a>
-                    </li>
-                </ul>
-            </div>
-             <div class="tab-content container w-1140">
-                <court-sessions v-if="tabs.sessions"/>
-                <court-practice v-if="tabs.practice"/>
-                <judges-bookmarks v-if="tabs.judges"/>
-                <courts-bookmarks v-if="tabs.courts"/>
-                <view-history v-if="tabs.history"/>
-             </div>
+    <div class="privacy-policy">  
+        <div class="card a4">
+            ferfaervg
+            frvgrvgrea
+            vgf
+        </div>
+        <div class="card a4">
+            ferfaervg
+            frvgrvgrea
+            vgf
         </div>
     </div>
 </template>
 
 <script>
-    import CourtSessions from './components/CourtSessions.vue';
-    import CourtPractice from './components/CourtPractice.vue';
-    import JudgesBookmarks from './components/JudgesBookmarks.vue';
-    import CourtsBookmarks from './components/CourtsBookmarks.vue';
-    import ViewHistory from './components/ViewHistory.vue';
+    // import CourtSessions from './components/CourtSessions.vue';
+    // import CourtPractice from './components/CourtPractice.vue';
+    // import JudgesBookmarks from './components/JudgesBookmarks.vue';
+    // import CourtsBookmarks from './components/CourtsBookmarks.vue';
+    // import ViewHistory from './components/ViewHistory.vue';
       
     export default {
-        name: "UserProfile",
+        name: "PrivacyPolicy",
         components: {
-            CourtSessions,
-            CourtPractice,
-            JudgesBookmarks,
-            CourtsBookmarks,
-            ViewHistory
+            // CourtSessions,
+            // CourtPractice,
+            // JudgesBookmarks,
+            // CourtsBookmarks,
+            // ViewHistory
         },
         data() {
             return {
@@ -83,6 +65,14 @@
 <style scoped lang="scss">
     @import "../../../sass/_variables.scss";
     // @import "../../../sass/_mixins.scss";
+    .a4 {
+        width: 20cm !important;
+        height: 30cm !important;
+        margin: 50px auto 20px auto;
+        padding: 1cm 0.5cm 1cm 2cm; 
+    }
+
+
     .user-profile {
         display: flex;
         justify-content: center;
