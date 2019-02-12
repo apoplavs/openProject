@@ -16,6 +16,8 @@ import UserProfile from '../components/user/UserProfile.vue';
 import UserSettings from '../components/user/UserSettings.vue';
 import ConfirmEmail from '../components/user/ConfirmEmail.vue';
 
+import PrivacyPolicy from '../components/system/PrivacyPolicy.vue'
+
 // import CourtSessions from '../components/user/components/CourtSessions.vue';
 // import CourtPractice from '../components/user/components/CourtPractice.vue';
 // import CourtsBookmarks from '../components/user/components/CourtsBookmarks.vue';
@@ -75,6 +77,11 @@ export default new Router({
             path: '/settings',
             component: UserSettings,
             name: 'user-settings',
+        },
+        {
+            path: '/privacy-policy',
+            component: PrivacyPolicy,
+            name: 'privacy-policy',
         },
 		{
 			path: '/confirm-email',
