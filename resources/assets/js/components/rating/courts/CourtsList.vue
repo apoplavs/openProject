@@ -110,18 +110,23 @@
         return true;
       },
       liveSearch: _.debounce(function(event) {
+        console.log('GOing', this.validateInputSearch());
+        
         if (this.validateInputSearch()) {
-          axios
-            .get('/api/v1/courts/autocomplete', {
+          console.log(this.filters.search);
+          
+          axios.get('/api/v1/courts/autocomplete', {
               headers: {
                 "Content-Type": "application/json",
                 "X-Requested-With": "XMLHttpRequest",
               },
-              filters: {
+              params: {
                 search: this.filters.search
               }
             })
             .then(response => {
+              console.log(response);
+              
               this.autocomplete = response.data;
             })
             .catch(error => {
