@@ -737,6 +737,7 @@ class CourtsController extends Controller
      *                   },
      *                   "judges": {
      *                       {
+     *							 "id": 124,
      *                           "surname": "Питель",
      *                           "name": "Олена",
      *                           "patronymic": "Віталіївна",
@@ -746,6 +747,7 @@ class CourtsController extends Controller
      *                           "rating": 0
      *                       },
      *                       {
+     *							 "id": 5124,	
      *                           "surname": "Єрмічова",
      *                           "name": "Віта",
      *                           "patronymic": "Валентинівна",
@@ -900,6 +902,7 @@ class CourtsController extends Controller
      *                   },
      *                   "judges": {
      *                       {
+     *							 "id": 124,	
      *                           "surname": "Питель",
      *                           "name": "Олена",
      *                           "patronymic": "Віталіївна",
@@ -910,6 +913,7 @@ class CourtsController extends Controller
      *                           "is_bookmark": 1
      *                       },
      *                       {
+     *							 "id": 5124,	
      *                           "surname": "Єрмічова",
      *                           "name": "Віта",
      *                           "patronymic": "Валентинівна",

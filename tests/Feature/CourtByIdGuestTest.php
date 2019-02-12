@@ -127,13 +127,6 @@ class CourtByIdGuestTest extends BaseApiTest
         return $etalon_data;
     }
 
-    public function insertDataToDb($insert_db_data)
-    {
-        foreach ($insert_db_data as $table => $data) {
-            DB::table($table)->insert($data);
-        }
-    }
-
     public function testBasic()
     {
         $insert_db_data = $this->getInsertDbData();
