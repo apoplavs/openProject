@@ -1,9 +1,27 @@
 <template>
     <div class="privacy-policy">  
         <div class="card a4">
-            ferfaervg
-            frvgrvgrea
-            vgf
+            <div class="h3 text-center">ПОЛІТИКА КОНФІДЕНЦІЙНОСТІ ТА ЗАХИСТУ ПЕРСОНАЛЬНИХ ДАНИХ</div>
+            <p>Ця політика конфіденційності та захисту персональних даних (далі – Політика) встановлює порядок одержання, обробки, зберігання та використання персональних даних, які отримує TOEсуд (далі –Компанія) від користувачів, цілі використання персональних даних, взаємодії з третіми особами, заходи безпеки для захисту персональних даних, умови доступу до персональних даних, а також, контактна інформація для користувача щодо отримання доступу, внесення змін, блокування або видалення своїх персональних даних, в т.ч. персональних даних та звернення з будь-якими питаннями, які можуть виникнути у Вас щодо практики захисту персональних даних відповідно до ЗУ «Про інформацію», ЗУ «Про доступ до публічної інформації», ЗУ «Про захист персональних даних».</p>
+            <p>Питання та запити щодо обробки, зберігання, використання  та видалення персональних даних можуть бути направлені на електронну пошту: toe.cyd@gmail.com.</p>
+            <p><b>Персональні дані</b> — інформація, що відноситься до певного Користувача, яка дозволяє ідентифікувати цього Користувача як фізичну особу.</p>
+            <p><b>Загальнодоступні дані</b> — дані (у тому числі Персональні дані), до яких фізична особа - власник цих даних, надала доступ необмеженому колу осіб (у т.ч. шляхом публікації на будь-якому інтернет-сайті без обмеження доступу до цих даних) або на які відповідно до даної Політики та/або чинного законодавства не поширюється вимога дотримання конфіденційності.</p>
+            <p><b>Обліковий запис</b> — запис, що містить дані авторизації Користувача (логін і пароль), необхідні для ідентифікації Користувача при використанні сервісів Компанії.</p>
+            <p><b>Cookie</b> — фрагмент даних, створений Сайтом й збережений у комп'ютері Користувача у вигляді одного або декількох файлів. Cookie не містять Персональних даних і можуть бути заблоковані Користувачем у будь-який момент.</p>
+            <div class="h5 text-center">Збір та використання персональних даних</div>
+            <p>Володільцем та розпорядником персональних даних користувачів Сайту є ТОЕсуд.
+При використанні користувачем сервісів Сайту Компанією здійснюється обробка даних користувача, а саме:</p>
+            <p></p>
+            <p></p>
+            <p></p>
+            <p></p>
+            <p></p>
+            <p></p>
+            <p></p>
+            <p></p>
+            <p></p>
+            <p></p>
+
         </div>
         <div class="card a4">
             ferfaervg
@@ -13,110 +31,29 @@
     </div>
 </template>
 
-<script>
-    // import CourtSessions from './components/CourtSessions.vue';
-    // import CourtPractice from './components/CourtPractice.vue';
-    // import JudgesBookmarks from './components/JudgesBookmarks.vue';
-    // import CourtsBookmarks from './components/CourtsBookmarks.vue';
-    // import ViewHistory from './components/ViewHistory.vue';
-      
+<script>      
     export default {
         name: "PrivacyPolicy",
         components: {
-            // CourtSessions,
-            // CourtPractice,
-            // JudgesBookmarks,
-            // CourtsBookmarks,
-            // ViewHistory
         },
         data() {
             return {
-                tabs: {
-                    sessions: false,
-                    practice: false,
-                    judges: false,
-                    courts: false,
-                    history: false
-                },
-                user: {}
             }
         },
         mounted() {
-            this.setActiveTab(1);
         },
         methods: {
-            setActiveTab(indexTab) {                                
-                Object.keys(this.tabs).forEach((key, index) => {
-                    this.tabs[key] = false;
-                    if (index + 1 === indexTab) {
-                        this.tabs[key] = true;
-                    }
-                });                      
-                let list = document.getElementsByClassName('nav-link tab');
-                for (let index = 0; index < list.length; index++) {   
-                    list[index].classList.remove("active");                
-                }
-                list[indexTab - 1].classList.add('active')
-            }
         }
     }
 </script>
 
 <style scoped lang="scss">
     @import "../../../sass/_variables.scss";
-    // @import "../../../sass/_mixins.scss";
     .a4 {
         width: 20cm !important;
         height: 30cm !important;
         margin: 50px auto 20px auto;
         padding: 1cm 0.5cm 1cm 2cm; 
-    }
-
-
-    .user-profile {
-        display: flex;
-        justify-content: center;
-        margin-top: 30px;
-    }
-    
-    .w-1140 {
-        min-width: 1140px !important;
-    }
-    
-    .nav.nav-tabs {
-        height: 60px;
-        display: flex;
-        align-items: flex-end;
-        justify-content: center;
-        background-color: #ffffff;
-        border-bottom: 0;
-    }
-    
-    .nav-item {
-        margin: 0 10px 0 10px;
-    }
-    
-    .nav-tabs .nav-item.show .nav-link,
-    .nav-tabs .nav-link.active {
-        color: #568a8a; //$text-color;
-        background-color: $body-bg; // $body-bg;
-        border: 0;
-        padding: 15px;
-        border-radius: 0;
-        border-top: 2px solid $main-color;
-        text-transform: uppercase;
-    }
-    
-    .nav-tabs .nav-item.show .nav-link,
-    .nav-tabs .nav-link:not(.active) {
-        color: $text-muted;
-        background-color: #ffffff;
-        border: 0;
-        border-radius: 0;
-        padding: 15px;
-        &:hover {
-             background-color: $body-bg;
-        }
     }
 </style>
 
