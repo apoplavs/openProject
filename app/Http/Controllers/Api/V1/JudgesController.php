@@ -1927,6 +1927,7 @@ class JudgesController extends Controller
     /**
      * @SWG\Post(
      *     path="/judges/photo",
+     *     consumes={"multipart/form-data"},
      *     summary="Додати фото судді",
      *     description="Додати фото судді",
      *     operationId="judges-addPhoto",
@@ -1940,6 +1941,24 @@ class JudgesController extends Controller
      *     ),
      *     @SWG\Parameter(
      *      ref="#/parameters/X-Requested-With",
+     *     ),
+     *
+     *     @SWG\Parameter(
+     *      name="id",
+     *      in="formData",
+     *      required=true,
+     *      description="Id судді, для якого потрібно завантажити фото",
+     *      type="integer",
+     *      minimum=1,
+     *      maximum=15000,
+     *      allowEmptyValue=false
+     *     ),
+     *     @SWG\Parameter(
+     *      name="photo",
+     *      in="formData",
+     *      required=true,
+     *      description="Файл з фото",
+     *      type="file"
      *     ),
      *
      *
