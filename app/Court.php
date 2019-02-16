@@ -40,7 +40,7 @@ class Court extends Model
 	 * @param int $id
 	 * @return mixed
 	 */
-	public static function getCourtById(int $id) : array
+	public static function getCourtById(int $id)
     {
 		$user_id = Auth::user()->id;
         $result = call_user_func_array(['static', 'select'], self::getCourtFields())
@@ -49,7 +49,7 @@ class Court extends Model
             ->join('jurisdictions', 'jurisdictions.id', '=', 'courts.jurisdiction')
             ->leftJoin('user_bookmark_courts', function ($join) use ($user_id) {
                 $join->on('courts.court_code', '=', 'user_bookmark_courts.court');
-                $join->on('user_bookmark_courts.user', '=',  $user_id);
+                $join->on('user_bookmark_courts.user', '=',  DB::raw($user_id));
             })
             ->where('court_code', '=', $id)
             ->first();
@@ -61,11 +61,12 @@ class Court extends Model
 		   ->values(); // перенумеровуємо елементи колекції (після unique вони занумеровані не підряд)
 
         $result['judges'] = DB::table('judges')
-		  ->select('id', 'surname', 'name', 'patronymic', 'photo', 'status', 'updated_status', 'due_date_status', 'rating',
+		  ->select('judges.id', 'judges.surname', 'judges.name', 'judges.patronymic',
+			  'judges.photo', 'judges.status', 'judges.updated_status', 'judges.due_date_status', 'judges.rating',
 			  DB::raw("(CASE WHEN user_bookmark_judges.user = {$user_id} THEN 1 ELSE 0 END) AS is_bookmark"))
 		  ->leftJoin('user_bookmark_judges', function ($join) use ($user_id) {
 			  $join->on('judges.id', '=', 'user_bookmark_judges.judge');
-			  $join->on('user_bookmark_judges.user', '=',  $user_id);
+			  $join->on('user_bookmark_judges.user', '=',  DB::raw($user_id));
 		  })
 		  ->where('court', '=', $id)
 		  ->orderBy('rating', 'DESC')
@@ -81,7 +82,7 @@ class Court extends Model
 		  ->join('justice_kinds', 'justice_kinds.justice_kind', '=', 'court_sessions.forma')
 		  ->leftJoin('user_bookmark_sessions', function ($join) use ($user_id) {
 			  $join->on('court_sessions.id', '=', 'user_bookmark_sessions.court_session');
-			  $join->on($user_id, '=', 'user_bookmark_sessions.user');
+			  $join->on(DB::raw($user_id), '=', 'user_bookmark_sessions.user');
 		  })
 		  ->where('court', '=', $id)
 		  ->where('court_sessions.date', '>', Carbon::now('Europe/Kiev'))
