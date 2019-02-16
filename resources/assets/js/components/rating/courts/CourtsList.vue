@@ -12,7 +12,7 @@
               <input type="search" class="form-control" placeholder="Пошук..." v-model.trim="filters.search" @keyup="liveSearch()">
               <div class="autocomplete-block-result" v-if="autocomplete.length">
                 <div class="autocomplete-block-result_element" v-for="(el, ind_2) in autocomplete" :key="ind_2">
-                  <router-link :to="`/court-profile/${el.court_code}`">
+                  <router-link :to="`/courts/${el.court_code}`">
                     {{ el.name }}
                   </router-link>
                 </div>

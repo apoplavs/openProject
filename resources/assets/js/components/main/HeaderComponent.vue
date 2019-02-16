@@ -19,7 +19,7 @@
               aria-expanded="false"
               :class="{'active': $route.fullPath === '/judges' || $route.fullPath === '/courts'}"
             >Рейтинг</a>
-            <div class="dropdown-menu raiting">
+            <div class="dropdown-menu rating">
               <router-link
                 to="/judges"
                 class="dropdown-item"
@@ -176,7 +176,7 @@ export default {
         }
       }
       
-      .raiting {
+      .rating {
         transform: translate3d(-65px, 40px, 0px) !important;
       }
       .dropdown-item > i {
