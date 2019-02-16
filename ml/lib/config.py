@@ -1,14 +1,14 @@
-ROOT_PATH = '/home/apoplavs/apache/toecyd.local/ml'
+ROOT_PATH = '/home/andriy/apache/t_phpMy/ml'
 
 PICKLES_PATH = f'{ROOT_PATH}/pickles'
 
-EDRSR = 'edrsr'
-TOECYD = 'test_toecyd'
+EDRSR = 'schema_mysqld'
+TOECYD = 'mysqli'
 
 DB_EDRSR = {
                'type': 'mysql',
                'host': '127.0.0.1',
-               'dbname': 'edrsr',
+               'dbname': 'schema_mysqld',
                'charset': 'utf8',
                'user': 'root',
                'pass': '1',
@@ -18,7 +18,7 @@ DB_EDRSR = {
 DB_TOECYD = {
                'type': 'mysql',
                'host': '127.0.0.1',
-               'dbname': 'toecyd',
+               'dbname': 'mysqli',
                'charset': 'utf8',
                'user': 'root',
                'pass': '1',
