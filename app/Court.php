@@ -42,13 +42,14 @@ class Court extends Model
 	 */
 	public static function getCourtById(int $id) : array
     {
+		$user_id = Auth::user()->id;
         $result = call_user_func_array(['static', 'select'], self::getCourtFields())
             ->join('instances', 'instances.instance_code', '=', 'courts.instance_code')
             ->join('regions', 'regions.region_code', '=', 'courts.region_code')
             ->join('jurisdictions', 'jurisdictions.id', '=', 'courts.jurisdiction')
-            ->leftJoin('user_bookmark_courts', function ($join) {
+            ->leftJoin('user_bookmark_courts', function ($join) use ($user_id) {
                 $join->on('courts.court_code', '=', 'user_bookmark_courts.court');
-                $join->on('user_bookmark_courts.user', '=',  DB::raw(Auth::user()->id));
+                $join->on('user_bookmark_courts.user', '=',  $user_id);
             })
             ->where('court_code', '=', $id)
             ->first();
@@ -60,14 +61,13 @@ class Court extends Model
 		   ->values(); // перенумеровуємо елементи колекції (після unique вони занумеровані не підряд)
 
         $result['judges'] = DB::table('judges')
-		  ->select('id', 'surname', 'name', 'patronymic', 'status', 'updated_status', 'due_date_status', 'rating',
-				   DB::raw('(user_bookmark_judges.id IS NOT NULL) AS is_bookmark'))
-		  ->leftJoin('user_bookmark_judges', function ($join) {
+		  ->select('id', 'surname', 'name', 'patronymic', 'photo', 'status', 'updated_status', 'due_date_status', 'rating',
+			  DB::raw("(CASE WHEN user_bookmark_judges.user = {$user_id} THEN 1 ELSE 0 END) AS is_bookmark"))
+		  ->leftJoin('user_bookmark_judges', function ($join) use ($user_id) {
 			  $join->on('judges.id', '=', 'user_bookmark_judges.judge');
-			  $join->on('user_bookmark_judges.user', '=',  DB::raw(Auth::user()->id));
+			  $join->on('user_bookmark_judges.user', '=',  $user_id);
 		  })
 		  ->where('court', '=', $id)
-		  ->where('status', '<>', 5)
 		  ->orderBy('rating', 'DESC')
 		  ->get()
 		  ->toArray();
@@ -79,9 +79,9 @@ class Court extends Model
 				   'number', 'involved', 'description',
 				   DB::raw('(user_bookmark_sessions.id IS NOT NULL) AS is_bookmark'))
 		  ->join('justice_kinds', 'justice_kinds.justice_kind', '=', 'court_sessions.forma')
-		  ->leftJoin('user_bookmark_sessions', function ($join) {
+		  ->leftJoin('user_bookmark_sessions', function ($join) use ($user_id) {
 			  $join->on('court_sessions.id', '=', 'user_bookmark_sessions.court_session');
-			  $join->on(DB::raw(Auth::user()->id), '=', 'user_bookmark_sessions.user');
+			  $join->on($user_id, '=', 'user_bookmark_sessions.user');
 		  })
 		  ->where('court', '=', $id)
 		  ->where('court_sessions.date', '>', Carbon::now('Europe/Kiev'))
@@ -91,8 +91,15 @@ class Court extends Model
 
         return $result;
     }
-
-    public static function getCourtByIdGuest(int $id)
+	
+	
+	/**
+	 * Отримання всієї необхідної інформації про суд
+	 * для сторінки пофайлу суду для незареєстрованого користувача
+	 * @param int $id
+	 * @return mixed
+	 */
+	public static function getCourtByIdGuest(int $id)
     {
         $result = call_user_func_array(['static', 'select'], self::getCourtGuestFields())
                      ->join('instances', 'instances.instance_code', '=', 'courts.instance_code')
@@ -108,9 +115,8 @@ class Court extends Model
             ->values(); // перенумеровуємо елементи колекції (після unique вони занумеровані не підряд)
 
         $result['judges'] = DB::table('judges')
-            ->select('id', 'surname', 'name', 'patronymic', 'status', 'updated_status', 'due_date_status', 'rating')
+            ->select('id', 'surname', 'name', 'patronymic', 'photo', 'status', 'updated_status', 'due_date_status', 'rating')
             ->where('court', '=', $id)
-			->where('status', '<>', 5)
             ->orderBy('rating', 'DESC')
             ->get()
             ->toArray();
