@@ -86,4 +86,10 @@ class User extends Authenticatable
 
 		return (['profile' => $profile, 'notifications' => $notifications]);
 	}
+
+	public function delete()
+    {
+        DB::table('user_settings')->where('user', '=', $this->id)->delete();
+        return parent::delete();
+    }
 }

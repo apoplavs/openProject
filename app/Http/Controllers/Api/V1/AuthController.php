@@ -100,11 +100,11 @@ class AuthController extends Controller
         ]);
         
         // надсилання email для підтвердження паролю
-		Mail::to($request->email)
-			->send(new AccountMail('confirm_email', 'Завершення реєстрації облікового запису', [
-				'name'  => $request->name,
-				'remember_token'  => $remember_token
-			]));
+//		Mail::to($request->email)
+//			->send(new AccountMail('confirm_email', 'Завершення реєстрації облікового запису', [
+//				'name'  => $request->name,
+//				'remember_token'  => $remember_token
+//			]));
 		
         $user->save();
         return response()->json([
