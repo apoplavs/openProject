@@ -14,10 +14,10 @@
                 <div class="court-name">{{court.name}}</div>
               </router-link>
               <div class="bookmark pr-3">
-                <span v-if="court.is_bookmark" @click="deleteBookmark(court)">
+                <span v-if="court.is_bookmark" @click="deleteBookmark()">
                   <i class="fa fa-bookmark" aria-hidden="true"></i>
                 </span>
-                <span v-if="!court.is_bookmark" @click="setBookmark(court)">
+                <span v-if="!court.is_bookmark" @click="setBookmark()">
                   <i class="fa fa-bookmark-o" aria-hidden="true"></i>
                 </span>
               </div>
@@ -64,7 +64,7 @@
 
             <div class="part-3 mt-3">
               <div class="rating w-100 d-flex justify-content-between">
-                <div>
+                <!-- <div>
                   <span class="like mr-4" @click="changeLikes">
                     <i class="fas fa-thumbs-up"></i>
                     {{ 12 }}
@@ -73,7 +73,7 @@
                     <i class="fas fa-thumbs-down"></i>
                     {{ 21 }}
                   </span>
-                </div>
+                </div> -->
                 <div>
                   <span class="line-chart">
                     <i class="fa fa-line-chart mr-1" aria-hidden="true"></i>
@@ -84,65 +84,59 @@
             </div>
           </div>
         </div>
+        <!-- --------------2222222---------------------- -->
         <div class="card mt-3 judges">
           <div class="card-header d-flex justify-content-between">
             <span>Судді</span>
-            <input type="search" class="form-control" placeholder="Пошук..." v-model.trim="search">
+            <input type="search" class="form-control" placeholder="Пошук..." v-model.trim="searchJudges">
           </div>
-          <div class="card-body">
-            <judge-component :judgesList="court.judges"/>
+          <div class="card-body p-0">
+            <judge-component :judgesList="filterJudges" :littlePhoto="true"/>
           </div>
         </div>
-
-
-
-
-
- <div class="card mt-3 courtSessions">
+<!-- --------------33333333---------------------- -->
+        <div class="card mt-3 courtSessions">
           <div class="card-header d-flex justify-content-between">
             <span>Засідання</span>
-            <input type="search" class="form-control" placeholder="Пошук..." v-model.trim="searchІession">
+            <input type="search" class="form-control" placeholder="Пошук..." v-model.trim="searchSessions">
           </div>
           <div class="card-body">
-             <div v-if="court.court_sessions.length" class="container-component">
-            <div class="row header">
-              <div class="col-1 pl-0">Дата розгляду</div>
-              <div class="col-1">Номер справи</div>
-              <div class="col-2">Судді</div>
-              <div class="col-1">Форма</div>
-              <div class="col-3">Сторони у справі</div>
-              <div class="col-2">Суть справи</div>
-              <div class="col-2 pr-0">Примітки</div>
-            </div>
-            <div class="row body" v-for="(session, i_el) in court.court_sessions" :key="i_el">
-              <div class="col-1 pl-0">
-                <                     div>{{ session.date }}</div>
+            <div v-if="filterSessions.length" class="container-component">
+              <div class="row header">
+                <div class="col-1 pl-0">Дата розгляду</div>
+                <div class="col-1">Номер справи</div>
+                <div class="col-2">Судді</div>
+                <div class="col-1">Форма</div>
+                <div class="col-3">Сторони у справі</div>
+                <div class="col-2">Суть справи</div>
+                <div class="col-2 pr-0">Примітки</div>
               </div>
-              <div class="col-1">{{ session.number }}</div>
-              <div class="col-2">{{ session.judges }}</div>
-              <div class="col-1">{{ session.forma }}</div>
-              <div class="col-3">{{ session.involved }}</div>
-              <div class="col-2">{{ session.description }}</div>
-              <div class="col-2 pr-0 text-center position-relative note-wrap">
-                <i class="fas fa-star" @click="showModalDelete(session)"></i>
-                <textarea class="note" maxlength="254" v-model.trim="session.note"></textarea>
-                <img class="checkmark" src="../../../../images/checkmark.png" @click="saveNote(session)">
+              <div class="row body" v-for="(session, i_el) in filterSessions" :key="i_el">
+                <div class="col-1 pl-0">
+                  <div>{{ session.date }}</div>
+                </div>
+                <div class="col-1">{{ session.number }}</div>
+                <div class="col-2">{{ session.judges }}</div>
+                <div class="col-1">{{ session.forma }}</div>
+                <div class="col-3">{{ session.involved }}</div>
+                <div class="col-2">{{ session.description }}</div>
+                <div class="col-2 pr-0 text-center position-relative note-wrap">
+                  <i class="fas fa-star" @click="showModalDelete(session)"></i>
+                  <textarea class="note" maxlength="254" v-model.trim="session.note"></textarea>
+                  <img class="checkmark" src="../../../../images/checkmark.png" @click="saveNote(session)">
+                </div>
               </div>
             </div>
-          </div>
+            <div v-else>За даними параметрами нічого не знайдено...</div>
           </div>
         </div>
-
-
-
-
-       
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import _ from 'lodash';
 import JudgeComponent from '../../rating/judges/JudgeComponent.vue';
 import StatusComponent from "../../shared/StatusComponent.vue";
 import ChangeStatus from "../../shared/ChangeStatus.vue";
@@ -160,58 +154,126 @@ export default {
     return {
       showModal: false,
       loadData: false,
-      court: {}
+      searchJudges: '',
+      searchSessions: '',
+      court: {},
+
     };
   },
+   computed: {
+      filterJudges() {
+        //  живий пошук = фільтер
+        return _.filter(this.court.judges, el => {
+          let arr = _.filter(Object.keys(el), key => {
+            let regEx = new RegExp(`(${this.searchJudges})`, "i");            
+            return regEx.test(el.surname) || this.searchJudges.length == 0;
+          });
+          return arr.length > 0 ? true : false;
+        });
+      },
+      filterSessions() {
+        //  живий пошук = фільтер
+        return _.filter(this.court.court_sessions, el => {
+          let arr = _.filter(Object.keys(el), key => {
+            let regEx = new RegExp(`(${this.searchSessions})`, "i");
+            return regEx.test(el[key]) || this.searchSessions.length == 0;
+          });
+          return arr.length > 0 ? true : false;
+        });
+      },
+    },
   created() {
-    if (this.$store.getters.isAuth) {
-      axios
-        .get(`/api/v1/courts/${this.$route.params.id}`, {
-          headers: {
-            "Content-Type": "application/json",
-            "X-Requested-With": "XMLHttpRequest",
-            Authorization: localStorage.getItem("token")
-          }
-        })
-        .then(response => {
-          this.court = response.data;
-          this.loadData = true;
-          console.log("COURT ____ PROFILE", this.court);
-        })
-        .catch(error => {
-          if (error.response && error.response.status === 401) {
-            this.$router.push("/login");
-          }
-          console.log("error");
-        });
-    } else {
-      console.log("not log in");
-
-      axios
-        .get(`/api/v1/guest/courts/${this.$route.params.id}`, {
-          headers: {
-            "Content-Type": "application/json",
-            "X-Requested-With": "XMLHttpRequest"
-          }
-        })
-        .then(response => {
-          this.court = response.data;
-          this.court.address.push(
-            "вул. Болбочана Петра, 8, корпус 1, м. Київ, 01051"
-          );
-          this.court.phone = "0-800-501-492";
-          this.court.email = "tatka@ukr.net";
-          this.court.site = "https://adm.ki.court.gov.ua";
-
-          this.loadData = true;
-          console.log("COURT ____ PROFILE not log in", this.court);
-        })
-        .catch(error => {
-          if (error.response && error.response.status === 401) {
-            this.$router.push("/login");
-          }
-          console.log(error);
-        });
+      this.getCourtProfile();
+  },
+  methods: {
+    getCourtProfile() {
+      if (this.$store.getters.isAuth) {
+        axios
+          .get(`/api/v1/courts/${this.$route.params.id}`, {
+            headers: {
+              "Content-Type": "application/json",
+              "X-Requested-With": "XMLHttpRequest",
+              Authorization: localStorage.getItem("token")
+            }
+          })
+          .then(response => {
+            this.court = response.data;              
+            this.loadData = true;
+            console.log("COURT ____ PROFILE", this.court);
+          })
+          .catch(error => {
+            if (error.response && error.response.status === 401) {
+              this.$router.push("/login");
+            }
+            console.log("error");
+          });
+      } else {
+        console.log("not log in");
+        axios
+          .get(`/api/v1/guest/courts/${this.$route.params.id}`, {
+            headers: {
+              "Content-Type": "application/json",
+              "X-Requested-With": "XMLHttpRequest"
+            }
+          })
+          .then(response => {
+            this.court = response.data;
+            this.loadData = true;
+            console.log("COURT ____ PROFILE not log in", this.court);
+          })
+          .catch(error => {
+            if (error.response && error.response.status === 401) {
+              this.$router.push("/login");
+            }
+            console.log(error);
+          });
+      }
+    },
+    setBookmark() {
+      if (!this.$store.getters.isAuth) {
+        this.$router.push("/login");
+      }
+      axios({
+        method: "put",
+        url: `/api/v1/courts/${this.$route.params.id}/bookmark`,
+        headers: {
+          "Content-Type": "application/json",
+          "X-Requested-With": "XMLHttpRequest",
+          Authorization: localStorage.getItem("token")
+        }
+      })
+      .then(response => {
+        this.court.is_bookmark = 1;
+      })
+      .catch(error => {
+        if (error.response && error.response.status === 401) {
+          this.$router.push("/login");
+        }
+        console.log("Bookmark", error);
+      });
+    },
+    deleteBookmark() {
+      if (!this.$store.getters.isAuth) {
+        this.$router.push("/login");
+      }
+      axios({
+        method: "delete",
+        url: `/api/v1/courts/${this.$route.params.id}/bookmark`,
+        headers: {
+          "Content-Type": "application/json",
+          "X-Requested-With": "XMLHttpRequest",
+          Authorization: localStorage.getItem("token")
+        }
+      })
+      .then(response => {
+        this.court.is_bookmark = 0;
+      })
+      .catch(error => {
+        if (error.response.status === 401) {
+          this.$router.push("/login");
+        }
+        console.log("Bookmark", error.response);
+      });
     }
   }
 };
@@ -397,6 +459,9 @@ export default {
   }
 }
 }
+
+
+
 
      
 </style>

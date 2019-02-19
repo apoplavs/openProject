@@ -21,7 +21,7 @@
 
 <style lang="scss">
     @import "../../sass/app.scss";
-    .content {
-        height: calc(100vh - 90px);
-    }
+    // .content {
+    //     height: calc(100vh - 90px);
+    // }
 </style>

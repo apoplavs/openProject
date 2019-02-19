@@ -12,7 +12,7 @@
         >
           <div class="col-9 d-flex pl-0 main-info">
             <div class="mr-3">
-              <img class="avatar" :src="judge.photo" alt="фото">
+              <img class="avatar" :src="judge.photo" alt="фото" :class="{littleAvatar: littlePhoto}">
             </div>
             <div>
               <h5>
@@ -27,7 +27,7 @@
             <div class="align-center pb-3">
               <div class="w-75">
                 <span class="float-left">
-                  <i class="fa fa-line-chart float-right" aria-hidden="true">{{ judge.rating }}</i>
+                  <i class="fa fa-line-chart float-right" aria-hidden="true"> {{ judge.rating + '%' }}</i>
                 </span>
               </div>
               <div class="w-25 bookmark">
@@ -69,7 +69,11 @@
     export default {
         name: "JudgeComponent",
         props: {
-            judgesList: Array
+            judgesList: Array,
+            littlePhoto: {
+              type: Boolean,
+              default: false
+            }
         },
         components: {
             StatusComponent,
@@ -191,6 +195,10 @@
   .avatar {
     width: 120px;
     height: 120px;
+  }
+  .littleAvatar {
+    width: 60px !important;
+    height: 60px !important;
   }
   a {
     color: $primary;
