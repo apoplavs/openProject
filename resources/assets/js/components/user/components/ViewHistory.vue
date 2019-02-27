@@ -9,7 +9,7 @@
           </div>
           <div>
             <spinner v-if="!loadData" />
-            <judge-component v-if="loadData" :judgesList="filterSessions"/>
+            <judge-component v-if="loadData" :judgesList="filterJudges"/>
           </div>
         </div>
       </div>
@@ -37,7 +37,7 @@
       }
     },
     computed: {
-      filterSessions() {
+      filterJudges() {
         //  живий пошук = фільтер
         return _.filter(this.judgesList, el => {
           let arr = _.filter(Object.keys(el), key => {
@@ -48,7 +48,7 @@
         });
       },
     },
-      created() {
+    created() {
       if (!this.$store.getters.isAuth) {
           thi.$router.push('/login');
       } else {

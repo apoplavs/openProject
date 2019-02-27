@@ -39,7 +39,7 @@
               </div>
             </div>
             <div class="part-3 mt-3">
-              <div class="raiting">
+              <div class="rating">
                 <i class="fa fa-line-chart" aria-hidden="true">{{ court.rating }}</i>
               </div>
               <div class="bookmark">
@@ -164,7 +164,7 @@
     }
     .part-3 {
       @include alignElement($justifyContent: space-between);
-      .raiting {
+      .rating {
         color: $main-color;
       }
       .bookmark {
