@@ -56,6 +56,7 @@ class Court extends Model
 
         $result['address'] = DB::table('judges')->select('address')
 		   ->where('court', '=', $id)
+		   ->whereNotNull('address')
 		   ->pluck('address')
 		   ->unique() // залишаємо в колекції лише унікальні елементи
 		   ->values(); // перенумеровуємо елементи колекції (після unique вони занумеровані не підряд)
@@ -74,7 +75,8 @@ class Court extends Model
 		  ->toArray();
 
         $result['court_sessions'] = DB::table('court_sessions')
-		  ->select(DB::raw('DATE_FORMAT(`court_sessions`.`date`, "%d.%m.%Y %H:%i") AS date'),
+		  ->select('court_sessions.id',
+			  	   DB::raw('DATE_FORMAT(`court_sessions`.`date`, "%d.%m.%Y %H:%i") AS date'),
 				   DB::raw('get_judges_by_id(judge1, judge2, judge3) AS judges'),
 				   DB::raw('justice_kinds.name AS forma'),
 				   'number', 'involved', 'description',
@@ -111,6 +113,7 @@ class Court extends Model
 
         $result['address'] = DB::table('judges')->select('address')
             ->where('court', '=', $id)
+			->whereNotNull('address')
             ->pluck('address')
             ->unique() // залишаємо в колекції лише унікальні елементи
             ->values(); // перенумеровуємо елементи колекції (після unique вони занумеровані не підряд)
@@ -123,7 +126,8 @@ class Court extends Model
             ->toArray();
 
         $result['court_sessions'] = DB::table('court_sessions')
-            ->select(DB::raw('DATE_FORMAT(`court_sessions`.`date`, "%d.%m.%Y %H:%i") AS date'),
+            ->select('court_sessions.id',
+					DB::raw('DATE_FORMAT(`court_sessions`.`date`, "%d.%m.%Y %H:%i") AS date'),
                     DB::raw(' get_judges_by_id(judge1, judge2, judge3) AS judges'),
                     DB::raw('justice_kinds.name AS forma'),
                     'number', 'involved', 'description')
