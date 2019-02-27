@@ -34,7 +34,7 @@ class UserBookmarkSession extends Model
     	// @togo додати поле, яким відмічати статус судді, чи знаходиться він на робомому місці
         return [
             'court_sessions.id',
-            'court_sessions.date',
+			DB::raw('DATE_FORMAT(`court_sessions`.`date`, "%d.%m.%Y %H:%i") AS date'),
             DB::raw('get_judges_by_id(court_sessions.judge1, court_sessions.judge2, court_sessions.judge3) AS judges'),
             'courts.court_code',
             'courts.name',

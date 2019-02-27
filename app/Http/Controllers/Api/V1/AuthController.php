@@ -621,6 +621,7 @@ class AuthController extends Controller
 		}
 		
 		$affected = User::where('remember_token', '=', $remember_token)
+			->where('usertype', '=', 1)
 			->update(['usertype' => 2]);
 		
 		// якщо токен некоректний

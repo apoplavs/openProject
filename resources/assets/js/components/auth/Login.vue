@@ -5,9 +5,6 @@
       <div class="card">
         <div class="card-header justify-content-center">Вхід</div>
         <div class="card-body">
-          <div id="back-error" class="is-danger w-100 text-center">
-            <small>Не вірний логін або пароль</small>
-          </div>
           <form @submit.prevent="validateBeforeSubmit">
             <div class="form-group">
               <label for="email" class="form-control-label">E-Mail</label>

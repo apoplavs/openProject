@@ -796,6 +796,57 @@ module.exports = {
 /* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(113)
+}
+var normalizeComponent = __webpack_require__(2)
+/* script */
+var __vue_script__ = __webpack_require__(115)
+/* template */
+var __vue_template__ = __webpack_require__(121)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-6b7448a6"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/shared/Spinner.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-6b7448a6", Component.options)
+  } else {
+    hotAPI.reload("data-v-6b7448a6", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
 /* WEBPACK VAR INJECTION */(function(global, module) {var __WEBPACK_AMD_DEFINE_RESULT__;/**
  * @license
  * Lodash <https://lodash.com/>
@@ -17908,63 +17959,12 @@ module.exports = {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7), __webpack_require__(101)(module)))
 
 /***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__(113)
-}
-var normalizeComponent = __webpack_require__(2)
-/* script */
-var __vue_script__ = __webpack_require__(115)
-/* template */
-var __vue_template__ = __webpack_require__(121)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = injectStyle
-/* scopeId */
-var __vue_scopeId__ = "data-v-6b7448a6"
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/components/shared/Spinner.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-6b7448a6", Component.options)
-  } else {
-    hotAPI.reload("data-v-6b7448a6", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
 /* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(global, setImmediate) {/*!
- * Vue.js v2.5.17
+ * Vue.js v2.5.16
  * (c) 2014-2018 Evan You
  * Released under the MIT License.
  */
@@ -23053,7 +23053,7 @@ Object.defineProperty(Vue, 'FunctionalRenderContext', {
   value: FunctionalRenderContext
 });
 
-Vue.version = '2.5.17';
+Vue.version = '2.5.16';
 
 /*  */
 
@@ -35497,7 +35497,7 @@ module.exports = Component.exports
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(29);
-module.exports = __webpack_require__(193);
+module.exports = __webpack_require__(199);
 
 
 /***/ }),
@@ -35522,7 +35522,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__scripts_router__ = __webpack_require__(66);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_vue_google_signin_button__ = __webpack_require__(22);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_vue_google_signin_button___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9_vue_google_signin_button__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__store_store__ = __webpack_require__(192);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__store_store__ = __webpack_require__(197);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_v_mask__ = __webpack_require__(198);
 
 
 
@@ -35536,6 +35537,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
+
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_11_v_mask__["a" /* default */]);
 
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_9_vue_google_signin_button___default.a);
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_3_vee_validate__["b" /* default */]);
@@ -36724,7 +36727,7 @@ module.exports = function spread(callback) {
 /* unused harmony export ErrorComponent */
 /* unused harmony export version */
 /**
-  * vee-validate v2.1.0-beta.9
+  * vee-validate v2.1.0-beta.7
   * (c) 2018 Abdelrahman Awad
   * @license MIT
   */
@@ -36948,15 +36951,15 @@ var debounce = function (fn, wait, immediate, token) {
  */
 var appendRule = function (rule, rules) {
   if (!rules) {
-    return normalizeRules(rule);
+    return rule;
   }
 
   if (!rule) {
-    return normalizeRules(rules);
+    return rules;
   }
 
   if (typeof rules === 'string') {
-    rules = normalizeRules(rules);
+    return (rules + "|" + rule);
   }
 
   return assign({}, rules, normalizeRules(rule));
@@ -36979,8 +36982,6 @@ var normalizeRules = function (rules) {
       if (rules[curr] === true) {
         params = [];
       } else if (Array.isArray(rules[curr])) {
-        params = rules[curr];
-      } else if (isObject(rules[curr])) {
         params = rules[curr];
       } else {
         params = [rules[curr]];
@@ -37262,7 +37263,7 @@ var fillRulesFromElement = function (el, rules) {
     }
 
     if (el.pattern) {
-      rules = appendRule({ regex: el.pattern }, rules);
+      rules = appendRule(("regex:" + (el.pattern)), rules);
     }
 
     // 524288 is the max on some browsers and test environments.
@@ -37830,7 +37831,7 @@ ErrorBag.prototype.any = function any (scope) {
 ErrorBag.prototype.clear = function clear (scope) {
     var this$1 = this;
 
-  var matchesVM = isNullOrUndefined(this.vmId) ? function () { return true; } : function (i) { return i.vmId === this$1.vmId; };
+  var matchesVM = isNullOrUndefined(this.id) ? function () { return true; } : function (i) { return i.vmId === this$1.vmId; };
   if (isNullOrUndefined(scope)) {
     scope = null;
   }
@@ -37997,7 +37998,7 @@ ErrorBag.prototype.removeById = function removeById (id) {
 /**
  * Removes all error messages associated with a specific field.
  */
-ErrorBag.prototype.remove = function remove (field, scope, vmId) {
+ErrorBag.prototype.remove = function remove (field, scope) {
     var this$1 = this;
 
   if (isNullOrUndefined(field)) {
@@ -38007,14 +38008,9 @@ ErrorBag.prototype.remove = function remove (field, scope, vmId) {
   var selector = isNullOrUndefined(scope) ? String(field) : (scope + "." + field);
   var ref = this._makeCandidateFilters(selector);
     var isPrimary = ref.isPrimary;
-  var shouldRemove = function (item) {
-    if (isNullOrUndefined(vmId)) { return isPrimary(item); }
-
-    return isPrimary(item) && item.vmId === vmId;
-  };
 
   for (var i = 0; i < this.items.length; ++i) {
-    if (shouldRemove(this$1.items[i])) {
+    if (isPrimary(this$1.items[i])) {
       this$1.items.splice(i, 1);
       --i;
     }
@@ -38255,11 +38251,6 @@ Resolver.resolveEvents = function resolveEvents (el, vnode) {
   if (events && vnode.componentInstance && includes(events, 'input')) {
     var ref = vnode.componentInstance.$options.model || { event: 'input' };
       var event = ref.event;
-    // if the prop was configured but not the model.
-    if (!event) {
-      return events;
-    }
-
     events = events.replace('input', event);
   }
 
@@ -38503,7 +38494,6 @@ Validator.extend = function extend (name, validator, options) {
   Validator._guardExtend(name, validator);
   Validator._merge(name, {
     validator: validator,
-    paramNames: options && options.paramNames,
     options: assign({}, { hasTarget: false, immediate: true }, options || {})
   });
 };
@@ -38575,7 +38565,7 @@ Validator.prototype.attach = function attach (fieldOpts) {
 
   // validate the field initially
   if (field.immediate) {
-    this.validate(("#" + (field.id)), value || field.value, { vmId: fieldOpts.vmId });
+    this.validate(("#" + (field.id)), value || field.value);
   } else {
     this._validate(field, value || field.value, { initial: true }).then(function (result) {
       field.flags.valid = result.valid;
@@ -38608,7 +38598,7 @@ Validator.prototype.detach = function detach (name, scope, uid) {
   if (!field) { return; }
 
   field.destroy();
-  this.errors.remove(field.name, field.scope, field.vmId);
+  this.errors.remove(field.name, field.scope, field.id);
   this.fields.remove(field);
 };
 
@@ -38630,7 +38620,7 @@ Validator.prototype.reset = function reset (matcher) {
   }).then(function () {
     this$1.fields.filter(matcher).forEach(function (field) {
       field.reset(); // reset field flags.
-      this$1.errors.remove(field.name, field.scope);
+      this$1.errors.remove(field.name, field.scope, field.id);
     });
   });
 };
@@ -38694,7 +38684,7 @@ Validator.prototype.validate = function validate (fieldDescriptor, value, ref) {
 
   return this._validate(field, value).then(function (result) {
     if (!silent) {
-      this$1._handleValidationResults([result], vmId);
+      this$1._handleValidationResults([result]);
     }
 
     return result.valid;
@@ -38752,7 +38742,7 @@ Validator.prototype.validateAll = function validateAll (values$$1, ref) {
     this.fields.filter(matcher).map(function (field) { return this$1._validate(field, providedValues ? values$$1[field.name] : field.value); })
   ).then(function (results) {
     if (!silent) {
-      this$1._handleValidationResults(results, vmId);
+      this$1._handleValidationResults(results);
     }
 
     return results.every(function (t) { return t.valid; });
@@ -38774,22 +38764,10 @@ Validator.prototype.validateScopes = function validateScopes (ref) {
     this.fields.filter({ vmId: vmId }).map(function (field) { return this$1._validate(field, field.value); })
   ).then(function (results) {
     if (!silent) {
-      this$1._handleValidationResults(results, vmId);
+      this$1._handleValidationResults(results);
     }
 
     return results.every(function (t) { return t.valid; });
-  });
-};
-
-/**
- * Validates a value against the rules.
- */
-Validator.prototype.verify = function verify (value, rules) {
-  var field = { name: '{field}', rules: normalizeRules(rules) };
-  field.isRequired = field.rules.required;
-
-  return this._validate(field, value).then(function (result) {
-    return { valid: result.valid, errors: result.errors.map(function (e) { return e.msg; }) };
   });
 };
 
@@ -38840,40 +38818,17 @@ Validator.prototype._formatErrorMessage = function _formatErrorMessage (field, r
 };
 
 /**
- * We need to convert any object param to an array format since the locales do not handle params as objects yet.
- */
-Validator.prototype._convertParamObjectToArray = function _convertParamObjectToArray (obj, ruleName) {
-  if (Array.isArray(obj)) {
-    return obj;
-  }
-
-  var paramNames = RULES[ruleName] && RULES[ruleName].paramNames;
-  if (!paramNames || !isObject(obj)) {
-    return obj;
-  }
-
-  return paramNames.reduce(function (prev, paramName) {
-    if (paramName in obj) {
-      prev.push(obj[paramName]);
-    }
-
-    return prev;
-  }, []);
-};
-
-/**
  * Translates the parameters passed to the rule (mainly for target fields).
  */
 Validator.prototype._getLocalizedParams = function _getLocalizedParams (rule, targetName) {
     if ( targetName === void 0 ) targetName = null;
 
-  var params = this._convertParamObjectToArray(rule.params, rule.name);
-  if (rule.options.hasTarget && params && params[0]) {
-    var localizedName = targetName || this.dictionary.getAttribute(this.locale, params[0], params[0]);
-    return [localizedName].concat(params.slice(1));
+  if (rule.options.hasTarget && rule.params && rule.params[0]) {
+    var localizedName = targetName || this.dictionary.getAttribute(this.locale, rule.params[0], rule.params[0]);
+    return [localizedName].concat(rule.params.slice(1));
   }
 
-  return params;
+  return rule.params;
 };
 
 /**
@@ -38884,47 +38839,13 @@ Validator.prototype._getFieldDisplayName = function _getFieldDisplayName (field)
 };
 
 /**
- * Converts an array of params to an object with named properties.
- * Only works if the rule is configured with a paramNames array.
- * Returns the same params if it cannot convert it.
- */
-Validator.prototype._convertParamArrayToObj = function _convertParamArrayToObj (params, ruleName) {
-  var paramNames = RULES[ruleName] && RULES[ruleName].paramNames;
-  if (!paramNames) {
-    return params;
-  }
-
-  if (isObject(params)) {
-    // check if the object is either a config object or a single parameter that is an object.
-    var hasKeys = paramNames.some(function (name) { return Object.keys(params).indexOf(name) !== -1; });
-    // if it has some of the keys, return it as is.
-    if (hasKeys) {
-      return params;
-    }
-    // otherwise wrap the object in an array.
-    params = [params];
-  }
-
-  // Reduce the paramsNames to a param object.
-  return params.reduce(function (prev, value, idx) {
-    prev[paramNames[idx]] = value;
-
-    return prev;
-  }, {});
-};
-
-/**
  * Tests a single input value against a rule.
  */
 Validator.prototype._test = function _test (field, value, rule) {
     var this$1 = this;
 
   var validator = RULES[rule.name] ? RULES[rule.name].validate : null;
-  var params = Array.isArray(rule.params) ? toArray(rule.params) : rule.params;
-  if (!params) {
-    params = [];
-  }
-
+  var params = Array.isArray(rule.params) ? toArray(rule.params) : [];
   var targetName = null;
   if (!validator || typeof validator !== 'function') {
     return Promise.reject(createError(("No such validator '" + (rule.name) + "' exists.")));
@@ -38949,7 +38870,7 @@ Validator.prototype._test = function _test (field, value, rule) {
     }
   }
 
-  var result = validator(value, this._convertParamArrayToObj(params, rule.name));
+  var result = validator(value, params);
 
   // If it is a promise.
   if (isCallable(result.then)) {
@@ -38986,7 +38907,6 @@ Validator.prototype._test = function _test (field, value, rule) {
 Validator._merge = function _merge (name, ref) {
     var validator = ref.validator;
     var options = ref.options;
-    var paramNames = ref.paramNames;
 
   var validate = isCallable(validator) ? validator : validator.validate;
   if (validator.getMessage) {
@@ -38995,8 +38915,7 @@ Validator._merge = function _merge (name, ref) {
 
   RULES[name] = {
     validate: validate,
-    options: options,
-    paramNames: paramNames
+    options: options
   };
 };
 
@@ -39075,14 +38994,14 @@ Validator.prototype._handleFieldNotFound = function _handleFieldNotFound (name, 
 /**
  * Handles validation results.
  */
-Validator.prototype._handleValidationResults = function _handleValidationResults (results, vmId) {
+Validator.prototype._handleValidationResults = function _handleValidationResults (results) {
     var this$1 = this;
 
   var matchers = results.map(function (result) { return ({ id: result.id }); });
   this.errors.removeById(matchers.map(function (m) { return m.id; }));
   // remove by name and scope to remove any custom errors added.
   results.forEach(function (result) {
-    this$1.errors.remove(result.field, result.scope, vmId);
+    this$1.errors.remove(result.field, result.scope);
   });
   var allErrors = results.reduce(function (prev, curr) {
     prev.push.apply(prev, curr.errors);
@@ -39658,8 +39577,8 @@ Field.prototype._determineInputEvent = function _determineInputEvent () {
     return (this.componentInstance.$options.model && this.componentInstance.$options.model.event) || 'input';
   }
 
-  if (this.model && this.model.lazy) {
-    return 'change';
+  if (this.model) {
+    return this.model.lazy ? 'change' : 'input';
   }
 
   if (isTextInput(this.el)) {
@@ -43095,25 +43014,23 @@ function parseDate$1 (date, format$$1) {
 }
 
 var afterValidator = function (value, ref) {
-  if ( ref === void 0 ) ref = {};
-  var targetValue = ref.targetValue;
-  var inclusion = ref.inclusion; if ( inclusion === void 0 ) inclusion = false;
-  var format$$1 = ref.format;
+  var otherValue = ref[0];
+  var inclusion = ref[1];
+  var format$$1 = ref[2];
 
   if (typeof format$$1 === 'undefined') {
     format$$1 = inclusion;
     inclusion = false;
   }
-
   value = parseDate$1(value, format$$1);
-  targetValue = parseDate$1(targetValue, format$$1);
+  otherValue = parseDate$1(otherValue, format$$1);
 
   // if either is not valid.
-  if (!value || !targetValue) {
+  if (!value || !otherValue) {
     return false;
   }
 
-  return isAfter(value, targetValue) || (inclusion && isEqual$1(value, targetValue));
+  return isAfter(value, otherValue) || (inclusion && isEqual$1(value, otherValue));
 };
 
 var options = {
@@ -43121,13 +43038,9 @@ var options = {
   isDate: true
 };
 
-// required to convert from a list of array values to an object.
-var paramNames = ['targetValue', 'inclusion', 'format'];
-
 var after = {
   validate: afterValidator,
-  options: options,
-  paramNames: paramNames
+  options: options
 };
 
 /**
@@ -43216,8 +43129,8 @@ var alphaDash = {
 };
 
 var validate = function (value, ref) {
-  if ( ref === void 0 ) ref = {};
-  var locale = ref.locale;
+  if ( ref === void 0 ) ref = [];
+  var locale = ref[0]; if ( locale === void 0 ) locale = null;
 
   if (Array.isArray(value)) {
     return value.every(function (val) { return validate(val, [locale]); });
@@ -43231,16 +43144,13 @@ var validate = function (value, ref) {
   return (alpha[locale] || alpha.en).test(value);
 };
 
-var paramNames$1 = ['locale'];
-
 var alpha$1 = {
-  validate: validate,
-  paramNames: paramNames$1
+  validate: validate
 };
 
 var validate$1 = function (value, ref) {
-  if ( ref === void 0 ) ref = {};
-  var locale = ref.locale;
+  if ( ref === void 0 ) ref = [];
+  var locale = ref[0]; if ( locale === void 0 ) locale = null;
 
   if (Array.isArray(value)) {
     return value.every(function (val) { return validate$1(val, [locale]); });
@@ -43254,16 +43164,13 @@ var validate$1 = function (value, ref) {
   return (alphaDash[locale] || alphaDash.en).test(value);
 };
 
-var paramNames$2 = ['locale'];
-
 var alpha_dash = {
-  validate: validate$1,
-  paramNames: paramNames$2
+  validate: validate$1
 };
 
 var validate$2 = function (value, ref) {
-  if ( ref === void 0 ) ref = {};
-  var locale = ref.locale;
+  if ( ref === void 0 ) ref = [];
+  var locale = ref[0]; if ( locale === void 0 ) locale = null;
 
   if (Array.isArray(value)) {
     return value.every(function (val) { return validate$2(val, [locale]); });
@@ -43277,16 +43184,13 @@ var validate$2 = function (value, ref) {
   return (alphanumeric[locale] || alphanumeric.en).test(value);
 };
 
-var paramNames$3 = ['locale'];
-
 var alpha_num = {
-  validate: validate$2,
-  paramNames: paramNames$3
+  validate: validate$2
 };
 
 var validate$3 = function (value, ref) {
-  if ( ref === void 0 ) ref = {};
-  var locale = ref.locale;
+  if ( ref === void 0 ) ref = [];
+  var locale = ref[0]; if ( locale === void 0 ) locale = null;
 
   if (Array.isArray(value)) {
     return value.every(function (val) { return validate$3(val, [locale]); });
@@ -43300,33 +43204,28 @@ var validate$3 = function (value, ref) {
   return (alphaSpaces[locale] || alphaSpaces.en).test(value);
 };
 
-var paramNames$4 = ['locale'];
-
 var alpha_spaces = {
-  validate: validate$3,
-  paramNames: paramNames$4
+  validate: validate$3
 };
 
 var validate$4 = function (value, ref) {
-  if ( ref === void 0 ) ref = {};
-  var targetValue = ref.targetValue;
-  var inclusion = ref.inclusion; if ( inclusion === void 0 ) inclusion = false;
-  var format$$1 = ref.format;
+  var otherValue = ref[0];
+  var inclusion = ref[1];
+  var format$$1 = ref[2];
 
   if (typeof format$$1 === 'undefined') {
     format$$1 = inclusion;
     inclusion = false;
   }
-
   value = parseDate$1(value, format$$1);
-  targetValue = parseDate$1(targetValue, format$$1);
+  otherValue = parseDate$1(otherValue, format$$1);
 
   // if either is not valid.
-  if (!value || !targetValue) {
+  if (!value || !otherValue) {
     return false;
   }
 
-  return isBefore(value, targetValue) || (inclusion && isEqual$1(value, targetValue));
+  return isBefore(value, otherValue) || (inclusion && isEqual$1(value, otherValue));
 };
 
 var options$1 = {
@@ -43334,48 +43233,34 @@ var options$1 = {
   isDate: true
 };
 
-var paramNames$5 = ['targetValue', 'inclusion', 'format'];
-
 var before = {
   validate: validate$4,
-  options: options$1,
-  paramNames: paramNames$5
+  options: options$1
 };
 
 var validate$5 = function (value, ref) {
-  if ( ref === void 0 ) ref = {};
-  var min = ref.min;
-  var max = ref.max;
+  var min = ref[0];
+  var max = ref[1];
 
   if (Array.isArray(value)) {
-    return value.every(function (val) { return validate$5(val, { min: min, max: max }); });
+    return value.every(function (val) { return validate$5(val, [min, max]); });
   }
 
   return Number(min) <= value && Number(max) >= value;
 };
 
-var paramNames$6 = ['min', 'max'];
-
 var between = {
-  validate: validate$5,
-  paramNames: paramNames$6
+  validate: validate$5
 };
 
-var validate$6 = function (value, ref) {
-  var targetValue = ref.targetValue;
-
-  return String(value) === String(targetValue);
-};
+var validate$6 = function (value, other) { return String(value) === String(other); };
 var options$2 = {
   hasTarget: true
 };
 
-var paramNames$7 = ['targetValue'];
-
 var confirmed = {
   validate: validate$6,
-  options: options$2,
-  paramNames: paramNames$7
+  options: options$2
 };
 
 function unwrapExports (x) {
@@ -43459,16 +43344,18 @@ var credit_card = {
   validate: validate$7
 };
 
-var validate$8 = function (value, ref) {
-  if ( ref === void 0 ) ref = {};
-  var min$$1 = ref.min;
-  var max$$1 = ref.max;
-  var inclusivity = ref.inclusivity; if ( inclusivity === void 0 ) inclusivity = '()';
-  var format$$1 = ref.format;
+var validate$8 = function (value, params) {
+  var assign, assign$1;
 
-  if (typeof format$$1 === 'undefined') {
-    format$$1 = inclusivity;
-    inclusivity = '()';
+  var min$$1;
+  var max$$1;
+  var format$$1;
+  var inclusivity = '()';
+
+  if (params.length > 3) {
+    (assign = params, min$$1 = assign[0], max$$1 = assign[1], inclusivity = assign[2], format$$1 = assign[3]);
+  } else {
+    (assign$1 = params, min$$1 = assign$1[0], max$$1 = assign$1[1], format$$1 = assign$1[2]);
   }
 
   var minDate = parseDate$1(String(min$$1), format$$1);
@@ -43499,16 +43386,13 @@ var options$3 = {
   isDate: true
 };
 
-var paramNames$8 = ['min', 'max', 'inclusivity', 'format'];
-
 var date_between = {
   validate: validate$8,
-  options: options$3,
-  paramNames: paramNames$8
+  options: options$3
 };
 
 var validate$9 = function (value, ref) {
-  var format = ref.format;
+  var format = ref[0];
 
   return !!parseDate$1(value, format);
 };
@@ -43517,21 +43401,18 @@ var options$4 = {
   isDate: true
 };
 
-var paramNames$9 = ['format'];
-
 var date_format = {
   validate: validate$9,
-  options: options$4,
-  paramNames: paramNames$9
+  options: options$4
 };
 
 var validate$a = function (value, ref) {
-  if ( ref === void 0 ) ref = {};
-  var decimals = ref.decimals; if ( decimals === void 0 ) decimals = '*';
-  var separator = ref.separator; if ( separator === void 0 ) separator = '.';
+  if ( ref === void 0 ) ref = [];
+  var decimals = ref[0]; if ( decimals === void 0 ) decimals = '*';
+  var separator = ref[1]; if ( separator === void 0 ) separator = '.';
 
   if (Array.isArray(value)) {
-    return value.every(function (val) { return validate$a(val, { decimals: decimals, separator: separator }); });
+    return value.every(function (val) { return validate$a(val, [decimals, separator]); });
   }
 
   if (value === null || value === undefined || value === '') {
@@ -43556,11 +43437,8 @@ var validate$a = function (value, ref) {
     return parsedValue === parsedValue;
 };
 
-var paramNames$a = ['decimals', 'separator'];
-
 var decimal = {
-  validate: validate$a,
-  paramNames: paramNames$a
+  validate: validate$a
 };
 
 var validate$b = function (value, ref) {
@@ -43741,6 +43619,196 @@ module.exports = exports['default'];
 
 unwrapExports(isFQDN_1);
 
+var isEmail_1 = createCommonjsModule(function (module, exports) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = isEmail;
+
+
+
+var _assertString2 = _interopRequireDefault(assertString_1);
+
+
+
+var _merge2 = _interopRequireDefault(merge_1);
+
+
+
+var _isByteLength2 = _interopRequireDefault(isByteLength_1);
+
+
+
+var _isFQDN2 = _interopRequireDefault(isFQDN_1);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var default_email_options = {
+  allow_display_name: false,
+  require_display_name: false,
+  allow_utf8_local_part: true,
+  require_tld: true
+};
+
+/* eslint-disable max-len */
+/* eslint-disable no-control-regex */
+var displayName = /^[a-z\d!#\$%&'\*\+\-\/=\?\^_`{\|}~\.\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+[a-z\d!#\$%&'\*\+\-\/=\?\^_`{\|}~\,\.\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF\s]*<(.+)>$/i;
+var emailUserPart = /^[a-z\d!#\$%&'\*\+\-\/=\?\^_`{\|}~]+$/i;
+var gmailUserPart = /^[a-z\d]+$/;
+var quotedEmailUser = /^([\s\x01-\x08\x0b\x0c\x0e-\x1f\x7f\x21\x23-\x5b\x5d-\x7e]|(\\[\x01-\x09\x0b\x0c\x0d-\x7f]))*$/i;
+var emailUserUtf8Part = /^[a-z\d!#\$%&'\*\+\-\/=\?\^_`{\|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+$/i;
+var quotedEmailUserUtf8 = /^([\s\x01-\x08\x0b\x0c\x0e-\x1f\x7f\x21\x23-\x5b\x5d-\x7e\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|(\\[\x01-\x09\x0b\x0c\x0d-\x7f\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))*$/i;
+/* eslint-enable max-len */
+/* eslint-enable no-control-regex */
+
+function isEmail(str, options) {
+  (0, _assertString2.default)(str);
+  options = (0, _merge2.default)(options, default_email_options);
+
+  if (options.require_display_name || options.allow_display_name) {
+    var display_email = str.match(displayName);
+    if (display_email) {
+      str = display_email[1];
+    } else if (options.require_display_name) {
+      return false;
+    }
+  }
+
+  var parts = str.split('@');
+  var domain = parts.pop();
+  var user = parts.join('@');
+
+  var lower_domain = domain.toLowerCase();
+
+  if (lower_domain === 'gmail.com' || lower_domain === 'googlemail.com') {
+    /*
+      Previously we removed dots for gmail addresses before validating.
+      This was removed because it allows `multiple..dots@gmail.com`
+      to be reported as valid, but it is not.
+      Gmail only normalizes single dots, removing them from here is pointless,
+      should be done in normalizeEmail
+    */
+    user = user.toLowerCase();
+
+    // Removing sub-address from username before gmail validation
+    var username = user.split('+')[0];
+
+    // Dots are not included in gmail length restriction
+    if (!(0, _isByteLength2.default)(username.replace('.', ''), { min: 6, max: 30 })) {
+      return false;
+    }
+
+    var _user_parts = username.split('.');
+    for (var i = 0; i < _user_parts.length; i++) {
+      if (!gmailUserPart.test(_user_parts[i])) {
+        return false;
+      }
+    }
+  }
+
+  if (!(0, _isByteLength2.default)(user, { max: 64 }) || !(0, _isByteLength2.default)(domain, { max: 254 })) {
+    return false;
+  }
+
+  if (!(0, _isFQDN2.default)(domain, { require_tld: options.require_tld })) {
+    return false;
+  }
+
+  if (user[0] === '"') {
+    user = user.slice(1, user.length - 1);
+    return options.allow_utf8_local_part ? quotedEmailUserUtf8.test(user) : quotedEmailUser.test(user);
+  }
+
+  var pattern = options.allow_utf8_local_part ? emailUserUtf8Part : emailUserPart;
+
+  var user_parts = user.split('.');
+  for (var _i = 0; _i < user_parts.length; _i++) {
+    if (!pattern.test(user_parts[_i])) {
+      return false;
+    }
+  }
+
+  return true;
+}
+module.exports = exports['default'];
+});
+
+var isEmail = unwrapExports(isEmail_1);
+
+var validate$d = function (value, ref) {
+  if ( ref === void 0 ) ref = [];
+  var multiple = ref[0]; if ( multiple === void 0 ) multiple = false;
+
+  if (multiple) {
+    value = value.split(',').map(function (emailStr) { return emailStr.trim(); });
+  }
+
+  if (Array.isArray(value)) {
+    return value.every(function (val) { return isEmail(String(val)); });
+  }
+
+  return isEmail(String(value));
+};
+
+var email = {
+  validate: validate$d
+};
+
+var validate$e = function (value, options) {
+  if (Array.isArray(value)) {
+    return value.every(function (val) { return validate$e(val, options); });
+  }
+
+  return toArray(options).some(function (item) {
+    // eslint-disable-next-line
+    return item == value;
+  });
+};
+
+var included = {
+  validate: validate$e
+};
+
+var validate$f = function () {
+  var args = [], len = arguments.length;
+  while ( len-- ) args[ len ] = arguments[ len ];
+
+  return !validate$e.apply(void 0, args);
+};
+
+var excluded = {
+  validate: validate$f
+};
+
+var validate$g = function (files, extensions) {
+  var regex = new RegExp((".(" + (extensions.join('|')) + ")$"), 'i');
+
+  return files.every(function (file) { return regex.test(file.name); });
+};
+
+var ext = {
+  validate: validate$g
+};
+
+var validate$h = function (files) { return files.every(function (file) { return /\.(jpg|svg|jpeg|png|bmp|gif)$/i.test(file.name); }); };
+
+var image = {
+  validate: validate$h
+};
+
+var validate$i = function (value) {
+  if (Array.isArray(value)) {
+    return value.every(function (val) { return /^-?[0-9]+$/.test(String(val)); });
+  }
+
+  return /^-?[0-9]+$/.test(String(value));
+};
+
+var integer = {
+  validate: validate$i
+};
+
 var isIP_1 = createCommonjsModule(function (module, exports) {
 
 Object.defineProperty(exports, "__esModule", {
@@ -43823,216 +43891,9 @@ module.exports = exports['default'];
 
 var isIP = unwrapExports(isIP_1);
 
-var isEmail_1 = createCommonjsModule(function (module, exports) {
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = isEmail;
-
-
-
-var _assertString2 = _interopRequireDefault(assertString_1);
-
-
-
-var _merge2 = _interopRequireDefault(merge_1);
-
-
-
-var _isByteLength2 = _interopRequireDefault(isByteLength_1);
-
-
-
-var _isFQDN2 = _interopRequireDefault(isFQDN_1);
-
-
-
-var _isIP2 = _interopRequireDefault(isIP_1);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var default_email_options = {
-  allow_display_name: false,
-  require_display_name: false,
-  allow_utf8_local_part: true,
-  require_tld: true
-};
-
-/* eslint-disable max-len */
-/* eslint-disable no-control-regex */
-var displayName = /^[a-z\d!#\$%&'\*\+\-\/=\?\^_`{\|}~\.\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+[a-z\d!#\$%&'\*\+\-\/=\?\^_`{\|}~\,\.\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF\s]*<(.+)>$/i;
-var emailUserPart = /^[a-z\d!#\$%&'\*\+\-\/=\?\^_`{\|}~]+$/i;
-var gmailUserPart = /^[a-z\d]+$/;
-var quotedEmailUser = /^([\s\x01-\x08\x0b\x0c\x0e-\x1f\x7f\x21\x23-\x5b\x5d-\x7e]|(\\[\x01-\x09\x0b\x0c\x0d-\x7f]))*$/i;
-var emailUserUtf8Part = /^[a-z\d!#\$%&'\*\+\-\/=\?\^_`{\|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+$/i;
-var quotedEmailUserUtf8 = /^([\s\x01-\x08\x0b\x0c\x0e-\x1f\x7f\x21\x23-\x5b\x5d-\x7e\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|(\\[\x01-\x09\x0b\x0c\x0d-\x7f\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))*$/i;
-/* eslint-enable max-len */
-/* eslint-enable no-control-regex */
-
-function isEmail(str, options) {
-  (0, _assertString2.default)(str);
-  options = (0, _merge2.default)(options, default_email_options);
-
-  if (options.require_display_name || options.allow_display_name) {
-    var display_email = str.match(displayName);
-    if (display_email) {
-      str = display_email[1];
-    } else if (options.require_display_name) {
-      return false;
-    }
-  }
-
-  var parts = str.split('@');
-  var domain = parts.pop();
-  var user = parts.join('@');
-
-  var lower_domain = domain.toLowerCase();
-
-  if (options.domain_specific_validation && (lower_domain === 'gmail.com' || lower_domain === 'googlemail.com')) {
-    /*
-      Previously we removed dots for gmail addresses before validating.
-      This was removed because it allows `multiple..dots@gmail.com`
-      to be reported as valid, but it is not.
-      Gmail only normalizes single dots, removing them from here is pointless,
-      should be done in normalizeEmail
-    */
-    user = user.toLowerCase();
-
-    // Removing sub-address from username before gmail validation
-    var username = user.split('+')[0];
-
-    // Dots are not included in gmail length restriction
-    if (!(0, _isByteLength2.default)(username.replace('.', ''), { min: 6, max: 30 })) {
-      return false;
-    }
-
-    var _user_parts = username.split('.');
-    for (var i = 0; i < _user_parts.length; i++) {
-      if (!gmailUserPart.test(_user_parts[i])) {
-        return false;
-      }
-    }
-  }
-
-  if (!(0, _isByteLength2.default)(user, { max: 64 }) || !(0, _isByteLength2.default)(domain, { max: 254 })) {
-    return false;
-  }
-
-  if (!(0, _isFQDN2.default)(domain, { require_tld: options.require_tld })) {
-    if (!options.allow_ip_domain) {
-      return false;
-    }
-
-    if (!(0, _isIP2.default)(domain)) {
-      if (!domain.startsWith('[') || !domain.endsWith(']')) {
-        return false;
-      }
-
-      var noBracketdomain = domain.substr(1, domain.length - 2);
-
-      if (noBracketdomain.length === 0 || !(0, _isIP2.default)(noBracketdomain)) {
-        return false;
-      }
-    }
-  }
-
-  if (user[0] === '"') {
-    user = user.slice(1, user.length - 1);
-    return options.allow_utf8_local_part ? quotedEmailUserUtf8.test(user) : quotedEmailUser.test(user);
-  }
-
-  var pattern = options.allow_utf8_local_part ? emailUserUtf8Part : emailUserPart;
-
-  var user_parts = user.split('.');
-  for (var _i = 0; _i < user_parts.length; _i++) {
-    if (!pattern.test(user_parts[_i])) {
-      return false;
-    }
-  }
-
-  return true;
-}
-module.exports = exports['default'];
-});
-
-var isEmail = unwrapExports(isEmail_1);
-
-var validate$d = function (value, options) {
-  if ( options === void 0 ) options = {};
-
-  if (options.multiple) {
-    value = value.split(',').map(function (emailStr) { return emailStr.trim(); });
-  }
-
-  if (Array.isArray(value)) {
-    return value.every(function (val) { return isEmail(String(val), options); });
-  }
-
-  return isEmail(String(value), options);
-};
-
-var email = {
-  validate: validate$d
-};
-
-var validate$e = function (value, options) {
-  if (Array.isArray(value)) {
-    return value.every(function (val) { return validate$e(val, options); });
-  }
-
-  return toArray(options).some(function (item) {
-    // eslint-disable-next-line
-    return item == value;
-  });
-};
-
-var included = {
-  validate: validate$e
-};
-
-var validate$f = function () {
-  var args = [], len = arguments.length;
-  while ( len-- ) args[ len ] = arguments[ len ];
-
-  return !validate$e.apply(void 0, args);
-};
-
-var excluded = {
-  validate: validate$f
-};
-
-var validate$g = function (files, extensions) {
-  var regex = new RegExp((".(" + (extensions.join('|')) + ")$"), 'i');
-
-  return files.every(function (file) { return regex.test(file.name); });
-};
-
-var ext = {
-  validate: validate$g
-};
-
-var validate$h = function (files) { return files.every(function (file) { return /\.(jpg|svg|jpeg|png|bmp|gif)$/i.test(file.name); }); };
-
-var image = {
-  validate: validate$h
-};
-
-var validate$i = function (value) {
-  if (Array.isArray(value)) {
-    return value.every(function (val) { return /^-?[0-9]+$/.test(String(val)); });
-  }
-
-  return /^-?[0-9]+$/.test(String(value));
-};
-
-var integer = {
-  validate: validate$i
-};
-
 var validate$j = function (value, ref) {
-  if ( ref === void 0 ) ref = {};
-  var version = ref.version; if ( version === void 0 ) version = 4;
+  if ( ref === void 0 ) ref = [];
+  var version = ref[0]; if ( version === void 0 ) version = 4;
 
   if (isNullOrUndefined(value)) {
     value = '';
@@ -44045,11 +43906,8 @@ var validate$j = function (value, ref) {
   return isIP(value, version);
 };
 
-var paramNames$b = ['version'];
-
 var ip = {
-  validate: validate$j,
-  paramNames: paramNames$b
+  validate: validate$j
 };
 
 var validate$k = function (value, ref) {
@@ -44121,10 +43979,6 @@ var validate$n = function (value, ref) {
     return length >= 0;
   }
 
-  if (Array.isArray(value)) {
-    return value.every(function (val) { return validate$n(val, [length]); });
-  }
-
   return String(value).length <= length;
 };
 
@@ -44135,12 +43989,8 @@ var max$1 = {
 var validate$o = function (value, ref) {
   var max = ref[0];
 
-  if (value === null || value === undefined || value === '') {
+  if (Array.isArray(value) || value === null || value === undefined || value === '') {
     return false;
-  }
-
-  if (Array.isArray(value)) {
-    return value.length > 0 && value.every(function (val) { return validate$o(val, [max]); });
   }
 
   return Number(value) <= max;
@@ -44166,11 +44016,6 @@ var validate$q = function (value, ref) {
   if (value === undefined || value === null) {
     return false;
   }
-
-  if (Array.isArray(value)) {
-    return value.every(function (val) { return validate$q(val, [length]); });
-  }
-
   return String(value).length >= length;
 };
 
@@ -44181,12 +44026,8 @@ var min$1 = {
 var validate$r = function (value, ref) {
   var min = ref[0];
 
-  if (value === null || value === undefined || value === '') {
+  if (Array.isArray(value) || value === null || value === undefined || value === '') {
     return false;
-  }
-
-  if (Array.isArray(value)) {
-    return value.length > 0 && value.every(function (val) { return validate$r(val, [min]); });
   }
 
   return Number(value) >= min;
@@ -44209,20 +44050,18 @@ var numeric = {
 };
 
 var validate$t = function (value, ref) {
-  var expression = ref.expression;
+  var regex = ref[0];
+  var flags = ref.slice(1);
 
-  if (typeof expression === 'string') {
-    expression = new RegExp(expression);
+  if (regex instanceof RegExp) {
+    return regex.test(value);
   }
 
-  return expression.test(String(value));
+  return new RegExp(regex, flags).test(String(value));
 };
 
-var paramNames$c = ['expression'];
-
 var regex = {
-  validate: validate$t,
-  paramNames: paramNames$c
+  validate: validate$t
 };
 
 var validate$u = function (value, ref) {
@@ -44348,16 +44187,13 @@ function isURL(url, options) {
 
   split = url.split('://');
   if (split.length > 1) {
-    protocol = split.shift().toLowerCase();
+    protocol = split.shift();
     if (options.require_valid_protocol && options.protocols.indexOf(protocol) === -1) {
       return false;
     }
   } else if (options.require_protocol) {
     return false;
-  } else if (url.substr(0, 2) === '//') {
-    if (!options.allow_protocol_relative_urls) {
-      return false;
-    }
+  } else if (options.allow_protocol_relative_urls && url.substr(0, 2) === '//') {
     split[0] = url.substr(2);
   }
   url = split.join('://');
@@ -44424,9 +44260,11 @@ module.exports = exports['default'];
 
 var isURL = unwrapExports(isURL_1);
 
-var validate$w = function (value, options) {
-  if ( options === void 0 ) options = {};
+var validate$w = function (value, ref) {
+  if ( ref === void 0 ) ref = [];
+  var requireProtocol = ref[0]; if ( requireProtocol === void 0 ) requireProtocol = false;
 
+  var options = { require_protocol: !!requireProtocol, allow_underscores: true };
   if (isNullOrUndefined(value)) {
     value = '';
   }
@@ -44618,13 +44456,13 @@ var ErrorComponent = {
   }
 };
 
-var version = '2.1.0-beta.9';
+var version = '2.1.0-beta.7';
 
 var rulesPlugin = function (ref) {
   var Validator$$1 = ref.Validator;
 
   Object.keys(Rules).forEach(function (rule) {
-    Validator$$1.extend(rule, Rules[rule].validate, assign({}, Rules[rule].options, { paramNames: Rules[rule].paramNames }));
+    Validator$$1.extend(rule, Rules[rule].validate, Rules[rule].options);
   });
 
   // Merge the english messages.
@@ -45431,10 +45269,13 @@ if (false) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_user_UserProfile_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10__components_user_UserProfile_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_user_UserSettings_vue__ = __webpack_require__(187);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_user_UserSettings_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_11__components_user_UserSettings_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_user_ConfirmEmail_vue__ = __webpack_require__(192);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_user_ConfirmEmail_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_12__components_user_ConfirmEmail_vue__);
 
 
 
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]);
+
 
 
 
@@ -45497,6 +45338,10 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
         path: '/settings',
         component: __WEBPACK_IMPORTED_MODULE_11__components_user_UserSettings_vue___default.a,
         name: 'user-settings'
+    }, {
+        path: '/confirm-email',
+        component: __WEBPACK_IMPORTED_MODULE_12__components_user_ConfirmEmail_vue___default.a,
+        name: 'confirm-email'
     }]
 }));
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, "/"))
@@ -45689,7 +45534,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n.card[data-v-dca5370e] {\n  width: 100%;\n  max-width: 450px;\n}\n.card input[aria-invalid=\"true\"][data-v-dca5370e] {\n    border: 1px solid red;\n}\n.card i.fa-warning[data-v-dca5370e],\n  .card span.is-danger[data-v-dca5370e],\n  .card #back-error[data-v-dca5370e] {\n    color: red;\n}\n.card #back-error[data-v-dca5370e] {\n    display: none;\n}\n.card input[data-v-dca5370e]:not([type=\"checkbox\"]) {\n    -webkit-box-shadow: inset 0 0 3px 0 rgba(0, 0, 0, 0.22);\n    box-shadow: inset 0 0 3px 0 rgba(0, 0, 0, 0.22);\n    border: none;\n}\n.card .card-header[data-v-dca5370e] {\n    font-size: 1.3rem;\n}\n.card .form-check[data-v-dca5370e] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: row;\n            flex-direction: row;\n    -webkit-box-pack: justify;\n        -ms-flex-pack: justify;\n            justify-content: space-between;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n}\n.card .socials[data-v-dca5370e] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: row;\n            flex-direction: row;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    margin-top: 1.5rem;\n}\n.card hr[data-v-dca5370e] {\n    height: 2px;\n}\nhr[data-v-dca5370e] {\n  height: 1px;\n  margin: 2em 0;\n  border: 0;\n  background-image: -webkit-gradient(linear, left top, right top, from(rgba(228, 228, 231, 0)), color-stop(10%, rgba(228, 228, 231, 0.9)), color-stop(90%, rgba(228, 228, 231, 0.9)), to(rgba(228, 228, 231, 0)));\n  background-image: linear-gradient(to right, rgba(228, 228, 231, 0), rgba(228, 228, 231, 0.9) 10%, rgba(228, 228, 231, 0.9) 90%, rgba(228, 228, 231, 0));\n}\n", ""]);
+exports.push([module.i, "\n.card[data-v-dca5370e] {\n  width: 100%;\n  max-width: 450px;\n}\n.card .help.is-danger[data-v-dca5370e] {\n    color: red;\n}\n.card .input.is-danger[data-v-dca5370e] {\n    border: 1px solid red;\n}\n.card input[data-v-dca5370e]:not([type=\"checkbox\"]) {\n    -webkit-box-shadow: inset 0 0 3px 0 rgba(0, 0, 0, 0.22);\n    box-shadow: inset 0 0 3px 0 rgba(0, 0, 0, 0.22);\n    border: none;\n}\n.card .card-header[data-v-dca5370e] {\n    font-size: 1.3rem;\n}\n.card .form-check[data-v-dca5370e] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: row;\n            flex-direction: row;\n    -webkit-box-pack: justify;\n        -ms-flex-pack: justify;\n            justify-content: space-between;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n}\n.card .socials[data-v-dca5370e] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: row;\n            flex-direction: row;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    margin-top: 1.5rem;\n}\n.card hr[data-v-dca5370e] {\n    height: 2px;\n}\nhr[data-v-dca5370e] {\n  height: 1px;\n  margin: 2em 0;\n  border: 0;\n  background-image: -webkit-gradient(linear, left top, right top, from(rgba(228, 228, 231, 0)), color-stop(10%, rgba(228, 228, 231, 0.9)), color-stop(90%, rgba(228, 228, 231, 0.9)), to(rgba(228, 228, 231, 0)));\n  background-image: linear-gradient(to right, rgba(228, 228, 231, 0), rgba(228, 228, 231, 0.9) 10%, rgba(228, 228, 231, 0.9) 90%, rgba(228, 228, 231, 0));\n}\n", ""]);
 
 // exports
 
@@ -45772,101 +45617,109 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    name: "Login",
-    components: {
-        LoginFacebook: __WEBPACK_IMPORTED_MODULE_0__shared_FacebookSignInButton_vue___default.a,
-        LoginGoogle: __WEBPACK_IMPORTED_MODULE_1__shared_GoogleSignInButton_vue___default.a
-    },
-    data: function data() {
-        return {
-            isLoading: false,
-            user: {
-                isAuth: false,
-                email: "",
-                password: "",
-                remember_me: 1
-            }
-        };
-    },
+  name: "Login",
+  components: {
+    LoginFacebook: __WEBPACK_IMPORTED_MODULE_0__shared_FacebookSignInButton_vue___default.a,
+    LoginGoogle: __WEBPACK_IMPORTED_MODULE_1__shared_GoogleSignInButton_vue___default.a
+  },
+  data: function data() {
+    return {
+      isLoading: false,
+      user: {
+        isAuth: false,
+        email: "",
+        password: "",
+        remember_me: 1
+      }
+    };
+  },
 
-    methods: {
-        getUserData: function getUserData(callback) {
-            var _this = this;
+  methods: {
+    getUserData: function getUserData(callback) {
+      var _this = this;
 
-            axios.get('/api/v1/user', {
-                headers: {
-                    "Content-Type": "application/json",
-                    "X-Requested-With": "XMLHttpRequest",
-                    "Authorization": localStorage.getItem('token')
-                }
-
-            }).then(function (response) {
-                var user = {
-                    name: response.data.name,
-                    email: response.data.email
-                };
-
-                localStorage.setItem('user', JSON.stringify(user));
-                _this.$store.commit('auth_success', response.data.email);
-                callback();
-            }).catch(function (error) {
-                console.log('ERR ', error);
-            });
-        },
-        validateBeforeSubmit: function validateBeforeSubmit() {
-            var _this2 = this;
-
-            this.$validator.validateAll().then(function (result) {
-                if (result) {
-                    _this2.user.remember_me = _this2.user.remember_me === true || _this2.user.remember_me === 1 ? 1 : 0; //конвертую чекбокс в 1 або 0 по дефолку true/false
-                    _this2.isLoading = true;
-                    axios.post("/api/v1/login", _this2.user, {
-                        headers: {
-                            "Content-Type": "application/json",
-                            "X-Requested-With": "XMLHttpRequest"
-                        }
-                    }).then(function (response) {
-                        if (response) {
-                            var token = response.data.token_type + " " + response.data.access_token;
-                            localStorage.setItem("token", token);
-                            // якщо токен отримано перекидаємо на профайл
-                            _this2.getUserData(function () {
-                                _this2.$router.push('/user-profile');
-                            });
-                        }
-                    }).catch(function (error) {
-                        if (error.response && error.response) {
-                            if (error.response.data && error.response.data.message) {
-                                _this2.$toasted.error(error.response.data.message, {
-                                    theme: "primary",
-                                    position: "top-right",
-                                    duration: 5000
-                                });
-                            }
-                        } else {
-                            _this2.$toasted.error("Щось пішло не так :( Cпробуйте пізніше", {
-                                theme: "primary",
-                                position: "top-right",
-                                duration: 5000
-                            });
-                            alert(error);
-                        }
-                    });
-                } else {
-                    _this2.$toasted.error("Заповніть коректно всі поля!", {
-                        theme: "primary",
-                        position: "top-right",
-                        duration: 5000
-                    });
-                }
-            });
+      axios.get("/api/v1/user", {
+        headers: {
+          "Content-Type": "application/json",
+          "X-Requested-With": "XMLHttpRequest",
+          Authorization: localStorage.getItem("token")
         }
+      }).then(function (response) {
+        var user = {
+          name: response.data.name,
+          email: response.data.email
+        };
+        localStorage.setItem("user", JSON.stringify(user));
+        _this.$store.commit("auth_success", response.data.email);
+        callback();
+      }).catch(function (error) {
+        console.log("ERR ", error);
+      });
+    },
+    validateBeforeSubmit: function validateBeforeSubmit() {
+      var _this2 = this;
+
+      this.$validator.validateAll().then(function (result) {
+        if (result) {
+          _this2.user.remember_me = _this2.user.remember_me === true || _this2.user.remember_me === 1 ? 1 : 0; //конвертую чекбокс в 1 або 0 по дефолку true/false
+          _this2.isLoading = true;
+          axios.post("/api/v1/login", _this2.user, {
+            headers: {
+              "Content-Type": "application/json",
+              "X-Requested-With": "XMLHttpRequest"
+            }
+          }).then(function (response) {
+            if (response) {
+              var token = response.data.token_type + " " + response.data.access_token;
+              localStorage.setItem("token", token);
+              // якщо токен отримано перекидаємо на профайл
+              _this2.getUserData(function () {
+                _this2.$router.push("/user-profile");
+              });
+            }
+          }).catch(function (error) {
+            if (error.response && error.response) {
+              if (error.response.data && error.response.data.message) {
+                _this2.$toasted.error(error.response.data.message, {
+                  theme: "primary",
+                  position: "top-right",
+                  duration: 5000
+                });
+              }
+            } else {
+              _this2.$toasted.error("Щось пішло не так :( Cпробуйте пізніше", {
+                theme: "primary",
+                position: "top-right",
+                duration: 5000
+              });
+              alert(error);
+            }
+          });
+        } else {
+          _this2.$toasted.error("Заповніть коректно всі поля!", {
+            theme: "primary",
+            position: "top-right",
+            duration: 5000
+          });
+        }
+      });
     }
+  }
 });
 
 /***/ }),
@@ -46290,15 +46143,13 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "content-wrapper" }, [
-    _c("div", { staticClass: "container d-flex justify-content-center " }, [
+    _c("div", { staticClass: "container d-flex justify-content-center" }, [
       _c("div", { staticClass: "card" }, [
         _c("div", { staticClass: "card-header justify-content-center" }, [
-          _vm._v("\n                Вхід\n            ")
+          _vm._v("Вхід")
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "card-body" }, [
-          _vm._m(0),
-          _vm._v(" "),
           _c(
             "form",
             {
@@ -46353,8 +46204,9 @@ var render = function() {
                     }
                   }),
                   _vm._v(" "),
-                  _c("small", [
-                    _c("i", {
+                  _c(
+                    "small",
+                    {
                       directives: [
                         {
                           name: "show",
@@ -46362,26 +46214,14 @@ var render = function() {
                           value: _vm.errors.has("email"),
                           expression: "errors.has('email')"
                         }
-                      ],
-                      staticClass: "fa fa-warning"
-                    }),
-                    _vm._v(" "),
-                    _c(
-                      "span",
-                      {
-                        directives: [
-                          {
-                            name: "show",
-                            rawName: "v-show",
-                            value: _vm.errors.has("email"),
-                            expression: "errors.has('email')"
-                          }
-                        ],
-                        staticClass: "help is-danger"
-                      },
-                      [_vm._v(_vm._s(_vm.errors.first("email")))]
-                    )
-                  ])
+                      ]
+                    },
+                    [
+                      _c("span", { staticClass: "help is-danger" }, [
+                        _vm._v(_vm._s(_vm.errors.first("email")))
+                      ])
+                    ]
+                  )
                 ])
               ]),
               _vm._v(" "),
@@ -46412,11 +46252,11 @@ var render = function() {
                       }
                     ],
                     staticClass: "form-control",
-                    attrs: {
-                      id: "password",
-                      type: "password",
-                      name: "password"
+                    class: {
+                      input: true,
+                      "is-danger": _vm.errors.has("пароль")
                     },
+                    attrs: { id: "password", type: "password", name: "пароль" },
                     domProps: { value: _vm.user.password },
                     on: {
                       input: function($event) {
@@ -46428,35 +46268,24 @@ var render = function() {
                     }
                   }),
                   _vm._v(" "),
-                  _c("small", [
-                    _c("i", {
+                  _c(
+                    "small",
+                    {
                       directives: [
                         {
                           name: "show",
                           rawName: "v-show",
-                          value: _vm.errors.has("password"),
-                          expression: "errors.has('password')"
+                          value: _vm.errors.has("пароль"),
+                          expression: "errors.has('пароль')"
                         }
-                      ],
-                      staticClass: "fa fa-warning"
-                    }),
-                    _vm._v(" "),
-                    _c(
-                      "span",
-                      {
-                        directives: [
-                          {
-                            name: "show",
-                            rawName: "v-show",
-                            value: _vm.errors.has("password"),
-                            expression: "errors.has('password')"
-                          }
-                        ],
-                        staticClass: "help is-danger"
-                      },
-                      [_vm._v(_vm._s(_vm.errors.first("password")))]
-                    )
-                  ])
+                      ]
+                    },
+                    [
+                      _c("span", { staticClass: "help is-danger" }, [
+                        _vm._v(_vm._s(_vm.errors.first("пароль")))
+                      ])
+                    ]
+                  )
                 ])
               ]),
               _vm._v(" "),
@@ -46510,9 +46339,7 @@ var render = function() {
                         }
                       }
                     }),
-                    _vm._v(
-                      "\n                            Запамятати мене\n                        "
-                    )
+                    _vm._v("\n              Запамятати мене\n            ")
                   ]),
                   _vm._v(" "),
                   _c("router-link", { attrs: { to: "/recover-password" } }, [
@@ -46534,9 +46361,7 @@ var render = function() {
                       _vm.isLoading
                         ? _c("i", { staticClass: "fas fa-spinner" })
                         : _vm._e(),
-                      _vm._v(
-                        "\n                                Увійти\n                            "
-                      )
+                      _vm._v("\n                Увійти\n              ")
                     ]
                   )
                 ])
@@ -46563,21 +46388,7 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass: "is-danger w-100 text-center",
-        attrs: { id: "back-error" }
-      },
-      [_c("small", [_vm._v("Не вірний логін або пароль")])]
-    )
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -46673,7 +46484,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n.card[data-v-7a32b0d9] {\n  width: 100%;\n  max-width: 450px;\n}\n.card input[aria-invalid=\"true\"][data-v-7a32b0d9] {\n    border: 1px solid red;\n}\n.card i.fa-warning[data-v-7a32b0d9],\n  .card span.is-danger[data-v-7a32b0d9],\n  .card #back-error[data-v-7a32b0d9] {\n    color: red;\n}\n.card #back-error[data-v-7a32b0d9] {\n    display: none;\n}\n.card .error > input[data-v-7a32b0d9] {\n    border-color: red;\n}\n.card input[data-v-7a32b0d9]:not([type=\"checkbox\"]) {\n    -webkit-box-shadow: inset 0 0 3px 0 rgba(0, 0, 0, 0.22);\n    box-shadow: inset 0 0 3px 0 rgba(0, 0, 0, 0.22);\n    border: none;\n}\n.card .card-header[data-v-7a32b0d9] {\n    font-size: 1.3rem;\n}\n.card .socials[data-v-7a32b0d9] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: row;\n            flex-direction: row;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    margin-top: 1.5rem;\n}\n.card hr[data-v-7a32b0d9] {\n    height: 1px;\n    margin: 2em 0;\n    border: 0;\n    background-image: -webkit-gradient(linear, left top, right top, from(rgba(228, 228, 231, 0)), color-stop(10%, rgba(228, 228, 231, 0.9)), color-stop(90%, rgba(228, 228, 231, 0.9)), to(rgba(228, 228, 231, 0)));\n    background-image: linear-gradient(to right, rgba(228, 228, 231, 0), rgba(228, 228, 231, 0.9) 10%, rgba(228, 228, 231, 0.9) 90%, rgba(228, 228, 231, 0));\n}\n", ""]);
+exports.push([module.i, "\n.card[data-v-7a32b0d9] {\n  width: 100%;\n  max-width: 450px;\n}\n.card .help.is-danger[data-v-7a32b0d9] {\n    color: red;\n}\n.card .input.is-danger[data-v-7a32b0d9] {\n    border: 1px solid red;\n}\n.card input[data-v-7a32b0d9]:not([type=\"checkbox\"]) {\n    -webkit-box-shadow: inset 0 0 3px 0 rgba(0, 0, 0, 0.22);\n    box-shadow: inset 0 0 3px 0 rgba(0, 0, 0, 0.22);\n    border: none;\n}\n.card .card-header[data-v-7a32b0d9] {\n    font-size: 1.3rem;\n}\n.card .socials[data-v-7a32b0d9] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: row;\n            flex-direction: row;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    margin-top: 1.5rem;\n}\n.card hr[data-v-7a32b0d9] {\n    height: 1px;\n    margin: 2em 0;\n    border: 0;\n    background-image: -webkit-gradient(linear, left top, right top, from(rgba(228, 228, 231, 0)), color-stop(10%, rgba(228, 228, 231, 0.9)), color-stop(90%, rgba(228, 228, 231, 0.9)), to(rgba(228, 228, 231, 0)));\n    background-image: linear-gradient(to right, rgba(228, 228, 231, 0), rgba(228, 228, 231, 0.9) 10%, rgba(228, 228, 231, 0.9) 90%, rgba(228, 228, 231, 0));\n}\n", ""]);
 
 // exports
 
@@ -46768,84 +46579,102 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    name: "Registration",
-    components: {
-        LoginFacebook: __WEBPACK_IMPORTED_MODULE_0__shared_FacebookSignInButton_vue___default.a,
-        LoginGoogle: __WEBPACK_IMPORTED_MODULE_1__shared_GoogleSignInButton_vue___default.a
-    },
-    data: function data() {
-        return {
-            isLoading: false,
-            user: {
-                name: '',
-                email: '',
-                password: '',
-                repassword: ''
+  name: "Registration",
+  components: {
+    LoginFacebook: __WEBPACK_IMPORTED_MODULE_0__shared_FacebookSignInButton_vue___default.a,
+    LoginGoogle: __WEBPACK_IMPORTED_MODULE_1__shared_GoogleSignInButton_vue___default.a
+  },
+  data: function data() {
+    return {
+      isLoading: false,
+      user: {
+        name: "",
+        email: "",
+        password: "",
+        repassword: ""
+      }
+    };
+  },
+
+  methods: {
+    validateBeforeSubmit: function validateBeforeSubmit() {
+      var _this = this;
+
+      this.$validator.validateAll().then(function (result) {
+        if (result && _this.user.password === _this.user.repassword) {
+          _this.isLoading = true;
+          // document.getElementById('register-btn').setAttribute('disabled');
+          var newUser = {};
+          newUser.name = _this.user.name;
+          newUser.email = _this.user.email;
+          newUser.password = _this.user.password;
+          axios.post("/api/v1/signup", newUser, {
+            headers: {
+              "Content-Type": "application/json",
+              "X-Requested-With": "XMLHttpRequest"
             }
-        };
-    },
-
-    methods: {
-        validateBeforeSubmit: function validateBeforeSubmit() {
-            var _this = this;
-
-            this.$validator.validateAll().then(function (result) {
-                if (result && _this.user.password === _this.user.repassword) {
-                    _this.isLoading = true;
-                    // document.getElementById('register-btn').setAttribute('disabled');
-                    var newUser = {};
-                    newUser.name = _this.user.name;
-                    newUser.email = _this.user.email;
-                    newUser.password = _this.user.password;
-                    axios.post('/api/v1/signup', newUser, {
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'X-Requested-With': 'XMLHttpRequest'
-                        }
-                    }).then(function (response) {
-                        if (response) {
-                            _this.$toasted.success('Вітаємо! Вам на пошту відпрвавлений лист з підтвердженням реєстрації!', {
-                                theme: "primary",
-                                position: "top-center",
-                                duration: 5000
-                            });
-                        }
-                    }).catch(function (error) {
-                        if (error.response && error.response.status) {
-                            if (error.response.data && error.response.data.message) {
-                                console.error(error.response.data.message);
-                                _this.$toasted.error(error.response.data.message, {
-                                    theme: "primary",
-                                    position: "top-right",
-                                    duration: 5000
-                                });
-                            }
-                        } else {
-                            if (error.response.data && error.response.data.message) {
-                                console.error(error.response.data.message);
-                                _this.$toasted.error('Щось пішло не так:( Спробуйте ще раз!', {
-                                    theme: "primary",
-                                    position: "top-right",
-                                    duration: 10000
-                                });
-                            }
-                        }
-                    });
-                } else {
-                    _this.$toasted.error('Заповніть коректно всі поля!', {
-                        theme: "primary",
-                        position: "top-right",
-                        duration: 10000
-                    });
-                }
-            });
+          }).then(function (response) {
+            if (response) {
+              _this.$toasted.success("Вітаємо! Вам на пошту відпрвавлений лист з підтвердженням реєстрації!", {
+                theme: "primary",
+                position: "top-center",
+                duration: 5000
+              });
+            }
+          }).catch(function (error) {
+            if (error.response && error.response.status) {
+              if (error.response.data && error.response.data.message) {
+                console.error(error.response.data.message);
+                _this.$toasted.error(error.response.data.message, {
+                  theme: "primary",
+                  position: "top-right",
+                  duration: 5000
+                });
+              }
+            } else {
+              if (error.response.data && error.response.data.message) {
+                console.error(error.response.data.message);
+                _this.$toasted.error("Щось пішло не так:( Спробуйте ще раз!", {
+                  theme: "primary",
+                  position: "top-right",
+                  duration: 10000
+                });
+              }
+            }
+          });
+        } else {
+          _this.$toasted.error("Заповніть коректно всі поля!", {
+            theme: "primary",
+            position: "top-right",
+            duration: 10000
+          });
         }
+      });
     }
+  }
 });
 
 /***/ }),
@@ -46860,7 +46689,7 @@ var render = function() {
     _c("div", { staticClass: "container d-flex justify-content-center" }, [
       _c("div", { staticClass: "card" }, [
         _c("div", { staticClass: "card-header justify-content-center" }, [
-          _vm._v("\n                Реєстрація\n            ")
+          _vm._v("Реєстрація")
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "card-body" }, [
@@ -46879,11 +46708,7 @@ var render = function() {
                 _c(
                   "label",
                   { staticClass: "form-control-label", attrs: { for: "name" } },
-                  [
-                    _vm._v(
-                      "\n                            Ім'я\n                        "
-                    )
-                  ]
+                  [_vm._v("Ім'я")]
                 ),
                 _vm._v(" "),
                 _c("p", { staticClass: "control has-icon has-icon-right" }, [
@@ -46916,8 +46741,9 @@ var render = function() {
                     }
                   }),
                   _vm._v(" "),
-                  _c("small", [
-                    _c("i", {
+                  _c(
+                    "small",
+                    {
                       directives: [
                         {
                           name: "show",
@@ -46925,26 +46751,14 @@ var render = function() {
                           value: _vm.errors.has("ім'я"),
                           expression: "errors.has('ім\\'я')"
                         }
-                      ],
-                      staticClass: "fa fa-warning"
-                    }),
-                    _vm._v(" "),
-                    _c(
-                      "span",
-                      {
-                        directives: [
-                          {
-                            name: "show",
-                            rawName: "v-show",
-                            value: _vm.errors.has("ім'я"),
-                            expression: "errors.has('ім\\'я')"
-                          }
-                        ],
-                        staticClass: "help is-danger"
-                      },
-                      [_vm._v(_vm._s(_vm.errors.first("ім'я")))]
-                    )
-                  ])
+                      ]
+                    },
+                    [
+                      _c("span", { staticClass: "help is-danger" }, [
+                        _vm._v(_vm._s(_vm.errors.first("ім'я")))
+                      ])
+                    ]
+                  )
                 ])
               ]),
               _vm._v(" "),
@@ -46955,11 +46769,7 @@ var render = function() {
                     staticClass: "form-control-label",
                     attrs: { for: "email" }
                   },
-                  [
-                    _vm._v(
-                      "\n                            E-Mail\n                        "
-                    )
-                  ]
+                  [_vm._v("E-Mail")]
                 ),
                 _vm._v(" "),
                 _c("p", { staticClass: "control has-icon has-icon-right" }, [
@@ -46995,8 +46805,9 @@ var render = function() {
                     }
                   }),
                   _vm._v(" "),
-                  _c("small", [
-                    _c("i", {
+                  _c(
+                    "small",
+                    {
                       directives: [
                         {
                           name: "show",
@@ -47004,26 +46815,14 @@ var render = function() {
                           value: _vm.errors.has("email"),
                           expression: "errors.has('email')"
                         }
-                      ],
-                      staticClass: "fa fa-warning"
-                    }),
-                    _vm._v(" "),
-                    _c(
-                      "span",
-                      {
-                        directives: [
-                          {
-                            name: "show",
-                            rawName: "v-show",
-                            value: _vm.errors.has("email"),
-                            expression: "errors.has('email')"
-                          }
-                        ],
-                        staticClass: "help is-danger"
-                      },
-                      [_vm._v(_vm._s(_vm.errors.first("email")))]
-                    )
-                  ])
+                      ]
+                    },
+                    [
+                      _c("span", { staticClass: "help is-danger" }, [
+                        _vm._v(_vm._s(_vm.errors.first("email")))
+                      ])
+                    ]
+                  )
                 ])
               ]),
               _vm._v(" "),
@@ -47034,11 +46833,7 @@ var render = function() {
                     staticClass: "form-control-label",
                     attrs: { for: "password" }
                   },
-                  [
-                    _vm._v(
-                      "\n                            Пароль\n                        "
-                    )
-                  ]
+                  [_vm._v("Пароль")]
                 ),
                 _vm._v(" "),
                 _c("p", { staticClass: "control has-icon has-icon-right" }, [
@@ -47074,8 +46869,9 @@ var render = function() {
                     }
                   }),
                   _vm._v(" "),
-                  _c("small", [
-                    _c("i", {
+                  _c(
+                    "small",
+                    {
                       directives: [
                         {
                           name: "show",
@@ -47083,26 +46879,14 @@ var render = function() {
                           value: _vm.errors.has("пароль"),
                           expression: "errors.has('пароль')"
                         }
-                      ],
-                      staticClass: "fa fa-warning"
-                    }),
-                    _vm._v(" "),
-                    _c(
-                      "span",
-                      {
-                        directives: [
-                          {
-                            name: "show",
-                            rawName: "v-show",
-                            value: _vm.errors.has("пароль"),
-                            expression: "errors.has('пароль')"
-                          }
-                        ],
-                        staticClass: "help is-danger"
-                      },
-                      [_vm._v(_vm._s(_vm.errors.first("пароль")))]
-                    )
-                  ])
+                      ]
+                    },
+                    [
+                      _c("span", { staticClass: "help is-danger" }, [
+                        _vm._v(_vm._s(_vm.errors.first("пароль")))
+                      ])
+                    ]
+                  )
                 ])
               ]),
               _vm._v(" "),
@@ -47113,11 +46897,7 @@ var render = function() {
                     staticClass: "form-control-label",
                     attrs: { for: "repassword" }
                   },
-                  [
-                    _vm._v(
-                      "\n                            Підтвердити пароль\n                        "
-                    )
-                  ]
+                  [_vm._v("Підтвердити пароль")]
                 ),
                 _vm._v(" "),
                 _c(
@@ -47146,9 +46926,8 @@ var render = function() {
                       ],
                       staticClass: "form-control",
                       class: {
-                        "is-danger": !(
-                          _vm.user.repassword === _vm.user.password
-                        )
+                        input: true,
+                        "is-danger": _vm.user.repassword !== _vm.user.password
                       },
                       attrs: {
                         id: "repassword",
@@ -47179,8 +46958,6 @@ var render = function() {
                         ]
                       },
                       [
-                        _c("i", { staticClass: "fa fa-warning" }),
-                        _vm._v(" "),
                         _c("span", { staticClass: "help is-danger" }, [
                           _vm._v("Паролі не співпадають")
                         ])
@@ -47203,7 +46980,7 @@ var render = function() {
                         ? _c("i", { staticClass: "fas fa-spinner" })
                         : _vm._e(),
                       _vm._v(
-                        "\n                                Зареєструватись\n                            "
+                        "\n                Зареєструватись\n              "
                       )
                     ]
                   )
@@ -47693,11 +47470,11 @@ exports.push([module.i, "\n@charset \"UTF-8\";\n/* Стилі для фільт�
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_ads_pagination__ = __webpack_require__(23);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_ads_pagination___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue_ads_pagination__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_lodash__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__JudgeComponent_vue__ = __webpack_require__(24);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__JudgeComponent_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__JudgeComponent_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_Spinner_vue__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_Spinner_vue__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_Spinner_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__shared_Spinner_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__shared_Filters_vue__ = __webpack_require__(25);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__shared_Filters_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__shared_Filters_vue__);
@@ -47998,7 +47775,7 @@ exports.push([module.i, "\n.judge-component[data-v-cfd711c4]:not(:last-child) {\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_lodash__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_StatusComponent_vue__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_StatusComponent_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__shared_StatusComponent_vue__);
@@ -48498,7 +48275,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* 110 */
 /***/ (function(module, exports, __webpack_require__) {
 
-!function(t,e){ true?module.exports=e():"function"==typeof define&&define.amd?define([],e):"object"==typeof exports?exports.datepicker=e():t.datepicker=e()}(window,function(){return function(t){var e={};function n(r){if(e[r])return e[r].exports;var a=e[r]={i:r,l:!1,exports:{}};return t[r].call(a.exports,a,a.exports,n),a.l=!0,a.exports}return n.m=t,n.c=e,n.d=function(t,e,r){n.o(t,e)||Object.defineProperty(t,e,{configurable:!1,enumerable:!0,get:r})},n.r=function(t){Object.defineProperty(t,"__esModule",{value:!0})},n.n=function(t){var e=t&&t.__esModule?function(){return t.default}:function(){return t};return n.d(e,"a",e),e},n.o=function(t,e){return Object.prototype.hasOwnProperty.call(t,e)},n.p="",n(n.s=62)}([function(t,e,n){var r=n(20)("wks"),a=n(19),o=n(1).Symbol,i="function"==typeof o;(t.exports=function(t){return r[t]||(r[t]=i&&o[t]||(i?o:a)("Symbol."+t))}).store=r},function(t,e){var n=t.exports="undefined"!=typeof window&&window.Math==Math?window:"undefined"!=typeof self&&self.Math==Math?self:Function("return this")();"number"==typeof __g&&(__g=n)},function(t,e){var n={}.hasOwnProperty;t.exports=function(t,e){return n.call(t,e)}},function(t,e,n){t.exports=!n(25)(function(){return 7!=Object.defineProperty({},"a",{get:function(){return 7}}).a})},function(t,e,n){var r=n(11);t.exports=function(t){if(!r(t))throw TypeError(t+" is not an object!");return t}},function(t,e,n){var r=n(4),a=n(50),o=n(49),i=Object.defineProperty;e.f=n(3)?Object.defineProperty:function(t,e,n){if(r(t),e=o(e,!0),r(n),a)try{return i(t,e,n)}catch(t){}if("get"in n||"set"in n)throw TypeError("Accessors not supported!");return"value"in n&&(t[e]=n.value),t}},function(t,e,n){var r=n(5),a=n(10);t.exports=n(3)?function(t,e,n){return r.f(t,e,a(1,n))}:function(t,e,n){return t[e]=n,t}},function(t,e,n){"use strict";var r=n(58);Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0;var a=r(n(57)),o={data:function(){var t,e,n,r,o,i,s,c,u,l,f,p,d,h=new Date;return this.range?(t=this.value[0]?new Date(this.value[0]):h,n=(e=this.value[1]?new Date(this.value[1]):h).getUTCFullYear(),r=e.getUTCMonth(),o=e.getUTCDate(),i=e.getUTCFullYear(),s=e.getUTCMonth(),c=t.getUTCFullYear(),u=t.getUTCMonth(),l=t.getUTCDate(),f=e.getUTCFullYear(),p=e.getUTCMonth(),d=e.getUTCDate()):(t=e=this.value?new Date(this.value):h,n=e.getUTCFullYear(),r=e.getUTCMonth(),o=e.getUTCDate(),i=e.getUTCFullYear(),s=e.getUTCMonth(),c=t.getUTCFullYear(),u=t.getUTCMonth(),l=t.getUTCDate(),f=e.getUTCFullYear(),p=e.getUTCMonth(),d=e.getUTCDate()),{showCancel:!1,panelState:!1,panelType:"date",coordinates:{},year:n,month:r,date:o,tmpYear:i,tmpMonth:s,tmpStartYear:c,tmpStartMonth:u,tmpStartDate:l,tmpEndYear:f,tmpEndMonth:p,tmpEndDate:d,minYear:Number,minMonth:Number,minDate:Number,maxYear:Number,maxMonth:Number,maxDate:Number,yearList:(0,a.default)({length:12},function(t,e){return(new Date).getFullYear()+e}),monthList:[1,2,3,4,5,6,7,8,9,10,11,12],weekList:[0,1,2,3,4,5,6],rangeStart:!1}},props:{language:{default:"en"},min:{default:"1970-01-01"},max:{default:"3016-01-01"},value:{type:[String,Array],default:""},range:{type:Boolean,default:!1}},methods:{togglePanel:function(){this.panelState=!this.panelState,this.rangeStart=!1},isSelected:function(t,e){switch(t){case"year":return this.range?new Date(e,0).getTime()>=new Date(this.tmpStartYear,0).getTime()&&new Date(e,0).getTime()<=new Date(this.tmpEndYear,0).getTime():e===this.tmpYear;case"month":return this.range?new Date(this.tmpYear,e).getTime()>=new Date(this.tmpStartYear,this.tmpStartMonth).getTime()&&new Date(this.tmpYear,e).getTime()<=new Date(this.tmpEndYear,this.tmpEndMonth).getTime():e===this.tmpMonth&&this.year===this.tmpYear;case"date":if(!this.range)return this.date===e.value&&this.month===this.tmpMonth&&e.currentMonth;var n=this.tmpMonth;return e.previousMonth&&n--,e.nextMonth&&n++,new Date(this.tmpYear,n,e.value).getTime()>=new Date(this.tmpStartYear,this.tmpStartMonth,this.tmpStartDate).getTime()&&new Date(this.tmpYear,n,e.value).getTime()<=new Date(this.tmpEndYear,this.tmpEndMonth,this.tmpEndDate).getTime()}},chType:function(t){this.panelType=t},chYearRange:function(t){this.yearList=t?this.yearList.map(function(t){return t+12}):this.yearList.map(function(t){return t-12})},prevMonthPreview:function(){this.tmpMonth=0===this.tmpMonth?0:this.tmpMonth-1},nextMonthPreview:function(){this.tmpMonth=11===this.tmpMonth?11:this.tmpMonth+1},selectYear:function(t){this.validateYear(t)||(this.tmpYear=t,this.panelType="month")},selectMonth:function(t){this.validateMonth(t)||(this.tmpMonth=t,this.panelType="date")},selectDate:function(t){var e=this;setTimeout(function(){if(!e.validateDate(t))if(t.previousMonth?0===e.tmpMonth?(e.year-=1,e.tmpYear-=1,e.month=e.tmpMonth=11):(e.month=e.tmpMonth-1,e.tmpMonth-=1):t.nextMonth&&(11===e.tmpMonth?(e.year+=1,e.tmpYear+=1,e.month=e.tmpMonth=0):(e.month=e.tmpMonth+1,e.tmpMonth+=1)),e.range){if(e.range&&!e.rangeStart)e.tmpEndYear=e.tmpStartYear=e.tmpYear,e.tmpEndMonth=e.tmpStartMonth=e.tmpMonth,e.tmpEndDate=e.tmpStartDate=t.value,e.rangeStart=!0;else if(e.range&&e.rangeStart){var n,r,a;if(e.tmpEndYear=e.tmpYear,e.tmpEndMonth=e.tmpMonth,e.tmpEndDate=t.value,new Date(e.tmpStartYear,e.tmpStartMonth,e.tmpStartDate).getTime()>new Date(e.tmpEndYear,e.tmpEndMonth,e.tmpEndDate).getTime())n=e.tmpEndYear,r=e.tmpEndMonth,a=e.tmpEndDate,e.tmpEndYear=e.tmpStartYear,e.tmpEndMonth=e.tmpStartMonth,e.tmpEndDate=e.tmpStartDate,e.tmpStartYear=n,e.tmpStartMonth=r,e.tmpStartDate=a;var o=["".concat(e.tmpStartYear,"-").concat(("0"+(e.tmpStartMonth+1)).slice(-2),"-").concat(("0"+e.tmpStartDate).slice(-2)),"".concat(e.tmpEndYear,"-").concat(("0"+(e.tmpEndMonth+1)).slice(-2),"-").concat(("0"+e.tmpEndDate).slice(-2))];e.$emit("input",o),e.rangeStart=!1,e.panelState=!1}}else{e.year=e.tmpYear,e.month=e.tmpMonth,e.date=t.value;var i="".concat(e.tmpYear,"-").concat(("0"+(e.month+1)).slice(-2),"-").concat(("0"+e.date).slice(-2));e.$emit("input",i),e.panelState=!1}},0)},validateYear:function(t){return t>this.maxYear||t<this.minYear},validateMonth:function(t){return!(new Date(this.tmpYear,t).getTime()>=new Date(this.minYear,this.minMonth-1).getTime()&&new Date(this.tmpYear,t).getTime()<=new Date(this.maxYear,this.maxMonth-1).getTime())},validateDate:function(t){var e=this.tmpMonth;return t.previousMonth?e-=1:t.nextMonth&&(e+=1),!(new Date(this.tmpYear,e,t.value).getTime()>=new Date(this.minYear,this.minMonth-1,this.minDate).getTime()&&new Date(this.tmpYear,e,t.value).getTime()<=new Date(this.maxYear,this.maxMonth-1,this.maxDate).getTime())},close:function(t){this.$el.contains(t.target)||(this.panelState=!1,this.rangeStart=!1)},clear:function(){this.$emit("input",this.range?["",""]:"")}},watch:{min:function(t){var e=t.split("-");this.minYear=Number(e[0]),this.minMonth=Number(e[1]),this.minDate=Number(e[2])},max:function(t){var e=t.split("-");this.maxYear=Number(e[0]),this.maxMonth=Number(e[1]),this.maxDate=Number(e[2])},range:function(t,e){t!==e&&(t&&"String"===Object.prototype.toString.call(this.value).slice(8,-1)&&this.$emit("input",["",""]),t||"Array"!==Object.prototype.toString.call(this.value).slice(8,-1)||this.$emit("input",""))}},computed:{dateList:function(){for(var t=new Date(this.tmpYear,this.tmpMonth+1,0).getDate(),e=(0,a.default)({length:t},function(t,e){return{currentMonth:!0,value:e+1}}),n=new Date(this.tmpYear,this.tmpMonth,1).getDay(),r=new Date(this.tmpYear,this.tmpMonth,0).getDate(),o=0,i=n;o<i;o++)e=[{previousMonth:!0,value:r-o}].concat(e);for(var s=e.length,c=1;s<42;s++,c++)e[e.length]={nextMonth:!0,value:c};return e}},filters:{week:function(t,e){switch(e){case"en":return{0:"Su",1:"Mo",2:"Tu",3:"We",4:"Th",5:"Fr",6:"Sa"}[t];case"zh-cn":return{0:"日",1:"一",2:"二",3:"三",4:"四",5:"五",6:"六"}[t];case"uk":return{0:"Пн",1:"Вт",2:"Ср",3:"Чт",4:"Пт",5:"Сб",6:"Нд"}[t];case"es":return{0:"Do",1:"Lu",2:"Ma",3:"Mi",4:"Ju",5:"Vi",6:"Sa"}[t];case"fr":return{0:"Dim",1:"Lun",2:"Mar",3:"Mer",4:"Jeu",5:"Ven",6:"Sam"}[t];default:return t}},month:function(t,e){switch(e){case"en":return{1:"Jan",2:"Feb",3:"Mar",4:"Apr",5:"May",6:"Jun",7:"Jul",8:"Aug",9:"Sep",10:"Oct",11:"Nov",12:"Dec"}[t];case"zh-cn":return{1:"一",2:"二",3:"三",4:"四",5:"五",6:"六",7:"七",8:"八",9:"九",10:"十",11:"十一",12:"十二"}[t];case"uk":return{1:"Січень",2:"Лютий",3:"Березень",4:"Квітень",5:"Травень",6:"Червень",7:"Липень",8:"Серпень",9:"Вересень",10:"Жовтень",11:"Листопад",12:"Грудень"}[t];case"es":return{1:"Ene",2:"Feb",3:"Mar",4:"Abr",5:"May",6:"Jun",7:"Jul",8:"Ago",9:"Sep",10:"Oct",11:"Nov",12:"Dic"}[t];case"fr":return{1:"Jan",2:"Fév",3:"Mar",4:"Avr",5:"Mai",6:"Juin",7:"Juil",8:"Août",9:"Sep",10:"Oct",11:"Nov",12:"Déc"}[t];default:return t}}},mounted:function(){var t=this;this.$nextTick(function(){t.$el.parentNode.offsetWidth+t.$el.parentNode.offsetLeft-t.$el.offsetLeft<=300?t.coordinates={right:"0",top:"".concat(window.getComputedStyle(t.$el.children[0]).offsetHeight+4,"px")}:t.coordinates={left:"0",top:"".concat(window.getComputedStyle(t.$el.children[0]).offsetHeight+4,"px")};var e=t.min.split("-");t.minYear=Number(e[0]),t.minMonth=Number(e[1]),t.minDate=Number(e[2]);var n=t.max.split("-");if(t.maxYear=Number(n[0]),t.maxMonth=Number(n[1]),t.maxDate=Number(n[2]),t.range){if("Array"!==Object.prototype.toString.call(t.value).slice(8,-1))throw new Error("Binding value must be an array in range mode.");if(t.value.length){var r=t.value[0].split("-"),a=t.value[1].split("-");t.tmpStartYear=Number(r[0]),t.tmpStartMonth=Number(r[1])-1,t.tmpStartDate=Number(r[2]),t.tmpEndYear=Number(a[0]),t.tmpEndMonth=Number(a[1])-1,t.tmpEndDate=Number(a[2])}else t.$emit("input",["",""])}t.value||t.$emit("input",""),window.addEventListener("click",t.close)})},beforeDestroy:function(){window.removeEventListener("click",this.close)}};e.default=o},function(t,e,n){var r=n(20)("keys"),a=n(19);t.exports=function(t){return r[t]||(r[t]=a(t))}},function(t,e){t.exports={}},function(t,e){t.exports=function(t,e){return{enumerable:!(1&t),configurable:!(2&t),writable:!(4&t),value:e}}},function(t,e){t.exports=function(t){return"object"==typeof t?null!==t:"function"==typeof t}},function(t,e){var n=t.exports={version:"2.5.5"};"number"==typeof __e&&(__e=n)},function(t,e){t.exports=function(t){if(void 0==t)throw TypeError("Can't call method on  "+t);return t}},function(t,e){var n=Math.ceil,r=Math.floor;t.exports=function(t){return isNaN(t=+t)?0:(t>0?r:n)(t)}},function(t,e,n){"use strict";n.d(e,"a",function(){return r}),n.d(e,"b",function(){return a});var r=function(){var t=this,e=t.$createElement,r=t._self._c||e;return r("div",{staticClass:"date-picker"},[r("div",{staticClass:"input-wrapper",on:{mouseenter:function(e){t.showCancel=!0},mouseleave:function(e){t.showCancel=!1}}},[r("div",{staticClass:"input",domProps:{textContent:t._s(t.range?t.value[0]+" -- "+t.value[1]:t.value)},on:{click:t.togglePanel}}),t._v(" "),r("transition",{attrs:{name:"fade"}},[r("img",{directives:[{name:"show",rawName:"v-show",value:t.showCancel,expression:"showCancel"}],staticClass:"cancel-btn",attrs:{src:n(30)},on:{click:t.clear}})])],1),t._v(" "),r("transition",{attrs:{name:"toggle"}},[r("div",{directives:[{name:"show",rawName:"v-show",value:t.panelState,expression:"panelState"}],staticClass:"date-panel",style:t.coordinates},[r("div",{directives:[{name:"show",rawName:"v-show",value:"year"!==t.panelType,expression:"panelType !== 'year'"}],staticClass:"panel-header"},[r("div",{staticClass:"arrow-left",on:{click:function(e){t.prevMonthPreview()}}},[t._v("<")]),t._v(" "),r("div",{staticClass:"year-month-box"},[r("div",{staticClass:"year-box",domProps:{textContent:t._s(t.tmpYear)},on:{click:function(e){t.chType("year")}}}),t._v(" "),r("div",{staticClass:"month-box",on:{click:function(e){t.chType("month")}}},[t._v(t._s(t._f("month")(t.tmpMonth+1,t.language)))])]),t._v(" "),r("div",{staticClass:"arrow-right",on:{click:function(e){t.nextMonthPreview()}}},[t._v(">")])]),t._v(" "),r("div",{directives:[{name:"show",rawName:"v-show",value:"year"===t.panelType,expression:"panelType === 'year'"}],staticClass:"panel-header"},[r("div",{staticClass:"arrow-left",on:{click:function(e){t.chYearRange(0)}}},[t._v("<")]),t._v(" "),r("div",{staticClass:"year-range"},[r("span",{domProps:{textContent:t._s(t.yearList[0])}}),t._v(" - "),r("span",{domProps:{textContent:t._s(t.yearList[t.yearList.length-1])}})]),t._v(" "),r("div",{staticClass:"arrow-right",on:{click:function(e){t.chYearRange(1)}}},[t._v(">")])]),t._v(" "),r("div",{directives:[{name:"show",rawName:"v-show",value:"year"===t.panelType,expression:"panelType === 'year'"}],staticClass:"type-year"},[r("ul",{staticClass:"year-list"},t._l(t.yearList,function(e){return r("li",{key:e,class:{selected:t.isSelected("year",e),invalid:t.validateYear(e)},domProps:{textContent:t._s(e)},on:{click:function(n){t.selectYear(e)}}})}))]),t._v(" "),r("div",{directives:[{name:"show",rawName:"v-show",value:"month"===t.panelType,expression:"panelType === 'month'"}],staticClass:"type-month"},[r("ul",{staticClass:"month-list"},t._l(t.monthList,function(e,n){return r("li",{key:e,class:{selected:t.isSelected("month",n),invalid:t.validateMonth(n)},on:{click:function(e){t.selectMonth(n)}}},[t._v("\n                        "+t._s(t._f("month")(e,t.language))+"\n                    ")])}))]),t._v(" "),r("div",{directives:[{name:"show",rawName:"v-show",value:"date"===t.panelType,expression:"panelType === 'date'"}],staticClass:"type-date"},[r("ul",{staticClass:"weeks"},t._l(t.weekList,function(e){return r("li",{key:e},[t._v(t._s(t._f("week")(e,t.language)))])})),t._v(" "),r("ul",{staticClass:"date-list"},t._l(t.dateList,function(e,n){return r("li",{key:n,class:{preMonth:e.previousMonth,nextMonth:e.nextMonth,invalid:t.validateDate(e),firstItem:n%7==0},on:{click:function(n){t.selectDate(e)}}},[r("div",{staticClass:"message",class:{selected:t.isSelected("date",e)}},[r("div",{staticClass:"bg"}),r("span",{domProps:{textContent:t._s(e.value)}})])])}))])])])],1)},a=[];r._withStripped=!0},function(t,e,n){var r=n(13);t.exports=function(t){return Object(r(t))}},function(t,e,n){var r=n(5).f,a=n(2),o=n(0)("toStringTag");t.exports=function(t,e,n){t&&!a(t=n?t:t.prototype,o)&&r(t,o,{configurable:!0,value:e})}},function(t,e){t.exports="constructor,hasOwnProperty,isPrototypeOf,propertyIsEnumerable,toLocaleString,toString,valueOf".split(",")},function(t,e){var n=0,r=Math.random();t.exports=function(t){return"Symbol(".concat(void 0===t?"":t,")_",(++n+r).toString(36))}},function(t,e,n){var r=n(1),a=r["__core-js_shared__"]||(r["__core-js_shared__"]={});t.exports=function(t){return a[t]||(a[t]={})}},function(t,e,n){var r=n(14),a=Math.min;t.exports=function(t){return t>0?a(r(t),9007199254740991):0}},function(t,e){var n={}.toString;t.exports=function(t){return n.call(t).slice(8,-1)}},function(t,e,n){var r=n(42),a=n(13);t.exports=function(t){return r(a(t))}},function(t,e,n){var r=n(11),a=n(1).document,o=r(a)&&r(a.createElement);t.exports=function(t){return o?a.createElement(t):{}}},function(t,e){t.exports=function(t){try{return!!t()}catch(t){return!0}}},function(t,e,n){var r=n(51);t.exports=function(t,e,n){if(r(t),void 0===e)return t;switch(n){case 1:return function(n){return t.call(e,n)};case 2:return function(n,r){return t.call(e,n,r)};case 3:return function(n,r,a){return t.call(e,n,r,a)}}return function(){return t.apply(e,arguments)}}},function(t,e,n){var r=n(1),a=n(12),o=n(26),i=n(6),s=n(2),c=function(t,e,n){var u,l,f,p=t&c.F,d=t&c.G,h=t&c.S,v=t&c.P,m=t&c.B,g=t&c.W,y=d?a:a[e]||(a[e]={}),x=y.prototype,w=d?r:h?r[e]:(r[e]||{}).prototype;for(u in d&&(n=e),n)(l=!p&&w&&void 0!==w[u])&&s(y,u)||(f=l?w[u]:n[u],y[u]=d&&"function"!=typeof w[u]?n[u]:m&&l?o(f,r):g&&w[u]==f?function(t){var e=function(e,n,r){if(this instanceof t){switch(arguments.length){case 0:return new t;case 1:return new t(e);case 2:return new t(e,n)}return new t(e,n,r)}return t.apply(this,arguments)};return e.prototype=t.prototype,e}(f):v&&"function"==typeof f?o(Function.call,f):f,v&&((y.virtual||(y.virtual={}))[u]=f,t&c.R&&x&&!x[u]&&i(x,u,f)))};c.F=1,c.G=2,c.S=4,c.P=8,c.B=16,c.W=32,c.U=64,c.R=128,t.exports=c},function(t,e,n){"use strict";function r(t,e,n,r,a,o,i,s){var c=typeof(t=t||{}).default;"object"!==c&&"function"!==c||(t=t.default);var u,l="function"==typeof t?t.options:t;if(e&&(l.render=e,l.staticRenderFns=n,l._compiled=!0),r&&(l.functional=!0),o&&(l._scopeId=o),i?(u=function(t){(t=t||this.$vnode&&this.$vnode.ssrContext||this.parent&&this.parent.$vnode&&this.parent.$vnode.ssrContext)||"undefined"==typeof __VUE_SSR_CONTEXT__||(t=__VUE_SSR_CONTEXT__),a&&a.call(this,t),t&&t._registeredComponents&&t._registeredComponents.add(i)},l._ssrRegister=u):a&&(u=s?function(){a.call(this,this.$root.$options.shadowRoot)}:a),u)if(l.functional){l._injectStyles=u;var f=l.render;l.render=function(t,e){return u.call(e),f(t,e)}}else{var p=l.beforeCreate;l.beforeCreate=p?[].concat(p,u):[u]}return{exports:t,options:l}}n.d(e,"a",function(){return r})},function(t,e,n){"use strict";function r(t,e){for(var n=[],r={},a=0;a<e.length;a++){var o=e[a],i=o[0],s={id:t+":"+a,css:o[1],media:o[2],sourceMap:o[3]};r[i]?r[i].parts.push(s):n.push(r[i]={id:i,parts:[s]})}return n}n.r(e),n.d(e,"default",function(){return h});var a="undefined"!=typeof document;if("undefined"!=typeof DEBUG&&DEBUG&&!a)throw new Error("vue-style-loader cannot be used in a non-browser environment. Use { target: 'node' } in your Webpack config to indicate a server-rendering environment.");var o={},i=a&&(document.head||document.getElementsByTagName("head")[0]),s=null,c=0,u=!1,l=function(){},f=null,p="data-vue-ssr-id",d="undefined"!=typeof navigator&&/msie [6-9]\b/.test(navigator.userAgent.toLowerCase());function h(t,e,n,a){u=n,f=a||{};var i=r(t,e);return v(i),function(e){for(var n=[],a=0;a<i.length;a++){var s=i[a];(c=o[s.id]).refs--,n.push(c)}e?v(i=r(t,e)):i=[];for(a=0;a<n.length;a++){var c;if(0===(c=n[a]).refs){for(var u=0;u<c.parts.length;u++)c.parts[u]();delete o[c.id]}}}}function v(t){for(var e=0;e<t.length;e++){var n=t[e],r=o[n.id];if(r){r.refs++;for(var a=0;a<r.parts.length;a++)r.parts[a](n.parts[a]);for(;a<n.parts.length;a++)r.parts.push(g(n.parts[a]));r.parts.length>n.parts.length&&(r.parts.length=n.parts.length)}else{var i=[];for(a=0;a<n.parts.length;a++)i.push(g(n.parts[a]));o[n.id]={id:n.id,refs:1,parts:i}}}}function m(){var t=document.createElement("style");return t.type="text/css",i.appendChild(t),t}function g(t){var e,n,r=document.querySelector("style["+p+'~="'+t.id+'"]');if(r){if(u)return l;r.parentNode.removeChild(r)}if(d){var a=c++;r=s||(s=m()),e=w.bind(null,r,a,!1),n=w.bind(null,r,a,!0)}else r=m(),e=function(t,e){var n=e.css,r=e.media,a=e.sourceMap;r&&t.setAttribute("media",r);f.ssrId&&t.setAttribute(p,e.id);a&&(n+="\n/*# sourceURL="+a.sources[0]+" */",n+="\n/*# sourceMappingURL=data:application/json;base64,"+btoa(unescape(encodeURIComponent(JSON.stringify(a))))+" */");if(t.styleSheet)t.styleSheet.cssText=n;else{for(;t.firstChild;)t.removeChild(t.firstChild);t.appendChild(document.createTextNode(n))}}.bind(null,r),n=function(){r.parentNode.removeChild(r)};return e(t),function(r){if(r){if(r.css===t.css&&r.media===t.media&&r.sourceMap===t.sourceMap)return;e(t=r)}else n()}}var y,x=(y=[],function(t,e){return y[t]=e,y.filter(Boolean).join("\n")});function w(t,e,n,r){var a=n?"":r.css;if(t.styleSheet)t.styleSheet.cssText=x(e,a);else{var o=document.createTextNode(a),i=t.childNodes;i[e]&&t.removeChild(i[e]),i.length?t.insertBefore(o,i[e]):t.appendChild(o)}}},function(t,e){t.exports="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAACVElEQVR4Xu3b7VHDMBBF0ZcKgEqgA6ADSoAOoBLoAEqACqAEqATogFnGnhFBtqTVfmiT+B8kDtxjOc5Y0QZ7vm32vB8HgMMI+C9wDeAewBuAGwBfwZGOATwCuABwB+Ap7cmdAp8AaCfa3gFcBkagjlcAZ1MPHcyTEgAd+fPkSVERtuMp6QXAVQmAdiSE08AIufiP6TT4c0ovXQUiI1TH0wFeuwxGRGiKLwHQ45EQmuNrAKIgsOJrAUZHYMe3AIyK0BXfCjAaQnc8B2AUBJF4LoA3glh8D4AXgmh8L4A1gni8BIAVgkq8FIA2glq8JIAWgmq8NIA0gnq8BoAUgkm8FkAvglm8JgAXwTReG6AVwTzeAqAWwSXeCqCEQI+nt67p5+wNTHpAerOcGlu6vUZN831703jLETAfuBxCelDNjvz8Ry1HQAnBPN5jBMzvB9vnPP3eZQbKegTk3u3TU8AcwRJg6VJHAG7TcFYAa9d5AnCbi7QAqPmQ4zYDpQ1QE792dVB/T9AEaIl3Q9AC4MS7IGgA9MSbI0gDSMSbIkgCSMabIUgBaMSbIEgAaMarI/QCWMSrIvQAWMarIXABPOJVEDgAnvHiCK0AI8SLIrQAjBQvhlALMGK8CEINwMjx3QglgAjxXQilL0u7zdgwZ4Ca7yytfV0+WjxrJOQAIg37pYFSPRJyAHTkaYHRvLnM2DBPgXS3HELVkhlaUnI0vVLU+KXT4TtZEPb7nNwIoGVzD9NUFS0w2oVlc8/TDPRtzbI5gdEX5yVKnwPilDD/0wMAE25ndvsBgEk4UB+ZTboAAAAASUVORK5CYII="},function(t,e,n){var r=n(0)("iterator"),a=!1;try{var o=[7][r]();o.return=function(){a=!0},Array.from(o,function(){throw 2})}catch(t){}t.exports=function(t,e){if(!e&&!a)return!1;var n=!1;try{var o=[7],i=o[r]();i.next=function(){return{done:n=!0}},o[r]=function(){return i},t(o)}catch(t){}return n}},function(t,e,n){var r=n(22),a=n(0)("toStringTag"),o="Arguments"==r(function(){return arguments}());t.exports=function(t){var e,n,i;return void 0===t?"Undefined":null===t?"Null":"string"==typeof(n=function(t,e){try{return t[e]}catch(t){}}(e=Object(t),a))?n:o?r(e):"Object"==(i=r(e))&&"function"==typeof e.callee?"Arguments":i}},function(t,e,n){var r=n(32),a=n(0)("iterator"),o=n(9);t.exports=n(12).getIteratorMethod=function(t){if(void 0!=t)return t[a]||t["@@iterator"]||o[r(t)]}},function(t,e,n){"use strict";var r=n(5),a=n(10);t.exports=function(t,e,n){e in t?r.f(t,e,a(0,n)):t[e]=n}},function(t,e,n){var r=n(9),a=n(0)("iterator"),o=Array.prototype;t.exports=function(t){return void 0!==t&&(r.Array===t||o[a]===t)}},function(t,e,n){var r=n(4);t.exports=function(t,e,n,a){try{return a?e(r(n)[0],n[1]):e(n)}catch(e){var o=t.return;throw void 0!==o&&r(o.call(t)),e}}},function(t,e,n){"use strict";var r=n(26),a=n(27),o=n(16),i=n(36),s=n(35),c=n(21),u=n(34),l=n(33);a(a.S+a.F*!n(31)(function(t){Array.from(t)}),"Array",{from:function(t){var e,n,a,f,p=o(t),d="function"==typeof this?this:Array,h=arguments.length,v=h>1?arguments[1]:void 0,m=void 0!==v,g=0,y=l(p);if(m&&(v=r(v,h>2?arguments[2]:void 0,2)),void 0==y||d==Array&&s(y))for(n=new d(e=c(p.length));e>g;g++)u(n,g,m?v(p[g],g):p[g]);else for(f=y.call(p),n=new d;!(a=f.next()).done;g++)u(n,g,m?i(f,v,[a.value,g],!0):a.value);return n.length=g,n}})},function(t,e,n){var r=n(2),a=n(16),o=n(8)("IE_PROTO"),i=Object.prototype;t.exports=Object.getPrototypeOf||function(t){return t=a(t),r(t,o)?t[o]:"function"==typeof t.constructor&&t instanceof t.constructor?t.constructor.prototype:t instanceof Object?i:null}},function(t,e,n){var r=n(1).document;t.exports=r&&r.documentElement},function(t,e,n){var r=n(14),a=Math.max,o=Math.min;t.exports=function(t,e){return(t=r(t))<0?a(t+e,0):o(t,e)}},function(t,e,n){var r=n(23),a=n(21),o=n(40);t.exports=function(t){return function(e,n,i){var s,c=r(e),u=a(c.length),l=o(i,u);if(t&&n!=n){for(;u>l;)if((s=c[l++])!=s)return!0}else for(;u>l;l++)if((t||l in c)&&c[l]===n)return t||l||0;return!t&&-1}}},function(t,e,n){var r=n(22);t.exports=Object("z").propertyIsEnumerable(0)?Object:function(t){return"String"==r(t)?t.split(""):Object(t)}},function(t,e,n){var r=n(2),a=n(23),o=n(41)(!1),i=n(8)("IE_PROTO");t.exports=function(t,e){var n,s=a(t),c=0,u=[];for(n in s)n!=i&&r(s,n)&&u.push(n);for(;e.length>c;)r(s,n=e[c++])&&(~o(u,n)||u.push(n));return u}},function(t,e,n){var r=n(43),a=n(18);t.exports=Object.keys||function(t){return r(t,a)}},function(t,e,n){var r=n(5),a=n(4),o=n(44);t.exports=n(3)?Object.defineProperties:function(t,e){a(t);for(var n,i=o(e),s=i.length,c=0;s>c;)r.f(t,n=i[c++],e[n]);return t}},function(t,e,n){var r=n(4),a=n(45),o=n(18),i=n(8)("IE_PROTO"),s=function(){},c=function(){var t,e=n(24)("iframe"),r=o.length;for(e.style.display="none",n(39).appendChild(e),e.src="javascript:",(t=e.contentWindow.document).open(),t.write("<script>document.F=Object<\/script>"),t.close(),c=t.F;r--;)delete c.prototype[o[r]];return c()};t.exports=Object.create||function(t,e){var n;return null!==t?(s.prototype=r(t),n=new s,s.prototype=null,n[i]=t):n=c(),void 0===e?n:a(n,e)}},function(t,e,n){"use strict";var r=n(46),a=n(10),o=n(17),i={};n(6)(i,n(0)("iterator"),function(){return this}),t.exports=function(t,e,n){t.prototype=r(i,{next:a(1,n)}),o(t,e+" Iterator")}},function(t,e,n){t.exports=n(6)},function(t,e,n){var r=n(11);t.exports=function(t,e){if(!r(t))return t;var n,a;if(e&&"function"==typeof(n=t.toString)&&!r(a=n.call(t)))return a;if("function"==typeof(n=t.valueOf)&&!r(a=n.call(t)))return a;if(!e&&"function"==typeof(n=t.toString)&&!r(a=n.call(t)))return a;throw TypeError("Can't convert object to primitive value")}},function(t,e,n){t.exports=!n(3)&&!n(25)(function(){return 7!=Object.defineProperty(n(24)("div"),"a",{get:function(){return 7}}).a})},function(t,e){t.exports=function(t){if("function"!=typeof t)throw TypeError(t+" is not a function!");return t}},function(t,e){t.exports=!0},function(t,e,n){"use strict";var r=n(52),a=n(27),o=n(48),i=n(6),s=n(9),c=n(47),u=n(17),l=n(38),f=n(0)("iterator"),p=!([].keys&&"next"in[].keys()),d=function(){return this};t.exports=function(t,e,n,h,v,m,g){c(n,e,h);var y,x,w,b=function(t){if(!p&&t in T)return T[t];switch(t){case"keys":case"values":return function(){return new n(this,t)}}return function(){return new n(this,t)}},M=e+" Iterator",A="values"==v,S=!1,T=t.prototype,C=T[f]||T["@@iterator"]||v&&T[v],_=C||b(v),D=v?A?b("entries"):_:void 0,Y="Array"==e&&T.entries||C;if(Y&&(w=l(Y.call(new t)))!==Object.prototype&&w.next&&(u(w,M,!0),r||"function"==typeof w[f]||i(w,f,d)),A&&C&&"values"!==C.name&&(S=!0,_=function(){return C.call(this)}),r&&!g||!p&&!S&&T[f]||i(T,f,_),s[e]=_,s[M]=d,v)if(y={values:A?_:b("values"),keys:m?_:b("keys"),entries:D},g)for(x in y)x in T||o(T,x,y[x]);else a(a.P+a.F*(p||S),e,y);return y}},function(t,e,n){var r=n(14),a=n(13);t.exports=function(t){return function(e,n){var o,i,s=String(a(e)),c=r(n),u=s.length;return c<0||c>=u?t?"":void 0:(o=s.charCodeAt(c))<55296||o>56319||c+1===u||(i=s.charCodeAt(c+1))<56320||i>57343?t?s.charAt(c):o:t?s.slice(c,c+2):i-56320+(o-55296<<10)+65536}}},function(t,e,n){"use strict";var r=n(54)(!0);n(53)(String,"String",function(t){this._t=String(t),this._i=0},function(){var t,e=this._t,n=this._i;return n>=e.length?{value:void 0,done:!0}:(t=r(e,n),this._i+=t.length,{value:t,done:!1})})},function(t,e,n){n(55),n(37),t.exports=n(12).Array.from},function(t,e,n){t.exports=n(56)},function(t,e){t.exports=function(t){return t&&t.__esModule?t:{default:t}}},function(t,e){t.exports=function(t){var e=[];return e.toString=function(){return this.map(function(e){var n=function(t,e){var n=t[1]||"",r=t[3];if(!r)return n;if(e&&"function"==typeof btoa){var a=(i=r,"/*# sourceMappingURL=data:application/json;charset=utf-8;base64,"+btoa(unescape(encodeURIComponent(JSON.stringify(i))))+" */"),o=r.sources.map(function(t){return"/*# sourceURL="+r.sourceRoot+t+" */"});return[n].concat(o).concat([a]).join("\n")}var i;return[n].join("\n")}(e,t);return e[2]?"@media "+e[2]+"{"+n+"}":n}).join("")},e.i=function(t,n){"string"==typeof t&&(t=[[null,t,""]]);for(var r={},a=0;a<this.length;a++){var o=this[a][0];"number"==typeof o&&(r[o]=!0)}for(a=0;a<t.length;a++){var i=t[a];"number"==typeof i[0]&&r[i[0]]||(n&&!i[2]?i[2]=n:n&&(i[2]="("+i[2]+") and ("+n+")"),e.push(i))}},e}},function(t,e,n){(t.exports=n(59)(!1)).push([t.i,"\nul[data-v-89588f16] {\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.date-picker[data-v-89588f16] {\n  position: relative;\n  height: 32px;\n}\n.input-wrapper[data-v-89588f16] {\n  border: 1px solid #ccc;\n  border-radius: 2px;\n  vertical-align: middle;\n  display: flex;\n  justify-content: space-between;\n  flex-flow: row nowrap;\n  align-items: center;\n  padding: 6px 10px 6px 4px;\n  height: 32px;\n  box-sizing: border-box;\n}\n.input[data-v-89588f16] {\n  height: 100%;\n  width: 100%;\n  font-size: inherit;\n  padding-left: 4px;\n  box-sizing: border-box;\n  outline: none;\n}\n.cancel-btn[data-v-89588f16] {\n  height: 14px;\n  width: 14px;\n}\n.date-panel[data-v-89588f16] {\n  position: absolute;\n  z-index: 5000;\n  border: 1px solid #eee;\n  width: 320px;\n  padding: 5px 10px 10px;\n  box-sizing: border-box;\n  background-color: #fff;\n  transform: translateY(4px);\n}\n.panel-header[data-v-89588f16] {\n  display: flex;\n  flex-flow: row nowrap;\n  width: 100%;\n}\n.arrow-left[data-v-89588f16],\n.arrow-right[data-v-89588f16] {\n  flex: 1;\n  font-size: 20px;\n  line-height: 2;\n  background-color: #fff;\n  text-align: center;\n  cursor: pointer;\n}\n.year-range[data-v-89588f16] {\n  font-size: 20px;\n  line-height: 2;\n  flex: 3;\n  display: flex;\n  justify-content: center;\n}\n.year-month-box[data-v-89588f16] {\n  flex: 3;\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: space-around;\n}\n.type-year[data-v-89588f16],\n.type-month[data-v-89588f16],\n.date-list[data-v-89588f16] {\n  background-color: #fff;\n}\n.year-box[data-v-89588f16],\n.month-box[data-v-89588f16] {\n  transition: all ease .1s;\n  font-family: Roboto, sans-serif;\n  flex: 1;\n  text-align: center;\n  font-size: 20px;\n  line-height: 2;\n  cursor: pointer;\n  background-color: #fff;\n}\n.year-list[data-v-89588f16],\n.month-list[data-v-89588f16] {\n  display: flex;\n  flex-flow: row wrap;\n  justify-content: space-between;\n}\n.year-list li[data-v-89588f16],\n.month-list li[data-v-89588f16] {\n  font-family: Roboto, sans-serif;\n  transition: all 0.45s cubic-bezier(0.23, 1, 0.32, 1) 0ms;\n  cursor: pointer;\n  text-align: center;\n  font-size: 20px;\n  width: 33%;\n  padding: 10px 0;\n}\n.year-list li[data-v-89588f16]:hover,\n.month-list li[data-v-89588f16]:hover {\n  background-color: #6ac1c9;\n  color: #fff;\n}\n.year-list li.selected[data-v-89588f16],\n.month-list li.selected[data-v-89588f16] {\n  background-color: #0097a7;\n  color: #fff;\n}\n.year-list li.invalid[data-v-89588f16],\n.month-list li.invalid[data-v-89588f16] {\n  cursor: not-allowed;\n  color: #ccc;\n}\n.date-list[data-v-89588f16] {\n  display: flex;\n  flex-flow: row wrap;\n  justify-content: space-between;\n}\n.date-list .valid[data-v-89588f16]:hover {\n  background-color: #eee;\n}\n.date-list li[data-v-89588f16] {\n  transition: all ease .1s;\n  cursor: pointer;\n  box-sizing: border-box;\n  border-bottom: 1px solid #fff;\n  position: relative;\n  margin: 2px;\n}\n.date-list li[data-v-89588f16]:not(.firstItem) {\n  margin-left: 10px;\n}\n.date-list li .message[data-v-89588f16] {\n  font-family: Roboto, sans-serif;\n  font-weight: 300;\n  font-size: 14px;\n  position: relative;\n  height: 30px;\n}\n.date-list li .message.selected .bg[data-v-89588f16] {\n  background-color: #0097a7;\n}\n.date-list li .message.selected span[data-v-89588f16] {\n  color: #fff;\n}\n.date-list li .message:not(.selected) .bg[data-v-89588f16] {\n  transform: scale(0);\n  opacity: 0;\n}\n.date-list li .message:not(.selected):hover .bg[data-v-89588f16] {\n  background-color: #0097a7;\n  transform: scale(1);\n  opacity: .6;\n}\n.date-list li .message:not(.selected):hover span[data-v-89588f16] {\n  color: #fff;\n}\n.date-list li .message .bg[data-v-89588f16] {\n  height: 30px;\n  width: 100%;\n  transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;\n  border-radius: 50%;\n  position: absolute;\n  z-index: 10;\n  top: 0;\n  left: 0;\n}\n.date-list li .message span[data-v-89588f16] {\n  position: absolute;\n  z-index: 20;\n  left: 50%;\n  top: 50%;\n  transform: translate3d(-50%, -50%, 0);\n}\n.date-list li.invalid[data-v-89588f16] {\n  cursor: not-allowed;\n  color: #ccc;\n}\n.weeks[data-v-89588f16] {\n  display: flex;\n  flex-flow: row wrap;\n  justify-content: space-between;\n}\n.weeks li[data-v-89588f16] {\n  font-weight: 600;\n}\n.weeks[data-v-89588f16],\n.date-list[data-v-89588f16] {\n  width: 100%;\n  text-align: center;\n}\n.weeks .preMonth[data-v-89588f16],\n.date-list .preMonth[data-v-89588f16],\n.weeks .nextMonth[data-v-89588f16],\n.date-list .nextMonth[data-v-89588f16] {\n  color: #ccc;\n}\n.weeks li[data-v-89588f16],\n.date-list li[data-v-89588f16] {\n  font-family: Roboto;\n  width: 30px;\n  height: 30px;\n  text-align: center;\n  line-height: 30px;\n}\n.toggle-enter[data-v-89588f16],\n.toggle-leave-active[data-v-89588f16] {\n  opacity: 0;\n  transform: translateY(-10px);\n}\n.toggle-enter-active[data-v-89588f16],\n.toggle-leave-active[data-v-89588f16] {\n  transition: all ease .2s;\n}\n.fade-enter[data-v-89588f16],\n.fade-leave-active[data-v-89588f16] {\n  opacity: 0;\n  transform: scale3d(0, 0, 0);\n}\n.fade-enter-active[data-v-89588f16],\n.fade-leave-active[data-v-89588f16] {\n  transition: all ease .1s;\n}\n",""])},function(t,e,n){var r=n(60);"string"==typeof r&&(r=[[t.i,r,""]]),r.locals&&(t.exports=r.locals);(0,n(29).default)("475e419f",r,!1,{})},function(t,e,n){"use strict";n.r(e);var r=n(7),a=n.n(r);for(var o in r)"default"!==o&&function(t){n.d(e,t,function(){return r[t]})}(o);var i=n(15),s=n(28),c=!1;var u=function(t){c||n(61)},l=Object(s.a)(a.a,i.a,i.b,!1,u,"data-v-89588f16",null);l.options.__file="src/Datepicker.vue",e.default=l.exports}]).default});
+!function(t,e){ true?module.exports=e():"function"==typeof define&&define.amd?define([],e):"object"==typeof exports?exports.datepicker=e():t.datepicker=e()}(window,function(){return function(t){var e={};function n(r){if(e[r])return e[r].exports;var a=e[r]={i:r,l:!1,exports:{}};return t[r].call(a.exports,a,a.exports,n),a.l=!0,a.exports}return n.m=t,n.c=e,n.d=function(t,e,r){n.o(t,e)||Object.defineProperty(t,e,{configurable:!1,enumerable:!0,get:r})},n.r=function(t){Object.defineProperty(t,"__esModule",{value:!0})},n.n=function(t){var e=t&&t.__esModule?function(){return t.default}:function(){return t};return n.d(e,"a",e),e},n.o=function(t,e){return Object.prototype.hasOwnProperty.call(t,e)},n.p="",n(n.s=62)}([function(t,e,n){var r=n(20)("wks"),a=n(19),o=n(1).Symbol,i="function"==typeof o;(t.exports=function(t){return r[t]||(r[t]=i&&o[t]||(i?o:a)("Symbol."+t))}).store=r},function(t,e){var n=t.exports="undefined"!=typeof window&&window.Math==Math?window:"undefined"!=typeof self&&self.Math==Math?self:Function("return this")();"number"==typeof __g&&(__g=n)},function(t,e){var n={}.hasOwnProperty;t.exports=function(t,e){return n.call(t,e)}},function(t,e,n){t.exports=!n(25)(function(){return 7!=Object.defineProperty({},"a",{get:function(){return 7}}).a})},function(t,e,n){var r=n(11);t.exports=function(t){if(!r(t))throw TypeError(t+" is not an object!");return t}},function(t,e,n){var r=n(4),a=n(50),o=n(49),i=Object.defineProperty;e.f=n(3)?Object.defineProperty:function(t,e,n){if(r(t),e=o(e,!0),r(n),a)try{return i(t,e,n)}catch(t){}if("get"in n||"set"in n)throw TypeError("Accessors not supported!");return"value"in n&&(t[e]=n.value),t}},function(t,e,n){var r=n(5),a=n(10);t.exports=n(3)?function(t,e,n){return r.f(t,e,a(1,n))}:function(t,e,n){return t[e]=n,t}},function(t,e,n){"use strict";var r=n(58);Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0;var a=r(n(57)),o={data:function(){var t,e,n=new Date;return this.range?(t=this.value[0]?new Date(this.value[0]):n,e=this.value[1]?new Date(this.value[1]):n):t=e=this.value?new Date(this.value):n,{showCancel:!1,panelState:!1,panelType:"date",coordinates:{},year:e.getFullYear(),month:e.getMonth(),date:e.getDate(),tmpYear:e.getFullYear(),tmpMonth:e.getMonth(),tmpStartYear:t.getFullYear(),tmpStartMonth:t.getMonth(),tmpStartDate:t.getDate(),tmpEndYear:e.getFullYear(),tmpEndMonth:e.getMonth(),tmpEndDate:e.getDate(),minYear:Number,minMonth:Number,minDate:Number,maxYear:Number,maxMonth:Number,maxDate:Number,yearList:(0,a.default)({length:12},function(t,e){return(new Date).getFullYear()+e}),monthList:[1,2,3,4,5,6,7,8,9,10,11,12],weekList:[0,1,2,3,4,5,6],rangeStart:!1}},props:{language:{default:"en"},min:{default:"1970-01-01"},max:{default:"3016-01-01"},value:{type:[String,Array],default:""},range:{type:Boolean,default:!1}},methods:{togglePanel:function(){this.panelState=!this.panelState,this.rangeStart=!1},isSelected:function(t,e){switch(t){case"year":return this.range?new Date(e,0).getTime()>=new Date(this.tmpStartYear,0).getTime()&&new Date(e,0).getTime()<=new Date(this.tmpEndYear,0).getTime():e===this.tmpYear;case"month":return this.range?new Date(this.tmpYear,e).getTime()>=new Date(this.tmpStartYear,this.tmpStartMonth).getTime()&&new Date(this.tmpYear,e).getTime()<=new Date(this.tmpEndYear,this.tmpEndMonth).getTime():e===this.tmpMonth&&this.year===this.tmpYear;case"date":if(!this.range)return this.date===e.value&&this.month===this.tmpMonth&&e.currentMonth;var n=this.tmpMonth;return e.previousMonth&&n--,e.nextMonth&&n++,new Date(this.tmpYear,n,e.value).getTime()>=new Date(this.tmpStartYear,this.tmpStartMonth,this.tmpStartDate).getTime()&&new Date(this.tmpYear,n,e.value).getTime()<=new Date(this.tmpEndYear,this.tmpEndMonth,this.tmpEndDate).getTime()}},chType:function(t){this.panelType=t},chYearRange:function(t){this.yearList=t?this.yearList.map(function(t){return t+12}):this.yearList.map(function(t){return t-12})},prevMonthPreview:function(){this.tmpMonth=0===this.tmpMonth?0:this.tmpMonth-1},nextMonthPreview:function(){this.tmpMonth=11===this.tmpMonth?11:this.tmpMonth+1},selectYear:function(t){this.validateYear(t)||(this.tmpYear=t,this.panelType="month")},selectMonth:function(t){this.validateMonth(t)||(this.tmpMonth=t,this.panelType="date")},selectDate:function(t){var e=this;setTimeout(function(){if(!e.validateDate(t))if(t.previousMonth?0===e.tmpMonth?(e.year-=1,e.tmpYear-=1,e.month=e.tmpMonth=11):(e.month=e.tmpMonth-1,e.tmpMonth-=1):t.nextMonth&&(11===e.tmpMonth?(e.year+=1,e.tmpYear+=1,e.month=e.tmpMonth=0):(e.month=e.tmpMonth+1,e.tmpMonth+=1)),e.range){if(e.range&&!e.rangeStart)e.tmpEndYear=e.tmpStartYear=e.tmpYear,e.tmpEndMonth=e.tmpStartMonth=e.tmpMonth,e.tmpEndDate=e.tmpStartDate=t.value,e.rangeStart=!0;else if(e.range&&e.rangeStart){var n,r,a;if(e.tmpEndYear=e.tmpYear,e.tmpEndMonth=e.tmpMonth,e.tmpEndDate=t.value,new Date(e.tmpStartYear,e.tmpStartMonth,e.tmpStartDate).getTime()>new Date(e.tmpEndYear,e.tmpEndMonth,e.tmpEndDate).getTime())n=e.tmpEndYear,r=e.tmpEndMonth,a=e.tmpEndDate,e.tmpEndYear=e.tmpStartYear,e.tmpEndMonth=e.tmpStartMonth,e.tmpEndDate=e.tmpStartDate,e.tmpStartYear=n,e.tmpStartMonth=r,e.tmpStartDate=a;var o=["".concat(e.tmpStartYear,"-").concat(("0"+(e.tmpStartMonth+1)).slice(-2),"-").concat(("0"+e.tmpStartDate).slice(-2)),"".concat(e.tmpEndYear,"-").concat(("0"+(e.tmpEndMonth+1)).slice(-2),"-").concat(("0"+e.tmpEndDate).slice(-2))];e.$emit("input",o),e.rangeStart=!1,e.panelState=!1}}else{e.year=e.tmpYear,e.month=e.tmpMonth,e.date=t.value;var i="".concat(e.tmpYear,"-").concat(("0"+(e.month+1)).slice(-2),"-").concat(("0"+e.date).slice(-2));e.$emit("input",i),e.panelState=!1}},0)},validateYear:function(t){return t>this.maxYear||t<this.minYear},validateMonth:function(t){return!(new Date(this.tmpYear,t).getTime()>=new Date(this.minYear,this.minMonth-1).getTime()&&new Date(this.tmpYear,t).getTime()<=new Date(this.maxYear,this.maxMonth-1).getTime())},validateDate:function(t){var e=this.tmpMonth;return t.previousMonth?e-=1:t.nextMonth&&(e+=1),!(new Date(this.tmpYear,e,t.value).getTime()>=new Date(this.minYear,this.minMonth-1,this.minDate).getTime()&&new Date(this.tmpYear,e,t.value).getTime()<=new Date(this.maxYear,this.maxMonth-1,this.maxDate).getTime())},close:function(t){this.$el.contains(t.target)||(this.panelState=!1,this.rangeStart=!1)},clear:function(){this.$emit("input",this.range?["",""]:"")}},watch:{min:function(t){var e=t.split("-");this.minYear=Number(e[0]),this.minMonth=Number(e[1]),this.minDate=Number(e[2])},max:function(t){var e=t.split("-");this.maxYear=Number(e[0]),this.maxMonth=Number(e[1]),this.maxDate=Number(e[2])},range:function(t,e){t!==e&&(t&&"String"===Object.prototype.toString.call(this.value).slice(8,-1)&&this.$emit("input",["",""]),t||"Array"!==Object.prototype.toString.call(this.value).slice(8,-1)||this.$emit("input",""))}},computed:{dateList:function(){for(var t=new Date(this.tmpYear,this.tmpMonth+1,0).getDate(),e=(0,a.default)({length:t},function(t,e){return{currentMonth:!0,value:e+1}}),n=new Date(this.tmpYear,this.tmpMonth,1).getDay(),r=new Date(this.tmpYear,this.tmpMonth,0).getDate(),o=0,i=n;o<i;o++)e=[{previousMonth:!0,value:r-o}].concat(e);for(var s=e.length,c=1;s<42;s++,c++)e[e.length]={nextMonth:!0,value:c};return e}},filters:{week:function(t,e){switch(e){case"en":return{0:"Su",1:"Mo",2:"Tu",3:"We",4:"Th",5:"Fr",6:"Sa"}[t];case"zh-cn":return{0:"日",1:"一",2:"二",3:"三",4:"四",5:"五",6:"六"}[t];case"uk":return{0:"Пн",1:"Вт",2:"Ср",3:"Чт",4:"Пт",5:"Сб",6:"Нд"}[t];case"es":return{0:"Do",1:"Lu",2:"Ma",3:"Mi",4:"Ju",5:"Vi",6:"Sa"}[t];default:return t}},month:function(t,e){switch(e){case"en":return{1:"Jan",2:"Feb",3:"Mar",4:"Apr",5:"May",6:"Jun",7:"Jul",8:"Aug",9:"Sep",10:"Oct",11:"Nov",12:"Dec"}[t];case"zh-cn":return{1:"一",2:"二",3:"三",4:"四",5:"五",6:"六",7:"七",8:"八",9:"九",10:"十",11:"十一",12:"十二"}[t];case"uk":return{1:"Січень",2:"Лютий",3:"Березень",4:"Квітень",5:"Травень",6:"Червень",7:"Липень",8:"Серпень",9:"Вересень",10:"Жовтень",11:"Листопад",12:"Грудень"}[t];case"es":return{1:"Ene",2:"Feb",3:"Mar",4:"Abr",5:"May",6:"Jun",7:"Jul",8:"Ago",9:"Sep",10:"Oct",11:"Nov",12:"Dic"}[t];default:return t}}},mounted:function(){var t=this;this.$nextTick(function(){t.$el.parentNode.offsetWidth+t.$el.parentNode.offsetLeft-t.$el.offsetLeft<=300?t.coordinates={right:"0",top:"".concat(window.getComputedStyle(t.$el.children[0]).offsetHeight+4,"px")}:t.coordinates={left:"0",top:"".concat(window.getComputedStyle(t.$el.children[0]).offsetHeight+4,"px")};var e=t.min.split("-");t.minYear=Number(e[0]),t.minMonth=Number(e[1]),t.minDate=Number(e[2]);var n=t.max.split("-");if(t.maxYear=Number(n[0]),t.maxMonth=Number(n[1]),t.maxDate=Number(n[2]),t.range){if("Array"!==Object.prototype.toString.call(t.value).slice(8,-1))throw new Error("Binding value must be an array in range mode.");if(t.value.length){var r=t.value[0].split("-"),a=t.value[1].split("-");t.tmpStartYear=Number(r[0]),t.tmpStartMonth=Number(r[1])-1,t.tmpStartDate=Number(r[2]),t.tmpEndYear=Number(a[0]),t.tmpEndMonth=Number(a[1])-1,t.tmpEndDate=Number(a[2])}else t.$emit("input",["",""])}t.value||t.$emit("input",""),window.addEventListener("click",t.close)})},beforeDestroy:function(){window.removeEventListener("click",this.close)}};e.default=o},function(t,e,n){var r=n(20)("keys"),a=n(19);t.exports=function(t){return r[t]||(r[t]=a(t))}},function(t,e){t.exports={}},function(t,e){t.exports=function(t,e){return{enumerable:!(1&t),configurable:!(2&t),writable:!(4&t),value:e}}},function(t,e){t.exports=function(t){return"object"==typeof t?null!==t:"function"==typeof t}},function(t,e){var n=t.exports={version:"2.5.5"};"number"==typeof __e&&(__e=n)},function(t,e){t.exports=function(t){if(void 0==t)throw TypeError("Can't call method on  "+t);return t}},function(t,e){var n=Math.ceil,r=Math.floor;t.exports=function(t){return isNaN(t=+t)?0:(t>0?r:n)(t)}},function(t,e,n){"use strict";n.d(e,"a",function(){return r}),n.d(e,"b",function(){return a});var r=function(){var t=this,e=t.$createElement,r=t._self._c||e;return r("div",{staticClass:"date-picker"},[r("div",{staticClass:"input-wrapper",on:{mouseenter:function(e){t.showCancel=!0},mouseleave:function(e){t.showCancel=!1}}},[r("div",{staticClass:"input",domProps:{textContent:t._s(t.range?t.value[0]+" -- "+t.value[1]:t.value)},on:{click:t.togglePanel}}),t._v(" "),r("transition",{attrs:{name:"fade"}},[r("img",{directives:[{name:"show",rawName:"v-show",value:t.showCancel,expression:"showCancel"}],staticClass:"cancel-btn",attrs:{src:n(30)},on:{click:t.clear}})])],1),t._v(" "),r("transition",{attrs:{name:"toggle"}},[r("div",{directives:[{name:"show",rawName:"v-show",value:t.panelState,expression:"panelState"}],staticClass:"date-panel",style:t.coordinates},[r("div",{directives:[{name:"show",rawName:"v-show",value:"year"!==t.panelType,expression:"panelType !== 'year'"}],staticClass:"panel-header"},[r("div",{staticClass:"arrow-left",on:{click:function(e){t.prevMonthPreview()}}},[t._v("<")]),t._v(" "),r("div",{staticClass:"year-month-box"},[r("div",{staticClass:"year-box",domProps:{textContent:t._s(t.tmpYear)},on:{click:function(e){t.chType("year")}}}),t._v(" "),r("div",{staticClass:"month-box",on:{click:function(e){t.chType("month")}}},[t._v(t._s(t._f("month")(t.tmpMonth+1,t.language)))])]),t._v(" "),r("div",{staticClass:"arrow-right",on:{click:function(e){t.nextMonthPreview()}}},[t._v(">")])]),t._v(" "),r("div",{directives:[{name:"show",rawName:"v-show",value:"year"===t.panelType,expression:"panelType === 'year'"}],staticClass:"panel-header"},[r("div",{staticClass:"arrow-left",on:{click:function(e){t.chYearRange(0)}}},[t._v("<")]),t._v(" "),r("div",{staticClass:"year-range"},[r("span",{domProps:{textContent:t._s(t.yearList[0])}}),t._v(" - "),r("span",{domProps:{textContent:t._s(t.yearList[t.yearList.length-1])}})]),t._v(" "),r("div",{staticClass:"arrow-right",on:{click:function(e){t.chYearRange(1)}}},[t._v(">")])]),t._v(" "),r("div",{directives:[{name:"show",rawName:"v-show",value:"year"===t.panelType,expression:"panelType === 'year'"}],staticClass:"type-year"},[r("ul",{staticClass:"year-list"},t._l(t.yearList,function(e){return r("li",{key:e,class:{selected:t.isSelected("year",e),invalid:t.validateYear(e)},domProps:{textContent:t._s(e)},on:{click:function(n){t.selectYear(e)}}})}))]),t._v(" "),r("div",{directives:[{name:"show",rawName:"v-show",value:"month"===t.panelType,expression:"panelType === 'month'"}],staticClass:"type-month"},[r("ul",{staticClass:"month-list"},t._l(t.monthList,function(e,n){return r("li",{key:e,class:{selected:t.isSelected("month",n),invalid:t.validateMonth(n)},on:{click:function(e){t.selectMonth(n)}}},[t._v("\n                        "+t._s(t._f("month")(e,t.language))+"\n                    ")])}))]),t._v(" "),r("div",{directives:[{name:"show",rawName:"v-show",value:"date"===t.panelType,expression:"panelType === 'date'"}],staticClass:"type-date"},[r("ul",{staticClass:"weeks"},t._l(t.weekList,function(e){return r("li",{key:e},[t._v(t._s(t._f("week")(e,t.language)))])})),t._v(" "),r("ul",{staticClass:"date-list"},t._l(t.dateList,function(e,n){return r("li",{key:n,class:{preMonth:e.previousMonth,nextMonth:e.nextMonth,invalid:t.validateDate(e),firstItem:n%7==0},on:{click:function(n){t.selectDate(e)}}},[r("div",{staticClass:"message",class:{selected:t.isSelected("date",e)}},[r("div",{staticClass:"bg"}),r("span",{domProps:{textContent:t._s(e.value)}})])])}))])])])],1)},a=[];r._withStripped=!0},function(t,e,n){var r=n(13);t.exports=function(t){return Object(r(t))}},function(t,e,n){var r=n(5).f,a=n(2),o=n(0)("toStringTag");t.exports=function(t,e,n){t&&!a(t=n?t:t.prototype,o)&&r(t,o,{configurable:!0,value:e})}},function(t,e){t.exports="constructor,hasOwnProperty,isPrototypeOf,propertyIsEnumerable,toLocaleString,toString,valueOf".split(",")},function(t,e){var n=0,r=Math.random();t.exports=function(t){return"Symbol(".concat(void 0===t?"":t,")_",(++n+r).toString(36))}},function(t,e,n){var r=n(1),a=r["__core-js_shared__"]||(r["__core-js_shared__"]={});t.exports=function(t){return a[t]||(a[t]={})}},function(t,e,n){var r=n(14),a=Math.min;t.exports=function(t){return t>0?a(r(t),9007199254740991):0}},function(t,e){var n={}.toString;t.exports=function(t){return n.call(t).slice(8,-1)}},function(t,e,n){var r=n(42),a=n(13);t.exports=function(t){return r(a(t))}},function(t,e,n){var r=n(11),a=n(1).document,o=r(a)&&r(a.createElement);t.exports=function(t){return o?a.createElement(t):{}}},function(t,e){t.exports=function(t){try{return!!t()}catch(t){return!0}}},function(t,e,n){var r=n(51);t.exports=function(t,e,n){if(r(t),void 0===e)return t;switch(n){case 1:return function(n){return t.call(e,n)};case 2:return function(n,r){return t.call(e,n,r)};case 3:return function(n,r,a){return t.call(e,n,r,a)}}return function(){return t.apply(e,arguments)}}},function(t,e,n){var r=n(1),a=n(12),o=n(26),i=n(6),s=n(2),c=function(t,e,n){var u,l,f,p=t&c.F,d=t&c.G,h=t&c.S,v=t&c.P,m=t&c.B,g=t&c.W,y=d?a:a[e]||(a[e]={}),x=y.prototype,w=d?r:h?r[e]:(r[e]||{}).prototype;for(u in d&&(n=e),n)(l=!p&&w&&void 0!==w[u])&&s(y,u)||(f=l?w[u]:n[u],y[u]=d&&"function"!=typeof w[u]?n[u]:m&&l?o(f,r):g&&w[u]==f?function(t){var e=function(e,n,r){if(this instanceof t){switch(arguments.length){case 0:return new t;case 1:return new t(e);case 2:return new t(e,n)}return new t(e,n,r)}return t.apply(this,arguments)};return e.prototype=t.prototype,e}(f):v&&"function"==typeof f?o(Function.call,f):f,v&&((y.virtual||(y.virtual={}))[u]=f,t&c.R&&x&&!x[u]&&i(x,u,f)))};c.F=1,c.G=2,c.S=4,c.P=8,c.B=16,c.W=32,c.U=64,c.R=128,t.exports=c},function(t,e,n){"use strict";function r(t,e,n,r,a,o,i,s){var c=typeof(t=t||{}).default;"object"!==c&&"function"!==c||(t=t.default);var u,l="function"==typeof t?t.options:t;if(e&&(l.render=e,l.staticRenderFns=n,l._compiled=!0),r&&(l.functional=!0),o&&(l._scopeId=o),i?(u=function(t){(t=t||this.$vnode&&this.$vnode.ssrContext||this.parent&&this.parent.$vnode&&this.parent.$vnode.ssrContext)||"undefined"==typeof __VUE_SSR_CONTEXT__||(t=__VUE_SSR_CONTEXT__),a&&a.call(this,t),t&&t._registeredComponents&&t._registeredComponents.add(i)},l._ssrRegister=u):a&&(u=s?function(){a.call(this,this.$root.$options.shadowRoot)}:a),u)if(l.functional){l._injectStyles=u;var f=l.render;l.render=function(t,e){return u.call(e),f(t,e)}}else{var p=l.beforeCreate;l.beforeCreate=p?[].concat(p,u):[u]}return{exports:t,options:l}}n.d(e,"a",function(){return r})},function(t,e,n){"use strict";function r(t,e){for(var n=[],r={},a=0;a<e.length;a++){var o=e[a],i=o[0],s={id:t+":"+a,css:o[1],media:o[2],sourceMap:o[3]};r[i]?r[i].parts.push(s):n.push(r[i]={id:i,parts:[s]})}return n}n.r(e),n.d(e,"default",function(){return h});var a="undefined"!=typeof document;if("undefined"!=typeof DEBUG&&DEBUG&&!a)throw new Error("vue-style-loader cannot be used in a non-browser environment. Use { target: 'node' } in your Webpack config to indicate a server-rendering environment.");var o={},i=a&&(document.head||document.getElementsByTagName("head")[0]),s=null,c=0,u=!1,l=function(){},f=null,p="data-vue-ssr-id",d="undefined"!=typeof navigator&&/msie [6-9]\b/.test(navigator.userAgent.toLowerCase());function h(t,e,n,a){u=n,f=a||{};var i=r(t,e);return v(i),function(e){for(var n=[],a=0;a<i.length;a++){var s=i[a];(c=o[s.id]).refs--,n.push(c)}e?v(i=r(t,e)):i=[];for(a=0;a<n.length;a++){var c;if(0===(c=n[a]).refs){for(var u=0;u<c.parts.length;u++)c.parts[u]();delete o[c.id]}}}}function v(t){for(var e=0;e<t.length;e++){var n=t[e],r=o[n.id];if(r){r.refs++;for(var a=0;a<r.parts.length;a++)r.parts[a](n.parts[a]);for(;a<n.parts.length;a++)r.parts.push(g(n.parts[a]));r.parts.length>n.parts.length&&(r.parts.length=n.parts.length)}else{var i=[];for(a=0;a<n.parts.length;a++)i.push(g(n.parts[a]));o[n.id]={id:n.id,refs:1,parts:i}}}}function m(){var t=document.createElement("style");return t.type="text/css",i.appendChild(t),t}function g(t){var e,n,r=document.querySelector("style["+p+'~="'+t.id+'"]');if(r){if(u)return l;r.parentNode.removeChild(r)}if(d){var a=c++;r=s||(s=m()),e=w.bind(null,r,a,!1),n=w.bind(null,r,a,!0)}else r=m(),e=function(t,e){var n=e.css,r=e.media,a=e.sourceMap;r&&t.setAttribute("media",r);f.ssrId&&t.setAttribute(p,e.id);a&&(n+="\n/*# sourceURL="+a.sources[0]+" */",n+="\n/*# sourceMappingURL=data:application/json;base64,"+btoa(unescape(encodeURIComponent(JSON.stringify(a))))+" */");if(t.styleSheet)t.styleSheet.cssText=n;else{for(;t.firstChild;)t.removeChild(t.firstChild);t.appendChild(document.createTextNode(n))}}.bind(null,r),n=function(){r.parentNode.removeChild(r)};return e(t),function(r){if(r){if(r.css===t.css&&r.media===t.media&&r.sourceMap===t.sourceMap)return;e(t=r)}else n()}}var y,x=(y=[],function(t,e){return y[t]=e,y.filter(Boolean).join("\n")});function w(t,e,n,r){var a=n?"":r.css;if(t.styleSheet)t.styleSheet.cssText=x(e,a);else{var o=document.createTextNode(a),i=t.childNodes;i[e]&&t.removeChild(i[e]),i.length?t.insertBefore(o,i[e]):t.appendChild(o)}}},function(t,e){t.exports="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAACVElEQVR4Xu3b7VHDMBBF0ZcKgEqgA6ADSoAOoBLoAEqACqAEqATogFnGnhFBtqTVfmiT+B8kDtxjOc5Y0QZ7vm32vB8HgMMI+C9wDeAewBuAGwBfwZGOATwCuABwB+Ap7cmdAp8AaCfa3gFcBkagjlcAZ1MPHcyTEgAd+fPkSVERtuMp6QXAVQmAdiSE08AIufiP6TT4c0ovXQUiI1TH0wFeuwxGRGiKLwHQ45EQmuNrAKIgsOJrAUZHYMe3AIyK0BXfCjAaQnc8B2AUBJF4LoA3glh8D4AXgmh8L4A1gni8BIAVgkq8FIA2glq8JIAWgmq8NIA0gnq8BoAUgkm8FkAvglm8JgAXwTReG6AVwTzeAqAWwSXeCqCEQI+nt67p5+wNTHpAerOcGlu6vUZN831703jLETAfuBxCelDNjvz8Ry1HQAnBPN5jBMzvB9vnPP3eZQbKegTk3u3TU8AcwRJg6VJHAG7TcFYAa9d5AnCbi7QAqPmQ4zYDpQ1QE792dVB/T9AEaIl3Q9AC4MS7IGgA9MSbI0gDSMSbIkgCSMabIUgBaMSbIEgAaMarI/QCWMSrIvQAWMarIXABPOJVEDgAnvHiCK0AI8SLIrQAjBQvhlALMGK8CEINwMjx3QglgAjxXQilL0u7zdgwZ4Ca7yytfV0+WjxrJOQAIg37pYFSPRJyAHTkaYHRvLnM2DBPgXS3HELVkhlaUnI0vVLU+KXT4TtZEPb7nNwIoGVzD9NUFS0w2oVlc8/TDPRtzbI5gdEX5yVKnwPilDD/0wMAE25ndvsBgEk4UB+ZTboAAAAASUVORK5CYII="},function(t,e,n){var r=n(0)("iterator"),a=!1;try{var o=[7][r]();o.return=function(){a=!0},Array.from(o,function(){throw 2})}catch(t){}t.exports=function(t,e){if(!e&&!a)return!1;var n=!1;try{var o=[7],i=o[r]();i.next=function(){return{done:n=!0}},o[r]=function(){return i},t(o)}catch(t){}return n}},function(t,e,n){var r=n(22),a=n(0)("toStringTag"),o="Arguments"==r(function(){return arguments}());t.exports=function(t){var e,n,i;return void 0===t?"Undefined":null===t?"Null":"string"==typeof(n=function(t,e){try{return t[e]}catch(t){}}(e=Object(t),a))?n:o?r(e):"Object"==(i=r(e))&&"function"==typeof e.callee?"Arguments":i}},function(t,e,n){var r=n(32),a=n(0)("iterator"),o=n(9);t.exports=n(12).getIteratorMethod=function(t){if(void 0!=t)return t[a]||t["@@iterator"]||o[r(t)]}},function(t,e,n){"use strict";var r=n(5),a=n(10);t.exports=function(t,e,n){e in t?r.f(t,e,a(0,n)):t[e]=n}},function(t,e,n){var r=n(9),a=n(0)("iterator"),o=Array.prototype;t.exports=function(t){return void 0!==t&&(r.Array===t||o[a]===t)}},function(t,e,n){var r=n(4);t.exports=function(t,e,n,a){try{return a?e(r(n)[0],n[1]):e(n)}catch(e){var o=t.return;throw void 0!==o&&r(o.call(t)),e}}},function(t,e,n){"use strict";var r=n(26),a=n(27),o=n(16),i=n(36),s=n(35),c=n(21),u=n(34),l=n(33);a(a.S+a.F*!n(31)(function(t){Array.from(t)}),"Array",{from:function(t){var e,n,a,f,p=o(t),d="function"==typeof this?this:Array,h=arguments.length,v=h>1?arguments[1]:void 0,m=void 0!==v,g=0,y=l(p);if(m&&(v=r(v,h>2?arguments[2]:void 0,2)),void 0==y||d==Array&&s(y))for(n=new d(e=c(p.length));e>g;g++)u(n,g,m?v(p[g],g):p[g]);else for(f=y.call(p),n=new d;!(a=f.next()).done;g++)u(n,g,m?i(f,v,[a.value,g],!0):a.value);return n.length=g,n}})},function(t,e,n){var r=n(2),a=n(16),o=n(8)("IE_PROTO"),i=Object.prototype;t.exports=Object.getPrototypeOf||function(t){return t=a(t),r(t,o)?t[o]:"function"==typeof t.constructor&&t instanceof t.constructor?t.constructor.prototype:t instanceof Object?i:null}},function(t,e,n){var r=n(1).document;t.exports=r&&r.documentElement},function(t,e,n){var r=n(14),a=Math.max,o=Math.min;t.exports=function(t,e){return(t=r(t))<0?a(t+e,0):o(t,e)}},function(t,e,n){var r=n(23),a=n(21),o=n(40);t.exports=function(t){return function(e,n,i){var s,c=r(e),u=a(c.length),l=o(i,u);if(t&&n!=n){for(;u>l;)if((s=c[l++])!=s)return!0}else for(;u>l;l++)if((t||l in c)&&c[l]===n)return t||l||0;return!t&&-1}}},function(t,e,n){var r=n(22);t.exports=Object("z").propertyIsEnumerable(0)?Object:function(t){return"String"==r(t)?t.split(""):Object(t)}},function(t,e,n){var r=n(2),a=n(23),o=n(41)(!1),i=n(8)("IE_PROTO");t.exports=function(t,e){var n,s=a(t),c=0,u=[];for(n in s)n!=i&&r(s,n)&&u.push(n);for(;e.length>c;)r(s,n=e[c++])&&(~o(u,n)||u.push(n));return u}},function(t,e,n){var r=n(43),a=n(18);t.exports=Object.keys||function(t){return r(t,a)}},function(t,e,n){var r=n(5),a=n(4),o=n(44);t.exports=n(3)?Object.defineProperties:function(t,e){a(t);for(var n,i=o(e),s=i.length,c=0;s>c;)r.f(t,n=i[c++],e[n]);return t}},function(t,e,n){var r=n(4),a=n(45),o=n(18),i=n(8)("IE_PROTO"),s=function(){},c=function(){var t,e=n(24)("iframe"),r=o.length;for(e.style.display="none",n(39).appendChild(e),e.src="javascript:",(t=e.contentWindow.document).open(),t.write("<script>document.F=Object<\/script>"),t.close(),c=t.F;r--;)delete c.prototype[o[r]];return c()};t.exports=Object.create||function(t,e){var n;return null!==t?(s.prototype=r(t),n=new s,s.prototype=null,n[i]=t):n=c(),void 0===e?n:a(n,e)}},function(t,e,n){"use strict";var r=n(46),a=n(10),o=n(17),i={};n(6)(i,n(0)("iterator"),function(){return this}),t.exports=function(t,e,n){t.prototype=r(i,{next:a(1,n)}),o(t,e+" Iterator")}},function(t,e,n){t.exports=n(6)},function(t,e,n){var r=n(11);t.exports=function(t,e){if(!r(t))return t;var n,a;if(e&&"function"==typeof(n=t.toString)&&!r(a=n.call(t)))return a;if("function"==typeof(n=t.valueOf)&&!r(a=n.call(t)))return a;if(!e&&"function"==typeof(n=t.toString)&&!r(a=n.call(t)))return a;throw TypeError("Can't convert object to primitive value")}},function(t,e,n){t.exports=!n(3)&&!n(25)(function(){return 7!=Object.defineProperty(n(24)("div"),"a",{get:function(){return 7}}).a})},function(t,e){t.exports=function(t){if("function"!=typeof t)throw TypeError(t+" is not a function!");return t}},function(t,e){t.exports=!0},function(t,e,n){"use strict";var r=n(52),a=n(27),o=n(48),i=n(6),s=n(9),c=n(47),u=n(17),l=n(38),f=n(0)("iterator"),p=!([].keys&&"next"in[].keys()),d=function(){return this};t.exports=function(t,e,n,h,v,m,g){c(n,e,h);var y,x,w,b=function(t){if(!p&&t in _)return _[t];switch(t){case"keys":case"values":return function(){return new n(this,t)}}return function(){return new n(this,t)}},M=e+" Iterator",A="values"==v,S=!1,_=t.prototype,D=_[f]||_["@@iterator"]||v&&_[v],T=D||b(v),C=v?A?b("entries"):T:void 0,E="Array"==e&&_.entries||D;if(E&&(w=l(E.call(new t)))!==Object.prototype&&w.next&&(u(w,M,!0),r||"function"==typeof w[f]||i(w,f,d)),A&&D&&"values"!==D.name&&(S=!0,T=function(){return D.call(this)}),r&&!g||!p&&!S&&_[f]||i(_,f,T),s[e]=T,s[M]=d,v)if(y={values:A?T:b("values"),keys:m?T:b("keys"),entries:C},g)for(x in y)x in _||o(_,x,y[x]);else a(a.P+a.F*(p||S),e,y);return y}},function(t,e,n){var r=n(14),a=n(13);t.exports=function(t){return function(e,n){var o,i,s=String(a(e)),c=r(n),u=s.length;return c<0||c>=u?t?"":void 0:(o=s.charCodeAt(c))<55296||o>56319||c+1===u||(i=s.charCodeAt(c+1))<56320||i>57343?t?s.charAt(c):o:t?s.slice(c,c+2):i-56320+(o-55296<<10)+65536}}},function(t,e,n){"use strict";var r=n(54)(!0);n(53)(String,"String",function(t){this._t=String(t),this._i=0},function(){var t,e=this._t,n=this._i;return n>=e.length?{value:void 0,done:!0}:(t=r(e,n),this._i+=t.length,{value:t,done:!1})})},function(t,e,n){n(55),n(37),t.exports=n(12).Array.from},function(t,e,n){t.exports=n(56)},function(t,e){t.exports=function(t){return t&&t.__esModule?t:{default:t}}},function(t,e){t.exports=function(t){var e=[];return e.toString=function(){return this.map(function(e){var n=function(t,e){var n=t[1]||"",r=t[3];if(!r)return n;if(e&&"function"==typeof btoa){var a=(i=r,"/*# sourceMappingURL=data:application/json;charset=utf-8;base64,"+btoa(unescape(encodeURIComponent(JSON.stringify(i))))+" */"),o=r.sources.map(function(t){return"/*# sourceURL="+r.sourceRoot+t+" */"});return[n].concat(o).concat([a]).join("\n")}var i;return[n].join("\n")}(e,t);return e[2]?"@media "+e[2]+"{"+n+"}":n}).join("")},e.i=function(t,n){"string"==typeof t&&(t=[[null,t,""]]);for(var r={},a=0;a<this.length;a++){var o=this[a][0];"number"==typeof o&&(r[o]=!0)}for(a=0;a<t.length;a++){var i=t[a];"number"==typeof i[0]&&r[i[0]]||(n&&!i[2]?i[2]=n:n&&(i[2]="("+i[2]+") and ("+n+")"),e.push(i))}},e}},function(t,e,n){(t.exports=n(59)(!1)).push([t.i,"\nul[data-v-89588f16] {\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.date-picker[data-v-89588f16] {\n  position: relative;\n  height: 32px;\n}\n.input-wrapper[data-v-89588f16] {\n  border: 1px solid #ccc;\n  border-radius: 2px;\n  vertical-align: middle;\n  display: flex;\n  justify-content: space-between;\n  flex-flow: row nowrap;\n  align-items: center;\n  padding: 6px 10px 6px 4px;\n  height: 32px;\n  box-sizing: border-box;\n}\n.input[data-v-89588f16] {\n  height: 100%;\n  width: 100%;\n  font-size: inherit;\n  padding-left: 4px;\n  box-sizing: border-box;\n  outline: none;\n}\n.cancel-btn[data-v-89588f16] {\n  height: 14px;\n  width: 14px;\n}\n.date-panel[data-v-89588f16] {\n  position: absolute;\n  z-index: 5000;\n  border: 1px solid #eee;\n  width: 320px;\n  padding: 5px 10px 10px;\n  box-sizing: border-box;\n  background-color: #fff;\n  transform: translateY(4px);\n}\n.panel-header[data-v-89588f16] {\n  display: flex;\n  flex-flow: row nowrap;\n  width: 100%;\n}\n.arrow-left[data-v-89588f16],\n.arrow-right[data-v-89588f16] {\n  flex: 1;\n  font-size: 20px;\n  line-height: 2;\n  background-color: #fff;\n  text-align: center;\n  cursor: pointer;\n}\n.year-range[data-v-89588f16] {\n  font-size: 20px;\n  line-height: 2;\n  flex: 3;\n  display: flex;\n  justify-content: center;\n}\n.year-month-box[data-v-89588f16] {\n  flex: 3;\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: space-around;\n}\n.type-year[data-v-89588f16],\n.type-month[data-v-89588f16],\n.date-list[data-v-89588f16] {\n  background-color: #fff;\n}\n.year-box[data-v-89588f16],\n.month-box[data-v-89588f16] {\n  transition: all ease .1s;\n  font-family: Roboto, sans-serif;\n  flex: 1;\n  text-align: center;\n  font-size: 20px;\n  line-height: 2;\n  cursor: pointer;\n  background-color: #fff;\n}\n.year-list[data-v-89588f16],\n.month-list[data-v-89588f16] {\n  display: flex;\n  flex-flow: row wrap;\n  justify-content: space-between;\n}\n.year-list li[data-v-89588f16],\n.month-list li[data-v-89588f16] {\n  font-family: Roboto, sans-serif;\n  transition: all 0.45s cubic-bezier(0.23, 1, 0.32, 1) 0ms;\n  cursor: pointer;\n  text-align: center;\n  font-size: 20px;\n  width: 33%;\n  padding: 10px 0;\n}\n.year-list li[data-v-89588f16]:hover,\n.month-list li[data-v-89588f16]:hover {\n  background-color: #6ac1c9;\n  color: #fff;\n}\n.year-list li.selected[data-v-89588f16],\n.month-list li.selected[data-v-89588f16] {\n  background-color: #0097a7;\n  color: #fff;\n}\n.year-list li.invalid[data-v-89588f16],\n.month-list li.invalid[data-v-89588f16] {\n  cursor: not-allowed;\n  color: #ccc;\n}\n.date-list[data-v-89588f16] {\n  display: flex;\n  flex-flow: row wrap;\n  justify-content: space-between;\n}\n.date-list .valid[data-v-89588f16]:hover {\n  background-color: #eee;\n}\n.date-list li[data-v-89588f16] {\n  transition: all ease .1s;\n  cursor: pointer;\n  box-sizing: border-box;\n  border-bottom: 1px solid #fff;\n  position: relative;\n  margin: 2px;\n}\n.date-list li[data-v-89588f16]:not(.firstItem) {\n  margin-left: 10px;\n}\n.date-list li .message[data-v-89588f16] {\n  font-family: Roboto, sans-serif;\n  font-weight: 300;\n  font-size: 14px;\n  position: relative;\n  height: 30px;\n}\n.date-list li .message.selected .bg[data-v-89588f16] {\n  background-color: #0097a7;\n}\n.date-list li .message.selected span[data-v-89588f16] {\n  color: #fff;\n}\n.date-list li .message:not(.selected) .bg[data-v-89588f16] {\n  transform: scale(0);\n  opacity: 0;\n}\n.date-list li .message:not(.selected):hover .bg[data-v-89588f16] {\n  background-color: #0097a7;\n  transform: scale(1);\n  opacity: .6;\n}\n.date-list li .message:not(.selected):hover span[data-v-89588f16] {\n  color: #fff;\n}\n.date-list li .message .bg[data-v-89588f16] {\n  height: 30px;\n  width: 100%;\n  transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;\n  border-radius: 50%;\n  position: absolute;\n  z-index: 10;\n  top: 0;\n  left: 0;\n}\n.date-list li .message span[data-v-89588f16] {\n  position: absolute;\n  z-index: 20;\n  left: 50%;\n  top: 50%;\n  transform: translate3d(-50%, -50%, 0);\n}\n.date-list li.invalid[data-v-89588f16] {\n  cursor: not-allowed;\n  color: #ccc;\n}\n.weeks[data-v-89588f16] {\n  display: flex;\n  flex-flow: row wrap;\n  justify-content: space-between;\n}\n.weeks li[data-v-89588f16] {\n  font-weight: 600;\n}\n.weeks[data-v-89588f16],\n.date-list[data-v-89588f16] {\n  width: 100%;\n  text-align: center;\n}\n.weeks .preMonth[data-v-89588f16],\n.date-list .preMonth[data-v-89588f16],\n.weeks .nextMonth[data-v-89588f16],\n.date-list .nextMonth[data-v-89588f16] {\n  color: #ccc;\n}\n.weeks li[data-v-89588f16],\n.date-list li[data-v-89588f16] {\n  font-family: Roboto;\n  width: 30px;\n  height: 30px;\n  text-align: center;\n  line-height: 30px;\n}\n.toggle-enter[data-v-89588f16],\n.toggle-leave-active[data-v-89588f16] {\n  opacity: 0;\n  transform: translateY(-10px);\n}\n.toggle-enter-active[data-v-89588f16],\n.toggle-leave-active[data-v-89588f16] {\n  transition: all ease .2s;\n}\n.fade-enter[data-v-89588f16],\n.fade-leave-active[data-v-89588f16] {\n  opacity: 0;\n  transform: scale3d(0, 0, 0);\n}\n.fade-enter-active[data-v-89588f16],\n.fade-leave-active[data-v-89588f16] {\n  transition: all ease .1s;\n}\n",""])},function(t,e,n){var r=n(60);"string"==typeof r&&(r=[[t.i,r,""]]),r.locals&&(t.exports=r.locals);(0,n(29).default)("475e419f",r,!1,{})},function(t,e,n){"use strict";n.r(e);var r=n(7),a=n.n(r);for(var o in r)"default"!==o&&function(t){n.d(e,t,function(){return r[t]})}(o);var i=n(15),s=n(28),c=!1;var u=function(t){c||n(61)},l=Object(s.a)(a.a,i.a,i.b,!1,u,"data-v-89588f16",null);l.options.__file="src/Datepicker.vue",e.default=l.exports}]).default});
 
 /***/ }),
 /* 111 */
@@ -51572,13 +51349,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_google_charts__ = __webpack_require__(131);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_doughnut_chart__ = __webpack_require__(132);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_doughnut_chart___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vue_doughnut_chart__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_lodash__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_StatusComponent_vue__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_StatusComponent_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__shared_StatusComponent_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__shared_ChangeStatus_vue__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__shared_ChangeStatus_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__shared_ChangeStatus_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__shared_Spinner_vue__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__shared_Spinner_vue__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__shared_Spinner_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__shared_Spinner_vue__);
 //
 //
@@ -53243,11 +53020,11 @@ exports.push([module.i, "\n@charset \"UTF-8\";\n/* Стилі для фільт�
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_ads_pagination__ = __webpack_require__(23);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_ads_pagination___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue_ads_pagination__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_lodash__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__CourtComponent_vue__ = __webpack_require__(27);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__CourtComponent_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__CourtComponent_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_Spinner_vue__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_Spinner_vue__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_Spinner_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__shared_Spinner_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__shared_Filters_vue__ = __webpack_require__(25);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__shared_Filters_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__shared_Filters_vue__);
@@ -54475,7 +54252,7 @@ exports.push([module.i, "\n.courtSessions[data-v-1157e9ac] {\n  width: 100%;\n  
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__shared_Modal_vue__ = __webpack_require__(159);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__shared_Modal_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__shared_Modal_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_Spinner_vue__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_Spinner_vue__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_Spinner_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__shared_Spinner_vue__);
 //
 //
@@ -55370,9 +55147,9 @@ exports.push([module.i, "\n@charset \"UTF-8\";\n/* Стилі для фільт�
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_lodash__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_Spinner_vue__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_Spinner_vue__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_Spinner_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__shared_Spinner_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_StatusComponent_vue__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_StatusComponent_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__shared_StatusComponent_vue__);
@@ -55849,11 +55626,11 @@ exports.push([module.i, "\n@charset \"UTF-8\";\n/* Стилі для фільт�
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_lodash__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__rating_courts_CourtComponent_vue__ = __webpack_require__(27);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__rating_courts_CourtComponent_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__rating_courts_CourtComponent_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_Spinner_vue__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_Spinner_vue__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_Spinner_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__shared_Spinner_vue__);
 //
 //
@@ -56140,9 +55917,9 @@ exports.push([module.i, "\n@charset \"UTF-8\";\n/* Стилі для фільт�
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__rating_judges_JudgeComponent_vue__ = __webpack_require__(24);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__rating_judges_JudgeComponent_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__rating_judges_JudgeComponent_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_Spinner_vue__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_Spinner_vue__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_Spinner_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__shared_Spinner_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_lodash__);
 //
 //
@@ -56522,13 +56299,1581 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n.content-wrapper_body[data-v-33ac42eb] {\n  padding: 3rem;\n  border-radius: 4px;\n  background: #ffffff;\n}\ninput[data-v-33ac42eb] {\n  -webkit-box-shadow: inset 0 0 3px 0 rgba(0, 0, 0, 0.22);\n  box-shadow: inset 0 0 3px 0 rgba(0, 0, 0, 0.22);\n  border: none;\n  background-color: #F5F6F7;\n}\n.table > .row[data-v-33ac42eb] {\n  padding: 15px 0;\n}\n.table .bg[data-v-33ac42eb] {\n  background-color: #F5F6F7;\n}\n.btn-primary[data-v-33ac42eb] {\n  min-width: 200px;\n  text-transform: uppercase;\n}\n.hr[data-v-33ac42eb] {\n  margin-top: 1rem;\n  margin-bottom: 1rem;\n  border: 0;\n  border-top: 1px solid rgba(0, 0, 0, 0.1);\n}\n", ""]);
+exports.push([module.i, "\n.content-wrapper_body[data-v-33ac42eb] {\n  padding: 3rem;\n  border-radius: 4px;\n  background: #ffffff;\n}\n.help.is-danger[data-v-33ac42eb] {\n  color: red;\n}\n.input.is-danger[data-v-33ac42eb] {\n  border: 1px solid red;\n}\ninput[data-v-33ac42eb] {\n  -webkit-box-shadow: inset 0 0 3px 0 rgba(0, 0, 0, 0.22);\n  box-shadow: inset 0 0 3px 0 rgba(0, 0, 0, 0.22);\n  border: none;\n  background-color: #F5F6F7;\n}\n.table .header[data-v-33ac42eb] {\n  font-weight: bold;\n}\n.table > .row[data-v-33ac42eb] {\n  padding: 15px 0;\n}\n.table .bg[data-v-33ac42eb] {\n  background-color: #F5F6F7;\n}\n.btn-primary[data-v-33ac42eb] {\n  min-width: 200px;\n  text-transform: uppercase;\n}\n.hr[data-v-33ac42eb] {\n  margin-top: 1rem;\n  margin-bottom: 1rem;\n  border: 0;\n  border-top: 1px solid rgba(0, 0, 0, 0.1);\n}\n", ""]);
 
 // exports
 
 
 /***/ }),
 /* 190 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__shared_Spinner_vue__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__shared_Spinner_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__shared_Spinner_vue__);
+var _this = this;
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "UserSettings",
+  components: {
+    Spinner: __WEBPACK_IMPORTED_MODULE_0__shared_Spinner_vue___default.a
+  },
+  data: function data() {
+    return {
+      loadData: false,
+      user: {
+        name: '',
+        surname: '',
+        phone: null,
+        email: '',
+        photo: ''
+      },
+      allSelected: false,
+      notifications: {
+        email_notification_1: 0,
+        email_notification_2: 0,
+        email_notification_3: 0,
+        email_notification_4: 0,
+        email_notification_5: 0,
+        email_notification_6: 0
+      },
+      password: {
+        currentPassword: '',
+        newPassword: '',
+        rePassword: ''
+      }
+    };
+  },
+
+  computed: {
+    isEqualPasswords: function isEqualPasswords() {
+      return _this.user.rePassword === _this.user.newPassword;
+    }
+
+  },
+  created: function created() {
+    this.getUserInfo();
+  },
+
+  methods: {
+    isDisabled: function isDisabled(errors, password) {
+      if (errors.items.length > 0 || !password.currentPassword.length || !password.rePassword.length || !password.newPassword.length) {
+        return true;
+      }
+      return false;
+    },
+    getUserInfo: function getUserInfo() {
+      var _this2 = this;
+
+      axios.get("/api/v1/user/settings", {
+        headers: {
+          "Content-Type": "application/json",
+          "X-Requested-With": "XMLHttpRequest",
+          Authorization: localStorage.getItem("token")
+        }
+      }).then(function (response) {
+        _this2.user = response.data.profile;
+        _this2.user.phone = '0660851225';
+        _this2.notifications = response.data.notifications;
+        _this2.loadData = true;
+        console.log("User settings", response);
+      }).catch(function (error) {
+        if (error.response && error.response.status === 401) {
+          _this2.$router.push("/login");
+        }
+      });
+    },
+    selectAll: function selectAll() {
+      if (this.allSelected) {
+        for (var key in this.notifications) {
+          this.notifications[key] = 1;
+        }
+      } else {
+        for (var _key in this.notifications) {
+          this.notifications[_key] = 0;
+        }
+      }
+    },
+    select: function select() {
+      this.allSelected = false;
+    },
+    changeProfileData: function changeProfileData() {
+      var _this3 = this;
+
+      var newProfileData = {};
+      if (this.user.phone) {
+        newProfileData.new_phone = this.user.phone.replace(/(\(|\)|\s)/g, '');
+      }
+      if (this.user.surname) {
+        newProfileData.new_surname = this.user.surname;
+      }
+      newProfileData.new_name = this.user.name;
+      axios.post("/api/v1/user/settings/user-data", newProfileData, {
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Requested-With': 'XMLHttpRequest',
+          Authorization: localStorage.getItem("token")
+        }
+      }).catch(function (error) {
+        if (error && error.response && error.response.status === 401) {
+          _this3.$router.push("/login");
+        }
+      });
+    },
+    changePassword: function changePassword() {
+      var _this4 = this;
+
+      var changePass = {
+        old_password: this.password.currentPassword,
+        new_password: this.password.newPassword
+      };
+      console.log(this.password);
+      axios.post("/api/v1/user/settings/password", changePass, {
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Requested-With': 'XMLHttpRequest',
+          Authorization: localStorage.getItem("token")
+        }
+      }).catch(function (error) {
+        if (error && error.response && error.response.status === 401) {
+          _this4.$router.push("/login");
+        }
+      });
+    },
+    changeNotifications: function changeNotifications() {
+      var _this5 = this;
+
+      // замінюємо в чекбоксі true/false на 0/1
+      for (var key in this.notifications) {
+        var elem = this.notifications[key];
+        this.notifications[key] = elem === true || elem === 1 ? 1 : 0;
+      }
+      axios.post("/api/v1/user/settings/notification", this.notifications, {
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Requested-With': 'XMLHttpRequest',
+          Authorization: localStorage.getItem("token")
+        }
+      }).catch(function (error) {
+        if (error && error.response && error.response.status === 401) {
+          _this5.$router.push("/login");
+        }
+      });
+    },
+    deleteProfile: function deleteProfile() {
+      console.log('Я хочу видалити свій профайл. Що скажете?');
+    }
+  }
+});
+
+/***/ }),
+/* 191 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "settings" }, [
+    _c(
+      "div",
+      { staticClass: "container content-wrapper" },
+      [
+        !_vm.loadData ? _c("spinner") : _vm._e(),
+        _vm._v(" "),
+        _vm.loadData
+          ? _c("div", { staticClass: "border content-wrapper_body" }, [
+              _c("div", { staticClass: "profile" }, [
+                _c("h4", [_vm._v("Профіль")]),
+                _vm._v(" "),
+                _c(
+                  "form",
+                  {
+                    on: {
+                      submit: function($event) {
+                        $event.preventDefault()
+                        _vm.changeProfileData()
+                      }
+                    }
+                  },
+                  [
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-6" }, [
+                        _c("div", { staticClass: "form-group" }, [
+                          _c(
+                            "label",
+                            {
+                              staticClass: "form-control-label",
+                              attrs: { for: "name" }
+                            },
+                            [_vm._v("Ім'я:")]
+                          ),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.user.name,
+                                expression: "user.name"
+                              },
+                              {
+                                name: "validate",
+                                rawName: "v-validate",
+                                value: "required|alpha|min:3|max:250",
+                                expression: "'required|alpha|min:3|max:250'"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            class: {
+                              input: true,
+                              "is-danger": _vm.errors.has("ім'я")
+                            },
+                            attrs: { id: "name", type: "text", name: "ім'я" },
+                            domProps: { value: _vm.user.name },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(_vm.user, "name", $event.target.value)
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "small",
+                            {
+                              directives: [
+                                {
+                                  name: "show",
+                                  rawName: "v-show",
+                                  value: _vm.errors.has("ім'я"),
+                                  expression: "errors.has('ім\\'я')"
+                                }
+                              ]
+                            },
+                            [
+                              _c("span", { staticClass: "help is-danger" }, [
+                                _vm._v(_vm._s(_vm.errors.first("ім'я")))
+                              ])
+                            ]
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-6" }, [
+                        _c("div", { staticClass: "form-group" }, [
+                          _c(
+                            "label",
+                            {
+                              staticClass: "form-control-label",
+                              attrs: { for: "name" }
+                            },
+                            [_vm._v("Прізвище:")]
+                          ),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.user.surname,
+                                expression: "user.surname"
+                              },
+                              {
+                                name: "validate",
+                                rawName: "v-validate",
+                                value: "required|alpha|min:3|max:250",
+                                expression: "'required|alpha|min:3|max:250'"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            class: {
+                              input: true,
+                              "is-danger": _vm.errors.has("прізвище")
+                            },
+                            attrs: {
+                              id: "surname",
+                              type: "text",
+                              name: "прізвище"
+                            },
+                            domProps: { value: _vm.user.surname },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.user,
+                                  "surname",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "small",
+                            {
+                              directives: [
+                                {
+                                  name: "show",
+                                  rawName: "v-show",
+                                  value: _vm.errors.has("прізвище"),
+                                  expression: "errors.has('прізвище')"
+                                }
+                              ]
+                            },
+                            [
+                              _c("span", { staticClass: "help is-danger" }, [
+                                _vm._v(_vm._s(_vm.errors.first("прізвище")))
+                              ])
+                            ]
+                          )
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-6" }, [
+                        _c("div", { staticClass: "form-group" }, [
+                          _c(
+                            "label",
+                            {
+                              staticClass: "form-control-label",
+                              attrs: { for: "name" }
+                            },
+                            [_vm._v("Номер мобільного:")]
+                          ),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.user.phone,
+                                expression: "user.phone"
+                              },
+                              {
+                                name: "mask",
+                                rawName: "v-mask",
+                                value: "(###) ### ## ##",
+                                expression: "'(###) ### ## ##'"
+                              },
+                              {
+                                name: "validate",
+                                rawName: "v-validate",
+                                value: "required|number|min:15|max:15",
+                                expression: "'required|number|min:15|max:15'"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            class: {
+                              input: true,
+                              "is-danger": _vm.errors.has("телефон")
+                            },
+                            attrs: {
+                              id: "telephone",
+                              type: "text",
+                              name: "телефон"
+                            },
+                            domProps: { value: _vm.user.phone },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(_vm.user, "phone", $event.target.value)
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "small",
+                            {
+                              directives: [
+                                {
+                                  name: "show",
+                                  rawName: "v-show",
+                                  value: _vm.errors.has("телефон"),
+                                  expression: "errors.has('телефон')"
+                                }
+                              ]
+                            },
+                            [
+                              _c("span", { staticClass: "help is-danger" }, [
+                                _vm._v(_vm._s(_vm.errors.first("телефон")))
+                              ])
+                            ]
+                          )
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "offset-6 col-6 text-center" }, [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-primary",
+                            attrs: {
+                              type: "submit",
+                              disabled: _vm.errors.items.length > 0
+                            }
+                          },
+                          [_vm._v("Зберегти")]
+                        )
+                      ])
+                    ])
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "hr py-4" }),
+              _vm._v(" "),
+              _c("div", { staticClass: "change-password" }, [
+                _c("h4", [_vm._v("Змінити пароль:")]),
+                _vm._v(" "),
+                _c(
+                  "form",
+                  {
+                    on: {
+                      submit: function($event) {
+                        $event.preventDefault()
+                        _vm.changePassword()
+                      }
+                    }
+                  },
+                  [
+                    _vm._m(0),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-6" }, [
+                        _c("div", { staticClass: "form-group" }, [
+                          _c(
+                            "label",
+                            {
+                              staticClass: "form-control-label",
+                              attrs: { for: "currentPassword" }
+                            },
+                            [_vm._v("Старий пароль:")]
+                          ),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.password.currentPassword,
+                                expression: "password.currentPassword"
+                              },
+                              {
+                                name: "validate",
+                                rawName: "v-validate",
+                                value: "min:6|max:32",
+                                expression: "'min:6|max:32'"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            class: {
+                              input: true,
+                              "is-danger": _vm.errors.has("пароль")
+                            },
+                            attrs: {
+                              id: "currentPassword",
+                              type: "password",
+                              name: "пароль"
+                            },
+                            domProps: { value: _vm.password.currentPassword },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.password,
+                                  "currentPassword",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "small",
+                            {
+                              directives: [
+                                {
+                                  name: "show",
+                                  rawName: "v-show",
+                                  value: _vm.errors.has("пароль"),
+                                  expression: "errors.has('пароль')"
+                                }
+                              ]
+                            },
+                            [
+                              _c("span", { staticClass: "help is-danger" }, [
+                                _vm._v(_vm._s(_vm.errors.first("пароль")))
+                              ])
+                            ]
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-6" }, [
+                        _c("div", { staticClass: "form-group" }, [
+                          _c(
+                            "label",
+                            {
+                              staticClass: "form-control-label",
+                              attrs: { for: "newPassword" }
+                            },
+                            [_vm._v("Новий пароль:")]
+                          ),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.password.newPassword,
+                                expression: "password.newPassword"
+                              },
+                              {
+                                name: "validate",
+                                rawName: "v-validate",
+                                value: "min:6|max:32",
+                                expression: "'min:6|max:32'"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            class: {
+                              input: true,
+                              "is-danger": _vm.errors.has("новий пароль")
+                            },
+                            attrs: {
+                              id: "newPassword",
+                              type: "password",
+                              name: "новий пароль"
+                            },
+                            domProps: { value: _vm.password.newPassword },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.password,
+                                  "newPassword",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("small", [
+                            _c(
+                              "span",
+                              {
+                                directives: [
+                                  {
+                                    name: "show",
+                                    rawName: "v-show",
+                                    value: _vm.errors.has("новий пароль"),
+                                    expression: "errors.has('новий пароль')"
+                                  }
+                                ],
+                                staticClass: "help is-danger"
+                              },
+                              [_vm._v(_vm._s(_vm.errors.first("новий пароль")))]
+                            )
+                          ])
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-6" }, [
+                        _c("div", { staticClass: "form-group" }, [
+                          _c(
+                            "label",
+                            {
+                              staticClass: "form-control-label",
+                              attrs: { for: "rePassword" }
+                            },
+                            [_vm._v("Підтвердити новий пароль:")]
+                          ),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.password.rePassword,
+                                expression: "password.rePassword"
+                              },
+                              {
+                                name: "validate",
+                                rawName: "v-validate",
+                                value: "min:6|max:32",
+                                expression: "'min:6|max:32'"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            class: {
+                              input: true,
+                              "is-danger":
+                                _vm.password.rePassword !==
+                                _vm.password.newPassword
+                            },
+                            attrs: {
+                              id: "rePassword",
+                              type: "password",
+                              name: "rePassword"
+                            },
+                            domProps: { value: _vm.password.rePassword },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.password,
+                                  "rePassword",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "small",
+                            {
+                              directives: [
+                                {
+                                  name: "show",
+                                  rawName: "v-show",
+                                  value:
+                                    _vm.password.rePassword !==
+                                    _vm.password.newPassword,
+                                  expression:
+                                    "password.rePassword !== password.newPassword"
+                                }
+                              ]
+                            },
+                            [
+                              _c("span", { staticClass: "help is-danger" }, [
+                                _vm._v("Паролі не співпадають")
+                              ])
+                            ]
+                          )
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "offset-6 col-6 text-center" }, [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-primary",
+                            attrs: {
+                              type: "submit",
+                              disabled: _vm.isDisabled(_vm.errors, _vm.password)
+                            }
+                          },
+                          [_vm._v("Зберегти")]
+                        )
+                      ])
+                    ])
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "hr py-4" }),
+              _vm._v(" "),
+              _c("div", { staticClass: "notifications" }, [
+                _c("h4", [_vm._v("Налаштування сповіщень")]),
+                _vm._v(" "),
+                _c(
+                  "form",
+                  {
+                    on: {
+                      submit: function($event) {
+                        $event.preventDefault()
+                        _vm.changeNotifications()
+                      }
+                    }
+                  },
+                  [
+                    _c("div", { staticClass: "table" }, [
+                      _c("div", { staticClass: "row header" }, [
+                        _c("div", { staticClass: "col-9" }, [_vm._v("Подія")]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-3" }, [
+                          _c("div", [_vm._v("Спосіб зв'язку")]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.allSelected,
+                                expression: "allSelected"
+                              }
+                            ],
+                            attrs: { type: "checkbox" },
+                            domProps: {
+                              checked: Array.isArray(_vm.allSelected)
+                                ? _vm._i(_vm.allSelected, null) > -1
+                                : _vm.allSelected
+                            },
+                            on: {
+                              change: [
+                                function($event) {
+                                  var $$a = _vm.allSelected,
+                                    $$el = $event.target,
+                                    $$c = $$el.checked ? true : false
+                                  if (Array.isArray($$a)) {
+                                    var $$v = null,
+                                      $$i = _vm._i($$a, $$v)
+                                    if ($$el.checked) {
+                                      $$i < 0 &&
+                                        (_vm.allSelected = $$a.concat([$$v]))
+                                    } else {
+                                      $$i > -1 &&
+                                        (_vm.allSelected = $$a
+                                          .slice(0, $$i)
+                                          .concat($$a.slice($$i + 1)))
+                                    }
+                                  } else {
+                                    _vm.allSelected = $$c
+                                  }
+                                },
+                                function($event) {
+                                  _vm.selectAll()
+                                }
+                              ]
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("small", [_vm._v("Виділити все/зняти виділення")])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "row hr" }, [
+                        _c("div", { staticClass: "col-9" }, [
+                          _vm._v(
+                            "В судді, якого користувач відстежує, змінився статус."
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-3" }, [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.notifications.email_notification_1,
+                                expression: "notifications.email_notification_1"
+                              }
+                            ],
+                            attrs: { type: "checkbox" },
+                            domProps: {
+                              checked: Array.isArray(
+                                _vm.notifications.email_notification_1
+                              )
+                                ? _vm._i(
+                                    _vm.notifications.email_notification_1,
+                                    null
+                                  ) > -1
+                                : _vm.notifications.email_notification_1
+                            },
+                            on: {
+                              click: function($event) {
+                                _vm.select()
+                              },
+                              change: function($event) {
+                                var $$a =
+                                    _vm.notifications.email_notification_1,
+                                  $$el = $event.target,
+                                  $$c = $$el.checked ? true : false
+                                if (Array.isArray($$a)) {
+                                  var $$v = null,
+                                    $$i = _vm._i($$a, $$v)
+                                  if ($$el.checked) {
+                                    $$i < 0 &&
+                                      _vm.$set(
+                                        _vm.notifications,
+                                        "email_notification_1",
+                                        $$a.concat([$$v])
+                                      )
+                                  } else {
+                                    $$i > -1 &&
+                                      _vm.$set(
+                                        _vm.notifications,
+                                        "email_notification_1",
+                                        $$a
+                                          .slice(0, $$i)
+                                          .concat($$a.slice($$i + 1))
+                                      )
+                                  }
+                                } else {
+                                  _vm.$set(
+                                    _vm.notifications,
+                                    "email_notification_1",
+                                    $$c
+                                  )
+                                }
+                              }
+                            }
+                          }),
+                          _vm._v(" Email\n              ")
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "row bg" }, [
+                        _c("div", { staticClass: "col-9" }, [
+                          _vm._v(
+                            "По справі, яку користувач відстежує, додалось нове судове засідання"
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-3" }, [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.notifications.email_notification_2,
+                                expression: "notifications.email_notification_2"
+                              }
+                            ],
+                            attrs: { type: "checkbox" },
+                            domProps: {
+                              checked: Array.isArray(
+                                _vm.notifications.email_notification_2
+                              )
+                                ? _vm._i(
+                                    _vm.notifications.email_notification_2,
+                                    null
+                                  ) > -1
+                                : _vm.notifications.email_notification_2
+                            },
+                            on: {
+                              click: function($event) {
+                                _vm.select()
+                              },
+                              change: function($event) {
+                                var $$a =
+                                    _vm.notifications.email_notification_2,
+                                  $$el = $event.target,
+                                  $$c = $$el.checked ? true : false
+                                if (Array.isArray($$a)) {
+                                  var $$v = null,
+                                    $$i = _vm._i($$a, $$v)
+                                  if ($$el.checked) {
+                                    $$i < 0 &&
+                                      _vm.$set(
+                                        _vm.notifications,
+                                        "email_notification_2",
+                                        $$a.concat([$$v])
+                                      )
+                                  } else {
+                                    $$i > -1 &&
+                                      _vm.$set(
+                                        _vm.notifications,
+                                        "email_notification_2",
+                                        $$a
+                                          .slice(0, $$i)
+                                          .concat($$a.slice($$i + 1))
+                                      )
+                                  }
+                                } else {
+                                  _vm.$set(
+                                    _vm.notifications,
+                                    "email_notification_2",
+                                    $$c
+                                  )
+                                }
+                              }
+                            }
+                          }),
+                          _vm._v(" Email\n              ")
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "row" }, [
+                        _c("div", { staticClass: "col-9" }, [
+                          _vm._v(
+                            "По справі, яку користувач відстежує, в будь-якого судді змінився статус"
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-3" }, [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.notifications.email_notification_3,
+                                expression: "notifications.email_notification_3"
+                              }
+                            ],
+                            attrs: { type: "checkbox" },
+                            domProps: {
+                              checked: Array.isArray(
+                                _vm.notifications.email_notification_3
+                              )
+                                ? _vm._i(
+                                    _vm.notifications.email_notification_3,
+                                    null
+                                  ) > -1
+                                : _vm.notifications.email_notification_3
+                            },
+                            on: {
+                              click: function($event) {
+                                _vm.select()
+                              },
+                              change: function($event) {
+                                var $$a =
+                                    _vm.notifications.email_notification_3,
+                                  $$el = $event.target,
+                                  $$c = $$el.checked ? true : false
+                                if (Array.isArray($$a)) {
+                                  var $$v = null,
+                                    $$i = _vm._i($$a, $$v)
+                                  if ($$el.checked) {
+                                    $$i < 0 &&
+                                      _vm.$set(
+                                        _vm.notifications,
+                                        "email_notification_3",
+                                        $$a.concat([$$v])
+                                      )
+                                  } else {
+                                    $$i > -1 &&
+                                      _vm.$set(
+                                        _vm.notifications,
+                                        "email_notification_3",
+                                        $$a
+                                          .slice(0, $$i)
+                                          .concat($$a.slice($$i + 1))
+                                      )
+                                  }
+                                } else {
+                                  _vm.$set(
+                                    _vm.notifications,
+                                    "email_notification_3",
+                                    $$c
+                                  )
+                                }
+                              }
+                            }
+                          }),
+                          _vm._v(" Email\n              ")
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "row bg" }, [
+                        _c("div", { staticClass: "col-9" }, [
+                          _vm._v(
+                            "За один день до судового засідання, яке користувач відстежує"
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-3" }, [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.notifications.email_notification_4,
+                                expression: "notifications.email_notification_4"
+                              }
+                            ],
+                            attrs: { type: "checkbox" },
+                            domProps: {
+                              checked: Array.isArray(
+                                _vm.notifications.email_notification_4
+                              )
+                                ? _vm._i(
+                                    _vm.notifications.email_notification_4,
+                                    null
+                                  ) > -1
+                                : _vm.notifications.email_notification_4
+                            },
+                            on: {
+                              click: function($event) {
+                                _vm.select()
+                              },
+                              change: function($event) {
+                                var $$a =
+                                    _vm.notifications.email_notification_4,
+                                  $$el = $event.target,
+                                  $$c = $$el.checked ? true : false
+                                if (Array.isArray($$a)) {
+                                  var $$v = null,
+                                    $$i = _vm._i($$a, $$v)
+                                  if ($$el.checked) {
+                                    $$i < 0 &&
+                                      _vm.$set(
+                                        _vm.notifications,
+                                        "email_notification_4",
+                                        $$a.concat([$$v])
+                                      )
+                                  } else {
+                                    $$i > -1 &&
+                                      _vm.$set(
+                                        _vm.notifications,
+                                        "email_notification_4",
+                                        $$a
+                                          .slice(0, $$i)
+                                          .concat($$a.slice($$i + 1))
+                                      )
+                                  }
+                                } else {
+                                  _vm.$set(
+                                    _vm.notifications,
+                                    "email_notification_4",
+                                    $$c
+                                  )
+                                }
+                              }
+                            }
+                          }),
+                          _vm._v(" Email\n              ")
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "row" }, [
+                        _c("div", { staticClass: "col-9" }, [
+                          _vm._v(
+                            "Про пропозиції судової практики для користувача"
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-3" }, [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.notifications.email_notification_5,
+                                expression: "notifications.email_notification_5"
+                              }
+                            ],
+                            attrs: { type: "checkbox" },
+                            domProps: {
+                              checked: Array.isArray(
+                                _vm.notifications.email_notification_5
+                              )
+                                ? _vm._i(
+                                    _vm.notifications.email_notification_5,
+                                    null
+                                  ) > -1
+                                : _vm.notifications.email_notification_5
+                            },
+                            on: {
+                              click: function($event) {
+                                _vm.select()
+                              },
+                              change: function($event) {
+                                var $$a =
+                                    _vm.notifications.email_notification_5,
+                                  $$el = $event.target,
+                                  $$c = $$el.checked ? true : false
+                                if (Array.isArray($$a)) {
+                                  var $$v = null,
+                                    $$i = _vm._i($$a, $$v)
+                                  if ($$el.checked) {
+                                    $$i < 0 &&
+                                      _vm.$set(
+                                        _vm.notifications,
+                                        "email_notification_5",
+                                        $$a.concat([$$v])
+                                      )
+                                  } else {
+                                    $$i > -1 &&
+                                      _vm.$set(
+                                        _vm.notifications,
+                                        "email_notification_5",
+                                        $$a
+                                          .slice(0, $$i)
+                                          .concat($$a.slice($$i + 1))
+                                      )
+                                  }
+                                } else {
+                                  _vm.$set(
+                                    _vm.notifications,
+                                    "email_notification_5",
+                                    $$c
+                                  )
+                                }
+                              }
+                            }
+                          }),
+                          _vm._v(" Email\n              ")
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "row bg" }, [
+                        _c("div", { staticClass: "col-9" }, [
+                          _vm._v("Новини, пропозиції, оновлення")
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-3" }, [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.notifications.email_notification_6,
+                                expression: "notifications.email_notification_6"
+                              }
+                            ],
+                            attrs: { type: "checkbox" },
+                            domProps: {
+                              checked: Array.isArray(
+                                _vm.notifications.email_notification_6
+                              )
+                                ? _vm._i(
+                                    _vm.notifications.email_notification_6,
+                                    null
+                                  ) > -1
+                                : _vm.notifications.email_notification_6
+                            },
+                            on: {
+                              click: function($event) {
+                                _vm.select()
+                              },
+                              change: function($event) {
+                                var $$a =
+                                    _vm.notifications.email_notification_6,
+                                  $$el = $event.target,
+                                  $$c = $$el.checked ? true : false
+                                if (Array.isArray($$a)) {
+                                  var $$v = null,
+                                    $$i = _vm._i($$a, $$v)
+                                  if ($$el.checked) {
+                                    $$i < 0 &&
+                                      _vm.$set(
+                                        _vm.notifications,
+                                        "email_notification_6",
+                                        $$a.concat([$$v])
+                                      )
+                                  } else {
+                                    $$i > -1 &&
+                                      _vm.$set(
+                                        _vm.notifications,
+                                        "email_notification_6",
+                                        $$a
+                                          .slice(0, $$i)
+                                          .concat($$a.slice($$i + 1))
+                                      )
+                                  }
+                                } else {
+                                  _vm.$set(
+                                    _vm.notifications,
+                                    "email_notification_6",
+                                    $$c
+                                  )
+                                }
+                              }
+                            }
+                          }),
+                          _vm._v(" Email\n                ")
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _vm._m(1)
+                    ])
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "hr py-4" }),
+              _vm._v(" "),
+              _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "col-6 offset-4" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-danger btn-lg",
+                      attrs: { type: "button" },
+                      on: {
+                        click: function($event) {
+                          _vm.deleteProfile()
+                        }
+                      }
+                    },
+                    [_vm._v("Видалити профайл")]
+                  )
+                ])
+              ])
+            ])
+          : _vm._e()
+      ],
+      1
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-12 py-4" }, [
+        _vm._v("Пароль повинен бути мінімум 6 символів!")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "offset-6 col-6 text-center" }, [
+        _c(
+          "button",
+          { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+          [_vm._v("Зберегти")]
+        )
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-33ac42eb", module.exports)
+  }
+}
+
+/***/ }),
+/* 192 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(193)
+}
+var normalizeComponent = __webpack_require__(2)
+/* script */
+var __vue_script__ = __webpack_require__(195)
+/* template */
+var __vue_template__ = __webpack_require__(196)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-106350ce"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/user/ConfirmEmail.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-106350ce", Component.options)
+  } else {
+    hotAPI.reload("data-v-106350ce", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 193 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(194);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(1)("7f924d2e", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-106350ce\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./ConfirmEmail.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-106350ce\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./ConfirmEmail.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 194 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(0)(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/***/ }),
+/* 195 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -56554,800 +57899,75 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "UserSettings",
-  data: function data() {
-    return {
-      user: {
-        name: "Tetiana",
-        surname: "Prysiazhniuk",
-        phone: "+380660851225"
-      },
-      password: {
-        currentPassword: "",
-        newPassword: "",
-        rePassword: ""
-      }
-    };
-  },
-  created: function created() {
-    this.getUserInfo();
-  },
+	name: "ConfirmEmail",
+	data: function data() {
+		return {
+			confirmed: true
+		};
+	},
+	created: function created() {
 
-  methods: {
-    getUserInfo: function getUserInfo() {
-      var _this = this;
+		var _this = this;
 
-      axios.get("/api/v1/user/settings", {
-        headers: {
-          "Content-Type": "application/json",
-          "X-Requested-With": "XMLHttpRequest",
-          Authorization: localStorage.getItem("token")
-        }
-      }).then(function (response) {
-        _this.user = response.data;
-        console.log("User settings", _this.user);
-      }).catch(function (error) {
-        if (error.response && error.response.status === 401) {
-          _this.$router.push("/login");
-        }
-      });
-    }
-  }
+		// якщо токена немає, або він неповний
+		if (this.$route.query.token === undefined || this.$route.query.token.length < 16) {
+			_this.confirmed = false;
+			this.$router.push("/");
+			return;
+		}
+		axios.get("/api/v1/confirm-email", {
+			headers: {
+				"Content-Type": "application/json",
+				"X-Requested-With": "XMLHttpRequest"
+			},
+			params: {
+				token: this.$route.query.token
+			}
+		}).then(function (response) {
+			_this.confirmed = true;
+			setTimeout(function () {
+				_this.$router.push("/login");
+			}, 7000);
+		}).catch(function (error) {
+			if (error.response && error.response.status === 401) {
+				_this.confirmed = false;
+				setTimeout(function () {
+					_this.$router.push("/");
+				}, 5000);
+			} else {
+				_this.$router.push("/");
+			}
+		});
+	}
 });
 
 /***/ }),
-/* 191 */
+/* 196 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "settings" }, [
-    _c("div", { staticClass: "container content-wrapper" }, [
-      _c("div", { staticClass: "border content-wrapper_body" }, [
-        _c("div", { staticClass: "profile" }, [
-          _c("h4", [_vm._v("Профіль")]),
-          _vm._v(" "),
-          _c("form", [
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-6" }, [
-                _c("div", { staticClass: "form-group" }, [
-                  _c(
-                    "label",
-                    {
-                      staticClass: "form-control-label",
-                      attrs: { for: "name" }
-                    },
-                    [_vm._v("Ім'я:")]
-                  ),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "control has-icon has-icon-right" }, [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.user.name,
-                          expression: "user.name"
-                        },
-                        {
-                          name: "validate",
-                          rawName: "v-validate",
-                          value: "required|alpha|min:3||max:250",
-                          expression: "'required|alpha|min:3||max:250'"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      class: {
-                        input: true,
-                        "is-danger": _vm.errors.has("ім'я")
-                      },
-                      attrs: { id: "name", type: "text", name: "ім'я" },
-                      domProps: { value: _vm.user.name },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(_vm.user, "name", $event.target.value)
-                        }
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("small", [
-                      _c("i", {
-                        directives: [
-                          {
-                            name: "show",
-                            rawName: "v-show",
-                            value: _vm.errors.has("ім'я"),
-                            expression: "errors.has('ім\\'я')"
-                          }
-                        ],
-                        staticClass: "fa fa-warning"
-                      }),
-                      _vm._v(" "),
-                      _c(
-                        "span",
-                        {
-                          directives: [
-                            {
-                              name: "show",
-                              rawName: "v-show",
-                              value: _vm.errors.has("ім'я"),
-                              expression: "errors.has('ім\\'я')"
-                            }
-                          ],
-                          staticClass: "help is-danger"
-                        },
-                        [_vm._v(_vm._s(_vm.errors.first("ім'я")))]
-                      )
-                    ])
-                  ])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-6" }, [
-                _c("div", { staticClass: "form-group" }, [
-                  _c(
-                    "label",
-                    {
-                      staticClass: "form-control-label",
-                      attrs: { for: "name" }
-                    },
-                    [_vm._v("Прізвище:")]
-                  ),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "control has-icon has-icon-right" }, [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.user.surname,
-                          expression: "user.surname"
-                        },
-                        {
-                          name: "validate",
-                          rawName: "v-validate",
-                          value: "required|alpha|min:3||max:250",
-                          expression: "'required|alpha|min:3||max:250'"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      class: {
-                        input: true,
-                        "is-danger": _vm.errors.has("прізвище")
-                      },
-                      attrs: { id: "surname", type: "text", name: "прізвище" },
-                      domProps: { value: _vm.user.surname },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(_vm.user, "surname", $event.target.value)
-                        }
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("small", [
-                      _c("i", {
-                        directives: [
-                          {
-                            name: "show",
-                            rawName: "v-show",
-                            value: _vm.errors.has("прізвище"),
-                            expression: "errors.has('прізвище')"
-                          }
-                        ],
-                        staticClass: "fa fa-warning"
-                      }),
-                      _vm._v(" "),
-                      _c(
-                        "span",
-                        {
-                          directives: [
-                            {
-                              name: "show",
-                              rawName: "v-show",
-                              value: _vm.errors.has("прізвище"),
-                              expression: "errors.has('прізвище')"
-                            }
-                          ],
-                          staticClass: "help is-danger"
-                        },
-                        [_vm._v(_vm._s(_vm.errors.first("прізвище")))]
-                      )
-                    ])
-                  ])
-                ])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-6" }, [
-                _c("div", { staticClass: "form-group" }, [
-                  _c(
-                    "label",
-                    {
-                      staticClass: "form-control-label",
-                      attrs: { for: "name" }
-                    },
-                    [_vm._v("Номер мобільного:")]
-                  ),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "control has-icon has-icon-right" }, [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.user.phone,
-                          expression: "user.phone"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      class: {
-                        input: true,
-                        "is-danger": _vm.errors.has("телефон")
-                      },
-                      attrs: { id: "telephone", type: "text", name: "телефон" },
-                      domProps: { value: _vm.user.phone },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(_vm.user, "phone", $event.target.value)
-                        }
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("small", [
-                      _c("i", {
-                        directives: [
-                          {
-                            name: "show",
-                            rawName: "v-show",
-                            value: _vm.errors.has("телефон"),
-                            expression: "errors.has('телефон')"
-                          }
-                        ],
-                        staticClass: "fa fa-warning"
-                      }),
-                      _vm._v(" "),
-                      _c(
-                        "span",
-                        {
-                          directives: [
-                            {
-                              name: "show",
-                              rawName: "v-show",
-                              value: _vm.errors.has("телефон"),
-                              expression: "errors.has('телефон')"
-                            }
-                          ],
-                          staticClass: "help is-danger"
-                        },
-                        [_vm._v(_vm._s(_vm.errors.first("телефон")))]
-                      )
-                    ])
-                  ])
-                ])
-              ])
-            ]),
-            _vm._v(" "),
-            _vm._m(0)
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "hr py-4" }),
-        _vm._v(" "),
-        _c("div", { staticClass: "change-password" }, [
-          _c("h4", [_vm._v("Змінити пароль:")]),
-          _vm._v(" "),
-          _c("form", [
-            _vm._m(1),
-            _vm._v(" "),
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-6" }, [
-                _c("div", { staticClass: "form-group" }, [
-                  _c(
-                    "label",
-                    {
-                      staticClass: "form-control-label",
-                      attrs: { for: "password" }
-                    },
-                    [_vm._v("Старий пароль:")]
-                  ),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "control has-icon has-icon-right" }, [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.password.currentPassword,
-                          expression: "password.currentPassword"
-                        },
-                        {
-                          name: "validate",
-                          rawName: "v-validate",
-                          value: "required|min:6|max:32",
-                          expression: "'required|min:6|max:32'"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      class: {
-                        input: true,
-                        "is-danger": _vm.errors.has("пароль")
-                      },
-                      attrs: {
-                        id: "password",
-                        type: "password",
-                        name: "пароль"
-                      },
-                      domProps: { value: _vm.password.currentPassword },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(
-                            _vm.password,
-                            "currentPassword",
-                            $event.target.value
-                          )
-                        }
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("small", [
-                      _c("i", {
-                        directives: [
-                          {
-                            name: "show",
-                            rawName: "v-show",
-                            value: _vm.errors.has("пароль"),
-                            expression: "errors.has('пароль')"
-                          }
-                        ],
-                        staticClass: "fa fa-warning"
-                      }),
-                      _vm._v(" "),
-                      _c(
-                        "span",
-                        {
-                          directives: [
-                            {
-                              name: "show",
-                              rawName: "v-show",
-                              value: _vm.errors.has("пароль"),
-                              expression: "errors.has('пароль')"
-                            }
-                          ],
-                          staticClass: "help is-danger"
-                        },
-                        [_vm._v(_vm._s(_vm.errors.first("пароль")))]
-                      )
-                    ])
-                  ])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-6" }, [
-                _c("div", { staticClass: "form-group" }, [
-                  _c(
-                    "label",
-                    {
-                      staticClass: "form-control-label",
-                      attrs: { for: "repassword" }
-                    },
-                    [_vm._v("Новий пароль:")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "p",
-                    {
-                      staticClass: "control",
-                      class: {
-                        error: !(_vm.user.repassword === _vm.user.password)
-                      }
-                    },
-                    [
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.password.newPassword,
-                            expression: "password.newPassword"
-                          },
-                          {
-                            name: "validate",
-                            rawName: "v-validate",
-                            value: "required|min:6|max:32",
-                            expression: "'required|min:6|max:32'"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        class: {
-                          "is-danger": !(
-                            _vm.user.repassword === _vm.user.password
-                          )
-                        },
-                        attrs: {
-                          id: "repassword",
-                          type: "password",
-                          name: "repassword"
-                        },
-                        domProps: { value: _vm.password.newPassword },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.$set(
-                              _vm.password,
-                              "newPassword",
-                              $event.target.value
-                            )
-                          }
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c(
-                        "small",
-                        {
-                          directives: [
-                            {
-                              name: "show",
-                              rawName: "v-show",
-                              value: !(
-                                _vm.user.repassword === _vm.user.password
-                              ),
-                              expression: "!(user.repassword === user.password)"
-                            }
-                          ]
-                        },
-                        [
-                          _c("i", { staticClass: "fa fa-warning" }),
-                          _vm._v(" "),
-                          _c("span", { staticClass: "help is-danger" }, [
-                            _vm._v("Паролі не співпадають")
-                          ])
-                        ]
-                      )
-                    ]
-                  )
-                ])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-6" }, [
-                _c("div", { staticClass: "form-group" }, [
-                  _c(
-                    "label",
-                    {
-                      staticClass: "form-control-label",
-                      attrs: { for: "password" }
-                    },
-                    [_vm._v("Підтвердити новий пароль:")]
-                  ),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "control has-icon has-icon-right" }, [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.password.rePassword,
-                          expression: "password.rePassword"
-                        },
-                        {
-                          name: "validate",
-                          rawName: "v-validate",
-                          value: "required|min:6|max:32",
-                          expression: "'required|min:6|max:32'"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      class: {
-                        input: true,
-                        "is-danger": _vm.errors.has("пароль")
-                      },
-                      attrs: {
-                        id: "password",
-                        type: "password",
-                        name: "пароль"
-                      },
-                      domProps: { value: _vm.password.rePassword },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(
-                            _vm.password,
-                            "rePassword",
-                            $event.target.value
-                          )
-                        }
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("small", [
-                      _c("i", {
-                        directives: [
-                          {
-                            name: "show",
-                            rawName: "v-show",
-                            value: _vm.errors.has("пароль"),
-                            expression: "errors.has('пароль')"
-                          }
-                        ],
-                        staticClass: "fa fa-warning"
-                      }),
-                      _vm._v(" "),
-                      _c(
-                        "span",
-                        {
-                          directives: [
-                            {
-                              name: "show",
-                              rawName: "v-show",
-                              value: _vm.errors.has("пароль"),
-                              expression: "errors.has('пароль')"
-                            }
-                          ],
-                          staticClass: "help is-danger"
-                        },
-                        [_vm._v(_vm._s(_vm.errors.first("пароль")))]
-                      )
-                    ])
-                  ])
-                ])
-              ])
-            ]),
-            _vm._v(" "),
-            _vm._m(2)
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "hr py-4" }),
-        _vm._v(" "),
-        _vm._m(3)
-      ])
-    ])
-  ])
+  return _vm.confirmed ? _c("div", [_vm._m(0)]) : _c("div", [_vm._m(1)])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "offset-6 col-6 text-center" }, [
-        _c(
-          "button",
-          { staticClass: "btn btn-primary", attrs: { type: "submit" } },
-          [_vm._v("Зберегти")]
-        )
+    return _c("div", { staticClass: "row mt-5" }, [
+      _c("div", { staticClass: "col-8 offset-2 mt-5" }, [
+        _c("p", { staticClass: "bg-success h2 text-center" }, [
+          _vm._v("Email підтверджено, вітаємо в системі!")
+        ]),
+        _vm._v(" "),
+        _c("p", { staticClass: "text-muted text-center" }, [
+          _vm._v("За декілька секунд Вас буде перенаправлено на сторінку входу")
+        ])
       ])
     ])
   },
@@ -57355,114 +57975,14 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-12 py-4" }, [
-        _vm._v("Пароль повинен бути мінімум 6 символів!")
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "offset-6 col-6 text-center" }, [
-        _c(
-          "button",
-          { staticClass: "btn btn-primary", attrs: { type: "submit" } },
-          [_vm._v("Зберегти")]
-        )
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "notifications" }, [
-      _c("h4", [_vm._v("Налаштування сповіщень")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "table" }, [
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-9" }, [_vm._v("Подія")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-3" }, [
-            _c("div", [_vm._v("Спосіб зв'язку")]),
-            _vm._v(" "),
-            _c("input", { attrs: { type: "checkbox" } })
-          ])
+    return _c("div", { staticClass: "row mt-5" }, [
+      _c("div", { staticClass: "col-8 offset-2 mt-5" }, [
+        _c("p", { staticClass: "text-danger h4 text-center" }, [
+          _vm._v("Даний email вже підтверджено, або його не існує в системі!")
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "row hr" }, [
-          _c("div", { staticClass: "col-9" }, [
-            _vm._v("В судді, якого користувач відстежує, змінився статус.")
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-3" }, [
-            _c("input", { attrs: { type: "checkbox" } }),
-            _vm._v(" Email\n            ")
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "row bg" }, [
-          _c("div", { staticClass: "col-9" }, [
-            _vm._v(
-              "По справі, яку користувач відстежує, додалось нове судове засідання"
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-3" }, [
-            _c("input", { attrs: { type: "checkbox" } }),
-            _vm._v(" Email\n            ")
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-9" }, [
-            _vm._v(
-              "По справі, яку користувач відстежує, в будь-якого судді змінився статус"
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-3" }, [
-            _c("input", { attrs: { type: "checkbox" } }),
-            _vm._v(" Email\n            ")
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "row bg" }, [
-          _c("div", { staticClass: "col-9" }, [
-            _vm._v(
-              "За один день до судового засідання, яке користувач відстежує"
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-3" }, [
-            _c("input", { attrs: { type: "checkbox" } }),
-            _vm._v(" Email\n            ")
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-9" }, [
-            _vm._v("Про пропозиції судової практики для користувача")
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-3" }, [
-            _c("input", { attrs: { type: "checkbox" } }),
-            _vm._v(" Email\n            ")
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "row bg" }, [
-          _c("div", { staticClass: "col-9" }, [
-            _vm._v("Новини, пропозиції, оновлення")
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-3" }, [
-            _c("input", { attrs: { type: "checkbox" } }),
-            _vm._v(" Email\n              ")
-          ])
+        _c("p", { staticClass: "text-muted text-center" }, [
+          _vm._v("За декілька секунд Вас буде направлено на головну сторінку")
         ])
       ])
     ])
@@ -57473,12 +57993,12 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-33ac42eb", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-106350ce", module.exports)
   }
 }
 
 /***/ }),
-/* 192 */
+/* 197 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -57525,7 +58045,145 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
 }));
 
 /***/ }),
-/* 193 */
+/* 198 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* unused harmony export VueMaskPlugin */
+/* unused harmony export VueMaskDirective */
+function format (text, wholeMask) {
+  if (!wholeMask) return text;
+
+  var maskStartRegExp = /^([^#ANX]+)/;
+
+  if (+text.length === 1 && maskStartRegExp.test(wholeMask)) {
+    text = maskStartRegExp.exec(wholeMask)[0] + text;
+  }
+
+  var newText = '';
+  var charOffset = 0;
+
+  for (var maskIndex = 0; maskIndex < wholeMask.length; maskIndex += 1) {
+    var mask = wholeMask.charAt(maskIndex);
+    switch (mask) {
+      case '#':
+        break;
+      case 'A':
+        break;
+      case '?':
+        break;
+      case 'N':
+        break;
+      case 'X':
+        break;
+      default:
+        text = text.replace(mask, '');
+    }
+  }
+  for (var _maskIndex = 0, x = 1; x && _maskIndex < wholeMask.length; _maskIndex += 1) {
+    var char = text.charAt(_maskIndex - charOffset);
+    var _mask = wholeMask.charAt(_maskIndex);
+
+    switch (_mask) {
+      case '#':
+        /\d/.test(char) ? newText += char : x = 0;
+        break;
+      case 'A':
+        /[a-z]/i.test(char) ? newText += char : x = 0;
+        break;
+      case 'N':
+        /[a-z0-9]/i.test(char) ? newText += char : x = 0;
+        break;
+
+      case '?':
+        charOffset += 1;
+        break;
+      case 'X':
+        newText += char;
+        break;
+      default:
+        newText += _mask;
+
+        if (char && char !== _mask) {
+          text = ' ' + text;
+        }
+
+        break;
+    }
+  }
+  return newText;
+}
+
+var trigger = function trigger(el, type) {
+  var e = document.createEvent('HTMLEvents');
+  e.initEvent(type, true, true);
+  el.dispatchEvent(e);
+};
+
+var inBrowser = typeof window !== 'undefined';
+var UA = inBrowser && window.navigator.userAgent.toLowerCase();
+var isEdge = UA && UA.indexOf('edge/') > 0;
+var isAndroid = UA && UA.indexOf('android') > 0;
+var isChrome = UA && /chrome\/\d+/.test(UA) && !isEdge;
+
+function updateValue(el) {
+  var force = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+  var value = el.value,
+      _el$dataset = el.dataset,
+      _el$dataset$previousV = _el$dataset.previousValue,
+      previousValue = _el$dataset$previousV === undefined ? '' : _el$dataset$previousV,
+      mask = _el$dataset.mask;
+
+
+  if (force || value && value !== previousValue && value.length > previousValue.length) {
+    el.value = format(value, mask);
+    if (isAndroid && isChrome) {
+      setTimeout(function () {
+        return trigger(el, 'input');
+      }, 0);
+    } else {
+      trigger(el, 'input');
+    }
+  }
+
+  el.dataset.previousValue = value;
+}
+
+function updateMask(el, mask) {
+  el.dataset.mask = mask;
+}
+
+var directive = {
+  bind: function bind(el, _ref) {
+    var value = _ref.value;
+
+    updateMask(el, value);
+    updateValue(el);
+  },
+  componentUpdated: function componentUpdated(el, _ref2) {
+    var value = _ref2.value,
+        oldValue = _ref2.oldValue;
+
+    var isMaskChanged = value !== oldValue;
+
+    if (isMaskChanged) {
+      updateMask(el, value);
+    }
+
+    updateValue(el, isMaskChanged);
+  }
+};
+
+var plugin = (function (Vue) {
+  Vue.directive('mask', directive);
+});
+
+/* harmony default export */ __webpack_exports__["a"] = (plugin);
+
+
+
+/***/ }),
+/* 199 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
