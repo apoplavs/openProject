@@ -5,6 +5,7 @@ import pickle
 import re
 
 import nltk
+nltk.download('punkt')
 import sys
 
 from lib.validation import Validator
