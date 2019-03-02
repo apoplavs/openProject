@@ -52031,7 +52031,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }).then(function (response) {
           _this3.judge.data.is_bookmark = 0;
         }).catch(function (error) {
-          if (error.response.status === 401) {
+          if (error.response && error.response.status === 401) {
             _this3.$router.push("/login");
           }
           console.log("Bookmark", error.response);
@@ -52044,11 +52044,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       if (!this.$store.getters.isAuth) {
         this.$router.push("/login");
       }
+
       if (this.judge.data.is_unliked) {
         this.changeUnlikes();
       }
       if (this.judge.data.is_liked) {
         // delete like
+        // спочатку міняємо view
+        this.judge.data.likes -= 1;
+        this.judge.data.is_liked = 0;
+
         axios({
           method: "delete",
           url: "/api/v1/judges/" + this.$route.params.id + "/like",
@@ -52058,16 +52063,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             Authorization: localStorage.getItem("token")
           }
         }).then(function (response) {
-          _this4.judge.data.likes -= 1;
-          _this4.judge.data.is_liked = 0;
+          //
         }).catch(function (error) {
-          if (error.response.status === 401) {
+          if (error.response && error.response.status === 401) {
             _this4.$router.push("/login");
           }
+          // якщо поставити лайк на сервері не вдалось, повертаємо кількість назад
+          _this4.judge.data.likes += 1;
+          _this4.judge.data.is_liked = 1;
           console.log("set Likes", error);
         });
       } else {
         // set like
+        this.judge.data.likes += 1;
+        this.judge.data.is_liked = 1;
         axios({
           method: "put",
           url: "/api/v1/judges/" + this.$route.params.id + "/like",
@@ -52077,12 +52086,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             Authorization: localStorage.getItem("token")
           }
         }).then(function (response) {
-          _this4.judge.data.likes += 1;
-          _this4.judge.data.is_liked = 1;
+          //
         }).catch(function (error) {
-          if (error.response.status === 401) {
+          if (error.response && error.response.status === 401) {
             _this4.$router.push("/login");
           }
+          // якщо поставити лайк на сервері не вдалось, повертаємо кількість назад
+          _this4.judge.data.likes -= 1;
+          _this4.judge.data.is_liked = 0;
           console.log("set Likes", error);
         });
       }
@@ -52098,6 +52109,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }
       if (this.judge.data.is_unliked) {
         // dell unlike
+        this.judge.data.unlikes -= 1;
+        this.judge.data.is_unliked = 0;
         axios({
           method: "delete",
           url: "/api/v1/judges/" + this.$route.params.id + "/unlike",
@@ -52107,16 +52120,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             Authorization: localStorage.getItem("token")
           }
         }).then(function (response) {
-          _this5.judge.data.unlikes -= 1;
-          _this5.judge.data.is_unliked = 0;
+          //
         }).catch(function (error) {
-          if (error.response.status === 401) {
+          if (error.response && error.response.status === 401) {
             _this5.$router.push("/login");
           }
+          // якщо поставити лайк на сервері не вдалось, повертаємо кількість назад
+          _this5.judge.data.unlikes += 1;
+          _this5.judge.data.is_unliked = 1;
           console.log("set Likes", error);
         });
       } else {
         // set unlike
+        this.judge.data.unlikes += 1;
+        this.judge.data.is_unliked = 1;
         axios({
           method: "put",
           url: "/api/v1/judges/" + this.$route.params.id + "/unlike",
@@ -52126,12 +52143,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             Authorization: localStorage.getItem("token")
           }
         }).then(function (response) {
-          _this5.judge.data.unlikes += 1;
-          _this5.judge.data.is_unliked = 1;
+          //
         }).catch(function (error) {
-          if (error.response.status === 401) {
+          if (error.response && error.response.status === 401) {
             _this5.$router.push("/login");
           }
+          // якщо поставити лайк на сервері не вдалось, повертаємо кількість назад
+          _this5.judge.data.unlikes -= 1;
+          _this5.judge.data.is_unliked = 0;
           console.log("set Likes", error);
         });
       }
@@ -52153,7 +52172,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }).then(function (response) {
           session.is_bookmark = 0;
         }).catch(function (error) {
-          if (error.response.status === 401) {
+          if (error.response && error.response.status === 401) {
             _this6.$router.push("/login");
           }
         });
@@ -52176,7 +52195,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }).then(function (response) {
           session.is_bookmark = 1;
         }).catch(function (error) {
-          if (error.response.status === 401) {
+          if (error.response && error.response.status === 401) {
             _this7.$router.push("/login");
           }
         });

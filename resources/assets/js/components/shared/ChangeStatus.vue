@@ -118,7 +118,7 @@
 				// встановлюємо новий статус
 				this.judgeData.status = this.judgeStatus.set_status;
 				this.judgeData.due_date_status = this.judgeStatus.due_date;
-				
+
                 axios({
                         method: "put",
                         url: `/api/v1/judges/${this.judgeData.id}/update-status`,
