@@ -782,6 +782,8 @@ export default {
   .status-info {
     .rating {
       @include alignElement($justifyContent: space-between);
+      padding-left: 20%;
+      padding-right: 20%;
       .like {
         color: green;
         font-size: 1.1rem;

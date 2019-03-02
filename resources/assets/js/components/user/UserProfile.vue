@@ -10,10 +10,10 @@
                         <a class="nav-link tab" href="javascript:" @click="setActiveTab(2)">Судова практика</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link tab" href="javascript:" @click="setActiveTab(3)">Закладки суддів</a>
+                        <a class="nav-link tab" href="javascript:" @click="setActiveTab(3)">Судді</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link tab" href="javascript:" @click="setActiveTab(4)">Закладки судових установ</a>
+                        <a class="nav-link tab" href="javascript:" @click="setActiveTab(4)">Судові установи</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link tab" href="javascript:" @click="setActiveTab(5)">Історія переглядів</a>
