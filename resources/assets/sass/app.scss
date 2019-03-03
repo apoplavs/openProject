@@ -78,31 +78,37 @@ button {
 i[class^="fa-bookmark"],
 i.fa-edit{
   cursor: pointer;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
 }
 .fa-bookmark-o,
 .fa-bookmark {
     color: $danger;
-    font-size: 1.1rem;
+    font-size: 1.3rem;
     cursor: pointer;
 }
 .fa-briefcase {
     color: $success;
+    font-size: 1.1rem;
 }
 .fa-line-chart {
     color: $main-color;
+    font-size: 1.1rem;
 }
 .fa-medkit {
     color: $danger;
+    font-size: 1.1rem;
 }
 .fa-calendar-minus-o{
     color: $text-color;
+    font-size: 1.1rem;
 }
 .fa-umbrella-beach {
     color: $warning;
+  font-size: 1.1rem;
 }
 .fa-calendar-times-o {
     color: red;
+  font-size: 1.1rem;
 }
 .fa-edit {
     color: $color-5;

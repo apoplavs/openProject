@@ -45,16 +45,17 @@
                       <i
                         class="fa fa-edit float-right pl-3"
                         aria-hidden="true"
+                        title="Змінити статус"
                         @click="showModal = true"
                       ></i>
                     </span>
                   </div>
                   <div class="bookmark w-50">
                     <span v-if="judge.data.is_bookmark" @click="changeBookmarkStatus()">
-                      <i class="fa fa-bookmark" aria-hidden="true"></i>
+                      <i class="fa fa-bookmark" aria-hidden="true" title="Видалити з закладок"></i>
                     </span>
                     <span v-if="!judge.data.is_bookmark" @click="changeBookmarkStatus()">
-                      <i class="fa fa-bookmark-o" aria-hidden="true"></i>
+                      <i class="fa fa-bookmark-o" aria-hidden="true" title="Додати в закладки"></i>
                     </span>
                   </div>
                 </div>
@@ -103,13 +104,13 @@
                   <div class="col-2">{{ session.forma }}</div>
                   <div class="col-3">{{ session.involved }}</div>
                   <div class="col-2">{{ session.description }}</div>
-                  <div class="col-1 pr-0 text-center">
+                  <div class="col-1 pr-0 text-center" v-if="isAuth">
                     <i
                       v-if="session.is_bookmark"
-                      class="fas fa-star"
+                      class="fas fa-star" title="Видалити з закладок"
                       @click="deleteBookmarkCourtSession(session)"
                     ></i>
-                    <i v-else class="far fa-star" @click="addBookmarkCourtSession(session)"></i>
+                    <i v-else class="far fa-star" @click="addBookmarkCourtSession(session)" title="Додати в закладки"></i>
                   </div>
                 </div>
               </div>
@@ -479,7 +480,9 @@ export default {
         this.$router.push("/login");
       }
       if (this.judge.data.is_bookmark === 0) {
-        axios({
+      	this.judge.data.is_bookmark = 1;
+
+      	axios({
           method: "put",
           url: `/api/v1/judges/${this.$route.params.id}/bookmark`,
           headers: {
@@ -489,15 +492,24 @@ export default {
           }
         })
           .then(response => {
-            this.judge.data.is_bookmark = 1;
+            //
           })
           .catch(error => {
             if (error.response && error.response.status === 401) {
               this.$router.push("/login");
             }
+			this.judge.data.is_bookmark = 0;
+            this.$toasted.error("Неможливо додати в закладки, перевірте Ваше інтернет з'єднання або спробуйте пізніше", {
+                theme: "primary",
+                position: "top-right",
+                duration: 5000
+            });
             console.log("Bookmark", error);
           });
+
+      // якщо вже є закладка - видаляємо
       } else {
+		this.judge.data.is_bookmark = 0;
         axios({
           method: "delete",
           url: `/api/v1/judges/${this.$route.params.id}/bookmark`,
@@ -508,12 +520,18 @@ export default {
           }
         })
           .then(response => {
-            this.judge.data.is_bookmark = 0;
+            //
           })
           .catch(error => {
-            if (error.response.status === 401) {
+            if (error.response && error.response.status === 401) {
               this.$router.push("/login");
             }
+			this.judge.data.is_bookmark = 1;
+            this.$toasted.error("Перевірте Ваше інтернет з'єднання або спробуйте пізніше", {
+                theme: "primary",
+                position: "top-right",
+                duration: 5000
+            });
             console.log("Bookmark", error.response);
           });
       }
@@ -522,11 +540,17 @@ export default {
       if (!this.$store.getters.isAuth) {
         this.$router.push("/login");
       }
+
+
       if (this.judge.data.is_unliked) {
         this.changeUnlikes();
       }
       if (this.judge.data.is_liked) {
         // delete like
+        // спочатку міняємо view
+        this.judge.data.likes -= 1;
+        this.judge.data.is_liked = 0;
+
         axios({
           method: "delete",
           url: `/api/v1/judges/${this.$route.params.id}/like`,
@@ -537,17 +561,28 @@ export default {
           }
         })
           .then(response => {
-            this.judge.data.likes -= 1;
-            this.judge.data.is_liked = 0;
+            //
           })
           .catch(error => {
-            if (error.response.status === 401) {
+            if (error.response && error.response.status === 401) {
               this.$router.push("/login");
             }
+            // якщо поставити лайк на сервері не вдалось, повертаємо кількість назад
+            this.judge.data.likes += 1;
+            this.judge.data.is_liked = 1;
+            this.$toasted.error("Перевірте Ваше інтернет з'єднання або спробуйте пізніше", {
+                theme: "primary",
+                position: "top-right",
+                duration: 5000
+            });
             console.log("set Likes", error);
           });
+
+
       } else {
         // set like
+		  this.judge.data.likes += 1;
+		  this.judge.data.is_liked = 1;
         axios({
           method: "put",
           url: `/api/v1/judges/${this.$route.params.id}/like`,
@@ -558,13 +593,20 @@ export default {
           }
         })
           .then(response => {
-            this.judge.data.likes += 1;
-            this.judge.data.is_liked = 1;
+            //
           })
           .catch(error => {
-            if (error.response.status === 401) {
+            if (error.response && error.response.status === 401) {
               this.$router.push("/login");
             }
+            // якщо поставити лайк на сервері не вдалось, повертаємо кількість назад
+            this.judge.data.likes -= 1;
+            this.judge.data.is_liked = 0;
+            this.$toasted.error("Перевірте Ваше інтернет з'єднання або спробуйте пізніше", {
+                theme: "primary",
+                position: "top-right",
+                duration: 5000
+            });
             console.log("set Likes", error);
           });
       }
@@ -578,6 +620,8 @@ export default {
       }
       if (this.judge.data.is_unliked) {
         // dell unlike
+		  this.judge.data.unlikes -= 1;
+		  this.judge.data.is_unliked = 0;
         axios({
           method: "delete",
           url: `/api/v1/judges/${this.$route.params.id}/unlike`,
@@ -588,17 +632,29 @@ export default {
           }
         })
           .then(response => {
-            this.judge.data.unlikes -= 1;
-            this.judge.data.is_unliked = 0;
+            //
           })
           .catch(error => {
-            if (error.response.status === 401) {
+            if (error.response && error.response.status === 401) {
               this.$router.push("/login");
             }
+            // якщо поставити лайк на сервері не вдалось, повертаємо кількість назад
+            this.judge.data.unlikes += 1;
+            this.judge.data.is_unliked = 1;
+            this.$toasted.error("Перевірте Ваше інтернет з'єднання або спробуйте пізніше", {
+                theme: "primary",
+                position: "top-right",
+                duration: 5000
+            });
             console.log("set Likes", error);
           });
+
+
+
       } else {
         // set unlike
+		  this.judge.data.unlikes += 1;
+		  this.judge.data.is_unliked = 1;
         axios({
           method: "put",
           url: `/api/v1/judges/${this.$route.params.id}/unlike`,
@@ -609,21 +665,32 @@ export default {
           }
         })
           .then(response => {
-            this.judge.data.unlikes += 1;
-            this.judge.data.is_unliked = 1;
+            //
           })
           .catch(error => {
-            if (error.response.status === 401) {
+            if (error.response && error.response.status === 401) {
               this.$router.push("/login");
             }
+            // якщо поставити лайк на сервері не вдалось, повертаємо кількість назад
+            this.judge.data.unlikes -= 1;
+            this.judge.data.is_unliked = 0;
+            this.$toasted.error("Перевірте Ваше інтернет з'єднання або спробуйте пізніше", {
+                theme: "primary",
+                position: "top-right",
+                duration: 5000
+            });
             console.log("set Likes", error);
           });
       }
     },
+
     deleteBookmarkCourtSession(session) {
       if (!this.$store.getters.isAuth) {
         this.$router.push("/login");
+
       } else {
+		session.is_bookmark = 0;
+
         axios({
           method: "delete",
           url: `/api/v1/court-sessions/${session.id}/bookmark`,
@@ -634,19 +701,28 @@ export default {
           }
         })
           .then(response => {
-            session.is_bookmark = 0;
+            //
           })
           .catch(error => {
-            if (error.response.status === 401) {
+            if (error.response && error.response.status === 401) {
               this.$router.push("/login");
             }
+			session.is_bookmark = 1;
+            this.$toasted.error("Перевірте Ваше інтернет з'єднання або спробуйте пізніше", {
+                theme: "primary",
+                position: "top-right",
+                duration: 5000
+            });
           });
       }
     },
+
     addBookmarkCourtSession(session) {
       if (!this.$store.getters.isAuth) {
         this.$router.push("/login");
+
       } else {
+		session.is_bookmark = 1;
         axios({
           method: "put",
           url: `/api/v1/court-sessions/${session.id}/bookmark`,
@@ -657,12 +733,18 @@ export default {
           }
         })
           .then(response => {
-            session.is_bookmark = 1;
+            //
           })
           .catch(error => {
-            if (error.response.status === 401) {
+            if (error.response && error.response.status === 401) {
               this.$router.push("/login");
             }
+			session.is_bookmark = 0;
+            this.$toasted.error("Неможливо додати в закладки, перевірте Ваше інтернет з'єднання або спробуйте пізніше", {
+                theme: "primary",
+                position: "top-right",
+                duration: 5000
+            });
           });
       }
     },
@@ -782,6 +864,8 @@ export default {
   .status-info {
     .rating {
       @include alignElement($justifyContent: space-between);
+      padding-left: 20%;
+      padding-right: 20%;
       .like {
         color: green;
         font-size: 1.1rem;
