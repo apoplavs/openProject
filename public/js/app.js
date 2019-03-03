@@ -45267,22 +45267,25 @@ if (false) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_rating_judges_JudgesList_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__components_rating_judges_JudgesList_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_rating_judges_JudgeProfile_vue__ = __webpack_require__(128);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_rating_judges_JudgeProfile_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__components_rating_judges_JudgeProfile_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_rating_courts_CourtsList_vue__ = __webpack_require__(135);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_rating_courts_CourtsList_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8__components_rating_courts_CourtsList_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_rating_courts_CourtProfile_vue__ = __webpack_require__(146);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_rating_courts_CourtProfile_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9__components_rating_courts_CourtProfile_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_user_UserProfile_vue__ = __webpack_require__(151);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_user_UserProfile_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10__components_user_UserProfile_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_user_UserSettings_vue__ = __webpack_require__(186);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_user_UserSettings_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_11__components_user_UserSettings_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_user_ConfirmEmail_vue__ = __webpack_require__(191);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_user_ConfirmEmail_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_12__components_user_ConfirmEmail_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_system_PrivacyPolicy_vue__ = __webpack_require__(196);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_system_PrivacyPolicy_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_13__components_system_PrivacyPolicy_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_rating_judges_JudgeComparison_vue__ = __webpack_require__(212);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_rating_judges_JudgeComparison_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8__components_rating_judges_JudgeComparison_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_rating_courts_CourtsList_vue__ = __webpack_require__(135);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_rating_courts_CourtsList_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9__components_rating_courts_CourtsList_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_rating_courts_CourtProfile_vue__ = __webpack_require__(146);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_rating_courts_CourtProfile_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10__components_rating_courts_CourtProfile_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_user_UserProfile_vue__ = __webpack_require__(151);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_user_UserProfile_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_11__components_user_UserProfile_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_user_UserSettings_vue__ = __webpack_require__(186);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_user_UserSettings_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_12__components_user_UserSettings_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_user_ConfirmEmail_vue__ = __webpack_require__(191);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_user_ConfirmEmail_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_13__components_user_ConfirmEmail_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__components_system_PrivacyPolicy_vue__ = __webpack_require__(196);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__components_system_PrivacyPolicy_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_14__components_system_PrivacyPolicy_vue__);
 
 
 
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]);
+
 
 
 
@@ -45334,28 +45337,32 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
         name: 'judge-profile'
     }, {
         path: '/courts',
-        component: __WEBPACK_IMPORTED_MODULE_8__components_rating_courts_CourtsList_vue___default.a,
+        component: __WEBPACK_IMPORTED_MODULE_9__components_rating_courts_CourtsList_vue___default.a,
         name: 'courts-list'
     }, {
         path: '/courts/:id',
-        component: __WEBPACK_IMPORTED_MODULE_9__components_rating_courts_CourtProfile_vue___default.a,
+        component: __WEBPACK_IMPORTED_MODULE_10__components_rating_courts_CourtProfile_vue___default.a,
         name: 'court-profile'
     }, {
         path: '/user-profile',
-        component: __WEBPACK_IMPORTED_MODULE_10__components_user_UserProfile_vue___default.a,
+        component: __WEBPACK_IMPORTED_MODULE_11__components_user_UserProfile_vue___default.a,
         name: 'user-profile'
     }, {
         path: '/settings',
-        component: __WEBPACK_IMPORTED_MODULE_11__components_user_UserSettings_vue___default.a,
+        component: __WEBPACK_IMPORTED_MODULE_12__components_user_UserSettings_vue___default.a,
         name: 'user-settings'
     }, {
         path: '/privacy-policy',
-        component: __WEBPACK_IMPORTED_MODULE_13__components_system_PrivacyPolicy_vue___default.a,
+        component: __WEBPACK_IMPORTED_MODULE_14__components_system_PrivacyPolicy_vue___default.a,
         name: 'privacy-policy'
     }, {
         path: '/confirm-email',
-        component: __WEBPACK_IMPORTED_MODULE_12__components_user_ConfirmEmail_vue___default.a,
+        component: __WEBPACK_IMPORTED_MODULE_13__components_user_ConfirmEmail_vue___default.a,
         name: 'confirm-email'
+    }, {
+        path: '/judge-comparison',
+        component: __WEBPACK_IMPORTED_MODULE_8__components_rating_judges_JudgeComparison_vue___default.a,
+        name: 'judge-comparison'
     }]
 }));
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, "/"))
@@ -47600,7 +47607,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n@charset \"UTF-8\";\n/* Стилі для фільтрів */\n.filters[data-v-3aabe072] {\n  margin-top: 58px;\n  font-size: 0.9em;\n  /* Customize the label (the container) */\n  /* Hide the browser's default checkbox */\n  /* Create a custom checkbox */\n  /* When the checkbox is checked, add a blue background */\n  /* Create the checkmark/indicator (hidden when not checked) */\n  /* Show the checkmark when checked */\n  /* Style the checkmark/indicator */\n}\n.filters h6[data-v-3aabe072] {\n    color: #4c88bd;\n}\n.filters ul label[data-v-3aabe072] {\n    display: block;\n    position: relative;\n    padding-left: 35px;\n    margin-bottom: 10px;\n    cursor: pointer;\n    -webkit-user-select: none;\n    -moz-user-select: none;\n    -ms-user-select: none;\n    user-select: none;\n}\n.filters ul input[data-v-3aabe072] {\n    position: absolute;\n    opacity: 0;\n    cursor: pointer;\n}\n.filters .checkmark[data-v-3aabe072] {\n    position: absolute;\n    top: 0;\n    left: 0;\n    height: 21px;\n    width: 21px;\n    background-color: #eee;\n}\n.filters ul label input:checked ~ .checkmark[data-v-3aabe072] {\n    background-color: #2b989b;\n}\n.filters .checkmark[data-v-3aabe072]:after {\n    content: \"\";\n    position: absolute;\n    display: none;\n}\n.filters ul label input:checked ~ .checkmark[data-v-3aabe072]:after {\n    display: block;\n}\n.filters ul label .checkmark[data-v-3aabe072]:after {\n    left: 9px;\n    top: 5px;\n    width: 5px;\n    height: 10px;\n    border: solid #ffffff;\n    border-width: 0 3px 3px 0;\n    -webkit-transform: rotate(45deg);\n    transform: rotate(45deg);\n}\n.filters .apply-filters[data-v-3aabe072] {\n    background-color: #ffffff;\n    position: -webkit-sticky;\n    position: sticky;\n    bottom: 0;\n}\n.filters .fa-filter[data-v-3aabe072] {\n    font-size: 21px;\n    color: #ffffff;\n}\n.list-data-container[data-v-3aabe072] {\n  /* styles for autocomplete field  */\n}\n.list-data-container .card[data-v-3aabe072] {\n    margin-top: 20px;\n}\n.list-data-container .pagination[data-v-3aabe072] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n}\n.list-data-container .select-sort[data-v-3aabe072] {\n    width: 290px;\n}\n.list-data-container input[type=\"search\"][data-v-3aabe072] {\n    -webkit-box-shadow: 0 2px 43px -4px rgba(0, 0, 0, 0.19);\n    box-shadow: 0 2px 43px -4px rgba(0, 0, 0, 0.19);\n    border: none;\n}\n.list-data-container .autocomplete[data-v-3aabe072] {\n    /*the container must be positioned relative:*/\n    position: relative;\n    display: inline-block;\n}\n.list-data-container .autocomplete-block-result[data-v-3aabe072] {\n    position: absolute;\n    font-size: 0.9rem;\n    border: none;\n    z-index: 99;\n    top: 100%;\n    left: 16px;\n    right: 16px;\n    padding: 10px;\n    -webkit-box-shadow: 0 3rem 3rem -1rem rgba(10, 10, 10, 0.2);\n    box-shadow: 0 3rem 3rem -1rem rgba(10, 10, 10, 0.2);\n    border-radius: 4px;\n    border-top-left-radius: 0;\n    border-top-right-radius: 0;\n    background-color: #ffffff;\n}\n.list-data-container .autocomplete-block-result .autocomplete-block-result_element[data-v-3aabe072] {\n      padding: 10px 0 10px 0;\n}\n.list-data-container .autocomplete-block-result .autocomplete-block-result_element[data-v-3aabe072]:not(:last-child) {\n        border-bottom: 1px solid rgba(0, 0, 0, 0.1);\n}\n", ""]);
+exports.push([module.i, "\n@charset \"UTF-8\";\n/* Стилі для фільтрів */\n.filters[data-v-3aabe072] {\n  margin-top: 58px;\n  font-size: 0.9em;\n  /* Customize the label (the container) */\n  /* Hide the browser's default checkbox */\n  /* Create a custom checkbox */\n  /* When the checkbox is checked, add a blue background */\n  /* Create the checkmark/indicator (hidden when not checked) */\n  /* Show the checkmark when checked */\n  /* Style the checkmark/indicator */\n}\n.filters h6[data-v-3aabe072] {\n    color: #4c88bd;\n}\n.filters ul label[data-v-3aabe072] {\n    display: block;\n    position: relative;\n    padding-left: 35px;\n    margin-bottom: 10px;\n    cursor: pointer;\n    -webkit-user-select: none;\n    -moz-user-select: none;\n    -ms-user-select: none;\n    user-select: none;\n}\n.filters ul input[data-v-3aabe072] {\n    position: absolute;\n    opacity: 0;\n    cursor: pointer;\n}\n.filters .checkmark[data-v-3aabe072] {\n    position: absolute;\n    top: 0;\n    left: 0;\n    height: 21px;\n    width: 21px;\n    background-color: #eee;\n}\n.filters ul label input:checked ~ .checkmark[data-v-3aabe072] {\n    background-color: #2b989b;\n}\n.filters .checkmark[data-v-3aabe072]:after {\n    content: \"\";\n    position: absolute;\n    display: none;\n}\n.filters ul label input:checked ~ .checkmark[data-v-3aabe072]:after {\n    display: block;\n}\n.filters ul label .checkmark[data-v-3aabe072]:after {\n    left: 9px;\n    top: 5px;\n    width: 5px;\n    height: 10px;\n    border: solid #ffffff;\n    border-width: 0 3px 3px 0;\n    -webkit-transform: rotate(45deg);\n    transform: rotate(45deg);\n}\n.filters .apply-filters[data-v-3aabe072] {\n    background-color: #ffffff;\n    position: -webkit-sticky;\n    position: sticky;\n    bottom: 0;\n}\n.filters .fa-filter[data-v-3aabe072] {\n    font-size: 21px;\n    color: #ffffff;\n}\n.list-data-container[data-v-3aabe072] {\n  /* styles for autocomplete field  */\n}\n.list-data-container .card[data-v-3aabe072] {\n    margin-top: 20px;\n}\n.list-data-container .pagination[data-v-3aabe072] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n}\n.list-data-container .select-sort[data-v-3aabe072] {\n    width: 290px;\n}\n.list-data-container input[type=\"search\"][data-v-3aabe072] {\n    -webkit-box-shadow: 0 2px 43px -4px rgba(0, 0, 0, 0.19);\n    box-shadow: 0 2px 43px -4px rgba(0, 0, 0, 0.19);\n    border: none;\n}\n.list-data-container .autocomplete[data-v-3aabe072] {\n    /*the container must be positioned relative:*/\n    position: relative;\n    display: inline-block;\n}\n.list-data-container .autocomplete-block-result[data-v-3aabe072] {\n    position: absolute;\n    font-size: 0.9rem;\n    border: none;\n    z-index: 99;\n    top: 100%;\n    left: 16px;\n    right: 16px;\n    padding: 10px;\n    -webkit-box-shadow: 0 3rem 3rem -1rem rgba(10, 10, 10, 0.2);\n    box-shadow: 0 3rem 3rem -1rem rgba(10, 10, 10, 0.2);\n    border-radius: 4px;\n    border-top-left-radius: 0;\n    border-top-right-radius: 0;\n    background-color: #ffffff;\n}\n.list-data-container .autocomplete-block-result .autocomplete-block-result_element[data-v-3aabe072] {\n      padding: 10px 0 10px 0;\n}\n.list-data-container .autocomplete-block-result .autocomplete-block-result_element[data-v-3aabe072]:not(:last-child) {\n        border-bottom: 1px solid rgba(0, 0, 0, 0.1);\n}\n.fa-balance-scale[data-v-3aabe072] {\n  color: #ffa726;\n  cursor: pointer;\n  margin-left: 15%;\n}\n", ""]);
 
 // exports
 
@@ -47621,6 +47628,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_Spinner_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__shared_Spinner_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__shared_Filters_vue__ = __webpack_require__(25);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__shared_Filters_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__shared_Filters_vue__);
+//
 //
 //
 //
@@ -47703,6 +47711,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         sort: 1,
         expired: 1
       },
+      judgeComparation: sessionStorage.judge_compare,
       autocomplete: [],
       judgesList: {
         total: 0
@@ -47721,6 +47730,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.filters = initialFilters;
     }
     this.getJudgesList();
+
+    this.$on('show-comparation', function (count_id) {
+      judgeComparation = true;
+      console.log("GEGEGEEGeeeee");
+      console.log(count_id);
+    });
   },
 
   methods: {
@@ -47907,7 +47922,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n.judge-component[data-v-cfd711c4]:not(:last-child) {\n  border-bottom: 1px solid lightgray;\n}\n.additional-info[data-v-cfd711c4] {\n  font-size: 0.8rem;\n  color: grey;\n  /* styles for font awesome */\n}\n.additional-info .fa[data-v-cfd711c4],\n  .additional-info .fas[data-v-cfd711c4] {\n    font-size: 1.1rem;\n    margin-right: 5px;\n}\n.additional-info .bookmark > span[data-v-cfd711c4] {\n    float: right;\n    padding-right: 7px;\n}\n.additional-info .bookmark > span[data-v-cfd711c4],\n  .additional-info .fa-pencil[data-v-cfd711c4] {\n    cursor: pointer;\n}\n.additional-info .align-center[data-v-cfd711c4] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: row;\n            flex-direction: row;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n}\n.main-info .avatar[data-v-cfd711c4] {\n  width: 120px;\n  height: 120px;\n}\n.main-info .littleAvatar[data-v-cfd711c4] {\n  width: 60px !important;\n  height: 60px !important;\n}\n.main-info a[data-v-cfd711c4] {\n  color: #4c88bd;\n}\n.main-info .court_name[data-v-cfd711c4] {\n  font-size: 1rem;\n}\n", ""]);
+exports.push([module.i, "\n.fa-balance-scale[data-v-cfd711c4] {\n  color: #ffa726;\n  cursor: pointer;\n}\n.judge-component[data-v-cfd711c4]:not(:last-child) {\n  border-bottom: 1px solid lightgray;\n}\n.additional-info[data-v-cfd711c4] {\n  font-size: 0.8rem;\n  color: grey;\n  /* styles for font awesome */\n}\n.additional-info .fa[data-v-cfd711c4],\n  .additional-info .fas[data-v-cfd711c4] {\n    font-size: 1.1rem;\n    margin-right: 5px;\n}\n.additional-info .bookmark > span[data-v-cfd711c4] {\n    float: right;\n    padding-right: 7px;\n}\n.additional-info .bookmark > span[data-v-cfd711c4],\n  .additional-info .fa-pencil[data-v-cfd711c4] {\n    cursor: pointer;\n}\n.additional-info .align-center[data-v-cfd711c4] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: row;\n            flex-direction: row;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n}\n.main-info .avatar[data-v-cfd711c4] {\n  width: 120px;\n  height: 120px;\n}\n.main-info .littleAvatar[data-v-cfd711c4] {\n  width: 60px !important;\n  height: 60px !important;\n}\n.main-info a[data-v-cfd711c4] {\n  color: #4c88bd;\n}\n.main-info .court_name[data-v-cfd711c4] {\n  font-size: 1rem;\n}\n", ""]);
 
 // exports
 
@@ -47924,6 +47939,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_StatusComponent_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__shared_StatusComponent_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_ChangeStatus_vue__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_ChangeStatus_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__shared_ChangeStatus_vue__);
+//
+//
+//
 //
 //
 //
@@ -48023,6 +48041,43 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     },
     methods: {
+        addToCompare: function addToCompare(judge_id) {
+            var judge_compare = [];
+            if (sessionStorage.judge_compare) {
+                judge_compare = JSON.parse(sessionStorage.getItem("judge_compare"));
+            }
+
+            // якщо суддя вже був доданий раніше
+            if (judge_compare.indexOf(judge_id) != -1) {
+                this.$toasted.error("Цей суддя вже доданий для порівняння", {
+                    theme: "outline",
+                    position: "top-right",
+                    duration: 3000
+                });
+                return;
+            }
+
+            // якщо занадто багато додається для порівняння
+            if (judge_compare.length > 2) {
+                this.$toasted.error("Можна порівнювати одночасно до 3 суддів", {
+                    theme: "outline",
+                    position: "top-right",
+                    duration: 3000
+                });
+                return;
+            }
+            this.$emit('show-comparation', judge_compare.length);
+            //this.judgeComparation = true;
+
+            judge_compare.push(judge_id);
+            sessionStorage.setItem("judge_compare", JSON.stringify(judge_compare));
+            this.$toasted.success("Додано до порівняння", {
+                theme: "outline",
+                position: "top-right",
+                duration: 3000
+            });
+            console.log(judge_id);
+        },
         formattingDate: function formattingDate(date) {
             if (date === '' || date === null) {
                 return '';
@@ -48037,6 +48092,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             if (!this.$store.getters.isAuth) {
                 this.$router.push("/login");
             }
+            judge.is_bookmark = 1;
             axios({
                 method: "put",
                 url: "/api/v1/judges/" + judge.id + "/bookmark",
@@ -48046,11 +48102,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     Authorization: localStorage.getItem("token")
                 }
             }).then(function (response) {
-                judge.is_bookmark = 1;
+                //
             }).catch(function (error) {
-                if (error.response.status === 401) {
+                if (error.response && error.response.status === 401) {
                     _this.$router.push('/login');
                 }
+                judge.is_bookmark = 0;
+                _this.$toasted.error("Неможливо додати в закладки, перевірте Ваше інтернет з'єднання або спробуйте пізніше", {
+                    theme: "primary",
+                    position: "top-right",
+                    duration: 5000
+                });
                 console.log("Bookmark", error);
             });
         },
@@ -48060,6 +48122,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             if (!this.$store.getters.isAuth) {
                 this.$router.push("/login");
             }
+            judge.is_bookmark = 0;
             axios({
                 method: "delete",
                 url: "/api/v1/judges/" + judge.id + "/bookmark",
@@ -48069,11 +48132,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     Authorization: localStorage.getItem("token")
                 }
             }).then(function (response) {
-                judge.is_bookmark = 0;
+                //
             }).catch(function (error) {
                 if (error.response.status === 401) {
                     _this2.$router.push('/login');
                 }
+                judge.is_bookmark = 1;
+                _this2.$toasted.error("Перевірте Ваше інтернет з'єднання або спробуйте пізніше", {
+                    theme: "primary",
+                    position: "top-right",
+                    duration: 5000
+                });
                 console.log('Bookmark', error);
             });
         },
@@ -51289,6 +51358,18 @@ var render = function() {
               { staticClass: "card-header d-flex justify-content-between" },
               [
                 _c("span", [_vm._v("Список суддів")]),
+                _vm._v(" "),
+                _vm.judgeComparation
+                  ? _c("i", {
+                      staticClass: "fas fa-balance-scale p-1",
+                      attrs: { "aria-hidden": "true", title: "Порівняння" },
+                      on: {
+                        click: function($event) {
+                          _vm.addToCompare(_vm.judge.id)
+                        }
+                      }
+                    })
+                  : _vm._e(),
                 _vm._v(" "),
                 _c("div", { staticClass: "d-flex align-items-center" }, [
                   _c("span", { staticClass: "mr-2" }, [
@@ -55361,12 +55442,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var _this4 = this;
 
       // якщо пуста строка передаємо null
-      session.note = !session.note.length ? null : session.note;
+      session.note = !session.note ? null : session.note;
       axios.post("/api/v1/court-sessions/" + session.id + "/bookmark/note", { 'note': session.note }, {
         headers: {
           'Content-Type': 'application/json',
           'X-Requested-With': 'XMLHttpRequest',
           Authorization: localStorage.getItem("token")
+        }
+      }).then(function (response) {
+        if (session.note) {
+          _this4.$toasted.success("Примітку оновлено", {
+            theme: "primary",
+            position: "top-right",
+            duration: 3000
+          });
         }
       }).catch(function (error) {
         if (error && error.response && error.response.status === 401) {
@@ -57587,6 +57676,12 @@ var _this = this;
           'X-Requested-With': 'XMLHttpRequest',
           Authorization: localStorage.getItem("token")
         }
+      }).then(function (response) {
+        _this3.$toasted.success("Збережено", {
+          theme: "primary",
+          position: "top-right",
+          duration: 3000
+        });
       }).catch(function (error) {
         if (error && error.response && error.response.status === 401) {
           _this3.$router.push("/login");
@@ -57627,6 +57722,12 @@ var _this = this;
           'X-Requested-With': 'XMLHttpRequest',
           Authorization: localStorage.getItem("token")
         }
+      }).then(function (response) {
+        _this5.$toasted.success("Збережено", {
+          theme: "primary",
+          position: "top-right",
+          duration: 3000
+        });
       }).catch(function (error) {
         if (error && error.response && error.response.status === 401) {
           _this5.$router.push("/login");
@@ -59381,6 +59482,493 @@ var plugin = (function (Vue) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 204 */,
+/* 205 */,
+/* 206 */,
+/* 207 */,
+/* 208 */,
+/* 209 */,
+/* 210 */,
+/* 211 */,
+/* 212 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(213)
+}
+var normalizeComponent = __webpack_require__(2)
+/* script */
+var __vue_script__ = __webpack_require__(215)
+/* template */
+var __vue_template__ = __webpack_require__(216)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-0268c538"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/rating/judges/JudgeComparison.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-0268c538", Component.options)
+  } else {
+    hotAPI.reload("data-v-0268c538", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 213 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(214);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(1)("cbc16836", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-0268c538\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../node_modules/sass-loader/lib/loader.js!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./JudgeComparison.vue", function() {
+     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-0268c538\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../node_modules/sass-loader/lib/loader.js!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./JudgeComparison.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 214 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(0)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.fa-balance-scale[data-v-0268c538] {\n  color: #ffa726;\n  cursor: pointer;\n}\n.judge-component[data-v-0268c538]:not(:last-child) {\n  border-bottom: 1px solid lightgray;\n}\n.additional-info[data-v-0268c538] {\n  font-size: 0.8rem;\n  color: grey;\n  /* styles for font awesome */\n}\n.additional-info .fa[data-v-0268c538],\n  .additional-info .fas[data-v-0268c538] {\n    font-size: 1.1rem;\n    margin-right: 5px;\n}\n.additional-info .bookmark > span[data-v-0268c538] {\n    float: right;\n    padding-right: 7px;\n}\n.additional-info .bookmark > span[data-v-0268c538],\n  .additional-info .fa-pencil[data-v-0268c538] {\n    cursor: pointer;\n}\n.additional-info .align-center[data-v-0268c538] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: row;\n            flex-direction: row;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n}\n.main-info .avatar[data-v-0268c538] {\n  width: 120px;\n  height: 120px;\n}\n.main-info .littleAvatar[data-v-0268c538] {\n  width: 60px !important;\n  height: 60px !important;\n}\n.main-info a[data-v-0268c538] {\n  color: #4c88bd;\n}\n.main-info .court_name[data-v-0268c538] {\n  font-size: 1rem;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 215 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_lodash__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_StatusComponent_vue__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_StatusComponent_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__shared_StatusComponent_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_ChangeStatus_vue__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_ChangeStatus_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__shared_ChangeStatus_vue__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    name: "JudgeComparison",
+    props: {
+        judgesList: Array,
+        littlePhoto: {
+            type: Boolean,
+            default: false
+        }
+    },
+    components: {
+        StatusComponent: __WEBPACK_IMPORTED_MODULE_1__shared_StatusComponent_vue___default.a,
+        ChangeStatus: __WEBPACK_IMPORTED_MODULE_2__shared_ChangeStatus_vue___default.a
+    },
+    data: function data() {
+        return {
+            isModalVisible: false,
+            currentJudge: {}
+        };
+    },
+
+    filters: {
+        formatDate: function formatDate(date) {
+            // getMobth() чомусь рахує місяці з 0 date.getMonth() + 1 //
+            if (date === '' || date === null) {
+                return '';
+            } else {
+                return date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+            }
+        }
+    },
+    created: function created() {
+        var judge_compare = [];
+        if (sessionStorage.judge_compare) {
+            judge_compare = JSON.parse(sessionStorage.getItem("judge_compare"));
+        }
+
+        // якщо масив пустий
+        if (judge_compare.length < 1 || !this.$store.getters.isAuth) {
+            this.$router.push("/judges");
+        }
+        // оримуємо список для поріняння
+        $$.each(judge_compare, function (key, value) {
+            var _this = this;
+
+            axios.get("/api/v1/judges/" + value, {
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-Requested-With": "XMLHttpRequest",
+                    Authorization: localStorage.getItem("token")
+                }
+            }).then(function (response) {
+                _this.judgesList.push(response.data);
+                //console.log("JUdge PROFILE", this.judge);
+            }).catch(function (error) {
+                if (error.response && error.response.status === 401) {
+                    _this.$router.push("/login");
+                }
+                _this.$router.push("/judges");
+            });
+            console.log(this.judgesList);
+        });
+    },
+
+    methods: {
+        formattingDate: function formattingDate(date) {
+            if (date === '' || date === null) {
+                return '';
+            } else {
+                var arr = __WEBPACK_IMPORTED_MODULE_0_lodash___default.a.split(date, '.');
+                return arr[2] + "-" + arr[1] + "-" + arr[0];
+            }
+        }
+    }
+});
+
+/***/ }),
+/* 216 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    !this.judgesList || this.judgesList.length == 0
+      ? _c("div", [_vm._v("\n    Не додано жодного суддю для порівняння")])
+      : _c("div", [
+          _c("table", { staticClass: "table" }, [
+            _c("thead", [
+              _c(
+                "tr",
+                [
+                  _c("th", { attrs: { scope: "col" } }, [_vm._v("#")]),
+                  _vm._v(" "),
+                  _vm._l(_vm.judgesList, function(judge, index) {
+                    return _c(
+                      "div",
+                      {
+                        key: index,
+                        staticClass: "judge-component row py-3 mx-1"
+                      },
+                      [_c("th", { attrs: { scope: "col" } }, [_vm._v("Last")])]
+                    )
+                  }),
+                  _vm._v(" "),
+                  _c("th", { attrs: { scope: "col" } }, [_vm._v("Handle")])
+                ],
+                2
+              )
+            ]),
+            _vm._v(" "),
+            _c("tbody")
+          ])
+        ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "card-body" }, [
+      this.judgesList && this.judgesList.length > 0
+        ? _c(
+            "div",
+            _vm._l(_vm.judgesList, function(judge, index) {
+              return _c(
+                "div",
+                { key: index, staticClass: "judge-component row py-3 mx-1" },
+                [
+                  _c("div", { staticClass: "col-9 d-flex pl-0 main-info" }, [
+                    _c("div", { staticClass: "mr-3" }, [
+                      _c("img", {
+                        staticClass: "avatar",
+                        class: { littleAvatar: _vm.littlePhoto },
+                        attrs: { src: judge.photo, alt: "фото" }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", [
+                      _c(
+                        "h5",
+                        [
+                          _c(
+                            "router-link",
+                            { attrs: { to: "/judges/" + judge.id } },
+                            [
+                              _vm._v(
+                                _vm._s(judge.surname) +
+                                  " " +
+                                  _vm._s(
+                                    judge.name.length != 1
+                                      ? judge.name
+                                      : judge.name + "."
+                                  ) +
+                                  " " +
+                                  _vm._s(
+                                    judge.patronymic.length != 1
+                                      ? judge.patronymic
+                                      : judge.patronymic + "."
+                                  )
+                              )
+                            ]
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "court_name" }, [
+                        _vm._v(_vm._s(judge.court_name))
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "pt-3" }, [
+                        _c(
+                          "i",
+                          {
+                            staticClass: "fas fa-balance-scale p-1",
+                            attrs: {
+                              "aria-hidden": "true",
+                              title: "Додати до порівняння"
+                            },
+                            on: {
+                              click: function($event) {
+                                _vm.addToCompare(judge.id)
+                              }
+                            }
+                          },
+                          [_c("sup", [_vm._v("+")])]
+                        )
+                      ])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-3 pl-0 additional-info" }, [
+                    _c("div", { staticClass: "align-center pb-3" }, [
+                      _c("div", { staticClass: "w-75" }, [
+                        _c("span", { staticClass: "float-left" }, [
+                          _c(
+                            "i",
+                            {
+                              staticClass: "fa fa-line-chart float-right",
+                              attrs: { "aria-hidden": "true" }
+                            },
+                            [_vm._v(" " + _vm._s(judge.rating + "%"))]
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "w-25 bookmark" }, [
+                        judge.is_bookmark
+                          ? _c(
+                              "span",
+                              {
+                                on: {
+                                  click: function($event) {
+                                    _vm.deleteBookmark(judge)
+                                  }
+                                }
+                              },
+                              [
+                                _c("i", {
+                                  staticClass: "fa fa-bookmark",
+                                  attrs: { "aria-hidden": "true" }
+                                })
+                              ]
+                            )
+                          : _vm._e(),
+                        _vm._v(" "),
+                        !judge.is_bookmark
+                          ? _c(
+                              "span",
+                              {
+                                on: {
+                                  click: function($event) {
+                                    _vm.setBookmark(judge)
+                                  }
+                                }
+                              },
+                              [
+                                _c("i", {
+                                  staticClass: "fa fa-bookmark-o",
+                                  attrs: { "aria-hidden": "true" }
+                                })
+                              ]
+                            )
+                          : _vm._e()
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "align-center" }, [
+                      _c(
+                        "div",
+                        { staticClass: "w-75" },
+                        [
+                          _c("status-component", {
+                            attrs: { judgeData: judge }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "w-25" }, [
+                        _c("i", {
+                          staticClass: "fa fa-edit p-1 float-right",
+                          attrs: { "aria-hidden": "true" },
+                          on: {
+                            click: function($event) {
+                              _vm.showModal(judge)
+                            }
+                          }
+                        })
+                      ])
+                    ])
+                  ])
+                ]
+              )
+            })
+          )
+        : _vm._e()
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-0268c538", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

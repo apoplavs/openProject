@@ -150,13 +150,23 @@ export default {
     },
     saveNote(session) {
       // якщо пуста строка передаємо null
-      session.note = !session.note.length ? null : session.note;
+      session.note = !session.note ? null : session.note;
       axios.post(`/api/v1/court-sessions/${session.id}/bookmark/note`, { 'note': session.note }, {
         headers: {
           'Content-Type': 'application/json',
           'X-Requested-With': 'XMLHttpRequest',
           Authorization: localStorage.getItem("token")
         }
+	  })
+        .then(response => {
+        	if (session.note) {
+				this.$toasted.success("Примітку оновлено", {
+					theme: "primary",
+					position: "top-right",
+					duration: 3000
+				});
+            }
+
         }) .catch(error => {
         if (error && error.response && error.response.status === 401) {
           this.$router.push("/login");

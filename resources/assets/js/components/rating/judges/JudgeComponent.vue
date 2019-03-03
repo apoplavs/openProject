@@ -21,6 +21,9 @@
                 >{{ judge.surname }} {{ (judge.name.length != 1) ? judge.name : judge.name + '.' }} {{ judge.patronymic.length != 1 ? judge.patronymic : judge.patronymic + '.' }}</router-link>
               </h5>
               <div class="court_name">{{ judge.court_name }}</div>
+              <!--<div class="pt-3">-->
+                 <!--<i class="fas fa-balance-scale p-1" aria-hidden="true" title="Додати до порівняння" @click="addToCompare(judge.id)"><sup>+</sup></i>-->
+              <!--</div>-->
             </div>
           </div>
           <div class="col-3 pl-0 additional-info">
@@ -96,6 +99,43 @@
             }
         },
         methods: {
+			addToCompare(judge_id) {
+				let judge_compare = [];
+				if (sessionStorage.judge_compare) {
+					judge_compare = JSON.parse(sessionStorage.getItem("judge_compare"));
+				}
+
+				// якщо суддя вже був доданий раніше
+				if (judge_compare.indexOf(judge_id) != -1) {
+					this.$toasted.error("Цей суддя вже доданий для порівняння", {
+						theme: "outline",
+						position: "top-right",
+						duration: 3000
+					});
+					return;
+				}
+
+				// якщо занадто багато додається для порівняння
+				if (judge_compare.length > 2) {
+					this.$toasted.error("Можна порівнювати одночасно до 3 суддів", {
+						theme: "outline",
+						position: "top-right",
+						duration: 3000
+					});
+					return;
+                }
+				this.$emit('show-comparation', judge_compare.length);
+                //this.judgeComparation = true;
+
+				judge_compare.push(judge_id);
+				sessionStorage.setItem("judge_compare", JSON.stringify(judge_compare));
+				this.$toasted.success("Додано до порівняння", {
+					theme: "outline",
+					position: "top-right",
+					duration: 3000
+				});
+				console.log(judge_id);
+			},
             formattingDate(date) {
                 if (date === '' || date === null) {
                     return '';
@@ -108,6 +148,7 @@
                 if (!this.$store.getters.isAuth) {
                     this.$router.push("/login");
                 }
+				judge.is_bookmark = 1;
                 axios({
                         method: "put",
                         url: `/api/v1/judges/${judge.id}/bookmark`,
@@ -118,12 +159,18 @@
                         }
                     })
                     .then(response => {
-                        judge.is_bookmark = 1;
+                        //
                     })
                     .catch(error => {
-                        if (error.response.status === 401) {
+                        if (error.response && error.response.status === 401) {
                             this.$router.push('/login');
                         }
+						judge.is_bookmark = 0;
+						this.$toasted.error("Неможливо додати в закладки, перевірте Ваше інтернет з'єднання або спробуйте пізніше", {
+							theme: "primary",
+							position: "top-right",
+							duration: 5000
+						});
                         console.log("Bookmark", error);
                     });
                 },
@@ -131,6 +178,7 @@
                 if (!this.$store.getters.isAuth) {
                     this.$router.push("/login");
                 }
+				judge.is_bookmark = 0;
                 axios({
                     method: "delete",
                     url: `/api/v1/judges/${judge.id}/bookmark`,
@@ -141,12 +189,18 @@
                     }
                 })
                 .then(response => {
-                    judge.is_bookmark = 0;
+                   //
                 })
                 .catch(error => {
                     if (error.response.status === 401) {
                         this.$router.push('/login');
                     }
+					judge.is_bookmark = 1;
+					this.$toasted.error("Перевірте Ваше інтернет з'єднання або спробуйте пізніше", {
+						theme: "primary",
+						position: "top-right",
+						duration: 5000
+					});
                     console.log('Bookmark', error);
                 });
             },
@@ -164,6 +218,11 @@
 <style scoped lang="scss">
 @import "../../../../sass/_variables.scss";
 @import "../../../../sass/_mixins.scss";
+
+.fa-balance-scale {
+  color: #ffa726;
+  cursor: pointer;
+}
 
 .judge-component:not(:last-child) {
   border-bottom: 1px solid lightgray;
