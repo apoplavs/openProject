@@ -20,4 +20,4 @@ yarn-error.log
 /ml/lib/config.py
 /ml/analyze/__pycache__/
 /ml/lib/__pycache__/
-public/js/app.js
+.gitignore
