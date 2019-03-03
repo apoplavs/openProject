@@ -14,10 +14,10 @@
                 <div class="court-name">{{court.name}}</div>
               </router-link>
               <div class="bookmark pr-3">
-                <span v-if="court.is_bookmark" @click="deleteBookmark()">
+                <span v-if="court.is_bookmark" @click="deleteBookmarkJudge()">
                   <i class="fa fa-bookmark" aria-hidden="true"></i>
                 </span>
-                <span v-if="!court.is_bookmark" @click="setBookmark()">
+                <span v-if="!court.is_bookmark" @click="setBookmarkJudge()">
                   <i class="fa fa-bookmark-o" aria-hidden="true"></i>
                 </span>
               </div>
@@ -77,7 +77,7 @@
                 <div>
                   <span class="line-chart">
                     <i class="fa fa-line-chart mr-1" aria-hidden="true"></i>
-                    {{ court.rating + '%' }}
+                    {{ court.rating }}
                   </span>
                 </div>
               </div>
@@ -106,10 +106,10 @@
                 <div class="col-1 pl-0">Дата розгляду</div>
                 <div class="col-1">Номер справи</div>
                 <div class="col-2">Судді</div>
-                <div class="col-1">Форма</div>
+                <div class="col-2">Форма</div>
                 <div class="col-3">Сторони у справі</div>
                 <div class="col-2">Суть справи</div>
-                <div class="col-2 pr-0">Примітки</div>
+                <div class="col-1 pr-0"></div>
               </div>
               <div class="row body" v-for="(session, i_el) in filterSessions" :key="i_el">
                 <div class="col-1 pl-0">
@@ -117,15 +117,18 @@
                 </div>
                 <div class="col-1">{{ session.number }}</div>
                 <div class="col-2">{{ session.judges }}</div>
-                <div class="col-1">{{ session.forma }}</div>
+                <div class="col-2">{{ session.forma }}</div>
                 <div class="col-3">{{ session.involved }}</div>
                 <div class="col-2">{{ session.description }}</div>
-                <div class="col-2 pr-0 text-center position-relative note-wrap">
-                  <i class="fas fa-star" @click="showModalDelete(session)"></i>
-                  <textarea class="note" maxlength="254" v-model.trim="session.note"></textarea>
-                  <img class="checkmark" src="../../../../images/checkmark.png" @click="saveNote(session)">
+                <div class="col-1 pr-0 text-center">
+                    <i
+                      v-if="session.is_bookmark"
+                      class="fas fa-star"
+                      @click="deleteBookmarkSession(session)"
+                    ></i>
+                    <i v-else class="far fa-star" @click="setBookmarkSession(session)"></i>
                 </div>
-              </div>
+              </div> 
             </div>
             <div v-else>За даними параметрами нічого не знайдено...</div>
           </div>
@@ -229,7 +232,7 @@ export default {
           });
       }
     },
-    setBookmark() {
+    setBookmarkJudge() {
       if (!this.$store.getters.isAuth) {
         this.$router.push("/login");
       }
@@ -252,7 +255,7 @@ export default {
         console.log("Bookmark", error);
       });
     },
-    deleteBookmark() {
+    deleteBookmarkJudge() {
       if (!this.$store.getters.isAuth) {
         this.$router.push("/login");
       }
@@ -274,6 +277,55 @@ export default {
         }
         console.log("Bookmark", error.response);
       });
+    },
+    showModalDelete(session) {
+      this.showModalConfirm = true;
+      this.deleteSession = session;
+    },
+
+    deleteBookmarkSession(session) {
+      if (!this.$store.getters.isAuth) {
+        this.$router.push("/login");
+      } else {
+        axios({
+          method: "delete",
+          url: `/api/v1/court-sessions/${this.deleteSession.id}/bookmark`,
+          headers: {
+            "Content-Type": "application/json",
+            "X-Requested-With": "XMLHttpRequest",
+            Authorization: localStorage.getItem("token")
+          }
+        })
+          .then(response => {
+            this.courtSessions = _.filter( this.courtSessions, el => {
+                return this.deleteSession.id !== el.id
+            });
+            console.log("courtSessions", this.courtSessions);
+            this.deleteSession = null;
+            this.loadData = true;
+          })
+          .catch(error => {
+            if (error && error.response && error.response.status === 401) {
+              this.$router.push("/login");
+            }
+          });
+      }
+    },
+    setBookmarkSession(session){},
+    saveNote(session) {
+      // якщо пуста строка передаємо null
+      session.note = !session.note.length ? null : session.note;
+      axios.post(`/api/v1/court-sessions/${session.id}/bookmark/note`, { 'note': session.note }, {
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Requested-With': 'XMLHttpRequest',
+          Authorization: localStorage.getItem("token")
+        }
+        }) .catch(error => {
+        if (error && error.response && error.response.status === 401) {
+          this.$router.push("/login");
+        }
+      })
     }
   }
 };
@@ -394,42 +446,10 @@ export default {
   .fa-star {
     color: $main-color;
     cursor: pointer;
-    font-size: 15px;
-    float: right;
-    padding: 0 0px 0px 10px;
-    margin-right: -10px;
+    font-size: 16px;
   }
   input[type="search"] {
     width: 200px;
-  }
-  .note {
-    height: calc(100% - 13.5px);
-    width: 100%;
-    border: none;
-    resize: none;
-    background-color: #fafa599c;
-    padding: 3px 5px 15px 5px;
-    font-size: 0.7rem;
-    margin-top: -5px;
-    color: #002366;
-    font-style: italic;
-    background: linear-gradient(-135deg, transparent 10px, #fafa599c 0);
-  }
-  textarea.note:before {
-    content: "";
-    position: absolute;
-    top: 0;
-    right: 0;
-    border-top: 80px solid white;
-    border-left: 80px solid rgba(0, 0, 0, 0);
-    width: 0;
-  }
-  .checkmark {
-    width: 25px;
-    position: absolute;
-    bottom: 5px;
-    right: 0;
-    cursor: pointer;
   }
 
   .container-component {
@@ -446,10 +466,6 @@ export default {
     &:not(:last-child) {
       border-bottom: 1px solid $text-muted;
     }
-  }
-  .note-wrap {
-    min-height: 160px;
-    max-height: 200px;
   }
   .col-1,
   .col-2,

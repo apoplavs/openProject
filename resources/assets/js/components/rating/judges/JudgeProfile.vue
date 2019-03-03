@@ -115,7 +115,7 @@
                 </div>
               </div>
               <div v-else class="container-component">
-                <p>Нічого не знайдено...</p>
+                <p>За даними параметрами нічого не знайдено...</p>
               </div>
             </div>
           </div>
@@ -897,7 +897,7 @@ export default {
       .fa-star {
         color: $main-color;
         cursor: pointer;
-        font-size: 20px;
+        font-size: 16px;
       }
       .container-component {
         background-color: #ffffff;

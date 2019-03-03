@@ -1,9 +1,6 @@
 <template>
   <div>
-    <div class="card-body">
-      <div
-        v-if="!this.judgesList || this.judgesList.length == 0"
-      >За заданими параметрами нічого не знайдено</div>
+    <div class="card-body"> 
       <div v-if="this.judgesList && this.judgesList.length > 0">
         <div
           class="judge-component row py-3 mx-1"
@@ -54,6 +51,7 @@
           </div>
         </div>
       </div>
+      <div v-else>За даними параметрами нічого не знайдено...</div>
     </div>
     <!-- modal change status -->
     <change-status

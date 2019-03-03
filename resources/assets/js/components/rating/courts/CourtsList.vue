@@ -111,9 +111,7 @@
       },
       liveSearch: _.debounce(function(event) {
         console.log('GOing', this.validateInputSearch());
-        
         if (this.validateInputSearch()) {
-          console.log(this.filters.search);
           
           axios.get('/api/v1/courts/autocomplete', {
               headers: {
@@ -125,8 +123,6 @@
               }
             })
             .then(response => {
-              console.log(response);
-              
               this.autocomplete = response.data;
             })
             .catch(error => {
@@ -184,16 +180,14 @@
                 "Content-Type": "application/json",
                 "X-Requested-With": "XMLHttpRequest",
               },
-              filters: this.filters
+              params: this.filters
             })
             .then(response => {
               this.courtsList = response.data;
               this.loadData = true;
-              // console.log('getCourts Response', this.courtsList);
             })
             .catch(error => {
               console.log(error);
-              // console.log('Ну нє не логінився я ще');
             });
         }
       },

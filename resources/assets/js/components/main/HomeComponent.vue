@@ -61,6 +61,9 @@
 <style lang='scss' scoped>
   @import "../../../sass/_variables.scss";
 
+.home {
+    height: calc(100vh - 60px);
+}
     /* styles for welcome page */
 
     .service-description {
