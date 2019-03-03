@@ -102,8 +102,8 @@
                   <div class="col-2">{{ session.judges }}</div>
                   <div class="col-2">{{ session.forma }}</div>
                   <div class="col-3">{{ session.involved }}</div>
-                  <div class="col-2">{{ session.description }}{{isAuth}}</div>
-                  <div class="col-1 pr-0 text-center" v-if="isAuth">
+                  <div class="col-2">{{ session.description }}</div>
+                  <div class="col-1 pr-0 text-center">
                     <i
                       v-if="session.is_bookmark"
                       class="fas fa-star"
@@ -114,7 +114,7 @@
                 </div>
               </div>
               <div v-else class="container-component">
-                <p>Нічого не знайдено...</p>
+                <p>За даними параметрами нічого не знайдено...</p>
               </div>
             </div>
           </div>
@@ -813,7 +813,7 @@ export default {
       .fa-star {
         color: $main-color;
         cursor: pointer;
-        font-size: 20px;
+        font-size: 16px;
       }
       .container-component {
         background-color: #ffffff;

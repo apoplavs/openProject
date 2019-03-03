@@ -1,6 +1,6 @@
 
 <template>
-    <div>
+    <div class="home">
         <div id="welcome-page" class="pt-lg-5">
             <div class="col-12 text-center" id="title-label">
                 <h1>ТОЕсуд</h1>
@@ -19,6 +19,9 @@
 <style lang='scss' scoped>
   @import "../../../sass/_variables.scss";
 
+.home {
+    height: calc(100vh - 60px);
+}
     /* styles for welcome page */
     
     #welcome-page {
