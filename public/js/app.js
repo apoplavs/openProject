@@ -44593,7 +44593,7 @@ exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Rob
 exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Coiny);", ""]);
 
 // module
-exports.push([module.i, "\nbody {\n  background-color: #F5F6F7;\n  font-family: 'Roboto', sans-serif;\n  font-weight: 400;\n  font-style: normal;\n  color: #304040;\n}\nbutton::-moz-focus-inner,\ninput::-moz-focus-inner {\n  border: 0;\n  padding: 0;\n}\n.b-primary {\n  color: #ffff;\n  background-color: #4c88bd;\n  border-color: #4c88bd;\n  min-width: 100px;\n}\n.b-primary:hover, .b-primary:active {\n    outline: none;\n    background-color: #4c88bd;\n    border-color: #4c88bd;\n    -webkit-box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);\n    box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);\n}\n.b-confirm {\n  color: #04bcb7;\n  background-color: #ffffff;\n  border-color: #04bcb7;\n}\n.b-confirm:active {\n    color: #04bcb7;\n    background-color: #ffffff;\n    border-color: #04bcb7;\n}\n.b-confirm:hover {\n    background-color: #04bcb7;\n    color: #ffffff;\n}\nbutton {\n  cursor: pointer;\n  border-color: transparent;\n}\nbutton:active, button:hover, button:focus {\n    outline: none;\n}\n.card {\n  border: none;\n  -webkit-box-shadow: 0 2px 43px -4px rgba(0, 0, 0, 0.19);\n  box-shadow: 0 2px 43px -4px rgba(0, 0, 0, 0.19);\n}\n.card-header {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  background-color: #04bcb7;\n  border-bottom: 2px solid #03a39f;\n  color: #ffffff;\n  font-size: 1.5rem;\n}\ni[class^=\"fa-bookmark\"],\ni.fa-edit {\n  cursor: pointer;\n  font-size: 1.1rem;\n}\n.fa-bookmark-o,\n.fa-bookmark {\n  color: #ef6733;\n  font-size: 1.1rem;\n  cursor: pointer;\n}\n.fa-briefcase {\n  color: #2ab27b;\n}\n.fa-line-chart {\n  color: #04bcb7;\n}\n.fa-medkit {\n  color: #ef6733;\n}\n.fa-calendar-minus-o {\n  color: #304040;\n}\n.fa-umbrella-beach {\n  color: orange;\n}\n.fa-calendar-times-o {\n  color: red;\n}\n.fa-edit {\n  color: #2C5F9C;\n}\n.content-wrapper {\n  min-width: 1140px;\n  height: 100%;\n  padding: 3rem 0;\n}\n.noselect {\n  -webkit-touch-callout: none;\n  /* iOS Safari */\n  -webkit-user-select: none;\n  /* Safari */\n  /* Konqueror HTML */\n  -moz-user-select: none;\n  /* Firefox */\n  -ms-user-select: none;\n  /* Internet Explorer/Edge */\n  user-select: none;\n  /* Non-prefixed version, currently\n                                  supported by Chrome and Opera */\n}\n::-webkit-scrollbar {\n  width: 0;\n  background-color: #ffffff;\n}\n.min-width {\n  min-width: 1140px;\n}\n.fade-enter, .fade-leave-to {\n  opacity: 0;\n  -webkit-transition: opacity .5s;\n  transition: opacity .5s;\n}\n.pagination .bg-active {\n  background-color: #04bcb7;\n  border-color: #04bcb7;\n}\n.pagination button:active, .pagination button:focus {\n  background-color: #04bcb7;\n  border-color: #04bcb7;\n}\n.pagination div.pr-2.leading-loose {\n  display: none !important;\n}\n.pagination .disabled {\n  color: #739696;\n  cursor: no-drop;\n}\n.pagination .dots {\n  background-color: transparent;\n  border: none !important;\n}\n.pagination .border {\n  border: 0 !important;\n  -webkit-box-shadow: 1px 1px 1px 1px #dee2e6 !important;\n          box-shadow: 1px 1px 1px 1px #dee2e6 !important;\n}\n.fa-spinner {\n  animation: 1s linear 0s normal none infinite running rotate;\n  -webkit-animation: 1s linear 0s normal none infinite running rotate;\n}\n@keyframes rotate {\n0% {\n    -webkit-transform: rotate(0deg);\n            transform: rotate(0deg);\n}\n100% {\n    -webkit-transform: rotate(360deg);\n            transform: rotate(360deg);\n}\n}\n@-webkit-keyframes rotate {\n0% {\n    -webkit-transform: rotate(0deg);\n            transform: rotate(0deg);\n}\n100% {\n    -webkit-transform: rotate(360deg);\n            transform: rotate(360deg);\n}\n}\n", ""]);
+exports.push([module.i, "\nbody {\n  background-color: #F5F6F7;\n  font-family: 'Roboto', sans-serif;\n  font-weight: 400;\n  font-style: normal;\n  color: #304040;\n}\nbutton::-moz-focus-inner,\ninput::-moz-focus-inner {\n  border: 0;\n  padding: 0;\n}\n.b-primary {\n  color: #ffff;\n  background-color: #4c88bd;\n  border-color: #4c88bd;\n  min-width: 100px;\n}\n.b-primary:hover, .b-primary:active {\n    outline: none;\n    background-color: #4c88bd;\n    border-color: #4c88bd;\n    -webkit-box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);\n    box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);\n}\n.b-confirm {\n  color: #04bcb7;\n  background-color: #ffffff;\n  border-color: #04bcb7;\n}\n.b-confirm:active {\n    color: #04bcb7;\n    background-color: #ffffff;\n    border-color: #04bcb7;\n}\n.b-confirm:hover {\n    background-color: #04bcb7;\n    color: #ffffff;\n}\nbutton {\n  cursor: pointer;\n  border-color: transparent;\n}\nbutton:active, button:hover, button:focus {\n    outline: none;\n}\n.card {\n  border: none;\n  -webkit-box-shadow: 0 2px 43px -4px rgba(0, 0, 0, 0.19);\n  box-shadow: 0 2px 43px -4px rgba(0, 0, 0, 0.19);\n}\n.card-header {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  background-color: #04bcb7;\n  border-bottom: 2px solid #03a39f;\n  color: #ffffff;\n  font-size: 1.5rem;\n}\ni[class^=\"fa-bookmark\"],\ni.fa-edit {\n  cursor: pointer;\n  font-size: 1.2rem;\n}\n.fa-bookmark-o,\n.fa-bookmark {\n  color: #ef6733;\n  font-size: 1.3rem;\n  cursor: pointer;\n}\n.fa-briefcase {\n  color: #2ab27b;\n  font-size: 1.1rem;\n}\n.fa-line-chart {\n  color: #04bcb7;\n  font-size: 1.1rem;\n}\n.fa-medkit {\n  color: #ef6733;\n  font-size: 1.1rem;\n}\n.fa-calendar-minus-o {\n  color: #304040;\n  font-size: 1.1rem;\n}\n.fa-umbrella-beach {\n  color: orange;\n  font-size: 1.1rem;\n}\n.fa-calendar-times-o {\n  color: red;\n  font-size: 1.1rem;\n}\n.fa-edit {\n  color: #2C5F9C;\n}\n.content-wrapper {\n  min-width: 1140px;\n  height: 100%;\n  padding: 3rem 0;\n}\n.noselect {\n  -webkit-touch-callout: none;\n  /* iOS Safari */\n  -webkit-user-select: none;\n  /* Safari */\n  /* Konqueror HTML */\n  -moz-user-select: none;\n  /* Firefox */\n  -ms-user-select: none;\n  /* Internet Explorer/Edge */\n  user-select: none;\n  /* Non-prefixed version, currently\n                                  supported by Chrome and Opera */\n}\n::-webkit-scrollbar {\n  width: 0;\n  background-color: #ffffff;\n}\n.min-width {\n  min-width: 1140px;\n}\n.fade-enter, .fade-leave-to {\n  opacity: 0;\n  -webkit-transition: opacity .5s;\n  transition: opacity .5s;\n}\n.pagination .bg-active {\n  background-color: #04bcb7;\n  border-color: #04bcb7;\n}\n.pagination button:active, .pagination button:focus {\n  background-color: #04bcb7;\n  border-color: #04bcb7;\n}\n.pagination div.pr-2.leading-loose {\n  display: none !important;\n}\n.pagination .disabled {\n  color: #739696;\n  cursor: no-drop;\n}\n.pagination .dots {\n  background-color: transparent;\n  border: none !important;\n}\n.pagination .border {\n  border: 0 !important;\n  -webkit-box-shadow: 1px 1px 1px 1px #dee2e6 !important;\n          box-shadow: 1px 1px 1px 1px #dee2e6 !important;\n}\n.fa-spinner {\n  animation: 1s linear 0s normal none infinite running rotate;\n  -webkit-animation: 1s linear 0s normal none infinite running rotate;\n}\n@keyframes rotate {\n0% {\n    -webkit-transform: rotate(0deg);\n            transform: rotate(0deg);\n}\n100% {\n    -webkit-transform: rotate(360deg);\n            transform: rotate(360deg);\n}\n}\n@-webkit-keyframes rotate {\n0% {\n    -webkit-transform: rotate(0deg);\n            transform: rotate(0deg);\n}\n100% {\n    -webkit-transform: rotate(360deg);\n            transform: rotate(360deg);\n}\n}\n", ""]);
 
 // exports
 
@@ -45446,7 +45446,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "/* styles for welcome page */\n.service-description[data-v-52579982] {\n  font-size: 1.2rem;\n  margin-top: 20px;\n}\n.court-practice i[data-v-52579982], .fa-gavel[data-v-52579982] {\n  font-size: 3rem;\n  position: relative;\n}\n.court-practice i.fa-chart-bar[data-v-52579982] {\n  bottom: 50px;\n}\n.court-practice i.fa-pie-chart[data-v-52579982] {\n  left: 20px;\n}\n.court-practice i.fa-chart-area[data-v-52579982] {\n  right: 20px;\n}\n.fa-thumbs-up[data-v-52579982] {\n  color: green;\n}\n.fa-thumbs-down[data-v-52579982] {\n  color: red;\n}\n.rating .fa-user-check[data-v-52579982], .fa-balance-scale[data-v-52579982] {\n  font-size: 3rem;\n  position: relative;\n}\n.fa-thumbs-up[data-v-52579982], .fa-thumbs-down[data-v-52579982],\n.fa-briefcase[data-v-52579982], .fa-umbrella-beach[data-v-52579982],\n.fa-calendar-minus-o[data-v-52579982], .fa-medkit[data-v-52579982] {\n  position: relative;\n  bottom: 40px;\n}\n.fa-user-tie[data-v-52579982] {\n  font-size: 3rem;\n}\n.services[data-v-52579982] {\n  padding-top: 20px;\n  padding-bottom: 20px;\n}\n.services .h2[data-v-52579982] {\n  font-weight: 300;\n  font-size: 3rem;\n  /*margin-top: 20px;*/\n}\n.welcome-wrap[data-v-52579982] {\n  min-height: 100vh;\n}\n.nice-background[data-v-52579982] {\n  background-color: #4686a08f;\n  background-image: -webkit-gradient(linear, left top, left bottom, from(#3081cf), to(#82db85));\n  background-image: linear-gradient(to bottom, #3081cf 0%, #82db85 100%);\n}\n#welcome-page[data-v-52579982] {\n  height: 100%;\n  width: 100%;\n  background-attachment: fixed, fixed, fixed;\n  /* background-position: top left, center center, center center;\n      background-size: auto, cover, cover; */\n  overflow: hidden;\n}\n#title-label[data-v-52579982] {\n  font-family: BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif;\n  color: white;\n  -moz-user-select: none;\n  -webkit-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  margin-bottom: 50px;\n}\n#title-label h1[data-v-52579982] {\n  font-size: 7em;\n  -webkit-animation-name: title1-data-v-52579982;\n          animation-name: title1-data-v-52579982;\n  -webkit-animation-duration: 1s;\n          animation-duration: 1s;\n}\n#title-label div[data-v-52579982] {\n  font-size: 2.2em;\n  text-decoration: overline;\n  margin-top: -17px;\n  -webkit-animation-name: title2-data-v-52579982;\n          animation-name: title2-data-v-52579982;\n  -webkit-animation-duration: 1s;\n          animation-duration: 1s;\n}\n@-webkit-keyframes title1-data-v-52579982 {\n0% {\n    color: rgba(255, 255, 255, 0.1);\n    font-size: 4.5em;\n}\n10% {\n    color: rgba(255, 255, 255, 0.2);\n    font-size: 5em;\n}\n20% {\n    color: rgba(255, 255, 255, 0.3);\n    font-size: 5.4em;\n}\n30% {\n    color: rgba(255, 255, 255, 0.4);\n    font-size: 5.7em;\n}\n40% {\n    color: rgba(255, 255, 255, 0.5);\n    font-size: 6em;\n}\n50% {\n    color: rgba(255, 255, 255, 0.6);\n    font-size: 6.3em;\n}\n60% {\n    color: rgba(255, 255, 255, 0.7);\n    font-size: 6.5em;\n}\n70% {\n    color: rgba(255, 255, 255, 0.7);\n    font-size: 6.7em;\n}\n80% {\n    color: rgba(255, 255, 255, 0.8);\n    font-size: 6.8em;\n}\n90% {\n    color: rgba(255, 255, 255, 0.9);\n    font-size: 6.9em;\n}\n}\n@keyframes title1-data-v-52579982 {\n0% {\n    color: rgba(255, 255, 255, 0.1);\n    font-size: 4.5em;\n}\n10% {\n    color: rgba(255, 255, 255, 0.2);\n    font-size: 5em;\n}\n20% {\n    color: rgba(255, 255, 255, 0.3);\n    font-size: 5.4em;\n}\n30% {\n    color: rgba(255, 255, 255, 0.4);\n    font-size: 5.7em;\n}\n40% {\n    color: rgba(255, 255, 255, 0.5);\n    font-size: 6em;\n}\n50% {\n    color: rgba(255, 255, 255, 0.6);\n    font-size: 6.3em;\n}\n60% {\n    color: rgba(255, 255, 255, 0.7);\n    font-size: 6.5em;\n}\n70% {\n    color: rgba(255, 255, 255, 0.7);\n    font-size: 6.7em;\n}\n80% {\n    color: rgba(255, 255, 255, 0.8);\n    font-size: 6.8em;\n}\n90% {\n    color: rgba(255, 255, 255, 0.9);\n    font-size: 6.9em;\n}\n}\n@-webkit-keyframes title2-data-v-52579982 {\n0% {\n    color: rgba(255, 255, 255, 0.1);\n    font-size: 1em;\n    text-decoration: none;\n}\n10% {\n    color: rgba(255, 255, 255, 0.2);\n    font-size: 1.3em;\n}\n20% {\n    color: rgba(255, 255, 255, 0.3);\n    font-size: 1.5em;\n}\n30% {\n    color: rgba(255, 255, 255, 0.4);\n    font-size: 1.6em;\n}\n40% {\n    color: rgba(255, 255, 255, 0.5);\n    font-size: 1.7em;\n}\n50% {\n    color: rgba(255, 255, 255, 0.6);\n    font-size: 1.8em;\n}\n60% {\n    color: rgba(255, 255, 255, 0.7);\n    font-size: 1.9em;\n}\n70% {\n    color: rgba(255, 255, 255, 0.7);\n    font-size: 2em;\n}\n80% {\n    color: rgba(255, 255, 255, 0.8);\n    font-size: 2.1em;\n}\n90% {\n    color: rgba(255, 255, 255, 0.9);\n    font-size: 2.2em;\n    text-decoration: none;\n}\n}\n@keyframes title2-data-v-52579982 {\n0% {\n    color: rgba(255, 255, 255, 0.1);\n    font-size: 1em;\n    text-decoration: none;\n}\n10% {\n    color: rgba(255, 255, 255, 0.2);\n    font-size: 1.3em;\n}\n20% {\n    color: rgba(255, 255, 255, 0.3);\n    font-size: 1.5em;\n}\n30% {\n    color: rgba(255, 255, 255, 0.4);\n    font-size: 1.6em;\n}\n40% {\n    color: rgba(255, 255, 255, 0.5);\n    font-size: 1.7em;\n}\n50% {\n    color: rgba(255, 255, 255, 0.6);\n    font-size: 1.8em;\n}\n60% {\n    color: rgba(255, 255, 255, 0.7);\n    font-size: 1.9em;\n}\n70% {\n    color: rgba(255, 255, 255, 0.7);\n    font-size: 2em;\n}\n80% {\n    color: rgba(255, 255, 255, 0.8);\n    font-size: 2.1em;\n}\n90% {\n    color: rgba(255, 255, 255, 0.9);\n    font-size: 2.2em;\n    text-decoration: none;\n}\n}\n", ""]);
+exports.push([module.i, "/* styles for welcome page */\n.service-description[data-v-52579982] {\n  font-size: 1.2rem;\n  margin-top: 20px;\n}\n.court-practice i[data-v-52579982], .fa-gavel[data-v-52579982] {\n  font-size: 3rem;\n  position: relative;\n}\n.court-practice i.fa-chart-bar[data-v-52579982] {\n  bottom: 50px;\n}\n.court-practice i.fa-pie-chart[data-v-52579982] {\n  left: 20px;\n}\n.court-practice i.fa-chart-area[data-v-52579982] {\n  right: 20px;\n}\n.fa-thumbs-up[data-v-52579982] {\n  color: green;\n}\n.fa-thumbs-down[data-v-52579982] {\n  color: red;\n}\n.rating .fa-user-check[data-v-52579982], .fa-balance-scale[data-v-52579982] {\n  font-size: 3rem;\n  position: relative;\n}\n.fa-thumbs-up[data-v-52579982], .fa-thumbs-down[data-v-52579982],\n.fa-briefcase[data-v-52579982], .fa-umbrella-beach[data-v-52579982],\n.fa-calendar-minus-o[data-v-52579982], .fa-medkit[data-v-52579982] {\n  position: relative;\n  bottom: 40px;\n}\n.fa-user-tie[data-v-52579982] {\n  font-size: 3rem;\n}\n.services[data-v-52579982] {\n  padding-top: 20px;\n  padding-bottom: 20px;\n  background-color: white;\n}\n.services .h2[data-v-52579982] {\n  font-weight: 300;\n  font-size: 3rem;\n  /*margin-top: 20px;*/\n}\n.welcome-wrap[data-v-52579982] {\n  min-height: 100vh;\n}\n.nice-background[data-v-52579982] {\n  background-color: #4686a08f;\n  background-image: -webkit-gradient(linear, left top, left bottom, from(#3081cf), to(#82db85));\n  background-image: linear-gradient(to bottom, #3081cf 0%, #82db85 100%);\n}\n#welcome-page[data-v-52579982] {\n  height: 100%;\n  width: 100%;\n  background-attachment: fixed, fixed, fixed;\n  /* background-position: top left, center center, center center;\n      background-size: auto, cover, cover; */\n  overflow: hidden;\n}\n#title-label[data-v-52579982] {\n  font-family: BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif;\n  color: white;\n  -moz-user-select: none;\n  -webkit-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  margin-bottom: 50px;\n}\n#title-label h1[data-v-52579982] {\n  font-size: 7em;\n  -webkit-animation-name: title1-data-v-52579982;\n          animation-name: title1-data-v-52579982;\n  -webkit-animation-duration: 1s;\n          animation-duration: 1s;\n}\n#title-label div[data-v-52579982] {\n  font-size: 2.2em;\n  text-decoration: overline;\n  margin-top: -17px;\n  -webkit-animation-name: title2-data-v-52579982;\n          animation-name: title2-data-v-52579982;\n  -webkit-animation-duration: 1s;\n          animation-duration: 1s;\n}\n@-webkit-keyframes title1-data-v-52579982 {\n0% {\n    color: rgba(255, 255, 255, 0.1);\n    font-size: 4.5em;\n}\n10% {\n    color: rgba(255, 255, 255, 0.2);\n    font-size: 5em;\n}\n20% {\n    color: rgba(255, 255, 255, 0.3);\n    font-size: 5.4em;\n}\n30% {\n    color: rgba(255, 255, 255, 0.4);\n    font-size: 5.7em;\n}\n40% {\n    color: rgba(255, 255, 255, 0.5);\n    font-size: 6em;\n}\n50% {\n    color: rgba(255, 255, 255, 0.6);\n    font-size: 6.3em;\n}\n60% {\n    color: rgba(255, 255, 255, 0.7);\n    font-size: 6.5em;\n}\n70% {\n    color: rgba(255, 255, 255, 0.7);\n    font-size: 6.7em;\n}\n80% {\n    color: rgba(255, 255, 255, 0.8);\n    font-size: 6.8em;\n}\n90% {\n    color: rgba(255, 255, 255, 0.9);\n    font-size: 6.9em;\n}\n}\n@keyframes title1-data-v-52579982 {\n0% {\n    color: rgba(255, 255, 255, 0.1);\n    font-size: 4.5em;\n}\n10% {\n    color: rgba(255, 255, 255, 0.2);\n    font-size: 5em;\n}\n20% {\n    color: rgba(255, 255, 255, 0.3);\n    font-size: 5.4em;\n}\n30% {\n    color: rgba(255, 255, 255, 0.4);\n    font-size: 5.7em;\n}\n40% {\n    color: rgba(255, 255, 255, 0.5);\n    font-size: 6em;\n}\n50% {\n    color: rgba(255, 255, 255, 0.6);\n    font-size: 6.3em;\n}\n60% {\n    color: rgba(255, 255, 255, 0.7);\n    font-size: 6.5em;\n}\n70% {\n    color: rgba(255, 255, 255, 0.7);\n    font-size: 6.7em;\n}\n80% {\n    color: rgba(255, 255, 255, 0.8);\n    font-size: 6.8em;\n}\n90% {\n    color: rgba(255, 255, 255, 0.9);\n    font-size: 6.9em;\n}\n}\n@-webkit-keyframes title2-data-v-52579982 {\n0% {\n    color: rgba(255, 255, 255, 0.1);\n    font-size: 1em;\n    text-decoration: none;\n}\n10% {\n    color: rgba(255, 255, 255, 0.2);\n    font-size: 1.3em;\n}\n20% {\n    color: rgba(255, 255, 255, 0.3);\n    font-size: 1.5em;\n}\n30% {\n    color: rgba(255, 255, 255, 0.4);\n    font-size: 1.6em;\n}\n40% {\n    color: rgba(255, 255, 255, 0.5);\n    font-size: 1.7em;\n}\n50% {\n    color: rgba(255, 255, 255, 0.6);\n    font-size: 1.8em;\n}\n60% {\n    color: rgba(255, 255, 255, 0.7);\n    font-size: 1.9em;\n}\n70% {\n    color: rgba(255, 255, 255, 0.7);\n    font-size: 2em;\n}\n80% {\n    color: rgba(255, 255, 255, 0.8);\n    font-size: 2.1em;\n}\n90% {\n    color: rgba(255, 255, 255, 0.9);\n    font-size: 2.2em;\n    text-decoration: none;\n}\n}\n@keyframes title2-data-v-52579982 {\n0% {\n    color: rgba(255, 255, 255, 0.1);\n    font-size: 1em;\n    text-decoration: none;\n}\n10% {\n    color: rgba(255, 255, 255, 0.2);\n    font-size: 1.3em;\n}\n20% {\n    color: rgba(255, 255, 255, 0.3);\n    font-size: 1.5em;\n}\n30% {\n    color: rgba(255, 255, 255, 0.4);\n    font-size: 1.6em;\n}\n40% {\n    color: rgba(255, 255, 255, 0.5);\n    font-size: 1.7em;\n}\n50% {\n    color: rgba(255, 255, 255, 0.6);\n    font-size: 1.8em;\n}\n60% {\n    color: rgba(255, 255, 255, 0.7);\n    font-size: 1.9em;\n}\n70% {\n    color: rgba(255, 255, 255, 0.7);\n    font-size: 2em;\n}\n80% {\n    color: rgba(255, 255, 255, 0.8);\n    font-size: 2.1em;\n}\n90% {\n    color: rgba(255, 255, 255, 0.9);\n    font-size: 2.2em;\n    text-decoration: none;\n}\n}\n", ""]);
 
 // exports
 
@@ -48573,6 +48573,7 @@ var render = function() {
                     [
                       _c("datepicker", {
                         attrs: {
+                          id: "status-end-date",
                           value: _vm.judgeStatus.due_date,
                           language: "uk",
                           min: _vm._f("formatDate")(_vm.calendar.startDate),
@@ -48612,7 +48613,7 @@ var render = function() {
                 attrs: { type: "button" },
                 on: { click: _vm.saveChanges }
               },
-              [_vm._v("\n                    Змінити сатус\n                ")]
+              [_vm._v("\n                    Змінити статус\n                ")]
             )
           ])
         ]
@@ -51836,6 +51837,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -52003,6 +52005,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         this.$router.push("/login");
       }
       if (this.judge.data.is_bookmark === 0) {
+        this.judge.data.is_bookmark = 1;
+
         axios({
           method: "put",
           url: "/api/v1/judges/" + this.$route.params.id + "/bookmark",
@@ -52012,14 +52016,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             Authorization: localStorage.getItem("token")
           }
         }).then(function (response) {
-          _this3.judge.data.is_bookmark = 1;
+          //
         }).catch(function (error) {
           if (error.response && error.response.status === 401) {
             _this3.$router.push("/login");
           }
+          _this3.judge.data.is_bookmark = 0;
+          _this3.$toasted.error("Неможливо додати в закладки, перевірте Ваше інтернет з'єднання або спробуйте пізніше", {
+            theme: "primary",
+            position: "top-right",
+            duration: 5000
+          });
           console.log("Bookmark", error);
         });
+
+        // якщо вже є закладка - видаляємо
       } else {
+        this.judge.data.is_bookmark = 0;
         axios({
           method: "delete",
           url: "/api/v1/judges/" + this.$route.params.id + "/bookmark",
@@ -52029,11 +52042,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             Authorization: localStorage.getItem("token")
           }
         }).then(function (response) {
-          _this3.judge.data.is_bookmark = 0;
+          //
         }).catch(function (error) {
           if (error.response && error.response.status === 401) {
             _this3.$router.push("/login");
           }
+          _this3.judge.data.is_bookmark = 1;
+          _this3.$toasted.error("Перевірте Ваше інтернет з'єднання або спробуйте пізніше", {
+            theme: "primary",
+            position: "top-right",
+            duration: 5000
+          });
           console.log("Bookmark", error.response);
         });
       }
@@ -52071,6 +52090,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           // якщо поставити лайк на сервері не вдалось, повертаємо кількість назад
           _this4.judge.data.likes += 1;
           _this4.judge.data.is_liked = 1;
+          _this4.$toasted.error("Перевірте Ваше інтернет з'єднання або спробуйте пізніше", {
+            theme: "primary",
+            position: "top-right",
+            duration: 5000
+          });
           console.log("set Likes", error);
         });
       } else {
@@ -52094,6 +52118,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           // якщо поставити лайк на сервері не вдалось, повертаємо кількість назад
           _this4.judge.data.likes -= 1;
           _this4.judge.data.is_liked = 0;
+          _this4.$toasted.error("Перевірте Ваше інтернет з'єднання або спробуйте пізніше", {
+            theme: "primary",
+            position: "top-right",
+            duration: 5000
+          });
           console.log("set Likes", error);
         });
       }
@@ -52128,6 +52157,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           // якщо поставити лайк на сервері не вдалось, повертаємо кількість назад
           _this5.judge.data.unlikes += 1;
           _this5.judge.data.is_unliked = 1;
+          _this5.$toasted.error("Перевірте Ваше інтернет з'єднання або спробуйте пізніше", {
+            theme: "primary",
+            position: "top-right",
+            duration: 5000
+          });
           console.log("set Likes", error);
         });
       } else {
@@ -52151,6 +52185,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           // якщо поставити лайк на сервері не вдалось, повертаємо кількість назад
           _this5.judge.data.unlikes -= 1;
           _this5.judge.data.is_unliked = 0;
+          _this5.$toasted.error("Перевірте Ваше інтернет з'єднання або спробуйте пізніше", {
+            theme: "primary",
+            position: "top-right",
+            duration: 5000
+          });
           console.log("set Likes", error);
         });
       }
@@ -52161,6 +52200,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       if (!this.$store.getters.isAuth) {
         this.$router.push("/login");
       } else {
+        session.is_bookmark = 0;
+
         axios({
           method: "delete",
           url: "/api/v1/court-sessions/" + session.id + "/bookmark",
@@ -52170,11 +52211,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             Authorization: localStorage.getItem("token")
           }
         }).then(function (response) {
-          session.is_bookmark = 0;
+          //
         }).catch(function (error) {
           if (error.response && error.response.status === 401) {
             _this6.$router.push("/login");
           }
+          session.is_bookmark = 1;
+          _this6.$toasted.error("Перевірте Ваше інтернет з'єднання або спробуйте пізніше", {
+            theme: "primary",
+            position: "top-right",
+            duration: 5000
+          });
         });
       }
     },
@@ -52184,6 +52231,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       if (!this.$store.getters.isAuth) {
         this.$router.push("/login");
       } else {
+        session.is_bookmark = 1;
         axios({
           method: "put",
           url: "/api/v1/court-sessions/" + session.id + "/bookmark",
@@ -52193,11 +52241,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             Authorization: localStorage.getItem("token")
           }
         }).then(function (response) {
-          session.is_bookmark = 1;
+          //
         }).catch(function (error) {
           if (error.response && error.response.status === 401) {
             _this7.$router.push("/login");
           }
+          session.is_bookmark = 0;
+          _this7.$toasted.error("Неможливо додати в закладки, перевірте Ваше інтернет з'єднання або спробуйте пізніше", {
+            theme: "primary",
+            position: "top-right",
+            duration: 5000
+          });
         });
       }
     },
@@ -52374,7 +52428,10 @@ var render = function() {
                             _c("span", [
                               _c("i", {
                                 staticClass: "fa fa-edit float-right pl-3",
-                                attrs: { "aria-hidden": "true" },
+                                attrs: {
+                                  "aria-hidden": "true",
+                                  title: "Змінити статус"
+                                },
                                 on: {
                                   click: function($event) {
                                     _vm.showModal = true
@@ -52400,7 +52457,10 @@ var render = function() {
                                 [
                                   _c("i", {
                                     staticClass: "fa fa-bookmark",
-                                    attrs: { "aria-hidden": "true" }
+                                    attrs: {
+                                      "aria-hidden": "true",
+                                      title: "Видалити з закладок"
+                                    }
                                   })
                                 ]
                               )
@@ -52419,7 +52479,10 @@ var render = function() {
                                 [
                                   _c("i", {
                                     staticClass: "fa fa-bookmark-o",
-                                    attrs: { "aria-hidden": "true" }
+                                    attrs: {
+                                      "aria-hidden": "true",
+                                      title: "Додати в закладки"
+                                    }
                                   })
                                 ]
                               )
@@ -52554,10 +52617,7 @@ var render = function() {
                                     ]),
                                     _vm._v(" "),
                                     _c("div", { staticClass: "col-2" }, [
-                                      _vm._v(
-                                        _vm._s(session.description) +
-                                          _vm._s(_vm.isAuth)
-                                      )
+                                      _vm._v(_vm._s(session.description))
                                     ]),
                                     _vm._v(" "),
                                     _vm.isAuth
@@ -52571,6 +52631,9 @@ var render = function() {
                                             session.is_bookmark
                                               ? _c("i", {
                                                   staticClass: "fas fa-star",
+                                                  attrs: {
+                                                    title: "Видалити з закладок"
+                                                  },
                                                   on: {
                                                     click: function($event) {
                                                       _vm.deleteBookmarkCourtSession(
@@ -52581,6 +52644,9 @@ var render = function() {
                                                 })
                                               : _c("i", {
                                                   staticClass: "far fa-star",
+                                                  attrs: {
+                                                    title: "Додати в закладки"
+                                                  },
                                                   on: {
                                                     click: function($event) {
                                                       _vm.addBookmarkCourtSession(
@@ -58314,7 +58380,7 @@ var render = function() {
                       _c("div", { staticClass: "row" }, [
                         _c("div", { staticClass: "col-9" }, [
                           _vm._v(
-                            "По справі, яку користувач відстежує, в будь-якого судді змінився статус"
+                            "По справі, яку користувач відстежує, в судді змінився статус"
                           )
                         ]),
                         _vm._v(" "),
@@ -58385,7 +58451,7 @@ var render = function() {
                       _c("div", { staticClass: "row bg" }, [
                         _c("div", { staticClass: "col-9" }, [
                           _vm._v(
-                            "За один день до судового засідання, яке користувач відстежує"
+                            "Нагадування про судове засідання, яке користувач відстежує"
                           )
                         ]),
                         _vm._v(" "),
@@ -58455,9 +58521,7 @@ var render = function() {
                       _vm._v(" "),
                       _c("div", { staticClass: "row" }, [
                         _c("div", { staticClass: "col-9" }, [
-                          _vm._v(
-                            "Про пропозиції судової практики для користувача"
-                          )
+                          _vm._v("Пропозиції судової практики для користувача")
                         ]),
                         _vm._v(" "),
                         _c("div", { staticClass: "col-3" }, [

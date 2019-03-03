@@ -25,7 +25,7 @@
                         <div class="form-group row mx-0 my-4">
                             <label for="status-end-date" class="col-7">Дата завершення дії статусу <br><sup class="text-muted">(якщо відома)</sup></label>
                             <div class="col-5">
-                                <datepicker v-model="judgeStatus.due_date" :value="judgeStatus.due_date" language="uk" :min="calendar.startDate | formatDate" :max="calendar.endDate | formatDate"></datepicker>
+                                <datepicker id="status-end-date" v-model="judgeStatus.due_date" :value="judgeStatus.due_date" language="uk" :min="calendar.startDate | formatDate" :max="calendar.endDate | formatDate"></datepicker>
                             </div>
                         </div>
                     </form>
@@ -35,7 +35,7 @@
                         Закрити
                     </button>
                     <button type="button" class="btn btn-info" @click="saveChanges">
-                        Змінити сатус
+                        Змінити статус
                     </button>
                 </footer>
             </div>

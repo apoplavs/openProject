@@ -106,6 +106,7 @@
     .services {
         padding-top: 20px;
         padding-bottom: 20px;
+        background-color: white;
     }
     .services .h2{
         font-weight: 300;
