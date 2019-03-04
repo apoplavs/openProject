@@ -759,6 +759,7 @@ class CourtsController extends Controller
      *                   },
      *                   "court_sessions": {
      *                       {
+	 *     						 "id": 87324,
      *                           "date": "2018-11-02 08:00:00",
      *                           "judges": "Єрмічова Віта Валентинівна",
      *                           "forma": "Цивільне",
@@ -767,6 +768,7 @@ class CourtsController extends Controller
      *                           "description": "про визнання права власності на спадкове майно за законом"
      *                       },
      *                       {
+	 *     						 "id": 15324,
      *                           "date": "2018-11-02 09:00:00",
      *                           "judges": "Хитрук Володимир Миколайович",
      *                           "forma": "Цивільне",
@@ -926,6 +928,7 @@ class CourtsController extends Controller
      *                   },
      *                   "court_sessions": {
      *                       {
+	 *     						 "id": 21324,
      *                           "date": "2018-11-02 08:00:00",
      *                           "judges": "Єрмічова Віта Валентинівна",
      *                           "forma": "Цивільне",
@@ -935,6 +938,7 @@ class CourtsController extends Controller
      *                           "is_bookmark": 0
      *                       },
      *                       {
+	 *     						 "id": 98324,
      *                           "date": "2018-11-02 09:00:00",
      *                           "judges": "Хитрук Володимир Миколайович",
      *                           "forma": "Цивільне",

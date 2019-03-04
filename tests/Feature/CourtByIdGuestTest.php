@@ -61,6 +61,7 @@ class CourtByIdGuestTest extends BaseApiTest
                     'court' => $court_code,
                     'judge1' => $head_judge_id,
                     'judge2' => null,
+                    'date' => date('Y-m-d', strtotime('+2 week')),
                     'forma' => 1,
                 ],
                 [
@@ -68,6 +69,7 @@ class CourtByIdGuestTest extends BaseApiTest
                     'court' => $court_code,
                     'judge1' => $head_judge_id,
                     'judge2' => $secondary_judge_id,
+                    'date' => date('Y-m-d', strtotime('+1 week')),
                     'forma' => 2,
                 ],
             ]
@@ -77,7 +79,7 @@ class CourtByIdGuestTest extends BaseApiTest
     public function getEtalonDataJudges($insert_db_data)
     {
         $result = DB::table('judges')
-                    ->select('surname', 'name', 'patronymic', 'status', 'updated_status', 'due_date_status', 'rating')
+                    ->select('surname', 'name', 'patronymic', 'status', 'updated_status', 'due_date_status', 'rating', 'id', 'photo')
                     ->where('court', '=', $insert_db_data['courts']['court_code'])
                     ->orderBy('rating', 'DESC')
                     ->get()
@@ -91,7 +93,7 @@ class CourtByIdGuestTest extends BaseApiTest
     public function getEtalonDataCourtSessions($insert_db_data)
     {
         $result = DB::table('court_sessions')
-                    ->select('date',
+                    ->select(DB::raw('DATE_FORMAT(`court_sessions`.`date`, "%d.%m.%Y %H:%i") AS date'),
                              DB::raw('get_judges_by_id(judge1, judge2, judge3) AS judges'),
                              DB::raw('justice_kinds.name AS forma'),
                              'number', 'involved', 'description')
