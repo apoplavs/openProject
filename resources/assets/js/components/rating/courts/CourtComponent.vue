@@ -40,7 +40,7 @@
             </div>
             <div class="part-3 mt-3">
               <div class="rating">
-                <i class="fa fa-line-chart" aria-hidden="true">{{ court.rating }}</i>
+                <i class="fa fa-line-chart mr-1" aria-hidden="true"></i>{{ court.rating }}
               </div>
               <div class="bookmark">
                 <span v-if="court.is_bookmark" @click="deleteBookmark(court)">

@@ -3,7 +3,7 @@
     <div class="row min-width">
       <div class="col-3 filters">
           <!-- filters -->
-          <filters :filters="filters" @resetFilters="resetFilters" @setFilters="setFilters"/> 
+          <filters :filters="filters" @resetFilters="resetFilters" @setFilters="setFilters" /> 
       </div>
   
       <!-- Main list -->
@@ -78,7 +78,6 @@
           instances: [],
           search: null,
           sort: 1,
-          expired: 1
         },
         autocomplete: [],
         judgesList: {

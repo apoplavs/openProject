@@ -94,7 +94,7 @@
             <judge-component :judgesList="filterJudges" :littlePhoto="true"/>
           </div>
         </div>
-<!-- --------------33333333---------------------- -->
+        <!-- --------------33333333---------------------- -->
         <div class="card mt-3 courtSessions">
           <div class="card-header d-flex justify-content-between">
             <span>Засідання</span>
