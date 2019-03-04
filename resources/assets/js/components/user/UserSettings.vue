@@ -62,7 +62,7 @@
                       :class="{'input': true, 'is-danger': errors.has('телефон') }"
                     >
                     <small v-show="errors.has('телефон')">
-                      <span   
+                      <span
                         class="help is-danger"
                       >{{ errors.first('телефон') }}</span>
                     </small>
@@ -323,6 +323,13 @@ export default {
           'X-Requested-With': 'XMLHttpRequest',
           Authorization: localStorage.getItem("token")
         }
+	  })
+      .then(response => {
+          this.$toasted.success("Збережено", {
+              theme: "primary",
+              position: "top-right",
+              duration: 3000
+          });
         }) .catch(error => {
         if (error && error.response && error.response.status === 401) {
           this.$router.push("/login");
@@ -360,6 +367,14 @@ export default {
           'X-Requested-With': 'XMLHttpRequest',
           Authorization: localStorage.getItem("token")
         }
+       })
+      .then(response => {
+          this.$toasted.success("Збережено", {
+              theme: "primary",
+              position: "top-right",
+              duration: 3000
+          });
+
         }) .catch( error => {
           if (error && error.response && error.response.status === 401) {
             this.$router.push("/login");
