@@ -9,6 +9,7 @@ import Registration from '../components/auth/Registration.vue';
 import RecoverPassword from '../components/auth/RecoverPassword.vue';
 import JudgesList from '../components/rating/judges/JudgesList.vue';
 import JudgeProfile from '../components/rating/judges/JudgeProfile.vue';
+import JudgeComparison from '../components/rating/judges/JudgeComparison.vue';
 
 import CourtsList from '../components/rating/courts/CourtsList.vue';
 import CourtProfile from '../components/rating/courts/CourtProfile.vue';
@@ -16,7 +17,7 @@ import UserProfile from '../components/user/UserProfile.vue';
 import UserSettings from '../components/user/UserSettings.vue';
 import ConfirmEmail from '../components/user/ConfirmEmail.vue';
 
-import PrivacyPolicy from '../components/system/PrivacyPolicy.vue'
+import PrivacyPolicy from '../components/system/PrivacyPolicy.vue';
 
 // import CourtSessions from '../components/user/components/CourtSessions.vue';
 // import CourtPractice from '../components/user/components/CourtPractice.vue';
@@ -87,6 +88,11 @@ export default new Router({
 			path: '/confirm-email',
 			component: ConfirmEmail,
 			name: 'confirm-email',
+		},
+		{
+			path: '/judge-comparison',
+			component: JudgeComparison,
+			name: 'judge-comparison',
 		},
     ]
 });

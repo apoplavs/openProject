@@ -26,6 +26,7 @@
         <div class="card">
           <div class="card-header d-flex justify-content-between">
             <span>Список суддів</span>
+            <i class="fas fa-balance-scale p-1" v-if="judgeComparation" aria-hidden="true" title="Порівняння" @click="addToCompare(judge.id)"></i>
             <div class="d-flex align-items-center">
               <span class="mr-2"> сортувати за: </span>
               <select class="form-control select-sort" name="sorting" v-model="filters.sort" @change="sortList()">
@@ -80,6 +81,7 @@
           sort: 1,
           expired: 1
         },
+          judgeComparation: sessionStorage.judge_compare,
         autocomplete: [],
         judgesList: {
           total: 0
@@ -97,7 +99,13 @@
       if (initialFilters) {
         this.filters = initialFilters;
       }
-      this.getJudgesList()
+      this.getJudgesList();
+
+		this.$on('show-comparation', function(count_id) {
+		  judgeComparation = true;
+		  console.log("GEGEGEEGeeeee");
+		  console.log(count_id);
+      });
     },
     methods: {
       validateInputSearch() {
@@ -226,4 +234,10 @@
 
 <style lang="scss" scoped>
   @import "../../../../sass/judges_coutrs_list.scss";
+
+  .fa-balance-scale {
+    color: #ffa726;
+    cursor: pointer;
+    margin-left: 15%;
+  }
 </style>

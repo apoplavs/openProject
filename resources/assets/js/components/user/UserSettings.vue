@@ -62,7 +62,7 @@
                       :class="{'input': true, 'is-danger': errors.has('телефон') }"
                     >
                     <small v-show="errors.has('телефон')">
-                      <span   
+                      <span
                         class="help is-danger"
                       >{{ errors.first('телефон') }}</span>
                     </small>
@@ -181,19 +181,19 @@
                 </div>
               </div>
               <div class="row">
-                <div class="col-9">По справі, яку користувач відстежує, в будь-якого судді змінився статус</div>
+                <div class="col-9">По справі, яку користувач відстежує, в судді змінився статус</div>
                 <div class="col-3">
                   <input type="checkbox" v-model="notifications.email_notification_3" @click="select()"> Email
                 </div>
               </div>
               <div class="row bg">
-                <div class="col-9">За один день до судового засідання, яке користувач відстежує</div>
+                <div class="col-9">Нагадування про судове засідання, яке користувач відстежує</div>
                 <div class="col-3">
                   <input type="checkbox" v-model="notifications.email_notification_4" @click="select()"> Email
                 </div>
               </div>
               <div class="row">
-                <div class="col-9">Про пропозиції судової практики для користувача</div>
+                <div class="col-9">Пропозиції судової практики для користувача</div>
                 <div class="col-3">
                   <input type="checkbox" v-model="notifications.email_notification_5" @click="select()"> Email
                 </div>
@@ -323,6 +323,13 @@ export default {
           'X-Requested-With': 'XMLHttpRequest',
           Authorization: localStorage.getItem("token")
         }
+	  })
+      .then(response => {
+          this.$toasted.success("Збережено", {
+              theme: "primary",
+              position: "top-right",
+              duration: 3000
+          });
         }) .catch(error => {
         if (error && error.response && error.response.status === 401) {
           this.$router.push("/login");
@@ -360,6 +367,14 @@ export default {
           'X-Requested-With': 'XMLHttpRequest',
           Authorization: localStorage.getItem("token")
         }
+       })
+      .then(response => {
+          this.$toasted.success("Збережено", {
+              theme: "primary",
+              position: "top-right",
+              duration: 3000
+          });
+
         }) .catch( error => {
           if (error && error.response && error.response.status === 401) {
             this.$router.push("/login");
