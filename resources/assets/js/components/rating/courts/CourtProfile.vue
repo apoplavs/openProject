@@ -1,6 +1,6 @@
 <template>
   <div class="court-profile">
-    <spinner v-if="!loadData"/>
+    <spinner v-if="!loadData" />
     <div v-else class="container content-wrapper">
       <div class="court-info">
         <div class="row court-component m-0">
@@ -15,29 +15,25 @@
               </router-link>
               <div class="bookmark pr-3">
                 <span v-if="court.is_bookmark" @click="deleteBookmarkJudge()">
-                  <i class="fa fa-bookmark" aria-hidden="true"></i>
-                </span>
+                    <i class="fa fa-bookmark" aria-hidden="true"></i>
+                  </span>
                 <span v-if="!court.is_bookmark" @click="setBookmarkJudge()">
-                  <i class="fa fa-bookmark-o" aria-hidden="true"></i>
-                </span>
+                    <i class="fa fa-bookmark-o" aria-hidden="true"></i>
+                  </span>
               </div>
             </div>
             <div class="part-1 mt-3">
               <div>
-                <span>Голова суду:</span>
-                {{court.head_judge ? court.head_judge : 'невідомо'}}
+                <span>Голова суду:</span> {{court.head_judge ? court.head_judge : 'невідомо'}}
               </div>
               <div>
-                <span>Інстанція суду:</span>
-                {{court.instance ? court.instance : 'невідомо'}}
+                <span>Інстанція суду:</span> {{court.instance ? court.instance : 'невідомо'}}
               </div>
               <div>
-                <span>Юрисдикція суду:</span>
-                {{court.jurisdiction ? court.jurisdiction : 'невідомо'}}
+                <span>Юрисдикція суду:</span> {{court.jurisdiction ? court.jurisdiction : 'невідомо'}}
               </div>
               <div>
-                <span>Регіон:</span>
-                {{court.region ? court.region : 'невідомо'}}
+                <span>Регіон:</span> {{court.region ? court.region : 'невідомо'}}
               </div>
             </div>
             <div class="part-2 mt-3">
@@ -61,24 +57,24 @@
                 <a target="_blank" :href="court.site">{{ court.site }}</a>
               </div>
             </div>
-
+  
             <div class="part-3 mt-3">
               <div class="rating w-100 d-flex justify-content-between">
                 <!-- <div>
-                  <span class="like mr-4" @click="changeLikes">
-                    <i class="fas fa-thumbs-up"></i>
-                    {{ 12 }}
-                  </span>
-                  <span class="dislike" @click="changeUnlikes">
-                    <i class="fas fa-thumbs-down"></i>
-                    {{ 21 }}
-                  </span>
-                </div> -->
+                    <span class="like mr-4" @click="changeLikes">
+                      <i class="fas fa-thumbs-up"></i>
+                      {{ 12 }}
+                    </span>
+                    <span class="dislike" @click="changeUnlikes">
+                      <i class="fas fa-thumbs-down"></i>
+                      {{ 21 }}
+                    </span>
+                  </div> -->
                 <div>
                   <span class="line-chart">
-                    <i class="fa fa-line-chart mr-1" aria-hidden="true"></i>
-                    {{ court.rating }}
-                  </span>
+                      <i class="fa fa-line-chart mr-1" aria-hidden="true"></i>
+                      {{ court.rating }}
+                    </span>
                 </div>
               </div>
             </div>
@@ -91,7 +87,7 @@
             <input type="search" class="form-control" placeholder="Пошук..." v-model.trim="searchJudges">
           </div>
           <div class="card-body p-0">
-            <judge-component :judgesList="filterJudges" :littlePhoto="true"/>
+            <judge-component :judgesList="filterJudges" :littlePhoto="true" />
           </div>
         </div>
         <!-- --------------33333333---------------------- -->
@@ -120,15 +116,11 @@
                 <div class="col-2">{{ session.forma }}</div>
                 <div class="col-3">{{ session.involved }}</div>
                 <div class="col-2">{{ session.description }}</div>
-                <div class="col-1 pr-0 text-center">
-                    <i
-                      v-if="session.is_bookmark"
-                      class="fas fa-star"
-                      @click="deleteBookmarkSession(session)"
-                    ></i>
-                    <i v-else class="far fa-star" @click="setBookmarkSession(session)"></i>
+                <div class="col-1 pr-0 center">
+                  <i v-if="session.is_bookmark" class="fas fa-star" @click="deleteBookmarkSession(session)"></i>
+                  <i v-else class="far fa-star" @click="setBookmarkSession(session)"></i>
                 </div>
-              </div> 
+              </div>
             </div>
             <div v-else>За даними параметрами нічого не знайдено...</div>
           </div>
@@ -139,36 +131,35 @@
 </template>
 
 <script>
-import _ from 'lodash';
-import JudgeComponent from '../../rating/judges/JudgeComponent.vue';
-import StatusComponent from "../../shared/StatusComponent.vue";
-import ChangeStatus from "../../shared/ChangeStatus.vue";
-import Spinner from "../../shared/Spinner.vue";
-
-export default {
-  name: "CourtProfile",
-  components: {
-    Spinner,
-    StatusComponent,
-    ChangeStatus,
-    JudgeComponent
-  },
-  data() {
-    return {
-      showModal: false,
-      loadData: false,
-      searchJudges: '',
-      searchSessions: '',
-      court: {},
-
-    };
-  },
-   computed: {
+  import _ from 'lodash';
+  import JudgeComponent from '../../rating/judges/JudgeComponent.vue';
+  import StatusComponent from "../../shared/StatusComponent.vue";
+  import ChangeStatus from "../../shared/ChangeStatus.vue";
+  import Spinner from "../../shared/Spinner.vue";
+  
+  export default {
+    name: "CourtProfile",
+    components: {
+      Spinner,
+      StatusComponent,
+      ChangeStatus,
+      JudgeComponent
+    },
+    data() {
+      return {
+        showModal: false,
+        loadData: false,
+        searchJudges: '',
+        searchSessions: '',
+        court: {} 
+      };
+    },
+    computed: {
       filterJudges() {
         //  живий пошук = фільтер
         return _.filter(this.court.judges, el => {
           let arr = _.filter(Object.keys(el), key => {
-            let regEx = new RegExp(`(${this.searchJudges})`, "i");            
+            let regEx = new RegExp(`(${this.searchJudges})`, "i");
             return regEx.test(el.surname) || this.searchJudges.length == 0;
           });
           return arr.length > 0 ? true : false;
@@ -185,14 +176,60 @@ export default {
         });
       },
     },
-  created() {
+    created() {
       this.getCourtProfile();
-  },
-  methods: {
-    getCourtProfile() {
-      if (this.$store.getters.isAuth) {
-        axios
-          .get(`/api/v1/courts/${this.$route.params.id}`, {
+    },
+    methods: {
+      getCourtProfile() {
+        if (this.$store.getters.isAuth) {
+          axios
+            .get(`/api/v1/courts/${this.$route.params.id}`, {
+              headers: {
+                "Content-Type": "application/json",
+                "X-Requested-With": "XMLHttpRequest",
+                Authorization: localStorage.getItem("token")
+              }
+            })
+            .then(response => {
+              this.court = response.data;
+              this.loadData = true;
+              console.log("COURT ____ PROFILE", this.court);
+            })
+            .catch(error => {
+              if (error.response && error.response.status === 401) {
+                this.$router.push("/login");
+              }
+              console.log("error");
+            });
+        } else {
+          console.log("not log in");
+          axios
+            .get(`/api/v1/guest/courts/${this.$route.params.id}`, {
+              headers: {
+                "Content-Type": "application/json",
+                "X-Requested-With": "XMLHttpRequest"
+              }
+            })
+            .then(response => {
+              this.court = response.data;
+              this.loadData = true;
+              console.log("COURT ____ PROFILE not log in", this.court);
+            })
+            .catch(error => {
+              if (error.response && error.response.status === 401) {
+                this.$router.push("/login");
+              }
+              console.log(error);
+            });
+        }
+      },
+      setBookmarkJudge() {
+        if (!this.$store.getters.isAuth) {
+          this.$router.push("/login");
+        }
+        axios({
+            method: "put",
+            url: `/api/v1/courts/${this.$route.params.id}/bookmark`,
             headers: {
               "Content-Type": "application/json",
               "X-Requested-With": "XMLHttpRequest",
@@ -200,284 +237,212 @@ export default {
             }
           })
           .then(response => {
-            this.court = response.data;              
-            this.loadData = true;
-            console.log("COURT ____ PROFILE", this.court);
+            this.court.is_bookmark = 1;
           })
           .catch(error => {
             if (error.response && error.response.status === 401) {
               this.$router.push("/login");
             }
-            console.log("error");
+            console.log("Bookmark", error);
           });
-      } else {
-        console.log("not log in");
-        axios
-          .get(`/api/v1/guest/courts/${this.$route.params.id}`, {
+      },
+      deleteBookmarkJudge() {
+        if (!this.$store.getters.isAuth) {
+          this.$router.push("/login");
+        }
+        axios({
+            method: "delete",
+            url: `/api/v1/courts/${this.$route.params.id}/bookmark`,
             headers: {
               "Content-Type": "application/json",
-              "X-Requested-With": "XMLHttpRequest"
+              "X-Requested-With": "XMLHttpRequest",
+              Authorization: localStorage.getItem("token")
             }
           })
           .then(response => {
-            this.court = response.data;
-            this.loadData = true;
-            console.log("COURT ____ PROFILE not log in", this.court);
+            this.court.is_bookmark = 0;
           })
           .catch(error => {
-            if (error.response && error.response.status === 401) {
+            if (error.response.status === 401) {
               this.$router.push("/login");
             }
-            console.log(error);
+            console.log("Bookmark", error.response);
           });
-      }
-    },
-    setBookmarkJudge() {
-      if (!this.$store.getters.isAuth) {
-        this.$router.push("/login");
-      }
-      axios({
-        method: "put",
-        url: `/api/v1/courts/${this.$route.params.id}/bookmark`,
-        headers: {
-          "Content-Type": "application/json",
-          "X-Requested-With": "XMLHttpRequest",
-          Authorization: localStorage.getItem("token")
-        }
-      })
-      .then(response => {
-        this.court.is_bookmark = 1;
-      })
-      .catch(error => {
-        if (error.response && error.response.status === 401) {
+      },
+      showModalDelete(session) {
+        this.showModalConfirm = true;
+        this.deleteSession = session;
+      },
+  
+      deleteBookmarkSession(session) {
+        if (!this.$store.getters.isAuth) {
           this.$router.push("/login");
-        }
-        console.log("Bookmark", error);
-      });
-    },
-    deleteBookmarkJudge() {
-      if (!this.$store.getters.isAuth) {
-        this.$router.push("/login");
-      }
-      axios({
-        method: "delete",
-        url: `/api/v1/courts/${this.$route.params.id}/bookmark`,
-        headers: {
-          "Content-Type": "application/json",
-          "X-Requested-With": "XMLHttpRequest",
-          Authorization: localStorage.getItem("token")
-        }
-      })
-      .then(response => {
-        this.court.is_bookmark = 0;
-      })
-      .catch(error => {
-        if (error.response.status === 401) {
-          this.$router.push("/login");
-        }
-        console.log("Bookmark", error.response);
-      });
-    },
-    showModalDelete(session) {
-      this.showModalConfirm = true;
-      this.deleteSession = session;
-    },
-
-    deleteBookmarkSession(session) {
-      if (!this.$store.getters.isAuth) {
-        this.$router.push("/login");
-      } else {
-        axios({
-          method: "delete",
-          url: `/api/v1/court-sessions/${this.deleteSession.id}/bookmark`,
-          headers: {
-            "Content-Type": "application/json",
-            "X-Requested-With": "XMLHttpRequest",
-            Authorization: localStorage.getItem("token")
-          }
-        })
-          .then(response => {
-            this.courtSessions = _.filter( this.courtSessions, el => {
+        } else {
+          axios({
+              method: "delete",
+              url: `/api/v1/court-sessions/${this.deleteSession.id}/bookmark`,
+              headers: {
+                "Content-Type": "application/json",
+                "X-Requested-With": "XMLHttpRequest",
+                Authorization: localStorage.getItem("token")
+              }
+            })
+            .then(response => {
+              this.courtSessions = _.filter(this.courtSessions, el => {
                 return this.deleteSession.id !== el.id
+              });
+              console.log("courtSessions", this.courtSessions);
+              this.deleteSession = null;
+              this.loadData = true;
+            })
+            .catch(error => {
+              if (error && error.response && error.response.status === 401) {
+                this.$router.push("/login");
+              }
             });
-            console.log("courtSessions", this.courtSessions);
-            this.deleteSession = null;
-            this.loadData = true;
-          })
-          .catch(error => {
-            if (error && error.response && error.response.status === 401) {
-              this.$router.push("/login");
-            }
-          });
-      }
-    },
-    setBookmarkSession(session){},
-    saveNote(session) {
-      // якщо пуста строка передаємо null
-      session.note = !session.note.length ? null : session.note;
-      axios.post(`/api/v1/court-sessions/${session.id}/bookmark/note`, { 'note': session.note }, {
-        headers: {
-          'Content-Type': 'application/json',
-          'X-Requested-With': 'XMLHttpRequest',
-          Authorization: localStorage.getItem("token")
         }
-        }) .catch(error => {
-        if (error && error.response && error.response.status === 401) {
-          this.$router.push("/login");
-        }
-      })
+      },
+      setBookmarkSession(session) {},
     }
-  }
-};
+  };
 </script>
 
 <style scoped lang='scss'>
-@import "../../../../sass/_variables.scss";
-@import "../../../../sass/_mixins.scss";
-.court-profile {
-  .court-component {
-    .court-component_left {
-      background-color: $body-bg;
-      @include boxShadow($shadow-header);
-      @include alignElement(column);
-      .fa-university {
-        color: $primary;
-        font-size: 1.8rem;
-        margin-bottom: 10px;
-      }
-    }
-    .court-component_right {
-      @include boxShadow($shadow-header);
-      background-color: #ffffff;
-      .bookmark {
-        color: $warning;
-      }
-      .court-name {
-        color: $primary;
-        font-size: 1.5rem;
-        &:hover {
+  @import "../../../../sass/_variables.scss";
+  @import "../../../../sass/_mixins.scss";
+  .court-profile {
+    .court-component {
+      .court-component_left {
+        background-color: $body-bg;
+        @include boxShadow($shadow-header);
+        @include alignElement(column);
+        .fa-university {
           color: $primary;
-          text-decoration: underline;
+          font-size: 1.8rem;
+          margin-bottom: 10px;
         }
       }
-      .part-1 {
-        line-height: 1.3rem;
-        font-size: 0.9rem;
-        span {
-          color: $text-color;
-          font-weight: 700;
+      .court-component_right {
+        @include boxShadow($shadow-header);
+        background-color: #ffffff;
+        .bookmark {
+          color: $warning;
         }
-      }
-      .part-2 {
-        .detail-info {
-          //   @include alignElement($justifyContent: start, $alignItems: start);
-          color: $text-muted;
+        .court-name {
+          color: $primary;
+          font-size: 1.5rem;
+          &:hover {
+            color: $primary;
+            text-decoration: underline;
+          }
+        }
+        .part-1 {
+          line-height: 1.3rem;
           font-size: 0.9rem;
-          i[class^="fa"] {
-            margin-right: 10px;
-            padding-top: 5px;
+          span {
+            color: $text-color;
+            font-weight: 700;
+          }
+        }
+        .part-2 {
+          .detail-info {
+            color: $text-muted;
+            font-size: 0.9rem;
+            i[class^="fa"] {
+              margin-right: 10px;
+              padding-top: 5px;
+            }
+          }
+        }
+        .part-1 {
+          &>div:first-child,
+          &>div:last-child {
+            color: $primary;
+          }
+        }
+        .part-3 {
+          .rating {
+            color: $main-color;
+          }
+          .like {
+            color: green;
+            font-size: .9rem;
+            cursor: pointer;
+          }
+          .dislike {
+            color: red;
+            font-size: .9rem;
+            cursor: pointer;
           }
         }
       }
-      .part-1 {
-        & > div:first-child,
-        & > div:last-child {
-            color: $primary;
-        }
-      }
-      .part-3 {
-        //   @include alignElement($justifyContent: space-between);
-        .rating {
-          color: $main-color;
-        }
-        .like {
-          color: green;
-          font-size: .9rem;
-          cursor: pointer;
-        }
-        .dislike {
-          color: red;
-          font-size: .9rem;
-          cursor: pointer;
-        }
-      }
     }
-  }
-  .judges,
-  .courtSessions {
+    .judges,
+    .courtSessions {
       .card-body {
-          max-height: 700px;
-          overflow: hidden;
-          overflow-y: scroll;
-        //   padding: 0;
+        max-height: 700px;
+        overflow: hidden;
+        overflow-y: scroll;
       }
-  }
-  input[type='search']{
-    width: 200px;
-  }
-
-
-
-//   session 
-
-.courtSessions {
-  width: 100%;
-  height: auto;
-  margin-top: 50px;
-  .card-header {
-    .fa-bookmark {
-      color: #ffffff;
-      font-size: 1.4rem;
-      margin-right: 15px;
+    }
+    input[type='search'] {
+      width: 200px;
+    }
+    //   session 
+    .courtSessions {
+      width: 100%;
+      height: auto;
+      margin-top: 50px;
+      .card-header {
+        .fa-bookmark {
+          color: #ffffff;
+          font-size: 1.4rem;
+          margin-right: 15px;
+        }
+      }
+      .infoCard {
+        padding: 20px;
+        >p:first-child {
+          font-size: 1.1rem;
+        }
+      }
+      .header {
+        font-size: 0.9rem;
+        font-weight: 700;
+        align-items: center;
+        line-height: 1.4;
+      }
+      .fa-star {
+        color: $main-color;
+        cursor: pointer;
+        font-size: 1.2rem;
+      }
+      input[type="search"] {
+        width: 200px;
+      }
+      .container-component {
+        padding: 0;
+        background-color: #ffffff;
+        .body {
+          font-size: .8rem;
+        }
+      }
+      .row {
+        margin: 0;
+        padding: 15px 0;
+        &:not(:last-child) {
+          border-bottom: 1px solid $text-muted;
+        }
+      }
+      .col-1,
+      .col-2,
+      .col-3 {
+        padding-right: 5px;
+        padding-left: 5px;
+      }
+    }
+    .center {
+      @include alignElement();
     }
   }
-  .infoCard {
-    padding: 20px;
-    > p:first-child {
-      font-size: 1.1rem;
-    }
-  }
-  .header {
-    font-size: 0.9rem;
-    font-weight: 700;
-    align-items: center;
-    line-height: 1.4;
-  }
-  .fa-star {
-    color: $main-color;
-    cursor: pointer;
-    font-size: 16px;
-  }
-  input[type="search"] {
-    width: 200px;
-  }
-
-  .container-component {
-    padding: 0;
-    background-color: #ffffff;
-    .body {
-      font-size: .8rem;
-    }
-  }
-
-  .row {
-    margin: 0;
-    padding: 15px 0;
-    &:not(:last-child) {
-      border-bottom: 1px solid $text-muted;
-    }
-  }
-  .col-1,
-  .col-2,
-  .col-3 {
-    padding-right: 5px;
-    padding-left: 5px;
-  }
-}
-}
-
-
-
-
-     
 </style>
