@@ -283,7 +283,7 @@ export default {
         })
         .then(response => {
           this.user = response.data.profile;
-          this.user.phone = '0660851225';
+          // this.user.phone = '0660851225';
           this.notifications = response.data.notifications;
           this.loadData = true;
           console.log("User settings", response);

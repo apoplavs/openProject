@@ -60,16 +60,6 @@
   
             <div class="part-3 mt-3">
               <div class="rating w-100 d-flex justify-content-between">
-                <!-- <div>
-                    <span class="like mr-4" @click="changeLikes">
-                      <i class="fas fa-thumbs-up"></i>
-                      {{ 12 }}
-                    </span>
-                    <span class="dislike" @click="changeUnlikes">
-                      <i class="fas fa-thumbs-down"></i>
-                      {{ 21 }}
-                    </span>
-                  </div> -->
                 <div>
                   <span class="line-chart">
                       <i class="fa fa-line-chart mr-1" aria-hidden="true"></i>

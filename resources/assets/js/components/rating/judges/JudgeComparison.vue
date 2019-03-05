@@ -4,7 +4,7 @@
       Не додано жодного суддю для порівняння</div>
 
     <div v-else-if="loadData">
-      <table class="table" width="100%">
+      <table class="table content-wrapper">
         <thead>
         <tr>
           <th scope="col"></th>
@@ -153,14 +153,9 @@ import Spinner from '../../shared/Spinner.vue';
 			if (sessionStorage.judge_compare) {
 				judge_compare = JSON.parse(sessionStorage.getItem("judge_compare"));
 			}
-
-			// якщо масив пустий
-			if (judge_compare.length < 1 || !this.$store.getters.isAuth) {
-				this.$router.push("/judges");
-			}
       
       // отримуємо список суддів для поріняння
-			judge_compare.map(function(value, key) {
+			let promises = judge_compare.map(function(value, key) {
 				axios
 					.get(`/api/v1/judges/${value}`, {
 						headers: {
@@ -178,7 +173,8 @@ import Spinner from '../../shared/Spinner.vue';
 						}
 						 $this.$router.push("/judges");
 					});
-			});
+      });
+
 
       // час затримки спінера пропорційно кількості суддів в порівнянні
       setTimeout(function() {
@@ -217,8 +213,8 @@ td {
 }
 td:first-child {
   text-align: right;
-  widht: 30%;
-  max-width: 300px!important;
+  width: 30%;
+  max-width: 300px !important;
   font-size: 0.9rem;
 }
 .delete-comparation {

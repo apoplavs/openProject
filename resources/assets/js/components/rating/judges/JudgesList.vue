@@ -26,10 +26,6 @@
         <div class="card">
           <div class="card-header d-flex justify-content-between">
             <span>Список суддів</span>
-
-            <router-link :to="`/judge-comparison`">
-              <i class="fas fa-balance-scale p-1" v-if="judgeComparation" aria-hidden="true" title="Порівняння" ></i>
-            </router-link>
             <div class="d-flex align-items-center">
               <span class="mr-2"> сортувати за: </span>
               <select class="form-control select-sort" name="sorting" v-model="filters.sort" @change="sortList()">
@@ -44,7 +40,7 @@
             <!--judges-judges-list-->
             <spinner v-if="!loadData" />
             <!-- <moon-loader :loading="!loadData" :color="color" :size="size"></moon-loader> -->
-            <judge-component v-if="loadData" :judgesList="judgesList.data"  @status="changeStatus"/>
+            <judge-component v-if="loadData" :judgesList="judgesList.data"  @status="changeStatus" @addToCompare="addToCompare"/>
           </div>
   
         </div>

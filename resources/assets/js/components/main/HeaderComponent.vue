@@ -38,6 +38,12 @@
           <router-link to="/contacts" tag="li" class="nav-item" disabled>
             <a class="nav-link" :class="{'active': $route.fullPath === '/contacts'}">Контакти</a>
           </router-link>
+
+          <router-link to="/judge-comparison">
+              <i class="fas fa-balance-scale p-1"  aria-hidden="true" title="Порівняння" ></i>{{ judge_compare.length ? judge_compare.length : null }} 
+           </router-link>
+
+
           <!-- left  -->
           <div class="d-flex ml-lg-5">
             <router-link to="/login" tag="li" class="nav-item" v-if="!isAuth">
@@ -103,9 +109,11 @@ export default {
     },
     user() {
       return this.$store.getters.getUser;
+    },
+    judge_compare() {
+      return this.$store.getters.judge_compare;
     }
   },
-
   methods: {
     logout() {
       axios
