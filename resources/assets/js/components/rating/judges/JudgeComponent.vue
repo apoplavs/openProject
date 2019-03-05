@@ -19,7 +19,7 @@
               </h5>
               <div class="court_name">{{ judge.court_name }}</div>
               <!--<div class="pt-3">-->
-                 <!--<i class="fas fa-balance-scale p-1" aria-hidden="true" title="Додати до порівняння" @click="addToCompare(judge.id)"><sup>+</sup></i>-->
+                 <i class="fas fa-balance-scale p-1" aria-hidden="true" title="Додати до порівняння" @click="addToCompare(judge.id)"><sup>+</sup></i>
               <!--</div>-->
             </div>
           </div>
@@ -97,43 +97,11 @@
             }
         },
         methods: {
-			addToCompare(judge_id) {
-				let judge_compare = [];
-				if (sessionStorage.judge_compare) {
-					judge_compare = JSON.parse(sessionStorage.getItem("judge_compare"));
-				}
+          // порівняння суддів викликає аналогічну функцію в батьківському компоненті JudgesList
+    			addToCompare(judge_id) {
+            this.$parent.addToCompare(judge_id);
+			       },
 
-				// якщо суддя вже був доданий раніше
-				if (judge_compare.indexOf(judge_id) != -1) {
-					this.$toasted.error("Цей суддя вже доданий для порівняння", {
-						theme: "outline",
-						position: "top-right",
-						duration: 3000
-					});
-					return;
-				}
-
-				// якщо занадто багато додається для порівняння
-				if (judge_compare.length > 2) {
-					this.$toasted.error("Можна порівнювати одночасно до 3 суддів", {
-						theme: "outline",
-						position: "top-right",
-						duration: 3000
-					});
-					return;
-                }
-				this.$emit('show-comparation', judge_compare.length);
-                //this.judgeComparation = true;
-
-				judge_compare.push(judge_id);
-				sessionStorage.setItem("judge_compare", JSON.stringify(judge_compare));
-				this.$toasted.success("Додано до порівняння", {
-					theme: "outline",
-					position: "top-right",
-					duration: 3000
-				});
-				console.log(judge_id);
-			},
             formattingDate(date) {
                 if (date === '' || date === null) {
                     return '';

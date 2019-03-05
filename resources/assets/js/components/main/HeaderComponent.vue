@@ -121,7 +121,7 @@ export default {
           this.$router.push("/login");
         })
         .catch(error => {
-          if (error.response.status === 401) {
+          if (error.response && error.response.status === 401) {
             localStorage.clear();
             this.$router.push("/login");
           }
