@@ -30,7 +30,12 @@ Route::group(['prefix' => 'v1/', 'namespace' => 'Api\V1',], function () {
 	Route::post('signup', 'AuthController@signup');
 	Route::get('confirm-email', 'AuthController@confirmEmail');
 
-	
+    // відправлення на email унікального посилання
+    Route::post('user/password/reset', 'ResetPasswordController@reset');
+    // запис нового пароля
+    Route::post('user/password/new', 'ResetPasswordController@create');
+
+
 	/**
 	 * Судді
 	 */
@@ -50,8 +55,8 @@ Route::group(['prefix' => 'v1/', 'namespace' => 'Api\V1',], function () {
 	Route::get('courts/autocomplete', 'CourtsController@autocomplete');
     // сторінка суду з інформацією про нього
     Route::get('guest/courts/{id}', 'CourtsController@showGuest')->middleware('checkId:court');
-	
-	// Маршрути які вимагають реєстрації користувача
+
+    // Маршрути які вимагають реєстрації користувача
 	Route::group(['middleware' => 'auth:api'], function() {
 		Route::get('logout', 'AuthController@logout');
 		Route::get('user', 'UserController@show');
