@@ -75,7 +75,29 @@
                 </small>
               </p>
             </div>
-            <div class="form-group">
+
+            <div class="form-check">
+              <label class="form-check-label">
+                <input
+                  type="checkbox"
+                  class="form-check-input"
+                  name="privacy-policy"
+                  value="1"
+                  v-validate="'required'"
+                  required="required"
+                >
+                Погоджуюсь з 
+                <router-link to="/privacy-policy" target="_blank">
+                  <a>Політикою конфіденційності</a>
+                </router-link>
+              та
+              <router-link to="/user-agreement" target="_blank">
+                  <a>Угодою користувача</a>
+                </router-link>
+              </label>
+            </div>
+
+            <div class="form-group mt-2">
               <div class="text-center">
                 <button type="submit" class="btn b-primary" id="register-btn">
                   <i class="fas fa-spinner" v-if="isLoading"></i>
