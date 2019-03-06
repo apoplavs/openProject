@@ -4,6 +4,9 @@ import Router from 'vue-router';
 Vue.use(Router);
 
 import HomeComponent from '../components/main/HomeComponent.vue';
+import AboutComponent from '../components/main/AboutComponent.vue';
+import ContactsComponent from '../components/main/ContactsComponent.vue';
+
 import Login from '../components/auth/Login.vue';
 import Registration from '../components/auth/Registration.vue';
 import RecoverPassword from '../components/auth/RecoverPassword.vue';
@@ -34,6 +37,16 @@ export default new Router({
             path: '/',
             component: HomeComponent,
             name: 'home-component'
+        },
+        {
+            path: '/about',
+            component: AboutComponent,
+            name: 'about'
+        },
+        {
+            path: '/contacts',
+            component: ContactsComponent,
+            name: 'contacts'
         },
         {
             path: '/login',
