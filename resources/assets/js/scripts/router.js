@@ -9,7 +9,9 @@ import ContactsComponent from '../components/main/ContactsComponent.vue';
 
 import Login from '../components/auth/Login.vue';
 import Registration from '../components/auth/Registration.vue';
+import ResetPassword from '../components/auth/ResetPassword.vue';
 import RecoverPassword from '../components/auth/RecoverPassword.vue';
+
 import JudgesList from '../components/rating/judges/JudgesList.vue';
 import JudgeProfile from '../components/rating/judges/JudgeProfile.vue';
 import JudgeComparison from '../components/rating/judges/JudgeComparison.vue';
@@ -57,6 +59,11 @@ export default new Router({
             path: '/registration',
             component: Registration,
             name: 'registration'
+        },
+        {
+            path: '/reset-password',
+            component: ResetPassword,
+            name: 'reset-password'
         },
         {
             path: '/recover-password',

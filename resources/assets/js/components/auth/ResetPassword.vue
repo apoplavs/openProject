@@ -9,53 +9,25 @@
                 <div id="back-error" class="is-danger w-100 text-center">
                     <small>Не вірний логін або пароль</small>
                 </div>
-
                 <form @submit.prevent="validateBeforeSubmit">
                     <div class="form-group">
-                      <label for="password" class="form-control-label">Пароль</label>
-                      <p class="control has-icon has-icon-right">
-                        <input
-                          id="password"
-                          type="password"
-                          class="form-control"
-                          name="пароль"
-                          v-model="user.password"
-                          v-validate="'required|min:6|max:32'"
-                          :class="{'input': true, 'is-danger': errors.has('пароль') }"
-                        >
-                        <small v-show="errors.has('пароль')">
-                          <span class="help is-danger">{{ errors.first('пароль') }}</span>
-                        </small>
-                      </p>
+                        <label for="email" class="form-control-label">Введіть email, який Ви вказували при реєстрації</label>
+                        <p class="control has-icon has-icon-right">
+                            <input id="email" type="email" class="form-control" name="email" v-model="user.email" v-validate="'required|email'" :class="{'input': true, 'is-danger': errors.has('email') }">
+                            <small>
+                                <i v-show="errors.has('email')" class="fa fa-warning"></i>
+                                <span v-show="errors.has('email')" class="help is-danger">{{ errors.first('email') }}</span>
+                            </small>
+                        </p>
                     </div>
-
-                    <div class="form-group">
-                      <label for="repassword" class="form-control-label">Підтвердити пароль</label>
-                      <p class="control" :class="{error: !(user.repassword === user.password)}">
-                        <input
-                          id="repassword"
-                          type="password"
-                          class="form-control"
-                          name="repassword"
-                          v-model="user.repassword"
-                          v-validate="'required|min:6|max:32'"
-                          :class="{'input': true, 'is-danger': user.repassword !== user.password}"
-                        >
-                        <small v-show="!(user.repassword === user.password)">
-                          <span class="help is-danger">Паролі не співпадають</span>
-                        </small>
-                      </p>
-                    </div>
-
                     <div class="form-group mt-3">
                         <div class="d-flex justify-content-center">
                             <button type="submit" class="btn b-primary" id="submit-btn">
-                                Надіслати
+                                Скинути пароль
                             </button>
                         </div>
                     </div>    
-                </form>
-
+                </form>              
             </div>
         </div>
     </div>
@@ -65,13 +37,11 @@
 <script>
 
     export default {
-        name: "RecoverPassword", 
+        name: "ResetPassword", 
         data() {
             return {
                 user: {
-                    token: "",
-                    password: "",
-                    repassword: ""
+                    email: "",
                 }
             };
         },
@@ -80,7 +50,7 @@
                 this.$validator.validateAll().then(result => {
                     if (result) {
                         axios
-                            .post("/api/v1/user/password/new", this.user, {
+                            .post("/api/v1/user/password/reset", this.user, {
                                 headers: {
                                     "Content-Type": "application/json",
                                     "X-Requested-With": "XMLHttpRequest"
@@ -97,11 +67,21 @@
                                 );
                             })
                             .catch(error => {
-                                this.$toasted.error("Щось пішло не так, перевірте Ваше інтернет з'єднання, або спробуйте пізніше", {
-                                    theme: "primary",
-                                    position: "top-right",
-                                    duration: 5000
-                                });
+                                if (error.response && error.response) {
+                                    if (error.response.data && error.response.data.message) {
+                                        this.$toasted.error(error.response.data.message, {
+                                            theme: "primary",
+                                            position: "top-right",
+                                            duration: 5000
+                                        });
+                                    }
+                                } else {
+                                    this.$toasted.error("Щось пішло не так, перевірте Ваше інтернет з'єднання, або спробуйте пізніше", {
+                                        theme: "primary",
+                                        position: "top-right",
+                                        duration: 5000
+                                    });
+                                }
                             });
                     } else {
                         this.$toasted.error("Заповніть коректно всі поля!", {

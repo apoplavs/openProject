@@ -51,7 +51,7 @@
                 >
                 Запамятати мене
               </label>
-              <router-link to="/recover-password">
+              <router-link to="/reset-password">
                 <a>Забув пароль?</a>
               </router-link>
             </div>

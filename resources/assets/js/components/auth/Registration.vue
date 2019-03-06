@@ -40,6 +40,7 @@
                 </small>
               </p>
             </div>
+            
             <div class="form-group">
               <label for="password" class="form-control-label">Пароль</label>
               <p class="control has-icon has-icon-right">
@@ -159,7 +160,7 @@ export default {
             .then(response => {
               if (response) {
                 this.$toasted.success(
-                  "Вітаємо! Вам на пошту відпрвавлений лист з підтвердженням реєстрації!",
+                  "Вітаємо! Вам на пошту відправлений лист з підтвердженням реєстрації!",
                   {
                     theme: "primary",
                     position: "top-center",
