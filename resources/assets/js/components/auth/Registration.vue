@@ -177,6 +177,7 @@ export default {
                     position: "top-right",
                     duration: 5000
                   });
+                  this.isLoading = false;
                 }
               } else {
                 if (error.response.data && error.response.data.message) {
