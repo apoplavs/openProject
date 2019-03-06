@@ -16,6 +16,8 @@ use Toecyd\UserHistory;
 use Toecyd\UsersLikesJudge;
 use Toecyd\UsersUnlikesJudge;
 use Aws\S3\S3Client;
+use DateTime;
+use Carbon\Carbon;
 
 /**
  * Class JudgesController
@@ -23,6 +25,7 @@ use Aws\S3\S3Client;
  */
 class JudgesController extends Controller
 {
+     const TIMEZONE = 'Europe/Kiev';
     /**
      * Display a listing of the resource.
      *
@@ -1582,14 +1585,19 @@ class JudgesController extends Controller
         if ($new_status == 1 || $new_status == 5) {
             $due_date = NULL;
         }
-        $old_status = Judge::find($id)->status;
+        $old = Judge::find($id);
 
-        // Додати в чергу відправку повідомлень всім хто:
-		// підписаний на судові засідання даного судді
-		SendNotification3::dispatch($id, $old_status, $new_status)->delay(now()->addMinute());
-		// відстежує даного суддю
-        SendNotification1::dispatch($id, $old_status, $new_status)->delay(now()->addMinute());
+        $last_change_date = new DateTime($old->updated_status);
 
+        if ($old->status != $new_status && $last_change_date < Carbon::now(self::TIMEZONE)->subMinutes(15)) {
+
+          // Додати в чергу відправку повідомлень всім хто:
+          // підписаний на судові засідання даного судді
+          SendNotification3::dispatch($id, $old->status, $new_status)->delay(now()->addMinute());
+          // відстежує даного суддю
+          SendNotification1::dispatch($id, $old->status, $new_status)->delay(now()->addMinute());
+        }
+		
         // оновлення статусу судді
         Judge::setNewStatus($id, $new_status, $due_date);
 
