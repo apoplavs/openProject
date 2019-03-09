@@ -40,7 +40,7 @@
             <!--judges-judges-list-->
             <spinner v-if="!loadData" />
             <!-- <moon-loader :loading="!loadData" :color="color" :size="size"></moon-loader> -->
-            <judge-component v-if="loadData" :judgesList="judgesList.data"  @status="changeStatus" @addToCompare="addToCompare"/>
+            <judge-component v-if="loadData" :judgesList="judgesList.data"  @status="changeStatus" @addToCompare="addToCompare(judge_id)"/>
           </div>
   
         </div>
@@ -79,7 +79,7 @@
           search: null,
           sort: 1,
         },
-          judgeComparation: sessionStorage.judge_compare,
+        // judgeComparation: sessionStorage.judge_compare,
         autocomplete: [],
         judgesList: {
           total: 0
@@ -101,14 +101,12 @@
     },
     methods: {
       // порівняння суддів
-      addToCompare(judge_id) {
-        let judge_compare = [];
-        if (sessionStorage.judge_compare) {
-          judge_compare = JSON.parse(sessionStorage.getItem("judge_compare"));
-        }
+      addJudgesToCompare(judge_id) {
+
+        let judges_compare = this.$store.getters('judge_compare');
 
         // якщо суддя вже був доданий раніше
-        if (judge_compare.indexOf(judge_id) != -1) {
+        if (judges_compare.indexOf(judge_id) != -1) {
           this.$toasted.error("Цей суддя вже доданий для порівняння", {
             theme: "outline",
             position: "top-right",
@@ -118,7 +116,7 @@
         }
 
         // якщо занадто багато додається для порівняння
-        if (judge_compare.length > 5) {
+        if (judges_compare.length + 1 > 5) {
           this.$toasted.error("Можна порівнювати одночасно до 5 суддів", {
             theme: "outline",
             position: "top-right",
@@ -127,11 +125,10 @@
           return;
         }
 
-        judge_compare.push(judge_id);
-        sessionStorage.setItem("judge_compare", JSON.stringify(judge_compare));
-
-        this.judgeComparation = true;
-
+        judges_compare.push('judge_id');
+        store.commit("addJudgeToCompare", judges_compare);
+       
+        //this.judgeComparation = true;
         this.$toasted.success("Додано до порівняння", {
           theme: "outline",
           position: "top-right",
