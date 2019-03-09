@@ -40,9 +40,8 @@
           </router-link>
 
           <router-link to="/judge-comparison">
-              <i class="fas fa-balance-scale p-1"  aria-hidden="true" title="Порівняння" ></i>{{ judge_compare.length  }} 
+              <i class="fas fa-balance-scale p-1"  aria-hidden="true" title="Порівняння" ><span class="ml-1">{{ judge_compare.length ?  judge_compare.length : null }}</span> </i>
            </router-link>
-
 
           <!-- left  -->
           <div class="d-flex ml-lg-5">

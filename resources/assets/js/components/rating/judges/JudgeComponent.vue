@@ -23,8 +23,8 @@
                 >{{ judge.surname }} {{ (judge.name.length != 1) ? judge.name : judge.name + '.' }} {{ judge.patronymic.length != 1 ? judge.patronymic : judge.patronymic + '.' }}</router-link>
               </h5>
               <div class="court_name">{{ judge.court_name }}</div>
-              <!--<div class="pt-3">-->
               <i
+                v-if="$route.fullPath === '/judges'"
                 class="fas fa-balance-scale p-1"
                 aria-hidden="true"
                 title="Додати до порівняння"
@@ -32,7 +32,6 @@
               >
                 <sup>+</sup>
               </i>
-              <!--</div>-->
             </div>
           </div>
           <div class="col-3 pl-0 additional-info">
@@ -114,6 +113,8 @@ export default {
   methods: {
     // порівняння суддів
     addToCompare(judge_id) {
+      console.log('asfasfasfafsasfasf======', judge_id);
+      
       this.$emit('addToCompare', judge_id);
     },
 

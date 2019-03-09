@@ -130,8 +130,7 @@ i.fa-edit {
 }
 
 .content-wrapper {
-  min-width: 1140px;
-  height: 100%;
+  width: 1140px;
   padding: 3rem 0;
 }
 

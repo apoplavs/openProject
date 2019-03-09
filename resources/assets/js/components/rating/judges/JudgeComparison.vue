@@ -1,19 +1,21 @@
 <template>
-  <div>
-    <div v-if="loadData && (!judgesList || judgesList.length == 0)">
-      Не додано жодного суддю для порівняння</div>
+  <div class="judge-compare">
+    <div v-if="loadData && (!judgesList || judgesList.length == 0)" class="text-center">
+      Не додано жодного суддю для порівняння
+    </div>
 
     <div v-else-if="loadData">
-      <table class="table content-wrapper">
+      <table class="table">
         <thead>
         <tr>
-          <th scope="col"></th>
-          <th scope="col" v-for="(judge, index) of judgesList" :key="index">{{ judge.data.surname }} {{ (judge.data.name.length != 1) ? judge.data.name : judge.data.name + '.' }} {{ judge.data.patronymic.length != 1 ? judge.data.patronymic : judge.data.patronymic + '.' }} 
-           <sup class="delete-comparation" @click="deleteJudgeFromComparation(judge.data.id)" title="Видалити з порівняння"> x </sup></th>
+          <th scope="col" :colspan="1"></th>
+          <th scope="col" v-for="(judge, index) of judgesList" :key="index" class="full-name">{{ judge.data.surname }} {{ (judge.data.name.length != 1) ? judge.data.name : judge.data.name + '.' }} {{ judge.data.patronymic.length != 1 ? judge.data.patronymic : judge.data.patronymic + '.' }} 
+           <span class="delete-comparation" @click="deleteJudgeFromComparation(judge.data.id)" title="Видалити з порівняння"> x </span></th>
         </tr>
         </thead>
         <tbody>
           <tr>
+            <th scope="col" :colspan="1" style="border-right-color: transparent;"></th>
             <th scope="col" class="text-center" :colspan="judgesList.length + 1">Статистика розглянутих справ</th>
           </tr>
 
@@ -39,6 +41,7 @@
           </tr>
 
           <tr>
+             <th scope="col" :colspan="1" style="border-right-color: transparent;"></th>
             <th scope="col" class="text-center" :colspan="judgesList.length + 1">Загальна ефективність</th>
           </tr>
           <tr>
@@ -53,6 +56,7 @@
           <!-- ЦИВІЛЬНЕ СУДОЧИНСТВО -->
 
           <tr>
+             <th scope="col" :colspan="1" style="border-right-color: transparent;"></th>
             <th scope="col" class="text-center" :colspan="judgesList.length + 1">Цивільне судочинство</th>
           </tr>
           <tr>
@@ -82,6 +86,7 @@
 
             <!-- КРИМІНАЛЬНЕ СУДОЧИНСТВО -->
           <tr>
+             <th scope="col" :colspan="1" style="border-right-color: transparent;"></th>
             <th scope="col" class="text-center" :colspan="judgesList.length + 1">Кримінальне судочинство</th>
           </tr>
           <tr>
@@ -103,6 +108,7 @@
 
           <!-- КУпАП СУДОЧИНСТВО -->
           <tr>
+             <th scope="col" :colspan="1" style="border-right-color: transparent;"></th>
             <th scope="col" class="text-center" :colspan="judgesList.length + 1">Судочинство в порядку КУпАП</th>
           </tr>
           <tr>
@@ -142,62 +148,62 @@ import Spinner from '../../shared/Spinner.vue';
         },
         data() {
             return {
+                judge_compare: [],
                 judgesList: [],
                 loadData: false,
             };
         },
 		created() {
-			let judge_compare = [];
-      var $this = this;
-
-			if (sessionStorage.judge_compare) {
-				judge_compare = JSON.parse(sessionStorage.getItem("judge_compare"));
-			}
-      
+      this.getJudgesToCompare();
+		
+    },
+    methods: {
+      getJudgesToCompare() {
+        this.judge_compare = this.$store.getters.judge_compare;      
       // отримуємо список суддів для поріняння
-			let promises = judge_compare.map(function(value, key) {
-				axios
-					.get(`/api/v1/judges/${value}`, {
+			let promises = this.judge_compare.map( id => {
+        return axios.get(`/api/v1/judges/${id}`, {
 						headers: {
 							"Content-Type": "application/json",
 							"X-Requested-With": "XMLHttpRequest",
 							Authorization: localStorage.getItem("token")
 						}
-					})
-					.then(response => {
-						$this.judgesList.push(response.data);
-					})
-					.catch(error => {
+					}).then(response => {
+						this.judgesList.push(response.data);
+					}).catch(error => {
 						if (error.response && error.response.status === 401) {
 							this.$router.push("/login");
 						}
-						 $this.$router.push("/judges");
+						 this.$router.push("/judges");
 					});
       });
+      Promise.all(promises).then( result => {
+        this.loadData = true;
+      }).catch(error => {
+        console.log("ERROR")
+      });
 
-
-      // час затримки спінера пропорційно кількості суддів в порівнянні
-      setTimeout(function() {
-          $this.loadData = true;
-        }, (judge_compare.length * 3000));
       },
-
-
-      methods: {
-            deleteJudgeFromComparation(id) {
-              let judge_compare = JSON.parse(sessionStorage.getItem("judge_compare"));
-              // якщо це останній суддя в порівнянні - переходимо на список суддів
-              if (judge_compare.length < 2) {
-                sessionStorage.clear();
-                this.$router.push("/judges");
-
-              } else {
-              let new_judges_compare = judge_compare.splice(judge_compare.indexOf(id), 1);
-              sessionStorage.setItem("judge_compare", JSON.stringify(judge_compare));
-              this.$router.go(); 
-              }
-            },
-        }
+        deleteJudgeFromComparation(id) {
+          // let judge_compare = this.$store.getters.judge_compare;
+          // якщо це останній суддя в порівнянні - переходимо на список суддів
+          if (this.judge_compare.length === 1) {
+              this.$store.commit('updateJudgeToCompare', []);
+              sessionStorage.clear();
+              this.$router.push("/judges");
+          } else {
+            this.loadData = false;
+            
+            this.judge_compare = this.judge_compare.filter( value => {
+              return value !== id;
+            });
+            this.$store.commit('updateJudgeToCompare', this.judge_compare);
+            this.getJudgesToCompare();
+             this.loadData = true;
+            // this.$router.go(); 
+          }
+        },
+      }
     };
 </script>
 
@@ -205,20 +211,33 @@ import Spinner from '../../shared/Spinner.vue';
 @import "../../../../sass/_variables.scss";
 @import "../../../../sass/_mixins.scss";
 
+.full-name{
+  color: $primary;
+}
 th {
   text-align: center;
 }
 td {
   text-align: center;
 }
+.table td, .table th {
+    border: 1px solid #dee2e6;
+}
+.table {
+  background-color: #ffffff;
+}
+
 td:first-child {
   text-align: right;
   width: 30%;
   max-width: 300px !important;
   font-size: 0.9rem;
 }
+
 .delete-comparation {
   color: red;
+  width: 20px;
+  font-size: 1.2rem;
   cursor: pointer;
 }
 

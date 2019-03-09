@@ -40,7 +40,7 @@
             <!--judges-judges-list-->
             <spinner v-if="!loadData" />
             <!-- <moon-loader :loading="!loadData" :color="color" :size="size"></moon-loader> -->
-            <judge-component v-if="loadData" :judgesList="judgesList.data"  @status="changeStatus" @addToCompare="addToCompare(judge_id)"/>
+            <judge-component v-if="loadData" :judgesList="judgesList.data"  @status="changeStatus" @addToCompare="addToCompare"/>
           </div>
   
         </div>
@@ -100,13 +100,15 @@
       this.getJudgesList();
     },
     methods: {
-      // порівняння суддів
-      addJudgesToCompare(judge_id) {
+       // порівняння суддів
+      addToCompare(judge_id) {
 
-        let judges_compare = this.$store.getters('judge_compare');
+        let judge_compare = this.$store.getters.judge_compare;
+        console.log('judge_compare', judge_compare);
+         console.log('judge_id', judge_id);
 
         // якщо суддя вже був доданий раніше
-        if (judges_compare.indexOf(judge_id) != -1) {
+        if (judge_compare.indexOf(judge_id) != -1) {
           this.$toasted.error("Цей суддя вже доданий для порівняння", {
             theme: "outline",
             position: "top-right",
@@ -116,7 +118,7 @@
         }
 
         // якщо занадто багато додається для порівняння
-        if (judges_compare.length + 1 > 5) {
+        if (judge_compare.length + 1 > 5) {
           this.$toasted.error("Можна порівнювати одночасно до 5 суддів", {
             theme: "outline",
             position: "top-right",
@@ -125,8 +127,8 @@
           return;
         }
 
-        judges_compare.push('judge_id');
-        store.commit("addJudgeToCompare", judges_compare);
+        judge_compare.push(judge_id);
+        this.$store.commit('updateJudgeToCompare', judge_compare);
        
         //this.judgeComparation = true;
         this.$toasted.success("Додано до порівняння", {

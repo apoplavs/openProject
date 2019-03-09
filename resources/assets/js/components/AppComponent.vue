@@ -1,7 +1,10 @@
 <template>
   <div>
     <header-component/>
-    <router-view class="content" />
+    <div class="container">
+        <router-view class="content-wrapper" />
+    </div>
+  
   </div>
 </template>
 
