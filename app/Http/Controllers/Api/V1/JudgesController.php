@@ -1952,21 +1952,19 @@ class JudgesController extends Controller
      *     ),
      *
      *     @SWG\Parameter(
-     *      name="id",
-     *      in="formData",
-     *      required=true,
-     *      description="Id судді, для якого потрібно завантажити фото",
-     *      type="integer",
-     *      minimum=1,
-     *      maximum=15000,
-     *      allowEmptyValue=false
+     *       name="judge_id",
+     *       in="formData",
+     *       required=true,
+     *       description="id судді",
+     *       type="string"
      *     ),
+     *
      *     @SWG\Parameter(
-     *      name="photo",
-     *      in="formData",
-     *      required=true,
-     *      description="Файл з фото",
-     *      type="file"
+     *       name="photo",
+     *       in="formData",
+     *       required=true,
+     *       description="Файл з фото",
+     *       type="file"
      *     ),
      *
      *
@@ -2041,7 +2039,7 @@ class JudgesController extends Controller
 
         $judge->save();
 
-        return response()->json([], 200);
+        return response()->json(['message' => 'Фото успішно додано'], 200);
     }
 
 
