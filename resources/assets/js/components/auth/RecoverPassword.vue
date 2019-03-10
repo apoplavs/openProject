@@ -1,71 +1,49 @@
 <template>
-<div class="content-wrapper">
-    <div class="container d-flex justify-content-center ">
-        <div class="card">
-            <div class="card-header justify-content-center">
-                Відновлення паролю
-            </div>
-            <div class="card-body">
-                <div id="back-error" class="is-danger w-100 text-center">
-                    <small>Не вірний логін або пароль</small>
-                </div>
-
-                <form @submit.prevent="validateBeforeSubmit">
-                    <div class="form-group">
-                      <label for="password" class="form-control-label">Пароль</label>
-                      <p class="control has-icon has-icon-right">
-                        <input
-                          id="password"
-                          type="password"
-                          class="form-control"
-                          name="пароль"
-                          v-model="user.password"
-                          v-validate="'required|min:6|max:32'"
-                          :class="{'input': true, 'is-danger': errors.has('пароль') }"
-                        >
-                        <small v-show="errors.has('пароль')">
+    <div class="recoverPassword">
+        <div class="d-flex justify-content-center">
+            <div class="card">
+                <div class="card-header justify-content-center">Відновлення паролю</div>
+                <div class="card-body">
+                    <div id="back-error" class="is-danger w-100 text-center">
+                        <small>Не вірний логін або пароль</small>
+                    </div>
+    
+                    <form @submit.prevent="validateBeforeSubmit">
+                        <div class="form-group">
+                            <label for="password" class="form-control-label">Пароль</label>
+                            <p class="control has-icon has-icon-right">
+                                <input id="password" type="password" class="form-control" name="пароль" v-model="user.password" v-validate="'required|min:6|max:32'" :class="{'input': true, 'is-danger': errors.has('пароль') }">
+                                <small v-show="errors.has('пароль')">
                           <span class="help is-danger">{{ errors.first('пароль') }}</span>
                         </small>
-                      </p>
-                    </div>
-
-                    <div class="form-group">
-                      <label for="repassword" class="form-control-label">Підтвердити пароль</label>
-                      <p class="control" :class="{error: !(user.repassword === user.password)}">
-                        <input
-                          id="repassword"
-                          type="password"
-                          class="form-control"
-                          name="repassword"
-                          v-model="user.repassword"
-                          v-validate="'required|min:6|max:32'"
-                          :class="{'input': true, 'is-danger': user.repassword !== user.password}"
-                        >
-                        <small v-show="!(user.repassword === user.password)">
+                            </p>
+                        </div>
+    
+                        <div class="form-group">
+                            <label for="repassword" class="form-control-label">Підтвердити пароль</label>
+                            <p class="control" :class="{error: !(user.repassword === user.password)}">
+                                <input id="repassword" type="password" class="form-control" name="repassword" v-model="user.repassword" v-validate="'required|min:6|max:32'" :class="{'input': true, 'is-danger': user.repassword !== user.password}">
+                                <small v-show="!(user.repassword === user.password)">
                           <span class="help is-danger">Паролі не співпадають</span>
                         </small>
-                      </p>
-                    </div>
-
-                    <div class="form-group mt-3">
-                        <div class="d-flex justify-content-center">
-                            <button type="submit" class="btn b-primary" id="submit-btn">
-                                Надіслати
-                            </button>
+                            </p>
                         </div>
-                    </div>    
-                </form>
-
+    
+                        <div class="form-group mt-3">
+                            <div class="d-flex justify-content-center">
+                                <button type="submit" class="btn b-primary" id="submit-btn">Надіслати</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
     </div>
 </template>
 
 <script>
-
     export default {
-        name: "RecoverPassword", 
+        name: "RecoverPassword",
         data() {
             return {
                 user: {
@@ -88,20 +66,21 @@
                             })
                             .then(response => {
                                 this.$toasted.success(
-                                  "Вам на пошту відправлений лист з посиланням для відновлення паролю!",
-                                  {
-                                    theme: "primary",
-                                    position: "top-center",
-                                    duration: 8000
-                                  }
+                                    "Вам на пошту відправлений лист з посиланням для відновлення паролю!", {
+                                        theme: "primary",
+                                        position: "top-center",
+                                        duration: 8000
+                                    }
                                 );
                             })
                             .catch(error => {
-                                this.$toasted.error("Щось пішло не так, перевірте Ваше інтернет з'єднання, або спробуйте пізніше", {
-                                    theme: "primary",
-                                    position: "top-right",
-                                    duration: 5000
-                                });
+                                this.$toasted.error(
+                                    "Щось пішло не так, перевірте Ваше інтернет з'єднання, або спробуйте пізніше", {
+                                        theme: "primary",
+                                        position: "top-right",
+                                        duration: 5000
+                                    }
+                                );
                             });
                     } else {
                         this.$toasted.error("Заповніть коректно всі поля!", {
@@ -111,16 +90,14 @@
                         });
                     }
                 });
-            },
-           
-        },
+            }
+        }
     };
 </script>
 
 <style lang="scss" scoped>
-  @import "../../../sass/_variables.scss";
-  @import "../../../sass/_mixins.scss";
-
+    @import "../../../sass/_variables.scss";
+    @import "../../../sass/_mixins.scss";
     .card {
         width: 100%;
         max-width: 450px;
@@ -142,6 +119,5 @@
         .card-header {
             font-size: 1.3rem;
         }
-        
     }
 </style>

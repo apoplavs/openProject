@@ -97,6 +97,9 @@ export default {
 
 <style scoped lang="scss">
 @import "../../../../sass/judges_coutrs_list.scss";
+.courtsBookmarks {
+  margin-top: 3rem;
+}
 .card {
   background: none !important;
   box-shadow: none;

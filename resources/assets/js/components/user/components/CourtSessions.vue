@@ -34,7 +34,8 @@
               <div class="col-2 pr-0 text-center position-relative note-wrap">
                 <i class="fas fa-star" @click="showModalDelete(session)"></i>
                 <textarea class="note" maxlength="254" v-model.trim="session.note"></textarea>
-                <img class="checkmark" src="../../../../images/checkmark.png" @click="saveNote(session)">
+                <i class="fas fa-check checkmark" @click="saveNote(session)"></i>
+                <!-- <img class="checkmark" src="../../../../images/checkmark.png" @click="saveNote(session)"> -->
               </div>
             </div>
           </div>
@@ -182,7 +183,7 @@ export default {
 .courtSessions {
   width: 100%;
   height: auto;
-  margin-top: 50px;
+  margin-top: 3rem;
   .card-header {
     .fa-bookmark {
       color: #ffffff;
@@ -241,6 +242,7 @@ export default {
     bottom: 5px;
     right: 0;
     cursor: pointer;
+    font-size: 1.2rem;
   }
 
   .container-component {
@@ -250,7 +252,6 @@ export default {
       font-size: .8rem;
     }
   }
-
   .row {
     margin: 0;
     padding: 15px 0;

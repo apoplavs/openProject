@@ -2,27 +2,23 @@
     <div class="user-profile">  
         <div class="w-100">
             <div class="">
-                <ul class="nav nav-tabs w-1140">              
+                <ul class="nav nav-tabs">              
                     <li class="nav-item">
                         <a class="nav-link tab" href="javascript:" @click="setActiveTab(1)">Судові засідання</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link tab" href="javascript:" @click="setActiveTab(2)">Судова практика</a>
+                        <a class="nav-link tab" href="javascript:" @click="setActiveTab(2)">Судді</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link tab" href="javascript:" @click="setActiveTab(3)">Судді</a>
+                        <a class="nav-link tab" href="javascript:" @click="setActiveTab(3)">Судові установи</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link tab" href="javascript:" @click="setActiveTab(4)">Судові установи</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link tab" href="javascript:" @click="setActiveTab(5)">Історія переглядів</a>
+                        <a class="nav-link tab" href="javascript:" @click="setActiveTab(4)">Історія переглядів</a>
                     </li>
                 </ul>
             </div>
-             <div class="tab-content container w-1140">
+             <div class="tab-content w-100">
                 <court-sessions v-if="tabs.sessions"/>
-                <court-practice v-if="tabs.practice"/>
                 <judges-bookmarks v-if="tabs.judges"/>
                 <courts-bookmarks v-if="tabs.courts"/>
                 <view-history v-if="tabs.history"/>
@@ -33,7 +29,6 @@
 
 <script>
     import CourtSessions from './components/CourtSessions.vue';
-    import CourtPractice from './components/CourtPractice.vue';
     import JudgesBookmarks from './components/JudgesBookmarks.vue';
     import CourtsBookmarks from './components/CourtsBookmarks.vue';
     import ViewHistory from './components/ViewHistory.vue';
@@ -42,7 +37,6 @@
         name: "UserProfile",
         components: {
             CourtSessions,
-            CourtPractice,
             JudgesBookmarks,
             CourtsBookmarks,
             ViewHistory
@@ -51,7 +45,6 @@
             return {
                 tabs: {
                     sessions: false,
-                    practice: false,
                     judges: false,
                     courts: false,
                     history: false
@@ -82,11 +75,10 @@
 
 <style scoped lang="scss">
     @import "../../../sass/_variables.scss";
-    // @import "../../../sass/_mixins.scss";
+    @import "../../../sass/_mixins.scss";
     .user-profile {
         display: flex;
         justify-content: center;
-        margin-top: 30px;
     }
     
     .w-1140 {
@@ -98,8 +90,6 @@
         display: flex;
         align-items: flex-end;
         justify-content: center;
-        background-color: #ffffff;
-        border-bottom: 0;
     }
     
     .nav-item {
@@ -108,7 +98,7 @@
     
     .nav-tabs .nav-item.show .nav-link,
     .nav-tabs .nav-link.active {
-        color: #568a8a; //$text-color;
+        color: $main-color; 
         background-color: $body-bg; // $body-bg;
         border: 0;
         padding: 15px;
@@ -120,7 +110,6 @@
     .nav-tabs .nav-item.show .nav-link,
     .nav-tabs .nav-link:not(.active) {
         color: $text-muted;
-        background-color: #ffffff;
         border: 0;
         border-radius: 0;
         padding: 15px;

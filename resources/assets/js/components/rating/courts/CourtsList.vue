@@ -1,5 +1,5 @@
 <template>
-    <div class="container content-wrapper" @keyup.enter="setFilters()">
+    <div class="courtsList" @keyup.enter="setFilters()">
       <div class="row">
         <div class="col-3 filters">
           <!-- filters -->

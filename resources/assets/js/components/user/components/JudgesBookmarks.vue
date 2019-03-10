@@ -1,7 +1,7 @@
 <template>
-  <div class="JudgesBookmarks">
+  <div class="judgesBookmarks">
     <!-- Main list -->
-    <div class="col-12 list-data-container">
+    <!-- <div class="list-data-container"> -->
       <div class="card">
         <div class="card-header d-flex justify-content-between">
           <span>
@@ -50,7 +50,7 @@
             </div>
           </div>
         </div>
-      </div>
+      <!-- </div> -->
     </div>
     <!-- modal change status -->
     <change-status
@@ -162,6 +162,9 @@ export default {
 
 <style scoped lang="scss">
 @import "../../../../sass/judges_coutrs_list.scss";
+.judgesBookmarks {
+  margin-top: 3rem;
+}
 input[type="search"] {
   width: 200px;
 }
@@ -182,7 +185,7 @@ input[type="search"] {
   flex-wrap: wrap;
 
   .judge-card {
-    width: 250px;
+    width: 265px;
     min-height: 350px;
     background-color: #ffffff;
     margin: 10px 10px;

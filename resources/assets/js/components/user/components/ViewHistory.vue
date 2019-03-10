@@ -1,6 +1,6 @@
 <template>
-  <div class="container content-wrapper">
-    <div class="row min-width">
+  <div class="history">
+    <div class="row">
       <div class="col-12 list-data-container">
         <div class="card">
           <div class="card-header d-flex justify-content-between">
@@ -93,11 +93,17 @@
 
 <style lang="scss" scoped>
   @import "../../../../sass/judges_coutrs_list.scss";
+  .history {
+    margin-top: 3rem;
+  }
   .min-width{
     display: flex;
     justify-content: center;
   }
   input[type='search']{
     width: 200px;
+  }
+  .card {
+    margin-top: 0 !important;
   }
 </style>
