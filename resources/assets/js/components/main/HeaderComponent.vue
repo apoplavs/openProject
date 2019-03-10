@@ -17,17 +17,15 @@
               <router-link to="/courts" class="dropdown-item" :class="{'active': $route.fullPath === '/courts'}">Суди</router-link>
             </div>
           </li>
-          <router-link to="/about" tag="li" class="nav-item" disabled>
+          <router-link to="/about" tag="li" class="nav-item" >
             <a class="nav-link" :class="{'active': $route.fullPath === '/about'}">Про нас</a>
           </router-link>
-          <router-link to="/contacts" tag="li" class="nav-item" disabled>
+          <router-link to="/contacts" tag="li" class="nav-item" >
             <a class="nav-link" :class="{'active': $route.fullPath === '/contacts'}">Контакти</a>
           </router-link>
-  
-          <router-link to="/judge-comparison">
-            <i class="fas fa-balance-scale p-1" aria-hidden="true" title="Порівняння"><span class="ml-1">{{ judge_compare.length ?  judge_compare.length : null }}</span> </i>
+          <router-link to="/judge-comparison" tag="li" class="nav-item">
+            <a class="nav-link"><i class="fas fa-balance-scale p-1" aria-hidden="true" title="Порівняння"><span class="ml-1">{{ judge_compare.length ?  judge_compare.length : null }}</span> </i></a>
           </router-link>
-  
           <!-- left  -->
           <div class="d-flex ml-lg-5">
             <router-link to="/login" tag="li" class="nav-item" v-if="!isAuth">
