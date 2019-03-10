@@ -3,7 +3,7 @@
       <div class="row">
         <div class="col-3 filters">
           <!-- filters -->
-          <filters :filters="filters" @resetFilters="resetFilters" @setFilters="setFilters"/> 
+          <filters :filters="filters" @resetFilters="resetFilters" @setFilters="setFilters" :expired="false"/> 
         </div>
         <!-- Main list -->
         <div class="col-9 list-data-container">
@@ -12,7 +12,7 @@
               <input type="search" class="form-control" placeholder="Пошук..." v-model.trim="filters.search" @keyup="liveSearch()">
               <div class="autocomplete-block-result" v-if="autocomplete.length">
                 <div class="autocomplete-block-result_element" v-for="(el, ind_2) in autocomplete" :key="ind_2">
-                  <router-link :to="`/court-profile/${el.court_code}`">
+                  <router-link :to="`/courts/${el.court_code}`">
                     {{ el.name }}
                   </router-link>
                 </div>
@@ -110,14 +110,15 @@
         return true;
       },
       liveSearch: _.debounce(function(event) {
+        console.log('GOing', this.validateInputSearch());
         if (this.validateInputSearch()) {
-          axios
-            .get('/api/v1/courts/autocomplete', {
+          
+          axios.get('/api/v1/courts/autocomplete', {
               headers: {
                 "Content-Type": "application/json",
                 "X-Requested-With": "XMLHttpRequest",
               },
-              filters: {
+              params: {
                 search: this.filters.search
               }
             })
@@ -179,16 +180,14 @@
                 "Content-Type": "application/json",
                 "X-Requested-With": "XMLHttpRequest",
               },
-              filters: this.filters
+              params: this.filters
             })
             .then(response => {
               this.courtsList = response.data;
               this.loadData = true;
-              // console.log('getCourts Response', this.courtsList);
             })
             .catch(error => {
               console.log(error);
-              // console.log('Ну нє не логінився я ще');
             });
         }
       },

@@ -25,7 +25,7 @@
                         <div class="form-group row mx-0 my-4">
                             <label for="status-end-date" class="col-7">Дата завершення дії статусу <br><sup class="text-muted">(якщо відома)</sup></label>
                             <div class="col-5">
-                                <datepicker v-model="judgeStatus.due_date" :value="judgeStatus.due_date" language="uk" :min="calendar.startDate | formatDate" :max="calendar.endDate | formatDate"></datepicker>
+                                <datepicker id="status-end-date" v-model="judgeStatus.due_date" :value="judgeStatus.due_date" language="uk" :min="calendar.startDate | formatDate" :max="calendar.endDate | formatDate"></datepicker>
                             </div>
                         </div>
                     </form>
@@ -35,7 +35,7 @@
                         Закрити
                     </button>
                     <button type="button" class="btn btn-info" @click="saveChanges">
-                        Змінити сатус
+                        Змінити статус
                     </button>
                 </footer>
             </div>
@@ -58,7 +58,9 @@
             return {
                 judgeStatus: {
                     set_status: null,
-                    due_date: null
+                    due_date: null,
+					old_set_status: null,
+					old_due_date: null
                 },
                 calendar: {
                     startDate: new Date(),
@@ -79,6 +81,10 @@
         created() {     
             this.judgeStatus.set_status = this.judgeData.status;
             this.judgeStatus.due_date = this.formattingDate(this.judgeData.due_date_status);
+
+			// запам'ятовуємо старий статус, щоб повернути його в випадку помилки
+			this.judgeStatus.old_set_status = this.judgeStatus.set_status;
+			this.judgeStatus.old_due_date = this.judgeStatus.due_date;
     
             this.calendar.startDate = new Date();
             this.calendar.endDate = new Date(
@@ -107,6 +113,12 @@
                 if (this.judgeStatus.set_status === "1" || this.judgeStatus.set_status === "5") {
                     this.judgeStatus.due_date = null;
                 }
+				this.$emit('closeModal');
+
+				// встановлюємо новий статус
+				this.judgeData.status = this.judgeStatus.set_status;
+				this.judgeData.due_date_status = this.judgeStatus.due_date;
+
                 axios({
                         method: "put",
                         url: `/api/v1/judges/${this.judgeData.id}/update-status`,
@@ -118,14 +130,20 @@
                         data: this.judgeStatus
                     })
                     .then(response => {
-                        this.judgeData.status = this.judgeStatus.set_status;
-                        this.judgeData.due_date_status = this.judgeStatus.due_date;
-                        this.$emit('closeModal');
+
                     })
                     .catch(error => {
-                        if (error.response.status === 401) {
+                        if (error.response && error.response.status === 401) {
                             this.$router.push('/login');
+                        } else {
+							this.judgeData.status = this.judgeStatus.old_set_status;
+							this.judgeData.due_date_status = this.judgeStatus.old_due_date;
                         }
+						this.$toasted.error("Неможливо змінити статус, перевірте Ваше інтернет з'єднання або спробуйте пізніше", {
+							theme: "primary",
+							position: "top-right",
+							duration: 5000
+						});
                         console.log(error);
                     });
             },

@@ -7,12 +7,12 @@ export default new Vuex.Store({
   state: {
     token: localStorage.getItem('token') || '',
     user: JSON.parse(localStorage.getItem('user')) || {},
-    filters: {}
+    judge_compare: JSON.parse(sessionStorage.getItem('judge_compare')) || [],
   },
   getters : {
     isAuth: state => state.token !== '' ? true : false,
     getUser: state => state.user,
-    filters: state => state.filters
+    judge_compare: state => state.judge_compare,
   },
   mutations: {
     auth_success(state){      
@@ -23,10 +23,7 @@ export default new Vuex.Store({
       state.token = '';
       localStorage.clear();   
     },
-    saveFilters(state) {
-      // state.filters = 
-      localStorage.setItem('filters', JSON.stringify(state.filters));
-    }
+
 
   },
   actions: {},

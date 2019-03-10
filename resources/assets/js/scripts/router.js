@@ -4,11 +4,17 @@ import Router from 'vue-router';
 Vue.use(Router);
 
 import HomeComponent from '../components/main/HomeComponent.vue';
+import AboutComponent from '../components/main/AboutComponent.vue';
+import ContactsComponent from '../components/main/ContactsComponent.vue';
+
 import Login from '../components/auth/Login.vue';
 import Registration from '../components/auth/Registration.vue';
+import ResetPassword from '../components/auth/ResetPassword.vue';
 import RecoverPassword from '../components/auth/RecoverPassword.vue';
+
 import JudgesList from '../components/rating/judges/JudgesList.vue';
 import JudgeProfile from '../components/rating/judges/JudgeProfile.vue';
+import JudgeComparison from '../components/rating/judges/JudgeComparison.vue';
 
 import CourtsList from '../components/rating/courts/CourtsList.vue';
 import CourtProfile from '../components/rating/courts/CourtProfile.vue';
@@ -16,7 +22,8 @@ import UserProfile from '../components/user/UserProfile.vue';
 import UserSettings from '../components/user/UserSettings.vue';
 import ConfirmEmail from '../components/user/ConfirmEmail.vue';
 
-import PrivacyPolicy from '../components/system/PrivacyPolicy.vue'
+import PrivacyPolicy from '../components/system/PrivacyPolicy.vue';
+import UserAgreement from '../components/system/UserAgreement.vue';
 
 // import CourtSessions from '../components/user/components/CourtSessions.vue';
 // import CourtPractice from '../components/user/components/CourtPractice.vue';
@@ -34,6 +41,16 @@ export default new Router({
             name: 'home-component'
         },
         {
+            path: '/about',
+            component: AboutComponent,
+            name: 'about'
+        },
+        {
+            path: '/contacts',
+            component: ContactsComponent,
+            name: 'contacts'
+        },
+        {
             path: '/login',
             component: Login,
             name: 'login'
@@ -42,6 +59,11 @@ export default new Router({
             path: '/registration',
             component: Registration,
             name: 'registration'
+        },
+        {
+            path: '/reset-password',
+            component: ResetPassword,
+            name: 'reset-password'
         },
         {
             path: '/recover-password',
@@ -83,10 +105,20 @@ export default new Router({
             component: PrivacyPolicy,
             name: 'privacy-policy',
         },
+        {
+            path: '/user-agreement',
+            component: UserAgreement,
+            name: 'user-agreement',
+        },
 		{
 			path: '/confirm-email',
 			component: ConfirmEmail,
 			name: 'confirm-email',
+		},
+		{
+			path: '/judge-comparison',
+			component: JudgeComparison,
+			name: 'judge-comparison',
 		},
     ]
 });

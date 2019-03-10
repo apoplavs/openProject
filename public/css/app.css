@@ -85,38 +85,44 @@ button:focus {
 i[class^="fa-bookmark"],
 i.fa-edit {
   cursor: pointer;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
 }
 
 .fa-bookmark-o,
 .fa-bookmark {
   color: #ef6733;
-  font-size: 1.1rem;
+  font-size: 1.3rem;
   cursor: pointer;
 }
 
 .fa-briefcase {
   color: #2ab27b;
+  font-size: 1.1rem;
 }
 
 .fa-line-chart {
   color: #04bcb7;
+  font-size: 1.1rem;
 }
 
 .fa-medkit {
   color: #ef6733;
+  font-size: 1.1rem;
 }
 
 .fa-calendar-minus-o {
   color: #304040;
+  font-size: 1.1rem;
 }
 
 .fa-umbrella-beach {
   color: orange;
+  font-size: 1.1rem;
 }
 
 .fa-calendar-times-o {
   color: red;
+  font-size: 1.1rem;
 }
 
 .fa-edit {
@@ -218,5 +224,10 @@ i.fa-edit {
     -webkit-transform: rotate(360deg);
             transform: rotate(360deg);
   }
+}
+
+.fa-balance-scale {
+  color: #ffa726;
+  cursor: pointer;
 }
 

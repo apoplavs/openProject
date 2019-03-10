@@ -3,7 +3,7 @@
     <div class="row min-width">
       <div class="col-3 filters">
           <!-- filters -->
-          <filters :filters="filters" @resetFilters="resetFilters" @setFilters="setFilters"/> 
+          <filters :filters="filters" @resetFilters="resetFilters" @setFilters="setFilters" /> 
       </div>
   
       <!-- Main list -->
@@ -40,7 +40,7 @@
             <!--judges-judges-list-->
             <spinner v-if="!loadData" />
             <!-- <moon-loader :loading="!loadData" :color="color" :size="size"></moon-loader> -->
-            <judge-component v-if="loadData" :judgesList="judgesList.data"  @status="changeStatus"/>
+            <judge-component v-if="loadData" :judgesList="judgesList.data"  @status="changeStatus" @addToCompare="addToCompare"/>
           </div>
   
         </div>
@@ -78,8 +78,8 @@
           instances: [],
           search: null,
           sort: 1,
-          expired: 1
         },
+          judgeComparation: sessionStorage.judge_compare,
         autocomplete: [],
         judgesList: {
           total: 0
@@ -97,9 +97,48 @@
       if (initialFilters) {
         this.filters = initialFilters;
       }
-      this.getJudgesList()
+      this.getJudgesList();
     },
     methods: {
+      // порівняння суддів
+      addToCompare(judge_id) {
+        let judge_compare = [];
+        if (sessionStorage.judge_compare) {
+          judge_compare = JSON.parse(sessionStorage.getItem("judge_compare"));
+        }
+
+        // якщо суддя вже був доданий раніше
+        if (judge_compare.indexOf(judge_id) != -1) {
+          this.$toasted.error("Цей суддя вже доданий для порівняння", {
+            theme: "outline",
+            position: "top-right",
+            duration: 3000
+          });
+          return;
+        }
+
+        // якщо занадто багато додається для порівняння
+        if (judge_compare.length > 5) {
+          this.$toasted.error("Можна порівнювати одночасно до 5 суддів", {
+            theme: "outline",
+            position: "top-right",
+            duration: 3000
+          });
+          return;
+        }
+
+        judge_compare.push(judge_id);
+        sessionStorage.setItem("judge_compare", JSON.stringify(judge_compare));
+
+        this.judgeComparation = true;
+
+        this.$toasted.success("Додано до порівняння", {
+          theme: "outline",
+          position: "top-right",
+          duration: 3000
+        });
+      },
+
       validateInputSearch() {
         const regexp = new RegExp(/^[а-щА-ЩЬьЮюЯяЇїІіЄєҐґ']+$/iu);
         let str = _.trim(this.filters.search);
@@ -133,7 +172,7 @@
         }
       }, 1000),
   
-      getJudgesList() {    
+      getJudgesList() {
         this.autocomplete = []; // коли визиваємо цей метод liveSearch маємо закрити
         this.filters.expired = (this.filters.expired === true || this.filters.expired === 1) ? 1 : 0; 
         if (this.validateInputSearch() === false) { // !! = true
@@ -226,4 +265,10 @@
 
 <style lang="scss" scoped>
   @import "../../../../sass/judges_coutrs_list.scss";
+
+  .fa-balance-scale {
+    color: #ffa726;
+    cursor: pointer;
+    margin-left: 15%;
+  }
 </style>

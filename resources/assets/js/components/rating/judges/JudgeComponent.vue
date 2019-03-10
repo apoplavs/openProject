@@ -1,9 +1,6 @@
 <template>
   <div>
     <div class="card-body">
-      <div
-        v-if="!this.judgesList || this.judgesList.length == 0"
-      >За заданими параметрами нічого не знайдено</div>
       <div v-if="this.judgesList && this.judgesList.length > 0">
         <div
           class="judge-component row py-3 mx-1"
@@ -12,7 +9,12 @@
         >
           <div class="col-9 d-flex pl-0 main-info">
             <div class="mr-3">
-              <img class="avatar" :src="judge.photo" alt="фото">
+              <img
+                class="avatar"
+                :src="judge.photo"
+                alt="фото"
+                :class="{littleAvatar: littlePhoto}"
+              >
             </div>
             <div>
               <h5>
@@ -21,13 +23,19 @@
                 >{{ judge.surname }} {{ (judge.name.length != 1) ? judge.name : judge.name + '.' }} {{ judge.patronymic.length != 1 ? judge.patronymic : judge.patronymic + '.' }}</router-link>
               </h5>
               <div class="court_name">{{ judge.court_name }}</div>
+              <!--<div class="pt-3">-->
+                 <i class="fas fa-balance-scale p-1" aria-hidden="true" title="Додати до порівняння" @click="addToCompare(judge.id)"><sup>+</sup></i>
+              <!--</div>-->
             </div>
           </div>
           <div class="col-3 pl-0 additional-info">
             <div class="align-center pb-3">
               <div class="w-75">
                 <span class="float-left">
-                  <i class="fa fa-line-chart float-right" aria-hidden="true">{{ judge.rating }}</i>
+                  <i
+                    class="fa fa-line-chart float-right"
+                    aria-hidden="true"
+                  >{{ judge.rating + '%' }}</i>
                 </span>
               </div>
               <div class="w-25 bookmark">
@@ -51,6 +59,7 @@
           </div>
         </div>
       </div>
+      <div v-else>За даними параметрами нічого не знайдено...</div>
     </div>
     <!-- modal change status -->
     <change-status
@@ -62,14 +71,19 @@
 </template>
 
 <script>
-    import _ from 'lodash';
-    import StatusComponent from "../../shared/StatusComponent.vue";
-    import ChangeStatus from "../../shared/ChangeStatus.vue";
+import _ from "lodash";
+import StatusComponent from "../../shared/StatusComponent.vue";
+import ChangeStatus from "../../shared/ChangeStatus.vue";
 
-    export default {
+
+export default {
         name: "JudgeComponent",
         props: {
-            judgesList: Array
+            judgesList: Array,
+            littlePhoto: {
+              type: Boolean,
+              default: false
+            }
         },
         components: {
             StatusComponent,
@@ -92,6 +106,11 @@
             }
         },
         methods: {
+          // порівняння суддів викликає аналогічну функцію в батьківському компоненті JudgesList
+    			addToCompare(judge_id) {
+            this.$emit('addToCompare', judge_id);
+			    },
+
             formattingDate(date) {
                 if (date === '' || date === null) {
                     return '';
@@ -104,6 +123,7 @@
                 if (!this.$store.getters.isAuth) {
                     this.$router.push("/login");
                 }
+				        judge.is_bookmark = 1;
                 axios({
                         method: "put",
                         url: `/api/v1/judges/${judge.id}/bookmark`,
@@ -114,19 +134,26 @@
                         }
                     })
                     .then(response => {
-                        judge.is_bookmark = 1;
+                        //
                     })
                     .catch(error => {
-                        if (error.response.status === 401) {
+                        if (error.response && error.response.status === 401) {
                             this.$router.push('/login');
                         }
-                        console.log("Bookmark", error);
-                    });
-                },
+						judge.is_bookmark = 0;
+						this.$toasted.error("Неможливо додати в закладки, перевірте Ваше інтернет з'єднання або спробуйте пізніше", {
+							theme: "primary",
+							position: "top-right",
+							duration: 5000
+						});
+                console.log("Bookmark", error);
+            });
+        },
             deleteBookmark(judge) {
                 if (!this.$store.getters.isAuth) {
                     this.$router.push("/login");
                 }
+				      judge.is_bookmark = 0;
                 axios({
                     method: "delete",
                     url: `/api/v1/judges/${judge.id}/bookmark`,
@@ -137,12 +164,18 @@
                     }
                 })
                 .then(response => {
-                    judge.is_bookmark = 0;
+                   //
                 })
                 .catch(error => {
                     if (error.response.status === 401) {
                         this.$router.push('/login');
                     }
+					judge.is_bookmark = 1;
+					this.$toasted.error("Перевірте Ваше інтернет з'єднання або спробуйте пізніше", {
+						theme: "primary",
+						position: "top-right",
+						duration: 5000
+					});
                     console.log('Bookmark', error);
                 });
             },
@@ -154,12 +187,14 @@
                 this.isModalVisible = true;
             },
         }
-    };
+        };
 </script>
 
 <style scoped lang="scss">
 @import "../../../../sass/_variables.scss";
 @import "../../../../sass/_mixins.scss";
+
+
 
 .judge-component:not(:last-child) {
   border-bottom: 1px solid lightgray;
@@ -191,6 +226,10 @@
   .avatar {
     width: 120px;
     height: 120px;
+  }
+  .littleAvatar {
+    width: 60px !important;
+    height: 60px !important;
   }
   a {
     color: $primary;

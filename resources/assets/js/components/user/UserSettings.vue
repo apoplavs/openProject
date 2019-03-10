@@ -58,11 +58,11 @@
                       name="телефон"
                       v-model="user.phone"
                       v-mask="'(###) ### ## ##'"
-                      v-validate="'required|number|min:15|max:15'"
+                      v-validate="'required|min:15|max:15'"
                       :class="{'input': true, 'is-danger': errors.has('телефон') }"
                     >
                     <small v-show="errors.has('телефон')">
-                      <span   
+                      <span
                         class="help is-danger"
                       >{{ errors.first('телефон') }}</span>
                     </small>
@@ -181,19 +181,19 @@
                 </div>
               </div>
               <div class="row">
-                <div class="col-9">По справі, яку користувач відстежує, в будь-якого судді змінився статус</div>
+                <div class="col-9">По справі, яку користувач відстежує, в судді змінився статус</div>
                 <div class="col-3">
                   <input type="checkbox" v-model="notifications.email_notification_3" @click="select()"> Email
                 </div>
               </div>
               <div class="row bg">
-                <div class="col-9">За один день до судового засідання, яке користувач відстежує</div>
+                <div class="col-9">Нагадування про судове засідання, яке користувач відстежує</div>
                 <div class="col-3">
                   <input type="checkbox" v-model="notifications.email_notification_4" @click="select()"> Email
                 </div>
               </div>
               <div class="row">
-                <div class="col-9">Про пропозиції судової практики для користувача</div>
+                <div class="col-9">Пропозиції судової практики для користувача</div>
                 <div class="col-3">
                   <input type="checkbox" v-model="notifications.email_notification_5" @click="select()"> Email
                 </div>
@@ -215,24 +215,44 @@
         <div class="hr py-4"></div>
          <div class="row">
             <div class="col-6 offset-4">
-              <button type="button" class="btn btn-danger btn-lg" @click="deleteProfile()">Видалити профайл</button>
+              <button type="button" class="btn btn-danger btn-lg" @click="showModalDelete()">Видалити профайл</button>
             </div>
           </div>
       </div>
     </div>
+
+    <!-- modal confirm -->
+    <modal
+      v-show="showModalConfirm"
+      @close="showModalConfirm = false"
+      @confirm="deleteProfile"
+      :modalConfirm="true"
+    >
+      <div slot="header"></div>
+      <div
+        slot="body"
+        class="modal-message"
+      >Ви впевнені, що хочете свій аккаунт?<br>
+    <span>Дану дію можна виконати 1 раз і вона є незворотньою</span></div>
+    </modal>
+
   </div>
 </template>
 
 <script>
 import Spinner from "../shared/Spinner.vue";
+import Modal from "../shared/Modal.vue";
+
 export default {
   name: "UserSettings",
   components: {
+    Modal,
     Spinner
   },
   data() {
     return {
       loadData: false,
+      showModalConfirm: false,
       user: {
         name: '',
         surname: '',
@@ -283,7 +303,7 @@ export default {
         })
         .then(response => {
           this.user = response.data.profile;
-          this.user.phone = '0660851225';
+          // this.user.phone = '0660851225';
           this.notifications = response.data.notifications;
           this.loadData = true;
           console.log("User settings", response);
@@ -323,6 +343,13 @@ export default {
           'X-Requested-With': 'XMLHttpRequest',
           Authorization: localStorage.getItem("token")
         }
+	  })
+      .then(response => {
+          this.$toasted.success("Збережено", {
+              theme: "primary",
+              position: "top-right",
+              duration: 3000
+          });
         }) .catch(error => {
         if (error && error.response && error.response.status === 401) {
           this.$router.push("/login");
@@ -348,6 +375,7 @@ export default {
     })
 
     },
+
     changeNotifications() {
       // замінюємо в чекбоксі true/false на 0/1
       for (let key in this.notifications) {
@@ -360,14 +388,44 @@ export default {
           'X-Requested-With': 'XMLHttpRequest',
           Authorization: localStorage.getItem("token")
         }
+       })
+      .then(response => {
+          this.$toasted.success("Збережено", {
+              theme: "primary",
+              position: "top-right",
+              duration: 3000
+          });
+
         }) .catch( error => {
           if (error && error.response && error.response.status === 401) {
             this.$router.push("/login");
         }
-      })
+        this.$router.push("/");
+      });
     },
+
+    showModalDelete() {
+      this.showModalConfirm = true;
+    },
+
     deleteProfile() {
-      console.log('Я хочу видалити свій профайл. Що скажете?')
+      axios.delete(`/api/v1/user/settings/delete-account`, {
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Requested-With': 'XMLHttpRequest',
+          Authorization: localStorage.getItem("token")
+        }
+       })
+      .then(response => {
+          sessionStorage.clear();
+          localStorage.clear();
+          this.$router.go();
+        }) .catch( error => {
+          if (error && error.response && error.response.status === 401) {
+            this.$router.push("/login");
+        }
+        this.$router.push("/");
+      });
     }
   }
 };
@@ -413,6 +471,14 @@ input {
     margin-bottom: 1rem;
     border: 0;
     border-top: 1px solid rgba(0,0,0,.1);
+}
+.modal-message {
+  text-align: center; 
+  font-size: 18px;
+}
+.modal-message span{
+  color: red;
+  font-size: 14px;
 }
 
 </style>
