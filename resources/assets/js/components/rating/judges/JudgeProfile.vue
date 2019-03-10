@@ -1,12 +1,32 @@
 <template>
   <div class="judge-profile">
     <spinner v-if="!loadData"/>
-    <div v-if="loadData" class="container content-wrapper">
+    <div v-if="loadData" class="content-wrapper">
       <div class="judge-info">
         <div class="card">
           <div class="card-body d-flex">
-            <div class="photo w-25">
+            <div class="photo w-25 text-center">
               <img :src="judge.data.photo" alt="avatar" class="w-100">
+              <a @click="show = true">Завантажити нове фото</a>
+
+              <!-- // -------------------------------------- // -->
+              <my-upload
+                field="img"
+                langType="ua"
+                @crop-success="cropSuccess"
+                @crop-upload-success="cropUploadSuccess"
+                @crop-upload-fail="cropUploadFail"
+                v-model="show"
+                :width="300"
+                :height="300"
+                url="/upload"
+                :params="params"
+                :headers="headers"
+                img-format="png"
+              ></my-upload>
+              <!-- <img :src="imgDataUrl"> -->
+
+              <!-- // ---------------------------------------- // -->
             </div>
             <div class="w-75 px-3">
               <div class="main-info pb-2">
@@ -107,10 +127,16 @@
                   <div class="col-1 pr-0 text-center" v-if="isAuth">
                     <i
                       v-if="session.is_bookmark"
-                      class="fas fa-star" title="Видалити з закладок"
+                      class="fas fa-star"
+                      title="Видалити з закладок"
                       @click="deleteBookmarkCourtSession(session)"
                     ></i>
-                    <i v-else class="far fa-star" @click="addBookmarkCourtSession(session)" title="Додати в закладки"></i>
+                    <i
+                      v-else
+                      class="far fa-star"
+                      @click="addBookmarkCourtSession(session)"
+                      title="Додати в закладки"
+                    ></i>
                   </div>
                 </div>
               </div>
@@ -323,6 +349,10 @@ import StatusComponent from "../../shared/StatusComponent.vue";
 import ChangeStatus from "../../shared/ChangeStatus.vue";
 import Spinner from "../../shared/Spinner.vue";
 
+
+import myUpload from 'vue-image-crop-upload'; //---
+
+
 export default {
   name: "JudgeProfile",
   components: {
@@ -330,10 +360,23 @@ export default {
     GChart,
     DoughnutChart,
     StatusComponent,
-    ChangeStatus
+    ChangeStatus,
+    myUpload //**** */
   },
   data() {
     return {
+      //-----
+      show: false,
+			params: {
+				token: '123456798',
+				name: 'avatar'
+			},
+			headers: {
+				smail: '*_~'
+			},
+      imgDataUrl: '', // the datebase64 url of created image
+      
+      //-----
       showModal: false,
       loadData: false,
       judge: {},
@@ -823,13 +866,64 @@ export default {
           "green"
         ]
       ];
-    }
-  }
+    },
+
+  // ----------------------
+  toggleShow() {
+				this.show = !this.show;
+			},
+      /**
+			 * crop success
+			 *
+			 * [param] imgDataUrl
+			 * [param] field
+			*/
+			cropSuccess(imgDataUrl, field){
+				console.log('-------- crop success --------');
+				this.judge.data.photo = imgDataUrl;
+			},
+			/**
+			 * upload success
+			 *
+			 * [param] jsonData  server api return data, already json encode
+			 * [param] field
+			 */
+			cropUploadSuccess(jsonData, field){
+				console.log('-------- upload success --------');
+				console.log(jsonData);
+				console.log('field: ' + field);
+			},
+			/**
+			 * upload fail
+			 *
+			 * [param] status    server api return error status, like 500
+			 * [param] field
+			 */
+			cropUploadFail(status, field){
+				console.log('-------- upload fail --------');
+				console.log(status);
+				console.log('field: ' + field);
+      }
+    },
+      //---------------------
 };
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
+  .vicp-wrap {
+    width: 430px !important;
+  }
+  .vicp-preview {
+    display: none;
+  }
+  .vicp-crop {
+    display: flex;
+    justify-content: center;
+  }
 
+</style>
+
+<style scoped lang="scss">
 @import "../../../../sass/_variables.scss";
 @import "../../../../sass/_mixins.scss";
 
