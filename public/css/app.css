@@ -134,6 +134,7 @@ i.fa-edit {
   padding: 4rem 0;
   margin-right: auto;
   margin-left: auto;
+  position: relative;
 }
 
 .noselect {

@@ -15,11 +15,11 @@
               </router-link>
               <div class="bookmark pr-3">
                 <span v-if="court.is_bookmark" @click="deleteBookmarkCourt()">
-                    <i class="fa fa-bookmark" aria-hidden="true"></i>
-                  </span>
+                      <i class="fa fa-bookmark" aria-hidden="true"></i>
+                    </span>
                 <span v-if="!court.is_bookmark" @click="setBookmarkCourt()">
-                    <i class="fa fa-bookmark-o" aria-hidden="true"></i>
-                  </span>
+                      <i class="fa fa-bookmark-o" aria-hidden="true"></i>
+                    </span>
               </div>
             </div>
             <div class="part-1 mt-3">
@@ -62,9 +62,9 @@
               <div class="rating w-100 d-flex justify-content-between">
                 <div>
                   <span class="line-chart">
-                      <i class="fa fa-line-chart mr-1" aria-hidden="true"></i>
-                      {{ court.rating }}
-                    </span>
+                        <i class="fa fa-line-chart mr-1" aria-hidden="true"></i>
+                        {{ court.rating }}
+                      </span>
                 </div>
               </div>
             </div>
@@ -141,7 +141,7 @@
         loadData: false,
         searchJudges: '',
         searchSessions: '',
-        court: {} 
+        court: {}
       };
     },
     computed: {
@@ -183,8 +183,7 @@
             })
             .then(response => {
               this.court = response.data;
-              this.loadData = true;
-              console.log("COURT ____ PROFILE", this.court);
+              // this.loadData = true;
             })
             .catch(error => {
               if (error.response && error.response.status === 401) {
@@ -204,7 +203,6 @@
             .then(response => {
               this.court = response.data;
               this.loadData = true;
-              console.log("COURT ____ PROFILE not log in", this.court);
             })
             .catch(error => {
               if (error.response && error.response.status === 401) {
@@ -220,20 +218,20 @@
         }
         this.court.is_bookmark = 1;
         axios({
-            method: "put",
-            url: `/api/v1/courts/${this.$route.params.id}/bookmark`,
-            headers: {
-              "Content-Type": "application/json",
-              "X-Requested-With": "XMLHttpRequest",
-              Authorization: localStorage.getItem("token")
-            }
-          }).catch(error => {
-            this.court.is_bookmark = 0;
-            if (error.response && error.response.status === 401) {
-              this.$router.push("/login");
-            }
-            console.log("Bookmark", error);
-          });
+          method: "put",
+          url: `/api/v1/courts/${this.$route.params.id}/bookmark`,
+          headers: {
+            "Content-Type": "application/json",
+            "X-Requested-With": "XMLHttpRequest",
+            Authorization: localStorage.getItem("token")
+          }
+        }).catch(error => {
+          this.court.is_bookmark = 0;
+          if (error.response && error.response.status === 401) {
+            this.$router.push("/login");
+          }
+          console.log("Bookmark", error);
+        });
       },
       deleteBookmarkCourt() {
         if (!this.$store.getters.isAuth) {
@@ -241,20 +239,20 @@
         }
         this.court.is_bookmark = 0;
         axios({
-            method: "delete",
-            url: `/api/v1/courts/${this.$route.params.id}/bookmark`,
-            headers: {
-              "Content-Type": "application/json",
-              "X-Requested-With": "XMLHttpRequest",
-              Authorization: localStorage.getItem("token")
-            }
-          }).catch(error => {
-            this.court.is_bookmark = 1;
-            if (error.response.status === 401) {
-              this.$router.push("/login");
-            }
-            console.log("Bookmark", error.response);
-          });
+          method: "delete",
+          url: `/api/v1/courts/${this.$route.params.id}/bookmark`,
+          headers: {
+            "Content-Type": "application/json",
+            "X-Requested-With": "XMLHttpRequest",
+            Authorization: localStorage.getItem("token")
+          }
+        }).catch(error => {
+          this.court.is_bookmark = 1;
+          if (error.response.status === 401) {
+            this.$router.push("/login");
+          }
+          console.log("Bookmark", error.response);
+        });
       },
       showModalDelete(session) {
         this.showModalConfirm = true;
@@ -266,18 +264,18 @@
         } else {
           session.is_bookmark = 0;
           axios({
-              method: "delete",
-              url: `/api/v1/court-sessions/${session.id}/bookmark`,
-              headers: {
-                "Content-Type": "application/json",
-                "X-Requested-With": "XMLHttpRequest",
-                Authorization: localStorage.getItem("token")
-              }
-            }).catch(error => {
-              if (error && error.response && error.response.status === 401) {
-                this.$router.push("/login");
-              }
-            });
+            method: "delete",
+            url: `/api/v1/court-sessions/${session.id}/bookmark`,
+            headers: {
+              "Content-Type": "application/json",
+              "X-Requested-With": "XMLHttpRequest",
+              Authorization: localStorage.getItem("token")
+            }
+          }).catch(error => {
+            if (error && error.response && error.response.status === 401) {
+              this.$router.push("/login");
+            }
+          });
         }
       },
       setBookmarkSession(session) {
@@ -286,18 +284,18 @@
         } else {
           session.is_bookmark = 1;
           axios({
-              method: "put",
-              url: `/api/v1/court-sessions/${session.id}/bookmark`,
-              headers: {
-                "Content-Type": "application/json",
-                "X-Requested-With": "XMLHttpRequest",
-                Authorization: localStorage.getItem("token")
-              }
-            }).catch(error => {
-              if (error && error.response && error.response.status === 401) {
-                this.$router.push("/login");
-              }
-            });
+            method: "put",
+            url: `/api/v1/court-sessions/${session.id}/bookmark`,
+            headers: {
+              "Content-Type": "application/json",
+              "X-Requested-With": "XMLHttpRequest",
+              Authorization: localStorage.getItem("token")
+            }
+          }).catch(error => {
+            if (error && error.response && error.response.status === 401) {
+              this.$router.push("/login");
+            }
+          });
         }
       },
     }
@@ -380,10 +378,6 @@
         max-height: 700px;
         overflow: hidden;
         overflow-y: scroll;
-        // &::-webkit-scrollbar {
-        //   display: block;
-        //   width: 2px;
-        // }
       }
     }
     input[type='search'] {

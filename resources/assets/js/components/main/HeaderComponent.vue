@@ -122,7 +122,7 @@
     }
     .custom-navbar {
       @include alignElement($justifyContent: space-between);
-      padding: 20px 0;
+      padding: 20px 10px;
       ul.menu {
         @include alignElement($justifyContent: space-between);
         list-style-type: none;
