@@ -51,7 +51,7 @@
                 >
                 Запамятати мене
               </label>
-              <router-link to="/recover-password">
+              <router-link to="/reset-password">
                 <a>Забув пароль?</a>
               </router-link>
             </div>
@@ -154,6 +154,7 @@ export default {
                     position: "top-right",
                     duration: 5000
                   });
+                  this.isLoading = false;
                 }
               } else {
                 this.$toasted.error("Щось пішло не так :( Cпробуйте пізніше", {
@@ -161,7 +162,7 @@ export default {
                   position: "top-right",
                   duration: 5000
                 });
-                alert(error);
+                this.isLoading = false;
               }
             });
         } else {
@@ -170,6 +171,7 @@ export default {
             position: "top-right",
             duration: 5000
           });
+          this.isLoading = false;
         }
       });
     }

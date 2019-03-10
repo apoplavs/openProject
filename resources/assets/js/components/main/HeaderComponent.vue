@@ -130,6 +130,7 @@ export default {
         .catch(error => {
           if (error.response && error.response.status === 401) {
             localStorage.clear();
+            sessionStorage.clear();
             this.$router.push("/login");
           }
           console.log(error);
