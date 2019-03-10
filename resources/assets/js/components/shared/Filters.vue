@@ -236,9 +236,9 @@
         </div>
       </div>
 
-      <hr>
+      <hr v-if="expired">
 
-      <div class="row">
+      <div class="row" v-if="expired">
         <div class="col-lg-12">
           <ul class="list-unstyled mb-0">
             <li>
@@ -270,7 +270,11 @@
 export default {
   name: "Filters",
   props: {
-    filters: Object
+    filters: Object,
+    expired: {
+      type: Boolean,
+      default: true
+    }
   },
   methods: {
     resetFilters() {

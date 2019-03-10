@@ -3,7 +3,7 @@
       <div class="row">
         <div class="col-3 filters">
           <!-- filters -->
-          <filters :filters="filters" @resetFilters="resetFilters" @setFilters="setFilters"/> 
+          <filters :filters="filters" @resetFilters="resetFilters" @setFilters="setFilters" :expired="false"/> 
         </div>
         <!-- Main list -->
         <div class="col-9 list-data-container">
