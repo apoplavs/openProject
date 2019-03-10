@@ -187,6 +187,11 @@ export default {
       .rating {
         transform: translate3d(-65px, 40px, 0px) !important;
       }
+      .dropdown-menu {
+        border-color: transparent;
+        box-shadow: $shadow-header;
+        border-radius: 4px;
+      }
       .dropdown-item > i {
         color: $text-color;
         margin-top: 4px;

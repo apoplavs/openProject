@@ -143,9 +143,7 @@
         margin-bottom:50px;
         text-transform:uppercase;
     }
-    #what-we-do{
-        background:#ffffff;
-    }
+
     #what-we-do .card{
         padding: 1rem!important;
         border: none;

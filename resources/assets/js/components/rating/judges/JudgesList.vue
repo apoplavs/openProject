@@ -27,7 +27,7 @@
           <div class="card-header d-flex justify-content-between">
             <span>Список суддів</span>
             <div class="d-flex align-items-center">
-              <span class="mr-2"> сортувати за: </span>
+              <span class="mr-2 sort"> сортувати за: </span>
               <select class="form-control select-sort" name="sorting" v-model="filters.sort" @change="sortList()">
                   <option value="1" selected>прізвищем (А->Я) <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i></option>
                   <option value="2">прізвищем (Я->А)</option>

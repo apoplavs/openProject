@@ -7,24 +7,22 @@
           <div class="card-body d-flex">
             <div class="photo w-25 text-center">
               <img :src="judge.data.photo" alt="avatar" class="w-100">
-              <a @click="show = true">Завантажити нове фото</a>
+              <button type="button" class="btn btn-add-photo mt-2" @click="show = true" v-if="judge.data.photo === '/img/judges/no_photo.jpg'">Додати фото</button>
 
               <!-- // -------------------------------------- // -->
               <my-upload
                 field="img"
                 langType="ua"
                 @crop-success="cropSuccess"
-                @crop-upload-success="cropUploadSuccess"
-                @crop-upload-fail="cropUploadFail"
+                @srcFileSet="srcFileSet"
                 v-model="show"
-                :width="300"
-                :height="300"
-                url="/upload"
+                :width="256"
+                :height="256"
+                url="/api/v1/judges/photo"
                 :params="params"
                 :headers="headers"
                 img-format="png"
               ></my-upload>
-              <!-- <img :src="imgDataUrl"> -->
 
               <!-- // ---------------------------------------- // -->
             </div>
@@ -368,13 +366,15 @@ export default {
       //-----
       show: false,
 			params: {
-				token: '123456798',
-				name: 'avatar'
+        id: null,
+        photo: null
 			},
 			headers: {
-				smail: '*_~'
-			},
-      imgDataUrl: '', // the datebase64 url of created image
+            // "Content-Type": "application/x-www-form-urlencoded",
+            "X-Requested-With": "XMLHttpRequest",
+            Authorization: localStorage.getItem("token")
+        },
+    //  imgDataUrl: '', // the datebase64 url of created image
       
       //-----
       showModal: false,
@@ -474,7 +474,7 @@ export default {
       return this.$store.getters.isAuth;
     }
   },
-  beforeMount() {
+  created() {
     if (this.$store.getters.isAuth) {
       axios
         .get(`/api/v1/judges/${this.$route.params.id}`, {
@@ -877,9 +877,38 @@ export default {
 			 *
 			 * [param] imgDataUrl
 			 * [param] field
-			*/
+      */
+      srcFileSet(fileName, fileType, fileSize) {
+        console.log('_________________-sdgsdg_________________');
+        
+        console.log('fileName', fileName);
+        console.log('fileType', fileType);
+        console.log('fileSize', fileSize);
+        
+      },
 			cropSuccess(imgDataUrl, field){
-				console.log('-------- crop success --------');
+        console.log('-------- crop success --------',imgDataUrl);
+        this.params.id = this.judge.data.id;
+        this.params.photo = imgDataUrl;
+        console.log(this.params);
+        this.srcFileSet();
+        
+        axios({
+          method: "post",
+          url: '/api/v1/judges/photo',
+          headers: this.headers,
+          params: this.params
+        })
+          .then(response => {
+            console.log(response);
+          })
+          .catch(error => {
+            if (error.response && error.response.status === 401) {
+              this.$router.push("/login");
+            }
+          });
+
+
 				this.judge.data.photo = imgDataUrl;
 			},
 			/**
@@ -1015,6 +1044,12 @@ export default {
   }
   input[type="search"] {
     width: 200px;
+  }
+  .btn-add-photo {
+    border: 1px solid gray;
+    border-radius: 4px;
+    font-size: 12px;
+    padding: 3px 10px
   }
 }
 </style>
