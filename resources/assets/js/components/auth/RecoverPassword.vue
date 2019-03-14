@@ -57,6 +57,7 @@
             validateBeforeSubmit() {
                 this.$validator.validateAll().then(result => {
                     if (result) {
+                        this.user.token = this.$route.query.token;
                         axios
                             .post("/api/v1/user/password/new", this.user, {
                                 headers: {
@@ -66,12 +67,13 @@
                             })
                             .then(response => {
                                 this.$toasted.success(
-                                    "Вам на пошту відправлений лист з посиланням для відновлення паролю!", {
+                                    "Пароль оновлено!", {
                                         theme: "primary",
                                         position: "top-center",
                                         duration: 8000
                                     }
                                 );
+                                this.$router.push("/user-profile");
                             })
                             .catch(error => {
                                 this.$toasted.error(
