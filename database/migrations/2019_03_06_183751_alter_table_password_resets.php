@@ -7,11 +7,7 @@ use Illuminate\Database\Migrations\Migration;
 class AlterTablePasswordResets extends Migration
 {
     private $tbl_name = 'password_resets';
-    private $fk_name = 'password_resets_user_foreign';
 
-    public function __construct() {
-        \Doctrine\DBAL\Types\Type::addType('timestamp', 'MarkTopper\DoctrineDBALTimestampType\TimestampType');
-    }
     /**
      * Run the migrations.
      *
@@ -19,8 +15,9 @@ class AlterTablePasswordResets extends Migration
      */
     public function up()
     {
+        DB::unprepared("ALTER TABLE {$this->tbl_name} CHANGE created_at created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP");
+
         Schema::table($this->tbl_name, function (Blueprint $table) {
-            $table->timestamp('created_at')->useCurrent()->change();
             $table->foreign('email')->references('email')->on('users');
         });
     }
@@ -32,9 +29,12 @@ class AlterTablePasswordResets extends Migration
      */
     public function down()
     {
+        DB::unprepared("ALTER TABLE {$this->tbl_name} CHANGE created_at created_at TIMESTAMP NULL DEFAULT NULL");
+
         Schema::table($this->tbl_name, function (Blueprint $table) {
-            $table->timestamp('created_at')->default(null)->change();
             $table->dropForeign(['email']);
         });
+
+
     }
 }
