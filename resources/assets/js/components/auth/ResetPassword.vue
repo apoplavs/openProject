@@ -1,5 +1,5 @@
 <template>
-<div class="content-wrapper">
+<div class="resetPassword">
     <div class="container d-flex justify-content-center ">
         <div class="card">
             <div class="card-header justify-content-center">

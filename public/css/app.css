@@ -29,19 +29,19 @@ input::-moz-focus-inner {
 }
 
 .b-confirm {
-  color: #04bcb7;
+  color: #4c88bd;
   background-color: #ffffff;
-  border-color: #04bcb7;
+  border-color: #4c88bd;
 }
 
 .b-confirm:active {
-  color: #04bcb7;
+  color: #4c88bd;
   background-color: #ffffff;
-  border-color: #04bcb7;
+  border-color: #4c88bd;
 }
 
 .b-confirm:hover {
-  background-color: #04bcb7;
+  background-color: #4c88bd;
   color: #ffffff;
 }
 
@@ -76,8 +76,8 @@ button:focus {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  background-color: #04bcb7;
-  border-bottom: 2px solid #03a39f;
+  background-color: #4c88bd;
+  border-bottom: 2px solid #417baf;
   color: #ffffff;
   font-size: 1.5rem;
 }
@@ -101,7 +101,7 @@ i.fa-edit {
 }
 
 .fa-line-chart {
-  color: #04bcb7;
+  color: #4c88bd;
   font-size: 1.1rem;
 }
 
@@ -130,9 +130,11 @@ i.fa-edit {
 }
 
 .content-wrapper {
-  min-width: 1140px;
-  height: 100%;
-  padding: 3rem 0;
+  width: 1140px;
+  padding: 4rem 0;
+  margin-right: auto;
+  margin-left: auto;
+  position: relative;
 }
 
 .noselect {
@@ -167,14 +169,14 @@ i.fa-edit {
 }
 
 .pagination .bg-active {
-  background-color: #04bcb7;
-  border-color: #04bcb7;
+  background-color: #4c88bd;
+  border-color: #4c88bd;
 }
 
 .pagination button:active,
 .pagination button:focus {
-  background-color: #04bcb7;
-  border-color: #04bcb7;
+  background-color: #4c88bd;
+  border-color: #4c88bd;
 }
 
 .pagination div.pr-2.leading-loose {

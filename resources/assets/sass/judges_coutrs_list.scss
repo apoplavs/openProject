@@ -84,6 +84,9 @@
     .select-sort {
       width: 290px;
     }
+    .sort {
+      font-size: 1rem;
+    }
     input[type="search"]{
       @include boxShadow($shadow-light);
       border: none;

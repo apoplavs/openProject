@@ -1,11 +1,10 @@
 <template>
-  <div class="container content-wrapper" @keyup.enter="setFilters()">
-    <div class="row min-width">
+  <div class="judgesList" @keyup.enter="setFilters()">
+    <div class="row">
       <div class="col-3 filters">
-          <!-- filters -->
-          <filters :filters="filters" @resetFilters="resetFilters" @setFilters="setFilters" /> 
+        <!-- filters -->
+        <filters :filters="filters" @resetFilters="resetFilters" @setFilters="setFilters" />
       </div>
-  
       <!-- Main list -->
       <div class="col-9 list-data-container">
         <div class="row">
@@ -27,25 +26,25 @@
           <div class="card-header d-flex justify-content-between">
             <span>Список суддів</span>
             <div class="d-flex align-items-center">
-              <span class="mr-2"> сортувати за: </span>
+              <span class="mr-2 sort"> сортувати за: </span>
               <select class="form-control select-sort" name="sorting" v-model="filters.sort" @change="sortList()">
-                  <option value="1" selected>прізвищем (А->Я) <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i></option>
-                  <option value="2">прізвищем (Я->А)</option>
-                  <option value="3">рейтингом (низький->високий)</option>
-                  <option value="4">рейтингом (високий->низький)</option>
-                </select> 
+                    <option value="1" selected>прізвищем (А->Я) <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i></option>
+                    <option value="2">прізвищем (Я->А)</option>
+                    <option value="3">рейтингом (низький->високий)</option>
+                    <option value="4">рейтингом (високий->низький)</option>
+                  </select>
             </div>
           </div>
           <div>
             <!--judges-judges-list-->
             <spinner v-if="!loadData" />
             <!-- <moon-loader :loading="!loadData" :color="color" :size="size"></moon-loader> -->
-            <judge-component v-if="loadData" :judgesList="judgesList.data"  @status="changeStatus" @addToCompare="addToCompare"/>
+            <judge-component v-if="loadData" :judgesList="judgesList.data" @status="changeStatus" @addToCompare="addToCompare" />
           </div>
   
         </div>
         <div class="pagination mb-5 mt-3">
-          <vue-ads-pagination  ref="pagins" @page-change="pageChange" :total-items="judgesList.total" :max-visible-pages="5" :button-classes="buttonClasses" :loading="false" />
+          <vue-ads-pagination ref="pagins" @page-change="pageChange" :total-items="judgesList.total" :max-visible-pages="5" :button-classes="buttonClasses" :loading="false" />
         </div>
       </div>
     </div>
@@ -79,7 +78,7 @@
           search: null,
           sort: 1,
         },
-          judgeComparation: sessionStorage.judge_compare,
+        // judgeComparation: sessionStorage.judge_compare,
         autocomplete: [],
         judgesList: {
           total: 0
@@ -102,11 +101,11 @@
     methods: {
       // порівняння суддів
       addToCompare(judge_id) {
-        let judge_compare = [];
-        if (sessionStorage.judge_compare) {
-          judge_compare = JSON.parse(sessionStorage.getItem("judge_compare"));
-        }
-
+  
+        let judge_compare = this.$store.getters.judge_compare;
+        console.log('judge_compare', judge_compare);
+        console.log('judge_id', judge_id);
+  
         // якщо суддя вже був доданий раніше
         if (judge_compare.indexOf(judge_id) != -1) {
           this.$toasted.error("Цей суддя вже доданий для порівняння", {
@@ -116,9 +115,9 @@
           });
           return;
         }
-
+  
         // якщо занадто багато додається для порівняння
-        if (judge_compare.length > 5) {
+        if (judge_compare.length + 1 > 5) {
           this.$toasted.error("Можна порівнювати одночасно до 5 суддів", {
             theme: "outline",
             position: "top-right",
@@ -126,19 +125,18 @@
           });
           return;
         }
-
+  
         judge_compare.push(judge_id);
-        sessionStorage.setItem("judge_compare", JSON.stringify(judge_compare));
-
-        this.judgeComparation = true;
-
+        this.$store.commit('updateJudgeToCompare', judge_compare);
+  
+        //this.judgeComparation = true;
         this.$toasted.success("Додано до порівняння", {
           theme: "outline",
           position: "top-right",
           duration: 3000
         });
       },
-
+  
       validateInputSearch() {
         const regexp = new RegExp(/^[а-щА-ЩЬьЮюЯяЇїІіЄєҐґ']+$/iu);
         let str = _.trim(this.filters.search);
@@ -174,7 +172,7 @@
   
       getJudgesList() {
         this.autocomplete = []; // коли визиваємо цей метод liveSearch маємо закрити
-        this.filters.expired = (this.filters.expired === true || this.filters.expired === 1) ? 1 : 0; 
+        this.filters.expired = (this.filters.expired === true || this.filters.expired === 1) ? 1 : 0;
         if (this.validateInputSearch() === false) { // !! = true
           this.filters.search = null;
         }
@@ -190,12 +188,12 @@
             })
             .then(response => {
               this.judgesList = response.data;
-              this.loadData = true;  
+              this.loadData = true;
               // console.log('getJudges Response', this.judgesList);
             })
             .catch(error => {
-               if (error.response.status === 401) {
-                  this.$router.push('/login');
+              if (error.response.status === 401) {
+                this.$router.push('/login');
               }
               // console.log('Каже що не авторизований пффф та Канеха');
             });
@@ -220,7 +218,7 @@
             });
         }
       },
-      
+  
       sortList: _.debounce(function(event) {
         this.loadData = false;
         window.scrollTo(0, 0);
@@ -234,8 +232,8 @@
         this.filters.page = page + 1;
         this.getJudgesList();
       },
-
-       setFilters() {
+  
+      setFilters() {
         window.scrollTo(0, 0);
         this.loadData = false;
         this.$refs.pagins.currentPage = 0;
@@ -246,17 +244,17 @@
   
       resetFilters() {
         this.autocomplete = [];
-        this.loadData = false;   
+        this.loadData = false;
         this.getJudgesList(); // онуляємо всі фільтри і визиваємо функцію
         sessionStorage.removeItem('judges-filters');
       },
-
-      changeStatus: function(data){
+  
+      changeStatus: function(data) {
         this.judgesList.data.forEach(element => {
-          if (element.id === data.id){ 
+          if (element.id === data.id) {
             element.status = data.status.set_status;
             element.due_date_status = data.status.due_date;
-          }          
+          }
         });
       }
     },
@@ -265,7 +263,6 @@
 
 <style lang="scss" scoped>
   @import "../../../../sass/judges_coutrs_list.scss";
-
   .fa-balance-scale {
     color: #ffa726;
     cursor: pointer;

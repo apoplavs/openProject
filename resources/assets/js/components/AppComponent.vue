@@ -1,7 +1,9 @@
 <template>
   <div>
     <header-component/>
-    <router-view class="content" />
+    <div class="content-wrapper">
+        <router-view  />
+    </div> 
   </div>
 </template>
 
@@ -21,7 +23,4 @@
 
 <style lang="scss">
     @import "../../sass/app.scss";
-    .content {
-        min-width: 1140px;
-    }
 </style>

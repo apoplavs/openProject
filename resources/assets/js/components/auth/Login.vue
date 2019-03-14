@@ -1,7 +1,6 @@
 <template>
-  <div class="content-wrapper">
-    <div class="container d-flex justify-content-center">
-      <!--<vue-toasted ref="toasted"></vue-toasted>-->
+  <div class="login">
+    <div class="d-flex justify-content-center">
       <div class="card">
         <div class="card-header justify-content-center">Вхід</div>
         <div class="card-body">

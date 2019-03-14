@@ -10,7 +10,6 @@ body {
   font-weight: 400;
   font-style: normal;
   color: $text-color;
-  // background-image: linear-gradient(to bottom, #3081cf, #82db85);
 }
 
 button::-moz-focus-inner,
@@ -117,9 +116,11 @@ i.fa-edit{
 // ------------- //
 
 .content-wrapper {
-  min-width: 1140px;
-  height: 100%;
-  padding: 3rem 0;
+  width: 1140px;
+  padding: 4rem 0;
+  margin-right: auto;
+  margin-left: auto;
+  position: relative;
 }
 
 .noselect {
@@ -140,41 +141,43 @@ i.fa-edit{
 .min-width {
   min-width: 1140px;
 }
-  .fade-enter, .fade-leave-to /* .fade-leave-active до версии 2.1.8 */ {
-    opacity: 0;
-    transition: opacity .5s;
-  }
+.fade-enter, .fade-leave-to /* .fade-leave-active до версии 2.1.8 */ {
+  opacity: 0;
+  transition: opacity .5s;
+}
 
-  // ----- pagination ------- //
-  .pagination {
-    .bg-active {
+// ----- pagination ------- //
+
+.pagination {
+  .bg-active {
+    background-color: $main-color;
+    border-color: $main-color;
+  }
+  button{
+    &:active,
+    &:focus{
       background-color: $main-color;
       border-color: $main-color;
     }
-    button{
-      &:active,
-      &:focus{
-        background-color: $main-color;
-        border-color: $main-color;
-      }
-    }
-    div.pr-2.leading-loose {
-      display: none !important;
-    }
-    .disabled {
-      color: $input-placeholder-color;
-      cursor: no-drop;
-    }
-    .dots {
-      background-color: transparent;
-      border: none !important;
-    }
-    .border {
-      border: 0 !important;
-      box-shadow: 1px 1px 1px 1px #dee2e6 !important;
-    }
   }
-  // ------ end ------- //
+  div.pr-2.leading-loose {
+    display: none !important;
+  }
+  .disabled {
+    color: $input-placeholder-color;
+    cursor: no-drop;
+  }
+  .dots {
+    background-color: transparent;
+    border: none !important;
+  }
+  .border {
+    border: 0 !important;
+    box-shadow: 1px 1px 1px 1px #dee2e6 !important;
+  }
+}
+
+// ------ end ------- //
 
 .fa-spinner {
   animation: 1s linear 0s normal none infinite running rotate;

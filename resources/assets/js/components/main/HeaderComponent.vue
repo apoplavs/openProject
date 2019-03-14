@@ -11,82 +11,52 @@
             <a class="nav-link" :class="{'active': $route.fullPath === '/'}">На головну</a>
           </router-link>
           <li class="nav-item dropdown">
-            <a
-              class="nav-link dropdown-toggle"
-              href="#"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-              :class="{'active': $route.fullPath === '/judges' || $route.fullPath === '/courts'}"
-            >Рейтинг</a>
+            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" :class="{'active': $route.fullPath === '/judges' || $route.fullPath === '/courts'}">Рейтинг</a>
             <div class="dropdown-menu rating">
-              <router-link
-                to="/judges"
-                class="dropdown-item"
-                :class="{'active': $route.fullPath === '/judges'}"
-              >Cудді</router-link>
-              <router-link
-                to="/courts"
-                class="dropdown-item"
-                :class="{'active': $route.fullPath === '/courts'}"
-              >Суди</router-link>
+              <router-link to="/judges" class="dropdown-item" :class="{'active': $route.fullPath === '/judges'}">Cудді</router-link>
+              <router-link to="/courts" class="dropdown-item" :class="{'active': $route.fullPath === '/courts'}">Суди</router-link>
             </div>
           </li>
-          <router-link to="/about" tag="li" class="nav-item" disabled>
+          <router-link to="/about" tag="li" class="nav-item" >
             <a class="nav-link" :class="{'active': $route.fullPath === '/about'}">Про нас</a>
           </router-link>
-          <router-link to="/contacts" tag="li" class="nav-item" disabled>
+          <router-link to="/contacts" tag="li" class="nav-item" >
             <a class="nav-link" :class="{'active': $route.fullPath === '/contacts'}">Контакти</a>
           </router-link>
-
-          <router-link to="/judge-comparison">
-              <i class="fas fa-balance-scale p-1"  aria-hidden="true" title="Порівняння" ></i>{{ judge_compare.length ? judge_compare.length : null }} 
-           </router-link>
-
-
+          <router-link to="/judge-comparison" tag="li" class="nav-item">
+            <a class="nav-link"><i class="fas fa-balance-scale p-1" aria-hidden="true" title="Порівняння"><span class="ml-1">{{ judge_compare.length ?  judge_compare.length : null }}</span> </i></a>
+          </router-link>
           <!-- left  -->
           <div class="d-flex ml-lg-5">
             <router-link to="/login" tag="li" class="nav-item" v-if="!isAuth">
               <a class="nav-link login" :class="{'active': $route.fullPath === '/login'}">Вхід</a>
             </router-link>
             <router-link to="/registration" tag="li" class="nav-item" v-if="!isAuth">
-              <a
-                class="nav-link registration"
-                :class="{'active': $route.fullPath === '/registration'}"
-              >Реєстрація</a>
+              <a class="nav-link registration" :class="{'active': $route.fullPath === '/registration'}">Реєстрація</a>
             </router-link>
-            <li class="nav-item dropdown user" v-if="isAuth"
-            :class="{'active': $route.fullPath === '/settings' || $route.fullPath === '/user-profile' || $route.fullPath === '/user-profile'}"
-            >
-              <a
-                class="nav-link dropdown-toggle"
-                href="#"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-                :class="{'active': $route.fullPath === '/settings' || $route.fullPath === '/user-profile' || $route.fullPath === '/user-profile'}"
-              >{{ user.name }}</a>
+            <li class="nav-item dropdown user" v-if="isAuth" :class="{'active': $route.fullPath === '/settings' || $route.fullPath === '/user-profile' || $route.fullPath === '/user-profile'}">
+              <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" :class="{'active': $route.fullPath === '/settings' || $route.fullPath === '/user-profile' || $route.fullPath === '/user-profile'}">{{ user.name }}</a>
               <div class="dropdown-menu user-cabinet">
                 <li class="py-3 noselect">
                   <span class="email-user">{{ user.email }}</span>
                 </li>
                 <router-link to="/user-profile" tag="li" class="nav-item">
                   <a class="dropdown-item" :class="{'active': $route.fullPath === '/user-profile'}">
-                    Особистий кабінет
-                    <i class="fa fa-home float-right" aria-hidden="true"></i>
-                  </a>
+                      Особистий кабінет
+                      <i class="fa fa-home float-right" aria-hidden="true"></i>
+                    </a>
                 </router-link>
                 <router-link to="/settings" tag="li" class="nav-item">
                   <a class="dropdown-item" :class="{'active': $route.fullPath === '/settings'}">
-                    Налаштування
-                    <i class="fa fa-cog float-right" aria-hidden="true"></i>
-                  </a>
+                      Налаштування
+                      <i class="fa fa-cog float-right" aria-hidden="true"></i>
+                    </a>
                 </router-link>
                 <li @click="logout()" class="nav-item">
                   <a class="dropdown-item" href="#">
-                    Вийти
-                    <i class="fa fa-sign-out float-right" aria-hidden="true"></i>
-                  </a>
+                      Вийти
+                      <i class="fa fa-sign-out float-right" aria-hidden="true"></i>
+                    </a>
                 </li>
               </div>
             </li>
@@ -98,133 +68,134 @@
 </template>
 
 <script>
-export default {
-  name: "header-component",
-  data() {
-    return {};
-  },
-  computed: {
-    isAuth() {
-      return this.$store.getters.isAuth;
+  export default {
+    name: "header-component",
+    data() {
+      return {};
     },
-    user() {
-      return this.$store.getters.getUser;
+    computed: {
+      isAuth() {
+        return this.$store.getters.isAuth;
+      },
+      user() {
+        return this.$store.getters.getUser;
+      },
+      judge_compare() {
+        return this.$store.getters.judge_compare;
+      }
     },
-    judge_compare() {
-      return this.$store.getters.judge_compare;
-    }
-  },
-  methods: {
-    logout() {
-      axios
-        .get("/api/v1/logout", {
-          headers: {
-            "Content-Type": "application/json",
-            "X-Requested-With": "XMLHttpRequest",
-            Authorization: localStorage.getItem("token")
-          }
-        })
-        .then(response => {
-          this.$store.commit("logout");
-          this.$router.push("/login");
-        })
-        .catch(error => {
-          if (error.response && error.response.status === 401) {
-            localStorage.clear();
-            sessionStorage.clear();
+    methods: {
+      logout() {
+        axios
+          .get("/api/v1/logout", {
+            headers: {
+              "Content-Type": "application/json",
+              "X-Requested-With": "XMLHttpRequest",
+              Authorization: localStorage.getItem("token")
+            }
+          })
+          .then(response => {
+            this.$store.commit("logout");
             this.$router.push("/login");
-          }
-          console.log(error);
-        });
+          })
+          .catch(error => {
+            if (error.response && error.response.status === 401) {
+              localStorage.clear();
+              sessionStorage.clear();
+              this.$router.push("/login");
+            }
+            console.log(error);
+          });
+      }
     }
-  }
-};
+  };
 </script>
 
 <style scoped lang="scss">
-@import "../../../sass/_variables.scss";
-@import "../../../sass/_mixins.scss";
-.header {
+  @import "../../../sass/_variables.scss";
+  @import "../../../sass/_mixins.scss";
+  .header {
     height: 90px;
     background-color: white;
-  nav.navigation-menu {
-    box-shadow: $shadow-header;
-  }
-  .custom-navbar {
-    @include alignElement($justifyContent: space-between);
-    padding: 20px 0;
-
-    ul.menu {
+    nav.navigation-menu {
+      box-shadow: $shadow-header;
+    }
+    .custom-navbar {
       @include alignElement($justifyContent: space-between);
-      list-style-type: none;
-      margin: 0;
-      a {
-        color: $text-color;
-        &:hover {
+      padding: 20px 10px;
+      ul.menu {
+        @include alignElement($justifyContent: space-between);
+        list-style-type: none;
+        margin: 0;
+        a {
+          color: $text-color;
+          &:hover {
+            color: $main-color;
+          }
+        }
+        .active {
           color: $main-color;
+          font-weight: 500px;
         }
-      }
-      .active {
-        color: $main-color;
-        font-weight: 500px;
-      }
-      .user {
-        border: 1px solid $text-color;
-        border-radius: $btn-border-radius;
-        &.active {
-          border-color: $main-color;
+        .user {
+          border: 1px solid $text-color;
+          border-radius: $btn-border-radius;
+          &.active {
+            border-color: $main-color;
+          }
+          .email-user {
+            padding: 0.25rem 1.5rem;
+            color: $primary;
+          }
+          .user-cabinet {
+            transform: translate3d(-132px, 42px, 0px) !important;
+            width: 15rem;
+          }
         }
-        
-        .email-user {
-          padding: 0.25rem 1.5rem;
-          color: $primary;
+        .rating {
+          transform: translate3d(-65px, 40px, 0px) !important;
         }
-        .user-cabinet {
-          transform: translate3d(-132px, 42px, 0px) !important;
-          width: 15rem;
+        .dropdown-menu {
+          border-color: transparent;
+          box-shadow: $shadow-header;
+          border-radius: 4px;
         }
-      }
-      
-      .rating {
-        transform: translate3d(-65px, 40px, 0px) !important;
-      }
-      .dropdown-item > i {
-        color: $text-color;
-        margin-top: 4px;
-      }
-      .dropdown-toggle::after {
-        vertical-align: 0.1em;
-      }
-      .dropdown-item.active,
-      .dropdown-item:active {
-        background-color: transparent !important;
-      }
-      .login {
-        border: 1px solid $main-color;
-        border-radius: $btn-border-radius;
-        color: $main-color;
-        margin-right: 10px;
-      }
-      .registration {
-        background: $main-color;
-        color: #ffffff;
-        border: 1px solid $main-color;
-        border-radius: $btn-border-radius;
-        &:hover {
+        .dropdown-item>i {
+          color: $text-color;
+          margin-top: 4px;
+        }
+        .dropdown-toggle::after {
+          vertical-align: 0.1em;
+        }
+        .dropdown-item.active,
+        .dropdown-item:active {
+          background-color: transparent !important;
+        }
+        .login {
+          border: 1px solid $main-color;
+          border-radius: $btn-border-radius;
+          color: $main-color;
+          margin-right: 10px;
+        }
+        .registration {
+          background: $main-color;
           color: #ffffff;
+          border: 1px solid $main-color;
+          border-radius: $btn-border-radius;
+          &:hover {
+            color: #ffffff;
+          }
         }
       }
-    }
-    .navbar-brand {
-      @include alignElement();
-      .logo {
-        color: $text-color;
-        font-weight: 500;
-        font-size: 1.5rem;
-        letter-spacing: 0.1em;
-        // text-shadow: 3px 0 $main-color;
+      .navbar-brand {
+        @include alignElement();
+        .logo {
+          color: $text-color;
+          font-weight: 500;
+          font-size: 1.5rem;
+          letter-spacing: 0.1em;
+        }
       }
     }
   }
-}
 </style>
