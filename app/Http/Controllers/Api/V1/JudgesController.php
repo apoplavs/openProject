@@ -2008,7 +2008,7 @@ class JudgesController extends Controller
     {
         $sizeInKb = pow(2, 10);
         $request->validate([
-            'judge_id' => 'int|min:1',
+            'judge_id' => 'required|int|min:1',
             'photo'    => "required|image|max:{$sizeInKb}|mimes:jpeg,png",
         ]);
 
@@ -2033,9 +2033,12 @@ class JudgesController extends Controller
             $file_extension = 'jpg';
         }
 
-        $judge->photo = "img/judges/{$judge_id}.{$file_extension}";
-
-        Judge::getPhotoStorage()->put($judge->photo, $photo_file);
+        $judge->photo = Judge::getPhotoStorage()->putFileAs(
+            "img/judges",
+            $photo_file,
+            "{$judge_id}.{$file_extension}"
+        );
+        Judge::getPhotoStorage()->setVisibility($judge->photo, 'public');
 
         $judge->save();
 
