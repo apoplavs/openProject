@@ -246,11 +246,10 @@ export default {
       // отримуємо список суддів для поріняння
       let promises = this.judge_compare.map(id => {
         return axios
-          .get(`/api/v1/judges/${id}`, {
+          .get(`/api/v1/gest/judges/${id}`, {
             headers: {
               "Content-Type": "application/json",
               "X-Requested-With": "XMLHttpRequest",
-              Authorization: localStorage.getItem("token")
             }
           })
           .then(response => {

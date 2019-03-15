@@ -1,7 +1,7 @@
 <template>
   <div class="judge-profile">
     <spinner v-if="!loadData"/>
-    <div v-if="loadData" class="content-wrapper">
+    <div v-if="loadData" class="">
       <div class="judge-info">
         <div class="card">
           <div class="card-body d-flex">
