@@ -70,8 +70,8 @@
                     <li class="col-12 col-md-6 col-lg-3">
                         <div class="cnt-block equal-hight" style="height: 349px;">
                             <figure><img src="http://www.webcoderskull.com/img/team4.png" class="img-responsive" alt=""></figure>
-                            <h3><a href="http://www.webcoderskull.com/">Web coder skull</a></h3>
-                            <p>Freelance Web Developer</p>
+                            <h3>Баранов Олександр</h3>
+                            <p>Data Scientist</p>
                             <ul class="follow-us clearfix">
                                 <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
                                 <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
@@ -94,25 +94,25 @@
                     </li>
                     <li class="col-12 col-md-6 col-lg-3">
                         <div class="cnt-block equal-hight" style="height: 349px;">
-                            <figure><img src="http://www.webcoderskull.com/img/team1.png" class="img-responsive" alt=""></figure>
-                            <h3><a href="#">Kappua </a></h3>
-                            <p>Freelance Web Developer</p>
+                            <figure><img src="../../../images/tprysiazh.jpeg" class="img-responsive" alt=""></figure>
+                            <h3>Тетяна Присяжнюк</h3>
+                            <p>Front End Developer</p>
                             <ul class="follow-us clearfix">
-                                <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                                <li><a href="#" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                <li><a href="https://github.com/Tanyuta" target="_blank"><i class="fa fa-github" aria-hidden="true"></i></a></li>
+                                <li><a href="https://www.linkedin.com/in/tanyuta/" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
                             </ul>
                         </div>
                     </li>
                     <li class="col-12 col-md-6 col-lg-3">
                         <div class="cnt-block equal-hight" style="height: 349px;">
                             <figure><img src="http://www.webcoderskull.com/img/team2.png" class="img-responsive" alt=""></figure>
-                            <h3><a href="http://www.webcoderskull.com/">Atul </a></h3>
-                            <p>Freelance Web Developer</p>
+                            <h3>Слуцький Олександр</h3>
+                            <p>Back End Developer</p>
                             <ul class="follow-us clearfix">
-                                <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                                <li><a href="#" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                <li><a href="#" target="_blank"><i class="fa fa-github" aria-hidden="true"></i></a></li>
+                                <li><a href="#" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
                             </ul>
                         </div>
                     </li>
