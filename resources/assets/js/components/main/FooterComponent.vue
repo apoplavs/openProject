@@ -2,14 +2,14 @@
   <div class="footer">
     <footer class="page-footer font-small unique-color-dark">
        <hr>
-        <div class="container text-center text-md-left mt-5">
-          <div class="row mt-3">
-            <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+        <div class="foter-container text-left mt-5">
+          <div class="row m-3">
+            <div class="col-3  mb-4">
               <h6 class="text-uppercase font-weight-bold">Open Project</h6>
               <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
               <p>Інформаційна платформа, де відображені показники діяльності судової системи за окремим суддею на основі відкритих даних ЄДРСРУ.</p>
             </div>
-            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+            <div class="col-2  mb-4">
               <h6 class="text-uppercase font-weight-bold">Можливості</h6>
               <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
               <p>
@@ -22,9 +22,9 @@
                 <router-link to="/courts">Статистика Судів</router-link>
               </p>
             </div>
-            <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+            <div class="col-3 mb-4">
               <h6 class="text-uppercase font-weight-bold">Корисні посилання</h6>
-              <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+              <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block" style="width: 60px;">
               <p>
                 <router-link to="/privacy-policy" target="_blank">
                   <a>Політика конфіденційності</a>
@@ -36,13 +36,13 @@
                   </router-link>
               </p>
             </div>
-            <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+            <div class="col-4 mb-4">
               <h6 class="text-uppercase font-weight-bold">Контакти</h6>
-              <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+              <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block " style="width: 60px;">
               <p>
-                <i class="fas fa-envelope mr-3"></i> <a href="mailto:toecyd@gmail.com">toecyd@gmail.com</a></p>
+                <i class="fas fa-envelope mr-2"></i> <a href="mailto:toecyd@gmail.com">toecyd@gmail.com</a></p>
               <p>
-                <i class="fas fa-phone mr-3"></i> <a href="tel:+380977023034">+ 38 097 702 3034</a></p>
+                <i class="fas fa-phone mr-2"></i> <a href="tel:+380977023034">+ 38 097 702 3034</a></p>
             </div>
           </div>
         </div>
@@ -70,7 +70,7 @@
     background: rgba(0,0,0,.68);
     color: #afafaf;
     font-weight: 300;
-    line-height: 1.2;
+    line-height: 1.5;
     font-size: 14px;
     h6 {
       font-weight: normal !important ;
@@ -78,6 +78,11 @@
     }
     a {
       color: $main-color;
+    }
+    .foter-container,
+    .footer-copyright {
+      width: 1140px;
+      margin: auto;
     }
   }
 </style>
