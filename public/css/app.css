@@ -233,3 +233,11 @@ i.fa-edit {
   cursor: pointer;
 }
 
+.rating {
+  color: #4c88bd;
+}
+
+.bookmark {
+  color: orange;
+}
+

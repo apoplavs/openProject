@@ -37,12 +37,10 @@
           <div class="col-3 pl-0 additional-info">
             <div class="align-center pb-3">
               <div class="w-75">
-                <span class="float-left">
-                  <i
-                    class="fa fa-line-chart float-right"
-                    aria-hidden="true"
-                  >{{ judge.rating + '%' }}</i>
-                </span>
+                <div class="rating">
+                <i class="fa fa-line-chart mr-1" aria-hidden="true"></i>
+                {{ judge.rating + '%' }}
+              </div>
               </div>
               <div class="w-25 bookmark">
                 <span v-if="judge.is_bookmark" @click="deleteBookmark(judge)">
@@ -140,10 +138,7 @@ export default {
           Authorization: localStorage.getItem("token")
         }
       })
-        .then(response => {
-          //
-        })
-        .catch(error => {
+      .catch(error => {
           if (error.response && error.response.status === 401) {
             this.$router.push("/login");
           }
@@ -173,9 +168,6 @@ export default {
           Authorization: localStorage.getItem("token")
         }
       })
-        .then(response => {
-          //
-        })
         .catch(error => {
           if (error.response.status === 401) {
             this.$router.push("/login");
@@ -227,7 +219,6 @@ export default {
   .fa-pencil {
     cursor: pointer;
   }
-  /* styles for font awesome */
   .align-center {
     @include alignElement();
   }

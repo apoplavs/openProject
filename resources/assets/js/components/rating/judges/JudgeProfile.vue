@@ -1,30 +1,29 @@
 <template>
   <div class="judge-profile">
     <spinner v-if="!loadData"/>
-    <div v-if="loadData" class="content-wrapper">
+    <div v-if="loadData" class>
       <div class="judge-info">
         <div class="card">
           <div class="card-body d-flex">
             <div class="photo w-25 text-center">
               <img :src="judge.data.photo" alt="avatar" class="w-100">
-              <button type="button" class="btn btn-add-photo mt-2" @click="show = true" v-if="judge.data.photo === '/img/judges/no_photo.jpg'">Додати фото</button>
-
-              <!-- // -------------------------------------- // -->
+              <button
+                type="button"
+                class="btn btn-add-photo mt-2"
+                @click="show = true"
+                v-if="judge.data.photo === '/img/judges/no_photo.jpg' && showBtnAddPhoto"
+              >Додати фото</button>
+              <!-- upload photo  -->
               <my-upload
                 field="img"
                 langType="ua"
                 @crop-success="cropSuccess"
-                @srcFileSet="srcFileSet"
                 v-model="show"
                 :width="256"
                 :height="256"
-                url="/api/v1/judges/photo"
-                :params="params"
-                :headers="headers"
                 img-format="png"
               ></my-upload>
-
-              <!-- // ---------------------------------------- // -->
+              <!-- end -->
             </div>
             <div class="w-75 px-3">
               <div class="main-info pb-2">
@@ -59,6 +58,7 @@
                   <div class="w-50 d-flex align-items-center">
                     <!-- status component-->
                     <status-component :judgeData="judge.data"/>
+                    <!-- end -->
                     <span>
                       <i
                         class="fa fa-edit float-right pl-3"
@@ -83,7 +83,10 @@
                     {{ judge.data.likes }}
                   </span>
                   <span class="line-chart">
-                    <i class="fa fa-line-chart" aria-hidden="true">{{ judge.data.rating + '%' }}</i>
+                    <div class="rating">
+                      <i class="fa fa-line-chart mr-1" aria-hidden="true"></i>
+                      {{ judge.data.rating + '%' }}
+                    </div>
                   </span>
                   <span class="dislike" @click="changeUnlikes">
                     <i class="fas fa-thumbs-down"></i>
@@ -145,192 +148,197 @@
           </div>
         </div>
       </div>
-      <div class="d-flex">
-        <div class="card w-50 mt-2 mr-1">
-          <div class="card-header">
-            <span>Статистика розглянутих справ</span>
+      <div v-if="judge.common_statistic.competence !== 0 && judge.common_statistic.timeliness !== 0" class="mt-3">
+        <div class="d-flex">
+          <div class="card w-50 mt-2 mr-1">
+            <div class="card-header">
+              <span>Статистика розглянутих справ</span>
+            </div>
+            <div class="card-body p-0">
+              <GChart type="PieChart" :data="commonChartData" :options="commonChartOptions"/>
+            </div>
           </div>
-          <div class="card-body p-0">
-            <GChart type="PieChart" :data="commonChartData" :options="commonChartOptions"/>
+          <div class="card w-50 mt-2 ml-1">
+            <div class="card-header">Загальна ефективність</div>
+            <div class="card-body">
+              <div>
+                <label>Рішень вистоюють у вищих інстанціях</label>
+                <div class="progress">
+                  <div
+                    class="progress-bar"
+                    role="progressbar"
+                    :style="{ width: judge.common_statistic.competence + '%', backgroundColor: calculateColor(judge.common_statistic.competence) }"
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                  >{{ judge.common_statistic.competence }}%</div>
+                </div>
+              </div>
+              <div class="mt-5">
+                <label>Справ розглядаються у визначений законом строк</label>
+                <div class="progress">
+                  <div
+                    class="progress-bar"
+                    role="progressbar"
+                    :style="{ width: judge.common_statistic.timeliness + '%', backgroundColor: calculateColor(judge.common_statistic.timeliness) }"
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                  >{{ judge.common_statistic.timeliness }}%</div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="card w-50 mt-2 ml-1">
-          <div class="card-header">Загальна ефективність</div>
-          <div class="card-body">
-            <div>
-              <label>Рішень вистоюють у вищих інстанціях</label>
-              <div class="progress">
-                <div
-                  class="progress-bar"
-                  role="progressbar"
-                  :style="{ width: judge.common_statistic.competence + '%', backgroundColor: calculateColor(judge.common_statistic.competence) }"
-                  aria-valuemin="0"
-                  aria-valuemax="100"
-                >{{ judge.common_statistic.competence }}%</div>
+        <div class="d-flex">
+          <div class="card w-50 mt-2 mr-1">
+            <div class="card-header">Цивільне судочинство</div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col">
+                  <GChart type="ColumnChart" :data="civilChartData" :options="civilChartOptions"/>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-6">
+                  <doughnut-chart
+                    :percent="judge.civil_statistic.cases_on_time"
+                    :visibleValue="true"
+                    emptyText="N/A"
+                    :foregroundColor="calculateColor(judge.civil_statistic.cases_on_time)"
+                    :width="gchart.width"
+                    :height="gchart.width"
+                  />
+                  <span>Справ розглянуто своєчасно</span>
+                </div>
+                <div class="col-6">
+                  <doughnut-chart
+                    :percent="judge.civil_statistic.approved_by_appeal"
+                    :visibleValue="true"
+                    emptyText="N/A"
+                    :foregroundColor="calculateColor(judge.civil_statistic.approved_by_appeal)"
+                    :width="gchart.width"
+                    :height="gchart.width"
+                  />
+                  <span>Рішень вистояли у вищих інстанціях</span>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-12">
+                  <span>
+                    <b>{{ judge.civil_statistic.average_duration }}</b> днів - середня тривалість розгляду однієї справи
+                  </span>
+                </div>
               </div>
             </div>
-            <div class="mt-5">
-              <label>Справ розглядаються у визначений законом строк</label>
-              <div class="progress">
-                <div
-                  class="progress-bar"
-                  role="progressbar"
-                  :style="{ width: judge.common_statistic.timeliness + '%', backgroundColor: calculateColor(judge.common_statistic.timeliness) }"
-                  aria-valuemin="0"
-                  aria-valuemax="100"
-                >{{ judge.common_statistic.timeliness }}%</div>
+          </div>
+          <div class="card w-50 mt-2 ml-1">
+            <div class="card-header">Кримінальне судочинство</div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col">
+                  <GChart
+                    type="ColumnChart"
+                    :data="criminalChartData"
+                    :options="criminalChartOptions"
+                  />
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-6">
+                  <doughnut-chart
+                    :percent="judge.criminal_statistic.cases_on_time"
+                    :visibleValue="true"
+                    emptyText="N/A"
+                    :foregroundColor="calculateColor(judge.criminal_statistic.cases_on_time)"
+                    :width="gchart.width"
+                    :height="gchart.width"
+                  />
+                  <span>Справ розглядаються менше 6 міс.</span>
+                </div>
+                <div class="col-6">
+                  <doughnut-chart
+                    :percent="judge.criminal_statistic.approved_by_appeal"
+                    :visibleValue="true"
+                    emptyText="N/A"
+                    :foregroundColor="calculateColor(judge.criminal_statistic.approved_by_appeal)"
+                    :width="gchart.width"
+                    :height="gchart.width"
+                  />
+                  <span>Рішень вистояли у вищих інстанціях</span>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-12">
+                  <span>
+                    <b>{{ judge.criminal_statistic.average_duration }}</b> днів - середня тривалість розгляду однієї справи
+                  </span>
+                </div>
               </div>
             </div>
+          </div>
+        </div>
+        <div class="d-flex">
+          <div class="card w-50 mt-2 mr-1">
+            <div class="card-header">
+              <span>Судочинство в порядку КУпАП</span>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col">
+                  <GChart
+                    type="ColumnChart"
+                    :data="adminoffenceChartData"
+                    :options="adminoffenceChartOptions"
+                  />
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-6">
+                  <doughnut-chart
+                    :percent="judge.adminoffence_statistic.cases_on_time"
+                    :visibleValue="true"
+                    emptyText="N/A"
+                    :foregroundColor="calculateColor(judge.adminoffence_statistic.cases_on_time)"
+                    :width="gchart.width"
+                    :height="120"
+                  />
+                  <span>Справ розглянуто своєчасно</span>
+                </div>
+                <div class="col-6">
+                  <doughnut-chart
+                    :percent="judge.adminoffence_statistic.approved_by_appeal"
+                    :visibleValue="true"
+                    emptyText="N/A"
+                    :foregroundColor="calculateColor(judge.adminoffence_statistic.approved_by_appeal)"
+                    :width="gchart.width"
+                    :height="120"
+                  />
+                  <span>Рішень вистояли у вищих інстанціях</span>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-12">
+                  <span>
+                    <b>{{ judge.adminoffence_statistic.average_duration }}</b> днів - середня тривалість розгляду однієї справи
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card w-50 mt-2 ml-1">
+            <div class="card-header">Адміністративне судочинство</div>
+            <div class="card-body">В розробці...</div>
           </div>
         </div>
       </div>
-      <div class="d-flex">
-        <div class="card w-50 mt-2 mr-1">
-          <div class="card-header">Цивільне судочинство</div>
-          <div class="card-body">
-            <div class="row">
-              <div class="col">
-                <GChart type="ColumnChart" :data="civilChartData" :options="civilChartOptions"/>
-              </div>
-            </div>
-            <hr>
-            <div class="row">
-              <div class="col-6">
-                <doughnut-chart
-                  :percent="judge.civil_statistic.cases_on_time"
-                  :visibleValue="true"
-                  emptyText="N/A"
-                  :foregroundColor="calculateColor(judge.civil_statistic.cases_on_time)"
-                  :width="gchart.width"
-                  :height="gchart.width"
-                />
-                <span>Справ розглянуто своєчасно</span>
-              </div>
-              <div class="col-6">
-                <doughnut-chart
-                  :percent="judge.civil_statistic.approved_by_appeal"
-                  :visibleValue="true"
-                  emptyText="N/A"
-                  :foregroundColor="calculateColor(judge.civil_statistic.approved_by_appeal)"
-                  :width="gchart.width"
-                  :height="gchart.width"
-                />
-                <span>Рішень вистояли у вищих інстанціях</span>
-              </div>
-            </div>
-            <hr>
-            <div class="row">
-              <div class="col-12">
-                <span>
-                  <b>{{ judge.civil_statistic.average_duration }}</b> днів - середня тривалість розгляду однієї справи
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="card w-50 mt-2 ml-1">
-          <div class="card-header">Кримінальне судочинство</div>
-          <div class="card-body">
-            <div class="row">
-              <div class="col">
-                <GChart
-                  type="ColumnChart"
-                  :data="criminalChartData"
-                  :options="criminalChartOptions"
-                />
-              </div>
-            </div>
-            <hr>
-            <div class="row">
-              <div class="col-6">
-                <doughnut-chart
-                  :percent="judge.criminal_statistic.cases_on_time"
-                  :visibleValue="true"
-                  emptyText="N/A"
-                  :foregroundColor="calculateColor(judge.criminal_statistic.cases_on_time)"
-                  :width="gchart.width"
-                  :height="gchart.width"
-                />
-                <span>Справ розглядаються менше 6 міс.</span>
-              </div>
-              <div class="col-6">
-                <doughnut-chart
-                  :percent="judge.criminal_statistic.approved_by_appeal"
-                  :visibleValue="true"
-                  emptyText="N/A"
-                  :foregroundColor="calculateColor(judge.criminal_statistic.approved_by_appeal)"
-                  :width="gchart.width"
-                  :height="gchart.width"
-                />
-                <span>Рішень вистояли у вищих інстанціях</span>
-              </div>
-            </div>
-            <hr>
-            <div class="row">
-              <div class="col-12">
-                <span>
-                  <b>{{ judge.criminal_statistic.average_duration }}</b> днів - середня тривалість розгляду однієї справи
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="d-flex">
-        <div class="card w-50 mt-2 mr-1">
-          <div class="card-header">
-            <span>Судочинство в порядку КУпАП</span>
-          </div>
-          <div class="card-body">
-            <div class="row">
-              <div class="col">
-                <GChart
-                  type="ColumnChart"
-                  :data="adminoffenceChartData"
-                  :options="adminoffenceChartOptions"
-                />
-              </div>
-            </div>
-            <hr>
-            <div class="row">
-              <div class="col-6">
-                <doughnut-chart
-                  :percent="judge.adminoffence_statistic.cases_on_time"
-                  :visibleValue="true"
-                  emptyText="N/A"
-                  :foregroundColor="calculateColor(judge.adminoffence_statistic.cases_on_time)"
-                  :width="gchart.width"
-                  :height="120"
-                />
-                <span>Справ розглянуто своєчасно</span>
-              </div>
-              <div class="col-6">
-                <doughnut-chart
-                  :percent="judge.adminoffence_statistic.approved_by_appeal"
-                  :visibleValue="true"
-                  emptyText="N/A"
-                  :foregroundColor="calculateColor(judge.adminoffence_statistic.approved_by_appeal)"
-                  :width="gchart.width"
-                  :height="120"
-                />
-                <span>Рішень вистояли у вищих інстанціях</span>
-              </div>
-            </div>
-            <hr>
-            <div class="row">
-              <div class="col-12">
-                <span>
-                  <b>{{ judge.adminoffence_statistic.average_duration }}</b> днів - середня тривалість розгляду однієї справи
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="card w-50 mt-2 ml-1">
-          <div class="card-header">Адміністративне судочинство</div>
-          <div class="card-body">В розробці...</div>
-        </div>
-      </div>
+       <div class="mt-3">
+      <b>Даних для статистики недостатньо!</b>
+    </div>
     </div>
     <!--<GChart tupe="PieChart"/>-->
     <!-- modal change status -->
@@ -342,14 +350,11 @@
 import { GChart } from "vue-google-charts";
 import DoughnutChart from "vue-doughnut-chart";
 import _ from "lodash";
+import MyUpload from "vue-image-crop-upload";
 
 import StatusComponent from "../../shared/StatusComponent.vue";
 import ChangeStatus from "../../shared/ChangeStatus.vue";
 import Spinner from "../../shared/Spinner.vue";
-
-
-import myUpload from 'vue-image-crop-upload'; //---
-
 
 export default {
   name: "JudgeProfile",
@@ -359,24 +364,22 @@ export default {
     DoughnutChart,
     StatusComponent,
     ChangeStatus,
-    myUpload //**** */
+    MyUpload
   },
   data() {
     return {
-      //-----
+      showBtnAddPhoto: true,
       show: false,
-			params: {
+      params: {
         id: null,
         photo: null
-			},
-			headers: {
-            // "Content-Type": "application/x-www-form-urlencoded",
-            "X-Requested-With": "XMLHttpRequest",
-            Authorization: localStorage.getItem("token")
-        },
-    //  imgDataUrl: '', // the datebase64 url of created image
-      
-      //-----
+      },
+      headers: {
+        // "Content-Type": "application/x-www-form-urlencoded",
+        "X-Requested-With": "XMLHttpRequest",
+        Authorization: localStorage.getItem("token")
+      },
+      //  imgDataUrl: '', // the datebase64 url of created image
       showModal: false,
       loadData: false,
       judge: {},
@@ -415,7 +418,6 @@ export default {
           position: "none"
         }
       },
-
       // налаштування для Google графіка статистики по кримінальних справах
       criminalChartData: [],
       criminalChartOptions: {
@@ -523,9 +525,9 @@ export default {
         this.$router.push("/login");
       }
       if (this.judge.data.is_bookmark === 0) {
-      	this.judge.data.is_bookmark = 1;
+        this.judge.data.is_bookmark = 1;
 
-      	axios({
+        axios({
           method: "put",
           url: `/api/v1/judges/${this.$route.params.id}/bookmark`,
           headers: {
@@ -534,25 +536,25 @@ export default {
             Authorization: localStorage.getItem("token")
           }
         })
-          .then(response => {
-            //
-          })
           .catch(error => {
             if (error.response && error.response.status === 401) {
               this.$router.push("/login");
             }
-			this.judge.data.is_bookmark = 0;
-            this.$toasted.error("Неможливо додати в закладки, перевірте Ваше інтернет з'єднання або спробуйте пізніше", {
+            this.judge.data.is_bookmark = 0;
+            this.$toasted.error(
+              "Неможливо додати в закладки, перевірте Ваше інтернет з'єднання або спробуйте пізніше",
+              {
                 theme: "primary",
                 position: "top-right",
                 duration: 5000
-            });
+              }
+            );
             console.log("Bookmark", error);
           });
 
-      // якщо вже є закладка - видаляємо
+        // якщо вже є закладка - видаляємо
       } else {
-		this.judge.data.is_bookmark = 0;
+        this.judge.data.is_bookmark = 0;
         axios({
           method: "delete",
           url: `/api/v1/judges/${this.$route.params.id}/bookmark`,
@@ -562,19 +564,19 @@ export default {
             Authorization: localStorage.getItem("token")
           }
         })
-          .then(response => {
-            //
-          })
           .catch(error => {
             if (error.response && error.response.status === 401) {
               this.$router.push("/login");
             }
-			this.judge.data.is_bookmark = 1;
-            this.$toasted.error("Перевірте Ваше інтернет з'єднання або спробуйте пізніше", {
+            this.judge.data.is_bookmark = 1;
+            this.$toasted.error(
+              "Перевірте Ваше інтернет з'єднання або спробуйте пізніше",
+              {
                 theme: "primary",
                 position: "top-right",
                 duration: 5000
-            });
+              }
+            );
             console.log("Bookmark", error.response);
           });
       }
@@ -583,7 +585,6 @@ export default {
       if (!this.$store.getters.isAuth) {
         this.$router.push("/login");
       }
-
 
       if (this.judge.data.is_unliked) {
         this.changeUnlikes();
@@ -603,9 +604,6 @@ export default {
             Authorization: localStorage.getItem("token")
           }
         })
-          .then(response => {
-            //
-          })
           .catch(error => {
             if (error.response && error.response.status === 401) {
               this.$router.push("/login");
@@ -613,19 +611,20 @@ export default {
             // якщо поставити лайк на сервері не вдалось, повертаємо кількість назад
             this.judge.data.likes += 1;
             this.judge.data.is_liked = 1;
-            this.$toasted.error("Перевірте Ваше інтернет з'єднання або спробуйте пізніше", {
+            this.$toasted.error(
+              "Перевірте Ваше інтернет з'єднання або спробуйте пізніше",
+              {
                 theme: "primary",
                 position: "top-right",
                 duration: 5000
-            });
+              }
+            );
             console.log("set Likes", error);
           });
-
-
       } else {
         // set like
-		  this.judge.data.likes += 1;
-		  this.judge.data.is_liked = 1;
+        this.judge.data.likes += 1;
+        this.judge.data.is_liked = 1;
         axios({
           method: "put",
           url: `/api/v1/judges/${this.$route.params.id}/like`,
@@ -635,9 +634,6 @@ export default {
             Authorization: localStorage.getItem("token")
           }
         })
-          .then(response => {
-            //
-          })
           .catch(error => {
             if (error.response && error.response.status === 401) {
               this.$router.push("/login");
@@ -645,11 +641,14 @@ export default {
             // якщо поставити лайк на сервері не вдалось, повертаємо кількість назад
             this.judge.data.likes -= 1;
             this.judge.data.is_liked = 0;
-            this.$toasted.error("Перевірте Ваше інтернет з'єднання або спробуйте пізніше", {
+            this.$toasted.error(
+              "Перевірте Ваше інтернет з'єднання або спробуйте пізніше",
+              {
                 theme: "primary",
                 position: "top-right",
                 duration: 5000
-            });
+              }
+            );
             console.log("set Likes", error);
           });
       }
@@ -663,8 +662,8 @@ export default {
       }
       if (this.judge.data.is_unliked) {
         // dell unlike
-		  this.judge.data.unlikes -= 1;
-		  this.judge.data.is_unliked = 0;
+        this.judge.data.unlikes -= 1;
+        this.judge.data.is_unliked = 0;
         axios({
           method: "delete",
           url: `/api/v1/judges/${this.$route.params.id}/unlike`,
@@ -674,9 +673,6 @@ export default {
             Authorization: localStorage.getItem("token")
           }
         })
-          .then(response => {
-            //
-          })
           .catch(error => {
             if (error.response && error.response.status === 401) {
               this.$router.push("/login");
@@ -684,20 +680,20 @@ export default {
             // якщо поставити лайк на сервері не вдалось, повертаємо кількість назад
             this.judge.data.unlikes += 1;
             this.judge.data.is_unliked = 1;
-            this.$toasted.error("Перевірте Ваше інтернет з'єднання або спробуйте пізніше", {
+            this.$toasted.error(
+              "Перевірте Ваше інтернет з'єднання або спробуйте пізніше",
+              {
                 theme: "primary",
                 position: "top-right",
                 duration: 5000
-            });
+              }
+            );
             console.log("set Likes", error);
           });
-
-
-
       } else {
         // set unlike
-		  this.judge.data.unlikes += 1;
-		  this.judge.data.is_unliked = 1;
+        this.judge.data.unlikes += 1;
+        this.judge.data.is_unliked = 1;
         axios({
           method: "put",
           url: `/api/v1/judges/${this.$route.params.id}/unlike`,
@@ -707,9 +703,6 @@ export default {
             Authorization: localStorage.getItem("token")
           }
         })
-          .then(response => {
-            //
-          })
           .catch(error => {
             if (error.response && error.response.status === 401) {
               this.$router.push("/login");
@@ -717,11 +710,14 @@ export default {
             // якщо поставити лайк на сервері не вдалось, повертаємо кількість назад
             this.judge.data.unlikes -= 1;
             this.judge.data.is_unliked = 0;
-            this.$toasted.error("Перевірте Ваше інтернет з'єднання або спробуйте пізніше", {
+            this.$toasted.error(
+              "Перевірте Ваше інтернет з'єднання або спробуйте пізніше",
+              {
                 theme: "primary",
                 position: "top-right",
                 duration: 5000
-            });
+              }
+            );
             console.log("set Likes", error);
           });
       }
@@ -730,10 +726,8 @@ export default {
     deleteBookmarkCourtSession(session) {
       if (!this.$store.getters.isAuth) {
         this.$router.push("/login");
-
       } else {
-		session.is_bookmark = 0;
-
+        session.is_bookmark = 0;
         axios({
           method: "delete",
           url: `/api/v1/court-sessions/${session.id}/bookmark`,
@@ -742,20 +736,19 @@ export default {
             "X-Requested-With": "XMLHttpRequest",
             Authorization: localStorage.getItem("token")
           }
-        })
-          .then(response => {
-            //
-          })
-          .catch(error => {
+        }).catch(error => {
             if (error.response && error.response.status === 401) {
               this.$router.push("/login");
             }
-			session.is_bookmark = 1;
-            this.$toasted.error("Перевірте Ваше інтернет з'єднання або спробуйте пізніше", {
+            session.is_bookmark = 1;
+            this.$toasted.error(
+              "Перевірте Ваше інтернет з'єднання або спробуйте пізніше",
+              {
                 theme: "primary",
                 position: "top-right",
                 duration: 5000
-            });
+              }
+            );
           });
       }
     },
@@ -763,9 +756,8 @@ export default {
     addBookmarkCourtSession(session) {
       if (!this.$store.getters.isAuth) {
         this.$router.push("/login");
-
       } else {
-		session.is_bookmark = 1;
+        session.is_bookmark = 1;
         axios({
           method: "put",
           url: `/api/v1/court-sessions/${session.id}/bookmark`,
@@ -782,12 +774,15 @@ export default {
             if (error.response && error.response.status === 401) {
               this.$router.push("/login");
             }
-			session.is_bookmark = 0;
-            this.$toasted.error("Неможливо додати в закладки, перевірте Ваше інтернет з'єднання або спробуйте пізніше", {
+            session.is_bookmark = 0;
+            this.$toasted.error(
+              "Неможливо додати в закладки, перевірте Ваше інтернет з'єднання або спробуйте пізніше",
+              {
                 theme: "primary",
                 position: "top-right",
                 duration: 5000
-            });
+              }
+            );
           });
       }
     },
@@ -867,89 +862,38 @@ export default {
         ]
       ];
     },
-
-  // ----------------------
-  toggleShow() {
-				this.show = !this.show;
-			},
-      /**
-			 * crop success
-			 *
-			 * [param] imgDataUrl
-			 * [param] field
-      */
-      srcFileSet(fileName, fileType, fileSize) {
-        console.log('_________________-sdgsdg_________________');
-        
-        console.log('fileName', fileName);
-        console.log('fileType', fileType);
-        console.log('fileSize', fileSize);
-        
-      },
-			cropSuccess(imgDataUrl, field){
-        console.log('-------- crop success --------',imgDataUrl);
-        this.params.id = this.judge.data.id;
-        this.params.photo = imgDataUrl;
-        console.log(this.params);
-        this.srcFileSet();
-        
-        axios({
-          method: "post",
-          url: '/api/v1/judges/photo',
-          headers: this.headers,
-          params: this.params
-        })
-          .then(response => {
-            console.log(response);
-          })
-          .catch(error => {
-            if (error.response && error.response.status === 401) {
-              this.$router.push("/login");
-            }
-          });
-
-
-				this.judge.data.photo = imgDataUrl;
-			},
-			/**
-			 * upload success
-			 *
-			 * [param] jsonData  server api return data, already json encode
-			 * [param] field
-			 */
-			cropUploadSuccess(jsonData, field){
-				console.log('-------- upload success --------');
-				console.log(jsonData);
-				console.log('field: ' + field);
-			},
-			/**
-			 * upload fail
-			 *
-			 * [param] status    server api return error status, like 500
-			 * [param] field
-			 */
-			cropUploadFail(status, field){
-				console.log('-------- upload fail --------');
-				console.log(status);
-				console.log('field: ' + field);
-      }
+    // ---------  upload photo ----------- //
+    toggleShow() {
+      this.show = !this.show;
     },
-      //---------------------
+  
+    cropSuccess(imgDataUrl, field) {
+      this.params.id = this.judge.data.id;
+      this.params.photo = imgDataUrl;
+      this.$toasted.success(
+          "Фото судді завантажено успішно і буде опубліковано після перевірки адміністратором!", {
+              theme: "primary",
+              position: "top-center",
+              duration: 8000
+          }
+      );
+     this.showBtnAddPhoto = false;
+    },
+  }
 };
 </script>
 
 <style lang="scss">
-  .vicp-wrap {
-    width: 430px !important;
-  }
-  .vicp-preview {
-    display: none;
-  }
-  .vicp-crop {
-    display: flex;
-    justify-content: center;
-  }
-
+.vicp-wrap {
+  width: 430px !important;
+}
+.vicp-preview {
+  display: none;
+}
+.vicp-crop {
+  display: flex;
+  justify-content: center;
+}
 </style>
 
 <style scoped lang="scss">
@@ -1049,7 +993,7 @@ export default {
     border: 1px solid gray;
     border-radius: 4px;
     font-size: 12px;
-    padding: 3px 10px
+    padding: 3px 10px;
   }
 }
 </style>

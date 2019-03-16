@@ -35,7 +35,6 @@
                 <i class="fas fa-star" @click="showModalDelete(session)"></i>
                 <textarea class="note" maxlength="254" v-model.trim="session.note"></textarea>
                 <i class="fas fa-check checkmark" @click="saveNote(session)"></i>
-                <!-- <img class="checkmark" src="../../../../images/checkmark.png" @click="saveNote(session)"> -->
               </div>
             </div>
           </div>

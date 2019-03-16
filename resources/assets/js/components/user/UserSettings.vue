@@ -3,6 +3,7 @@
     <spinner v-if="!loadData" />
     <div v-if="loadData" class="border content-wrapper_body">
       <!-- 1 -->
+      {{errors}}
       <div class="profile">
         <h4>Профіль</h4>
         <form @submit.prevent="changeProfileData()">
@@ -220,12 +221,14 @@
     },
     methods: {
       isDisabled: (errors, password) => {
+        console.log('ololol===------------')
         if (
           errors.items.length > 0 ||
           !password.currentPassword.length ||
           !password.rePassword.length ||
-          !password.newPassword.length
-        ) {
+          !password.newPassword.length ||
+          password.rePassword !== password.newPassword 
+        ){
           return true;
         }
         return false;
