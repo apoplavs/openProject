@@ -264,11 +264,10 @@ export default {
       });
       Promise.all(promises)
         .then(result => {
-          console.log("list compare", this.judgesList);
           this.loadData = true;
         })
         .catch(error => {
-          console.log("ERROR");
+          console.log(error);
         });
     },
     deleteJudgeFromComparation(id) {

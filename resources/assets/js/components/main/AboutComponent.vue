@@ -3,11 +3,11 @@
     <div class="welcome-wrap">
         <!-- Services section -->
         <section id="what-we-do">
-            <div class="container-fluid">
+            <div class="wrap-container">
                 <h2 class="section-title mb-2 h1">Про нас</h2>
                 <p class="text-center text-muted h5">Допомагаємо знайомитись із суддями до першого судового засідання</p>
                 <div class="row mt-5">
-                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
+                    <div class="col ">
                         <div class="card">
                             <div class="card-block block-1">
                                 <h3 class="card-title">ML</h3>
@@ -15,7 +15,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
+                    <div class="col">
                         <div class="card">
                             <div class="card-block block-2">
                                 <h3 class="card-title">ТОЕсуд</h3>
@@ -23,7 +23,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
+                    <div class="col">
                         <div class="card">
                             <div class="card-block block-3">
                                 <h3 class="card-title">Аналітика в графіках</h3>
@@ -33,7 +33,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
+                    <div class="col">
                         <div class="card">
                             <div class="card-block block-4">
                                 <h3 class="card-title">Актуальність</h3>
@@ -41,7 +41,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
+                    <div class="col">
                         <div class="card">
                             <div class="card-block block-5">
                                 <h3 class="card-title">Проста API інтеграція</h3>
@@ -49,7 +49,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
+                    <div class="col">
                         <div class="card">
                             <div class="card-block block-6">
                                 <h3 class="card-title">Оптимізація</h3>
@@ -62,19 +62,18 @@
         </section>
         <!-- /Services section -->
         <section class="our-webcoderskull padding-lg">
-            <div class="container">
+            <div class="wrap-container">
                 <div class="row heading heading-icon">
                     <h2>Наша команда</h2>
                 </div>
                 <ul class="row">
-                    <li class="col-12 col-md-6 col-lg-3">
+                    <li class="col">
                         <div class="cnt-block equal-hight" style="height: 349px;">
                             <figure><img src="../../../images/abaranov.jpg" class="img-responsive" alt=""></figure>
                             <h3>Баранов Олександр</h3>
                             <p>Data Scientist</p>
                             <ul class="follow-us clearfix">
                                 <li><a href="https://www.facebook.com/photo.php?fbid=1006014652888615&set=a.256940597796028&type=3&theater" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                <!-- <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li> -->
                                 <li><a href="https://www.linkedin.com/in/barrannov/" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
                             </ul>
                         </div>
@@ -131,6 +130,14 @@
 
 <style lang='scss' scoped>
     @import "../../../sass/_variables.scss";  
+    .wrap-container {
+      width: 1140px;
+      margin-right: auto;
+      margin-left: auto;
+    }
+    .welcome-wrap {
+      margin-top: 4rem;
+    }
     section .section-title {
         text-align: center;
         color: #007b5e;

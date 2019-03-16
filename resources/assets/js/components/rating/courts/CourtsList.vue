@@ -110,9 +110,7 @@
         return true;
       },
       liveSearch: _.debounce(function(event) {
-        console.log('GOing', this.validateInputSearch());
         if (this.validateInputSearch()) {
-          
           axios.get('/api/v1/courts/autocomplete', {
               headers: {
                 "Content-Type": "application/json",
@@ -151,7 +149,6 @@
           this.filters.search = null;
         }
         if (localStorage.getItem('token')) {
-          // console.log('have token')
           axios
             .get('/api/v1/courts/list', {
               headers: {
@@ -164,16 +161,14 @@
             .then(response => {
               this.courtsList = response.data;
               this.loadData = true;
-              // console.log('getCourts Response', this.courtsList);
             })
             .catch(error => {
               if (error.response.status === 401) {
                 this.$router.push('/login');
               }
-              // console.log('Каже що не авторизований пффф та Канеха');
+              console.log(error);
             });
         } else {
-          // console.log('no token')
           axios
             .get("/api/v1/guest/courts/list", {
               headers: {

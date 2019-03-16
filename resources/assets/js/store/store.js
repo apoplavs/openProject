@@ -24,7 +24,6 @@ export default new Vuex.Store({
       localStorage.clear();   
     },
     updateJudgeToCompare(state, judge_compare) {
-     console.log('judge_compare VUEX', JSON.stringify(judge_compare))
       sessionStorage.setItem('judge_compare', JSON.stringify(judge_compare));
       state.judge_compare = judge_compare; 
     },

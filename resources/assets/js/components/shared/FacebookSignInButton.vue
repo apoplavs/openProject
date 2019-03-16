@@ -56,7 +56,7 @@
 						callback();
 					})
 					.catch(error => {
-						console.log('ERR ', error);
+						console.log(error);
 					});
 			},
 			onSignInSuccess(response) {

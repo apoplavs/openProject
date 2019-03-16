@@ -69,7 +69,6 @@ export default {
           .then(response => {
             this.bookmarks = response.data;
             this.loadData = true;
-            console.log("Courts Bookmarks", this.bookmarks);
           })
           .catch(error => {
             if (error && error.response && error.response.status === 401) {

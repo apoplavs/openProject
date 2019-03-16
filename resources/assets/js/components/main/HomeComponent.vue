@@ -2,12 +2,14 @@
 <template>
     <div class="welcome-wrap">
         <div id="welcome-page" class="pt-lg-5 nice-background">
-            <div class="col-12 text-center" id="title-label">
-                <h1>ТОЕсуд</h1>
-                <div>прозорий відкритий ефективний суд</div>
+            <div class="wrap-container">
+                <div class="text-center" id="title-label">
+                    <h1>ТОЕсуд</h1>
+                    <div>прозорий відкритий ефективний суд</div>
+                </div>
             </div>
         </div>
-        <div class="services text-center">
+        <div class="wrap-container services text-center">
             <div class="h2">Можливості</div>
             <div class="row mt-5">
                 <div class="court-practice col-4 text-center">
@@ -46,9 +48,7 @@
             </div>
         </div>
 
-        <div class="nice-background">
-            <br><br><br><br><br><br><br><br><br>
-        </div>
+        <div class="nice-background"></div>
     </div>
 </template>
 
@@ -104,17 +104,13 @@
     .fa-user-tie {
       font-size: 3rem;
     }
-
-
     .services {
         padding-top: 20px;
         padding-bottom: 20px;
-        background-color: white;
     }
     .services .h2{
         font-weight: 300;
         font-size: 3rem;
-        /*margin-top: 20px;*/
     }
 
     .welcome-wrap {
@@ -245,5 +241,12 @@
             font-size: 2.2em;
             text-decoration: none;
         }
+    }
+    .nice-background {
+        height: 350px;
+    }
+    .wrap-container {
+        width: 1149px;
+        margin: auto;
     }
 </style>

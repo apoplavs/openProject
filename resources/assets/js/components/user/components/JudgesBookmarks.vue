@@ -107,12 +107,7 @@ export default {
           })
           .then(response => {
             this.bookmarks = response.data;
-            /* -------------------delete!!!!  ------------------------------------------*/
-            // this.bookmarks.forEach(obj => {
-            //   obj.is_bookmark = true;
-            // });
             this.loadData = true;
-            console.log("Judges Bookmarks", this.bookmarks);
           })
           .catch(error => {
             if (error && error.response && error.response.status === 401) {
