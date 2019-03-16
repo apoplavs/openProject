@@ -199,7 +199,7 @@
               </div>
               <hr>
               <div class="row">
-                <div class="col-6">
+                <div class="col-6 align-center-chart">
                   <doughnut-chart
                     :percent="judge.civil_statistic.cases_on_time"
                     :visibleValue="true"
@@ -210,7 +210,7 @@
                   />
                   <span>Справ розглянуто своєчасно</span>
                 </div>
-                <div class="col-6">
+                <div class="col-6 align-center-chart">
                   <doughnut-chart
                     :percent="judge.civil_statistic.approved_by_appeal"
                     :visibleValue="true"
@@ -224,7 +224,7 @@
               </div>
               <hr>
               <div class="row">
-                <div class="col-12">
+                <div class="col">
                   <span>
                     <b>{{ judge.civil_statistic.average_duration }}</b> днів - середня тривалість розгляду однієї справи
                   </span>
@@ -246,7 +246,7 @@
               </div>
               <hr>
               <div class="row">
-                <div class="col-6">
+                <div class="col-6 align-center-chart">
                   <doughnut-chart
                     :percent="judge.criminal_statistic.cases_on_time"
                     :visibleValue="true"
@@ -257,7 +257,7 @@
                   />
                   <span>Справ розглядаються менше 6 міс.</span>
                 </div>
-                <div class="col-6">
+                <div class="col-6 align-center-chart">
                   <doughnut-chart
                     :percent="judge.criminal_statistic.approved_by_appeal"
                     :visibleValue="true"
@@ -297,7 +297,7 @@
               </div>
               <hr>
               <div class="row">
-                <div class="col-6">
+                <div class="col-6 align-center-chart">
                   <doughnut-chart
                     :percent="judge.adminoffence_statistic.cases_on_time"
                     :visibleValue="true"
@@ -308,7 +308,7 @@
                   />
                   <span>Справ розглянуто своєчасно</span>
                 </div>
-                <div class="col-6">
+                <div class="col-6 align-center-chart">
                   <doughnut-chart
                     :percent="judge.adminoffence_statistic.approved_by_appeal"
                     :visibleValue="true"
@@ -336,9 +336,10 @@
           </div>
         </div>
       </div>
-       <div class="mt-3">
-      <b>Даних для статистики недостатньо!</b>
+      
     </div>
+     <div v-if="loadData && judge.common_statistic.competence === 0 && judge.common_statistic.timeliness === 0" class="mt-2 ml-2">
+      <b>Даних для статистики недостатньо!</b>
     </div>
     <!--<GChart tupe="PieChart"/>-->
     <!-- modal change status -->
@@ -893,6 +894,10 @@ export default {
   display: flex;
   justify-content: center;
 }
+.doughnut_chart > div {
+    bottom: 52.5px !important;
+    left: 108.5px !important;
+}
 </style>
 
 <style scoped lang="scss">
@@ -902,6 +907,12 @@ export default {
 .judge-profile {
   .card-body {
     font-size: 0.9rem;
+  }
+  .align-center-chart {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
   }
   .progress {
     height: 20px;
