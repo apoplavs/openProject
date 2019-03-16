@@ -67,7 +67,7 @@
                 <div>
                   <span class="line-chart">
                     <i class="fa fa-line-chart mr-1" aria-hidden="true"></i>
-                    {{ court.rating }}
+                    {{ court.rating + '%'}}
                   </span>
                 </div>
               </div>

@@ -148,7 +148,6 @@
           </div>
         </div>
       </div>
-
       <div v-if="judge.common_statistic.competence !== 0 && judge.common_statistic.timeliness !== 0" class="mt-3">
         <div class="d-flex">
           <div class="card w-50 mt-2 mr-1">
@@ -337,9 +336,9 @@
           </div>
         </div>
       </div>
-    </div>
-    <div class="mt-3">
+       <div class="mt-3">
       <b>Даних для статистики недостатньо!</b>
+    </div>
     </div>
     <!--<GChart tupe="PieChart"/>-->
     <!-- modal change status -->
