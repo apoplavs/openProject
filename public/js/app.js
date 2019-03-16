@@ -45633,7 +45633,17 @@ var render = function() {
     [
       _c("header-component"),
       _vm._v(" "),
-      _c("div", { staticClass: "content-wrapper" }, [_c("router-view")], 1),
+      _c(
+        "div",
+        {
+          class: {
+            "content-wrapper":
+              _vm.$route.fullPath !== "/" && _vm.$route.fullPath !== "/about"
+          }
+        },
+        [_c("router-view")],
+        1
+      ),
       _vm._v(" "),
       _c("footer-component")
     ],
@@ -45886,7 +45896,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n.home[data-v-52579982] {\n  height: calc(100vh - 60px);\n}\n\n/* styles for welcome page */\n.service-description[data-v-52579982] {\n  font-size: 1.2rem;\n  margin-top: 20px;\n}\n.court-practice i[data-v-52579982], .fa-gavel[data-v-52579982] {\n  font-size: 3rem;\n  position: relative;\n}\n.court-practice i.fa-chart-bar[data-v-52579982] {\n  bottom: 50px;\n}\n.court-practice i.fa-pie-chart[data-v-52579982] {\n  left: 20px;\n}\n.court-practice i.fa-chart-area[data-v-52579982] {\n  right: 20px;\n}\n.fa-thumbs-up[data-v-52579982] {\n  color: green;\n}\n.fa-thumbs-down[data-v-52579982] {\n  color: red;\n}\n.rating .fa-user-check[data-v-52579982], .fa-balance-scale[data-v-52579982] {\n  font-size: 3rem;\n  position: relative;\n}\n.fa-thumbs-up[data-v-52579982], .fa-thumbs-down[data-v-52579982],\n.fa-briefcase[data-v-52579982], .fa-umbrella-beach[data-v-52579982],\n.fa-calendar-minus-o[data-v-52579982], .fa-medkit[data-v-52579982] {\n  position: relative;\n  bottom: 40px;\n}\n.fa-user-tie[data-v-52579982] {\n  font-size: 3rem;\n}\n.services[data-v-52579982] {\n  padding-top: 20px;\n  padding-bottom: 20px;\n  background-color: white;\n}\n.services .h2[data-v-52579982] {\n  font-weight: 300;\n  font-size: 3rem;\n  /*margin-top: 20px;*/\n}\n.welcome-wrap[data-v-52579982] {\n  min-height: 100vh;\n}\n.nice-background[data-v-52579982] {\n  background-color: #4686a08f;\n  background-image: -webkit-gradient(linear, left top, left bottom, from(#3081cf), to(#82db85));\n  background-image: linear-gradient(to bottom, #3081cf 0%, #82db85 100%);\n}\n#welcome-page[data-v-52579982] {\n  height: 100%;\n  width: 100%;\n  background-attachment: fixed, fixed, fixed;\n  /* background-position: top left, center center, center center;\n        background-size: auto, cover, cover; */\n  overflow: hidden;\n}\n#title-label[data-v-52579982] {\n  font-family: BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif;\n  color: white;\n  -moz-user-select: none;\n  -webkit-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  margin-bottom: 50px;\n}\n#title-label h1[data-v-52579982] {\n  font-size: 7em;\n  -webkit-animation-name: title1-data-v-52579982;\n          animation-name: title1-data-v-52579982;\n  -webkit-animation-duration: 1s;\n          animation-duration: 1s;\n}\n#title-label div[data-v-52579982] {\n  font-size: 2.2em;\n  text-decoration: overline;\n  margin-top: -17px;\n  -webkit-animation-name: title2-data-v-52579982;\n          animation-name: title2-data-v-52579982;\n  -webkit-animation-duration: 1s;\n          animation-duration: 1s;\n}\n@-webkit-keyframes title1-data-v-52579982 {\n0% {\n    color: rgba(255, 255, 255, 0.1);\n    font-size: 4.5em;\n}\n10% {\n    color: rgba(255, 255, 255, 0.2);\n    font-size: 5em;\n}\n20% {\n    color: rgba(255, 255, 255, 0.3);\n    font-size: 5.4em;\n}\n30% {\n    color: rgba(255, 255, 255, 0.4);\n    font-size: 5.7em;\n}\n40% {\n    color: rgba(255, 255, 255, 0.5);\n    font-size: 6em;\n}\n50% {\n    color: rgba(255, 255, 255, 0.6);\n    font-size: 6.3em;\n}\n60% {\n    color: rgba(255, 255, 255, 0.7);\n    font-size: 6.5em;\n}\n70% {\n    color: rgba(255, 255, 255, 0.7);\n    font-size: 6.7em;\n}\n80% {\n    color: rgba(255, 255, 255, 0.8);\n    font-size: 6.8em;\n}\n90% {\n    color: rgba(255, 255, 255, 0.9);\n    font-size: 6.9em;\n}\n}\n@keyframes title1-data-v-52579982 {\n0% {\n    color: rgba(255, 255, 255, 0.1);\n    font-size: 4.5em;\n}\n10% {\n    color: rgba(255, 255, 255, 0.2);\n    font-size: 5em;\n}\n20% {\n    color: rgba(255, 255, 255, 0.3);\n    font-size: 5.4em;\n}\n30% {\n    color: rgba(255, 255, 255, 0.4);\n    font-size: 5.7em;\n}\n40% {\n    color: rgba(255, 255, 255, 0.5);\n    font-size: 6em;\n}\n50% {\n    color: rgba(255, 255, 255, 0.6);\n    font-size: 6.3em;\n}\n60% {\n    color: rgba(255, 255, 255, 0.7);\n    font-size: 6.5em;\n}\n70% {\n    color: rgba(255, 255, 255, 0.7);\n    font-size: 6.7em;\n}\n80% {\n    color: rgba(255, 255, 255, 0.8);\n    font-size: 6.8em;\n}\n90% {\n    color: rgba(255, 255, 255, 0.9);\n    font-size: 6.9em;\n}\n}\n@-webkit-keyframes title2-data-v-52579982 {\n0% {\n    color: rgba(255, 255, 255, 0.1);\n    font-size: 1em;\n    text-decoration: none;\n}\n10% {\n    color: rgba(255, 255, 255, 0.2);\n    font-size: 1.3em;\n}\n20% {\n    color: rgba(255, 255, 255, 0.3);\n    font-size: 1.5em;\n}\n30% {\n    color: rgba(255, 255, 255, 0.4);\n    font-size: 1.6em;\n}\n40% {\n    color: rgba(255, 255, 255, 0.5);\n    font-size: 1.7em;\n}\n50% {\n    color: rgba(255, 255, 255, 0.6);\n    font-size: 1.8em;\n}\n60% {\n    color: rgba(255, 255, 255, 0.7);\n    font-size: 1.9em;\n}\n70% {\n    color: rgba(255, 255, 255, 0.7);\n    font-size: 2em;\n}\n80% {\n    color: rgba(255, 255, 255, 0.8);\n    font-size: 2.1em;\n}\n90% {\n    color: rgba(255, 255, 255, 0.9);\n    font-size: 2.2em;\n    text-decoration: none;\n}\n}\n@keyframes title2-data-v-52579982 {\n0% {\n    color: rgba(255, 255, 255, 0.1);\n    font-size: 1em;\n    text-decoration: none;\n}\n10% {\n    color: rgba(255, 255, 255, 0.2);\n    font-size: 1.3em;\n}\n20% {\n    color: rgba(255, 255, 255, 0.3);\n    font-size: 1.5em;\n}\n30% {\n    color: rgba(255, 255, 255, 0.4);\n    font-size: 1.6em;\n}\n40% {\n    color: rgba(255, 255, 255, 0.5);\n    font-size: 1.7em;\n}\n50% {\n    color: rgba(255, 255, 255, 0.6);\n    font-size: 1.8em;\n}\n60% {\n    color: rgba(255, 255, 255, 0.7);\n    font-size: 1.9em;\n}\n70% {\n    color: rgba(255, 255, 255, 0.7);\n    font-size: 2em;\n}\n80% {\n    color: rgba(255, 255, 255, 0.8);\n    font-size: 2.1em;\n}\n90% {\n    color: rgba(255, 255, 255, 0.9);\n    font-size: 2.2em;\n    text-decoration: none;\n}\n}\n", ""]);
+exports.push([module.i, "\n.home[data-v-52579982] {\n  height: calc(100vh - 60px);\n}\n\n/* styles for welcome page */\n.service-description[data-v-52579982] {\n  font-size: 1.2rem;\n  margin-top: 20px;\n}\n.court-practice i[data-v-52579982], .fa-gavel[data-v-52579982] {\n  font-size: 3rem;\n  position: relative;\n}\n.court-practice i.fa-chart-bar[data-v-52579982] {\n  bottom: 50px;\n}\n.court-practice i.fa-pie-chart[data-v-52579982] {\n  left: 20px;\n}\n.court-practice i.fa-chart-area[data-v-52579982] {\n  right: 20px;\n}\n.fa-thumbs-up[data-v-52579982] {\n  color: green;\n}\n.fa-thumbs-down[data-v-52579982] {\n  color: red;\n}\n.rating .fa-user-check[data-v-52579982], .fa-balance-scale[data-v-52579982] {\n  font-size: 3rem;\n  position: relative;\n}\n.fa-thumbs-up[data-v-52579982], .fa-thumbs-down[data-v-52579982],\n.fa-briefcase[data-v-52579982], .fa-umbrella-beach[data-v-52579982],\n.fa-calendar-minus-o[data-v-52579982], .fa-medkit[data-v-52579982] {\n  position: relative;\n  bottom: 40px;\n}\n.fa-user-tie[data-v-52579982] {\n  font-size: 3rem;\n}\n.services[data-v-52579982] {\n  padding-top: 20px;\n  padding-bottom: 20px;\n}\n.services .h2[data-v-52579982] {\n  font-weight: 300;\n  font-size: 3rem;\n}\n.welcome-wrap[data-v-52579982] {\n  min-height: 100vh;\n}\n.nice-background[data-v-52579982] {\n  background-color: #4686a08f;\n  background-image: -webkit-gradient(linear, left top, left bottom, from(#3081cf), to(#82db85));\n  background-image: linear-gradient(to bottom, #3081cf 0%, #82db85 100%);\n}\n#welcome-page[data-v-52579982] {\n  height: 100%;\n  width: 100%;\n  background-attachment: fixed, fixed, fixed;\n  /* background-position: top left, center center, center center;\n        background-size: auto, cover, cover; */\n  overflow: hidden;\n}\n#title-label[data-v-52579982] {\n  font-family: BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif;\n  color: white;\n  -moz-user-select: none;\n  -webkit-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  margin-bottom: 50px;\n}\n#title-label h1[data-v-52579982] {\n  font-size: 7em;\n  -webkit-animation-name: title1-data-v-52579982;\n          animation-name: title1-data-v-52579982;\n  -webkit-animation-duration: 1s;\n          animation-duration: 1s;\n}\n#title-label div[data-v-52579982] {\n  font-size: 2.2em;\n  text-decoration: overline;\n  margin-top: -17px;\n  -webkit-animation-name: title2-data-v-52579982;\n          animation-name: title2-data-v-52579982;\n  -webkit-animation-duration: 1s;\n          animation-duration: 1s;\n}\n@-webkit-keyframes title1-data-v-52579982 {\n0% {\n    color: rgba(255, 255, 255, 0.1);\n    font-size: 4.5em;\n}\n10% {\n    color: rgba(255, 255, 255, 0.2);\n    font-size: 5em;\n}\n20% {\n    color: rgba(255, 255, 255, 0.3);\n    font-size: 5.4em;\n}\n30% {\n    color: rgba(255, 255, 255, 0.4);\n    font-size: 5.7em;\n}\n40% {\n    color: rgba(255, 255, 255, 0.5);\n    font-size: 6em;\n}\n50% {\n    color: rgba(255, 255, 255, 0.6);\n    font-size: 6.3em;\n}\n60% {\n    color: rgba(255, 255, 255, 0.7);\n    font-size: 6.5em;\n}\n70% {\n    color: rgba(255, 255, 255, 0.7);\n    font-size: 6.7em;\n}\n80% {\n    color: rgba(255, 255, 255, 0.8);\n    font-size: 6.8em;\n}\n90% {\n    color: rgba(255, 255, 255, 0.9);\n    font-size: 6.9em;\n}\n}\n@keyframes title1-data-v-52579982 {\n0% {\n    color: rgba(255, 255, 255, 0.1);\n    font-size: 4.5em;\n}\n10% {\n    color: rgba(255, 255, 255, 0.2);\n    font-size: 5em;\n}\n20% {\n    color: rgba(255, 255, 255, 0.3);\n    font-size: 5.4em;\n}\n30% {\n    color: rgba(255, 255, 255, 0.4);\n    font-size: 5.7em;\n}\n40% {\n    color: rgba(255, 255, 255, 0.5);\n    font-size: 6em;\n}\n50% {\n    color: rgba(255, 255, 255, 0.6);\n    font-size: 6.3em;\n}\n60% {\n    color: rgba(255, 255, 255, 0.7);\n    font-size: 6.5em;\n}\n70% {\n    color: rgba(255, 255, 255, 0.7);\n    font-size: 6.7em;\n}\n80% {\n    color: rgba(255, 255, 255, 0.8);\n    font-size: 6.8em;\n}\n90% {\n    color: rgba(255, 255, 255, 0.9);\n    font-size: 6.9em;\n}\n}\n@-webkit-keyframes title2-data-v-52579982 {\n0% {\n    color: rgba(255, 255, 255, 0.1);\n    font-size: 1em;\n    text-decoration: none;\n}\n10% {\n    color: rgba(255, 255, 255, 0.2);\n    font-size: 1.3em;\n}\n20% {\n    color: rgba(255, 255, 255, 0.3);\n    font-size: 1.5em;\n}\n30% {\n    color: rgba(255, 255, 255, 0.4);\n    font-size: 1.6em;\n}\n40% {\n    color: rgba(255, 255, 255, 0.5);\n    font-size: 1.7em;\n}\n50% {\n    color: rgba(255, 255, 255, 0.6);\n    font-size: 1.8em;\n}\n60% {\n    color: rgba(255, 255, 255, 0.7);\n    font-size: 1.9em;\n}\n70% {\n    color: rgba(255, 255, 255, 0.7);\n    font-size: 2em;\n}\n80% {\n    color: rgba(255, 255, 255, 0.8);\n    font-size: 2.1em;\n}\n90% {\n    color: rgba(255, 255, 255, 0.9);\n    font-size: 2.2em;\n    text-decoration: none;\n}\n}\n@keyframes title2-data-v-52579982 {\n0% {\n    color: rgba(255, 255, 255, 0.1);\n    font-size: 1em;\n    text-decoration: none;\n}\n10% {\n    color: rgba(255, 255, 255, 0.2);\n    font-size: 1.3em;\n}\n20% {\n    color: rgba(255, 255, 255, 0.3);\n    font-size: 1.5em;\n}\n30% {\n    color: rgba(255, 255, 255, 0.4);\n    font-size: 1.6em;\n}\n40% {\n    color: rgba(255, 255, 255, 0.5);\n    font-size: 1.7em;\n}\n50% {\n    color: rgba(255, 255, 255, 0.6);\n    font-size: 1.8em;\n}\n60% {\n    color: rgba(255, 255, 255, 0.7);\n    font-size: 1.9em;\n}\n70% {\n    color: rgba(255, 255, 255, 0.7);\n    font-size: 2em;\n}\n80% {\n    color: rgba(255, 255, 255, 0.8);\n    font-size: 2.1em;\n}\n90% {\n    color: rgba(255, 255, 255, 0.9);\n    font-size: 2.2em;\n    text-decoration: none;\n}\n}\n.nice-background[data-v-52579982] {\n  height: 350px;\n}\n.wrap-container[data-v-52579982] {\n  width: 1149px;\n  margin: auto;\n}\n", ""]);
 
 // exports
 
@@ -45979,19 +45989,21 @@ var staticRenderFns = [
           attrs: { id: "welcome-page" }
         },
         [
-          _c(
-            "div",
-            { staticClass: "col-12 text-center", attrs: { id: "title-label" } },
-            [
-              _c("h1", [_vm._v("ТОЕсуд")]),
-              _vm._v(" "),
-              _c("div", [_vm._v("прозорий відкритий ефективний суд")])
-            ]
-          )
+          _c("div", { staticClass: "wrap-container" }, [
+            _c(
+              "div",
+              { staticClass: "text-center", attrs: { id: "title-label" } },
+              [
+                _c("h1", [_vm._v("ТОЕсуд")]),
+                _vm._v(" "),
+                _c("div", [_vm._v("прозорий відкритий ефективний суд")])
+              ]
+            )
+          ])
         ]
       ),
       _vm._v(" "),
-      _c("div", { staticClass: "services text-center" }, [
+      _c("div", { staticClass: "wrap-container services text-center" }, [
         _c("div", { staticClass: "h2" }, [_vm._v("Можливості")]),
         _vm._v(" "),
         _c("div", { staticClass: "row mt-5" }, [
@@ -46059,17 +46071,7 @@ var staticRenderFns = [
         ])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "nice-background" }, [
-        _c("br"),
-        _c("br"),
-        _c("br"),
-        _c("br"),
-        _c("br"),
-        _c("br"),
-        _c("br"),
-        _c("br"),
-        _c("br")
-      ])
+      _c("div", { staticClass: "nice-background" })
     ])
   }
 ]
@@ -46168,7 +46170,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\nsection .section-title[data-v-73206242] {\n  text-align: center;\n  color: #007b5e;\n  margin-bottom: 50px;\n  text-transform: uppercase;\n}\n#what-we-do .card[data-v-73206242] {\n  padding: 1rem !important;\n  border: none;\n  margin-bottom: 1rem;\n  -webkit-transition: .5s all ease;\n  transition: .5s all ease;\n}\n#what-we-do .card[data-v-73206242]:hover {\n  -webkit-box-shadow: 5px 7px 9px -4px #9e9e9e;\n  box-shadow: 5px 7px 9px -4px #9e9e9e;\n}\n#what-we-do .card .card-block[data-v-73206242] {\n  padding-left: 50px;\n  position: relative;\n}\n#what-we-do .card .card-block a[data-v-73206242] {\n  color: #007b5e !important;\n  font-weight: 700;\n  text-decoration: none;\n}\n#what-we-do .card .card-block a i[data-v-73206242] {\n  display: none;\n}\n#what-we-do .card:hover .card-block a i[data-v-73206242] {\n  display: inline-block;\n  font-weight: 700;\n}\n#what-we-do .card .card-block[data-v-73206242]:before {\n  font-family: FontAwesome;\n  position: absolute;\n  font-size: 39px;\n  color: #007b5e;\n  left: 0;\n  -webkit-transition: -webkit-transform .2s ease-in-out;\n  transition: -webkit-transform .2s ease-in-out;\n  transition: transform .2s ease-in-out;\n  transition: transform .2s ease-in-out, -webkit-transform .2s ease-in-out;\n}\n#what-we-do .card .block-1[data-v-73206242]:before {\n  content: \"\\F23A\";\n}\n#what-we-do .card .block-2[data-v-73206242]:before {\n  content: \"\\F0EB\";\n}\n#what-we-do .card .block-3[data-v-73206242]:before {\n  content: \"\\F080\";\n}\n#what-we-do .card .block-4[data-v-73206242]:before {\n  content: \"\\F24E\";\n}\n#what-we-do .card .block-5[data-v-73206242]:before {\n  content: \"\\F00C\";\n}\n#what-we-do .card .block-6[data-v-73206242]:before {\n  content: \"\\F017\";\n}\n#what-we-do .card:hover .card-block[data-v-73206242]:before {\n  -webkit-transform: rotate(360deg);\n  transform: rotate(360deg);\n  -webkit-transition: .5s all ease;\n  transition: .5s all ease;\n}\n.row.heading h2[data-v-73206242] {\n  color: #fff;\n  font-size: 52.52px;\n  line-height: 95px;\n  font-weight: 400;\n  text-align: center;\n  margin: 0 0 40px;\n  padding-bottom: 20px;\n  text-transform: uppercase;\n}\nul[data-v-73206242] {\n  margin: 0;\n  padding: 0;\n  list-style: none;\n}\n.heading.heading-icon[data-v-73206242] {\n  display: block;\n}\n.padding-lg[data-v-73206242] {\n  display: block;\n  padding-top: 60px;\n  padding-bottom: 60px;\n}\n.practice-area.padding-lg[data-v-73206242] {\n  padding-bottom: 55px;\n  padding-top: 55px;\n}\n.practice-area .inner[data-v-73206242] {\n  border: 1px solid #999999;\n  text-align: center;\n  margin-bottom: 28px;\n  padding: 40px 25px;\n}\n.our-webcoderskull .cnt-block[data-v-73206242]:hover {\n  -webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);\n          box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);\n  border: 0;\n}\n.practice-area .inner h3[data-v-73206242] {\n  color: #3c3c3c;\n  font-size: 24px;\n  font-weight: 500;\n  font-family: 'Poppins', sans-serif;\n  padding: 10px 0;\n}\n.practice-area .inner p[data-v-73206242] {\n  font-size: 14px;\n  line-height: 22px;\n  font-weight: 400;\n}\n.practice-area .inner img[data-v-73206242] {\n  display: inline-block;\n}\n.our-webcoderskull[data-v-73206242] {\n  background-color: #4686a08f;\n  background-image: -webkit-gradient(linear, left top, left bottom, from(#3081cf), to(#82db85));\n  background-image: linear-gradient(to bottom, #3081cf 0%, #82db85 100%);\n}\n.our-webcoderskull .cnt-block[data-v-73206242] {\n  float: left;\n  width: 100%;\n  background: #fff;\n  padding: 30px 20px;\n  text-align: center;\n  border: 2px solid #d5d5d5;\n  margin: 0 0 28px;\n}\n.our-webcoderskull .cnt-block figure[data-v-73206242] {\n  width: 148px;\n  height: 148px;\n  border-radius: 100%;\n  display: inline-block;\n  margin-bottom: 15px;\n}\n.our-webcoderskull .cnt-block img[data-v-73206242] {\n  width: 148px;\n  height: 148px;\n  border-radius: 100%;\n}\n.our-webcoderskull .cnt-block h3[data-v-73206242] {\n  color: #2a2a2a;\n  font-size: 20px;\n  font-weight: 500;\n  padding: 6px 0;\n  text-transform: uppercase;\n}\n.our-webcoderskull .cnt-block h3 a[data-v-73206242] {\n  text-decoration: none;\n  color: #2a2a2a;\n}\n.our-webcoderskull .cnt-block h3 a[data-v-73206242]:hover {\n  color: #337ab7;\n}\n.our-webcoderskull .cnt-block p[data-v-73206242] {\n  color: #2a2a2a;\n  font-size: 13px;\n  line-height: 20px;\n  font-weight: 400;\n}\n.our-webcoderskull .cnt-block .follow-us[data-v-73206242] {\n  margin: 20px 0 0;\n}\n.our-webcoderskull .cnt-block .follow-us li[data-v-73206242] {\n  display: inline-block;\n  width: auto;\n  margin: 0 5px;\n}\n.our-webcoderskull .cnt-block .follow-us li .fa[data-v-73206242] {\n  font-size: 24px;\n  color: #767676;\n}\n.our-webcoderskull .cnt-block .follow-us li .fa[data-v-73206242]:hover {\n  color: #025a8e;\n}\n", ""]);
+exports.push([module.i, "\n.wrap-container[data-v-73206242] {\n  width: 1140px;\n  margin-right: auto;\n  margin-left: auto;\n}\n.welcome-wrap[data-v-73206242] {\n  margin-top: 4rem;\n}\nsection .section-title[data-v-73206242] {\n  text-align: center;\n  color: #007b5e;\n  margin-bottom: 50px;\n  text-transform: uppercase;\n}\n#what-we-do .card[data-v-73206242] {\n  padding: 1rem !important;\n  border: none;\n  margin-bottom: 1rem;\n  -webkit-transition: .5s all ease;\n  transition: .5s all ease;\n}\n#what-we-do .card[data-v-73206242]:hover {\n  -webkit-box-shadow: 5px 7px 9px -4px #9e9e9e;\n  box-shadow: 5px 7px 9px -4px #9e9e9e;\n}\n#what-we-do .card .card-block[data-v-73206242] {\n  padding-left: 50px;\n  position: relative;\n}\n#what-we-do .card .card-block a[data-v-73206242] {\n  color: #007b5e !important;\n  font-weight: 700;\n  text-decoration: none;\n}\n#what-we-do .card .card-block a i[data-v-73206242] {\n  display: none;\n}\n#what-we-do .card:hover .card-block a i[data-v-73206242] {\n  display: inline-block;\n  font-weight: 700;\n}\n#what-we-do .card .card-block[data-v-73206242]:before {\n  font-family: FontAwesome;\n  position: absolute;\n  font-size: 39px;\n  color: #007b5e;\n  left: 0;\n  -webkit-transition: -webkit-transform .2s ease-in-out;\n  transition: -webkit-transform .2s ease-in-out;\n  transition: transform .2s ease-in-out;\n  transition: transform .2s ease-in-out, -webkit-transform .2s ease-in-out;\n}\n#what-we-do .card .block-1[data-v-73206242]:before {\n  content: \"\\F23A\";\n}\n#what-we-do .card .block-2[data-v-73206242]:before {\n  content: \"\\F0EB\";\n}\n#what-we-do .card .block-3[data-v-73206242]:before {\n  content: \"\\F080\";\n}\n#what-we-do .card .block-4[data-v-73206242]:before {\n  content: \"\\F24E\";\n}\n#what-we-do .card .block-5[data-v-73206242]:before {\n  content: \"\\F00C\";\n}\n#what-we-do .card .block-6[data-v-73206242]:before {\n  content: \"\\F017\";\n}\n#what-we-do .card:hover .card-block[data-v-73206242]:before {\n  -webkit-transform: rotate(360deg);\n  transform: rotate(360deg);\n  -webkit-transition: .5s all ease;\n  transition: .5s all ease;\n}\n.row.heading h2[data-v-73206242] {\n  color: #fff;\n  font-size: 52.52px;\n  line-height: 95px;\n  font-weight: 400;\n  text-align: center;\n  margin: 0 0 40px;\n  padding-bottom: 20px;\n  text-transform: uppercase;\n}\nul[data-v-73206242] {\n  margin: 0;\n  padding: 0;\n  list-style: none;\n}\n.heading.heading-icon[data-v-73206242] {\n  display: block;\n}\n.padding-lg[data-v-73206242] {\n  display: block;\n  padding-top: 60px;\n  padding-bottom: 60px;\n}\n.practice-area.padding-lg[data-v-73206242] {\n  padding-bottom: 55px;\n  padding-top: 55px;\n}\n.practice-area .inner[data-v-73206242] {\n  border: 1px solid #999999;\n  text-align: center;\n  margin-bottom: 28px;\n  padding: 40px 25px;\n}\n.our-webcoderskull .cnt-block[data-v-73206242]:hover {\n  -webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);\n          box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);\n  border: 0;\n}\n.practice-area .inner h3[data-v-73206242] {\n  color: #3c3c3c;\n  font-size: 24px;\n  font-weight: 500;\n  font-family: 'Poppins', sans-serif;\n  padding: 10px 0;\n}\n.practice-area .inner p[data-v-73206242] {\n  font-size: 14px;\n  line-height: 22px;\n  font-weight: 400;\n}\n.practice-area .inner img[data-v-73206242] {\n  display: inline-block;\n}\n.our-webcoderskull[data-v-73206242] {\n  background-color: #4686a08f;\n  background-image: -webkit-gradient(linear, left top, left bottom, from(#3081cf), to(#82db85));\n  background-image: linear-gradient(to bottom, #3081cf 0%, #82db85 100%);\n}\n.our-webcoderskull .cnt-block[data-v-73206242] {\n  float: left;\n  width: 100%;\n  background: #fff;\n  padding: 30px 20px;\n  text-align: center;\n  border: 2px solid #d5d5d5;\n  margin: 0 0 28px;\n}\n.our-webcoderskull .cnt-block figure[data-v-73206242] {\n  width: 148px;\n  height: 148px;\n  border-radius: 100%;\n  display: inline-block;\n  margin-bottom: 15px;\n}\n.our-webcoderskull .cnt-block img[data-v-73206242] {\n  width: 148px;\n  height: 148px;\n  border-radius: 100%;\n}\n.our-webcoderskull .cnt-block h3[data-v-73206242] {\n  color: #2a2a2a;\n  font-size: 20px;\n  font-weight: 500;\n  padding: 6px 0;\n  text-transform: uppercase;\n}\n.our-webcoderskull .cnt-block h3 a[data-v-73206242] {\n  text-decoration: none;\n  color: #2a2a2a;\n}\n.our-webcoderskull .cnt-block h3 a[data-v-73206242]:hover {\n  color: #337ab7;\n}\n.our-webcoderskull .cnt-block p[data-v-73206242] {\n  color: #2a2a2a;\n  font-size: 13px;\n  line-height: 20px;\n  font-weight: 400;\n}\n.our-webcoderskull .cnt-block .follow-us[data-v-73206242] {\n  margin: 20px 0 0;\n}\n.our-webcoderskull .cnt-block .follow-us li[data-v-73206242] {\n  display: inline-block;\n  width: auto;\n  margin: 0 5px;\n}\n.our-webcoderskull .cnt-block .follow-us li .fa[data-v-73206242] {\n  font-size: 24px;\n  color: #767676;\n}\n.our-webcoderskull .cnt-block .follow-us li .fa[data-v-73206242]:hover {\n  color: #025a8e;\n}\n", ""]);
 
 // exports
 
@@ -46179,7 +46181,6 @@ exports.push([module.i, "\nsection .section-title[data-v-73206242] {\n  text-ali
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
 //
 //
 //
@@ -46326,7 +46327,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "welcome-wrap" }, [
       _c("section", { attrs: { id: "what-we-do" } }, [
-        _c("div", { staticClass: "container-fluid" }, [
+        _c("div", { staticClass: "wrap-container" }, [
           _c("h2", { staticClass: "section-title mb-2 h1" }, [
             _vm._v("Про нас")
           ]),
@@ -46338,135 +46339,111 @@ var staticRenderFns = [
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "row mt-5" }, [
-            _c(
-              "div",
-              { staticClass: "col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-4" },
-              [
-                _c("div", { staticClass: "card" }, [
-                  _c("div", { staticClass: "card-block block-1" }, [
-                    _c("h3", { staticClass: "card-title" }, [_vm._v("ML")]),
-                    _vm._v(" "),
-                    _c("p", { staticClass: "card-text" }, [
-                      _vm._v(
-                        "За допомогою алгоритмів machine learning ми аналізуємо відкритті дані Реєстру судових рішень що дозволяє визначати судові тенденції кожного судді."
-                      )
-                    ])
+            _c("div", { staticClass: "col " }, [
+              _c("div", { staticClass: "card" }, [
+                _c("div", { staticClass: "card-block block-1" }, [
+                  _c("h3", { staticClass: "card-title" }, [_vm._v("ML")]),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "card-text" }, [
+                    _vm._v(
+                      "За допомогою алгоритмів machine learning ми аналізуємо відкритті дані Реєстру судових рішень що дозволяє визначати судові тенденції кожного судді."
+                    )
                   ])
                 ])
-              ]
-            ),
+              ])
+            ]),
             _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-4" },
-              [
-                _c("div", { staticClass: "card" }, [
-                  _c("div", { staticClass: "card-block block-2" }, [
-                    _c("h3", { staticClass: "card-title" }, [_vm._v("ТОЕсуд")]),
-                    _vm._v(" "),
-                    _c("p", { staticClass: "card-text" }, [
-                      _vm._v(
-                        "Інформаційна платформа, де відображені показники діяльності судової системи за окремим суддею на основі відкритих даних ЄДРСРУ."
-                      )
-                    ])
+            _c("div", { staticClass: "col" }, [
+              _c("div", { staticClass: "card" }, [
+                _c("div", { staticClass: "card-block block-2" }, [
+                  _c("h3", { staticClass: "card-title" }, [_vm._v("ТОЕсуд")]),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "card-text" }, [
+                    _vm._v(
+                      "Інформаційна платформа, де відображені показники діяльності судової системи за окремим суддею на основі відкритих даних ЄДРСРУ."
+                    )
                   ])
                 ])
-              ]
-            ),
+              ])
+            ]),
             _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-4" },
-              [
-                _c("div", { staticClass: "card" }, [
-                  _c("div", { staticClass: "card-block block-3" }, [
-                    _c("h3", { staticClass: "card-title" }, [
-                      _vm._v("Аналітика в графіках")
-                    ]),
-                    _vm._v(" "),
-                    _c("p", { staticClass: "card-text" }, [
-                      _vm._v(
-                        "Відображення результатів аналізу судової практики конкретного судді у вигляді зручних порівняльних графіків, що дозволяє суттєво зекономити час юриста."
-                      )
-                    ])
+            _c("div", { staticClass: "col" }, [
+              _c("div", { staticClass: "card" }, [
+                _c("div", { staticClass: "card-block block-3" }, [
+                  _c("h3", { staticClass: "card-title" }, [
+                    _vm._v("Аналітика в графіках")
+                  ]),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "card-text" }, [
+                    _vm._v(
+                      "Відображення результатів аналізу судової практики конкретного судді у вигляді зручних порівняльних графіків, що дозволяє суттєво зекономити час юриста."
+                    )
                   ])
                 ])
-              ]
-            )
+              ])
+            ])
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "row" }, [
-            _c(
-              "div",
-              { staticClass: "col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-4" },
-              [
-                _c("div", { staticClass: "card" }, [
-                  _c("div", { staticClass: "card-block block-4" }, [
-                    _c("h3", { staticClass: "card-title" }, [
-                      _vm._v("Актуальність")
-                    ]),
-                    _vm._v(" "),
-                    _c("p", { staticClass: "card-text" }, [
-                      _vm._v(
-                        "Інформація про наявність судді на робочому місці, відстеження його судових засідань, формування власної бази крутих судових рішень та багато іншого."
-                      )
-                    ])
+            _c("div", { staticClass: "col" }, [
+              _c("div", { staticClass: "card" }, [
+                _c("div", { staticClass: "card-block block-4" }, [
+                  _c("h3", { staticClass: "card-title" }, [
+                    _vm._v("Актуальність")
+                  ]),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "card-text" }, [
+                    _vm._v(
+                      "Інформація про наявність судді на робочому місці, відстеження його судових засідань, формування власної бази крутих судових рішень та багато іншого."
+                    )
                   ])
                 ])
-              ]
-            ),
+              ])
+            ]),
             _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-4" },
-              [
-                _c("div", { staticClass: "card" }, [
-                  _c("div", { staticClass: "card-block block-5" }, [
-                    _c("h3", { staticClass: "card-title" }, [
-                      _vm._v("Проста API інтеграція")
-                    ]),
-                    _vm._v(" "),
-                    _c("p", { staticClass: "card-text" }, [
-                      _vm._v(
-                        "Зручна інтеграція з будь-якою CRM/ERM системою завдяки широкому функціоналу API."
-                      )
-                    ])
+            _c("div", { staticClass: "col" }, [
+              _c("div", { staticClass: "card" }, [
+                _c("div", { staticClass: "card-block block-5" }, [
+                  _c("h3", { staticClass: "card-title" }, [
+                    _vm._v("Проста API інтеграція")
+                  ]),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "card-text" }, [
+                    _vm._v(
+                      "Зручна інтеграція з будь-якою CRM/ERM системою завдяки широкому функціоналу API."
+                    )
                   ])
                 ])
-              ]
-            ),
+              ])
+            ]),
             _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-4" },
-              [
-                _c("div", { staticClass: "card" }, [
-                  _c("div", { staticClass: "card-block block-6" }, [
-                    _c("h3", { staticClass: "card-title" }, [
-                      _vm._v("Оптимізація")
-                    ]),
-                    _vm._v(" "),
-                    _c("p", { staticClass: "card-text" }, [
-                      _vm._v(
-                        "ТОЕсуд прагне оптимізувати робочий час, а наші сервіси допоможуть юристу вдосконалити стратегію ведення справи."
-                      )
-                    ])
+            _c("div", { staticClass: "col" }, [
+              _c("div", { staticClass: "card" }, [
+                _c("div", { staticClass: "card-block block-6" }, [
+                  _c("h3", { staticClass: "card-title" }, [
+                    _vm._v("Оптимізація")
+                  ]),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "card-text" }, [
+                    _vm._v(
+                      "ТОЕсуд прагне оптимізувати робочий час, а наші сервіси допоможуть юристу вдосконалити стратегію ведення справи."
+                    )
                   ])
                 ])
-              ]
-            )
+              ])
+            ])
           ])
         ])
       ]),
       _vm._v(" "),
       _c("section", { staticClass: "our-webcoderskull padding-lg" }, [
-        _c("div", { staticClass: "container" }, [
+        _c("div", { staticClass: "wrap-container" }, [
           _c("div", { staticClass: "row heading heading-icon" }, [
             _c("h2", [_vm._v("Наша команда")])
           ]),
           _vm._v(" "),
           _c("ul", { staticClass: "row" }, [
-            _c("li", { staticClass: "col-12 col-md-6 col-lg-3" }, [
+            _c("li", { staticClass: "col" }, [
               _c(
                 "div",
                 {
@@ -47091,7 +47068,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         _this.$store.commit("auth_success", response.data.email);
         callback();
       }).catch(function (error) {
-        console.log("ERR ", error);
+        console.log(error);
       });
     },
     validateBeforeSubmit: function validateBeforeSubmit() {
@@ -47121,7 +47098,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 _this2.$toasted.error(error.response.data.message, {
                   theme: "primary",
                   position: "top-right",
-                  duration: 5000
+                  duration: 8000
                 });
                 _this2.isLoading = false;
               }
@@ -47129,7 +47106,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
               _this2.$toasted.error("Щось пішло не так :( Cпробуйте пізніше", {
                 theme: "primary",
                 position: "top-right",
-                duration: 5000
+                duration: 8000
               });
               _this2.isLoading = false;
             }
@@ -47138,7 +47115,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           _this2.$toasted.error("Заповніть коректно всі поля!", {
             theme: "primary",
             position: "top-right",
-            duration: 5000
+            duration: 8000
           });
           _this2.isLoading = false;
         }
@@ -47256,7 +47233,7 @@ window.fbAsyncInit = function () {
 				_this2.$store.commit('auth_success', response.data.email);
 				callback();
 			}).catch(function (error) {
-				console.log('ERR ', error);
+				console.log(error);
 			});
 		},
 		onSignInSuccess: function onSignInSuccess(response) {
@@ -47483,7 +47460,6 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
         if (response) {
           var token = response.data.token_type + " " + response.data.access_token;
           localStorage.setItem("token", token);
-          console.log('ya idu dodmkuuuu');
           _this2.getUserData(function () {
             _this2.$router.push("/user-profile");
           });
@@ -49443,11 +49419,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   methods: {
     // порівняння суддів
     addToCompare: function addToCompare(judge_id) {
-
       var judge_compare = this.$store.getters.judge_compare;
-      console.log('judge_compare', judge_compare);
-      console.log('judge_id', judge_id);
-
       // якщо суддя вже був доданий раніше
       if (judge_compare.indexOf(judge_id) != -1) {
         this.$toasted.error("Цей суддя вже доданий для порівняння", {
@@ -49471,7 +49443,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       judge_compare.push(judge_id);
       this.$store.commit('updateJudgeToCompare', judge_compare);
 
-      //this.judgeComparation = true;
       this.$toasted.success("Додано до порівняння", {
         theme: "outline",
         position: "top-right",
@@ -49531,15 +49502,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }).then(function (response) {
           _this2.judgesList = response.data;
           _this2.loadData = true;
-          // console.log('getJudges Response', this.judgesList);
         }).catch(function (error) {
           if (error.response.status === 401) {
             _this2.$router.push('/login');
           }
-          // console.log('Каже що не авторизований пффф та Канеха');
+          console.log(error);
         });
       } else {
-        // console.log('no token')
         axios.get("/api/v1/guest/judges/list", {
           headers: {
             "Content-Type": "application/json",
@@ -49549,10 +49518,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }).then(function (response) {
           _this2.judgesList = response.data;
           _this2.loadData = true;
-          console.log('getJudges Response', _this2.judgesList);
         }).catch(function (error) {
           console.log(error);
-          // console.log('Ну нє не логінився я ще');
         });
       }
     },
@@ -49792,8 +49759,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   methods: {
     // порівняння суддів
     addToCompare: function addToCompare(judge_id) {
-      console.log('asfasfasfafsasfasf======', judge_id);
-
       this.$emit('addToCompare', judge_id);
     },
     formattingDate: function formattingDate(date) {
@@ -53313,7 +53278,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n.vicp-wrap {\n  width: 430px !important;\n}\n.vicp-preview {\n  display: none;\n}\n.vicp-crop {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n}\n", ""]);
+exports.push([module.i, "\n.vicp-wrap {\n  width: 430px !important;\n}\n.vicp-preview {\n  display: none;\n}\n.vicp-crop {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n}\n.doughnut_chart > div {\n  bottom: 52.5px !important;\n  left: 108.5px !important;\n}\n", ""]);
 
 // exports
 
@@ -53353,7 +53318,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n.judge-profile .card-body[data-v-7cdb9c0a] {\n  font-size: 0.9rem;\n}\n.judge-profile .progress[data-v-7cdb9c0a] {\n  height: 20px;\n  font-size: 1.1rem;\n}\n.judge-profile .main-info[data-v-7cdb9c0a] {\n  border-bottom: 1px solid rgba(0, 0, 0, 0.1);\n}\n.judge-profile .main-info .fa-university[data-v-7cdb9c0a] {\n    color: #4c88bd;\n    font-size: 1.3rem;\n    margin-right: 5px;\n}\n.judge-profile .main-info .court-name[data-v-7cdb9c0a] {\n    color: #5c7a7a;\n    font-weight: 300;\n}\n.judge-profile .main-info .detail-info[data-v-7cdb9c0a] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: row;\n            flex-direction: row;\n    -webkit-box-pack: start;\n        -ms-flex-pack: start;\n            justify-content: start;\n    -webkit-box-align: start;\n        -ms-flex-align: start;\n            align-items: start;\n    color: #5c7a7a;\n}\n.judge-profile .main-info .detail-info i[class^=\"fa\"][data-v-7cdb9c0a] {\n      margin-right: 10px;\n      padding-top: 5px;\n}\n.judge-profile .status-info .rating[data-v-7cdb9c0a] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  padding-left: 20%;\n  padding-right: 20%;\n}\n.judge-profile .status-info .rating .like[data-v-7cdb9c0a] {\n    color: green;\n    font-size: 1.1rem;\n    cursor: pointer;\n}\n.judge-profile .status-info .rating .dislike[data-v-7cdb9c0a] {\n    color: red;\n    font-size: 1.1rem;\n    cursor: pointer;\n}\n.judge-profile .status-info .status[data-v-7cdb9c0a] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: start;\n      -ms-flex-align: start;\n          align-items: start;\n}\n.judge-profile .status-info .bookmark > span[data-v-7cdb9c0a] {\n  width: 20px;\n  float: right;\n}\n.judge-profile .court-sessions-container[data-v-7cdb9c0a] {\n  max-height: 600px;\n  overflow-y: auto;\n}\n.judge-profile .court-sessions-container .court-sessions[data-v-7cdb9c0a] {\n    width: 100%;\n    height: auto;\n    font-size: 0.9rem;\n}\n.judge-profile .court-sessions-container .court-sessions .fa-star[data-v-7cdb9c0a] {\n      color: #4c88bd;\n      cursor: pointer;\n      font-size: 16px;\n}\n.judge-profile .court-sessions-container .court-sessions .container-component[data-v-7cdb9c0a] {\n      background-color: #ffffff;\n}\n.judge-profile .court-sessions-container .court-sessions .header[data-v-7cdb9c0a] {\n      -webkit-box-align: center;\n          -ms-flex-align: center;\n              align-items: center;\n      font-weight: 700;\n      line-height: 1.3;\n}\n.judge-profile .court-sessions-container .court-sessions .row[data-v-7cdb9c0a] {\n      margin: 0;\n      padding: 15px 0;\n}\n.judge-profile .court-sessions-container .court-sessions .row[data-v-7cdb9c0a]:not(:last-child) {\n        border-bottom: 1px solid lightgrey;\n}\n.judge-profile .court-sessions-container .court-sessions .row div[class^=\"col\"][data-v-7cdb9c0a] {\n        padding-right: 0;\n}\n.judge-profile input[type=\"search\"][data-v-7cdb9c0a] {\n  width: 200px;\n}\n.judge-profile .btn-add-photo[data-v-7cdb9c0a] {\n  border: 1px solid gray;\n  border-radius: 4px;\n  font-size: 12px;\n  padding: 3px 10px;\n}\n", ""]);
+exports.push([module.i, "\n.judge-profile .card-body[data-v-7cdb9c0a] {\n  font-size: 0.9rem;\n}\n.judge-profile .align-center-chart[data-v-7cdb9c0a] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  text-align: center;\n}\n.judge-profile .progress[data-v-7cdb9c0a] {\n  height: 20px;\n  font-size: 1.1rem;\n}\n.judge-profile .main-info[data-v-7cdb9c0a] {\n  border-bottom: 1px solid rgba(0, 0, 0, 0.1);\n}\n.judge-profile .main-info .fa-university[data-v-7cdb9c0a] {\n    color: #4c88bd;\n    font-size: 1.3rem;\n    margin-right: 5px;\n}\n.judge-profile .main-info .court-name[data-v-7cdb9c0a] {\n    color: #5c7a7a;\n    font-weight: 300;\n}\n.judge-profile .main-info .detail-info[data-v-7cdb9c0a] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: row;\n            flex-direction: row;\n    -webkit-box-pack: start;\n        -ms-flex-pack: start;\n            justify-content: start;\n    -webkit-box-align: start;\n        -ms-flex-align: start;\n            align-items: start;\n    color: #5c7a7a;\n}\n.judge-profile .main-info .detail-info i[class^=\"fa\"][data-v-7cdb9c0a] {\n      margin-right: 10px;\n      padding-top: 5px;\n}\n.judge-profile .status-info .rating[data-v-7cdb9c0a] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  padding-left: 20%;\n  padding-right: 20%;\n}\n.judge-profile .status-info .rating .like[data-v-7cdb9c0a] {\n    color: green;\n    font-size: 1.1rem;\n    cursor: pointer;\n}\n.judge-profile .status-info .rating .dislike[data-v-7cdb9c0a] {\n    color: red;\n    font-size: 1.1rem;\n    cursor: pointer;\n}\n.judge-profile .status-info .status[data-v-7cdb9c0a] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: start;\n      -ms-flex-align: start;\n          align-items: start;\n}\n.judge-profile .status-info .bookmark > span[data-v-7cdb9c0a] {\n  width: 20px;\n  float: right;\n}\n.judge-profile .court-sessions-container[data-v-7cdb9c0a] {\n  max-height: 600px;\n  overflow-y: auto;\n}\n.judge-profile .court-sessions-container .court-sessions[data-v-7cdb9c0a] {\n    width: 100%;\n    height: auto;\n    font-size: 0.9rem;\n}\n.judge-profile .court-sessions-container .court-sessions .fa-star[data-v-7cdb9c0a] {\n      color: #4c88bd;\n      cursor: pointer;\n      font-size: 16px;\n}\n.judge-profile .court-sessions-container .court-sessions .container-component[data-v-7cdb9c0a] {\n      background-color: #ffffff;\n}\n.judge-profile .court-sessions-container .court-sessions .header[data-v-7cdb9c0a] {\n      -webkit-box-align: center;\n          -ms-flex-align: center;\n              align-items: center;\n      font-weight: 700;\n      line-height: 1.3;\n}\n.judge-profile .court-sessions-container .court-sessions .row[data-v-7cdb9c0a] {\n      margin: 0;\n      padding: 15px 0;\n}\n.judge-profile .court-sessions-container .court-sessions .row[data-v-7cdb9c0a]:not(:last-child) {\n        border-bottom: 1px solid lightgrey;\n}\n.judge-profile .court-sessions-container .court-sessions .row div[class^=\"col\"][data-v-7cdb9c0a] {\n        padding-right: 0;\n}\n.judge-profile input[type=\"search\"][data-v-7cdb9c0a] {\n  width: 200px;\n}\n.judge-profile .btn-add-photo[data-v-7cdb9c0a] {\n  border: 1px solid gray;\n  border-radius: 4px;\n  font-size: 12px;\n  padding: 3px 10px;\n}\n", ""]);
 
 // exports
 
@@ -53379,6 +53344,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__shared_Spinner_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__shared_Spinner_vue__);
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
 //
 //
 //
@@ -53857,7 +53823,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }).then(function (response) {
         _this2.judge = response.data;
         _this2.loadData = true;
-        console.log("JUdge PROFILE", _this2.judge);
         _this2.setStatistic();
       }).catch(function (error) {
         if (error.response && error.response.status === 401) {
@@ -56618,7 +56583,7 @@ var render = function() {
                         _c("div", { staticClass: "row" }, [
                           _c(
                             "div",
-                            { staticClass: "col-6" },
+                            { staticClass: "col-6 align-center-chart" },
                             [
                               _c("doughnut-chart", {
                                 attrs: {
@@ -56641,7 +56606,7 @@ var render = function() {
                           _vm._v(" "),
                           _c(
                             "div",
-                            { staticClass: "col-6" },
+                            { staticClass: "col-6 align-center-chart" },
                             [
                               _c("doughnut-chart", {
                                 attrs: {
@@ -56669,7 +56634,7 @@ var render = function() {
                         _c("hr"),
                         _vm._v(" "),
                         _c("div", { staticClass: "row" }, [
-                          _c("div", { staticClass: "col-12" }, [
+                          _c("div", { staticClass: "col" }, [
                             _c("span", [
                               _c("b", [
                                 _vm._v(
@@ -56715,7 +56680,7 @@ var render = function() {
                         _c("div", { staticClass: "row" }, [
                           _c(
                             "div",
-                            { staticClass: "col-6" },
+                            { staticClass: "col-6 align-center-chart" },
                             [
                               _c("doughnut-chart", {
                                 attrs: {
@@ -56740,7 +56705,7 @@ var render = function() {
                           _vm._v(" "),
                           _c(
                             "div",
-                            { staticClass: "col-6" },
+                            { staticClass: "col-6 align-center-chart" },
                             [
                               _c("doughnut-chart", {
                                 attrs: {
@@ -56816,7 +56781,7 @@ var render = function() {
                         _c("div", { staticClass: "row" }, [
                           _c(
                             "div",
-                            { staticClass: "col-6" },
+                            { staticClass: "col-6 align-center-chart" },
                             [
                               _c("doughnut-chart", {
                                 attrs: {
@@ -56841,7 +56806,7 @@ var render = function() {
                           _vm._v(" "),
                           _c(
                             "div",
-                            { staticClass: "col-6" },
+                            { staticClass: "col-6 align-center-chart" },
                             [
                               _c("doughnut-chart", {
                                 attrs: {
@@ -56892,9 +56857,15 @@ var render = function() {
                     _vm._m(3)
                   ])
                 ])
-              : _vm._e(),
-            _vm._v(" "),
-            _vm._m(4)
+              : _vm._e()
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.loadData &&
+      _vm.judge.common_statistic.competence === 0 &&
+      _vm.judge.common_statistic.timeliness === 0
+        ? _c("div", { staticClass: "mt-2 ml-2" }, [
+            _c("b", [_vm._v("Даних для статистики недостатньо!")])
           ])
         : _vm._e(),
       _vm._v(" "),
@@ -56959,14 +56930,6 @@ var staticRenderFns = [
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "card-body" }, [_vm._v("В розробці...")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "mt-3" }, [
-      _c("b", [_vm._v("Даних для статистики недостатньо!")])
     ])
   }
 ]
@@ -57343,10 +57306,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         });
       });
       Promise.all(promises).then(function (result) {
-        console.log("list compare", _this.judgesList);
         _this.loadData = true;
       }).catch(function (error) {
-        console.log("ERROR");
+        console.log(error);
       });
     },
     deleteJudgeFromComparation: function deleteJudgeFromComparation(id) {
@@ -58251,9 +58213,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     liveSearch: __WEBPACK_IMPORTED_MODULE_1_lodash___default.a.debounce(function (event) {
       var _this = this;
 
-      console.log('GOing', this.validateInputSearch());
       if (this.validateInputSearch()) {
-
         axios.get('/api/v1/courts/autocomplete', {
           headers: {
             "Content-Type": "application/json",
@@ -58292,7 +58252,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         this.filters.search = null;
       }
       if (localStorage.getItem('token')) {
-        // console.log('have token')
         axios.get('/api/v1/courts/list', {
           headers: {
             "Content-Type": "application/json",
@@ -58303,15 +58262,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }).then(function (response) {
           _this2.courtsList = response.data;
           _this2.loadData = true;
-          // console.log('getCourts Response', this.courtsList);
         }).catch(function (error) {
           if (error.response.status === 401) {
             _this2.$router.push('/login');
           }
-          // console.log('Каже що не авторизований пффф та Канеха');
+          console.log(error);
         });
       } else {
-        // console.log('no token')
         axios.get("/api/v1/guest/courts/list", {
           headers: {
             "Content-Type": "application/json",
@@ -59251,10 +59208,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           if (error.response && error.response.status === 401) {
             _this3.$router.push("/login");
           }
-          console.log("error");
+          console.log(error);
         });
       } else {
-        console.log("not log in");
         axios.get("/api/v1/guest/courts/" + this.$route.params.id, {
           headers: {
             "Content-Type": "application/json",
@@ -59314,7 +59270,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         if (error.response.status === 401) {
           _this5.$router.push("/login");
         }
-        console.log("Bookmark", error.response);
+        console.log("Bookmark", error);
       });
     },
     showModalDelete: function showModalDelete(session) {
@@ -60167,7 +60123,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }).then(function (response) {
         _this2.courtSessions = response.data;
         _this2.loadData = true;
-        console.log("User profile CourtSessions", _this2.courtSessions);
       }).catch(function (error) {
         if (error.response && error.response.status === 401) {
           _this2.$router.push("/login");
@@ -60204,7 +60159,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           _this3.courtSessions = _.filter(_this3.courtSessions, function (el) {
             return _this3.deleteSession.id !== el.id;
           });
-          console.log("courtSessions", _this3.courtSessions);
           _this3.deleteSession = null;
           _this3.loadData = true;
         }).catch(function (error) {
@@ -60894,12 +60848,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           }
         }).then(function (response) {
           _this2.bookmarks = response.data;
-          /* -------------------delete!!!!  ------------------------------------------*/
-          // this.bookmarks.forEach(obj => {
-          //   obj.is_bookmark = true;
-          // });
           _this2.loadData = true;
-          console.log("Judges Bookmarks", _this2.bookmarks);
         }).catch(function (error) {
           if (error && error.response && error.response.status === 401) {
             _this2.$router.push("/login");
@@ -61327,7 +61276,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }).then(function (response) {
           _this2.bookmarks = response.data;
           _this2.loadData = true;
-          console.log("Courts Bookmarks", _this2.bookmarks);
         }).catch(function (error) {
           if (error && error.response && error.response.status === 401) {
             _this2.$router.push("/login");
@@ -62088,6 +62036,95 @@ var _this = this;
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -62122,6 +62159,11 @@ var _this = this;
         currentPassword: "",
         newPassword: "",
         rePassword: ""
+      },
+      headers: {
+        "Content-Type": "application/json",
+        "X-Requested-With": "XMLHttpRequest",
+        Authorization: localStorage.getItem("token")
       }
     };
   },
@@ -62137,8 +62179,7 @@ var _this = this;
 
   methods: {
     isDisabled: function isDisabled(errors, password) {
-      console.log('ololol===------------');
-      if (errors.items.length > 0 || !password.currentPassword.length || !password.rePassword.length || !password.newPassword.length || password.rePassword !== password.newPassword) {
+      if (errors.has("пароль") || errors.has("новий пароль") || !password.newPassword.length || password.rePassword !== password.newPassword) {
         return true;
       }
       return false;
@@ -62147,17 +62188,11 @@ var _this = this;
       var _this2 = this;
 
       axios.get("/api/v1/user/settings", {
-        headers: {
-          "Content-Type": "application/json",
-          "X-Requested-With": "XMLHttpRequest",
-          Authorization: localStorage.getItem("token")
-        }
+        headers: this.headers
       }).then(function (response) {
         _this2.user = response.data.profile;
-        // this.user.phone = '0660851225';
         _this2.notifications = response.data.notifications;
         _this2.loadData = true;
-        console.log("User settings", response);
       }).catch(function (error) {
         if (error.response && error.response.status === 401) {
           _this2.$router.push("/login");
@@ -62190,16 +62225,12 @@ var _this = this;
       }
       newProfileData.new_name = this.user.name;
       axios.post("/api/v1/user/settings/user-data", newProfileData, {
-        headers: {
-          "Content-Type": "application/json",
-          "X-Requested-With": "XMLHttpRequest",
-          Authorization: localStorage.getItem("token")
-        }
-      }).then(function (response) {
-        _this3.$toasted.success("Збережено", {
+        headers: this.headers
+      }).then(function () {
+        _this3.$toasted.success("Дані успішно збережено!", {
           theme: "primary",
           position: "top-right",
-          duration: 3000
+          duration: 8000
         });
       }).catch(function (error) {
         if (error && error.response && error.response.status === 401) {
@@ -62214,13 +62245,14 @@ var _this = this;
         old_password: this.password.currentPassword,
         new_password: this.password.newPassword
       };
-      console.log(this.password);
       axios.post("/api/v1/user/settings/password", changePass, {
-        headers: {
-          "Content-Type": "application/json",
-          "X-Requested-With": "XMLHttpRequest",
-          Authorization: localStorage.getItem("token")
-        }
+        headers: this.headers
+      }).then(function () {
+        _this4.$toasted.success("Пароль успішно змінено!", {
+          theme: "primary",
+          position: "top-right",
+          duration: 8000
+        });
       }).catch(function (error) {
         if (error && error.response && error.response.status === 401) {
           _this4.$router.push("/login");
@@ -62236,13 +62268,9 @@ var _this = this;
         this.notifications[key] = elem === true || elem === 1 ? 1 : 0;
       }
       axios.post("/api/v1/user/settings/notification", this.notifications, {
-        headers: {
-          "Content-Type": "application/json",
-          "X-Requested-With": "XMLHttpRequest",
-          Authorization: localStorage.getItem("token")
-        }
+        headers: this.headers
       }).then(function (response) {
-        _this5.$toasted.success("Збережено", {
+        _this5.$toasted.success("Налаштування сповіщень успішно змінене!", {
           theme: "primary",
           position: "top-right",
           duration: 3000
@@ -62261,11 +62289,7 @@ var _this = this;
       var _this6 = this;
 
       axios.delete("/api/v1/user/settings/delete-account", {
-        headers: {
-          "Content-Type": "application/json",
-          "X-Requested-With": "XMLHttpRequest",
-          Authorization: localStorage.getItem("token")
-        }
+        headers: this.headers
       }).then(function (response) {
         sessionStorage.clear();
         localStorage.clear();
@@ -62296,7 +62320,6 @@ var render = function() {
       _vm._v(" "),
       _vm.loadData
         ? _c("div", { staticClass: "border content-wrapper_body" }, [
-            _vm._v("\n    " + _vm._s(_vm.errors) + "\n    "),
             _c("div", { staticClass: "profile" }, [
               _c("h4", [_vm._v("Профіль")]),
               _vm._v(" "),
@@ -62529,7 +62552,10 @@ var render = function() {
                           staticClass: "btn btn-primary",
                           attrs: {
                             type: "submit",
-                            disabled: _vm.errors.items.length > 0
+                            disabled:
+                              _vm.errors.has("ім'я") ||
+                              _vm.errors.has("прізвище") ||
+                              _vm.errors.has("телефон")
                           }
                         },
                         [_vm._v("Зберегти")]
@@ -64790,7 +64816,6 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
       localStorage.clear();
     },
     updateJudgeToCompare: function updateJudgeToCompare(state, judge_compare) {
-      console.log('judge_compare VUEX', JSON.stringify(judge_compare));
       sessionStorage.setItem('judge_compare', JSON.stringify(judge_compare));
       state.judge_compare = judge_compare;
     }
