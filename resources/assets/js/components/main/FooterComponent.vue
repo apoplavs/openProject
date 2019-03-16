@@ -70,7 +70,6 @@
     background: rgba(0,0,0,.68);
     color: #afafaf;
     font-weight: 300;
-    line-height: 1.5;
     font-size: 14px;
     h6 {
       font-weight: normal !important ;

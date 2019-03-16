@@ -1,15 +1,19 @@
 <template>
   <div class="judge-profile">
     <spinner v-if="!loadData"/>
-    <div v-if="loadData" class="">
+    <div v-if="loadData" class>
       <div class="judge-info">
         <div class="card">
           <div class="card-body d-flex">
             <div class="photo w-25 text-center">
               <img :src="judge.data.photo" alt="avatar" class="w-100">
-              <button type="button" class="btn btn-add-photo mt-2" @click="show = true" v-if="judge.data.photo === '/img/judges/no_photo.jpg'">Додати фото</button>
-
-              <!-- // -------------------------------------- // -->
+              <button
+                type="button"
+                class="btn btn-add-photo mt-2"
+                @click="show = true"
+                v-if="judge.data.photo === '/img/judges/no_photo.jpg'"
+              >Додати фото</button>
+              <!-- upload photo  -->
               <my-upload
                 field="img"
                 langType="ua"
@@ -23,8 +27,7 @@
                 :headers="headers"
                 img-format="png"
               ></my-upload>
-
-              <!-- // ---------------------------------------- // -->
+              <!-- end -->
             </div>
             <div class="w-75 px-3">
               <div class="main-info pb-2">
@@ -59,6 +62,7 @@
                   <div class="w-50 d-flex align-items-center">
                     <!-- status component-->
                     <status-component :judgeData="judge.data"/>
+                    <!-- end -->
                     <span>
                       <i
                         class="fa fa-edit float-right pl-3"
@@ -83,7 +87,7 @@
                     {{ judge.data.likes }}
                   </span>
                   <span class="line-chart">
-                    <i class="fa fa-line-chart" aria-hidden="true">{{ judge.data.rating + '%' }}</i>
+                    <i class="fa fa-line-chart" aria-hidden="true">{{ + ' ' + judge.data.rating + ' %' }}</i>
                   </span>
                   <span class="dislike" @click="changeUnlikes">
                     <i class="fas fa-thumbs-down"></i>
@@ -342,14 +346,11 @@
 import { GChart } from "vue-google-charts";
 import DoughnutChart from "vue-doughnut-chart";
 import _ from "lodash";
+import MyUpload from "vue-image-crop-upload";
 
 import StatusComponent from "../../shared/StatusComponent.vue";
 import ChangeStatus from "../../shared/ChangeStatus.vue";
 import Spinner from "../../shared/Spinner.vue";
-
-
-import myUpload from 'vue-image-crop-upload'; //---
-
 
 export default {
   name: "JudgeProfile",
@@ -359,23 +360,23 @@ export default {
     DoughnutChart,
     StatusComponent,
     ChangeStatus,
-    myUpload //**** */
+    MyUpload
   },
   data() {
     return {
       //-----
       show: false,
-			params: {
+      params: {
         id: null,
         photo: null
-			},
-			headers: {
-            // "Content-Type": "application/x-www-form-urlencoded",
-            "X-Requested-With": "XMLHttpRequest",
-            Authorization: localStorage.getItem("token")
-        },
-    //  imgDataUrl: '', // the datebase64 url of created image
-      
+      },
+      headers: {
+        // "Content-Type": "application/x-www-form-urlencoded",
+        "X-Requested-With": "XMLHttpRequest",
+        Authorization: localStorage.getItem("token")
+      },
+      //  imgDataUrl: '', // the datebase64 url of created image
+
       //-----
       showModal: false,
       loadData: false,
@@ -523,9 +524,9 @@ export default {
         this.$router.push("/login");
       }
       if (this.judge.data.is_bookmark === 0) {
-      	this.judge.data.is_bookmark = 1;
+        this.judge.data.is_bookmark = 1;
 
-      	axios({
+        axios({
           method: "put",
           url: `/api/v1/judges/${this.$route.params.id}/bookmark`,
           headers: {
@@ -534,25 +535,25 @@ export default {
             Authorization: localStorage.getItem("token")
           }
         })
-          .then(response => {
-            //
-          })
           .catch(error => {
             if (error.response && error.response.status === 401) {
               this.$router.push("/login");
             }
-			this.judge.data.is_bookmark = 0;
-            this.$toasted.error("Неможливо додати в закладки, перевірте Ваше інтернет з'єднання або спробуйте пізніше", {
+            this.judge.data.is_bookmark = 0;
+            this.$toasted.error(
+              "Неможливо додати в закладки, перевірте Ваше інтернет з'єднання або спробуйте пізніше",
+              {
                 theme: "primary",
                 position: "top-right",
                 duration: 5000
-            });
+              }
+            );
             console.log("Bookmark", error);
           });
 
-      // якщо вже є закладка - видаляємо
+        // якщо вже є закладка - видаляємо
       } else {
-		this.judge.data.is_bookmark = 0;
+        this.judge.data.is_bookmark = 0;
         axios({
           method: "delete",
           url: `/api/v1/judges/${this.$route.params.id}/bookmark`,
@@ -562,19 +563,19 @@ export default {
             Authorization: localStorage.getItem("token")
           }
         })
-          .then(response => {
-            //
-          })
           .catch(error => {
             if (error.response && error.response.status === 401) {
               this.$router.push("/login");
             }
-			this.judge.data.is_bookmark = 1;
-            this.$toasted.error("Перевірте Ваше інтернет з'єднання або спробуйте пізніше", {
+            this.judge.data.is_bookmark = 1;
+            this.$toasted.error(
+              "Перевірте Ваше інтернет з'єднання або спробуйте пізніше",
+              {
                 theme: "primary",
                 position: "top-right",
                 duration: 5000
-            });
+              }
+            );
             console.log("Bookmark", error.response);
           });
       }
@@ -583,7 +584,6 @@ export default {
       if (!this.$store.getters.isAuth) {
         this.$router.push("/login");
       }
-
 
       if (this.judge.data.is_unliked) {
         this.changeUnlikes();
@@ -603,9 +603,6 @@ export default {
             Authorization: localStorage.getItem("token")
           }
         })
-          .then(response => {
-            //
-          })
           .catch(error => {
             if (error.response && error.response.status === 401) {
               this.$router.push("/login");
@@ -613,19 +610,20 @@ export default {
             // якщо поставити лайк на сервері не вдалось, повертаємо кількість назад
             this.judge.data.likes += 1;
             this.judge.data.is_liked = 1;
-            this.$toasted.error("Перевірте Ваше інтернет з'єднання або спробуйте пізніше", {
+            this.$toasted.error(
+              "Перевірте Ваше інтернет з'єднання або спробуйте пізніше",
+              {
                 theme: "primary",
                 position: "top-right",
                 duration: 5000
-            });
+              }
+            );
             console.log("set Likes", error);
           });
-
-
       } else {
         // set like
-		  this.judge.data.likes += 1;
-		  this.judge.data.is_liked = 1;
+        this.judge.data.likes += 1;
+        this.judge.data.is_liked = 1;
         axios({
           method: "put",
           url: `/api/v1/judges/${this.$route.params.id}/like`,
@@ -635,9 +633,6 @@ export default {
             Authorization: localStorage.getItem("token")
           }
         })
-          .then(response => {
-            //
-          })
           .catch(error => {
             if (error.response && error.response.status === 401) {
               this.$router.push("/login");
@@ -645,11 +640,14 @@ export default {
             // якщо поставити лайк на сервері не вдалось, повертаємо кількість назад
             this.judge.data.likes -= 1;
             this.judge.data.is_liked = 0;
-            this.$toasted.error("Перевірте Ваше інтернет з'єднання або спробуйте пізніше", {
+            this.$toasted.error(
+              "Перевірте Ваше інтернет з'єднання або спробуйте пізніше",
+              {
                 theme: "primary",
                 position: "top-right",
                 duration: 5000
-            });
+              }
+            );
             console.log("set Likes", error);
           });
       }
@@ -663,8 +661,8 @@ export default {
       }
       if (this.judge.data.is_unliked) {
         // dell unlike
-		  this.judge.data.unlikes -= 1;
-		  this.judge.data.is_unliked = 0;
+        this.judge.data.unlikes -= 1;
+        this.judge.data.is_unliked = 0;
         axios({
           method: "delete",
           url: `/api/v1/judges/${this.$route.params.id}/unlike`,
@@ -674,9 +672,6 @@ export default {
             Authorization: localStorage.getItem("token")
           }
         })
-          .then(response => {
-            //
-          })
           .catch(error => {
             if (error.response && error.response.status === 401) {
               this.$router.push("/login");
@@ -684,20 +679,20 @@ export default {
             // якщо поставити лайк на сервері не вдалось, повертаємо кількість назад
             this.judge.data.unlikes += 1;
             this.judge.data.is_unliked = 1;
-            this.$toasted.error("Перевірте Ваше інтернет з'єднання або спробуйте пізніше", {
+            this.$toasted.error(
+              "Перевірте Ваше інтернет з'єднання або спробуйте пізніше",
+              {
                 theme: "primary",
                 position: "top-right",
                 duration: 5000
-            });
+              }
+            );
             console.log("set Likes", error);
           });
-
-
-
       } else {
         // set unlike
-		  this.judge.data.unlikes += 1;
-		  this.judge.data.is_unliked = 1;
+        this.judge.data.unlikes += 1;
+        this.judge.data.is_unliked = 1;
         axios({
           method: "put",
           url: `/api/v1/judges/${this.$route.params.id}/unlike`,
@@ -707,9 +702,6 @@ export default {
             Authorization: localStorage.getItem("token")
           }
         })
-          .then(response => {
-            //
-          })
           .catch(error => {
             if (error.response && error.response.status === 401) {
               this.$router.push("/login");
@@ -717,11 +709,14 @@ export default {
             // якщо поставити лайк на сервері не вдалось, повертаємо кількість назад
             this.judge.data.unlikes -= 1;
             this.judge.data.is_unliked = 0;
-            this.$toasted.error("Перевірте Ваше інтернет з'єднання або спробуйте пізніше", {
+            this.$toasted.error(
+              "Перевірте Ваше інтернет з'єднання або спробуйте пізніше",
+              {
                 theme: "primary",
                 position: "top-right",
                 duration: 5000
-            });
+              }
+            );
             console.log("set Likes", error);
           });
       }
@@ -730,10 +725,8 @@ export default {
     deleteBookmarkCourtSession(session) {
       if (!this.$store.getters.isAuth) {
         this.$router.push("/login");
-
       } else {
-		session.is_bookmark = 0;
-
+        session.is_bookmark = 0;
         axios({
           method: "delete",
           url: `/api/v1/court-sessions/${session.id}/bookmark`,
@@ -750,12 +743,15 @@ export default {
             if (error.response && error.response.status === 401) {
               this.$router.push("/login");
             }
-			session.is_bookmark = 1;
-            this.$toasted.error("Перевірте Ваше інтернет з'єднання або спробуйте пізніше", {
+            session.is_bookmark = 1;
+            this.$toasted.error(
+              "Перевірте Ваше інтернет з'єднання або спробуйте пізніше",
+              {
                 theme: "primary",
                 position: "top-right",
                 duration: 5000
-            });
+              }
+            );
           });
       }
     },
@@ -763,9 +759,8 @@ export default {
     addBookmarkCourtSession(session) {
       if (!this.$store.getters.isAuth) {
         this.$router.push("/login");
-
       } else {
-		session.is_bookmark = 1;
+        session.is_bookmark = 1;
         axios({
           method: "put",
           url: `/api/v1/court-sessions/${session.id}/bookmark`,
@@ -782,12 +777,15 @@ export default {
             if (error.response && error.response.status === 401) {
               this.$router.push("/login");
             }
-			session.is_bookmark = 0;
-            this.$toasted.error("Неможливо додати в закладки, перевірте Ваше інтернет з'єднання або спробуйте пізніше", {
+            session.is_bookmark = 0;
+            this.$toasted.error(
+              "Неможливо додати в закладки, перевірте Ваше інтернет з'єднання або спробуйте пізніше",
+              {
                 theme: "primary",
                 position: "top-right",
                 duration: 5000
-            });
+              }
+            );
           });
       }
     },
@@ -868,88 +866,85 @@ export default {
       ];
     },
 
-  // ----------------------
-  toggleShow() {
-				this.show = !this.show;
-			},
-      /**
-			 * crop success
-			 *
-			 * [param] imgDataUrl
-			 * [param] field
-      */
-      srcFileSet(fileName, fileType, fileSize) {
-        console.log('_________________-sdgsdg_________________');
-        
-        console.log('fileName', fileName);
-        console.log('fileType', fileType);
-        console.log('fileSize', fileSize);
-        
-      },
-			cropSuccess(imgDataUrl, field){
-        console.log('-------- crop success --------',imgDataUrl);
-        this.params.id = this.judge.data.id;
-        this.params.photo = imgDataUrl;
-        console.log(this.params);
-        this.srcFileSet();
-        
-        axios({
-          method: "post",
-          url: '/api/v1/judges/photo',
-          headers: this.headers,
-          params: this.params
-        })
-          .then(response => {
-            console.log(response);
-          })
-          .catch(error => {
-            if (error.response && error.response.status === 401) {
-              this.$router.push("/login");
-            }
-          });
-
-
-				this.judge.data.photo = imgDataUrl;
-			},
-			/**
-			 * upload success
-			 *
-			 * [param] jsonData  server api return data, already json encode
-			 * [param] field
-			 */
-			cropUploadSuccess(jsonData, field){
-				console.log('-------- upload success --------');
-				console.log(jsonData);
-				console.log('field: ' + field);
-			},
-			/**
-			 * upload fail
-			 *
-			 * [param] status    server api return error status, like 500
-			 * [param] field
-			 */
-			cropUploadFail(status, field){
-				console.log('-------- upload fail --------');
-				console.log(status);
-				console.log('field: ' + field);
-      }
+    // ----------------------
+    toggleShow() {
+      this.show = !this.show;
     },
-      //---------------------
+    /**
+     * crop success
+     *
+     * [param] imgDataUrl
+     * [param] field
+     */
+    srcFileSet(fileName, fileType, fileSize) {
+      console.log("_________________-sdgsdg_________________");
+
+      console.log("fileName", fileName);
+      console.log("fileType", fileType);
+      console.log("fileSize", fileSize);
+    },
+    cropSuccess(imgDataUrl, field) {
+      console.log("-------- crop success --------", imgDataUrl);
+      this.params.id = this.judge.data.id;
+      this.params.photo = imgDataUrl;
+      console.log(this.params);
+      this.srcFileSet();
+
+      axios({
+        method: "post",
+        url: "/api/v1/judges/photo",
+        headers: this.headers,
+        params: this.params
+      })
+        .then(response => {
+          console.log(response);
+        })
+        .catch(error => {
+          if (error.response && error.response.status === 401) {
+            this.$router.push("/login");
+          }
+        });
+
+      this.judge.data.photo = imgDataUrl;
+    },
+    /**
+     * upload success
+     *
+     * [param] jsonData  server api return data, already json encode
+     * [param] field
+     */
+    cropUploadSuccess(jsonData, field) {
+      console.log("-------- upload success --------");
+      console.log(jsonData);
+      console.log("field: " + field);
+    },
+    /**
+     * upload fail
+     *
+     * [param] status    server api return error status, like 500
+     * [param] field
+     */
+    cropUploadFail(status, field) {
+      console.log("-------- upload fail --------");
+      console.log(status);
+      console.log("field: " + field);
+    }
+  }
+  //---------------------
 };
 </script>
 
 <style lang="scss">
-  .vicp-wrap {
-    width: 430px !important;
-  }
-  .vicp-preview {
-    display: none;
-  }
-  .vicp-crop {
-    display: flex;
-    justify-content: center;
-  }
-
+.vicp-wrap {
+  width: 430px !important;
+}
+.vicp-preview {
+  display: none;
+}
+.vicp-crop {
+  display: flex;
+  justify-content: center;
+}
 </style>
 
 <style scoped lang="scss">
@@ -1049,7 +1044,7 @@ export default {
     border: 1px solid gray;
     border-radius: 4px;
     font-size: 12px;
-    padding: 3px 10px
+    padding: 3px 10px;
   }
 }
 </style>

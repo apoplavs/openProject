@@ -246,10 +246,10 @@ export default {
       // отримуємо список суддів для поріняння
       let promises = this.judge_compare.map(id => {
         return axios
-          .get(`/api/v1/gest/judges/${id}`, {
+          .get(`/api/v1/guest/judges/${id}`, {
             headers: {
               "Content-Type": "application/json",
-              "X-Requested-With": "XMLHttpRequest",
+              "X-Requested-With": "XMLHttpRequest"
             }
           })
           .then(response => {
@@ -264,6 +264,7 @@ export default {
       });
       Promise.all(promises)
         .then(result => {
+          console.log("list compare", this.judgesList);
           this.loadData = true;
         })
         .catch(error => {
@@ -282,8 +283,8 @@ export default {
         });
         this.judgesList = this.judgesList.filter(judge => {
           return judge.data.id !== id;
-        })        
-         this.$store.commit("updateJudgeToCompare", this.judge_compare);
+        });
+        this.$store.commit("updateJudgeToCompare", this.judge_compare);
         this.loadData = true;
       }
     }

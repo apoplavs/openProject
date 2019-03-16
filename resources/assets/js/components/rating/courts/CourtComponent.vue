@@ -40,7 +40,8 @@
             </div>
             <div class="part-3 mt-3">
               <div class="rating">
-                <i class="fa fa-line-chart mr-1" aria-hidden="true"></i>{{ court.rating }}
+                <i class="fa fa-line-chart mr-1" aria-hidden="true"></i>
+                {{ court.rating + '%' }}
               </div>
               <div class="bookmark">
                 <span v-if="court.is_bookmark" @click="deleteBookmark(court)">
@@ -58,69 +59,70 @@
   </div>
 </template>
 
-<script>    
-    export default {
-        name: "CourtComponent",
-        props: {
-            courtsList: Array
-        },
-        data() {
-            return {
-                headers: {
-                    "Content-Type": "application/json",
-                    "X-Requested-With": "XMLHttpRequest",
-                    Authorization: localStorage.getItem("token")
-                }
-            };
-        }, 
-        methods: {
-            setBookmark(court) {
-                if (!this.$store.getters.isAuth) {
-                    this.$router.push("/login");
-                }
-                    axios({
-                    method: "put",
-                    url: `/api/v1/courts/${court.court_code}/bookmark`,
-                    headers: {
-                        "Content-Type": "application/json",
-                        "X-Requested-With": "XMLHttpRequest",
-                        Authorization: localStorage.getItem("token")
-                    }
-                })
-                .then(response => {
-                    court.is_bookmark = 1;
-                })
-                .catch(error => {
-                    if (error.response.status === 401) {
-                        this.$router.push('/login');
-                    }
-                console.log("Bookmark", error);
-                });
-
-            },
-            deleteBookmark(court) {
-                axios({
-                    method: "delete",
-                    url: `/api/v1/courts/${court.court_code}/bookmark`,
-                    headers: {
-                        "Content-Type": "application/json",
-                        "X-Requested-With": "XMLHttpRequest",
-                        Authorization: localStorage.getItem("token")
-                    }
-                })
-                .then(response => {
-                    court.is_bookmark = 0;
-                    this.$emit('deleteBookmark', court);
-                })
-                .catch(error => {
-                    if (error.response.status === 401) {
-                        this.$router.push('/login');
-                    }
-                    console.log('Bookmark', error);
-                }); 
-            },
-        },
+<script>
+export default {
+  name: "CourtComponent",
+  props: {
+    courtsList: Array
+  },
+  data() {
+    return {
+      headers: {
+        "Content-Type": "application/json",
+        "X-Requested-With": "XMLHttpRequest",
+        Authorization: localStorage.getItem("token")
+      }
     };
+  },
+  methods: {
+    setBookmark(court) {
+      if (!this.$store.getters.isAuth) {
+        this.$router.push("/login");
+      }
+      court.is_bookmark = 1;
+      axios({
+        method: "put",
+        url: `/api/v1/courts/${court.court_code}/bookmark`,
+        headers: {
+          "Content-Type": "application/json",
+          "X-Requested-With": "XMLHttpRequest",
+          Authorization: localStorage.getItem("token")
+        }
+      })
+      .catch(error => {
+          court.is_bookmark = 0;
+          if (error.response.status === 401) {
+            this.$router.push("/login");
+          }
+          console.log("Bookmark", error);
+        });
+    },
+    deleteBookmark(court) {
+      
+      this.$emit("deleteBookmark", court);
+      court.is_bookmark = 0;
+      axios({
+        method: "delete",
+        url: `/api/v1/courts/${court.court_code}/bookmark`,
+        headers: {
+          "Content-Type": "application/json",
+          "X-Requested-With": "XMLHttpRequest",
+          Authorization: localStorage.getItem("token")
+        }
+      })
+        .then(response => { 
+          
+        })
+        .catch(error => {
+          court.is_bookmark = 1;
+          if (error.response.status === 401) {
+            this.$router.push("/login");
+          }
+          console.log("Bookmark", error);
+        });
+    }
+  }
+};
 </script>
 
 <style scoped lang="scss">
@@ -164,12 +166,6 @@
     }
     .part-3 {
       @include alignElement($justifyContent: space-between);
-      .rating {
-        color: $main-color;
-      }
-      .bookmark {
-        color: $warning;
-      }
     }
   }
 }

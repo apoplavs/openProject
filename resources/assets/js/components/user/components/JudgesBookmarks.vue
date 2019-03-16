@@ -2,54 +2,50 @@
   <div class="judgesBookmarks">
     <!-- Main list -->
     <!-- <div class="list-data-container"> -->
-      <div class="card">
-        <div class="card-header d-flex justify-content-between">
-          <span>
-            <i class="fa fa-bookmark" aria-hidden="true"></i>Закладки суддів
-          </span>
-          <input type="search" class="form-control" placeholder="Пошук..." v-model.trim="search">
-        </div>
-        <spinner v-if="!loadData"/>
-          <div
-            class="p-3"
-            v-if="filterBookmarks && !filterBookmarks.length && loadData"
-          >За заданими параметрами нічого не знайдено...</div>
-        <div class="jugdes-list"  v-if="loadData">
-          <div class="judge-card"  v-for="(judge, ind) of filterBookmarks" :key="ind">
-            <div class="body">
-              <div class="name pb-1 text-center">
-                <router-link :to="`/judges/${judge.id}`">
-                  {{ judge.surname }} {{ (judge.name.length != 1) ? judge.name : judge.name + '.' }}
-                  {{ judge.patronymic.length != 1 ? judge.patronymic : judge.patronymic + '.' }}
-                </router-link>
-              </div>
-              <div class="photo">
-                <router-link :to="`/judges/${judge.id}`">
-                  <img class="avatar" :src="judge.photo" alt="фото">
-                </router-link>
-              </div>
-              <div class="court-name text-center py-2">{{ judge.court_name }}</div>
+    <div class="card">
+      <div class="card-header d-flex justify-content-between">
+        <span>
+          <i class="fa fa-bookmark" aria-hidden="true"></i>Закладки суддів
+        </span>
+        <input type="search" class="form-control" placeholder="Пошук..." v-model.trim="search">
+      </div>
+      <spinner v-if="!loadData"/>
+      <div
+        class="p-3"
+        v-if="filterBookmarks && !filterBookmarks.length && loadData"
+      >За заданими параметрами нічого не знайдено...</div>
+      <div class="jugdes-list" v-if="loadData">
+        <div class="judge-card" v-for="(judge, ind) of filterBookmarks" :key="ind">
+          <div class="body">
+            <div class="name pb-1 text-center">
+              <router-link :to="`/judges/${judge.id}`">
+                {{ judge.surname }} {{ (judge.name.length != 1) ? judge.name : judge.name + '.' }}
+                {{ judge.patronymic.length != 1 ? judge.patronymic : judge.patronymic + '.' }}
+              </router-link>
             </div>
-            <div class="footer">
-              <div class="row mt-2">
-                <div class="col-10 status">
-                  <!-- status-component -->
-                  <status-component :judgeData="judge"/>
-                  <i
-                    class="fa fa-edit pl-3 float-right"
-                    aria-hidden="true"
-                    @click="showModal(judge)"
-                  ></i>
-                </div>
-                <div class="col-2 bookmark">
-                  <span @click="deleteBookmark(judge)">
-                    <i class="fa fa-bookmark" aria-hidden="true"></i>
-                  </span>
-                </div>
+            <div class="photo">
+              <router-link :to="`/judges/${judge.id}`">
+                <img class="avatar" :src="judge.photo" alt="фото">
+              </router-link>
+            </div>
+            <div class="court-name text-center py-2">{{ judge.court_name }}</div>
+          </div>
+          <div class="footer">
+            <div class="row mt-2">
+              <div class="col-10 status">
+                <!-- status-component -->
+                <status-component :judgeData="judge"/>
+                <i class="fa fa-edit pl-3 float-right" aria-hidden="true" @click="showModal(judge)"></i>
+              </div>
+              <div class="col-2 bookmark">
+                <span @click="deleteBookmark(judge)">
+                  <i class="fa fa-bookmark" aria-hidden="true"></i>
+                </span>
               </div>
             </div>
           </div>
         </div>
+      </div>
       <!-- </div> -->
     </div>
     <!-- modal change status -->
@@ -78,7 +74,7 @@ export default {
     return {
       loadData: false,
       bookmarks: [],
-      search: '',
+      search: "",
       isModalVisible: false,
       currentJudge: {}
     };
@@ -138,13 +134,13 @@ export default {
           Authorization: localStorage.getItem("token")
         }
       })
-      .then(response => {
-           this.bookmarks = _.filter(this.bookmarks, e => {
+        .then(response => {
+          this.bookmarks = _.filter(this.bookmarks, e => {
             return e.id !== judge.id;
-           })
-           this.loadData = true;
+          });
+          this.loadData = true;
         })
-      .catch(error => {
+        .catch(error => {
           if (error.response && error.response.status === 401) {
             this.$router.push("/login");
           }
