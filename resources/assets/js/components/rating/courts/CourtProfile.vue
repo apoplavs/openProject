@@ -268,7 +268,7 @@ export default {
         if (error.response.status === 401) {
           this.$router.push("/login");
         }
-        console.log("Bookmark", error.response);
+        console.log("Bookmark", error);
       });
     },
     showModalDelete(session) {

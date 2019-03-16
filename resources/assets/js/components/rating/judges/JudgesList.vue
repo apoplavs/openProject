@@ -100,12 +100,8 @@
     },
     methods: {
       // порівняння суддів
-      addToCompare(judge_id) {
-  
+      addToCompare(judge_id) { 
         let judge_compare = this.$store.getters.judge_compare;
-        console.log('judge_compare', judge_compare);
-        console.log('judge_id', judge_id);
-  
         // якщо суддя вже був доданий раніше
         if (judge_compare.indexOf(judge_id) != -1) {
           this.$toasted.error("Цей суддя вже доданий для порівняння", {
@@ -125,11 +121,10 @@
           });
           return;
         }
-  
+
         judge_compare.push(judge_id);
         this.$store.commit('updateJudgeToCompare', judge_compare);
-  
-        //this.judgeComparation = true;
+
         this.$toasted.success("Додано до порівняння", {
           theme: "outline",
           position: "top-right",
@@ -189,16 +184,14 @@
             .then(response => {
               this.judgesList = response.data;
               this.loadData = true;
-              // console.log('getJudges Response', this.judgesList);
             })
             .catch(error => {
               if (error.response.status === 401) {
                 this.$router.push('/login');
               }
-              // console.log('Каже що не авторизований пффф та Канеха');
+              console.log(error);
             });
         } else {
-          // console.log('no token')
           axios
             .get("/api/v1/guest/judges/list", {
               headers: {
@@ -210,11 +203,9 @@
             .then(response => {
               this.judgesList = response.data;
               this.loadData = true;
-              console.log('getJudges Response', this.judgesList);
             })
             .catch(error => {
               console.log(error);
-              // console.log('Ну нє не логінився я ще');
             });
         }
       },

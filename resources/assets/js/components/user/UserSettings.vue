@@ -334,7 +334,6 @@ export default {
           this.user = response.data.profile;
           this.notifications = response.data.notifications;
           this.loadData = true;
-          console.log("User settings", response);
         })
         .catch(error => {
           if (error.response && error.response.status === 401) {
@@ -387,7 +386,6 @@ export default {
         old_password: this.password.currentPassword,
         new_password: this.password.newPassword
       };
-      console.log(this.password);
       axios
         .post(`/api/v1/user/settings/password`, changePass, {
           headers: this.headers

@@ -110,9 +110,7 @@ export default {
   },
   methods: {
     // порівняння суддів
-    addToCompare(judge_id) {
-      console.log('asfasfasfafsasfasf======', judge_id);
-      
+    addToCompare(judge_id) {      
       this.$emit('addToCompare', judge_id);
     },
 

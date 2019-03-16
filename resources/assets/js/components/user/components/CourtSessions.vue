@@ -100,7 +100,6 @@ export default {
         .then(response => {
           this.courtSessions = response.data;
           this.loadData = true;
-          console.log("User profile CourtSessions", this.courtSessions);
         })
         .catch(error => {
           if (error.response && error.response.status === 401) {
@@ -137,7 +136,6 @@ export default {
             this.courtSessions = _.filter( this.courtSessions, el => {
                 return this.deleteSession.id !== el.id
             });
-            console.log("courtSessions", this.courtSessions);
             this.deleteSession = null;
             this.loadData = true;
           })

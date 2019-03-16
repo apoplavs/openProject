@@ -489,7 +489,6 @@ export default {
         .then(response => {
           this.judge = response.data;
           this.loadData = true;
-          console.log("JUdge PROFILE", this.judge);
           this.setStatistic();
         })
         .catch(error => {

@@ -94,13 +94,8 @@ function loadInView(file) {
 	// });
 }
 
-
 function addPhoto(judge) {
 	let formData = new FormData($('#uploadPhotoForm').find('form').get(0));
-	// let fileInput = $('#newJudgePhoto')[0];
-	// let file = fileInput.files[0];
-	console.log(formData);
-	// console.log($('#newJudgePhoto')[0]);
 
 	$.ajax({
 		url: '/judges/add-photo',
@@ -117,8 +112,6 @@ function addPhoto(judge) {
 		}
 	});
 }
-
-
 
 // якщо документ був повністю завантажений
 $(document).ready(function () {

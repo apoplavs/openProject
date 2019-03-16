@@ -72,7 +72,6 @@
             let token =
               response.data.token_type + " " + response.data.access_token;
             localStorage.setItem("token", token);
-            console.log('ya idu dodmkuuuu')
             this.getUserData(() => {
               this.$router.push("/user-profile");
             });
