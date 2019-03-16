@@ -113,10 +113,6 @@
         font-size: 3rem;
     }
 
-    .welcome-wrap {
-      min-height: 100vh;
-    }
-
     .nice-background {
         background-color: #4686a08f;
         background-image: linear-gradient(to bottom, rgb(48, 129, 207) 0%, rgb(130, 219, 133) 100%);
