@@ -220,12 +220,14 @@
     },
     methods: {
       isDisabled: (errors, password) => {
+        console.log('ololol===------------')
         if (
           errors.items.length > 0 ||
           !password.currentPassword.length ||
           !password.rePassword.length ||
-          !password.newPassword.length
-        ) {
+          !password.newPassword.length ||
+          password.rePassword !== password.newPassword 
+        ){
           return true;
         }
         return false;

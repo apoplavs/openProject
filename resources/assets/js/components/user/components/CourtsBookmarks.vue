@@ -81,11 +81,13 @@ export default {
       }
     },
     deleteBookmark(court) {
-      // елемент видаляється в courtComponent
-     
-      this.bookmarks = this.bookmarks.filter(e => {
-        return e.court_code !== court.court_code;
-      });
+      this.loadData = false;
+      setTimeout(() => {
+        this.bookmarks = this.bookmarks.filter(e => {
+          return e.court_code !== court.court_code;
+        });
+        this.loadData = true;
+      }, 1000)   
     }
   }
 };
