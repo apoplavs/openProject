@@ -3,6 +3,7 @@
     <spinner v-if="!loadData" />
     <div v-if="loadData" class="border content-wrapper_body">
       <!-- 1 -->
+      {{errors}}
       <div class="profile">
         <h4>Профіль</h4>
         <form @submit.prevent="changeProfileData()">

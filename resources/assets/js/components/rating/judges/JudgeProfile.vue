@@ -11,20 +11,16 @@
                 type="button"
                 class="btn btn-add-photo mt-2"
                 @click="show = true"
-                v-if="judge.data.photo === '/img/judges/no_photo.jpg'"
+                v-if="judge.data.photo === '/img/judges/no_photo.jpg' && showBtnAddPhoto"
               >Додати фото</button>
               <!-- upload photo  -->
               <my-upload
                 field="img"
                 langType="ua"
                 @crop-success="cropSuccess"
-                @srcFileSet="srcFileSet"
                 v-model="show"
                 :width="256"
                 :height="256"
-                url="/api/v1/judges/photo"
-                :params="params"
-                :headers="headers"
                 img-format="png"
               ></my-upload>
               <!-- end -->
@@ -87,7 +83,10 @@
                     {{ judge.data.likes }}
                   </span>
                   <span class="line-chart">
-                    <i class="fa fa-line-chart" aria-hidden="true">{{ + ' ' + judge.data.rating + ' %' }}</i>
+                    <div class="rating">
+                      <i class="fa fa-line-chart mr-1" aria-hidden="true"></i>
+                      {{ judge.data.rating + '%' }}
+                    </div>
                   </span>
                   <span class="dislike" @click="changeUnlikes">
                     <i class="fas fa-thumbs-down"></i>
@@ -149,192 +148,198 @@
           </div>
         </div>
       </div>
-      <div class="d-flex">
-        <div class="card w-50 mt-2 mr-1">
-          <div class="card-header">
-            <span>Статистика розглянутих справ</span>
+
+      <div v-if="judge.common_statistic.competence !== 0 && judge.common_statistic.timeliness !== 0" class="mt-3">
+        <div class="d-flex">
+          <div class="card w-50 mt-2 mr-1">
+            <div class="card-header">
+              <span>Статистика розглянутих справ</span>
+            </div>
+            <div class="card-body p-0">
+              <GChart type="PieChart" :data="commonChartData" :options="commonChartOptions"/>
+            </div>
           </div>
-          <div class="card-body p-0">
-            <GChart type="PieChart" :data="commonChartData" :options="commonChartOptions"/>
+          <div class="card w-50 mt-2 ml-1">
+            <div class="card-header">Загальна ефективність</div>
+            <div class="card-body">
+              <div>
+                <label>Рішень вистоюють у вищих інстанціях</label>
+                <div class="progress">
+                  <div
+                    class="progress-bar"
+                    role="progressbar"
+                    :style="{ width: judge.common_statistic.competence + '%', backgroundColor: calculateColor(judge.common_statistic.competence) }"
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                  >{{ judge.common_statistic.competence }}%</div>
+                </div>
+              </div>
+              <div class="mt-5">
+                <label>Справ розглядаються у визначений законом строк</label>
+                <div class="progress">
+                  <div
+                    class="progress-bar"
+                    role="progressbar"
+                    :style="{ width: judge.common_statistic.timeliness + '%', backgroundColor: calculateColor(judge.common_statistic.timeliness) }"
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                  >{{ judge.common_statistic.timeliness }}%</div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="card w-50 mt-2 ml-1">
-          <div class="card-header">Загальна ефективність</div>
-          <div class="card-body">
-            <div>
-              <label>Рішень вистоюють у вищих інстанціях</label>
-              <div class="progress">
-                <div
-                  class="progress-bar"
-                  role="progressbar"
-                  :style="{ width: judge.common_statistic.competence + '%', backgroundColor: calculateColor(judge.common_statistic.competence) }"
-                  aria-valuemin="0"
-                  aria-valuemax="100"
-                >{{ judge.common_statistic.competence }}%</div>
+        <div class="d-flex">
+          <div class="card w-50 mt-2 mr-1">
+            <div class="card-header">Цивільне судочинство</div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col">
+                  <GChart type="ColumnChart" :data="civilChartData" :options="civilChartOptions"/>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-6">
+                  <doughnut-chart
+                    :percent="judge.civil_statistic.cases_on_time"
+                    :visibleValue="true"
+                    emptyText="N/A"
+                    :foregroundColor="calculateColor(judge.civil_statistic.cases_on_time)"
+                    :width="gchart.width"
+                    :height="gchart.width"
+                  />
+                  <span>Справ розглянуто своєчасно</span>
+                </div>
+                <div class="col-6">
+                  <doughnut-chart
+                    :percent="judge.civil_statistic.approved_by_appeal"
+                    :visibleValue="true"
+                    emptyText="N/A"
+                    :foregroundColor="calculateColor(judge.civil_statistic.approved_by_appeal)"
+                    :width="gchart.width"
+                    :height="gchart.width"
+                  />
+                  <span>Рішень вистояли у вищих інстанціях</span>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-12">
+                  <span>
+                    <b>{{ judge.civil_statistic.average_duration }}</b> днів - середня тривалість розгляду однієї справи
+                  </span>
+                </div>
               </div>
             </div>
-            <div class="mt-5">
-              <label>Справ розглядаються у визначений законом строк</label>
-              <div class="progress">
-                <div
-                  class="progress-bar"
-                  role="progressbar"
-                  :style="{ width: judge.common_statistic.timeliness + '%', backgroundColor: calculateColor(judge.common_statistic.timeliness) }"
-                  aria-valuemin="0"
-                  aria-valuemax="100"
-                >{{ judge.common_statistic.timeliness }}%</div>
+          </div>
+          <div class="card w-50 mt-2 ml-1">
+            <div class="card-header">Кримінальне судочинство</div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col">
+                  <GChart
+                    type="ColumnChart"
+                    :data="criminalChartData"
+                    :options="criminalChartOptions"
+                  />
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-6">
+                  <doughnut-chart
+                    :percent="judge.criminal_statistic.cases_on_time"
+                    :visibleValue="true"
+                    emptyText="N/A"
+                    :foregroundColor="calculateColor(judge.criminal_statistic.cases_on_time)"
+                    :width="gchart.width"
+                    :height="gchart.width"
+                  />
+                  <span>Справ розглядаються менше 6 міс.</span>
+                </div>
+                <div class="col-6">
+                  <doughnut-chart
+                    :percent="judge.criminal_statistic.approved_by_appeal"
+                    :visibleValue="true"
+                    emptyText="N/A"
+                    :foregroundColor="calculateColor(judge.criminal_statistic.approved_by_appeal)"
+                    :width="gchart.width"
+                    :height="gchart.width"
+                  />
+                  <span>Рішень вистояли у вищих інстанціях</span>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-12">
+                  <span>
+                    <b>{{ judge.criminal_statistic.average_duration }}</b> днів - середня тривалість розгляду однієї справи
+                  </span>
+                </div>
               </div>
             </div>
+          </div>
+        </div>
+        <div class="d-flex">
+          <div class="card w-50 mt-2 mr-1">
+            <div class="card-header">
+              <span>Судочинство в порядку КУпАП</span>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col">
+                  <GChart
+                    type="ColumnChart"
+                    :data="adminoffenceChartData"
+                    :options="adminoffenceChartOptions"
+                  />
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-6">
+                  <doughnut-chart
+                    :percent="judge.adminoffence_statistic.cases_on_time"
+                    :visibleValue="true"
+                    emptyText="N/A"
+                    :foregroundColor="calculateColor(judge.adminoffence_statistic.cases_on_time)"
+                    :width="gchart.width"
+                    :height="120"
+                  />
+                  <span>Справ розглянуто своєчасно</span>
+                </div>
+                <div class="col-6">
+                  <doughnut-chart
+                    :percent="judge.adminoffence_statistic.approved_by_appeal"
+                    :visibleValue="true"
+                    emptyText="N/A"
+                    :foregroundColor="calculateColor(judge.adminoffence_statistic.approved_by_appeal)"
+                    :width="gchart.width"
+                    :height="120"
+                  />
+                  <span>Рішень вистояли у вищих інстанціях</span>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-12">
+                  <span>
+                    <b>{{ judge.adminoffence_statistic.average_duration }}</b> днів - середня тривалість розгляду однієї справи
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card w-50 mt-2 ml-1">
+            <div class="card-header">Адміністративне судочинство</div>
+            <div class="card-body">В розробці...</div>
           </div>
         </div>
       </div>
-      <div class="d-flex">
-        <div class="card w-50 mt-2 mr-1">
-          <div class="card-header">Цивільне судочинство</div>
-          <div class="card-body">
-            <div class="row">
-              <div class="col">
-                <GChart type="ColumnChart" :data="civilChartData" :options="civilChartOptions"/>
-              </div>
-            </div>
-            <hr>
-            <div class="row">
-              <div class="col-6">
-                <doughnut-chart
-                  :percent="judge.civil_statistic.cases_on_time"
-                  :visibleValue="true"
-                  emptyText="N/A"
-                  :foregroundColor="calculateColor(judge.civil_statistic.cases_on_time)"
-                  :width="gchart.width"
-                  :height="gchart.width"
-                />
-                <span>Справ розглянуто своєчасно</span>
-              </div>
-              <div class="col-6">
-                <doughnut-chart
-                  :percent="judge.civil_statistic.approved_by_appeal"
-                  :visibleValue="true"
-                  emptyText="N/A"
-                  :foregroundColor="calculateColor(judge.civil_statistic.approved_by_appeal)"
-                  :width="gchart.width"
-                  :height="gchart.width"
-                />
-                <span>Рішень вистояли у вищих інстанціях</span>
-              </div>
-            </div>
-            <hr>
-            <div class="row">
-              <div class="col-12">
-                <span>
-                  <b>{{ judge.civil_statistic.average_duration }}</b> днів - середня тривалість розгляду однієї справи
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="card w-50 mt-2 ml-1">
-          <div class="card-header">Кримінальне судочинство</div>
-          <div class="card-body">
-            <div class="row">
-              <div class="col">
-                <GChart
-                  type="ColumnChart"
-                  :data="criminalChartData"
-                  :options="criminalChartOptions"
-                />
-              </div>
-            </div>
-            <hr>
-            <div class="row">
-              <div class="col-6">
-                <doughnut-chart
-                  :percent="judge.criminal_statistic.cases_on_time"
-                  :visibleValue="true"
-                  emptyText="N/A"
-                  :foregroundColor="calculateColor(judge.criminal_statistic.cases_on_time)"
-                  :width="gchart.width"
-                  :height="gchart.width"
-                />
-                <span>Справ розглядаються менше 6 міс.</span>
-              </div>
-              <div class="col-6">
-                <doughnut-chart
-                  :percent="judge.criminal_statistic.approved_by_appeal"
-                  :visibleValue="true"
-                  emptyText="N/A"
-                  :foregroundColor="calculateColor(judge.criminal_statistic.approved_by_appeal)"
-                  :width="gchart.width"
-                  :height="gchart.width"
-                />
-                <span>Рішень вистояли у вищих інстанціях</span>
-              </div>
-            </div>
-            <hr>
-            <div class="row">
-              <div class="col-12">
-                <span>
-                  <b>{{ judge.criminal_statistic.average_duration }}</b> днів - середня тривалість розгляду однієї справи
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="d-flex">
-        <div class="card w-50 mt-2 mr-1">
-          <div class="card-header">
-            <span>Судочинство в порядку КУпАП</span>
-          </div>
-          <div class="card-body">
-            <div class="row">
-              <div class="col">
-                <GChart
-                  type="ColumnChart"
-                  :data="adminoffenceChartData"
-                  :options="adminoffenceChartOptions"
-                />
-              </div>
-            </div>
-            <hr>
-            <div class="row">
-              <div class="col-6">
-                <doughnut-chart
-                  :percent="judge.adminoffence_statistic.cases_on_time"
-                  :visibleValue="true"
-                  emptyText="N/A"
-                  :foregroundColor="calculateColor(judge.adminoffence_statistic.cases_on_time)"
-                  :width="gchart.width"
-                  :height="120"
-                />
-                <span>Справ розглянуто своєчасно</span>
-              </div>
-              <div class="col-6">
-                <doughnut-chart
-                  :percent="judge.adminoffence_statistic.approved_by_appeal"
-                  :visibleValue="true"
-                  emptyText="N/A"
-                  :foregroundColor="calculateColor(judge.adminoffence_statistic.approved_by_appeal)"
-                  :width="gchart.width"
-                  :height="120"
-                />
-                <span>Рішень вистояли у вищих інстанціях</span>
-              </div>
-            </div>
-            <hr>
-            <div class="row">
-              <div class="col-12">
-                <span>
-                  <b>{{ judge.adminoffence_statistic.average_duration }}</b> днів - середня тривалість розгляду однієї справи
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="card w-50 mt-2 ml-1">
-          <div class="card-header">Адміністративне судочинство</div>
-          <div class="card-body">В розробці...</div>
-        </div>
-      </div>
+    </div>
+    <div class="mt-3">
+      <b>Даних для статистики недостатньо!</b>
     </div>
     <!--<GChart tupe="PieChart"/>-->
     <!-- modal change status -->
@@ -364,7 +369,7 @@ export default {
   },
   data() {
     return {
-      //-----
+      showBtnAddPhoto: true,
       show: false,
       params: {
         id: null,
@@ -376,8 +381,6 @@ export default {
         Authorization: localStorage.getItem("token")
       },
       //  imgDataUrl: '', // the datebase64 url of created image
-
-      //-----
       showModal: false,
       loadData: false,
       judge: {},
@@ -416,7 +419,6 @@ export default {
           position: "none"
         }
       },
-
       // налаштування для Google графіка статистики по кримінальних справах
       criminalChartData: [],
       criminalChartOptions: {
@@ -735,11 +737,7 @@ export default {
             "X-Requested-With": "XMLHttpRequest",
             Authorization: localStorage.getItem("token")
           }
-        })
-          .then(response => {
-            //
-          })
-          .catch(error => {
+        }).catch(error => {
             if (error.response && error.response.status === 401) {
               this.$router.push("/login");
             }
@@ -865,72 +863,24 @@ export default {
         ]
       ];
     },
-
-    // ----------------------
+    // ---------  upload photo ----------- //
     toggleShow() {
       this.show = !this.show;
     },
-    /**
-     * crop success
-     *
-     * [param] imgDataUrl
-     * [param] field
-     */
-    srcFileSet(fileName, fileType, fileSize) {
-      console.log("_________________-sdgsdg_________________");
-
-      console.log("fileName", fileName);
-      console.log("fileType", fileType);
-      console.log("fileSize", fileSize);
-    },
+  
     cropSuccess(imgDataUrl, field) {
-      console.log("-------- crop success --------", imgDataUrl);
       this.params.id = this.judge.data.id;
       this.params.photo = imgDataUrl;
-      console.log(this.params);
-      this.srcFileSet();
-
-      axios({
-        method: "post",
-        url: "/api/v1/judges/photo",
-        headers: this.headers,
-        params: this.params
-      })
-        .then(response => {
-          console.log(response);
-        })
-        .catch(error => {
-          if (error.response && error.response.status === 401) {
-            this.$router.push("/login");
+      this.$toasted.success(
+          "Фото судді завантажено успішно і буде опубліковано після перевірки адміністратором!", {
+              theme: "primary",
+              position: "top-center",
+              duration: 8000
           }
-        });
-
-      this.judge.data.photo = imgDataUrl;
+      );
+     this.showBtnAddPhoto = false;
     },
-    /**
-     * upload success
-     *
-     * [param] jsonData  server api return data, already json encode
-     * [param] field
-     */
-    cropUploadSuccess(jsonData, field) {
-      console.log("-------- upload success --------");
-      console.log(jsonData);
-      console.log("field: " + field);
-    },
-    /**
-     * upload fail
-     *
-     * [param] status    server api return error status, like 500
-     * [param] field
-     */
-    cropUploadFail(status, field) {
-      console.log("-------- upload fail --------");
-      console.log(status);
-      console.log("field: " + field);
-    }
   }
-  //---------------------
 };
 </script>
 

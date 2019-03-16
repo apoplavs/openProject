@@ -219,7 +219,6 @@ export default {
   .fa-pencil {
     cursor: pointer;
   }
-  /* styles for font awesome */
   .align-center {
     @include alignElement();
   }

@@ -10,7 +10,7 @@
         <input type="search" class="form-control" placeholder="Пошук..." v-model.trim="search">
       </div>
       <spinner v-if="!loadData"/>
-      <div
+      <div 
         class="p-3"
         v-if="filterBookmarks && !filterBookmarks.length && loadData"
       >За заданими параметрами нічого не знайдено...</div>
