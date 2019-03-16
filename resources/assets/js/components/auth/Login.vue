@@ -116,16 +116,14 @@ export default {
           callback();
         })
         .catch(error => {
-          console.log("ERR ", error);
+          console.log(error);
         });
     },
     validateBeforeSubmit() {
       this.$validator.validateAll().then(result => {
         if (result) {
           this.user.remember_me =
-            this.user.remember_me === true || this.user.remember_me === 1
-              ? 1
-              : 0; //конвертую чекбокс в 1 або 0 по дефолку true/false
+            this.user.remember_me === true || this.user.remember_me === 1 ? 1 : 0; //конвертую чекбокс в 1 або 0 по дефолку true/false
           this.isLoading = true;
           axios
             .post("/api/v1/login", this.user, {
@@ -151,7 +149,7 @@ export default {
                   this.$toasted.error(error.response.data.message, {
                     theme: "primary",
                     position: "top-right",
-                    duration: 5000
+                    duration: 8000
                   });
                   this.isLoading = false;
                 }
@@ -159,7 +157,7 @@ export default {
                 this.$toasted.error("Щось пішло не так :( Cпробуйте пізніше", {
                   theme: "primary",
                   position: "top-right",
-                  duration: 5000
+                  duration: 8000
                 });
                 this.isLoading = false;
               }
@@ -168,7 +166,7 @@ export default {
           this.$toasted.error("Заповніть коректно всі поля!", {
             theme: "primary",
             position: "top-right",
-            duration: 5000
+            duration: 8000
           });
           this.isLoading = false;
         }

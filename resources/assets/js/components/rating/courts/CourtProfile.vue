@@ -207,10 +207,9 @@ export default {
             if (error.response && error.response.status === 401) {
               this.$router.push("/login");
             }
-            console.log("error");
+            console.log(error);
           });
       } else {
-        console.log("not log in");
         axios
           .get(`/api/v1/guest/courts/${this.$route.params.id}`, {
             headers: {

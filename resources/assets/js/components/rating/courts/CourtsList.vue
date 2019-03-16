@@ -110,9 +110,7 @@
         return true;
       },
       liveSearch: _.debounce(function(event) {
-        console.log('GOing', this.validateInputSearch());
         if (this.validateInputSearch()) {
-          
           axios.get('/api/v1/courts/autocomplete', {
               headers: {
                 "Content-Type": "application/json",
