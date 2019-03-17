@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "0d1facb8173c23bfad38365167b4d13c",
-    "content-hash": "71027497839a33566ee489970736fd6c",
+    "hash": "009d1591575f5a1d4c2a61e22464c08a",
+    "content-hash": "1796e69c07bfe46cc98836686bf249f8",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -88,6 +88,60 @@
                 "sdk"
             ],
             "time": "2019-03-14 18:32:41"
+        },
+        {
+            "name": "crazybooot/base64-validation",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/crazybooot/base64-validation.git",
+                "reference": "20ac264ed40cfeb76d11d37f37361a85c86e654a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/crazybooot/base64-validation/zipball/20ac264ed40cfeb76d11d37f37361a85c86e654a",
+                "reference": "20ac264ed40cfeb76d11d37f37361a85c86e654a",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "^5.5",
+                "php": "^7.1"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Crazybooot\\Base64Validation\\Providers\\ServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "App\\": "app/",
+                    "Crazybooot\\Base64Validation\\": "/src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "crazybooot",
+                    "email": "crazybooot@gmail.com"
+                }
+            ],
+            "description": "Laravel validators for base64 encoded files",
+            "keywords": [
+                "base64",
+                "download",
+                "encoded",
+                "files",
+                "images",
+                "laravel",
+                "validation"
+            ],
+            "time": "2019-03-13 08:45:30"
         },
         {
             "name": "darkaonline/l5-swagger",
