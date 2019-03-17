@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Filesystem\FilesystemAdapter;
 
 
 /**
@@ -19,9 +20,11 @@ class Judge extends Model
 
     public $timestamps = false;
 
-    public static function getPhotoStorage() {
+    public static function getPhotoStorage() : FilesystemAdapter
+    {
         return Storage::disk('s3');
     }
+
     // The attributes that are mass assignable.
     protected $fillable = [
         'id',
