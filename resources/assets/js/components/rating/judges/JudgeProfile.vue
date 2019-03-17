@@ -22,12 +22,11 @@
                 v-model="show"
                 :width="256"
                 :height="256"
-               
+                url="/api/v1/judges/photo"
+                :params="params"
+                :headers="headers"
                 img-format="png"
               ></my-upload>
-               <!-- url="/api/v1/judges/photo"
-                :params="params"
-                :headers="headers" -->
               <!-- end -->
             </div>
             <div class="w-75 px-3">
@@ -377,11 +376,11 @@ export default {
       showBtnAddPhoto: true,
       show: false,
       params: {
-        id: null,
+        judge_id: null,
         photo: null
       },
       headers: {
-        "Content-Type": "application/json",
+        // "Content-Type": "application/json",
         "X-Requested-With": "XMLHttpRequest",
         Authorization: localStorage.getItem("token")
       },
@@ -727,7 +726,6 @@ export default {
           });
       }
     },
-
     deleteBookmarkCourtSession(session) {
       if (!this.$store.getters.isAuth) {
         this.$router.push("/login");
@@ -757,7 +755,6 @@ export default {
           });
       }
     },
-
     addBookmarkCourtSession(session) {
       if (!this.$store.getters.isAuth) {
         this.$router.push("/login");
@@ -871,12 +868,7 @@ export default {
       toggleShow() {
 				this.show = !this.show;
 			},
-      /**
-			 * crop success
-			 *
-			 * [param] imgDataUrl
-			 * [param] field
-      */
+
       srcFileSet(fileName, fileType, fileSize) {
         console.log('_________________-sdgsdg_________________');
         
@@ -887,25 +879,27 @@ export default {
       },
 			cropSuccess(imgDataUrl, field){
         console.log('-------- crop success --------',imgDataUrl);
-        this.params.id = this.judge.data.id;
+        this.params.judge_id = this.judge.data.id;
         this.params.photo = imgDataUrl;
         console.log(this.params);
-        this.srcFileSet();
+        console.log('field', field);
         
-        axios({
-          method: "post",
-          url: '/api/v1/judges/photo',
-          headers: this.headers,
-          params: this.params
-        })
-          .then(response => {
-            console.log(response);
-          })
-          .catch(error => {
-            if (error.response && error.response.status === 401) {
-              this.$router.push("/login");
-            }
-          });
+       // this.srcFileSet();
+        
+        // axios({
+        //   method: "post",
+        //   url: '/api/v1/judges/photo',
+        //   headers: this.headers,
+        //   params: this.params
+        // })
+        //   .then(response => {
+        //     console.log(response);
+        //   })
+        //   .catch(error => {
+        //     if (error.response && error.response.status === 401) {
+        //       this.$router.push("/login");
+        //     }
+        //   });
 				this.judge.data.photo = imgDataUrl;
 			},
 			/**
