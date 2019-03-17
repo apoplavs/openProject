@@ -18,11 +18,16 @@
                 field="img"
                 langType="ua"
                 @crop-success="cropSuccess"
+                @srcFileSet="srcFileSet"
                 v-model="show"
                 :width="256"
                 :height="256"
+               
                 img-format="png"
               ></my-upload>
+               <!-- url="/api/v1/judges/photo"
+                :params="params"
+                :headers="headers" -->
               <!-- end -->
             </div>
             <div class="w-75 px-3">
@@ -376,11 +381,11 @@ export default {
         photo: null
       },
       headers: {
-        // "Content-Type": "application/x-www-form-urlencoded",
+        "Content-Type": "application/json",
         "X-Requested-With": "XMLHttpRequest",
         Authorization: localStorage.getItem("token")
       },
-      //  imgDataUrl: '', // the datebase64 url of created image
+      imgDataUrl: '', // the datebase64 url of created image
       showModal: false,
       loadData: false,
       judge: {},
@@ -629,7 +634,7 @@ export default {
           method: "put",
           url: `/api/v1/judges/${this.$route.params.id}/like`,
           headers: {
-            "Content-Type": "application/json",
+            //"Content-Type": "application/json",
             "X-Requested-With": "XMLHttpRequest",
             Authorization: localStorage.getItem("token")
           }
@@ -863,23 +868,90 @@ export default {
       ];
     },
     // ---------  upload photo ----------- //
-    toggleShow() {
-      this.show = !this.show;
+      toggleShow() {
+				this.show = !this.show;
+			},
+      /**
+			 * crop success
+			 *
+			 * [param] imgDataUrl
+			 * [param] field
+      */
+      srcFileSet(fileName, fileType, fileSize) {
+        console.log('_________________-sdgsdg_________________');
+        
+        console.log('fileName', fileName);
+        console.log('fileType', fileType);
+        console.log('fileSize', fileSize);
+        
+      },
+			cropSuccess(imgDataUrl, field){
+        console.log('-------- crop success --------',imgDataUrl);
+        this.params.id = this.judge.data.id;
+        this.params.photo = imgDataUrl;
+        console.log(this.params);
+        this.srcFileSet();
+        
+        axios({
+          method: "post",
+          url: '/api/v1/judges/photo',
+          headers: this.headers,
+          params: this.params
+        })
+          .then(response => {
+            console.log(response);
+          })
+          .catch(error => {
+            if (error.response && error.response.status === 401) {
+              this.$router.push("/login");
+            }
+          });
+				this.judge.data.photo = imgDataUrl;
+			},
+			/**
+			 * upload success
+			 *
+			 * [param] jsonData  server api return data, already json encode
+			 * [param] field
+			 */
+			cropUploadSuccess(jsonData, field){
+				console.log('-------- upload success --------');
+				console.log(jsonData);
+				console.log('field: ' + field);
+			},
+			/**
+			 * upload fail
+			 *
+			 * [param] status    server api return error status, like 500
+			 * [param] field
+			 */
+			cropUploadFail(status, field){
+				console.log('-------- upload fail --------');
+				console.log(status);
+				console.log('field: ' + field);
+      }
     },
+
+
+
+
+    // toggleShow() {
+    //   this.show = !this.show;
+    // },
   
-    cropSuccess(imgDataUrl, field) {
-      this.params.id = this.judge.data.id;
-      this.params.photo = imgDataUrl;
-      this.$toasted.success(
-          "Фото судді завантажено успішно і буде опубліковано після перевірки адміністратором!", {
-              theme: "primary",
-              position: "top-center",
-              duration: 8000
-          }
-      );
-     this.showBtnAddPhoto = false;
-    },
-  }
+    // cropSuccess(imgDataUrl, field) {
+    //   this.params.id = this.judge.data.id;
+    //   this.params.photo = imgDataUrl;
+    //   this.$toasted.success(
+    //       "Фото судді завантажено успішно і буде опубліковано після перевірки адміністратором!", {
+    //           theme: "primary",
+    //           position: "top-center",
+    //           duration: 8000
+    //       }
+    //   );
+    //  this.showBtnAddPhoto = false;
+    // },
+  // }
 };
 </script>
 
