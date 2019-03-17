@@ -62,24 +62,24 @@
                                   {
                                     theme: "primary",
                                     position: "top-center",
-                                    duration: 8000
+                                    duration: 10000
                                   }
                                 );
                             })
                             .catch(error => {
                                 if (error.response && error.response) {
                                     if (error.response.data && error.response.data.message) {
-                                        this.$toasted.error(error.response.data.message, {
+                                        this.$toasted.error('Даний email не зареєстрований!', {
                                             theme: "primary",
                                             position: "top-right",
-                                            duration: 5000
+                                            duration: 8000
                                         });
                                     }
                                 } else {
                                     this.$toasted.error("Щось пішло не так, перевірте Ваше інтернет з'єднання, або спробуйте пізніше", {
                                         theme: "primary",
                                         position: "top-right",
-                                        duration: 5000
+                                        duration: 8000
                                     });
                                 }
                             });

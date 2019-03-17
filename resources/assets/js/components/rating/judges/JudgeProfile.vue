@@ -11,7 +11,7 @@
                 type="button"
                 class="btn btn-add-photo mt-2"
                 @click="show = true"
-                v-if="judge.data.photo === '/img/judges/no_photo.jpg' && showBtnAddPhoto"
+                v-if="judge.data.photo === '/img/judges/no_photo.jpg' && showBtnAddPhoto &&	isAuth"
               >Додати фото</button>
               <!-- upload photo  -->
               <my-upload
@@ -882,9 +882,9 @@ export default {
         this.params.judge_id = this.judge.data.id;
         this.params.photo = imgDataUrl;
         console.log(this.params);
-        console.log('field', field);
+        console.log('field', field.fileSize);
         
-       // this.srcFileSet();
+    
         
         // axios({
         //   method: "post",
@@ -900,7 +900,7 @@ export default {
         //       this.$router.push("/login");
         //     }
         //   });
-				this.judge.data.photo = imgDataUrl;
+			
 			},
 			/**
 			 * upload success
@@ -911,7 +911,8 @@ export default {
 			cropUploadSuccess(jsonData, field){
 				console.log('-------- upload success --------');
 				console.log(jsonData);
-				console.log('field: ' + field);
+        console.log('field: -------------', field);
+        	this.judge.data.photo = imgDataUrl;
 			},
 			/**
 			 * upload fail
