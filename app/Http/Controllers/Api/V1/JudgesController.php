@@ -2040,7 +2040,8 @@ class JudgesController extends Controller
             base64_decode($base64),
             'public'
         );
-        $judge->photo = $path;
+        // @todo адресу AWS потім винести в константу
+        $judge->photo = 'https://s3.eu-central-1.amazonaws.com/toecyd/'.$path;
         // Для отримання лінка використовуємо Judge::getPhotoStorage()->url($path)
 
         $judge->save();
