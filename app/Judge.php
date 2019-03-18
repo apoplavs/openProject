@@ -197,6 +197,15 @@ class Judge extends Model
                       'judges.due_date_status' => $due_date]);
     }
 
+    /**
+     * отримати список суддів, по яких є статистика
+     */
+    public static function getJudgesWithStatistic() {
+        return (static::select('judges.id', 'judges.surname', 'judges.name', 'judges.patronymic', 'judges.rating')
+            ->join('judges_civil_statistic', 'judges_civil_statistic.judge', '=', 'judges.id')
+            ->get());
+    }
+
 
     /**
      * отримати дані по одному судді
