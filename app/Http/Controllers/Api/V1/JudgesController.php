@@ -2104,7 +2104,7 @@ class JudgesController extends Controller
     }
 
 	/**
-	 * виконується, якщо застосовувалась фільтрація до списку суддів
+	 * розразунок загальної статистики
 	 * @return array
 	 */
 	private function countCommonStatistic($adminoffence_statistic, $criminal_statistic, $civil_statistic) {
