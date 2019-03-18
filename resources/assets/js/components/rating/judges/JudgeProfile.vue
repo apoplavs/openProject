@@ -543,19 +543,27 @@ export default {
           }
         })
           .catch(error => {
+            this.judge.data.is_bookmark = 0;
             if (error.response && error.response.status === 401) {
               this.$router.push("/login");
+              this.$toasted.error(
+                "Для виконання цієї дії необхідно увійти в систему",
+                {
+                  theme: "primary",
+                  position: "top-right",
+                  duration: 5000
+                }
+              );
+            } else {
+              this.$toasted.error(
+                "Неможливо додати в закладки, перевірте Ваше інтернет з'єднання або спробуйте пізніше",
+                {
+                  theme: "primary",
+                  position: "top-right",
+                  duration: 5000
+                }
+              );
             }
-            this.judge.data.is_bookmark = 0;
-            this.$toasted.error(
-              "Неможливо додати в закладки, перевірте Ваше інтернет з'єднання або спробуйте пізніше",
-              {
-                theme: "primary",
-                position: "top-right",
-                duration: 5000
-              }
-            );
-            console.log("Bookmark", error);
           });
 
         // якщо вже є закладка - видаляємо
@@ -571,19 +579,27 @@ export default {
           }
         })
           .catch(error => {
+            this.judge.data.is_bookmark = 1;
             if (error.response && error.response.status === 401) {
               this.$router.push("/login");
+              this.$toasted.error(
+                "Для виконання цієї дії необхідно увійти в систему",
+                {
+                  theme: "primary",
+                  position: "top-right",
+                  duration: 5000
+                }
+              );
+            } else {
+              this.$toasted.error(
+                "Перевірте Ваше інтернет з'єднання або спробуйте пізніше",
+                {
+                  theme: "primary",
+                  position: "top-right",
+                  duration: 5000
+                }
+              );
             }
-            this.judge.data.is_bookmark = 1;
-            this.$toasted.error(
-              "Перевірте Ваше інтернет з'єднання або спробуйте пізніше",
-              {
-                theme: "primary",
-                position: "top-right",
-                duration: 5000
-              }
-            );
-            console.log("Bookmark", error.response);
           });
       }
     },
@@ -613,11 +629,16 @@ export default {
           .catch(error => {
             if (error.response && error.response.status === 401) {
               this.$router.push("/login");
-            }
-            // якщо поставити лайк на сервері не вдалось, повертаємо кількість назад
-            this.judge.data.likes += 1;
-            this.judge.data.is_liked = 1;
-            this.$toasted.error(
+              this.$toasted.error(
+                "Для виконання цієї дії необхідно увійти в систему",
+                {
+                  theme: "primary",
+                  position: "top-right",
+                  duration: 5000
+                }
+              );
+            } else {
+              this.$toasted.error(
               "Перевірте Ваше інтернет з'єднання або спробуйте пізніше",
               {
                 theme: "primary",
@@ -625,7 +646,11 @@ export default {
                 duration: 5000
               }
             );
-            console.log("set Likes", error);
+            }
+            // якщо поставити лайк на сервері не вдалось, повертаємо кількість назад
+            this.judge.data.likes += 1;
+            this.judge.data.is_liked = 1;
+            
           });
       } else {
         // set like
@@ -643,11 +668,16 @@ export default {
           .catch(error => {
             if (error.response && error.response.status === 401) {
               this.$router.push("/login");
-            }
-            // якщо поставити лайк на сервері не вдалось, повертаємо кількість назад
-            this.judge.data.likes -= 1;
-            this.judge.data.is_liked = 0;
-            this.$toasted.error(
+              this.$toasted.error(
+                "Для виконання цієї дії необхідно увійти в систему",
+                {
+                  theme: "primary",
+                  position: "top-right",
+                  duration: 5000
+                }
+              );
+            } else {
+              this.$toasted.error(
               "Перевірте Ваше інтернет з'єднання або спробуйте пізніше",
               {
                 theme: "primary",
@@ -655,7 +685,10 @@ export default {
                 duration: 5000
               }
             );
-            console.log("set Likes", error);
+            }
+            // якщо поставити лайк на сервері не вдалось, повертаємо кількість назад
+            this.judge.data.likes -= 1;
+            this.judge.data.is_liked = 0;
           });
       }
     },
@@ -682,19 +715,27 @@ export default {
           .catch(error => {
             if (error.response && error.response.status === 401) {
               this.$router.push("/login");
+              this.$toasted.error(
+                "Для виконання цієї дії необхідно увійти в систему",
+                {
+                  theme: "primary",
+                  position: "top-right",
+                  duration: 5000
+                }
+              );
+            } else {
+              this.$toasted.error(
+                "Перевірте Ваше інтернет з'єднання або спробуйте пізніше",
+                {
+                  theme: "primary",
+                  position: "top-right",
+                  duration: 5000
+                }
+              );
             }
             // якщо поставити лайк на сервері не вдалось, повертаємо кількість назад
             this.judge.data.unlikes += 1;
             this.judge.data.is_unliked = 1;
-            this.$toasted.error(
-              "Перевірте Ваше інтернет з'єднання або спробуйте пізніше",
-              {
-                theme: "primary",
-                position: "top-right",
-                duration: 5000
-              }
-            );
-            console.log("set Likes", error);
           });
       } else {
         // set unlike
@@ -712,19 +753,28 @@ export default {
           .catch(error => {
             if (error.response && error.response.status === 401) {
               this.$router.push("/login");
+              this.$toasted.error(
+                "Для виконання цієї дії необхідно увійти в систему",
+                {
+                  theme: "primary",
+                  position: "top-right",
+                  duration: 5000
+                }
+              );
+            } else {
+              this.$toasted.error(
+                "Перевірте Ваше інтернет з'єднання або спробуйте пізніше",
+                {
+                  theme: "primary",
+                  position: "top-right",
+                  duration: 5000
+                }
+              );
             }
             // якщо поставити лайк на сервері не вдалось, повертаємо кількість назад
             this.judge.data.unlikes -= 1;
             this.judge.data.is_unliked = 0;
-            this.$toasted.error(
-              "Перевірте Ваше інтернет з'єднання або спробуйте пізніше",
-              {
-                theme: "primary",
-                position: "top-right",
-                duration: 5000
-              }
-            );
-            console.log("set Likes", error);
+            
           });
       }
     },
@@ -742,18 +792,27 @@ export default {
             Authorization: localStorage.getItem("token")
           }
         }).catch(error => {
+            session.is_bookmark = 1;
             if (error.response && error.response.status === 401) {
               this.$router.push("/login");
-            }
-            session.is_bookmark = 1;
-            this.$toasted.error(
-              "Перевірте Ваше інтернет з'єднання або спробуйте пізніше",
-              {
-                theme: "primary",
-                position: "top-right",
-                duration: 5000
-              }
-            );
+              this.$toasted.error(
+                "Для виконання цієї дії необхідно увійти в систему",
+                {
+                  theme: "primary",
+                  position: "top-right",
+                  duration: 5000
+                }
+              );
+            } else {
+              this.$toasted.error(
+                "Перевірте Ваше інтернет з'єднання або спробуйте пізніше",
+                {
+                  theme: "primary",
+                  position: "top-right",
+                  duration: 5000
+                }
+              );
+            } 
           });
       }
     },
@@ -775,18 +834,27 @@ export default {
             //
           })
           .catch(error => {
+            session.is_bookmark = 0;
             if (error.response && error.response.status === 401) {
               this.$router.push("/login");
+              this.$toasted.error(
+                "Для виконання цієї дії необхідно увійти в систему",
+                {
+                  theme: "primary",
+                  position: "top-right",
+                  duration: 5000
+                }
+              );
+            } else {
+              this.$toasted.error(
+                "Неможливо додати в закладки, перевірте Ваше інтернет з'єднання або спробуйте пізніше",
+                {
+                  theme: "primary",
+                  position: "top-right",
+                  duration: 5000
+                }
+              );
             }
-            session.is_bookmark = 0;
-            this.$toasted.error(
-              "Неможливо додати в закладки, перевірте Ваше інтернет з'єднання або спробуйте пізніше",
-              {
-                theme: "primary",
-                position: "top-right",
-                duration: 5000
-              }
-            );
           });
       }
     },
