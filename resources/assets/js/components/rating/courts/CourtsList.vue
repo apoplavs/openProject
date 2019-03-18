@@ -24,7 +24,7 @@
           </div>
           <div class="card courts-card">
             <div class="card-header">
-              <span>Список судів</span>
+              <span>Список судових установ</span>
               <div class="d-flex align-items-center">
                 <span class="mr-2 sort"> сортувати за: </span>
                 <select class="form-control select-sort" name="sorting" v-model="filters.sort" @change="sortList()">

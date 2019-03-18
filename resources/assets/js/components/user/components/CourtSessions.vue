@@ -9,7 +9,7 @@
         <spinner v-if="!loadData"/>
         <div
           v-if="loadData && !filterSessions.length"
-          >Немає ...
+          >За заданими параметрами нічого не знайдено...
         </div>
         <div v-if="loadData" class="court-sessions">
           <div v-if="filterSessions.length" class="container-component">

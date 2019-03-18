@@ -14,7 +14,6 @@
                   </small>
               </p>
             </div>
-  
             <div class="form-group">
               <label for="email" class="form-control-label">E-Mail</label>
               <p class="control has-icon has-icon-right">
@@ -24,7 +23,6 @@
                   </small>
               </p>
             </div>
-  
             <div class="form-group">
               <label for="password" class="form-control-label">Пароль</label>
               <p class="control has-icon has-icon-right">
@@ -34,17 +32,15 @@
                   </small>
               </p>
             </div>
-  
             <div class="form-group">
               <label for="repassword" class="form-control-label">Підтвердити пароль</label>
               <p class="control" :class="{error: !(user.repassword === user.password)}">
                 <input id="repassword" type="password" class="form-control" name="repassword" v-model="user.repassword" v-validate="'required|min:6|max:32'" :class="{'input': true, 'is-danger': user.repassword !== user.password}">
                 <small v-show="!(user.repassword === user.password)">
-                    <span class="help is-danger">Паролі не співпадають</span>
-                  </small>
+                  <span class="help is-danger">Паролі не співпадають</span>
+                </small>
               </p>
             </div>
-  
             <div class="form-check">
               <label class="form-check-label">
                   <input
@@ -65,7 +61,6 @@
                   </router-link>
                 </label>
             </div>
-  
             <div class="form-group mt-2">
               <div class="text-center">
                 <button type="submit" class="btn b-primary" id="register-btn">
@@ -113,7 +108,6 @@
         this.$validator.validateAll().then(result => {
           if (result && this.user.password === this.user.repassword) {
             this.isLoading = true;
-            // document.getElementById('register-btn').setAttribute('disabled');
             let newUser = {};
             newUser.name = this.user.name;
             newUser.email = this.user.email;
@@ -131,29 +125,33 @@
                     "Вітаємо! Вам на пошту відправлений лист з підтвердженням реєстрації!", {
                       theme: "primary",
                       position: "top-center",
-                      duration: 5000
+                      duration: 8000
                     }
                   );
                 }
+                setTimeout(() => {
+                  this.$router.push('/login');
+                }, 8000)
+               
               })
               .catch(error => {
                 if (error.response && error.response.status) {
                   if (error.response.data && error.response.data.message) {
-                    console.error(error.response.data.message);
-                    this.$toasted.error(error.response.data.message, {
+                    console.log(error.response.data.message);
+                    this.$toasted.error('Даний email вже використовується!', {
                       theme: "primary",
                       position: "top-right",
-                      duration: 5000
+                      duration: 8000
                     });
                     this.isLoading = false;
                   }
                 } else {
                   if (error.response.data && error.response.data.message) {
                     console.error(error.response.data.message);
-                    this.$toasted.error("Щось пішло не так:( Спробуйте ще раз!", {
+                    this.$toasted.error("Щось пішло не так:( Перевірте інтернет з'єднання та спробуйте ще раз!", {
                       theme: "primary",
                       position: "top-right",
-                      duration: 10000
+                      duration: 8000
                     });
                   }
                 }
@@ -162,7 +160,7 @@
             this.$toasted.error("Заповніть коректно всі поля!", {
               theme: "primary",
               position: "top-right",
-              duration: 10000
+              duration: 8000
             });
           }
         });

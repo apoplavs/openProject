@@ -415,7 +415,7 @@ export default {
           headers: this.headers
         })
         .then(response => {
-          this.$toasted.success("Налаштування сповіщень успішно змінене!", {
+          this.$toasted.success("Налаштування сповіщень успішно змінено!", {
             theme: "primary",
             position: "top-right",
             duration: 3000
