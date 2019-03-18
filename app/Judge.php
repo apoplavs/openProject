@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Filesystem\FilesystemAdapter;
 
 
 /**
@@ -19,9 +20,11 @@ class Judge extends Model
 
     public $timestamps = false;
 
-    public static function getPhotoStorage() {
+    public static function getPhotoStorage() : FilesystemAdapter
+    {
         return Storage::disk('s3');
     }
+
     // The attributes that are mass assignable.
     protected $fillable = [
         'id',
@@ -192,6 +195,15 @@ class Judge extends Model
         static::where('judges.id', '=', $judge_id)
             ->update(['judges.status'          => $status,
                       'judges.due_date_status' => $due_date]);
+    }
+
+    /**
+     * отримати список суддів, по яких є статистика
+     */
+    public static function getJudgesWithStatistic() {
+        return (static::select('judges.id', 'judges.surname', 'judges.name', 'judges.patronymic', 'judges.rating')
+            ->join('judges_civil_statistic', 'judges_civil_statistic.judge', '=', 'judges.id')
+            ->get());
     }
 
 

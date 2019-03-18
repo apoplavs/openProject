@@ -11,16 +11,22 @@
                 type="button"
                 class="btn btn-add-photo mt-2"
                 @click="show = true"
-                v-if="judge.data.photo === '/img/judges/no_photo.jpg' && showBtnAddPhoto"
+                v-if="judge.data.photo === '/img/judges/no_photo.jpg' && showBtnAddPhoto &&	isAuth"
               >Додати фото</button>
               <!-- upload photo  -->
               <my-upload
                 field="img"
                 langType="ua"
                 @crop-success="cropSuccess"
+                @crop-upload-success="cropUploadSuccess"
+                @crop-upload-fail="cropUploadFail"
+                @src-file-set="srcFileSet"
                 v-model="show"
                 :width="256"
                 :height="256"
+                url="/api/v1/judges/photo"
+                :params="params"
+                :headers="headers"
                 img-format="png"
               ></my-upload>
               <!-- end -->
@@ -125,7 +131,7 @@
                   <div class="col-2">{{ session.forma }}</div>
                   <div class="col-3">{{ session.involved }}</div>
                   <div class="col-2">{{ session.description }}</div>
-                  <div class="col-1 pr-0 text-center" v-if="isAuth">
+                  <div class="col-1 pr-0 center" v-if="isAuth">
                     <i
                       v-if="session.is_bookmark"
                       class="fas fa-star"
@@ -372,15 +378,15 @@ export default {
       showBtnAddPhoto: true,
       show: false,
       params: {
-        id: null,
+        judge_id: null,
         photo: null
       },
       headers: {
-        // "Content-Type": "application/x-www-form-urlencoded",
+        // "Content-Type": "application/json",
         "X-Requested-With": "XMLHttpRequest",
         Authorization: localStorage.getItem("token")
       },
-      //  imgDataUrl: '', // the datebase64 url of created image
+      imgDataUrl: '', // the datebase64 url of created image
       showModal: false,
       loadData: false,
       judge: {},
@@ -537,19 +543,27 @@ export default {
           }
         })
           .catch(error => {
+            this.judge.data.is_bookmark = 0;
             if (error.response && error.response.status === 401) {
               this.$router.push("/login");
+              this.$toasted.error(
+                "Для виконання цієї дії необхідно увійти в систему",
+                {
+                  theme: "primary",
+                  position: "top-right",
+                  duration: 5000
+                }
+              );
+            } else {
+              this.$toasted.error(
+                "Неможливо додати в закладки, перевірте Ваше інтернет з'єднання або спробуйте пізніше",
+                {
+                  theme: "primary",
+                  position: "top-right",
+                  duration: 5000
+                }
+              );
             }
-            this.judge.data.is_bookmark = 0;
-            this.$toasted.error(
-              "Неможливо додати в закладки, перевірте Ваше інтернет з'єднання або спробуйте пізніше",
-              {
-                theme: "primary",
-                position: "top-right",
-                duration: 5000
-              }
-            );
-            console.log("Bookmark", error);
           });
 
         // якщо вже є закладка - видаляємо
@@ -565,19 +579,27 @@ export default {
           }
         })
           .catch(error => {
+            this.judge.data.is_bookmark = 1;
             if (error.response && error.response.status === 401) {
               this.$router.push("/login");
+              this.$toasted.error(
+                "Для виконання цієї дії необхідно увійти в систему",
+                {
+                  theme: "primary",
+                  position: "top-right",
+                  duration: 5000
+                }
+              );
+            } else {
+              this.$toasted.error(
+                "Перевірте Ваше інтернет з'єднання або спробуйте пізніше",
+                {
+                  theme: "primary",
+                  position: "top-right",
+                  duration: 5000
+                }
+              );
             }
-            this.judge.data.is_bookmark = 1;
-            this.$toasted.error(
-              "Перевірте Ваше інтернет з'єднання або спробуйте пізніше",
-              {
-                theme: "primary",
-                position: "top-right",
-                duration: 5000
-              }
-            );
-            console.log("Bookmark", error.response);
           });
       }
     },
@@ -607,11 +629,16 @@ export default {
           .catch(error => {
             if (error.response && error.response.status === 401) {
               this.$router.push("/login");
-            }
-            // якщо поставити лайк на сервері не вдалось, повертаємо кількість назад
-            this.judge.data.likes += 1;
-            this.judge.data.is_liked = 1;
-            this.$toasted.error(
+              this.$toasted.error(
+                "Для виконання цієї дії необхідно увійти в систему",
+                {
+                  theme: "primary",
+                  position: "top-right",
+                  duration: 5000
+                }
+              );
+            } else {
+              this.$toasted.error(
               "Перевірте Ваше інтернет з'єднання або спробуйте пізніше",
               {
                 theme: "primary",
@@ -619,7 +646,11 @@ export default {
                 duration: 5000
               }
             );
-            console.log("set Likes", error);
+            }
+            // якщо поставити лайк на сервері не вдалось, повертаємо кількість назад
+            this.judge.data.likes += 1;
+            this.judge.data.is_liked = 1;
+            
           });
       } else {
         // set like
@@ -629,7 +660,7 @@ export default {
           method: "put",
           url: `/api/v1/judges/${this.$route.params.id}/like`,
           headers: {
-            "Content-Type": "application/json",
+            //"Content-Type": "application/json",
             "X-Requested-With": "XMLHttpRequest",
             Authorization: localStorage.getItem("token")
           }
@@ -637,11 +668,16 @@ export default {
           .catch(error => {
             if (error.response && error.response.status === 401) {
               this.$router.push("/login");
-            }
-            // якщо поставити лайк на сервері не вдалось, повертаємо кількість назад
-            this.judge.data.likes -= 1;
-            this.judge.data.is_liked = 0;
-            this.$toasted.error(
+              this.$toasted.error(
+                "Для виконання цієї дії необхідно увійти в систему",
+                {
+                  theme: "primary",
+                  position: "top-right",
+                  duration: 5000
+                }
+              );
+            } else {
+              this.$toasted.error(
               "Перевірте Ваше інтернет з'єднання або спробуйте пізніше",
               {
                 theme: "primary",
@@ -649,7 +685,10 @@ export default {
                 duration: 5000
               }
             );
-            console.log("set Likes", error);
+            }
+            // якщо поставити лайк на сервері не вдалось, повертаємо кількість назад
+            this.judge.data.likes -= 1;
+            this.judge.data.is_liked = 0;
           });
       }
     },
@@ -676,19 +715,27 @@ export default {
           .catch(error => {
             if (error.response && error.response.status === 401) {
               this.$router.push("/login");
+              this.$toasted.error(
+                "Для виконання цієї дії необхідно увійти в систему",
+                {
+                  theme: "primary",
+                  position: "top-right",
+                  duration: 5000
+                }
+              );
+            } else {
+              this.$toasted.error(
+                "Перевірте Ваше інтернет з'єднання або спробуйте пізніше",
+                {
+                  theme: "primary",
+                  position: "top-right",
+                  duration: 5000
+                }
+              );
             }
             // якщо поставити лайк на сервері не вдалось, повертаємо кількість назад
             this.judge.data.unlikes += 1;
             this.judge.data.is_unliked = 1;
-            this.$toasted.error(
-              "Перевірте Ваше інтернет з'єднання або спробуйте пізніше",
-              {
-                theme: "primary",
-                position: "top-right",
-                duration: 5000
-              }
-            );
-            console.log("set Likes", error);
           });
       } else {
         // set unlike
@@ -706,23 +753,31 @@ export default {
           .catch(error => {
             if (error.response && error.response.status === 401) {
               this.$router.push("/login");
+              this.$toasted.error(
+                "Для виконання цієї дії необхідно увійти в систему",
+                {
+                  theme: "primary",
+                  position: "top-right",
+                  duration: 5000
+                }
+              );
+            } else {
+              this.$toasted.error(
+                "Перевірте Ваше інтернет з'єднання або спробуйте пізніше",
+                {
+                  theme: "primary",
+                  position: "top-right",
+                  duration: 5000
+                }
+              );
             }
             // якщо поставити лайк на сервері не вдалось, повертаємо кількість назад
             this.judge.data.unlikes -= 1;
             this.judge.data.is_unliked = 0;
-            this.$toasted.error(
-              "Перевірте Ваше інтернет з'єднання або спробуйте пізніше",
-              {
-                theme: "primary",
-                position: "top-right",
-                duration: 5000
-              }
-            );
-            console.log("set Likes", error);
+            
           });
       }
     },
-
     deleteBookmarkCourtSession(session) {
       if (!this.$store.getters.isAuth) {
         this.$router.push("/login");
@@ -737,22 +792,30 @@ export default {
             Authorization: localStorage.getItem("token")
           }
         }).catch(error => {
+            session.is_bookmark = 1;
             if (error.response && error.response.status === 401) {
               this.$router.push("/login");
-            }
-            session.is_bookmark = 1;
-            this.$toasted.error(
-              "Перевірте Ваше інтернет з'єднання або спробуйте пізніше",
-              {
-                theme: "primary",
-                position: "top-right",
-                duration: 5000
-              }
-            );
+              this.$toasted.error(
+                "Для виконання цієї дії необхідно увійти в систему",
+                {
+                  theme: "primary",
+                  position: "top-right",
+                  duration: 5000
+                }
+              );
+            } else {
+              this.$toasted.error(
+                "Перевірте Ваше інтернет з'єднання або спробуйте пізніше",
+                {
+                  theme: "primary",
+                  position: "top-right",
+                  duration: 5000
+                }
+              );
+            } 
           });
       }
     },
-
     addBookmarkCourtSession(session) {
       if (!this.$store.getters.isAuth) {
         this.$router.push("/login");
@@ -771,18 +834,27 @@ export default {
             //
           })
           .catch(error => {
+            session.is_bookmark = 0;
             if (error.response && error.response.status === 401) {
               this.$router.push("/login");
+              this.$toasted.error(
+                "Для виконання цієї дії необхідно увійти в систему",
+                {
+                  theme: "primary",
+                  position: "top-right",
+                  duration: 5000
+                }
+              );
+            } else {
+              this.$toasted.error(
+                "Неможливо додати в закладки, перевірте Ваше інтернет з'єднання або спробуйте пізніше",
+                {
+                  theme: "primary",
+                  position: "top-right",
+                  duration: 5000
+                }
+              );
             }
-            session.is_bookmark = 0;
-            this.$toasted.error(
-              "Неможливо додати в закладки, перевірте Ваше інтернет з'єднання або спробуйте пізніше",
-              {
-                theme: "primary",
-                position: "top-right",
-                duration: 5000
-              }
-            );
           });
       }
     },
@@ -862,24 +934,42 @@ export default {
         ]
       ];
     },
-    // ---------  upload photo ----------- //
+    /* ---------  upload photo ----------- */
     toggleShow() {
       this.show = !this.show;
     },
-  
-    cropSuccess(imgDataUrl, field) {
-      this.params.id = this.judge.data.id;
-      this.params.photo = imgDataUrl;
-      this.$toasted.success(
-          "Фото судді завантажено успішно і буде опубліковано після перевірки адміністратором!", {
-              theme: "primary",
-              position: "top-center",
-              duration: 8000
-          }
-      );
-     this.showBtnAddPhoto = false;
+    srcFileSet(fileName, fileType, fileSize) {
+      // if (fileSize > (1024 * 1024)) {
+      //     this.$toasted.error('Розмір файла має бути не більше 1Мб!', {
+      //       theme: "primary",
+      //       position: "top-right",
+      //       duration: 8000
+      //     });
+      //   this.show = !this.show;
+      // }     
     },
-  }
+    cropSuccess(imgDataUrl, field){
+      this.params.judge_id = this.judge.data.id;
+      this.params.photo = imgDataUrl;
+      setTimeout(() => {
+         this.judge.data.photo = imgDataUrl;
+      }, 5000);
+     
+    },
+    cropUploadSuccess(jsonData, field){
+      this.$toasted.success('Фото успішно додано!', {
+        theme: "primary",
+        position: "top-center",
+        duration: 3000
+      });
+      setTimeout(() => {
+        this.show = !this.show;
+      }, 3000);
+    },
+    cropUploadFail(status, field){
+      console.log('upload fail', status);
+    }
+},
 };
 </script>
 
@@ -966,7 +1056,8 @@ export default {
   }
   .court-sessions-container {
     max-height: 600px;
-    overflow-y: auto;
+    overflow-y: scroll;
+    margin: 20px;
     .court-sessions {
       width: 100%;
       height: auto;
@@ -974,7 +1065,7 @@ export default {
       .fa-star {
         color: $main-color;
         cursor: pointer;
-        font-size: 16px;
+        font-size: 20px;
       }
       .container-component {
         background-color: #ffffff;
@@ -1004,6 +1095,9 @@ export default {
     border-radius: 4px;
     font-size: 12px;
     padding: 3px 10px;
+  }
+  .center {
+    @include alignElement();
   }
 }
 </style>

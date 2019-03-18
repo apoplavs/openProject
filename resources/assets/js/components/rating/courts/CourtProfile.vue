@@ -15,10 +15,10 @@
               </router-link>
               <div class="bookmark pr-3">
                 <span v-if="court.is_bookmark" @click="deleteBookmarkCourt()">
-                  <i class="fa fa-bookmark" aria-hidden="true"></i>
+                  <i class="fa fa-bookmark" aria-hidden="true" title="Видалити з закладок"></i>
                 </span>
                 <span v-if="!court.is_bookmark" @click="setBookmarkCourt()">
-                  <i class="fa fa-bookmark-o" aria-hidden="true"></i>
+                  <i class="fa fa-bookmark-o" aria-hidden="true" title="Додати в закладки"></i>
                 </span>
               </div>
             </div>
@@ -74,7 +74,7 @@
             </div>
           </div>
         </div>
-        <!-- --------------2222222---------------------- -->
+        <!-- --------------2 block---------------------- -->
         <div class="card mt-3 judges">
           <div class="card-header d-flex justify-content-between">
             <span>Судді</span>
@@ -85,11 +85,11 @@
               v-model.trim="searchJudges"
             >
           </div>
-          <div class="card-body p-0">
+          <div class="card-body p-0 m-3">
             <judge-component :judgesList="filterJudges" :littlePhoto="true"/>
           </div>
         </div>
-        <!-- --------------33333333---------------------- -->
+        <!-- --------------3 block---------------------- -->
         <div class="card mt-3 courtSessions">
           <div class="card-header d-flex justify-content-between">
             <span>Засідання</span>
@@ -100,7 +100,7 @@
               v-model.trim="searchSessions"
             >
           </div>
-          <div class="card-body">
+          <div class="card-body p-0 m-4">
             <div v-if="filterSessions.length" class="container-component">
               <div class="row header">
                 <div class="col-1 pl-0">Дата розгляду</div>
@@ -125,8 +125,9 @@
                     v-if="session.is_bookmark"
                     class="fas fa-star"
                     @click="deleteBookmarkSession(session)"
+                    title="Видалити з закладок"
                   ></i>
-                  <i v-else class="far fa-star" @click="setBookmarkSession(session)"></i>
+                  <i v-else class="far fa-star" @click="setBookmarkSession(session)" title="Додати в закладки"></i>
                 </div>
               </div>
             </div>

@@ -85,9 +85,13 @@ class JudgesPhotoTest extends BaseApiTest
         $insert_db_data = $this->getInsertDbData();
         $this->insertDataToDb($insert_db_data);
         $judge_id = $insert_db_data['judges'][0]['id'];
+
+        $file = UploadedFile::fake()->image("photo.{$file_extension}")->size($this->getMaxPhotoSizeInKb());
+        $base64 = "data:image/{$file_extension};base64, " . base64_encode(file_get_contents($file->path()));
+
         $response = $this->post($this->url, [
             'judge_id' => $judge_id,
-            'photo'    => UploadedFile::fake()->image("photo.{$file_extension}")->size($this->getMaxPhotoSizeInKb()),
+            'photo'    => $base64,
         ], $this->headersWithToken($this->login($this->user_data)));
 
         $this->assertCorrectResponse($response);

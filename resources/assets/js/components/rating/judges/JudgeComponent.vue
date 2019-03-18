@@ -44,10 +44,10 @@
               </div>
               <div class="w-25 bookmark">
                 <span v-if="judge.is_bookmark" @click="deleteBookmark(judge)">
-                  <i class="fa fa-bookmark" aria-hidden="true"></i>
+                  <i class="fa fa-bookmark" aria-hidden="true" title="Видалити з закладок"></i>
                 </span>
                 <span v-if="!judge.is_bookmark" @click="setBookmark(judge)">
-                  <i class="fa fa-bookmark-o" aria-hidden="true"></i>
+                  <i class="fa fa-bookmark-o" aria-hidden="true" title="Додати в закладки"></i>
                 </span>
               </div>
             </div>
