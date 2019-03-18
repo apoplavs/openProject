@@ -6,6 +6,7 @@ Vue.use(Router);
 import HomeComponent from '../components/main/HomeComponent.vue';
 import AboutComponent from '../components/main/AboutComponent.vue';
 import ContactsComponent from '../components/main/ContactsComponent.vue';
+import PageNotFound from '../components/main/PageNotFoundComponent.vue';
 
 import Login from '../components/auth/Login.vue';
 import Registration from '../components/auth/Registration.vue';
@@ -120,6 +121,11 @@ export default new Router({
 			component: JudgeComparison,
 			name: 'judge-comparison',
 		},
+        {
+            path: '*',
+            component: PageNotFound,
+            name: 'not-found',
+        },
     ]
 });
 
