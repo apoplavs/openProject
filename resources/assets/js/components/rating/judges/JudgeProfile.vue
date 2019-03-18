@@ -131,7 +131,7 @@
                   <div class="col-2">{{ session.forma }}</div>
                   <div class="col-3">{{ session.involved }}</div>
                   <div class="col-2">{{ session.description }}</div>
-                  <div class="col-1 pr-0 text-center" v-if="isAuth">
+                  <div class="col-1 pr-0 center" v-if="isAuth">
                     <i
                       v-if="session.is_bookmark"
                       class="fas fa-star"
@@ -997,7 +997,7 @@ export default {
       .fa-star {
         color: $main-color;
         cursor: pointer;
-        font-size: 16px;
+        font-size: 20px;
       }
       .container-component {
         background-color: #ffffff;
@@ -1027,6 +1027,9 @@ export default {
     border-radius: 4px;
     font-size: 12px;
     padding: 3px 10px;
+  }
+  .center {
+    @include alignElement();
   }
 }
 </style>

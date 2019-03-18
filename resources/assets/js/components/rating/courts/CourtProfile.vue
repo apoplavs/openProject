@@ -15,10 +15,10 @@
               </router-link>
               <div class="bookmark pr-3">
                 <span v-if="court.is_bookmark" @click="deleteBookmarkCourt()">
-                  <i class="fa fa-bookmark" aria-hidden="true"></i>
+                  <i class="fa fa-bookmark" aria-hidden="true" title="Видалити з закладок"></i>
                 </span>
                 <span v-if="!court.is_bookmark" @click="setBookmarkCourt()">
-                  <i class="fa fa-bookmark-o" aria-hidden="true"></i>
+                  <i class="fa fa-bookmark-o" aria-hidden="true" title="Додати в закладки"></i>
                 </span>
               </div>
             </div>
@@ -125,8 +125,9 @@
                     v-if="session.is_bookmark"
                     class="fas fa-star"
                     @click="deleteBookmarkSession(session)"
+                    title="Видалити з закладок"
                   ></i>
-                  <i v-else class="far fa-star" @click="setBookmarkSession(session)"></i>
+                  <i v-else class="far fa-star" @click="setBookmarkSession(session)" title="Додати в закладки"></i>
                 </div>
               </div>
             </div>
