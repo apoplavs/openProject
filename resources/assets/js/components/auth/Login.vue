@@ -146,7 +146,7 @@ export default {
             .catch(error => {
               if (error.response && error.response) {
                 if (error.response.data && error.response.data.message) {
-                  this.$toasted.error('Даний email не зареєстрований!', {
+                  this.$toasted.error('Не вірний email або пароль!', {
                     theme: "primary",
                     position: "top-right",
                     duration: 8000

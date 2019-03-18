@@ -15,7 +15,6 @@
                         <p class="control has-icon has-icon-right">
                             <input id="email" type="email" class="form-control" name="email" v-model="user.email" v-validate="'required|email'" :class="{'input': true, 'is-danger': errors.has('email') }">
                             <small>
-                                <i v-show="errors.has('email')" class="fa fa-warning"></i>
                                 <span v-show="errors.has('email')" class="help is-danger">{{ errors.first('email') }}</span>
                             </small>
                         </p>

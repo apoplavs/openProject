@@ -18,7 +18,9 @@
                 field="img"
                 langType="ua"
                 @crop-success="cropSuccess"
-                @srcFileSet="srcFileSet"
+                @crop-upload-success="cropUploadSuccess"
+                @crop-upload-fail="cropUploadFail"
+                @src-file-set="srcFileSet"
                 v-model="show"
                 :width="256"
                 :height="256"
@@ -864,89 +866,42 @@ export default {
         ]
       ];
     },
-    // ---------  upload photo ----------- //
-      toggleShow() {
-				this.show = !this.show;
-			},
-
-      srcFileSet(fileName, fileType, fileSize) {
-        console.log('_________________-sdgsdg_________________');
-        
-        console.log('fileName', fileName);
-        console.log('fileType', fileType);
-        console.log('fileSize', fileSize);
-        
-      },
-			cropSuccess(imgDataUrl, field){
-        console.log('-------- crop success --------',imgDataUrl);
-        this.params.judge_id = this.judge.data.id;
-        this.params.photo = imgDataUrl;
-        console.log(this.params);
-        console.log('field', field.fileSize);
-        
-    
-        
-        // axios({
-        //   method: "post",
-        //   url: '/api/v1/judges/photo',
-        //   headers: this.headers,
-        //   params: this.params
-        // })
-        //   .then(response => {
-        //     console.log(response);
-        //   })
-        //   .catch(error => {
-        //     if (error.response && error.response.status === 401) {
-        //       this.$router.push("/login");
-        //     }
-        //   });
-			
-			},
-			/**
-			 * upload success
-			 *
-			 * [param] jsonData  server api return data, already json encode
-			 * [param] field
-			 */
-			cropUploadSuccess(jsonData, field){
-				console.log('-------- upload success --------');
-				console.log(jsonData);
-        console.log('field: -------------', field);
-        	this.judge.data.photo = imgDataUrl;
-			},
-			/**
-			 * upload fail
-			 *
-			 * [param] status    server api return error status, like 500
-			 * [param] field
-			 */
-			cropUploadFail(status, field){
-				console.log('-------- upload fail --------');
-				console.log(status);
-				console.log('field: ' + field);
-      }
+    /* ---------  upload photo ----------- */
+    toggleShow() {
+      this.show = !this.show;
     },
-
-
-
-
-    // toggleShow() {
-    //   this.show = !this.show;
-    // },
-  
-    // cropSuccess(imgDataUrl, field) {
-    //   this.params.id = this.judge.data.id;
-    //   this.params.photo = imgDataUrl;
-    //   this.$toasted.success(
-    //       "Фото судді завантажено успішно і буде опубліковано після перевірки адміністратором!", {
-    //           theme: "primary",
-    //           position: "top-center",
-    //           duration: 8000
-    //       }
-    //   );
-    //  this.showBtnAddPhoto = false;
-    // },
-  // }
+    srcFileSet(fileName, fileType, fileSize) {
+      // if (fileSize > (1024 * 1024)) {
+      //     this.$toasted.error('Розмір файла має бути не більше 1Мб!', {
+      //       theme: "primary",
+      //       position: "top-right",
+      //       duration: 8000
+      //     });
+      //   this.show = !this.show;
+      // }     
+    },
+    cropSuccess(imgDataUrl, field){
+      this.params.judge_id = this.judge.data.id;
+      this.params.photo = imgDataUrl;
+      setTimeout(() => {
+         this.judge.data.photo = imgDataUrl;
+      }, 5000);
+     
+    },
+    cropUploadSuccess(jsonData, field){
+      this.$toasted.success('Фото успішно додано!', {
+        theme: "primary",
+        position: "top-center",
+        duration: 3000
+      });
+      setTimeout(() => {
+        this.show = !this.show;
+      }, 3000);
+    },
+    cropUploadFail(status, field){
+      console.log('upload fail', status);
+    }
+},
 };
 </script>
 
@@ -1033,7 +988,8 @@ export default {
   }
   .court-sessions-container {
     max-height: 600px;
-    overflow-y: auto;
+    overflow-y: scroll;
+    margin: 20px;
     .court-sessions {
       width: 100%;
       height: auto;

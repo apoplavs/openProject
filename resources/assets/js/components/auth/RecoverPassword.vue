@@ -62,7 +62,6 @@ export default {
   data() {
     return {
       user: {
-        token: "",
         password: "",
         repassword: ""
       }
@@ -72,12 +71,15 @@ export default {
     validateBeforeSubmit() {
       this.$validator.validateAll().then(result => {
         if (result) {
-          this.user.token = this.$route.query.token;
+            let userData = {};
+            userData.token = this.$route.query.token;
+            userData.password = this.user.password;
+          //console.log('this.$route.query.token', userData)
           axios
-            .post("/api/v1/user/password/new", this.user, {
+            .post("/api/v1/user/password/new", userData, {
               headers: {
                 "Content-Type": "application/json",
-                "X-Requested-With": "XMLHttpRequest"
+                "X-Requested-With": "XMLHttpRequest",
               }
             })
             .then(response => {
@@ -90,7 +92,7 @@ export default {
             })
             .catch(error => {
               this.$toasted.error(
-                "Щось пішло не так, перевірте Ваше інтернет з'єднання, або спробуйте пізніше!",
+                "Щось пішло не так, перевірте Ваше інтернет з'єднання або спробуйте пізніше!",
                 {
                   theme: "primary",
                   position: "top-right",

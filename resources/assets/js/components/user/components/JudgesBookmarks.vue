@@ -1,7 +1,6 @@
 <template>
   <div class="judgesBookmarks">
     <!-- Main list -->
-    <!-- <div class="list-data-container"> -->
     <div class="card">
       <div class="card-header d-flex justify-content-between">
         <span>

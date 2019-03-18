@@ -3,7 +3,7 @@
     <div class="card-body">
       <div
         v-if="!this.courtsList || this.courtsList.length == 0"
-      >За заданими параметрами нічого не знайдено</div>
+      >За заданими параметрами нічого не знайдено...</div>
       <div v-if="this.courtsList && this.courtsList.length > 0">
         <div
           class="court-component row mb-3"
