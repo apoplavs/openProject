@@ -26,6 +26,7 @@ use Carbon\Carbon;
 class JudgesController extends Controller
 {
      const TIMEZONE = 'Europe/Kiev';
+     const AWS_S3 = 'https://s3.eu-central-1.amazonaws.com/toecyd/';
     /**
      * Display a listing of the resource.
      *
@@ -2002,7 +2003,7 @@ class JudgesController extends Controller
      */
     public function addPhoto(Request $request)
     {
-        $sizeInKb = pow(2, 10);
+        $sizeInKb = pow(2, 11);
         $request->validate([
             'judge_id' => 'required|int|min:1',
             'photo'    => "required|base64image|base64max:{$sizeInKb}|base64mimes:jpeg,png",
@@ -2040,8 +2041,8 @@ class JudgesController extends Controller
             base64_decode($base64),
             'public'
         );
-        // @todo адресу AWS потім винести в константу
-        $judge->photo = 'https://s3.eu-central-1.amazonaws.com/toecyd/'.$path;
+
+        $judge->photo = self::AWS_S3.$path;
         // Для отримання лінка використовуємо Judge::getPhotoStorage()->url($path)
 
         $judge->save();
@@ -2103,7 +2104,7 @@ class JudgesController extends Controller
     }
 
 	/**
-	 * виконується, якщо застосовувалась фільтрація до списку суддів
+	 * розразунок загальної статистики
 	 * @return array
 	 */
 	private function countCommonStatistic($adminoffence_statistic, $criminal_statistic, $civil_statistic) {
