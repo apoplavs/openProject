@@ -1,5 +1,5 @@
 <template>
-  <div class="footer">
+  <div class="footer min-width">
     <footer class="page-footer font-small unique-color-dark">
        <hr>
         <div class="foter-container text-left mt-5">

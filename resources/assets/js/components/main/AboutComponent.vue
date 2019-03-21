@@ -60,14 +60,14 @@
                 </div>
             </div>
         </section>
-        <!-- /Services section -->
-        <section class="our-webcoderskull padding-lg">
+        <!-- Services section -->
+        <section class="our-webcoderskull padding-lg min-width">
             <div class="wrap-container">
                 <div class="row heading heading-icon">
                     <h2>Наша команда</h2>
                 </div>
                 <ul class="row">
-                    <li class="col">
+                    <li class="col-3">
                         <div class="cnt-block equal-hight" style="height: 349px;">
                             <figure><img src="../../../images/abaranov.jpg" class="img-responsive" alt=""></figure>
                             <h3>Баранов Олександр</h3>
@@ -78,11 +78,11 @@
                             </ul>
                         </div>
                     </li>
-                    <li class="col-12 col-md-6 col-lg-3">
+                    <li class="col-3">
                         <div class="cnt-block equal-hight" style="height: 349px;">
                             <figure><img src="../../../images/apoplavs.jpeg" class="img-responsive" alt=""></figure>
                             <h3>Поплавський Андрій</h3>
-                            <p>Full Stack Developer</p>
+                            <p>Team Lead</p>
                             <ul class="follow-us clearfix">
                                 <li><a href="https://www.facebook.com/andriy.poplavskiy.5" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
                                 <li><a href="https://github.com/apoplavs" target="_blank"><i class="fa fa-github" aria-hidden="true"></i></a></li>
@@ -91,7 +91,7 @@
                             </ul>
                         </div>
                     </li>
-                    <li class="col-12 col-md-6 col-lg-3">
+                    <li class="col-3">
                         <div class="cnt-block equal-hight" style="height: 349px;">
                             <figure><img src="../../../images/tprysiazh.jpg" class="img-responsive" alt=""></figure>
                             <h3>Тетяна Присяжнюк</h3>
@@ -103,10 +103,10 @@
                             </ul>
                         </div>
                     </li>
-                    <li class="col-12 col-md-6 col-lg-3">
+                    <li class="col-3">
                         <div class="cnt-block equal-hight" style="height: 349px;">
                             <figure><img src="http://www.webcoderskull.com/img/team2.png" class="img-responsive" alt=""></figure>
-                            <h3>Mr. Ingnito</h3>
+                            <h3>Mr. Incognito</h3>
                             <!-- <h3>Слуцький Олександр</h3> -->
                             <p>Back End Developer</p>
                             <ul class="follow-us clearfix">

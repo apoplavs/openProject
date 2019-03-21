@@ -501,8 +501,10 @@ export default {
         .catch(error => {
           if (error.response && error.response.status === 401) {
             this.$router.push("/login");
-          }
-          console.log("error");
+          } else {
+             this.$router.push("/page-not-found");
+          } 
+          //console.log("error");
         });
     } else {
       axios
@@ -520,7 +522,9 @@ export default {
         .catch(error => {
           if (error.response && error.response.status === 401) {
             this.$router.push("/login");
-          }
+          } else {
+             this.$router.push("/page-not-found");
+          } 
           console.log(error);
         });
     }
