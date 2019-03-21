@@ -1,7 +1,7 @@
 <template>
   <div>
     <header-component/>
-    <div :class="{'content-wrapper':  $route.fullPath !== '/' &&  $route.fullPath !== '/about'}">
+    <div :class="{'content-wrapper':  $route.fullPath !== '/' &&  $route.fullPath !== '/about', 'min-width': $route.fullPath === '/'}">
         <router-view  />
     </div>
     <footer-component/>

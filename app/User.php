@@ -50,8 +50,8 @@ class User extends Authenticatable
 			->first();
 		
 		if (empty($user) || $user->usertype == 4) {
-			return Lang::get('passwords.user'); // користувача не існує
-		} else if ($user->usertype == 7) { //todo пізніше виправити на 1 // не підтверджений email
+			return Lang::get('passwords.user'); // користувача не існує (видалений)
+		} else if ($user->usertype == 1) {  // не підтверджений email
 			return Lang::get('auth.unconfirmed');
 		} else if (!is_null($user->google_id) && !Auth::validate($credentials)) {
 			return Lang::get('auth.via_google');
