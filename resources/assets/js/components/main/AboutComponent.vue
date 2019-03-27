@@ -261,8 +261,8 @@
         display: inline-block;
     }
     .our-webcoderskull {
-        background-color: #4686a08f;
-        background-image: linear-gradient(to bottom, rgb(48, 129, 207) 0%, rgb(130, 219, 133) 100%);
+        background-color: $main-color;
+       /* background-image: linear-gradient(to bottom, rgb(48, 129, 207) 0%, rgb(130, 219, 133) 100%);*/
     }
     .our-webcoderskull .cnt-block {
         float: left;

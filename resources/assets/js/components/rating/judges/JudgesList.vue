@@ -100,7 +100,14 @@
     },
     methods: {
       // порівняння суддів
-      addToCompare(judge_id) { 
+      addToCompare(judge_id) {
+        this.$toasted.success('<router-link to="/judge-comparison" tag="li" class="nav-item"><a class="nav-link"><i class="fas fa-balance-scale p-1" aria-hidden="true" title="Порівняння"></i>Порівняти</a></router-link>', {
+          theme: "outline",
+          position: "top-right",
+          duration: 0,
+          tapToDismiss: false
+        });
+
         let judge_compare = this.$store.getters.judge_compare;
         // якщо суддя вже був доданий раніше
         if (judge_compare.indexOf(judge_id) != -1) {

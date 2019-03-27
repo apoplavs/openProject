@@ -20,9 +20,9 @@
           <router-link to="/about" tag="li" class="nav-item" >
             <a class="nav-link" :class="{'active': $route.fullPath === '/about'}">Про нас</a>
           </router-link>
-          <router-link to="/contacts" tag="li" class="nav-item" >
+         <!--  <router-link to="/contacts" tag="li" class="nav-item" >
             <a class="nav-link" :class="{'active': $route.fullPath === '/contacts'}">Контакти</a>
-          </router-link>
+          </router-link> -->
           <router-link to="/judge-comparison" tag="li" class="nav-item">
             <a class="nav-link"><i class="fas fa-balance-scale p-1" aria-hidden="true" title="Порівняння"><span class="ml-1">{{ judge_compare.length ?  judge_compare.length : null }}</span> </i></a>
           </router-link>

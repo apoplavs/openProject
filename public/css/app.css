@@ -29,19 +29,19 @@ input::-moz-focus-inner {
 }
 
 .b-confirm {
-  color: #4c88bd;
+  color: #2b989b;
   background-color: #ffffff;
-  border-color: #4c88bd;
+  border-color: #2b989b;
 }
 
 .b-confirm:active {
-  color: #4c88bd;
+  color: #2b989b;
   background-color: #ffffff;
-  border-color: #4c88bd;
+  border-color: #2b989b;
 }
 
 .b-confirm:hover {
-  background-color: #4c88bd;
+  background-color: #2b989b;
   color: #ffffff;
 }
 
@@ -76,8 +76,8 @@ button:focus {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  background-color: #4c88bd;
-  border-bottom: 2px solid #417baf;
+  background-color: #2b989b;
+  border-bottom: 2px solid #258487;
   color: #ffffff;
   font-size: 1.5rem;
 }
@@ -101,7 +101,7 @@ i.fa-edit {
 }
 
 .fa-line-chart {
-  color: #4c88bd;
+  color: #2b989b;
   font-size: 1.1rem;
 }
 
@@ -169,14 +169,14 @@ i.fa-edit {
 }
 
 .pagination .bg-active {
-  background-color: #4c88bd;
-  border-color: #4c88bd;
+  background-color: #2b989b;
+  border-color: #2b989b;
 }
 
 .pagination button:active,
 .pagination button:focus {
-  background-color: #4c88bd;
-  border-color: #4c88bd;
+  background-color: #2b989b;
+  border-color: #2b989b;
 }
 
 .pagination div.pr-2.leading-loose {
@@ -234,7 +234,7 @@ i.fa-edit {
 }
 
 .rating {
-  color: #4c88bd;
+  color: #2b989b;
 }
 
 .bookmark {
