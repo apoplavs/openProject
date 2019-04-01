@@ -82,7 +82,7 @@
                         <div class="cnt-block equal-hight" style="height: 349px;">
                             <figure><img src="../../../images/apoplavs.jpeg" class="img-responsive" alt=""></figure>
                             <h3>Поплавський Андрій</h3>
-                            <p>Full Stack Developer</p>
+                            <p>Team Lead</p>
                             <ul class="follow-us clearfix">
                                 <li><a href="https://www.facebook.com/andriy.poplavskiy.5" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
                                 <li><a href="https://github.com/apoplavs" target="_blank"><i class="fa fa-github" aria-hidden="true"></i></a></li>
@@ -106,7 +106,7 @@
                     <li class="col-3">
                         <div class="cnt-block equal-hight" style="height: 349px;">
                             <figure><img src="http://www.webcoderskull.com/img/team2.png" class="img-responsive" alt=""></figure>
-                            <h3>Mr. Ingnito</h3>
+                            <h3>Mr. Incognito</h3>
                             <!-- <h3>Слуцький Олександр</h3> -->
                             <p>Back End Developer</p>
                             <ul class="follow-us clearfix">

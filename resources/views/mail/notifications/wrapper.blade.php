@@ -46,7 +46,7 @@
 		
 		<div id="unsubscribe">
 			Даний лист відправлений системою <b>ТОЕсуд</b><br>
-					<a href="{{url('/user-profile/settings')}}">Змінити налаштування повідомлень</a>
+					<a href="{{url('/settings')}}">Змінити налаштування повідомлень</a>
 		</div>
 	</footer>
 </body>
