@@ -344,10 +344,10 @@
       </div>
       
     </div>
-     <div v-if="loadData && judge.common_statistic.competence === 0 && judge.common_statistic.timeliness === 0" class="mt-2 ml-2">
-      <b>Даних для статистики недостатньо!</b>
+     <div v-if="loadData && judge.common_statistic.competence == 0 || (judge.common_statistic && judge.common_statistic.timeliness == 0)" class="mt-4 ml-2 text-center">
+      <b>Недостатньо даних для відображення повноцінної аналітики</b>
     </div>
-    <!--<GChart tupe="PieChart"/>-->
+    <!-- <GChart tupe="PieChart"/> -->
     <!-- modal change status -->
     <change-status v-if="showModal" :judgeData="judge.data" @closeModal="showModal = !showModal"/>
   </div>

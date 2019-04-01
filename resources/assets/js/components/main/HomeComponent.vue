@@ -105,6 +105,10 @@ export default {
   position: relative;
   bottom: 40px;
 }
+i.fa, i.fas {
+  color: $text-color;
+}
+
 
 .fa-user-tie {
   font-size: 3rem;

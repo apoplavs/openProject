@@ -7,11 +7,11 @@
                 <h2 class="section-title mb-2 h1">Про нас</h2>
                 <p class="text-center text-muted h5">Допомагаємо знайомитись із суддями до першого судового засідання</p>
                 <div class="row mt-5">
-                    <div class="col ">
+                    <div class="col">
                         <div class="card">
                             <div class="card-block block-1">
                                 <h3 class="card-title">ML</h3>
-                                <p class="card-text">За допомогою алгоритмів machine learning ми аналізуємо відкритті дані Реєстру судових рішень що дозволяє визначати судові тенденції кожного судді.</p>
+                                <p class="card-text">Аналіз відкритих даних ЄДРСРУ за допомогою алгоритмів machine learning, що дозволяє визначати судові тенденції кожного судді.</p>
                             </div>
                         </div>
                     </div>
@@ -27,7 +27,7 @@
                         <div class="card">
                             <div class="card-block block-3">
                                 <h3 class="card-title">Аналітика в графіках</h3>
-                                <p class="card-text">Відображення результатів аналізу судової практики конкретного судді у вигляді зручних порівняльних графіків, що дозволяє суттєво зекономити час юриста.</p>
+                                <p class="card-text">Відображення результатів аналізу судової практики конкретного судді у вигляді зручних порівняльних графіків.</p>
                             </div>
                         </div>
                     </div>
@@ -37,7 +37,7 @@
                         <div class="card">
                             <div class="card-block block-4">
                                 <h3 class="card-title">Актуальність</h3>
-                                <p class="card-text">Інформація про наявність судді на робочому місці, відстеження його судових засідань, формування власної бази крутих судових рішень та багато іншого.</p>
+                                <p class="card-text">Інформація про наявність судді на робочому місці, відстеження його судових засідань, формування власної бази корисних судових рішень та багато іншого.</p>
                             </div>
                         </div>
                     </div>
@@ -105,7 +105,7 @@
                     </li>
                     <li class="col-3">
                         <div class="cnt-block equal-hight" style="height: 349px;">
-                            <figure><img src="http://www.webcoderskull.com/img/team2.png" class="img-responsive" alt=""></figure>
+                            <figure><img src="http://www.webcoderskull.com/img/team4.png" class="img-responsive" alt=""></figure>
                             <h3>Mr. Incognito</h3>
                             <!-- <h3>Слуцький Олександр</h3> -->
                             <p>Back End Developer</p>
@@ -151,6 +151,7 @@
         -webkit-transition: .5s all ease;
         -moz-transition: .5s all ease;
         transition: .5s all ease;
+        min-height: 200px;
     } 
     #what-we-do .card:hover {
         -webkit-box-shadow: 5px 7px 9px -4px rgb(158, 158, 158);
@@ -261,8 +262,8 @@
         display: inline-block;
     }
     .our-webcoderskull {
-        background-color: #4686a08f;
-        background-image: linear-gradient(to bottom, rgb(48, 129, 207) 0%, rgb(130, 219, 133) 100%);
+        background-color: $main-color;
+       /* background-image: linear-gradient(to bottom, rgb(48, 129, 207) 0%, rgb(130, 219, 133) 100%);*/
     }
     .our-webcoderskull .cnt-block {
         float: left;

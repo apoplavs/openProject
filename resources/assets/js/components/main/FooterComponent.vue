@@ -5,7 +5,7 @@
         <div class="foter-container text-left mt-5">
           <div class="row m-3">
             <div class="col-3  mb-4">
-              <h6 class="text-uppercase font-weight-bold">Open Project</h6>
+              <h6 class="text-uppercase font-weight-bold">ТОЕ суд</h6>
               <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
               <p>Інформаційна платформа, де відображені показники діяльності судової системи за окремим суддею на основі відкритих даних ЄДРСРУ.</p>
             </div>
@@ -43,11 +43,14 @@
                 <i class="fas fa-envelope mr-2"></i> <a href="mailto:toecyd@gmail.com">toecyd@gmail.com</a></p>
               <p>
                 <i class="fas fa-phone mr-2"></i> <a href="tel:+380977023034">+ 38 097 702 3034</a></p>
+              <p>
+                <i class="fab fa-facebook-f white-text mr-4"></i>
+                <a class="fb-ic" href="https://www.facebook.com/TOEcyd/" target="_blank">@ТОЕсуд</a></p>  
             </div>
           </div>
         </div>
         <div class="footer-copyright text-center py-3">© 2018 - 2019 Copyright:
-          <a href="https://toecyd.top"> Open Project</a>
+          <a href="https://toecyd.top"> ТОЕ суд</a>
           &nbsp; 
           <a class="fb-ic" href="https://www.facebook.com/TOEcyd/" target="_blank">
             <i class="fab fa-facebook-f white-text mr-4"> </i>
