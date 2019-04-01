@@ -103,6 +103,10 @@ class Judge extends Model
                 ->when($powers_expired == false, function ($query) {
                     return $query->where('judges.status', '!=', 5);
                 })
+                // якщо задане сортування за рейтингом - не відображаємо суддів в яких немає рейтингу
+                ->when(($sort_order == 3 || $sort_order == 4), function ($query) {
+                    return $query->where('judges.rating', '>', 0);
+                })
                 // якщо застосовано пошук
                 ->when(!empty($search), function ($query) use ($search) {
                     return $query->where('judges.surname', 'LIKE', $search . '%');
@@ -153,6 +157,10 @@ class Judge extends Model
                 // якщо не переданий аргумент щоб показувати суддів в яких закінчились повноваження - значить упускємо їх при вибірці
                 ->when($powers_expired == false, function ($query) {
                     return $query->where('judges.status', '!=', 5);
+                })
+                // якщо задане сортування за рейтингом - не відображаємо суддів в яких немає рейтингу
+                ->when(($sort_order == 3 || $sort_order == 4), function ($query) {
+                    return $query->where('judges.rating', '>', 0);
                 })
                 // якщо застосовано пошук
                 ->when(!empty($search), function ($query) use ($search) {
