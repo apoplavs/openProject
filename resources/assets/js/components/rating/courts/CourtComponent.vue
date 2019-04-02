@@ -160,7 +160,6 @@ export default {
         font-weight: 700;
       }
     }
-    .part-1 > div:last-child,
     .part-2 > div:first-child {
       color: $primary;
     }
