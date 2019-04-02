@@ -337,7 +337,7 @@ export default {
       @include alignElement(column);
       .fa-university {
         color: $primary;
-        font-size: 1.8rem;
+        font-size: 2.8rem;
         margin-bottom: 10px;
       }
     }
@@ -374,7 +374,6 @@ export default {
         }
       }
       .part-1 {
-        & > div:first-child,
         & > div:last-child {
           color: $primary;
         }

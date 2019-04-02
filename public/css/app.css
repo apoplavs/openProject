@@ -1,4 +1,20 @@
-@import url(https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&subset=cyrillic);@import url(https://fonts.googleapis.com/css?family=Coiny);body {
+@import url(https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&subset=cyrillic);@import url(https://fonts.googleapis.com/css?family=Coiny);/*
+scroll bar for google chrome
+*/
+
+body::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 10px;
+  display: block;
+}
+
+body::-webkit-scrollbar-thumb {
+  border-radius: 2px;
+  background-color: #2b989b;
+  -webkit-box-shadow: 0 0 250px 500px rgba(205, 205, 205, 0.5);
+}
+
+body {
   background-color: #F5F6F7;
   font-family: 'Roboto', sans-serif;
   font-weight: 400;
