@@ -147,7 +147,7 @@ export default {
               if (error.response && error.response) {
                 if (error.response.data && error.response.data.message) {
                   this.$toasted.error('Не вірний email або пароль!', {
-                    theme: "primary",
+                    theme: "toasted-primary",
                     position: "top-right",
                     duration: 8000
                   });
@@ -155,7 +155,7 @@ export default {
                 }
               } else {
                 this.$toasted.error("Щось пішло не так :( Cпробуйте пізніше", {
-                  theme: "primary",
+                  theme: "toasted-primary",
                   position: "top-right",
                   duration: 8000
                 });
@@ -164,7 +164,7 @@ export default {
             });
         } else {
           this.$toasted.error("Заповніть коректно всі поля!", {
-            theme: "primary",
+            theme: "toasted-primary",
             position: "top-right",
             duration: 8000
           });
