@@ -144,22 +144,20 @@ export default {
               }
             })
             .catch(error => {
-              if (error.response && error.response) {
-                if (error.response.data && error.response.data.message) {
-                  this.$toasted.error('Не вірний email або пароль!', {
-                    theme: "toasted-primary",
-                    position: "top-right",
-                    duration: 8000
-                  });
-                  this.isLoading = false;
-                }
+              this.isLoading = false;
+              if (error.response && error.response.data && error.response.data.message) {
+                this.$toasted.error(error.response.data.message, {
+                  theme: "toasted-primary",
+                  position: "top-right",
+                  duration: 8000
+                });
+                
               } else {
                 this.$toasted.error("Щось пішло не так :( Cпробуйте пізніше", {
                   theme: "toasted-primary",
                   position: "top-right",
                   duration: 8000
                 });
-                this.isLoading = false;
               }
             });
         } else {
@@ -168,7 +166,7 @@ export default {
             position: "top-right",
             duration: 8000
           });
-          this.isLoading = false;
+          this.isLoading = false;  
         }
       });
     }

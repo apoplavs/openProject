@@ -159,7 +159,7 @@ export default {
         .then(response => {
         	if (session.note) {
 				this.$toasted.success("Примітку оновлено", {
-					theme: "primary",
+					theme: "toasted-primary",
 					position: "top-right",
 					duration: 3000
 				});
