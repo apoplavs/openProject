@@ -7,18 +7,22 @@
                         <a class="nav-link tab" href="javascript:" @click="setActiveTab(1)">Судові засідання</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link tab" href="javascript:" @click="setActiveTab(2)">Судді</a>
+                        <a class="nav-link tab" href="javascript:" @click="setActiveTab(2)">Шаблони</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link tab" href="javascript:" @click="setActiveTab(3)">Судові установи</a>
+                        <a class="nav-link tab" href="javascript:" @click="setActiveTab(3)">Судді</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link tab" href="javascript:" @click="setActiveTab(4)">Історія переглядів</a>
+                        <a class="nav-link tab" href="javascript:" @click="setActiveTab(4)">Судові установи</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link tab" href="javascript:" @click="setActiveTab(5)">Історія переглядів</a>
                     </li>
                 </ul>
             </div>
              <div class="tab-content w-100">
                 <court-sessions v-if="tabs.sessions"/>
+                <templates v-if="tabs.templates"/>
                 <judges-bookmarks v-if="tabs.judges"/>
                 <courts-bookmarks v-if="tabs.courts"/>
                 <view-history v-if="tabs.history"/>
@@ -29,6 +33,7 @@
 
 <script>
     import CourtSessions from './components/CourtSessions.vue';
+    import Templates from './components/Templates.vue';
     import JudgesBookmarks from './components/JudgesBookmarks.vue';
     import CourtsBookmarks from './components/CourtsBookmarks.vue';
     import ViewHistory from './components/ViewHistory.vue';
@@ -37,6 +42,7 @@
         name: "UserProfile",
         components: {
             CourtSessions,
+            Templates,
             JudgesBookmarks,
             CourtsBookmarks,
             ViewHistory
@@ -45,6 +51,7 @@
             return {
                 tabs: {
                     sessions: false,
+                    templates: false,
                     judges: false,
                     courts: false,
                     history: false
