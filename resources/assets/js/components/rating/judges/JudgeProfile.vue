@@ -338,7 +338,9 @@
           </div>
           <div class="card w-50 mt-2 ml-1">
             <div class="card-header">Адміністративне судочинство</div>
-            <div class="card-body">В розробці...</div>
+            <div class="card-body">В розробці...
+            <line-chart :data-set="judge"></line-chart>
+            </div>
           </div>
         </div>
       </div>
@@ -355,6 +357,7 @@
 
 <script>
 import { GChart } from "vue-google-charts";
+import LineChart from '../../charts/LineChart.js'
 import DoughnutChart from "vue-doughnut-chart";
 import _ from "lodash";
 import MyUpload from "vue-image-crop-upload";
@@ -368,6 +371,7 @@ export default {
   components: {
     Spinner,
     GChart,
+    LineChart,
     DoughnutChart,
     StatusComponent,
     ChangeStatus,
