@@ -21,13 +21,35 @@ export default {
                   pointHoverBackgroundColor: '#fff',
 
                   //Data to be represented on y-axis
-                  data: [40, 55, 30, 50, 90, 50]
+                  data: [
+                      this.dataSet.civil_statistic.cases_on_time,
+                      this.dataSet.civil_statistic.approved_by_appeal,
+                      this.dataSet.criminal_statistic.cases_on_time,
+                      this.dataSet.criminal_statistic.approved_by_appeal,
+                      75, 50
+
+                  ]
                },
 
             ]
          },
          //Chart.js options that controls the appearance of the chart
          options: {
+            legend: {
+               display: false,
+               position: 'top',
+               labels: {
+                  boxWidth: 80,
+                  fontColor: 'rgb(60, 180, 100)'
+               }
+            },
+            tooltips: {
+               callbacks: {
+                  label: function(tooltipItem) {
+                     return Number(tooltipItem.yLabel) + '%';
+                  }
+               }
+            },
             scales: {
                yAxes: [{
                   display: false,
@@ -44,9 +66,6 @@ export default {
                      display: false
                   }
                }]
-            },
-            legend: {
-               display: false
             },
             responsive: true,
             maintainAspectRatio: false
