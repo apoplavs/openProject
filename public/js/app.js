@@ -71203,7 +71203,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                pointHoverBackgroundColor: '#fff',
 
                //Data to be represented on y-axis
-               data: [this.dataSet.civil_statistic.cases_on_time, this.dataSet.civil_statistic.approved_by_appeal, this.dataSet.criminal_statistic.cases_on_time, this.dataSet.criminal_statistic.approved_by_appeal, 75, 50]
+               data: [this.dataSet.civil_statistic.cases_on_time, this.dataSet.civil_statistic.approved_by_appeal, this.dataSet.criminal_statistic.cases_on_time, this.dataSet.criminal_statistic.approved_by_appeal, this.dataSet.adminoffence_statistic.cases_on_time, this.dataSet.adminoffence_statistic.approved_by_appeal]
             }]
          },
          //Chart.js options that controls the appearance of the chart

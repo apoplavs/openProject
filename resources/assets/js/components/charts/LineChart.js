@@ -26,8 +26,8 @@ export default {
                       this.dataSet.civil_statistic.approved_by_appeal,
                       this.dataSet.criminal_statistic.cases_on_time,
                       this.dataSet.criminal_statistic.approved_by_appeal,
-                      75, 50
-
+                      this.dataSet.adminoffence_statistic.cases_on_time,
+                      this.dataSet.adminoffence_statistic.approved_by_appeal,
                   ]
                },
 
