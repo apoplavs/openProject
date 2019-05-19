@@ -55,6 +55,9 @@ class UpdateJudgeRating extends Command
 				$judges_with_statistic[$key]->rating = $this->median($arr_statistic);
 				$judges_with_statistic[$key]->save();
 				echo "for judge {$judge->id} rating is ready".PHP_EOL;
+			} else {
+				$judges_with_statistic[$key]->rating = 0;
+				$judges_with_statistic[$key]->save();
 			}
         }
         
@@ -71,26 +74,37 @@ class UpdateJudgeRating extends Command
             return [];
         }
         $common_statistic = [];
+        $count = 0;
+        
         if (array_key_exists('approved_by_appeal', $civil_statistic)) {
 			$common_statistic[] = $civil_statistic['approved_by_appeal'];
+			$count++;
         }
         if (array_key_exists('approved_by_appeal', $criminal_statistic)) {
 			$common_statistic[] = $criminal_statistic['approved_by_appeal'];
+			$count++;
         }
         if (array_key_exists('approved_by_appeal', $adminoffence_statistic)) {
 			$common_statistic[] =  $adminoffence_statistic['approved_by_appeal'];
+			$count++;
         }
 
         if (array_key_exists('cases_on_time', $civil_statistic)) {
 			$common_statistic[] = $civil_statistic['cases_on_time'];
+			$count++;
         }
         if (array_key_exists('cases_on_time', $criminal_statistic)) {
 			$common_statistic[] = $criminal_statistic['cases_on_time'];
+			$count++;
         }
         if (array_key_exists('cases_on_time', $adminoffence_statistic)) {
 			$common_statistic[] = $adminoffence_statistic['cases_on_time'];
+			$count++;
         }
-
+		
+        if ($count < 4) {
+        	return [];
+		}
         return $common_statistic;
     }
 	
