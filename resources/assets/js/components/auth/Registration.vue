@@ -120,26 +120,27 @@
                 }
               })
               .then(response => {
+                this.isLoading = false;
                 if (response) {
                   this.$toasted.success(
-                    "Вітаємо! Вам на пошту відправлений лист з підтвердженням реєстрації!", {
-                      theme: "primary",
-                      position: "top-center",
+                    " Вітаємо! Вам на пошту відправлений лист з підтвердженням реєстрації! ", {
+                      theme: "toasted-primary",
+                      position: "top-right",
                       duration: 8000
                     }
                   );
                 }
                 setTimeout(() => {
                   this.$router.push('/login');
-                }, 8000)
+                }, 4000)
                
               })
               .catch(error => {
                 if (error.response && error.response.status) {
                   if (error.response.data && error.response.data.message) {
                     console.log(error.response.data.message);
-                    this.$toasted.error('Даний email вже використовується!', {
-                      theme: "primary",
+                    this.$toasted.error('Даний email вже використовується в системі!', {
+                      theme: "toasted-primary",
                       position: "top-right",
                       duration: 8000
                     });
@@ -149,7 +150,7 @@
                   if (error.response.data && error.response.data.message) {
                     console.error(error.response.data.message);
                     this.$toasted.error("Щось пішло не так:( Перевірте інтернет з'єднання та спробуйте ще раз!", {
-                      theme: "primary",
+                      theme: "toasted-primary",
                       position: "top-right",
                       duration: 8000
                     });
@@ -158,7 +159,7 @@
               });
           } else {
             this.$toasted.error("Заповніть коректно всі поля!", {
-              theme: "primary",
+              theme: "toasted-primary",
               position: "top-right",
               duration: 8000
             });

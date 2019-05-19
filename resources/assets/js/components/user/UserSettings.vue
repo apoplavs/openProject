@@ -53,6 +53,7 @@
                   name="телефон"
                   v-model="user.phone"
                   v-mask="'(###) ### ## ##'"
+                  placeholder="(0##) ### ## ##"
                   v-validate="'required|min:15|max:15'"
                   :class="{'input': true, 'is-danger': errors.has('телефон') }"
                 >
