@@ -357,13 +357,13 @@ class AuthController extends Controller
             'picture' => 'required|string',
         ]);
 
-        $request->link = 'https://plus.google.com/'.$request->id;
+       // $request->link = 'https://plus.google.com/'.$request->id;
 
         $user = $this->getUserForGFLogin($request, 'google', $already_exists);
 
-        if ($this->getHttpStatusByUrl($request->link) != 200) {
-            return response()->json(['message' => Lang::get('auth.bad_link')], 401);
-        }
+        // if ($this->getHttpStatusByUrl($request->link) != 200) {
+        //     return response()->json(['message' => Lang::get('auth.bad_link')], 401);
+        // }
 
         if (!$this->savePhoto($request->picture, $user)) {
             return response()->json(['message' => Lang::get('auth.bad_photo')], 401);
@@ -649,6 +649,7 @@ class AuthController extends Controller
 
     /**
      * Функція виконує cURL запит по вказаному URL і повертає HTTP RESPONSE CODE (наприклад, 200 чи 404)
+     * !!! DEPRECATED !!!
      *
      * @param string $url
      *
