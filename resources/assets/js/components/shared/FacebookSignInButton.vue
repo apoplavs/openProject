@@ -1,7 +1,10 @@
 <template>
-	<fb-signin-button :params="fbSignInParams" @success="onSignInSuccess" @error="onSignInError">
-		<img width="30" src="../../../images/facebook.png" />
-	</fb-signin-button>
+	<div>
+		<fb-signin-button :params="fbSignInParams" @success="onSignInSuccess" @error="onSignInError">
+			<img width="30" src="../../../images/facebook.png" />
+		</fb-signin-button>
+		<i class="fas fa-spinner" v-if="isLoading"></i>
+	</div>
 </template>
 
 <script>
@@ -30,6 +33,7 @@
 		name: "login-facebook",
 		data() {
 			return {
+				isLoading: false,
 				fbSignInParams: {
 					scope: 'email, public_profile',
 					return_scopes: true
@@ -61,6 +65,13 @@
 			},
 			onSignInSuccess(response) {
 				const _this = this;
+				_this.isLoading = true;
+				this.$toasted.info('Очікування відповіді від Facebook, будь-ласка зачекайте', {
+					theme: "primary",
+					position: "top",
+					duration: 10000
+				});
+
 				FB.api('/me', 'GET', {
 					fields: 'id,email,first_name,last_name'
 				}, user_data => {
@@ -106,8 +117,8 @@
 					theme: "primary",
 					position: "top-right",
 					duration: 10000
-				})
-			}
+				});
+			},
 		}
 	}
 </script>
