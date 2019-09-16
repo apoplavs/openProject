@@ -82,7 +82,7 @@
                         <div class="cnt-block equal-hight" style="height: 349px;">
                             <figure><img src="../../../images/apoplavs.jpeg" class="img-responsive" alt=""></figure>
                             <h3>Поплавський Андрій</h3>
-                            <p>Team Lead</p>
+                            <p>Co-founder</p>
                             <ul class="follow-us clearfix">
                                 <li><a href="https://www.facebook.com/andriy.poplavskiy.5" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
                                 <li><a href="https://github.com/apoplavs" target="_blank"><i class="fa fa-github" aria-hidden="true"></i></a></li>
@@ -105,14 +105,14 @@
                     </li>
                     <li class="col-3">
                         <div class="cnt-block equal-hight" style="height: 349px;">
-                            <figure><img src="http://www.webcoderskull.com/img/team4.png" class="img-responsive" alt=""></figure>
-                            <h3>Mr. Incognito</h3>
+                            <figure><img src="../../../images/mtsal.jpg" class="img-responsive" alt=""></figure>
+                            <h3>Марина Цаль</h3>
                             <!-- <h3>Слуцький Олександр</h3> -->
-                            <p>Back End Developer</p>
+                            <p>Co-founder</p>
                             <ul class="follow-us clearfix">
-                                <li><a href="#" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                <li><a href="#" target="_blank"><i class="fa fa-github" aria-hidden="true"></i></a></li>
-                                <li><a href="#" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                                <li><a href="https://www.facebook.com/tsal.marina" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                <!-- <li><a href="#" target="_blank"><i class="fa fa-github" aria-hidden="true"></i></a></li> -->
+                                <li><a href="https://www.linkedin.com/in/maryna-tsal-1576a4161" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
                             </ul>
                         </div>
                     </li>
