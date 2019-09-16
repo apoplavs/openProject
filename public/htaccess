@@ -14,14 +14,6 @@
     RewriteCond %{REQUEST_URI} (.+)/$
     RewriteRule ^ %1 [L,R=301]
 
-    # Redirect to https
-    RewriteCond %{HTTPS} !=on
-    # This checks to make sure the connection is not already HTTPS
-
-    RewriteRule ^/?(.*) https://%{SERVER_NAME}/$1 [R,L]
-    # This rule will redirect users from their original location, to the same location but using HTTPS.
-
- 
     # Handle Front Controller...
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
