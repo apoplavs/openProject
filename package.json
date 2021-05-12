@@ -32,7 +32,7 @@
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.4.2",
     "ajv": "^6.5.2",
-    "chart.js": "^2.8.0",
+    "chart.js": "^2.9.4",
     "imagemin-pngquant": "^5.0.1",
     "passport-facebook": "^2.1.1",
     "pngquant-bin": "^3.1.1",
