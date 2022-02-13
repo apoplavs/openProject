@@ -31,7 +31,7 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.4.2",
-    "ajv": "^6.5.2",
+    "ajv": "^6.12.3",
     "chart.js": "^2.8.0",
     "imagemin-pngquant": "^5.0.1",
     "passport-facebook": "^2.1.1",
